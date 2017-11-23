@@ -1,0 +1,8 @@
+desktop.ini
+**/Downloads
+**/downloads
+**/Debug
+**/debug
+*.atsuo
+*.o
+*.d

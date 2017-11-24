@@ -62,14 +62,14 @@ void init_ios(void);
 #define read_DO0 read_io(PORTF, 0)
 
 /* LED0 */
-#define set_LED0 set_io(PORTB, 6)
-#define clr_LED0 clear_io(PORTB, 6)
+#define set_LED0 clear_io(PORTB, 6)
+#define clr_LED0 set_io(PORTB, 6)
 #define tgl_LED0 toggle_io(PORTB, 6)
 #define read_LED0 read_io(PORTB, 6)
 
 /* LED1 */
-#define set_LED1 set_io(PORTB, 5)
-#define clr_LED1 clear_io(PORTB, 5)
+#define set_LED1 clear_io(PORTB, 5)
+#define clr_LED1 set_io(PORTB, 5)
 #define tgl_LED1 toggle_io(PORTB, 5)
 #define read_LED1 read_io(PORTB, 5)
 
@@ -235,8 +235,8 @@ typedef struct
 #define ADD_REG_DCYCLE_DO1                  78 // U8     
 #define ADD_REG_DCYCLE_DO2                  79 // U8     
 #define ADD_REG_DCYCLE_DO3                  80 // U8     
-#define ADD_REG_PWM_START                   81 // U8     Start the PWM output on the select output
-#define ADD_REG_PWM_STOP                    82 // U8     Stop the PWM output on the select output
+#define ADD_REG_PWM_START                   81 // U8     Start the PWM output on the selected output
+#define ADD_REG_PWM_STOP                    82 // U8     Stop the PWM output on the selected output
 #define ADD_REG_RGBS                        83 // U8     [RGB0 Green] [RGB0  Red] [RGB0 Blue] [RGB1 Green] [RGB1  Red] [RGB1 Blue]
 #define ADD_REG_RGB0                        84 // U8     [RGB0 Green] [RGB0  Red] [RGB0 Blue]
 #define ADD_REG_RGB1                        85 // U8     [RGB1 Green] [RGB1  Red] [RGB1 Blue]
@@ -283,6 +283,10 @@ typedef struct
 #define MSK_BEH_MODE                       (3<<0)       // 
 #define GM_SOFTWARE                        (0<<0)       // 
 #define GM_PULSE                           (1<<0)       // 
+#define B_PWM_DO0                          (1<<0)       // 
+#define B_PWM_DO1                          (1<<1)       // 
+#define B_PWM_DO2                          (1<<2)       // 
+#define B_PWM_DO3                          (1<<3)       // 
 #define B_EVT_POKE_IN                      (1<<0)       // Event of register POKE_IN
 #define B_EVT_POKE_DIOS_IN                 (1<<1)       // Event of register POKE_DIOS_IN
 #define B_EVT_ADC                          (1<<2)       // Event of register ADC

@@ -6,6 +6,8 @@
 #include "app_funcs.h"
 #include "app_ios_and_regs.h"
 
+#include "WS2812S.h"
+
 
 /************************************************************************/
 /* Declare application registers                                        */
@@ -68,18 +70,67 @@ ISR(PORTB_INT0_vect, ISR_NAKED)
 /************************************************************************/
 /* Initialization Callbacks                                             */
 /************************************************************************/
+uint16_t AdcOffset;
+
+#define DAC_GAINCAL 0x83
+#define DAC_OFFSETCAL 0x85
+
 void core_callback_1st_config_hw_after_boot(void)
 {
 	/* Initialize IOs */
 	/* Don't delete this function!!! */
 	init_ios();
 	
-	/* SYNC OUTx */
-	//io_pin2out(&PORTC, 1, OUT_IO_DIGITAL, IN_EN_IO_DIS);
+	/* Initialize LEDs digital line */
+	initialize_rgb();
 
-	/* TRIG_IN0 */
-	//io_pin2in(&PORTF, 5, PULL_IO_TRISTATE, SENSE_IO_EDGES_BOTH);
-	//io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<5), true);
+	/* Configure DAC calibration using default values */
+	DACA.CH0GAINCAL = DAC_GAINCAL;
+	DACA.CH0OFFSETCAL = DAC_OFFSETCAL;
+	DACB.CH0GAINCAL = DAC_GAINCAL;
+	DACB.CH0OFFSETCAL = DAC_OFFSETCAL;
+
+	/* Initialize DACA channel 0 */
+	DACA.CTRLB = 0;
+	DACA.CTRLC = DAC_REFSEL_AREFA_gc;
+	DACA.CTRLA = DAC_CH0EN_bm | DAC_ENABLE_bm;
+
+	/* Initialize DACB channel 0 */
+	DACB.CTRLB = 0;
+	DACB.CTRLC = DAC_REFSEL_AREFA_gc;
+	DACB.CTRLA = DAC_CH0EN_bm | DAC_ENABLE_bm;
+
+	/* Initialize ADC */
+	PR_PRPA &= ~(PR_ADC_bm);									// Remove power reduction
+	ADCA_CTRLA = ADC_ENABLE_bm;								// Enable ADCA
+	ADCA_CTRLB = ADC_CURRLIMIT_HIGH_gc;						// High current limit, max. sampling rate 0.5MSPS
+	ADCA_CTRLB  |= ADC_RESOLUTION_12BIT_gc;				// 12-bit result, right adjusted
+	ADCA_REFCTRL = ADC_REFSEL_INTVCC_gc;					// VCC/1.6 = 3.3/1.6 = 2.0625 V
+	ADCA_PRESCALER = ADC_PRESCALER_DIV128_gc;				// 250 ksps
+	// Propagation Delay = (1 + 12[bits]/2 + 1[gain]) / fADC[125k] = 32 us
+	// Note: For single measurements, Propagation Delay is equal to Conversion Time
+		
+	ADCA_CH0_CTRL = ADC_CH_INPUTMODE_SINGLEENDED_gc;	// Single-ended positive input signal
+	ADCA_CH0_MUXCTRL = 1 << 3;									// Pin 1 for zero calibration
+	ADCA_CH0_INTCTRL = ADC_CH_INTMODE_COMPLETE_gc;		// Rise interrupt flag when conversion is complete
+	ADCA_CH0_INTCTRL |= ADC_CH_INTLVL_OFF_gc;				// Interrupt is not used
+		
+	/* Wait 10 us to stabilization before measure the zero/GND value */
+	timer_type0_enable(&TCD0, TIMER_PRESCALER_DIV2, 80, INT_LEVEL_OFF);
+	while(!timer_type0_get_flag(&TCD0));
+	timer_type0_stop(&TCD0);
+		
+	/* Measure and safe adc offset */
+	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Start conversion
+	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
+	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
+	AdcOffset = ADCA_CH0_RES;									// Read offset
+
+	/* Point ADC to the right channel */
+	ADCA_CH0_MUXCTRL = 0 << 3;									// Select pin 0 for further conversions
+	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
+	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
+	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
 }
 
 void core_callback_reset_registers(void)
@@ -164,7 +215,7 @@ void core_callback_reset_registers(void)
     app_regs.REG_LED0_MAX_CURRENT = 30;
     app_regs.REG_LED1_MAX_CURRENT = 30;
     
-    app_regs.REG_EVNT_ENABLE = B_EVT_POKE_IN | B_EVT_POKE_DIG_IN | B_EVT_POKE_DIOS_IN | B_EVT_ADC;
+    app_regs.REG_EVNT_ENABLE = B_EVT_POKE_IN | B_EVT_POKE_DIOS_IN | B_EVT_ADC;
 }
 
 void core_callback_registers_were_reinitialized(void)
@@ -221,11 +272,31 @@ void core_callback_device_to_speed(void) {}
 /************************************************************************/
 /* Callbacks: 1 ms timer                                                */
 /************************************************************************/
-void core_callback_t_before_exec(void) {}
+void core_callback_t_before_exec(void)
+{
+	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
+	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
+	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
+
+	if (ADCA_CH0_RES > AdcOffset)
+	app_regs.REG_ADC |= (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_ADC)
+	{
+		core_func_send_event(ADD_REG_ADC, true);
+	}
+}
 void core_callback_t_after_exec(void) {}
 void core_callback_t_new_second(void) {}
 void core_callback_t_500us(void) {}
-void core_callback_t_1ms(void) {}
+void core_callback_t_1ms(void)
+{
+	uint8_t led0[3] = {16, 64, 16};
+	uint8_t led1[3] = {64, 16, 16};
+	uint8_t led2[3] = {16, 16, 64};
+
+	update_3rgbs(led0, led1, led2);
+}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */

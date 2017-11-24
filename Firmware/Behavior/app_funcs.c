@@ -2,6 +2,12 @@
 #include "app_ios_and_regs.h"
 #include "hwbp_core.h"
 
+#include "structs.h"
+
+extern countdown_t pulse_countdown;
+
+extern timer_conf_t timer_conf;
+extern is_new_timer_conf_t is_new_timer_conf;
 
 /************************************************************************/
 /* Create pointers to functions                                         */
@@ -161,31 +167,51 @@ bool app_write_REG_RESERVED0(void *a)
 /************************************************************************/
 /* REG_OUTPUTS_SET                                                      */
 /************************************************************************/
-bool rgb0_on, rgb1_on;
+bool rgb0_on;
+bool rgb1_on;
+
+#define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_MODE_POKE0_LED == GM_PULSE) pulse_countdown.poke0_led = app_regs.REG_PULSE_POKE0_LED + 1; } while(0)
+#define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_MODE_POKE1_LED == GM_PULSE) pulse_countdown.poke1_led = app_regs.REG_PULSE_POKE1_LED + 1; } while(0)
+#define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_MODE_POKE2_LED == GM_PULSE) pulse_countdown.poke2_led = app_regs.REG_PULSE_POKE2_LED + 1; } while(0)
+
+#define start_POKE0_VALVE do {set_POKE0_VALVE; if (app_regs.REG_MODE_POKE0_VALVE == GM_PULSE) pulse_countdown.poke0_valve = app_regs.REG_PULSE_POKE0_VALVE + 1; } while(0)
+#define start_POKE1_VALVE do {set_POKE1_VALVE; if (app_regs.REG_MODE_POKE1_VALVE == GM_PULSE) pulse_countdown.poke1_valve = app_regs.REG_PULSE_POKE1_VALVE + 1; } while(0)
+#define start_POKE2_VALVE do {set_POKE2_VALVE; if (app_regs.REG_MODE_POKE2_VALVE == GM_PULSE) pulse_countdown.poke2_valve = app_regs.REG_PULSE_POKE2_VALVE + 1; } while(0)
+
+#define start_LED0 do {set_LED0; if (app_regs.REG_MODE_LED0 == GM_PULSE) pulse_countdown.led0 = app_regs.REG_PULSE_LED0 + 1; } while(0)
+#define start_LED1 do {set_LED1; if (app_regs.REG_MODE_LED1 == GM_PULSE) pulse_countdown.led1 = app_regs.REG_PULSE_LED1 + 1; } while(0)
+
+#define start_RGB0 do {rgb0_on = true; if (app_regs.REG_MODE_RGB0 == GM_PULSE) pulse_countdown.rgb0 = app_regs.REG_PULSE_RGB0 + 1; } while(0)
+#define start_RGB1 do {rgb1_on = true; if (app_regs.REG_MODE_RGB1 == GM_PULSE) pulse_countdown.rgb1 = app_regs.REG_PULSE_RGB1 + 1; } while(0)
+
+#define start_DO0 do {set_DO0; if (app_regs.REG_MODE_DO0 == GM_PULSE) pulse_countdown.do0 = app_regs.REG_PULSE_DO0 + 1; } while(0)
+#define start_DO1 do {set_DO1; if (app_regs.REG_MODE_DO1 == GM_PULSE) pulse_countdown.do1 = app_regs.REG_PULSE_DO1 + 1; } while(0)
+#define start_DO2 do {set_DO2; if (app_regs.REG_MODE_DO2 == GM_PULSE) pulse_countdown.do2 = app_regs.REG_PULSE_DO2 + 1; } while(0)
+#define start_DO3 do {set_DO3; if (app_regs.REG_MODE_DO3 == GM_PULSE) pulse_countdown.do3 = app_regs.REG_PULSE_DO3 + 1; } while(0)
 
 void app_read_REG_OUTPUTS_SET(void) {}
 bool app_write_REG_OUTPUTS_SET(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) set_POKE0_LED;
-	if (reg & B_POKE1_LED) set_POKE1_LED;
-	if (reg & B_POKE2_LED) set_POKE2_LED;
+	if (reg & B_POKE0_LED) start_POKE0_LED;
+	if (reg & B_POKE1_LED) start_POKE1_LED;
+	if (reg & B_POKE2_LED) start_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) set_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) set_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) set_POKE2_VALVE;
+	if (reg & B_POKE0_VALVE) start_POKE0_VALVE;
+	if (reg & B_POKE1_VALVE) start_POKE1_VALVE;
+	if (reg & B_POKE2_VALVE) start_POKE2_VALVE;
 	
-	if (reg & B_LED0) set_LED0;
-	if (reg & B_LED1) set_LED1;
+	if (reg & B_LED0) start_LED0;
+	if (reg & B_LED1) start_LED1;
 	
-	if (reg & B_RGB0) rgb0_on = true;
-	if (reg & B_RGB1) rgb1_on = true;
+	if (reg & B_RGB0) start_RGB0;
+	if (reg & B_RGB1) start_RGB0;
 	
-	if (reg & B_DO0) set_DO0;
-	if (reg & B_DO1) set_DO1;
-	if (reg & B_DO2) set_DO2;
-	if (reg & B_DO3) set_DO3;
+	if (reg & B_DO0) start_DO0;
+	if (reg & B_DO1) start_DO1;
+	if (reg & B_DO2) start_DO2;
+	if (reg & B_DO3) start_DO3;
 	
 	return true;
 }
@@ -230,36 +256,36 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) tgl_POKE0_LED;
-	if (reg & B_POKE1_LED) tgl_POKE1_LED;
-	if (reg & B_POKE2_LED) tgl_POKE2_LED;
+	if (reg & B_POKE0_LED) tgl_POKE0_LED; if (read_POKE0_LED) start_POKE0_LED;
+	if (reg & B_POKE1_LED) tgl_POKE1_LED; if (read_POKE1_LED) start_POKE1_LED;
+	if (reg & B_POKE2_LED) tgl_POKE2_LED; if (read_POKE2_LED) start_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) tgl_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) tgl_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) tgl_POKE2_VALVE;
+	if (reg & B_POKE0_VALVE) tgl_POKE0_VALVE; if (read_POKE0_VALVE) start_POKE0_VALVE;
+	if (reg & B_POKE1_VALVE) tgl_POKE1_VALVE; if (read_POKE1_VALVE) start_POKE1_VALVE;
+	if (reg & B_POKE2_VALVE) tgl_POKE2_VALVE; if (read_POKE2_VALVE) start_POKE2_VALVE;
 	
-	if (reg & B_LED0) tgl_LED0;
-	if (reg & B_LED1) tgl_LED1;
+	if (reg & B_LED0) tgl_LED0; if (read_LED0) start_LED0;
+	if (reg & B_LED1) tgl_LED1; if (read_LED1) start_LED1;
 	
 	if (reg & B_RGB0)
 	{
 		if (rgb0_on)
 			rgb0_on = false;
 		else
-			rgb0_on = true;
+			start_RGB0;
 	}
 	if (reg & B_RGB1)
 	{
 		if (rgb1_on)
 			rgb1_on = false;
 		else
-			rgb1_on = true;
+			start_RGB0;
 	}
 	
-	if (reg & B_DO0) tgl_DO0;
-	if (reg & B_DO1) tgl_DO1;
-	if (reg & B_DO2) tgl_DO2;
-	if (reg & B_DO3) tgl_DO3;
+	if (reg & B_DO0) tgl_DO0; if (read_DO0) start_DO0;
+	if (reg & B_DO1) tgl_DO1; if (read_DO1) start_DO1;
+	if (reg & B_DO2) tgl_DO2; if (read_DO2) start_DO2;
+	if (reg & B_DO3) tgl_DO3; if (read_DO3) start_DO3;
 	
 	return true;
 }
@@ -278,8 +304,8 @@ void app_read_REG_OUTPUTS_OUT(void)
 	app_regs.REG_OUTPUTS_OUT |= (read_POKE1_VALVE) ? B_POKE1_VALVE : 0;
 	app_regs.REG_OUTPUTS_OUT |= (read_POKE2_VALVE) ? B_POKE2_VALVE : 0;
 	
-	app_regs.REG_OUTPUTS_OUT |= (read_LED0) ? B_LED0 : 0;
-	app_regs.REG_OUTPUTS_OUT |= (read_LED1) ? B_LED1 : 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_LED0) ? 0 : B_LED0;
+	app_regs.REG_OUTPUTS_OUT |= (read_LED1) ? 0 : B_LED1;
 	
 	app_regs.REG_OUTPUTS_OUT |= (rgb0_on) ? B_RGB0 : 0;
 	app_regs.REG_OUTPUTS_OUT |= (rgb1_on) ? B_RGB1 : 0;
@@ -294,24 +320,24 @@ bool app_write_REG_OUTPUTS_OUT(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-	if (reg & B_POKE0_LED) set_POKE0_LED; else clr_POKE0_LED;
-	if (reg & B_POKE1_LED) set_POKE1_LED; else clr_POKE1_LED;
-	if (reg & B_POKE2_LED) set_POKE2_LED; else clr_POKE2_LED;
+	if (reg & B_POKE0_LED) start_POKE0_LED; else clr_POKE0_LED;
+	if (reg & B_POKE1_LED) start_POKE1_LED; else clr_POKE1_LED;
+	if (reg & B_POKE2_LED) start_POKE2_LED; else clr_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) set_POKE0_VALVE; else clr_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) set_POKE1_VALVE; else clr_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) set_POKE2_VALVE; else clr_POKE2_VALVE;
+	if (reg & B_POKE0_VALVE) start_POKE0_VALVE; else clr_POKE0_VALVE;
+	if (reg & B_POKE1_VALVE) start_POKE1_VALVE; else clr_POKE1_VALVE;
+	if (reg & B_POKE2_VALVE) start_POKE2_VALVE; else clr_POKE2_VALVE;
 	
-	if (reg & B_LED0) set_LED0; else clr_LED0;
-	if (reg & B_LED1) set_LED1; else clr_LED1;
+	if (reg & B_LED0) start_LED0; else clr_LED0;
+	if (reg & B_LED1) start_LED1; else clr_LED1;
 	
-	if (reg & B_RGB0) rgb0_on = true; else rgb0_on = false;
-	if (reg & B_RGB1) rgb1_on = true; else rgb1_on = false;
+	if (reg & B_RGB0) start_RGB0; else rgb0_on = false;
+	if (reg & B_RGB1) start_RGB1; else rgb1_on = false;
 	
-	if (reg & B_DO0) set_DO0; else clr_DO0;
-	if (reg & B_DO1) set_DO1; else clr_DO1;
-	if (reg & B_DO2) set_DO2; else clr_DO2;
-	if (reg & B_DO3) set_DO3; else clr_DO3;
+	if (reg & B_DO0) start_DO0; else clr_DO0;
+	if (reg & B_DO1) start_DO1; else clr_DO1;
+	if (reg & B_DO2) start_DO2; else clr_DO2;
+	if (reg & B_DO3) start_DO3; else clr_DO3;
 
 	app_regs.REG_OUTPUTS_OUT = reg;
 	return true;
@@ -447,12 +473,7 @@ bool app_write_REG_ADC(void *a)
 /************************************************************************/
 /* REG_MODE_POKE0_LED                                                   */
 /************************************************************************/
-void app_read_REG_MODE_POKE0_LED(void)
-{
-	//app_regs.REG_MODE_POKE0_LED = 0;
-
-}
-
+void app_read_REG_MODE_POKE0_LED(void) {}
 bool app_write_REG_MODE_POKE0_LED(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -465,12 +486,7 @@ bool app_write_REG_MODE_POKE0_LED(void *a)
 /************************************************************************/
 /* REG_MODE_POKE1_LED                                                   */
 /************************************************************************/
-void app_read_REG_MODE_POKE1_LED(void)
-{
-	//app_regs.REG_MODE_POKE1_LED = 0;
-
-}
-
+void app_read_REG_MODE_POKE1_LED(void) {}
 bool app_write_REG_MODE_POKE1_LED(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -483,12 +499,7 @@ bool app_write_REG_MODE_POKE1_LED(void *a)
 /************************************************************************/
 /* REG_MODE_POKE2_LED                                                   */
 /************************************************************************/
-void app_read_REG_MODE_POKE2_LED(void)
-{
-	//app_regs.REG_MODE_POKE2_LED = 0;
-
-}
-
+void app_read_REG_MODE_POKE2_LED(void) {}
 bool app_write_REG_MODE_POKE2_LED(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -501,12 +512,7 @@ bool app_write_REG_MODE_POKE2_LED(void *a)
 /************************************************************************/
 /* REG_MODE_POKE0_VALVE                                                 */
 /************************************************************************/
-void app_read_REG_MODE_POKE0_VALVE(void)
-{
-	//app_regs.REG_MODE_POKE0_VALVE = 0;
-
-}
-
+void app_read_REG_MODE_POKE0_VALVE(void) {}
 bool app_write_REG_MODE_POKE0_VALVE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -519,12 +525,7 @@ bool app_write_REG_MODE_POKE0_VALVE(void *a)
 /************************************************************************/
 /* REG_MODE_POKE1_VALVE                                                 */
 /************************************************************************/
-void app_read_REG_MODE_POKE1_VALVE(void)
-{
-	//app_regs.REG_MODE_POKE1_VALVE = 0;
-
-}
-
+void app_read_REG_MODE_POKE1_VALVE(void) {}
 bool app_write_REG_MODE_POKE1_VALVE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -537,12 +538,7 @@ bool app_write_REG_MODE_POKE1_VALVE(void *a)
 /************************************************************************/
 /* REG_MODE_POKE2_VALVE                                                 */
 /************************************************************************/
-void app_read_REG_MODE_POKE2_VALVE(void)
-{
-	//app_regs.REG_MODE_POKE2_VALVE = 0;
-
-}
-
+void app_read_REG_MODE_POKE2_VALVE(void) {}
 bool app_write_REG_MODE_POKE2_VALVE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -555,12 +551,7 @@ bool app_write_REG_MODE_POKE2_VALVE(void *a)
 /************************************************************************/
 /* REG_MODE_LED0                                                        */
 /************************************************************************/
-void app_read_REG_MODE_LED0(void)
-{
-	//app_regs.REG_MODE_LED0 = 0;
-
-}
-
+void app_read_REG_MODE_LED0(void) {}
 bool app_write_REG_MODE_LED0(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -573,12 +564,7 @@ bool app_write_REG_MODE_LED0(void *a)
 /************************************************************************/
 /* REG_MODE_LED1                                                        */
 /************************************************************************/
-void app_read_REG_MODE_LED1(void)
-{
-	//app_regs.REG_MODE_LED1 = 0;
-
-}
-
+void app_read_REG_MODE_LED1(void) {}
 bool app_write_REG_MODE_LED1(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -591,12 +577,7 @@ bool app_write_REG_MODE_LED1(void *a)
 /************************************************************************/
 /* REG_MODE_RGB0                                                        */
 /************************************************************************/
-void app_read_REG_MODE_RGB0(void)
-{
-	//app_regs.REG_MODE_RGB0 = 0;
-
-}
-
+void app_read_REG_MODE_RGB0(void) {}
 bool app_write_REG_MODE_RGB0(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -609,12 +590,7 @@ bool app_write_REG_MODE_RGB0(void *a)
 /************************************************************************/
 /* REG_MODE_RGB1                                                        */
 /************************************************************************/
-void app_read_REG_MODE_RGB1(void)
-{
-	//app_regs.REG_MODE_RGB1 = 0;
-
-}
-
+void app_read_REG_MODE_RGB1(void) {}
 bool app_write_REG_MODE_RGB1(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -627,12 +603,7 @@ bool app_write_REG_MODE_RGB1(void *a)
 /************************************************************************/
 /* REG_MODE_DO0                                                         */
 /************************************************************************/
-void app_read_REG_MODE_DO0(void)
-{
-	//app_regs.REG_MODE_DO0 = 0;
-
-}
-
+void app_read_REG_MODE_DO0(void) {}
 bool app_write_REG_MODE_DO0(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -645,12 +616,7 @@ bool app_write_REG_MODE_DO0(void *a)
 /************************************************************************/
 /* REG_MODE_DO1                                                         */
 /************************************************************************/
-void app_read_REG_MODE_DO1(void)
-{
-	//app_regs.REG_MODE_DO1 = 0;
-
-}
-
+void app_read_REG_MODE_DO1(void) {}
 bool app_write_REG_MODE_DO1(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -663,12 +629,7 @@ bool app_write_REG_MODE_DO1(void *a)
 /************************************************************************/
 /* REG_MODE_DO2                                                         */
 /************************************************************************/
-void app_read_REG_MODE_DO2(void)
-{
-	//app_regs.REG_MODE_DO2 = 0;
-
-}
-
+void app_read_REG_MODE_DO2(void) {}
 bool app_write_REG_MODE_DO2(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -681,12 +642,7 @@ bool app_write_REG_MODE_DO2(void *a)
 /************************************************************************/
 /* REG_MODE_DO3                                                         */
 /************************************************************************/
-void app_read_REG_MODE_DO3(void)
-{
-	//app_regs.REG_MODE_DO3 = 0;
-
-}
-
+void app_read_REG_MODE_DO3(void) {}
 bool app_write_REG_MODE_DO3(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
@@ -699,17 +655,13 @@ bool app_write_REG_MODE_DO3(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE0_LED                                                  */
 /************************************************************************/
-void app_read_REG_PULSE_POKE0_LED(void)
-{
-	//app_regs.REG_PULSE_POKE0_LED = 0;
-
-}
-
+void app_read_REG_PULSE_POKE0_LED(void) {}
 bool app_write_REG_PULSE_POKE0_LED(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
-
-	app_regs.REG_PULSE_POKE0_LED = reg;
+	if (*((uint16_t*)a) < 1)
+        return false;
+        
+	app_regs.REG_PULSE_POKE0_LED = *((uint16_t*)a);
 	return true;
 }
 
@@ -717,17 +669,13 @@ bool app_write_REG_PULSE_POKE0_LED(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE1_LED                                                  */
 /************************************************************************/
-void app_read_REG_PULSE_POKE1_LED(void)
-{
-	//app_regs.REG_PULSE_POKE1_LED = 0;
-
-}
-
+void app_read_REG_PULSE_POKE1_LED(void) {}
 bool app_write_REG_PULSE_POKE1_LED(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
-
-	app_regs.REG_PULSE_POKE1_LED = reg;
+    if (*((uint16_t*)a) < 1)
+        return false;
+    
+	app_regs.REG_PULSE_POKE1_LED = *((uint16_t*)a);
 	return true;
 }
 
@@ -735,17 +683,13 @@ bool app_write_REG_PULSE_POKE1_LED(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE2_LED                                                  */
 /************************************************************************/
-void app_read_REG_PULSE_POKE2_LED(void)
-{
-	//app_regs.REG_PULSE_POKE2_LED = 0;
-
-}
-
+void app_read_REG_PULSE_POKE2_LED(void) {}
 bool app_write_REG_PULSE_POKE2_LED(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_POKE2_LED = reg;
+	app_regs.REG_PULSE_POKE2_LED = *((uint16_t*)a);
 	return true;
 }
 
@@ -753,17 +697,13 @@ bool app_write_REG_PULSE_POKE2_LED(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE0_VALVE                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE0_VALVE(void)
-{
-	//app_regs.REG_PULSE_POKE0_VALVE = 0;
-
-}
-
+void app_read_REG_PULSE_POKE0_VALVE(void) {}
 bool app_write_REG_PULSE_POKE0_VALVE(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_POKE0_VALVE = reg;
+	app_regs.REG_PULSE_POKE0_VALVE = *((uint16_t*)a);
 	return true;
 }
 
@@ -771,17 +711,13 @@ bool app_write_REG_PULSE_POKE0_VALVE(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE1_VALVE                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE1_VALVE(void)
-{
-	//app_regs.REG_PULSE_POKE1_VALVE = 0;
-
-}
-
+void app_read_REG_PULSE_POKE1_VALVE(void) {}
 bool app_write_REG_PULSE_POKE1_VALVE(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_POKE1_VALVE = reg;
+	app_regs.REG_PULSE_POKE1_VALVE = *((uint16_t*)a);
 	return true;
 }
 
@@ -789,17 +725,13 @@ bool app_write_REG_PULSE_POKE1_VALVE(void *a)
 /************************************************************************/
 /* REG_PULSE_POKE2_VALVE                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE2_VALVE(void)
-{
-	//app_regs.REG_PULSE_POKE2_VALVE = 0;
-
-}
-
+void app_read_REG_PULSE_POKE2_VALVE(void) {}
 bool app_write_REG_PULSE_POKE2_VALVE(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_POKE2_VALVE = reg;
+	app_regs.REG_PULSE_POKE2_VALVE = *((uint16_t*)a);
 	return true;
 }
 
@@ -807,17 +739,13 @@ bool app_write_REG_PULSE_POKE2_VALVE(void *a)
 /************************************************************************/
 /* REG_PULSE_LED0                                                       */
 /************************************************************************/
-void app_read_REG_PULSE_LED0(void)
-{
-	//app_regs.REG_PULSE_LED0 = 0;
-
-}
-
+void app_read_REG_PULSE_LED0(void) {}
 bool app_write_REG_PULSE_LED0(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_LED0 = reg;
+	app_regs.REG_PULSE_LED0 = *((uint16_t*)a);
 	return true;
 }
 
@@ -825,17 +753,13 @@ bool app_write_REG_PULSE_LED0(void *a)
 /************************************************************************/
 /* REG_PULSE_LED1                                                       */
 /************************************************************************/
-void app_read_REG_PULSE_LED1(void)
-{
-	//app_regs.REG_PULSE_LED1 = 0;
-
-}
-
+void app_read_REG_PULSE_LED1(void) {}
 bool app_write_REG_PULSE_LED1(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_LED1 = reg;
+	app_regs.REG_PULSE_LED1 = *((uint16_t*)a);
 	return true;
 }
 
@@ -843,17 +767,13 @@ bool app_write_REG_PULSE_LED1(void *a)
 /************************************************************************/
 /* REG_PULSE_RGB0                                                       */
 /************************************************************************/
-void app_read_REG_PULSE_RGB0(void)
-{
-	//app_regs.REG_PULSE_RGB0 = 0;
-
-}
-
+void app_read_REG_PULSE_RGB0(void) {}
 bool app_write_REG_PULSE_RGB0(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_RGB0 = reg;
+	app_regs.REG_PULSE_RGB0 = *((uint16_t*)a);
 	return true;
 }
 
@@ -861,17 +781,13 @@ bool app_write_REG_PULSE_RGB0(void *a)
 /************************************************************************/
 /* REG_PULSE_RGB1                                                       */
 /************************************************************************/
-void app_read_REG_PULSE_RGB1(void)
-{
-	//app_regs.REG_PULSE_RGB1 = 0;
-
-}
-
+void app_read_REG_PULSE_RGB1(void) {}
 bool app_write_REG_PULSE_RGB1(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_RGB1 = reg;
+	app_regs.REG_PULSE_RGB1 = *((uint16_t*)a);
 	return true;
 }
 
@@ -879,17 +795,13 @@ bool app_write_REG_PULSE_RGB1(void *a)
 /************************************************************************/
 /* REG_PULSE_DO0                                                        */
 /************************************************************************/
-void app_read_REG_PULSE_DO0(void)
-{
-	//app_regs.REG_PULSE_DO0 = 0;
-
-}
-
+void app_read_REG_PULSE_DO0(void) {}
 bool app_write_REG_PULSE_DO0(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_DO0 = reg;
+	app_regs.REG_PULSE_DO0 = *((uint16_t*)a);
 	return true;
 }
 
@@ -897,17 +809,13 @@ bool app_write_REG_PULSE_DO0(void *a)
 /************************************************************************/
 /* REG_PULSE_DO1                                                        */
 /************************************************************************/
-void app_read_REG_PULSE_DO1(void)
-{
-	//app_regs.REG_PULSE_DO1 = 0;
-
-}
-
+void app_read_REG_PULSE_DO1(void) {}
 bool app_write_REG_PULSE_DO1(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_DO1 = reg;
+	app_regs.REG_PULSE_DO1 = *((uint16_t*)a);
 	return true;
 }
 
@@ -915,17 +823,13 @@ bool app_write_REG_PULSE_DO1(void *a)
 /************************************************************************/
 /* REG_PULSE_DO2                                                        */
 /************************************************************************/
-void app_read_REG_PULSE_DO2(void)
-{
-	//app_regs.REG_PULSE_DO2 = 0;
-
-}
-
+void app_read_REG_PULSE_DO2(void) {}
 bool app_write_REG_PULSE_DO2(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_DO2 = reg;
+	app_regs.REG_PULSE_DO2 = *((uint16_t*)a);
 	return true;
 }
 
@@ -933,17 +837,13 @@ bool app_write_REG_PULSE_DO2(void *a)
 /************************************************************************/
 /* REG_PULSE_DO3                                                        */
 /************************************************************************/
-void app_read_REG_PULSE_DO3(void)
-{
-	//app_regs.REG_PULSE_DO3 = 0;
-
-}
-
+void app_read_REG_PULSE_DO3(void) {}
 bool app_write_REG_PULSE_DO3(void *a)
 {
-	uint16_t reg = *((uint16_t*)a);
+    if (*((uint16_t*)a) < 1)
+        return false;
 
-	app_regs.REG_PULSE_DO3 = reg;
+	app_regs.REG_PULSE_DO3 = *((uint16_t*)a);
 	return true;
 }
 
@@ -951,15 +851,17 @@ bool app_write_REG_PULSE_DO3(void *a)
 /************************************************************************/
 /* REG_FREQ_DO0                                                         */
 /************************************************************************/
-void app_read_REG_FREQ_DO0(void)
-{
-	//app_regs.REG_FREQ_DO0 = 0;
-
-}
-
+void app_read_REG_FREQ_DO0(void) {}
 bool app_write_REG_FREQ_DO0(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 1 || reg > 10000)
+        return false;
+    
+    calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do0, &timer_conf.target_do0);
+    timer_conf.dcycle_do0 = app_regs.REG_DCYCLE_DO0/100.0 * timer_conf.target_do0 + 0.5;
+    is_new_timer_conf.pwm_do0 = true;
 
 	app_regs.REG_FREQ_DO0 = reg;
 	return true;
@@ -969,15 +871,17 @@ bool app_write_REG_FREQ_DO0(void *a)
 /************************************************************************/
 /* REG_FREQ_DO1                                                         */
 /************************************************************************/
-void app_read_REG_FREQ_DO1(void)
-{
-	//app_regs.REG_FREQ_DO1 = 0;
-
-}
-
+void app_read_REG_FREQ_DO1(void) {}
 bool app_write_REG_FREQ_DO1(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 1 || reg > 10000)
+        return false;
+    
+    calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do1, &timer_conf.target_do1);
+    timer_conf.dcycle_do1 = app_regs.REG_DCYCLE_DO1/100.0 * timer_conf.target_do1 + 0.5;
+    is_new_timer_conf.pwm_do1 = true;
 
 	app_regs.REG_FREQ_DO1 = reg;
 	return true;
@@ -996,6 +900,13 @@ void app_read_REG_FREQ_DO2(void)
 bool app_write_REG_FREQ_DO2(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 1 || reg > 10000)
+        return false;
+    
+    calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do2, &timer_conf.target_do2);
+    timer_conf.dcycle_do2 = app_regs.REG_DCYCLE_DO2/100.0 * timer_conf.target_do2 + 0.5;
+    is_new_timer_conf.pwm_do2 = true;
 
 	app_regs.REG_FREQ_DO2 = reg;
 	return true;
@@ -1014,6 +925,13 @@ void app_read_REG_FREQ_DO3(void)
 bool app_write_REG_FREQ_DO3(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 1 || reg > 10000)
+        return false;
+    
+    calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do3, &timer_conf.target_do3);
+    timer_conf.dcycle_do3 = app_regs.REG_DCYCLE_DO3/100.0 * timer_conf.target_do3 + 0.5;
+    is_new_timer_conf.pwm_do3 = true;
 
 	app_regs.REG_FREQ_DO3 = reg;
 	return true;
@@ -1023,16 +941,18 @@ bool app_write_REG_FREQ_DO3(void *a)
 /************************************************************************/
 /* REG_DCYCLE_DO0                                                       */
 /************************************************************************/
-void app_read_REG_DCYCLE_DO0(void)
-{
-	//app_regs.REG_DCYCLE_DO0 = 0;
-
-}
-
+void app_read_REG_DCYCLE_DO0(void) {}
 bool app_write_REG_DCYCLE_DO0(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
-
+	
+	if (reg < 1 || reg > 99)
+	    return false;
+    
+    //calculate_timer_16bits(32000000, app_regs.REG_FREQ_DO0, &timer_conf.prescaler_do0, &timer_conf.target_do0);
+    timer_conf.dcycle_do0 = reg/100.0 * timer_conf.target_do0 + 0.5;
+    is_new_timer_conf.pwm_do0 = true;
+    
 	app_regs.REG_DCYCLE_DO0 = reg;
 	return true;
 }
@@ -1050,6 +970,13 @@ void app_read_REG_DCYCLE_DO1(void)
 bool app_write_REG_DCYCLE_DO1(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg < 1 || reg > 99)
+	    return false;
+    
+    //calculate_timer_16bits(32000000, app_regs.REG_FREQ_DO0, &timer_conf.prescaler_do0, &timer_conf.target_do0);
+    timer_conf.dcycle_do1 = reg/100.0 * timer_conf.target_do1 + 0.5;
+    is_new_timer_conf.pwm_do1 = true;
 
 	app_regs.REG_DCYCLE_DO1 = reg;
 	return true;
@@ -1068,6 +995,13 @@ void app_read_REG_DCYCLE_DO2(void)
 bool app_write_REG_DCYCLE_DO2(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg < 1 || reg > 99)
+	    return false;
+    
+    //calculate_timer_16bits(32000000, app_regs.REG_FREQ_DO0, &timer_conf.prescaler_do0, &timer_conf.target_do0);
+    timer_conf.dcycle_do2 = reg/100.0 * timer_conf.target_do2 + 0.5;
+    is_new_timer_conf.pwm_do2 = true;
 
 	app_regs.REG_DCYCLE_DO2 = reg;
 	return true;
@@ -1086,6 +1020,13 @@ void app_read_REG_DCYCLE_DO3(void)
 bool app_write_REG_DCYCLE_DO3(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg < 1 || reg > 99)
+	    return false;
+    
+    //calculate_timer_16bits(32000000, app_regs.REG_FREQ_DO0, &timer_conf.prescaler_do0, &timer_conf.target_do0);
+    timer_conf.dcycle_do3 = reg/100.0 * timer_conf.target_do3 + 0.5;
+    is_new_timer_conf.pwm_do3 = true;
 
 	app_regs.REG_DCYCLE_DO3 = reg;
 	return true;
@@ -1095,17 +1036,56 @@ bool app_write_REG_DCYCLE_DO3(void *a)
 /************************************************************************/
 /* REG_PWM_START                                                        */
 /************************************************************************/
-void app_read_REG_PWM_START(void)
-{
-	//app_regs.REG_PWM_START = 0;
-
-}
-
+void app_read_REG_PWM_START(void) {}
 bool app_write_REG_PWM_START(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_PWM_START = reg;
+	if (reg & B_PWM_DO0)
+    {
+        if (TCF0_CTRLA == 0)
+        /* PWM on DO0 is not running */
+        {
+            timer_type0_pwm(&TCF0, timer_conf.prescaler_do0, timer_conf.target_do0, timer_conf.dcycle_do0, INT_LEVEL_LOW, INT_LEVEL_OFF);
+            is_new_timer_conf.pwm_do0 = false;
+            start_DO0;
+        }
+    }    
+    
+	if (reg & B_PWM_DO1)
+	{
+    	if (TCE0_CTRLA == 0)
+    	/* PWM on DO0 is not running */
+    	{
+        	timer_type0_pwm(&TCE0, timer_conf.prescaler_do1, timer_conf.target_do1, timer_conf.dcycle_do1, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        	is_new_timer_conf.pwm_do1 = false;
+            start_DO1;
+    	}
+	}
+    
+	if (reg & B_PWM_DO2)
+	{
+    	if (TCD0_CTRLA == 0)
+    	/* PWM on DO0 is not running */
+    	{
+        	timer_type0_pwm(&TCD0, timer_conf.prescaler_do2, timer_conf.target_do2, timer_conf.dcycle_do2, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        	is_new_timer_conf.pwm_do2 = false;
+            start_DO2;
+    	}
+	}
+    
+	if (reg & B_PWM_DO3)
+	{
+    	if (TCC0_CTRLA == 0)
+    	/* PWM on DO0 is not running */
+    	{
+        	timer_type0_pwm(&TCC0, timer_conf.prescaler_do3, timer_conf.target_do3, timer_conf.dcycle_do3, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        	is_new_timer_conf.pwm_do3 = false;
+            start_DO3;
+    	}
+	}
+    
+    app_regs.REG_PWM_START = reg;    
 	return true;
 }
 
@@ -1113,17 +1093,35 @@ bool app_write_REG_PWM_START(void *a)
 /************************************************************************/
 /* REG_PWM_STOP                                                         */
 /************************************************************************/
-void app_read_REG_PWM_STOP(void)
-{
-	//app_regs.REG_PWM_STOP = 0;
-
-}
-
+void app_read_REG_PWM_STOP(void) {}
 bool app_write_REG_PWM_STOP(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+    
+    if (reg & B_PWM_DO0)
+    {
+        clr_DO0;
+        timer_type0_stop(&TCF0);
+    }
 
-	app_regs.REG_PWM_STOP = reg;
+    if (reg & B_PWM_DO1)
+    {
+        clr_DO1;
+        timer_type0_stop(&TCE0);
+    }
+    
+    if (reg & B_PWM_DO2)
+    {
+        clr_DO2;
+        timer_type0_stop(&TCD0);
+    }
+    
+    if (reg & B_PWM_DO3)
+    {
+        clr_DO3;
+        timer_type0_stop(&TCC0);
+    }
+	
 	return true;
 }
 
@@ -1132,17 +1130,26 @@ bool app_write_REG_PWM_STOP(void *a)
 /* REG_RGBS                                                             */
 /************************************************************************/
 // This register is an array with 6 positions
-void app_read_REG_RGBS(void)
-{
-	//app_regs.REG_RGBS[0] = 0;
-
-}
-
+void app_read_REG_RGBS(void) {}
 bool app_write_REG_RGBS(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
 
+	app_regs.REG_RGB0[0] = reg[0];
+	app_regs.REG_RGB0[1] = reg[1];
+	app_regs.REG_RGB0[2] = reg[2];
+    
+    app_regs.REG_RGB1[0] = reg[3];
+    app_regs.REG_RGB1[1] = reg[4];
+    app_regs.REG_RGB1[2] = reg[5];
+    
 	app_regs.REG_RGBS[0] = reg[0];
+    app_regs.REG_RGBS[1] = reg[1];
+    app_regs.REG_RGBS[2] = reg[2];
+    app_regs.REG_RGBS[3] = reg[3];
+    app_regs.REG_RGBS[4] = reg[4];
+    app_regs.REG_RGBS[5] = reg[5];
+    
 	return true;
 }
 
@@ -1151,17 +1158,19 @@ bool app_write_REG_RGBS(void *a)
 /* REG_RGB0                                                             */
 /************************************************************************/
 // This register is an array with 3 positions
-void app_read_REG_RGB0(void)
-{
-	//app_regs.REG_RGB0[0] = 0;
-
-}
-
+void app_read_REG_RGB0(void) {}
 bool app_write_REG_RGB0(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
+    
+    app_regs.REG_RGBS[0] = reg[0];
+    app_regs.REG_RGBS[1] = reg[1];
+    app_regs.REG_RGBS[2] = reg[2];
 
 	app_regs.REG_RGB0[0] = reg[0];
+    app_regs.REG_RGB0[1] = reg[1];
+    app_regs.REG_RGB0[2] = reg[2];
+    
 	return true;
 }
 
@@ -1170,17 +1179,19 @@ bool app_write_REG_RGB0(void *a)
 /* REG_RGB1                                                             */
 /************************************************************************/
 // This register is an array with 3 positions
-void app_read_REG_RGB1(void)
-{
-	//app_regs.REG_RGB1[0] = 0;
-
-}
-
+void app_read_REG_RGB1(void) {}
 bool app_write_REG_RGB1(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
+	
+	app_regs.REG_RGBS[3] = reg[0];
+	app_regs.REG_RGBS[4] = reg[1];
+	app_regs.REG_RGBS[5] = reg[2];
 
 	app_regs.REG_RGB1[0] = reg[0];
+    app_regs.REG_RGB1[1] = reg[1];
+    app_regs.REG_RGB1[2] = reg[2];
+    
 	return true;
 }
 
@@ -1193,7 +1204,7 @@ bool app_write_REG_LED0_CURRENT(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	if (reg < 2 || reg > 100)
+	if (reg < 1 || reg > 100)
 	{
 		return false;
 	}
@@ -1204,7 +1215,11 @@ bool app_write_REG_LED0_CURRENT(void *a)
 	}
 
 	/* Set DAC value */
-	//DACA_CH0DATA = (uint16_t) ( (float)(stim.current) * ((2.0 / 1000.0) / (2.048 / 4096.0)) );
+    uint16_t dac = (uint16_t) ( (float)(reg) / 100.0 * 4096.0 );
+	if (dac > 4095)
+        DACB_CH1DATA = 4095;
+    else
+        DACB_CH1DATA = dac;
 
 	app_regs.REG_LED0_CURRENT = reg;
 	return true;
@@ -1219,7 +1234,7 @@ bool app_write_REG_LED1_CURRENT(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 	
-	if (reg < 2 || reg > 100)
+	if (reg < 1 || reg > 100)
 	{
 		return false;
 	}
@@ -1230,7 +1245,11 @@ bool app_write_REG_LED1_CURRENT(void *a)
 	}
 
 	/* Set DAC value */
-	//DACB_CH0DATA = (uint16_t) ( (float)(stim.current) * ((2.0 / 1000.0) / (2.048 / 4096.0)) );
+    uint16_t dac = (uint16_t) ( (float)(reg) / 100.0 * 4096.0 );	
+    if (dac > 4095)
+	    DACB_CH0DATA = 4095;
+    else
+        DACB_CH0DATA = dac;
 
 	app_regs.REG_LED1_CURRENT = reg;
 	return true;
@@ -1245,7 +1264,7 @@ bool app_write_REG_LED0_MAX_CURRENT(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	if (reg < 5 || reg > 100)
+	if (reg < 2 || reg > 100)
 	{
 		return false;
 	}
@@ -1263,7 +1282,7 @@ bool app_write_REG_LED1_MAX_CURRENT(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	if (reg < 5 || reg > 100)
+	if (reg < 2 || reg > 100)
 	{
 		return false;
 	}

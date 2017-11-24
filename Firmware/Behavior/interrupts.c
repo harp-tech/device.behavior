@@ -27,26 +27,50 @@ extern AppRegs app_regs;
 // ISR(TCD1_CCA_vect, ISR_NAKED)
 
 /************************************************************************/ 
-/* POKE0_IN                                                             */
+/* POKE0_IR                                                             */
 /************************************************************************/
 ISR(PORTD_INT0_vect, ISR_NAKED)
-{
+{	
+	app_regs.REG_POKE_IN &= ~B_IR0;
+	app_regs.REG_POKE_IN |= (read_POKE0_IR) ? B_IR0 : 0;
+
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	{
+		core_func_send_event(ADD_REG_POKE_IN, true);
+	}
+
 	reti();
 }
 
 /************************************************************************/ 
-/* POKE1_IN                                                             */
+/* POKE1_IR                                                             */
 /************************************************************************/
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
+	app_regs.REG_POKE_IN &= ~B_IR1;
+	app_regs.REG_POKE_IN |= (read_POKE1_IR) ? B_IR1 : 0;
+
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	{
+		core_func_send_event(ADD_REG_POKE_IN, true);
+	}
+
 	reti();
 }
 
 /************************************************************************/ 
-/* POKE2_IN                                                             */
+/* POKE2_IR                                                             */
 /************************************************************************/
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
+	app_regs.REG_POKE_IN &= ~B_IR2;
+	app_regs.REG_POKE_IN |= (read_POKE2_IR) ? B_IR2 : 0;
+
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	{
+		core_func_send_event(ADD_REG_POKE_IN, true);
+	}
+
 	reti();
 }
 

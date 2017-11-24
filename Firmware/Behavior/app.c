@@ -7,6 +7,7 @@
 #include "app_ios_and_regs.h"
 
 #include "WS2812S.h"
+#include "structs.h"
 
 
 /************************************************************************/
@@ -34,38 +35,40 @@ void hwbp_app_initialize(void)
 /************************************************************************/
 void core_callback_catastrophic_error_detected(void)
 {
-	
+    uint8_t led[3] = {0, 0, 0};
+        
+	timer_type0_stop(&TCF0); clr_DO0;
+    timer_type0_stop(&TCE0); clr_DO1;
+    timer_type0_stop(&TCD0); clr_DO2;
+    timer_type0_stop(&TCC0); clr_DO3;
+    
+    clr_LED0;
+    clr_LED1;
+    
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm;
+    update_2rgbs(led, led);
+    //update_3rgbs(led, led, led);
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
+    
+    clr_POKE0_LED;
+    clr_POKE1_LED;
+    clr_POKE2_LED;    
+    
+    clr_POKE0_VALVE;
+    clr_POKE1_VALVE;
+    clr_POKE2_VALVE;
+    
+    // To do: Clear Pokes DIOs
 }
 
 /************************************************************************/
 /* General definitions                                                  */
 /************************************************************************/
-// #define NBYTES 23
+countdown_t pulse_countdown;
 
 /************************************************************************/
 /* General used functions                                               */
 /************************************************************************/
-/* Load external functions if needed */
-//#include "hwbp_app_pwm_gen_funcs.c"
-
-/*
-void update_enabled_pwmx(void)
-{
-	if (!core_bool_is_visual_enabled())
-	return;
-	
-	if (!(app_regs.REG_CH_CONFEN & B_USEEN0) || ((app_regs.REG_CH_CONFEN & B_USEEN0) && (app_regs.REG_CH_ENABLE & B_EN0)))
-		set_ENABLED_PWM0;
-	else
-		clr_ENABLED_PWM0;
-}
-
-ISR(PORTB_INT0_vect, ISR_NAKED)
-{
-	reti();
-}
-*/
-
 
 /************************************************************************/
 /* Initialization Callbacks                                             */
@@ -90,15 +93,10 @@ void core_callback_1st_config_hw_after_boot(void)
 	DACB.CH0GAINCAL = DAC_GAINCAL;
 	DACB.CH0OFFSETCAL = DAC_OFFSETCAL;
 
-	/* Initialize DACA channel 0 */
-	DACA.CTRLB = 0;
-	DACA.CTRLC = DAC_REFSEL_AREFA_gc;
-	DACA.CTRLA = DAC_CH0EN_bm | DAC_ENABLE_bm;
-
-	/* Initialize DACB channel 0 */
-	DACB.CTRLB = 0;
-	DACB.CTRLC = DAC_REFSEL_AREFA_gc;
-	DACB.CTRLA = DAC_CH0EN_bm | DAC_ENABLE_bm;
+    /* Initialize DACB dual channel using internal 1V as reference */
+	DACB.CTRLB = DAC_CHSEL_DUAL_gc;
+	DACB.CTRLC = DAC_REFSEL_INT1V_gc;
+	DACB.CTRLA = DAC_CH0EN_bm | DAC_CH1EN_bm | DAC_ENABLE_bm;
 
 	/* Initialize ADC */
 	PR_PRPA &= ~(PR_ADC_bm);									// Remove power reduction
@@ -155,9 +153,9 @@ void core_callback_reset_registers(void)
     app_regs.REG_MODE_POKE0_LED = GM_SOFTWARE;
     app_regs.REG_MODE_POKE1_LED = GM_SOFTWARE;
     app_regs.REG_MODE_POKE2_LED = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE0_VALVE = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE1_VALVE = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE2_VALVE = GM_SOFTWARE;
+    app_regs.REG_MODE_POKE0_VALVE = GM_PULSE;
+    app_regs.REG_MODE_POKE1_VALVE = GM_PULSE;
+    app_regs.REG_MODE_POKE2_VALVE = GM_PULSE;
     app_regs.REG_MODE_LED0 = GM_SOFTWARE;
     app_regs.REG_MODE_LED1 = GM_SOFTWARE;
     app_regs.REG_MODE_RGB0 = GM_SOFTWARE;
@@ -167,9 +165,9 @@ void core_callback_reset_registers(void)
     app_regs.REG_MODE_DO2 = GM_SOFTWARE;
     app_regs.REG_MODE_DO3 = GM_SOFTWARE;
 
-    app_regs.REG_PULSE_POKE0_LED = 200;
-    app_regs.REG_PULSE_POKE1_LED = 200;
-    app_regs.REG_PULSE_POKE2_LED = 200;
+    app_regs.REG_PULSE_POKE0_LED = 500;
+    app_regs.REG_PULSE_POKE1_LED = 500;
+    app_regs.REG_PULSE_POKE2_LED = 500;
     app_regs.REG_PULSE_POKE0_VALVE = 15;
     app_regs.REG_PULSE_POKE1_VALVE = 15;
     app_regs.REG_PULSE_POKE2_VALVE = 15;
@@ -177,15 +175,15 @@ void core_callback_reset_registers(void)
     app_regs.REG_PULSE_LED1 = 500;
     app_regs.REG_PULSE_RGB0 = 500;
     app_regs.REG_PULSE_RGB1 = 500;
-    app_regs.REG_PULSE_DO0 = 1000;
-    app_regs.REG_PULSE_DO1 = 1000;
-    app_regs.REG_PULSE_DO2 = 1000;
-    app_regs.REG_PULSE_DO3 = 1000;
+    app_regs.REG_PULSE_DO0 = 250;
+    app_regs.REG_PULSE_DO1 = 250;
+    app_regs.REG_PULSE_DO2 = 250;
+    app_regs.REG_PULSE_DO3 = 250;
     
     app_regs.REG_FREQ_DO0 = 1000;
-    app_regs.REG_FREQ_DO1 = 1000;
-    app_regs.REG_FREQ_DO2 = 1000;
-    app_regs.REG_FREQ_DO3 = 1000;
+    app_regs.REG_FREQ_DO1 = 2000;
+    app_regs.REG_FREQ_DO2 = 3000;
+    app_regs.REG_FREQ_DO3 = 4000;
     
     app_regs.REG_DCYCLE_DO0 = 50;
     app_regs.REG_DCYCLE_DO1 = 50;
@@ -223,43 +221,29 @@ void core_callback_registers_were_reinitialized(void)
 	uint16_t aux16b = app_regs.REG_OUTPUTS_OUT;
     app_write_REG_OUTPUTS_OUT(&aux16b);
     
-    /* Check if the user indication is valid */
-	//update_enabled_pwmx();
-	
-	/* Update state register */
-	//app_regs.REG_TRIG_STATE = (read_TRIG_IN0) ? B_LTRG0 : 0;
-	//app_regs.REG_TRIG_STATE |= (read_TRIG_IN1) ? B_LTRG1 : 0;
-
-	/* Reset start bits */
-	//app_regs.REG_TRG0_START = 0;
-	//app_regs.REG_TRG1_START = 0;
-
-	/*
-	if ((app_regs.REG_MODE0 & B_M0) == GM_BNC_MODE)
-	{
-		app_regs.REG_OUT0 = app_regs.REG_CTRL0;
-		set_OUT0(app_regs.REG_OUT0);
-	}
-	else
-	{
-		set_OUT0(app_regs.REG_OUT0);
-	}
-	*/
+    uint8_t aux8b = app_regs.REG_LED0_CURRENT;
+    app_write_REG_LED0_CURRENT(&aux8b);
+    aux8b = app_regs.REG_LED1_CURRENT;
+    app_write_REG_LED1_CURRENT(&aux8b);
+    
+    aux16b = app_regs.REG_FREQ_DO0;
+    app_write_REG_FREQ_DO0(&aux16b);
+    aux16b = app_regs.REG_FREQ_DO1;
+    app_write_REG_FREQ_DO1(&aux16b);
+    aux16b = app_regs.REG_FREQ_DO2;
+    app_write_REG_FREQ_DO2(&aux16b);
+    aux16b = app_regs.REG_FREQ_DO3;
+    app_write_REG_FREQ_DO3(&aux16b);
+    
+    aux8b = app_regs.REG_PWM_START;
+    app_write_REG_PWM_START(&aux8b);
 }
 
 /************************************************************************/
 /* Callbacks: Visualization                                             */
 /************************************************************************/
-void core_callback_visualen_to_on(void)
-{
-	/* Update channels enable indicators */
-	//update_enabled_pwmx();
-}
-
-void core_callback_visualen_to_off(void)
-{
-	/* Clear all the enabled indicators */
-}
+void core_callback_visualen_to_on(void) {}
+void core_callback_visualen_to_off(void) {}
 
 /************************************************************************/
 /* Callbacks: Change on the operation mode                              */
@@ -272,6 +256,9 @@ void core_callback_device_to_speed(void) {}
 /************************************************************************/
 /* Callbacks: 1 ms timer                                                */
 /************************************************************************/
+extern bool rgb0_on;
+extern bool rgb1_on;
+
 void core_callback_t_before_exec(void)
 {
 	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
@@ -288,14 +275,91 @@ void core_callback_t_before_exec(void)
 }
 void core_callback_t_after_exec(void) {}
 void core_callback_t_new_second(void) {}
-void core_callback_t_500us(void) {}
+void core_callback_t_500us(void)
+{
+    if (pulse_countdown.poke0_led > 0)
+        if (--pulse_countdown.poke0_led == 0)
+            clr_POKE0_LED;
+    if (pulse_countdown.poke1_led > 0)
+        if (--pulse_countdown.poke1_led == 0)
+            clr_POKE1_LED;
+    if (pulse_countdown.poke2_led > 0)
+        if (--pulse_countdown.poke2_led == 0)
+            clr_POKE2_LED;
+
+    if (pulse_countdown.poke0_valve > 0)
+        if (--pulse_countdown.poke0_valve == 0)
+            clr_POKE0_VALVE;
+    if (pulse_countdown.poke1_valve > 0)
+        if (--pulse_countdown.poke1_valve == 0)
+            clr_POKE1_VALVE;
+    if (pulse_countdown.poke2_valve > 0)
+        if (--pulse_countdown.poke2_valve == 0)
+            clr_POKE2_VALVE;
+
+    if (pulse_countdown.led0 > 0)
+        if (--pulse_countdown.led0 == 0)
+            clr_LED0;
+    if (pulse_countdown.led1 > 0)
+        if (--pulse_countdown.led1 == 0)
+            clr_LED1;
+
+    if (pulse_countdown.rgb0 > 0)
+        if (--pulse_countdown.rgb0 == 0)
+            rgb0_on = false;
+    if (pulse_countdown.rgb1 > 0)
+        if (--pulse_countdown.rgb1 == 0)
+            rgb1_on = false;
+    
+    if (pulse_countdown.do0 > 0)
+        if (--pulse_countdown.do0 == 0)
+        {
+            clr_DO0;
+            timer_type0_stop(&TCF0);
+        }
+    if (pulse_countdown.do1 > 0)
+        if (--pulse_countdown.do1 == 0)
+        {
+            clr_DO1;
+            timer_type0_stop(&TCE0);
+        }
+    if (pulse_countdown.do2 > 0)
+        if (--pulse_countdown.do2 == 0)
+        {
+            clr_DO2;
+            timer_type0_stop(&TCD0);
+        }
+    if (pulse_countdown.do3 > 0)
+        if (--pulse_countdown.do3 == 0)
+        {
+            clr_DO3;
+            timer_type0_stop(&TCC0);
+        }
+}
+
 void core_callback_t_1ms(void)
 {
-	uint8_t led0[3] = {16, 64, 16};
-	uint8_t led1[3] = {64, 16, 16};
-	uint8_t led2[3] = {16, 16, 64};
+	uint8_t led0[3] = {0, 0, 0};
+	uint8_t led1[3] = {0, 0, 0};
+    
+    if (rgb0_on == true)
+    {
+        led0[0] = app_regs.REG_RGB0[0];
+        led0[1] = app_regs.REG_RGB0[1];
+        led0[2] = app_regs.REG_RGB0[2];
+    }
+    
+    if (rgb1_on == true)
+    {
+        led1[0] = app_regs.REG_RGB1[0];
+        led1[1] = app_regs.REG_RGB1[1];
+        led1[2] = app_regs.REG_RGB1[2];
+    }
 
-	update_3rgbs(led0, led1, led2);
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm;	
+    update_2rgbs(led0, led1);
+    //update_3rgbs(led0, led1, led2);
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 }
 
 /************************************************************************/

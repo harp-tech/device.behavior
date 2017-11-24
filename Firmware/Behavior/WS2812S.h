@@ -67,6 +67,7 @@ do                                                  \
 /* Prototypes                                                           */
 /************************************************************************/
 void initialize_rgb (void);
+void update_2rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1);
 void update_3rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1, uint8_t * rgb_led2);
 
 #endif /* _WS2812_H_ */

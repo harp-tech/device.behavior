@@ -43,6 +43,200 @@ void initialize_rgb (void)
 )
 
 uint8_t rgbs_array[9];
+
+void update_2rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1)
+{
+    uint8_t * address;
+    
+    rgbs_array[0] = rgb_led0[0];
+    rgbs_array[1] = rgb_led0[1];
+    rgbs_array[2] = rgb_led0[2];
+    rgbs_array[3] = rgb_led1[0];
+    rgbs_array[4] = rgb_led1[1];
+    rgbs_array[5] = rgb_led1[2];
+    
+    asm volatile (
+    "rjmp start2leds            \n"
+    
+    "zero:                      \n"
+    "sts    0x0645, r16         \n"     // Clear output pin
+    "nop                        \n"     // 8x nops (250 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "sts    0x0646, r16         \n"     // Set output pin
+    "nop                        \n"     // 22x nops (687,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "ret                        \n"
+    
+    "one:                       \n"
+    "sts    0x0645, r16         \n"     // Clear output pin
+    "nop                        \n"     // 22x nops (687,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "sts    0x0646, r16         \n"     // Set output pin
+    "nop                        \n"     // 14x nops (437,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "ret                        \n"
+
+    "zero_less:                 \n"
+    "sts    0x0645, r16         \n"     // Clear output pin
+    "nop                        \n"     // 8x nops (250 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "sts    0x0646, r16         \n"     // Set output pin
+    "nop                        \n"     // 21 nops (687,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "ret                        \n"
+    
+    "one_less:                  \n"
+    "sts    0x0645, r16         \n"     // Clear output pin
+    "nop                        \n"     // 22x nops (687,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "sts    0x0646, r16         \n"     // Set output pin
+    "nop                        \n"     // 13 nops (437,50 ns)
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "nop                        \n"
+    "ret                        \n"
+    
+    
+    "start2leds:                \n"
+    "push	r16                 \n"
+    "push	__tmp_reg__         \n"
+    "ldi    r16, 0x20           \n"     // Load 0x20 to R16 -- means output port bit 5
+    );
+    
+    /* Send address to Z pointer */
+    address = (uint16_t)(&rgbs_array[0]);
+    asm volatile (
+    "ld __tmp_reg__, Z        \n\t"
+    :   /* No outputs. */
+    :"z"(address)
+    );
+    
+    XMIT_BYTE;
+    XMIT_BYTE;
+    XMIT_BYTE;
+    
+    XMIT_BYTE;
+    XMIT_BYTE;
+    XMIT_BYTE;
+    
+    asm volatile (
+    "pop    __tmp_reg__         \n"
+    "pop    r16                 \n"
+    );
+}
+
     
 void update_3rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1, uint8_t * rgb_led2)
 {  
@@ -59,163 +253,14 @@ void update_3rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1, uint8_t * rgb_led2)
     rgbs_array[8] = rgb_led2[2];    
     
     asm volatile (
-        "rjmp start                 \n"
+        "rjmp start3leds            \n"
         
-        "zero:                      \n"
-        "sts    0x0645, r16         \n"     // Clear output pin
-        "nop                        \n"     // 8x nops (250 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "sts    0x0646, r16         \n"     // Set output pin
-        "nop                        \n"     // 22x nops (687,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "ret                        \n"
-               
-        "one:                       \n"
-        "sts    0x0645, r16         \n"     // Clear output pin
-        "nop                        \n"     // 22x nops (687,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "sts    0x0646, r16         \n"     // Set output pin
-        "nop                        \n"     // 14x nops (437,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "ret                        \n"
-
-        "zero_less:                 \n"
-        "sts    0x0645, r16         \n"     // Clear output pin
-        "nop                        \n"     // 8x nops (250 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "sts    0x0646, r16         \n"     // Set output pin
-        "nop                        \n"     // 21 nops (687,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "ret                        \n"
-                
-        "one_less:                  \n"
-        "sts    0x0645, r16         \n"     // Clear output pin
-        "nop                        \n"     // 22x nops (687,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "sts    0x0646, r16         \n"     // Set output pin
-        "nop                        \n"     // 13 nops (437,50 ns)
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "nop                        \n"
-        "ret                        \n"
         
                 
-        "start:                     \n"
+        "start3leds:                \n"
         "push	r16                 \n"
         "push	__tmp_reg__         \n"        
-        "ldi    r16, 0x20           \n"     // Load 0x80 to R16
+        "ldi    r16, 0x20           \n"     // Load 0x20 to R16 -- means output port bit 5
         );
     
     /* Send address to Z pointer */
@@ -234,9 +279,9 @@ void update_3rgbs (uint8_t * rgb_led0, uint8_t * rgb_led1, uint8_t * rgb_led2)
     XMIT_BYTE;
     XMIT_BYTE;
               
-//     XMIT_BYTE;
-//     XMIT_BYTE;
-//     XMIT_BYTE;
+    XMIT_BYTE;
+    XMIT_BYTE;
+    XMIT_BYTE;
         
     asm volatile (        
         "pop    __tmp_reg__         \n"

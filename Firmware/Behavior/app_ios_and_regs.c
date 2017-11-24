@@ -24,8 +24,8 @@ void init_ios(void)
 	io_pin2out(&PORTD, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // DO2
 	io_pin2out(&PORTE, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // DO1
 	io_pin2out(&PORTF, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // DO0
-	io_pin2out(&PORTB, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED0
-	io_pin2out(&PORTB, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED1
+	io_pin2out(&PORTB, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED0
+	io_pin2out(&PORTB, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // LED1
 	io_pin2out(&PORTC, 5, OUT_IO_DIGITAL, IN_EN_IO_DIS);                 // RGBS
 	io_pin2out(&PORTD, 6, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // POKE0_LED
 	io_pin2out(&PORTD, 7, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // POKE0_VALVE
@@ -181,7 +181,7 @@ uint16_t app_regs_n_elements[] = {
 
 uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_POKE_IN),
-	(uint8_t*)(&app_regs.REG_POKE_DIG_IN),
+	(uint8_t*)(&app_regs.REG_RESERVED0),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_SET),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_CLEAR),
 	(uint8_t*)(&app_regs.REG_OUTPUTS_TOGGLE),

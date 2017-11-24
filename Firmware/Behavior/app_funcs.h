@@ -21,7 +21,7 @@
 /* Prototypes                                                           */
 /************************************************************************/
 void app_read_REG_POKE_IN(void);
-void app_read_REG_POKE_DIG_IN(void);
+void app_read_REG_RESERVED0(void);
 void app_read_REG_OUTPUTS_SET(void);
 void app_read_REG_OUTPUTS_CLEAR(void);
 void app_read_REG_OUTPUTS_TOGGLE(void);
@@ -81,7 +81,7 @@ void app_read_REG_LED1_MAX_CURRENT(void);
 void app_read_REG_EVNT_ENABLE(void);
 
 bool app_write_REG_POKE_IN(void *a);
-bool app_write_REG_POKE_DIG_IN(void *a);
+bool app_write_REG_RESERVED0(void *a);
 bool app_write_REG_OUTPUTS_SET(void *a);
 bool app_write_REG_OUTPUTS_CLEAR(void *a);
 bool app_write_REG_OUTPUTS_TOGGLE(void *a);

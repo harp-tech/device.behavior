@@ -62,16 +62,16 @@ void init_ios(void);
 #define read_DO0 read_io(PORTF, 0)
 
 /* LED0 */
-#define set_LED0 set_io(PORTB, 5)
-#define clr_LED0 clear_io(PORTB, 5)
-#define tgl_LED0 toggle_io(PORTB, 5)
-#define read_LED0 read_io(PORTB, 5)
+#define set_LED0 set_io(PORTB, 6)
+#define clr_LED0 clear_io(PORTB, 6)
+#define tgl_LED0 toggle_io(PORTB, 6)
+#define read_LED0 read_io(PORTB, 6)
 
 /* LED1 */
-#define set_LED1 set_io(PORTB, 6)
-#define clr_LED1 clear_io(PORTB, 6)
-#define tgl_LED1 toggle_io(PORTB, 6)
-#define read_LED1 read_io(PORTB, 6)
+#define set_LED1 set_io(PORTB, 5)
+#define clr_LED1 clear_io(PORTB, 5)
+#define tgl_LED1 toggle_io(PORTB, 5)
+#define read_LED1 read_io(PORTB, 5)
 
 /* RGBS */
 #define set_RGBS set_io(PORTC, 5)
@@ -122,7 +122,7 @@ void init_ios(void);
 typedef struct
 {
 	uint8_t REG_POKE_IN;
-	uint8_t REG_POKE_DIG_IN;
+	uint8_t REG_RESERVED0;
 	uint16_t REG_OUTPUTS_SET;
 	uint16_t REG_OUTPUTS_CLEAR;
 	uint16_t REG_OUTPUTS_TOGGLE;
@@ -187,7 +187,7 @@ typedef struct
 /************************************************************************/
 /* Registers */
 #define ADD_REG_POKE_IN                     32 // U8     Reflects the state of each Poke's infreared beam
-#define ADD_REG_POKE_DIG_IN                 33 // U8     Reflects the state of each Poke's digital input
+#define ADD_REG_RESERVED0                   33 // U8     Reserved for future use.
 #define ADD_REG_OUTPUTS_SET                 34 // U16    Set the correspondent output
 #define ADD_REG_OUTPUTS_CLEAR               35 // U16    Clear the correspondent output
 #define ADD_REG_OUTPUTS_TOGGLE              36 // U16    Toggle the correspondent output
@@ -263,9 +263,6 @@ typedef struct
 #define B_IR0                              (1<<0)       // Infrared 0
 #define B_IR1                              (1<<1)       // Infrared 1
 #define B_IR2                              (1<<2)       // Infrared 2
-#define B_DIG_IN0                          (1<<0)       // Digital input of Poke 0
-#define B_DIG_IN1                          (1<<1)       // Digital input of Poke 1
-#define B_DIG_IN2                          (1<<2)       // Digital input of Poke 2
 #define B_POKE0_LED                        (1<<0)       // 
 #define B_POKE1_LED                        (1<<1)       // 
 #define B_POKE2_LED                        (1<<2)       // 
@@ -287,8 +284,7 @@ typedef struct
 #define GM_SOFTWARE                        (0<<0)       // 
 #define GM_PULSE                           (1<<0)       // 
 #define B_EVT_POKE_IN                      (1<<0)       // Event of register POKE_IN
-#define B_EVT_POKE_DIG_IN                  (1<<1)       // Event of register POKE_DIG_IN
-#define B_EVT_POKE_DIOS_IN                 (1<<2)       // Event of register POKE_DIOS_IN
-#define B_EVT_ADC                          (1<<3)       // Event of register ADC
+#define B_EVT_POKE_DIOS_IN                 (1<<1)       // Event of register POKE_DIOS_IN
+#define B_EVT_ADC                          (1<<2)       // Event of register ADC
 
 #endif /* _APP_REGS_H_ */

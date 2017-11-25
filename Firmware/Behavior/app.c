@@ -266,7 +266,9 @@ void core_callback_t_before_exec(void)
 	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
 
 	if (ADCA_CH0_RES > AdcOffset)
-	app_regs.REG_ADC |= (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+		app_regs.REG_ADC = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+	else
+		app_regs.REG_ADC = 0;
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_ADC)
 	{

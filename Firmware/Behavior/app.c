@@ -113,12 +113,12 @@ void core_callback_1st_config_hw_after_boot(void)
 	ADCA_CH0_INTCTRL = ADC_CH_INTMODE_COMPLETE_gc;		// Rise interrupt flag when conversion is complete
 	ADCA_CH0_INTCTRL |= ADC_CH_INTLVL_OFF_gc;				// Interrupt is not used
 		
-	/* Wait 10 us to stabilization before measure the zero/GND value */
-	timer_type0_enable(&TCD0, TIMER_PRESCALER_DIV2, 80, INT_LEVEL_OFF);
+	/* Wait 100 us to stabilization before measure the zero/GND value */
+	timer_type0_enable(&TCD0, TIMER_PRESCALER_DIV2, 1600, INT_LEVEL_OFF);
 	while(!timer_type0_get_flag(&TCD0));
 	timer_type0_stop(&TCD0);
 		
-	/* Measure and safe adc offset */
+	/* Measure and save adc offset */
 	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Start conversion
 	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
 	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit

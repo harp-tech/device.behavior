@@ -2,6 +2,7 @@
 #include "app_ios_and_regs.h"
 #include "hwbp_core.h"
 
+#include "WS2812S.h"
 #include "structs.h"
 
 extern countdown_t pulse_countdown;
@@ -167,8 +168,8 @@ bool app_write_REG_RESERVED0(void *a)
 /************************************************************************/
 /* REG_OUTPUTS_SET                                                      */
 /************************************************************************/
-bool rgb0_on;
-bool rgb1_on;
+bool rgb0_on = false;
+bool rgb1_on = false;
 
 #define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_MODE_POKE0_LED == GM_PULSE) pulse_countdown.poke0_led = app_regs.REG_PULSE_POKE0_LED + 1; } while(0)
 #define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_MODE_POKE1_LED == GM_PULSE) pulse_countdown.poke1_led = app_regs.REG_PULSE_POKE1_LED + 1; } while(0)
@@ -189,6 +190,28 @@ bool rgb1_on;
 #define start_DO2 do {set_DO2; if (app_regs.REG_MODE_DO2 == GM_PULSE) pulse_countdown.do2 = app_regs.REG_PULSE_DO2 + 1; } while(0)
 #define start_DO3 do {set_DO3; if (app_regs.REG_MODE_DO3 == GM_PULSE) pulse_countdown.do3 = app_regs.REG_PULSE_DO3 + 1; } while(0)
 
+void handle_Rgbs(bool use_rgb0, bool use_rgb1)
+{
+	uint8_t led0[3] = {0, 0, 0};
+	uint8_t led1[3] = {0, 0, 0};
+	
+	if (use_rgb0 == true)
+	{
+		led0[0] = app_regs.REG_RGB0[0];
+		led0[1] = app_regs.REG_RGB0[1];
+		led0[2] = app_regs.REG_RGB0[2];
+	}
+	
+	if (use_rgb1 == true)
+	{
+		led1[0] = app_regs.REG_RGB1[0];
+		led1[1] = app_regs.REG_RGB1[1];
+		led1[2] = app_regs.REG_RGB1[2];
+	}
+
+	update_2rgbs(led0, led1);
+}
+
 void app_read_REG_OUTPUTS_SET(void) {}
 bool app_write_REG_OUTPUTS_SET(void *a)
 {
@@ -206,7 +229,11 @@ bool app_write_REG_OUTPUTS_SET(void *a)
 	if (reg & B_LED1) start_LED1;
 	
 	if (reg & B_RGB0) start_RGB0;
-	if (reg & B_RGB1) start_RGB0;
+	if (reg & B_RGB1) start_RGB1;
+	if ((reg & B_RGB0) || (reg & B_RGB1))
+	{
+		handle_Rgbs(rgb0_on, rgb1_on);
+	}
 	
 	if (reg & B_DO0) start_DO0;
 	if (reg & B_DO1) start_DO1;
@@ -238,7 +265,11 @@ bool app_write_REG_OUTPUTS_CLEAR(void *a)
 	
 	if (reg & B_RGB0) rgb0_on = false;
 	if (reg & B_RGB1) rgb1_on = false;
-	
+	if ((reg & B_RGB0) || (reg & B_RGB1))
+	{
+		handle_Rgbs(rgb0_on, rgb1_on);
+	}
+
 	if (reg & B_DO0) clr_DO0;
 	if (reg & B_DO1) clr_DO1;
 	if (reg & B_DO2) clr_DO2;
@@ -256,16 +287,17 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) tgl_POKE0_LED; if (read_POKE0_LED) start_POKE0_LED;
-	if (reg & B_POKE1_LED) tgl_POKE1_LED; if (read_POKE1_LED) start_POKE1_LED;
-	if (reg & B_POKE2_LED) tgl_POKE2_LED; if (read_POKE2_LED) start_POKE2_LED;
+	if (reg & B_POKE0_LED) { if (read_POKE0_LED) tgl_POKE0_LED; else start_POKE0_LED;}
+	if (reg & B_POKE1_LED) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
+	if (reg & B_POKE2_LED) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
 	
-	if (reg & B_POKE0_VALVE) tgl_POKE0_VALVE; if (read_POKE0_VALVE) start_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) tgl_POKE1_VALVE; if (read_POKE1_VALVE) start_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) tgl_POKE2_VALVE; if (read_POKE2_VALVE) start_POKE2_VALVE;
+	if (reg & B_POKE0_VALVE) { if (read_POKE0_VALVE) tgl_POKE0_VALVE; else start_POKE0_VALVE;}
+	if (reg & B_POKE1_VALVE) { if (read_POKE1_VALVE) tgl_POKE1_VALVE; else start_POKE1_VALVE;}
+	if (reg & B_POKE2_VALVE) { if (read_POKE2_VALVE) tgl_POKE2_VALVE; else start_POKE2_VALVE;}
 	
-	if (reg & B_LED0) tgl_LED0; if (read_LED0) start_LED0;
-	if (reg & B_LED1) tgl_LED1; if (read_LED1) start_LED1;
+
+	if (reg & B_LED0) { if (!read_LED0) tgl_LED0; else start_LED0;}
+	if (reg & B_LED1) { if (!read_LED1) tgl_LED1; else start_LED1;}
 	
 	if (reg & B_RGB0)
 	{
@@ -279,14 +311,18 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 		if (rgb1_on)
 			rgb1_on = false;
 		else
-			start_RGB0;
+			start_RGB1;
+	}
+	if ((reg & B_RGB0) || (reg & B_RGB1))
+	{
+		handle_Rgbs(rgb0_on, rgb1_on);
 	}
 	
-	if (reg & B_DO0) tgl_DO0; if (read_DO0) start_DO0;
-	if (reg & B_DO1) tgl_DO1; if (read_DO1) start_DO1;
-	if (reg & B_DO2) tgl_DO2; if (read_DO2) start_DO2;
-	if (reg & B_DO3) tgl_DO3; if (read_DO3) start_DO3;
-	
+	if (reg & B_DO0) { if (read_DO0) tgl_DO0; else start_DO0;}
+	if (reg & B_DO1) { if (read_DO1) tgl_DO1; else start_DO1;}
+	if (reg & B_DO2) { if (read_DO2) tgl_DO2; else start_DO2;}
+	if (reg & B_DO3) { if (read_DO3) tgl_DO3; else start_DO3;}
+
 	return true;
 }
 
@@ -319,6 +355,10 @@ void app_read_REG_OUTPUTS_OUT(void)
 bool app_write_REG_OUTPUTS_OUT(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+
+	bool prev_rgb0_on, prev_rgb1_on;
+	prev_rgb0_on = rgb0_on;
+	prev_rgb1_on = rgb1_on;
 	
 	if (reg & B_POKE0_LED) start_POKE0_LED; else clr_POKE0_LED;
 	if (reg & B_POKE1_LED) start_POKE1_LED; else clr_POKE1_LED;
@@ -334,12 +374,16 @@ bool app_write_REG_OUTPUTS_OUT(void *a)
 	if (reg & B_RGB0) start_RGB0; else rgb0_on = false;
 	if (reg & B_RGB1) start_RGB1; else rgb1_on = false;
 	
+	if ((prev_rgb0_on != rgb0_on) || (prev_rgb1_on != rgb1_on))
+	{
+		handle_Rgbs(rgb0_on, rgb1_on);
+	}
+	
 	if (reg & B_DO0) start_DO0; else clr_DO0;
 	if (reg & B_DO1) start_DO1; else clr_DO1;
 	if (reg & B_DO2) start_DO2; else clr_DO2;
 	if (reg & B_DO3) start_DO3; else clr_DO3;
 
-	app_regs.REG_OUTPUTS_OUT = reg;
 	return true;
 }
 
@@ -1134,22 +1178,24 @@ void app_read_REG_RGBS(void) {}
 bool app_write_REG_RGBS(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
+	
+	app_regs.REG_RGBS[0] = reg[0];
+	app_regs.REG_RGBS[1] = reg[1];
+	app_regs.REG_RGBS[2] = reg[2];
+	app_regs.REG_RGBS[3] = reg[3];
+	app_regs.REG_RGBS[4] = reg[4];
+	app_regs.REG_RGBS[5] = reg[5];
 
 	app_regs.REG_RGB0[0] = reg[0];
 	app_regs.REG_RGB0[1] = reg[1];
 	app_regs.REG_RGB0[2] = reg[2];
-    
-    app_regs.REG_RGB1[0] = reg[3];
-    app_regs.REG_RGB1[1] = reg[4];
-    app_regs.REG_RGB1[2] = reg[5];
-    
-	app_regs.REG_RGBS[0] = reg[0];
-    app_regs.REG_RGBS[1] = reg[1];
-    app_regs.REG_RGBS[2] = reg[2];
-    app_regs.REG_RGBS[3] = reg[3];
-    app_regs.REG_RGBS[4] = reg[4];
-    app_regs.REG_RGBS[5] = reg[5];
-    
+	
+	app_regs.REG_RGB1[0] = reg[3];
+	app_regs.REG_RGB1[1] = reg[4];
+	app_regs.REG_RGB1[2] = reg[5];
+   
+	handle_Rgbs(rgb0_on, rgb1_on);
+
 	return true;
 }
 
@@ -1163,13 +1209,15 @@ bool app_write_REG_RGB0(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
     
-    app_regs.REG_RGBS[0] = reg[0];
-    app_regs.REG_RGBS[1] = reg[1];
-    app_regs.REG_RGBS[2] = reg[2];
+	app_regs.REG_RGBS[0] = reg[0];
+	app_regs.REG_RGBS[1] = reg[1];
+	app_regs.REG_RGBS[2] = reg[2];
 
 	app_regs.REG_RGB0[0] = reg[0];
-    app_regs.REG_RGB0[1] = reg[1];
-    app_regs.REG_RGB0[2] = reg[2];
+	app_regs.REG_RGB0[1] = reg[1];
+	app_regs.REG_RGB0[2] = reg[2];
+
+	handle_Rgbs(rgb0_on, rgb1_on);
     
 	return true;
 }
@@ -1189,8 +1237,10 @@ bool app_write_REG_RGB1(void *a)
 	app_regs.REG_RGBS[5] = reg[2];
 
 	app_regs.REG_RGB1[0] = reg[0];
-    app_regs.REG_RGB1[1] = reg[1];
-    app_regs.REG_RGB1[2] = reg[2];
+	app_regs.REG_RGB1[1] = reg[1];
+	app_regs.REG_RGB1[2] = reg[2];
+
+	handle_Rgbs(rgb0_on, rgb1_on);
     
 	return true;
 }

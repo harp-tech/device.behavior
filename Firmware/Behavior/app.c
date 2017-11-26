@@ -37,7 +37,7 @@ void core_callback_catastrophic_error_detected(void)
 {
     uint8_t led[3] = {0, 0, 0};
         
-	timer_type0_stop(&TCF0); clr_DO0;
+	 timer_type0_stop(&TCF0); clr_DO0;
     timer_type0_stop(&TCE0); clr_DO1;
     timer_type0_stop(&TCD0); clr_DO2;
     timer_type0_stop(&TCC0); clr_DO3;
@@ -193,20 +193,20 @@ void core_callback_reset_registers(void)
     app_regs.REG_PWM_START = 0;
     app_regs.REG_PWM_STOP = 0;
     
-    app_regs.REG_RGBS[0] = 64;  // Green
-    app_regs.REG_RGBS[1] = 16;  // Red
-    app_regs.REG_RGBS[2] = 16;  // Blue
-    app_regs.REG_RGBS[3] = 16;  // Green
-    app_regs.REG_RGBS[4] = 16;  // Red
-    app_regs.REG_RGBS[5] = 64;  // Blue
+    app_regs.REG_RGBS[0] = 255;  // Green
+    app_regs.REG_RGBS[1] = 0;		// Red
+    app_regs.REG_RGBS[2] = 0;		// Blue
+    app_regs.REG_RGBS[3] = 0;		// Green
+    app_regs.REG_RGBS[4] = 0;		// Red
+    app_regs.REG_RGBS[5] = 255;  // Blue
     
-    app_regs.REG_RGB0[0] = 64;  // Green
-    app_regs.REG_RGB0[1] = 16;  // Red
-    app_regs.REG_RGB0[2] = 16;  // Blue
+    app_regs.REG_RGB0[0] = 255;  // Green
+    app_regs.REG_RGB0[1] = 0;		// Red
+    app_regs.REG_RGB0[2] = 0;		// Blue
     
-    app_regs.REG_RGB1[0] = 16;  // Green
-    app_regs.REG_RGB1[1] = 16;  // Red
-    app_regs.REG_RGB1[2] = 64;  // Blue
+    app_regs.REG_RGB1[0] = 0;		// Green
+    app_regs.REG_RGB1[1] = 0;		// Red
+    app_regs.REG_RGB1[2] = 255;  // Blue
     
     app_regs.REG_LED0_CURRENT = 10;
     app_regs.REG_LED1_CURRENT = 10;
@@ -256,6 +256,8 @@ void core_callback_device_to_speed(void) {}
 /************************************************************************/
 /* Callbacks: 1 ms timer                                                */
 /************************************************************************/
+extern void handle_Rgbs(bool use_rgb0, bool use_rgb1);
+
 extern bool rgb0_on;
 extern bool rgb1_on;
 
@@ -277,92 +279,79 @@ void core_callback_t_before_exec(void)
 }
 void core_callback_t_after_exec(void) {}
 void core_callback_t_new_second(void) {}
+
 void core_callback_t_500us(void)
 {
-    if (pulse_countdown.poke0_led > 0)
-        if (--pulse_countdown.poke0_led == 0)
-            clr_POKE0_LED;
-    if (pulse_countdown.poke1_led > 0)
-        if (--pulse_countdown.poke1_led == 0)
-            clr_POKE1_LED;
-    if (pulse_countdown.poke2_led > 0)
-        if (--pulse_countdown.poke2_led == 0)
-            clr_POKE2_LED;
+	bool prev_rgb0_on, prev_rgb1_on;
+	prev_rgb0_on = rgb0_on;
+	prev_rgb1_on = rgb1_on;
 
-    if (pulse_countdown.poke0_valve > 0)
-        if (--pulse_countdown.poke0_valve == 0)
-            clr_POKE0_VALVE;
-    if (pulse_countdown.poke1_valve > 0)
-        if (--pulse_countdown.poke1_valve == 0)
-            clr_POKE1_VALVE;
-    if (pulse_countdown.poke2_valve > 0)
-        if (--pulse_countdown.poke2_valve == 0)
-            clr_POKE2_VALVE;
+	if (pulse_countdown.poke0_led > 0)
+		if (--pulse_countdown.poke0_led == 0)
+			clr_POKE0_LED;
+	if (pulse_countdown.poke1_led > 0)
+		if (--pulse_countdown.poke1_led == 0)
+			clr_POKE1_LED;
+	if (pulse_countdown.poke2_led > 0)
+		if (--pulse_countdown.poke2_led == 0)
+			clr_POKE2_LED;
 
-    if (pulse_countdown.led0 > 0)
-        if (--pulse_countdown.led0 == 0)
-            clr_LED0;
-    if (pulse_countdown.led1 > 0)
-        if (--pulse_countdown.led1 == 0)
-            clr_LED1;
+	if (pulse_countdown.poke0_valve > 0)
+		if (--pulse_countdown.poke0_valve == 0)
+			clr_POKE0_VALVE;
+	if (pulse_countdown.poke1_valve > 0)
+		if (--pulse_countdown.poke1_valve == 0)
+			clr_POKE1_VALVE;
+	if (pulse_countdown.poke2_valve > 0)
+		if (--pulse_countdown.poke2_valve == 0)
+			clr_POKE2_VALVE;
 
-    if (pulse_countdown.rgb0 > 0)
-        if (--pulse_countdown.rgb0 == 0)
-            rgb0_on = false;
-    if (pulse_countdown.rgb1 > 0)
-        if (--pulse_countdown.rgb1 == 0)
-            rgb1_on = false;
-    
-    if (pulse_countdown.do0 > 0)
-        if (--pulse_countdown.do0 == 0)
-        {
-            clr_DO0;
-            timer_type0_stop(&TCF0);
-        }
-    if (pulse_countdown.do1 > 0)
-        if (--pulse_countdown.do1 == 0)
-        {
-            clr_DO1;
-            timer_type0_stop(&TCE0);
-        }
-    if (pulse_countdown.do2 > 0)
-        if (--pulse_countdown.do2 == 0)
-        {
-            clr_DO2;
-            timer_type0_stop(&TCD0);
-        }
-    if (pulse_countdown.do3 > 0)
-        if (--pulse_countdown.do3 == 0)
-        {
-            clr_DO3;
-            timer_type0_stop(&TCC0);
-        }
+	if (pulse_countdown.led0 > 0)
+		if (--pulse_countdown.led0 == 0)
+			clr_LED0;
+	if (pulse_countdown.led1 > 0)
+		if (--pulse_countdown.led1 == 0)
+			clr_LED1;
+
+	if (pulse_countdown.rgb0 > 0)
+		if (--pulse_countdown.rgb0 == 0)
+			rgb0_on = false;
+	if (pulse_countdown.rgb1 > 0)
+		if (--pulse_countdown.rgb1 == 0)
+			rgb1_on = false;
+
+	if ((prev_rgb0_on != rgb0_on) || (prev_rgb1_on != rgb1_on))
+	{
+		handle_Rgbs(rgb0_on, rgb1_on);
+	}
+	
+	if (pulse_countdown.do0 > 0)
+	if (--pulse_countdown.do0 == 0)
+	{
+		clr_DO0;
+		timer_type0_stop(&TCF0);
+	}
+	if (pulse_countdown.do1 > 0)
+	if (--pulse_countdown.do1 == 0)
+	{
+		clr_DO1;
+		timer_type0_stop(&TCE0);
+	}
+	if (pulse_countdown.do2 > 0)
+	if (--pulse_countdown.do2 == 0)
+	{
+		clr_DO2;
+		timer_type0_stop(&TCD0);
+	}
+	if (pulse_countdown.do3 > 0)
+	if (--pulse_countdown.do3 == 0)
+	{
+		clr_DO3;
+		timer_type0_stop(&TCC0);
+	}
 }
 
-void core_callback_t_1ms(void)
-{
-	uint8_t led0[3] = {0, 0, 0};
-	uint8_t led1[3] = {0, 0, 0};
-    
-    if (rgb0_on == true)
-    {
-        led0[0] = app_regs.REG_RGB0[0];
-        led0[1] = app_regs.REG_RGB0[1];
-        led0[2] = app_regs.REG_RGB0[2];
-    }
-    
-    if (rgb1_on == true)
-    {
-        led1[0] = app_regs.REG_RGB1[0];
-        led1[1] = app_regs.REG_RGB1[1];
-        led1[2] = app_regs.REG_RGB1[2];
-    }
-
-    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm;	
-    update_2rgbs(led0, led1);
-    //update_3rgbs(led0, led1, led2);
-    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
-}
+void core_callback_t_1ms(void) {}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */

@@ -71,15 +71,17 @@ bool hwbp_write_common_reg(uint8_t add, uint8_t type, uint8_t * content, uint16_
 
 
 // It is mandatory that this function is the first of the application code.
-void core_func_start_core(	uint16_t who_am_i,
-									uint8_t hwH,
-									uint8_t hwL,
-									uint8_t fwH,
-									uint8_t fwL,
-									uint8_t assembly,
-									uint8_t * pointer_to_app_regs,
-									uint16_t app_mem_size_to_save,
-									uint8_t num_of_app_registers);
+void core_func_start_core (
+    const uint16_t who_am_i,
+    const uint8_t hwH,
+    const uint8_t hwL,
+    const uint8_t fwH,
+    const uint8_t fwL,
+    const uint8_t assembly,
+    uint8_t *pointer_to_app_regs,
+    const uint16_t app_mem_size_to_save,
+    const uint8_t num_of_app_registers,
+    const uint8_t *device_name);
 
 // Call this function in case of error
 // A power up or reset must be performed to remove the device from this state

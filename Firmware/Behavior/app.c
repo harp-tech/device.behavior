@@ -24,10 +24,12 @@ extern bool (*app_func_wr_pointer[])(void*);
 /************************************************************************/
 /* Initialize app                                                       */
 /************************************************************************/
+static const uint8_t default_device_name[] = "Behavior";
+
 void hwbp_app_initialize(void)
 {
 	/* Start core */
-	core_func_start_core(1216, 1, 0, 1, 0, 0, (uint8_t*)(&app_regs), APP_NBYTES_OF_REG_BANK, APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1);
+	core_func_start_core(1216, 1, 1, 1, 1, 0, (uint8_t*)(&app_regs), APP_NBYTES_OF_REG_BANK, APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1, default_device_name);
 }
 
 /************************************************************************/

@@ -1129,7 +1129,7 @@ bool app_write_REG_PWM_START(void *a)
     	}
 	}
     
-    app_regs.REG_PWM_START = reg;    
+    app_regs.REG_PWM_START = reg;
 	return true;
 }
 
@@ -1166,6 +1166,8 @@ bool app_write_REG_PWM_STOP(void *a)
         timer_type0_stop(&TCC0);
     }
 	
+    app_regs.REG_PWM_START = ~reg & 0x0F;
+    
 	return true;
 }
 

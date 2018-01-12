@@ -28,8 +28,15 @@ static const uint8_t default_device_name[] = "Behavior";
 
 void hwbp_app_initialize(void)
 {
-	/* Start core */
-	core_func_start_core(1216, 1, 1, 1, 1, 0, (uint8_t*)(&app_regs), APP_NBYTES_OF_REG_BANK, APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1, default_device_name);
+    /* Define versions */
+    uint8_t hwH = 1;
+    uint8_t hwL = 1;
+    uint8_t fwH = 1;
+    uint8_t fwL = 1;
+    uint8_t ass = 0;
+    
+    /* Start core */
+    core_func_start_core(1216, hwH, hwL, fwH, fwL, ass, (uint8_t*)(&app_regs), APP_NBYTES_OF_REG_BANK, APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1, default_device_name);
 }
 
 /************************************************************************/

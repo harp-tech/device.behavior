@@ -208,8 +208,22 @@ void handle_Rgbs(bool use_rgb0, bool use_rgb1)
 		led1[1] = app_regs.REG_RGB1[1];
 		led1[2] = app_regs.REG_RGB1[2];
 	}
+    
+    /* Disable TX interrupts before update disable USART TX and RX */
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm;
+    		
+    /* Disable USART TX */
+    uint8_t usartf0_ctrla = USARTF0_CTRLA;
+    USARTF0_CTRLA = 0;
 
-	update_2rgbs(led0, led1);
+    /* Write to RGBs */
+    update_2rgbs(led0, led1);
+
+    /* Recover USART TX Interrupt state */
+    USARTF0_CTRLA = usartf0_ctrla;
+
+    /* Re-enable high level interrupts */
+    PMIC_CTRL = PMIC_RREN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 }
 
 void app_read_REG_OUTPUTS_SET(void) {}

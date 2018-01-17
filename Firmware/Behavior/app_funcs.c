@@ -253,6 +253,8 @@ bool app_write_REG_OUTPUTS_SET(void *a)
 	if (reg & B_DO1) start_DO1;
 	if (reg & B_DO2) start_DO2;
 	if (reg & B_DO3) start_DO3;
+    
+    app_regs.REG_OUTPUTS_OUT |= reg;
 	
 	return true;
 }
@@ -288,6 +290,8 @@ bool app_write_REG_OUTPUTS_CLEAR(void *a)
 	if (reg & B_DO1) clr_DO1;
 	if (reg & B_DO2) clr_DO2;
 	if (reg & B_DO3) clr_DO3;
+    
+    app_regs.REG_OUTPUTS_OUT &= ~reg;
 	
 	return true;
 }
@@ -336,6 +340,8 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 	if (reg & B_DO1) { if (read_DO1) tgl_DO1; else start_DO1;}
 	if (reg & B_DO2) { if (read_DO2) tgl_DO2; else start_DO2;}
 	if (reg & B_DO3) { if (read_DO3) tgl_DO3; else start_DO3;}
+        
+    app_regs.REG_OUTPUTS_OUT ^= reg;
 
 	return true;
 }
@@ -397,6 +403,8 @@ bool app_write_REG_OUTPUTS_OUT(void *a)
 	if (reg & B_DO1) start_DO1; else clr_DO1;
 	if (reg & B_DO2) start_DO2; else clr_DO2;
 	if (reg & B_DO3) start_DO3; else clr_DO3;
+    
+    app_regs.REG_OUTPUTS_OUT = reg;
 
 	return true;
 }

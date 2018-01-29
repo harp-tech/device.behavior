@@ -32,6 +32,7 @@
 #define GM_OP_MODE_SPEED    (3<<0)
 
 #define B_DUMP              (1<<3)
+#define B_MUTE_RPL          (1<<4)
 #define B_VISUALEN          (1<<5)
 #define B_OPLEDEN           (1<<6)
 #define B_ALIVE_EN          (1<<7)

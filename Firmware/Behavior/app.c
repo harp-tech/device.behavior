@@ -30,10 +30,10 @@ void hwbp_app_initialize(void)
 {
     /* Define versions */
     uint8_t hwH = 1;
-    uint8_t hwL = 1;
+    uint8_t hwL = 0;
     uint8_t fwH = 1;
     uint8_t fwL = 2;
-    uint8_t ass = 0;    
+    uint8_t ass = 2;    
     
    	/* Start core */
    	core_func_start_core(

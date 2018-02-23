@@ -133,7 +133,7 @@ typedef struct
 	uint8_t REG_POKE_DIOS_OUT;
 	uint8_t REG_POKE_DIOS_CONF;
 	uint8_t REG_POKE_DIOS_IN;
-	uint16_t REG_ADC;
+	int16_t REG_ADC_AND_DECODER[2];
 	uint8_t REG_MODE_POKE0_LED;
 	uint8_t REG_MODE_POKE1_LED;
 	uint8_t REG_MODE_POKE2_LED;
@@ -180,6 +180,39 @@ typedef struct
 	uint8_t REG_LED0_MAX_CURRENT;
 	uint8_t REG_LED1_MAX_CURRENT;
 	uint8_t REG_EVNT_ENABLE;
+	uint8_t REG_EN_CAMERAS;
+	uint8_t REG_DIS_CAMERAS;
+	uint8_t REG_EN_SERVOS;
+	uint8_t REG_DIS_SERVOS;
+	uint8_t REG_EN_ENCODERS;
+	uint8_t REG_DIS_ENCODERS;
+	uint8_t REG_RESERVED2;
+	uint8_t REG_RESERVED3;
+	uint8_t REG_RESERVED4;
+	uint8_t REG_RESERVED5;
+	uint8_t REG_RESERVED6;
+	uint8_t REG_RESERVED7;
+	uint8_t REG_RESERVED8;
+	uint8_t REG_RESERVED9;
+	uint8_t REG_CAM_OUT0_FRAME_ACQUIRED;
+	uint16_t REG_CAM_OUT0_FREQ;
+	uint8_t REG_CAM_OUT1_FRAME_ACQUIRED;
+	uint16_t REG_CAM_OUT2_FREQ;
+	uint8_t REG_RESERVED10;
+	uint8_t REG_RESERVED11;
+	uint8_t REG_RESERVED12;
+	uint8_t REG_RESERVED13;
+	uint16_t REG_MOTOR_OUT2_PERIOD;
+	uint16_t REG_MOTOR_OUT2_PULSE;
+	uint16_t REG_MOTOR_OUT3_PERIOD;
+	uint16_t REG_MOTOR_OUT3_PULSE;
+	uint8_t REG_RESERVED14;
+	uint8_t REG_RESERVED15;
+	uint8_t REG_RESERVED16;
+	uint8_t REG_RESERVED17;
+	uint8_t REG_ENCODERS_RESET;
+	uint8_t REG_RESERVED18;
+	uint8_t REG_RESERVED19;
 } AppRegs;
 
 /************************************************************************/
@@ -187,7 +220,7 @@ typedef struct
 /************************************************************************/
 /* Registers */
 #define ADD_REG_POKE_IN                     32 // U8     Reflects the state of each Poke's infreared beam
-#define ADD_REG_RESERVED0                   33 // U8     Reserved for future use.
+#define ADD_REG_RESERVED0                   33 // U8     Reserved for future use
 #define ADD_REG_OUTPUTS_SET                 34 // U16    Set the correspondent output
 #define ADD_REG_OUTPUTS_CLEAR               35 // U16    Clear the correspondent output
 #define ADD_REG_OUTPUTS_TOGGLE              36 // U16    Toggle the correspondent output
@@ -198,7 +231,7 @@ typedef struct
 #define ADD_REG_POKE_DIOS_OUT               41 // U8     Control the correspondent DIO
 #define ADD_REG_POKE_DIOS_CONF              42 // U8     Set the DIOs direction (1 is output)
 #define ADD_REG_POKE_DIOS_IN                43 // U8     State of the DIOs
-#define ADD_REG_ADC                         44 // U16    Voltage at ADC input
+#define ADD_REG_ADC_AND_DECODER             44 // I16    Voltage at ADC input and decoder (poke 2) value
 #define ADD_REG_MODE_POKE0_LED              45 // U8     Mode of the output
 #define ADD_REG_MODE_POKE1_LED              46 // U8     
 #define ADD_REG_MODE_POKE2_LED              47 // U8     
@@ -245,6 +278,39 @@ typedef struct
 #define ADD_REG_LED0_MAX_CURRENT            88 // U8     Configuration of current to drive LED 0 [5:100]
 #define ADD_REG_LED1_MAX_CURRENT            89 // U8     Configuration of current to drive LED 1 [5:100]
 #define ADD_REG_EVNT_ENABLE                 90 // U8     Enable the Events
+#define ADD_REG_EN_CAMERAS                  91 // U8     Enable cameras
+#define ADD_REG_DIS_CAMERAS                 92 // U8     Disable cameras
+#define ADD_REG_EN_SERVOS                   93 // U8     Enable servo motors control
+#define ADD_REG_DIS_SERVOS                  94 // U8     Disable servo motors control
+#define ADD_REG_EN_ENCODERS                 95 // U8     Enable encoders
+#define ADD_REG_DIS_ENCODERS                96 // U8     Disable encoders
+#define ADD_REG_RESERVED2                   97 // U8     Reserved for future use
+#define ADD_REG_RESERVED3                   98 // U8     Reserved for future use
+#define ADD_REG_RESERVED4                   99 // U8     Reserved for future use
+#define ADD_REG_RESERVED5                  100 // U8     Reserved for future use
+#define ADD_REG_RESERVED6                  101 // U8     Reserved for future use
+#define ADD_REG_RESERVED7                  102 // U8     Reserved for future use
+#define ADD_REG_RESERVED8                  103 // U8     Reserved for future use
+#define ADD_REG_RESERVED9                  104 // U8     Reserved for future use
+#define ADD_REG_CAM_OUT0_FRAME_ACQUIRED    105 // U8     
+#define ADD_REG_CAM_OUT0_FREQ              106 // U16    Configures the camera's sample frequency [1;600]
+#define ADD_REG_CAM_OUT1_FRAME_ACQUIRED    107 // U8     
+#define ADD_REG_CAM_OUT2_FREQ              108 // U16    Configures the camera's sample frequency [1;600]
+#define ADD_REG_RESERVED10                 109 // U8     Reserved for future use
+#define ADD_REG_RESERVED11                 110 // U8     Reserved for future use
+#define ADD_REG_RESERVED12                 111 // U8     Reserved for future use
+#define ADD_REG_RESERVED13                 112 // U8     Reserved for future use
+#define ADD_REG_MOTOR_OUT2_PERIOD          113 // U16    Configures the servo motor period (us)  (sensitive to 2 us)
+#define ADD_REG_MOTOR_OUT2_PULSE           114 // U16    Configures the servo motor pulse (us)  (sensitive to 2 us)
+#define ADD_REG_MOTOR_OUT3_PERIOD          115 // U16    Configures the servo motor period (us)  (sensitive to 2 us)
+#define ADD_REG_MOTOR_OUT3_PULSE           116 // U16    Configures the servo motor pulse (us)  (sensitive to 2 us)
+#define ADD_REG_RESERVED14                 117 // U8     Reserved for future use
+#define ADD_REG_RESERVED15                 118 // U8     Reserved for future use
+#define ADD_REG_RESERVED16                 119 // U8     Reserved for future use
+#define ADD_REG_RESERVED17                 120 // U8     Reserved for future use
+#define ADD_REG_ENCODERS_RESET             121 // U8     Resets the encoder counter to ZERO
+#define ADD_REG_RESERVED18                 122 // U8     Reserved for future use
+#define ADD_REG_RESERVED19                 123 // U8     Reserved for future use
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -254,8 +320,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x5A
-#define APP_NBYTES_OF_REG_BANK              91
+#define APP_REGS_ADD_MAX                    0x7B
+#define APP_NBYTES_OF_REG_BANK              132
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -290,5 +356,12 @@ typedef struct
 #define B_EVT_POKE_IN                      (1<<0)       // Event of register POKE_IN
 #define B_EVT_POKE_DIOS_IN                 (1<<1)       // Event of register POKE_DIOS_IN
 #define B_EVT_ADC                          (1<<2)       // Event of register ADC
+#define B_EN_CAM_OUT0                      (1<<0)       // Camera on digital output 0
+#define B_EN_CAM_OUT1                      (1<<1)       // Camera on digital output 1
+#define B_EN_SERVO_OUT2                    (1<<2)       // Servo on digital output 2
+#define B_EN_SERVO_OUT3                    (1<<3)       // Servo on digital output 3
+#define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
+#define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
+#define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
 
 #endif /* _APP_REGS_H_ */

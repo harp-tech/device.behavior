@@ -28,7 +28,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_POKE_DIOS_OUT,
 	&app_read_REG_POKE_DIOS_CONF,
 	&app_read_REG_POKE_DIOS_IN,
-	&app_read_REG_ADC,
+	&app_read_REG_ADC_AND_DECODER,
 	&app_read_REG_MODE_POKE0_LED,
 	&app_read_REG_MODE_POKE1_LED,
 	&app_read_REG_MODE_POKE2_LED,
@@ -74,7 +74,40 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_LED1_CURRENT,
 	&app_read_REG_LED0_MAX_CURRENT,
 	&app_read_REG_LED1_MAX_CURRENT,
-	&app_read_REG_EVNT_ENABLE
+	&app_read_REG_EVNT_ENABLE,
+	&app_read_REG_EN_CAMERAS,
+	&app_read_REG_DIS_CAMERAS,
+	&app_read_REG_EN_SERVOS,
+	&app_read_REG_DIS_SERVOS,
+	&app_read_REG_EN_ENCODERS,
+	&app_read_REG_DIS_ENCODERS,
+	&app_read_REG_RESERVED2,
+	&app_read_REG_RESERVED3,
+	&app_read_REG_RESERVED4,
+	&app_read_REG_RESERVED5,
+	&app_read_REG_RESERVED6,
+	&app_read_REG_RESERVED7,
+	&app_read_REG_RESERVED8,
+	&app_read_REG_RESERVED9,
+	&app_read_REG_CAM_OUT0_FRAME_ACQUIRED,
+	&app_read_REG_CAM_OUT0_FREQ,
+	&app_read_REG_CAM_OUT1_FRAME_ACQUIRED,
+	&app_read_REG_CAM_OUT2_FREQ,
+	&app_read_REG_RESERVED10,
+	&app_read_REG_RESERVED11,
+	&app_read_REG_RESERVED12,
+	&app_read_REG_RESERVED13,
+	&app_read_REG_MOTOR_OUT2_PERIOD,
+	&app_read_REG_MOTOR_OUT2_PULSE,
+	&app_read_REG_MOTOR_OUT3_PERIOD,
+	&app_read_REG_MOTOR_OUT3_PULSE,
+	&app_read_REG_RESERVED14,
+	&app_read_REG_RESERVED15,
+	&app_read_REG_RESERVED16,
+	&app_read_REG_RESERVED17,
+	&app_read_REG_ENCODERS_RESET,
+	&app_read_REG_RESERVED18,
+	&app_read_REG_RESERVED19
 };
 
 bool (*app_func_wr_pointer[])(void*) = {
@@ -90,7 +123,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_POKE_DIOS_OUT,
 	&app_write_REG_POKE_DIOS_CONF,
 	&app_write_REG_POKE_DIOS_IN,
-	&app_write_REG_ADC,
+	&app_write_REG_ADC_AND_DECODER,
 	&app_write_REG_MODE_POKE0_LED,
 	&app_write_REG_MODE_POKE1_LED,
 	&app_write_REG_MODE_POKE2_LED,
@@ -136,7 +169,40 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_LED1_CURRENT,
 	&app_write_REG_LED0_MAX_CURRENT,
 	&app_write_REG_LED1_MAX_CURRENT,
-	&app_write_REG_EVNT_ENABLE
+	&app_write_REG_EVNT_ENABLE,
+	&app_write_REG_EN_CAMERAS,
+	&app_write_REG_DIS_CAMERAS,
+	&app_write_REG_EN_SERVOS,
+	&app_write_REG_DIS_SERVOS,
+	&app_write_REG_EN_ENCODERS,
+	&app_write_REG_DIS_ENCODERS,
+	&app_write_REG_RESERVED2,
+	&app_write_REG_RESERVED3,
+	&app_write_REG_RESERVED4,
+	&app_write_REG_RESERVED5,
+	&app_write_REG_RESERVED6,
+	&app_write_REG_RESERVED7,
+	&app_write_REG_RESERVED8,
+	&app_write_REG_RESERVED9,
+	&app_write_REG_CAM_OUT0_FRAME_ACQUIRED,
+	&app_write_REG_CAM_OUT0_FREQ,
+	&app_write_REG_CAM_OUT1_FRAME_ACQUIRED,
+	&app_write_REG_CAM_OUT2_FREQ,
+	&app_write_REG_RESERVED10,
+	&app_write_REG_RESERVED11,
+	&app_write_REG_RESERVED12,
+	&app_write_REG_RESERVED13,
+	&app_write_REG_MOTOR_OUT2_PERIOD,
+	&app_write_REG_MOTOR_OUT2_PULSE,
+	&app_write_REG_MOTOR_OUT3_PERIOD,
+	&app_write_REG_MOTOR_OUT3_PULSE,
+	&app_write_REG_RESERVED14,
+	&app_write_REG_RESERVED15,
+	&app_write_REG_RESERVED16,
+	&app_write_REG_RESERVED17,
+	&app_write_REG_ENCODERS_RESET,
+	&app_write_REG_RESERVED18,
+	&app_write_REG_RESERVED19
 };
 
 
@@ -519,20 +585,17 @@ bool app_write_REG_POKE_DIOS_IN(void *a)
 
 
 /************************************************************************/
-/* REG_ADC                                                              */
+/* REG_ADC_AND_DECODER                                                  */
 /************************************************************************/
-void app_read_REG_ADC(void)
+// This register is an array with 2 positions
+void app_read_REG_ADC_AND_DECODER(void) {}      // The register is always updated
+bool app_write_REG_ADC_AND_DECODER(void *a)     
 {
-	//app_regs.REG_ADC = 0;
+    uint16_t *reg = ((uint16_t*)a);
 
-}
-
-bool app_write_REG_ADC(void *a)
-{
-	uint16_t reg = *((uint16_t*)a);
-
-	app_regs.REG_ADC = reg;
-	return true;
+    app_regs.REG_ADC_AND_DECODER[1] = reg[1];   // Write only to encoder counter
+    
+    return true;
 }
 
 
@@ -1377,3 +1440,353 @@ bool app_write_REG_EVNT_ENABLE(void *a)
 	app_regs.REG_EVNT_ENABLE = reg;
 	return true;
 }
+
+
+/************************************************************************/
+/* REG_EN_CAMERAS                                                       */
+/************************************************************************/
+void app_read_REG_EN_CAMERAS(void)
+{
+	//app_regs.REG_EN_CAMERAS = 0;
+
+}
+
+bool app_write_REG_EN_CAMERAS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_EN_CAMERAS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_DIS_CAMERAS                                                      */
+/************************************************************************/
+void app_read_REG_DIS_CAMERAS(void)
+{
+	//app_regs.REG_DIS_CAMERAS = 0;
+
+}
+
+bool app_write_REG_DIS_CAMERAS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_DIS_CAMERAS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_EN_SERVOS                                                        */
+/************************************************************************/
+void app_read_REG_EN_SERVOS(void)
+{
+	//app_regs.REG_EN_SERVOS = 0;
+
+}
+
+bool app_write_REG_EN_SERVOS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_EN_SERVOS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_DIS_SERVOS                                                       */
+/************************************************************************/
+void app_read_REG_DIS_SERVOS(void)
+{
+	//app_regs.REG_DIS_SERVOS = 0;
+
+}
+
+bool app_write_REG_DIS_SERVOS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+	app_regs.REG_DIS_SERVOS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_EN_ENCODERS                                                      */
+/************************************************************************/
+void app_read_REG_EN_ENCODERS(void)
+{
+	app_regs.REG_EN_ENCODERS = 0;
+    
+    if (TCD1_CTRLD == (TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc))
+    {
+        app_regs.REG_EN_ENCODERS |= B_EN_ENCODER_PORT2;
+    }
+}
+
+bool app_write_REG_EN_ENCODERS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+    
+    if (reg & B_EN_ENCODER_PORT2)
+    {        
+        /* Turn off interrupts on the Encoder pins and redefine pins to input */
+        PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
+        PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
+        io_pin2in(&PORTF, 4, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IR
+        io_pin2in(&PORTF, 5, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IO
+        
+        /* Set up quadrature decoding event */
+        EVSYS_CH0MUX = EVSYS_CHMUX_PORTF_PIN4_gc;                           // P. 77
+        EVSYS_CH0CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78
+        
+        /* Stop and reset timer */
+        TCD1_CTRLA = TC_CLKSEL_OFF_gc;
+        TCD1_CTRLFSET = TC_CMD_RESET_gc;
+        
+        /* Configure timer */
+        TCD1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc;	                // P. 180-1
+        TCD1_PER = 0xFFFF;
+        TCD1_CNT = 0x8000;
+        
+        /* Start timer */
+        TCD1_CTRLA=TC_CLKSEL_DIV1_gc;
+    }
+    
+    app_regs.REG_EN_ENCODERS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_DIS_ENCODERS                                                     */
+/************************************************************************/
+void app_read_REG_DIS_ENCODERS(void)
+{
+    app_regs.REG_DIS_ENCODERS = 0;
+}
+bool app_write_REG_DIS_ENCODERS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+
+    if (reg & B_EN_ENCODER_PORT2)
+    {
+        /* Stop and reset timer */
+        TCD1_CTRLA = TC_CLKSEL_OFF_gc;
+        TCD1_CTRLFSET = TC_CMD_RESET_gc;
+        
+        /* Turn inputs to default configuration (same as *init_ios()* func)  */
+        io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
+        io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<4), false);    // POKE2_IR
+        
+        /* Reset register */
+        app_regs.REG_ADC_AND_DECODER[1] = 0;
+        app_regs.REG_EN_ENCODERS &= ~(B_EN_ENCODER_PORT2);
+    }
+
+	app_regs.REG_DIS_ENCODERS = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_RESERVED2                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED2(void) {}
+bool app_write_REG_RESERVED2(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED3                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED3(void) {}
+bool app_write_REG_RESERVED3(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED4                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED4(void) {}
+bool app_write_REG_RESERVED4(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED5                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED5(void) {}
+bool app_write_REG_RESERVED5(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED6                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED6(void) {}
+bool app_write_REG_RESERVED6(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED7                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED7(void) {}
+bool app_write_REG_RESERVED7(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED8                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED8(void) {}
+bool app_write_REG_RESERVED8(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED9                                                        */
+/************************************************************************/
+void app_read_REG_RESERVED9(void) {}
+bool app_write_REG_RESERVED9(void *a) {return true;}
+
+
+/************************************************************************/
+/* REG_CAM_OUT0_FRAME_ACQUIRED                                          */
+/************************************************************************/
+void app_read_REG_CAM_OUT0_FRAME_ACQUIRED(void) {}
+bool app_write_REG_CAM_OUT0_FRAME_ACQUIRED(void *a) {return false;}
+/************************************************************************/
+/* REG_CAM_OUT0_FREQ                                                    */
+/************************************************************************/
+void app_read_REG_CAM_OUT0_FREQ(void) {}
+bool app_write_REG_CAM_OUT0_FREQ(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_CAM_OUT0_FREQ = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_CAM_OUT1_FRAME_ACQUIRED                                          */
+/************************************************************************/
+void app_read_REG_CAM_OUT1_FRAME_ACQUIRED(void) {}
+bool app_write_REG_CAM_OUT1_FRAME_ACQUIRED(void *a) {return false;}
+/************************************************************************/
+/* REG_CAM_OUT2_FREQ                                                    */
+/************************************************************************/
+void app_read_REG_CAM_OUT2_FREQ(void) {}
+bool app_write_REG_CAM_OUT2_FREQ(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_CAM_OUT2_FREQ = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_RESERVED10                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED10(void) {}
+bool app_write_REG_RESERVED10(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED11                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED11(void) {}
+bool app_write_REG_RESERVED11(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED12                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED12(void) {}
+bool app_write_REG_RESERVED12(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED13                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED13(void) {}
+bool app_write_REG_RESERVED13(void *a) {return true;}
+
+
+/************************************************************************/
+/* REG_MOTOR_OUT2_PERIOD                                                */
+/************************************************************************/
+void app_read_REG_MOTOR_OUT2_PERIOD(void) {}
+bool app_write_REG_MOTOR_OUT2_PERIOD(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_MOTOR_OUT2_PERIOD = reg;
+	return true;
+}
+/************************************************************************/
+/* REG_MOTOR_OUT2_PULSE                                                 */
+/************************************************************************/
+void app_read_REG_MOTOR_OUT2_PULSE(void) {}
+bool app_write_REG_MOTOR_OUT2_PULSE(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_MOTOR_OUT2_PULSE = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_MOTOR_OUT3_PERIOD                                                */
+/************************************************************************/
+void app_read_REG_MOTOR_OUT3_PERIOD(void) {}
+bool app_write_REG_MOTOR_OUT3_PERIOD(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_MOTOR_OUT3_PERIOD = reg;
+	return true;
+}
+/************************************************************************/
+/* REG_MOTOR_OUT3_PULSE                                                 */
+/************************************************************************/
+void app_read_REG_MOTOR_OUT3_PULSE(void) {}
+bool app_write_REG_MOTOR_OUT3_PULSE(void *a)
+{
+	uint16_t reg = *((uint16_t*)a);
+
+	app_regs.REG_MOTOR_OUT3_PULSE = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_RESERVED14                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED14(void) {}
+bool app_write_REG_RESERVED14(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED15                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED15(void) {}
+bool app_write_REG_RESERVED15(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED16                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED16(void) {}
+bool app_write_REG_RESERVED16(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED17                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED17(void) {}
+bool app_write_REG_RESERVED17(void *a) {return true;}
+
+
+/************************************************************************/
+/* REG_ENCODER_PORT2_RESET                                              */
+/************************************************************************/
+void app_read_REG_ENCODERS_RESET(void) {}
+bool app_write_REG_ENCODERS_RESET(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+    
+    if (reg & B_RST_ENCODER_PORT2)
+    {
+        TCD1_CNT = 0x8000;
+    }
+
+	app_regs.REG_ENCODERS_RESET = reg;
+	return true;
+}
+
+
+/************************************************************************/
+/* REG_RESERVED18                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED18(void)  {}
+bool app_write_REG_RESERVED18(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED19                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED19(void) {}
+bool app_write_REG_RESERVED19(void *a) {return true;}

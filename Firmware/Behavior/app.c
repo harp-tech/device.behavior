@@ -232,6 +232,8 @@ void core_callback_reset_registers(void)
     app_regs.REG_LED1_MAX_CURRENT = 30;
     
     app_regs.REG_EVNT_ENABLE = B_EVT_POKE_IN | B_EVT_POKE_DIOS_IN | B_EVT_ADC;
+    
+    app_regs.REG_EN_ENCODERS = 0;
 }
 
 void core_callback_registers_were_reinitialized(void)
@@ -255,6 +257,9 @@ void core_callback_registers_were_reinitialized(void)
     
     aux8b = app_regs.REG_PWM_START;
     app_write_REG_PWM_START(&aux8b);
+    
+    aux8b = app_regs.REG_EN_ENCODERS;
+    bool app_write_REG_EN_ENCODERS(&aux8b)
 }
 
 /************************************************************************/
@@ -281,19 +286,35 @@ extern bool rgb1_on;
 
 void core_callback_t_before_exec(void)
 {
-	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
+	/* Read ADC */
+    ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
 	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
 	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
 
 	if (ADCA_CH0_RES > AdcOffset)
-		app_regs.REG_ADC = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+		app_regs.REG_ADC_AND_DECODER[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
 	else
-		app_regs.REG_ADC = 0;
+		app_regs.REG_ADC_AND_DECODER[0] = 0;
+        
+    /* Read encoder on Port 2 */
+    if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
+    {
+        int16_t timer_cnt = TCD1_CNT;
+    
+        if (timer_cnt > 32768)
+        {
+            app_regs.REG_ADC_AND_DECODER[1] = 0xFFFF - timer_cnt;
+        }
+        else
+        {
+            app_regs.REG_ADC_AND_DECODER[1] = (32768 - timer_cnt) * -1;
+        }
+    }        
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_ADC)
 	{
-		core_func_send_event(ADD_REG_ADC, true);
-	}
+		core_func_send_event(ADD_REG_ADC_AND_DECODER, true);
+	}        
 }
 void core_callback_t_after_exec(void) {}
 void core_callback_t_new_second(void) {}

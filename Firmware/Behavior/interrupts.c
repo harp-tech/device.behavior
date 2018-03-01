@@ -33,12 +33,12 @@ extern AppRegs app_regs;
 /************************************************************************/
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {	
-	app_regs.REG_POKE_IN &= ~B_IR0;
-	app_regs.REG_POKE_IN |= (read_POKE0_IR) ? B_IR0 : 0;
+	app_regs.REG_PORT_DIS &= ~B_DI0;
+	app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_POKE_IN, true);
+		core_func_send_event(ADD_REG_PORT_DIS, true);
 	}
 
 	reti();
@@ -49,12 +49,12 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
 /************************************************************************/
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
-	app_regs.REG_POKE_IN &= ~B_IR1;
-	app_regs.REG_POKE_IN |= (read_POKE1_IR) ? B_IR1 : 0;
+	app_regs.REG_PORT_DIS &= ~B_DI1;
+	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_POKE_IN, true);
+		core_func_send_event(ADD_REG_PORT_DIS, true);
 	}
 
 	reti();
@@ -65,12 +65,12 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 /************************************************************************/
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
-	app_regs.REG_POKE_IN &= ~B_IR2;
-	app_regs.REG_POKE_IN |= (read_POKE2_IR) ? B_IR2 : 0;
+	app_regs.REG_PORT_DIS &= ~B_DI2;
+	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_POKE_IN)
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_POKE_IN, true);
+		core_func_send_event(ADD_REG_PORT_DIS, true);
 	}
 
 	reti();
@@ -82,14 +82,27 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
 timer_conf_t timer_conf;
 is_new_timer_conf_t is_new_timer_conf;
 
+extern ports_state_t _states_;
+
 ISR(TCF0_OVF_vect, ISR_NAKED)
 {
-    if (is_new_timer_conf.pwm_do0)
+    if (_states_.pwm.do0)
     {
-        TCF0_PER = timer_conf.target_do0;
-        TCF0_CCA = timer_conf.dcycle_do0;
-        TCF0_CTRLA = timer_conf.prescaler_do0;
-        is_new_timer_conf.pwm_do0 = false;
+        if (is_new_timer_conf.pwm_do0)
+        {
+            TCF0_PER = timer_conf.target_do0;
+            TCF0_CCA = timer_conf.dcycle_do0;
+            TCF0_CTRLA = timer_conf.prescaler_do0;
+            is_new_timer_conf.pwm_do0 = false;
+        }
+    }        
+    
+    if (_states_.camera.do0)
+    {
+        if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM0)
+        {
+            core_func_send_event(ADD_REG_CAM_OUT0_FRAME_ACQUIRED, true);
+        }
     }
     
     reti();
@@ -97,39 +110,56 @@ ISR(TCF0_OVF_vect, ISR_NAKED)
 
 ISR(TCE0_OVF_vect, ISR_NAKED)
 {
-    if (is_new_timer_conf.pwm_do1)
+    if (_states_.pwm.do1)
     {
-        TCE0_PER = timer_conf.target_do1;
-        TCE0_CCA = timer_conf.dcycle_do1;
-        TCE0_CTRLA = timer_conf.prescaler_do1;
-        is_new_timer_conf.pwm_do1 = false;
-    }
+        if (is_new_timer_conf.pwm_do1)
+        {
+            TCE0_PER = timer_conf.target_do1;
+            TCE0_CCA = timer_conf.dcycle_do1;
+            TCE0_CTRLA = timer_conf.prescaler_do1;
+            is_new_timer_conf.pwm_do1 = false;
+        }
+    }     
+          
+    if (_states_.camera.do1)
+    {
+        if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM1)
+        {
+            core_func_send_event(ADD_REG_CAM_OUT1_FRAME_ACQUIRED, true);
+        }
+    }       
     
     reti();
 }
 
 ISR(TCD0_OVF_vect, ISR_NAKED)
 {
-    if (is_new_timer_conf.pwm_do2)
+    if (_states_.pwm.do2)
     {
-        TCD0_PER = timer_conf.target_do2;
-        TCD0_CCA = timer_conf.dcycle_do2;
-        TCD0_CTRLA = timer_conf.prescaler_do2;
-        is_new_timer_conf.pwm_do2 = false;
-    }
+        if (is_new_timer_conf.pwm_do2)
+        {
+            TCD0_PER = timer_conf.target_do2;
+            TCD0_CCA = timer_conf.dcycle_do2;
+            TCD0_CTRLA = timer_conf.prescaler_do2;
+            is_new_timer_conf.pwm_do2 = false;
+        }
+    }        
     
     reti();
 }
 
 ISR(TCC0_OVF_vect, ISR_NAKED)
 {
-    if (is_new_timer_conf.pwm_do3)
+    if (_states_.pwm.do3)
     {
-        TCC0_PER = timer_conf.target_do3;
-        TCC0_CCA = timer_conf.dcycle_do3;
-        TCC0_CTRLA = timer_conf.prescaler_do3;
-        is_new_timer_conf.pwm_do3 = false;
+        if (is_new_timer_conf.pwm_do3)
+        {
+            TCC0_PER = timer_conf.target_do3;
+            TCC0_CCA = timer_conf.dcycle_do3;
+            TCC0_CTRLA = timer_conf.prescaler_do3;
+            is_new_timer_conf.pwm_do3 = false;
+        }
     }
-    
+        
     reti();
 }

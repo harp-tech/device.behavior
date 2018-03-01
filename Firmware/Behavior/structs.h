@@ -22,4 +22,35 @@ typedef struct
     bool pwm_do0, pwm_do1, pwm_do2, pwm_do3;
 } is_new_timer_conf_t;
 
+
+/* State of output ports */
+typedef struct
+{
+    bool do0, do1, do2, do3;
+} pwm_possibilities_t;
+
+typedef struct
+{
+    bool do0, do1, do2, do3;
+} camera_possibilities_t;
+
+typedef struct
+{
+    bool do0, do1, do2, do3;
+} motor_possibilities_t;
+
+typedef struct
+{
+    bool port0, port1, port2;
+} quad_counter_possibilities_t;
+
+
+typedef struct
+{
+    pwm_possibilities_t pwm;
+    camera_possibilities_t camera;
+    motor_possibilities_t servo;
+    quad_counter_possibilities_t quad_counter;
+} ports_state_t;
+
 #endif /* _STRUCT_H_ */

@@ -30,7 +30,7 @@ void hwbp_app_initialize(void)
 {
     /* Define versions */
     uint8_t hwH = 1;
-    uint8_t hwL = 2;
+    uint8_t hwL = 1;
     uint8_t fwH = 2;
     uint8_t fwL = 0;
     uint8_t ass = 0;    
@@ -151,7 +151,7 @@ void core_callback_1st_config_hw_after_boot(void)
 
 void core_callback_reset_registers(void)
 {
-	//app_regs.REG_POKE_IN = 0;
+	//app_regs.REG_PORTS_IN = 0;
     //app_regs.REG_POKE_DIG_IN = 0;
     
     app_regs.REG_OUTPUTS_SET = 0;
@@ -159,36 +159,23 @@ void core_callback_reset_registers(void)
     app_regs.REG_OUTPUTS_TOGGLE = 0;
     app_regs.REG_OUTPUTS_OUT = 0;
     
-    app_regs.REG_POKE_DIOS_SET = 0;
-    app_regs.REG_POKE_DIOS_CLEAR = 0;
-    app_regs.REG_POKE_DIOS_TOGGLE = 0;
-    app_regs.REG_POKE_DIOS_OUT = 0;
-    app_regs.REG_POKE_DIOS_CONF = 0; // All as inputs
-    //app_regs.REG_POKE_DIOS_IN = 0;
+    app_regs.REG_PORT_DIOS_SET = 0;
+    app_regs.REG_PORT_DIOS_CLEAR = 0;
+    app_regs.REG_PORT_DIOS_TOGGLE = 0;
+    app_regs.REG_PORT_DIOS_OUT = 0;
+    app_regs.REG_PORT_DIOS_CONF = 0; // All as inputs
+    //app_regs.REG_PORT_DIOS_IN = 0;
     
     //app_regs.REG_ADC = 0;
     
-    app_regs.REG_MODE_POKE0_LED = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE1_LED = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE2_LED = GM_SOFTWARE;
-    app_regs.REG_MODE_POKE0_VALVE = GM_PULSE;
-    app_regs.REG_MODE_POKE1_VALVE = GM_PULSE;
-    app_regs.REG_MODE_POKE2_VALVE = GM_PULSE;
-    app_regs.REG_MODE_LED0 = GM_SOFTWARE;
-    app_regs.REG_MODE_LED1 = GM_SOFTWARE;
-    app_regs.REG_MODE_RGB0 = GM_SOFTWARE;
-    app_regs.REG_MODE_RGB1 = GM_SOFTWARE;
-    app_regs.REG_MODE_DO0 = GM_SOFTWARE;
-    app_regs.REG_MODE_DO1 = GM_SOFTWARE;
-    app_regs.REG_MODE_DO2 = GM_SOFTWARE;
-    app_regs.REG_MODE_DO3 = GM_SOFTWARE;
+    app_regs.REG_OUTPUT_PULSE_EN = B_PORT0_12V | B_PORT1_12V | B_PORT2_12V;
 
-    app_regs.REG_PULSE_POKE0_LED = 500;
-    app_regs.REG_PULSE_POKE1_LED = 500;
-    app_regs.REG_PULSE_POKE2_LED = 500;
-    app_regs.REG_PULSE_POKE0_VALVE = 15;
-    app_regs.REG_PULSE_POKE1_VALVE = 15;
-    app_regs.REG_PULSE_POKE2_VALVE = 15;
+    app_regs.REG_PULSE_PORT0_DO = 500;
+    app_regs.REG_PULSE_PORT1_DO = 500;
+    app_regs.REG_PULSE_PORT2_DO = 500;
+    app_regs.REG_PULSE_PORT0_12V = 15;
+    app_regs.REG_PULSE_PORT1_12V = 15;
+    app_regs.REG_PULSE_PORT2_12V = 15;
     app_regs.REG_PULSE_LED0 = 500;
     app_regs.REG_PULSE_LED1 = 500;
     app_regs.REG_PULSE_RGB0 = 500;
@@ -231,14 +218,42 @@ void core_callback_reset_registers(void)
     app_regs.REG_LED0_MAX_CURRENT = 30;
     app_regs.REG_LED1_MAX_CURRENT = 30;
     
-    app_regs.REG_EVNT_ENABLE = B_EVT_POKE_IN | B_EVT_POKE_DIOS_IN | B_EVT_ADC;
+    app_regs.REG_EVNT_ENABLE = B_EVT_PORT_DIS | B_EVT_PORT_DIOS_IN | B_EVT_DATA | B_EVT_CAM0 | B_EVT_CAM1;
     
+    app_regs.REG_START_CAMERAS = 0;
+    app_regs.REG_EN_SERVOS = 0;
     app_regs.REG_EN_ENCODERS = 0;
+    
+    app_regs.REG_CAM_OUT0_FREQ = 30;
+    app_regs.REG_CAM_OUT1_FREQ = 30;
+    
+    app_regs.REG_MOTOR_OUT2_PERIOD = 20000;
+    app_regs.REG_MOTOR_OUT2_PULSE = 1500;
+    app_regs.REG_MOTOR_OUT3_PERIOD = 20000;
+    app_regs.REG_MOTOR_OUT3_PULSE = 1500;
 }
+
+extern ports_state_t _states_;
 
 void core_callback_registers_were_reinitialized(void)
 {
-	uint16_t aux16b = app_regs.REG_OUTPUTS_OUT;
+	_states_.pwm.do0 = false;
+    _states_.pwm.do1 = false;
+    _states_.pwm.do2 = false;
+    _states_.pwm.do3 = false;
+    _states_.camera.do0 = false;
+    _states_.camera.do1 = false;
+    _states_.camera.do2 = false;
+    _states_.camera.do3 = false;
+    _states_.servo.do0 = false;
+    _states_.servo.do1 = false;
+    _states_.servo.do2 = false;
+    _states_.servo.do3 = false;
+    _states_.quad_counter.port0 = false;
+    _states_.quad_counter.port1 = false;
+    _states_.quad_counter.port2 = false;
+    
+    uint16_t aux16b = app_regs.REG_OUTPUTS_OUT;
     app_write_REG_OUTPUTS_OUT(&aux16b);
     
     uint8_t aux8b = app_regs.REG_LED0_CURRENT;
@@ -292,9 +307,9 @@ void core_callback_t_before_exec(void)
 	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
 
 	if (ADCA_CH0_RES > AdcOffset)
-		app_regs.REG_ADC_AND_DECODER[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+		app_regs.REG_DATA[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
 	else
-		app_regs.REG_ADC_AND_DECODER[0] = 0;
+		app_regs.REG_DATA[0] = 0;
         
     /* Read encoder on Port 2 */
     if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
@@ -303,17 +318,17 @@ void core_callback_t_before_exec(void)
     
         if (timer_cnt > 32768)
         {
-            app_regs.REG_ADC_AND_DECODER[1] = 0xFFFF - timer_cnt;
+            app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
         }
         else
         {
-            app_regs.REG_ADC_AND_DECODER[1] = (32768 - timer_cnt) * -1;
+            app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
         }
     }        
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_ADC)
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
 	{
-		core_func_send_event(ADD_REG_ADC_AND_DECODER, true);
+		core_func_send_event(ADD_REG_DATA, true);
 	}        
 }
 void core_callback_t_after_exec(void) {}
@@ -371,23 +386,23 @@ void core_callback_t_500us(void)
 		timer_type0_stop(&TCF0);
 	}
 	if (pulse_countdown.do1 > 0)
-	if (--pulse_countdown.do1 == 0)
-	{
-		clr_DO1;
-		timer_type0_stop(&TCE0);
-	}
+	    if (--pulse_countdown.do1 == 0)
+	    {
+    	    clr_DO1;
+    	    timer_type0_stop(&TCE0);
+	    }
 	if (pulse_countdown.do2 > 0)
-	if (--pulse_countdown.do2 == 0)
-	{
-		clr_DO2;
-		timer_type0_stop(&TCD0);
-	}
+	    if (--pulse_countdown.do2 == 0)
+	    {
+    	    clr_DO2;
+    	    timer_type0_stop(&TCD0);
+	    }
 	if (pulse_countdown.do3 > 0)
-	if (--pulse_countdown.do3 == 0)
-	{
-		clr_DO3;
-		timer_type0_stop(&TCC0);
-	}
+	    if (--pulse_countdown.do3 == 0)
+	    {
+    	    clr_DO3;
+    	    timer_type0_stop(&TCC0);
+	    }
 }
 
 void core_callback_t_1ms(void) {}

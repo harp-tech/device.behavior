@@ -2,6 +2,9 @@
 #include "app_ios_and_regs.h"
 #include "hwbp_core.h"
 
+#define F_CPU 32000000
+#include <util/delay.h>
+
 #include "WS2812S.h"
 #include "structs.h"
 
@@ -10,45 +13,34 @@ extern countdown_t pulse_countdown;
 extern timer_conf_t timer_conf;
 extern is_new_timer_conf_t is_new_timer_conf;
 
+ports_state_t _states_;
+
 /************************************************************************/
 /* Create pointers to functions                                         */
 /************************************************************************/
 extern AppRegs app_regs;
 
 void (*app_func_rd_pointer[])(void) = {
-	&app_read_REG_POKE_IN,
+	&app_read_REG_PORT_DIS,
 	&app_read_REG_RESERVED0,
 	&app_read_REG_OUTPUTS_SET,
 	&app_read_REG_OUTPUTS_CLEAR,
 	&app_read_REG_OUTPUTS_TOGGLE,
 	&app_read_REG_OUTPUTS_OUT,
-	&app_read_REG_POKE_DIOS_SET,
-	&app_read_REG_POKE_DIOS_CLEAR,
-	&app_read_REG_POKE_DIOS_TOGGLE,
-	&app_read_REG_POKE_DIOS_OUT,
-	&app_read_REG_POKE_DIOS_CONF,
-	&app_read_REG_POKE_DIOS_IN,
-	&app_read_REG_ADC_AND_DECODER,
-	&app_read_REG_MODE_POKE0_LED,
-	&app_read_REG_MODE_POKE1_LED,
-	&app_read_REG_MODE_POKE2_LED,
-	&app_read_REG_MODE_POKE0_VALVE,
-	&app_read_REG_MODE_POKE1_VALVE,
-	&app_read_REG_MODE_POKE2_VALVE,
-	&app_read_REG_MODE_LED0,
-	&app_read_REG_MODE_LED1,
-	&app_read_REG_MODE_RGB0,
-	&app_read_REG_MODE_RGB1,
-	&app_read_REG_MODE_DO0,
-	&app_read_REG_MODE_DO1,
-	&app_read_REG_MODE_DO2,
-	&app_read_REG_MODE_DO3,
-	&app_read_REG_PULSE_POKE0_LED,
-	&app_read_REG_PULSE_POKE1_LED,
-	&app_read_REG_PULSE_POKE2_LED,
-	&app_read_REG_PULSE_POKE0_VALVE,
-	&app_read_REG_PULSE_POKE1_VALVE,
-	&app_read_REG_PULSE_POKE2_VALVE,
+	&app_read_REG_PORT_DIOS_SET,
+	&app_read_REG_PORT_DIOS_CLEAR,
+	&app_read_REG_PORT_DIOS_TOGGLE,
+	&app_read_REG_PORT_DIOS_OUT,
+	&app_read_REG_PORT_DIOS_CONF,
+	&app_read_REG_PORT_DIOS_IN,
+	&app_read_REG_DATA,
+	&app_read_REG_OUTPUT_PULSE_EN,
+	&app_read_REG_PULSE_PORT0_DO,
+	&app_read_REG_PULSE_PORT1_DO,
+	&app_read_REG_PULSE_PORT2_DO,
+	&app_read_REG_PULSE_PORT0_12V,
+	&app_read_REG_PULSE_PORT1_12V,
+	&app_read_REG_PULSE_PORT2_12V,
 	&app_read_REG_PULSE_LED0,
 	&app_read_REG_PULSE_LED1,
 	&app_read_REG_PULSE_RGB0,
@@ -75,8 +67,8 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_LED0_MAX_CURRENT,
 	&app_read_REG_LED1_MAX_CURRENT,
 	&app_read_REG_EVNT_ENABLE,
-	&app_read_REG_EN_CAMERAS,
-	&app_read_REG_DIS_CAMERAS,
+	&app_read_REG_START_CAMERAS,
+	&app_read_REG_STOP_CAMERAS,
 	&app_read_REG_EN_SERVOS,
 	&app_read_REG_DIS_SERVOS,
 	&app_read_REG_EN_ENCODERS,
@@ -92,7 +84,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_CAM_OUT0_FRAME_ACQUIRED,
 	&app_read_REG_CAM_OUT0_FREQ,
 	&app_read_REG_CAM_OUT1_FRAME_ACQUIRED,
-	&app_read_REG_CAM_OUT2_FREQ,
+	&app_read_REG_CAM_OUT1_FREQ,
 	&app_read_REG_RESERVED10,
 	&app_read_REG_RESERVED11,
 	&app_read_REG_RESERVED12,
@@ -111,39 +103,26 @@ void (*app_func_rd_pointer[])(void) = {
 };
 
 bool (*app_func_wr_pointer[])(void*) = {
-	&app_write_REG_POKE_IN,
+	&app_write_REG_PORT_DIS,
 	&app_write_REG_RESERVED0,
 	&app_write_REG_OUTPUTS_SET,
 	&app_write_REG_OUTPUTS_CLEAR,
 	&app_write_REG_OUTPUTS_TOGGLE,
 	&app_write_REG_OUTPUTS_OUT,
-	&app_write_REG_POKE_DIOS_SET,
-	&app_write_REG_POKE_DIOS_CLEAR,
-	&app_write_REG_POKE_DIOS_TOGGLE,
-	&app_write_REG_POKE_DIOS_OUT,
-	&app_write_REG_POKE_DIOS_CONF,
-	&app_write_REG_POKE_DIOS_IN,
-	&app_write_REG_ADC_AND_DECODER,
-	&app_write_REG_MODE_POKE0_LED,
-	&app_write_REG_MODE_POKE1_LED,
-	&app_write_REG_MODE_POKE2_LED,
-	&app_write_REG_MODE_POKE0_VALVE,
-	&app_write_REG_MODE_POKE1_VALVE,
-	&app_write_REG_MODE_POKE2_VALVE,
-	&app_write_REG_MODE_LED0,
-	&app_write_REG_MODE_LED1,
-	&app_write_REG_MODE_RGB0,
-	&app_write_REG_MODE_RGB1,
-	&app_write_REG_MODE_DO0,
-	&app_write_REG_MODE_DO1,
-	&app_write_REG_MODE_DO2,
-	&app_write_REG_MODE_DO3,
-	&app_write_REG_PULSE_POKE0_LED,
-	&app_write_REG_PULSE_POKE1_LED,
-	&app_write_REG_PULSE_POKE2_LED,
-	&app_write_REG_PULSE_POKE0_VALVE,
-	&app_write_REG_PULSE_POKE1_VALVE,
-	&app_write_REG_PULSE_POKE2_VALVE,
+	&app_write_REG_PORT_DIOS_SET,
+	&app_write_REG_PORT_DIOS_CLEAR,
+	&app_write_REG_PORT_DIOS_TOGGLE,
+	&app_write_REG_PORT_DIOS_OUT,
+	&app_write_REG_PORT_DIOS_CONF,
+	&app_write_REG_PORT_DIOS_IN,
+	&app_write_REG_DATA,
+	&app_write_REG_OUTPUT_PULSE_EN,
+	&app_write_REG_PULSE_PORT0_DO,
+	&app_write_REG_PULSE_PORT1_DO,
+	&app_write_REG_PULSE_PORT2_DO,
+	&app_write_REG_PULSE_PORT0_12V,
+	&app_write_REG_PULSE_PORT1_12V,
+	&app_write_REG_PULSE_PORT2_12V,
 	&app_write_REG_PULSE_LED0,
 	&app_write_REG_PULSE_LED1,
 	&app_write_REG_PULSE_RGB0,
@@ -170,8 +149,8 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_LED0_MAX_CURRENT,
 	&app_write_REG_LED1_MAX_CURRENT,
 	&app_write_REG_EVNT_ENABLE,
-	&app_write_REG_EN_CAMERAS,
-	&app_write_REG_DIS_CAMERAS,
+	&app_write_REG_START_CAMERAS,
+	&app_write_REG_STOP_CAMERAS,
 	&app_write_REG_EN_SERVOS,
 	&app_write_REG_DIS_SERVOS,
 	&app_write_REG_EN_ENCODERS,
@@ -187,7 +166,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_CAM_OUT0_FRAME_ACQUIRED,
 	&app_write_REG_CAM_OUT0_FREQ,
 	&app_write_REG_CAM_OUT1_FRAME_ACQUIRED,
-	&app_write_REG_CAM_OUT2_FREQ,
+	&app_write_REG_CAM_OUT1_FREQ,
 	&app_write_REG_RESERVED10,
 	&app_write_REG_RESERVED11,
 	&app_write_REG_RESERVED12,
@@ -207,15 +186,15 @@ bool (*app_func_wr_pointer[])(void*) = {
 
 
 /************************************************************************/
-/* REG_POKE_IN                                                          */
+/* REG_PORTS_IN                                                          */
 /************************************************************************/
-void app_read_REG_POKE_IN(void)
+void app_read_REG_PORT_DIS(void)
 {
-	app_regs.REG_POKE_IN = (read_POKE0_IR) ? B_IR0 : 0;
-	app_regs.REG_POKE_IN |= (read_POKE1_IR) ? B_IR1 : 0;
-	app_regs.REG_POKE_IN |= (read_POKE2_IR) ? B_IR2 : 0;
+	app_regs.REG_PORT_DIS = (read_POKE0_IR) ? B_DI0 : 0;
+	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
+	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
 }
-bool app_write_REG_POKE_IN(void *a) { return false; }
+bool app_write_REG_PORT_DIS(void *a) { return false; }
 
 
 /************************************************************************/
@@ -237,24 +216,24 @@ bool app_write_REG_RESERVED0(void *a)
 bool rgb0_on = false;
 bool rgb1_on = false;
 
-#define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_MODE_POKE0_LED == GM_PULSE) pulse_countdown.poke0_led = app_regs.REG_PULSE_POKE0_LED + 1; } while(0)
-#define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_MODE_POKE1_LED == GM_PULSE) pulse_countdown.poke1_led = app_regs.REG_PULSE_POKE1_LED + 1; } while(0)
-#define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_MODE_POKE2_LED == GM_PULSE) pulse_countdown.poke2_led = app_regs.REG_PULSE_POKE2_LED + 1; } while(0)
+#define start_POKE0_LED do {set_POKE0_LED; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT0_DO) pulse_countdown.poke0_led = app_regs.REG_PULSE_PORT0_DO + 1; } while(0)
+#define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT1_DO) pulse_countdown.poke1_led = app_regs.REG_PULSE_PORT1_DO + 1; } while(0)
+#define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT2_DO) pulse_countdown.poke2_led = app_regs.REG_PULSE_PORT2_DO + 1; } while(0)
 
-#define start_POKE0_VALVE do {set_POKE0_VALVE; if (app_regs.REG_MODE_POKE0_VALVE == GM_PULSE) pulse_countdown.poke0_valve = app_regs.REG_PULSE_POKE0_VALVE + 1; } while(0)
-#define start_POKE1_VALVE do {set_POKE1_VALVE; if (app_regs.REG_MODE_POKE1_VALVE == GM_PULSE) pulse_countdown.poke1_valve = app_regs.REG_PULSE_POKE1_VALVE + 1; } while(0)
-#define start_POKE2_VALVE do {set_POKE2_VALVE; if (app_regs.REG_MODE_POKE2_VALVE == GM_PULSE) pulse_countdown.poke2_valve = app_regs.REG_PULSE_POKE2_VALVE + 1; } while(0)
+#define start_POKE0_VALVE do {set_POKE0_VALVE; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT0_12V) pulse_countdown.poke0_valve = app_regs.REG_PULSE_PORT0_12V + 1; } while(0)
+#define start_POKE1_VALVE do {set_POKE1_VALVE; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT1_12V) pulse_countdown.poke1_valve = app_regs.REG_PULSE_PORT1_12V + 1; } while(0)
+#define start_POKE2_VALVE do {set_POKE2_VALVE; if (app_regs.REG_OUTPUT_PULSE_EN & B_PORT2_12V) pulse_countdown.poke2_valve = app_regs.REG_PULSE_PORT2_12V + 1; } while(0)
 
-#define start_LED0 do {set_LED0; if (app_regs.REG_MODE_LED0 == GM_PULSE) pulse_countdown.led0 = app_regs.REG_PULSE_LED0 + 1; } while(0)
-#define start_LED1 do {set_LED1; if (app_regs.REG_MODE_LED1 == GM_PULSE) pulse_countdown.led1 = app_regs.REG_PULSE_LED1 + 1; } while(0)
+#define start_LED0 do {set_LED0; if (app_regs.REG_OUTPUT_PULSE_EN & B_LED0) pulse_countdown.led0 = app_regs.REG_PULSE_LED0 + 1; } while(0)
+#define start_LED1 do {set_LED1; if (app_regs.REG_OUTPUT_PULSE_EN & B_LED1) pulse_countdown.led1 = app_regs.REG_PULSE_LED1 + 1; } while(0)
 
-#define start_RGB0 do {rgb0_on = true; if (app_regs.REG_MODE_RGB0 == GM_PULSE) pulse_countdown.rgb0 = app_regs.REG_PULSE_RGB0 + 1; } while(0)
-#define start_RGB1 do {rgb1_on = true; if (app_regs.REG_MODE_RGB1 == GM_PULSE) pulse_countdown.rgb1 = app_regs.REG_PULSE_RGB1 + 1; } while(0)
+#define start_RGB0 do {rgb0_on = true; if (app_regs.REG_OUTPUT_PULSE_EN & B_RGB0) pulse_countdown.rgb0 = app_regs.REG_PULSE_RGB0 + 1; } while(0)
+#define start_RGB1 do {rgb1_on = true; if (app_regs.REG_OUTPUT_PULSE_EN & B_RGB1) pulse_countdown.rgb1 = app_regs.REG_PULSE_RGB1 + 1; } while(0)
 
-#define start_DO0 do {set_DO0; if (app_regs.REG_MODE_DO0 == GM_PULSE) pulse_countdown.do0 = app_regs.REG_PULSE_DO0 + 1; } while(0)
-#define start_DO1 do {set_DO1; if (app_regs.REG_MODE_DO1 == GM_PULSE) pulse_countdown.do1 = app_regs.REG_PULSE_DO1 + 1; } while(0)
-#define start_DO2 do {set_DO2; if (app_regs.REG_MODE_DO2 == GM_PULSE) pulse_countdown.do2 = app_regs.REG_PULSE_DO2 + 1; } while(0)
-#define start_DO3 do {set_DO3; if (app_regs.REG_MODE_DO3 == GM_PULSE) pulse_countdown.do3 = app_regs.REG_PULSE_DO3 + 1; } while(0)
+#define start_DO0 do {set_DO0; if (app_regs.REG_OUTPUT_PULSE_EN & B_DO0) pulse_countdown.do0 = app_regs.REG_PULSE_DO0 + 1; } while(0)
+#define start_DO1 do {set_DO1; if (app_regs.REG_OUTPUT_PULSE_EN & B_DO1) pulse_countdown.do1 = app_regs.REG_PULSE_DO1 + 1; } while(0)
+#define start_DO2 do {set_DO2; if (app_regs.REG_OUTPUT_PULSE_EN & B_DO2) pulse_countdown.do2 = app_regs.REG_PULSE_DO2 + 1; } while(0)
+#define start_DO3 do {set_DO3; if (app_regs.REG_OUTPUT_PULSE_EN & B_DO3) pulse_countdown.do3 = app_regs.REG_PULSE_DO3 + 1; } while(0)
 
 void handle_Rgbs(bool use_rgb0, bool use_rgb1)
 {
@@ -297,13 +276,13 @@ bool app_write_REG_OUTPUTS_SET(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) start_POKE0_LED;
-	if (reg & B_POKE1_LED) start_POKE1_LED;
-	if (reg & B_POKE2_LED) start_POKE2_LED;
+	if (reg & B_PORT0_DO) start_POKE0_LED;
+	if (reg & B_PORT1_DO) start_POKE1_LED;
+	if (reg & B_PORT2_DO) start_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) start_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) start_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) start_POKE2_VALVE;
+	if (reg & B_PORT0_12V) start_POKE0_VALVE;
+	if (reg & B_PORT1_12V) start_POKE1_VALVE;
+	if (reg & B_PORT2_12V) start_POKE2_VALVE;
 	
 	if (reg & B_LED0) start_LED0;
 	if (reg & B_LED1) start_LED1;
@@ -334,13 +313,13 @@ bool app_write_REG_OUTPUTS_CLEAR(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) clr_POKE0_LED;
-	if (reg & B_POKE1_LED) clr_POKE1_LED;
-	if (reg & B_POKE2_LED) clr_POKE2_LED;
+	if (reg & B_PORT0_DO) clr_POKE0_LED;
+	if (reg & B_PORT1_DO) clr_POKE1_LED;
+	if (reg & B_PORT2_DO) clr_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) clr_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) clr_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) clr_POKE2_VALVE;
+	if (reg & B_PORT0_12V) clr_POKE0_VALVE;
+	if (reg & B_PORT1_12V) clr_POKE1_VALVE;
+	if (reg & B_PORT2_12V) clr_POKE2_VALVE;
 	
 	if (reg & B_LED0) clr_LED0;
 	if (reg & B_LED1) clr_LED1;
@@ -371,13 +350,13 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 
-	if (reg & B_POKE0_LED) { if (read_POKE0_LED) tgl_POKE0_LED; else start_POKE0_LED;}
-	if (reg & B_POKE1_LED) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
-	if (reg & B_POKE2_LED) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
+	if (reg & B_PORT0_DO) { if (read_POKE0_LED) tgl_POKE0_LED; else start_POKE0_LED;}
+	if (reg & B_PORT1_DO) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
+	if (reg & B_PORT2_DO) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
 	
-	if (reg & B_POKE0_VALVE) { if (read_POKE0_VALVE) tgl_POKE0_VALVE; else start_POKE0_VALVE;}
-	if (reg & B_POKE1_VALVE) { if (read_POKE1_VALVE) tgl_POKE1_VALVE; else start_POKE1_VALVE;}
-	if (reg & B_POKE2_VALVE) { if (read_POKE2_VALVE) tgl_POKE2_VALVE; else start_POKE2_VALVE;}
+	if (reg & B_PORT0_12V) { if (read_POKE0_VALVE) tgl_POKE0_VALVE; else start_POKE0_VALVE;}
+	if (reg & B_PORT1_12V) { if (read_POKE1_VALVE) tgl_POKE1_VALVE; else start_POKE1_VALVE;}
+	if (reg & B_PORT2_12V) { if (read_POKE2_VALVE) tgl_POKE2_VALVE; else start_POKE2_VALVE;}
 	
 
 	if (reg & B_LED0) { if (!read_LED0) tgl_LED0; else start_LED0;}
@@ -418,13 +397,13 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 /************************************************************************/
 void app_read_REG_OUTPUTS_OUT(void)
 {
-	app_regs.REG_OUTPUTS_OUT = (read_POKE0_LED) ? B_POKE0_LED : 0;
-	app_regs.REG_OUTPUTS_OUT |= (read_POKE1_LED) ? B_POKE1_LED : 0;
-	app_regs.REG_OUTPUTS_OUT |= (read_POKE2_LED) ? B_POKE2_LED : 0;
+	app_regs.REG_OUTPUTS_OUT = (read_POKE0_LED) ? B_PORT0_DO : 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_POKE1_LED) ? B_PORT1_DO : 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_POKE2_LED) ? B_PORT2_DO : 0;
 	
-	app_regs.REG_OUTPUTS_OUT |= (read_POKE0_VALVE) ? B_POKE0_VALVE : 0;
-	app_regs.REG_OUTPUTS_OUT |= (read_POKE1_VALVE) ? B_POKE1_VALVE : 0;
-	app_regs.REG_OUTPUTS_OUT |= (read_POKE2_VALVE) ? B_POKE2_VALVE : 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_POKE0_VALVE) ? B_PORT0_12V: 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_POKE1_VALVE) ? B_PORT1_12V: 0;
+	app_regs.REG_OUTPUTS_OUT |= (read_POKE2_VALVE) ? B_PORT2_12V: 0;
 	
 	app_regs.REG_OUTPUTS_OUT |= (read_LED0) ? 0 : B_LED0;
 	app_regs.REG_OUTPUTS_OUT |= (read_LED1) ? 0 : B_LED1;
@@ -446,13 +425,13 @@ bool app_write_REG_OUTPUTS_OUT(void *a)
 	prev_rgb0_on = rgb0_on;
 	prev_rgb1_on = rgb1_on;
 	
-	if (reg & B_POKE0_LED) start_POKE0_LED; else clr_POKE0_LED;
-	if (reg & B_POKE1_LED) start_POKE1_LED; else clr_POKE1_LED;
-	if (reg & B_POKE2_LED) start_POKE2_LED; else clr_POKE2_LED;
+	if (reg & B_PORT0_DO) start_POKE0_LED; else clr_POKE0_LED;
+	if (reg & B_PORT1_DO) start_POKE1_LED; else clr_POKE1_LED;
+	if (reg & B_PORT2_DO) start_POKE2_LED; else clr_POKE2_LED;
 	
-	if (reg & B_POKE0_VALVE) start_POKE0_VALVE; else clr_POKE0_VALVE;
-	if (reg & B_POKE1_VALVE) start_POKE1_VALVE; else clr_POKE1_VALVE;
-	if (reg & B_POKE2_VALVE) start_POKE2_VALVE; else clr_POKE2_VALVE;
+	if (reg & B_PORT0_12V) start_POKE0_VALVE; else clr_POKE0_VALVE;
+	if (reg & B_PORT1_12V) start_POKE1_VALVE; else clr_POKE1_VALVE;
+	if (reg & B_PORT2_12V) start_POKE2_VALVE; else clr_POKE2_VALVE;
 	
 	if (reg & B_LED0) start_LED0; else clr_LED0;
 	if (reg & B_LED1) start_LED1; else clr_LED1;
@@ -477,123 +456,123 @@ bool app_write_REG_OUTPUTS_OUT(void *a)
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_SET                                                    */
+/* REG_PORT_DIOS_SET                                                    */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_SET(void)
+void app_read_REG_PORT_DIOS_SET(void)
 {
-	//app_regs.REG_POKE_DIOS_SET = 0;
+	//app_regs.REG_PORT_DIOS_SET = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_SET(void *a)
+bool app_write_REG_PORT_DIOS_SET(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_SET = reg;
+	app_regs.REG_PORT_DIOS_SET = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_CLEAR                                                  */
+/* REG_PORT_DIOS_CLEAR                                                  */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_CLEAR(void)
+void app_read_REG_PORT_DIOS_CLEAR(void)
 {
-	//app_regs.REG_POKE_DIOS_CLEAR = 0;
+	//app_regs.REG_PORT_DIOS_CLEAR = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_CLEAR(void *a)
+bool app_write_REG_PORT_DIOS_CLEAR(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_CLEAR = reg;
+	app_regs.REG_PORT_DIOS_CLEAR = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_TOGGLE                                                 */
+/* REG_PORT_DIOS_TOGGLE                                                 */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_TOGGLE(void)
+void app_read_REG_PORT_DIOS_TOGGLE(void)
 {
-	//app_regs.REG_POKE_DIOS_TOGGLE = 0;
+	//app_regs.REG_PORT_DIOS_TOGGLE = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_TOGGLE(void *a)
+bool app_write_REG_PORT_DIOS_TOGGLE(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_TOGGLE = reg;
+	app_regs.REG_PORT_DIOS_TOGGLE = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_OUT                                                    */
+/* REG_PORT_DIOS_OUT                                                    */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_OUT(void)
+void app_read_REG_PORT_DIOS_OUT(void)
 {
-	//app_regs.REG_POKE_DIOS_OUT = 0;
+	//app_regs.REG_PORT_DIOS_OUT = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_OUT(void *a)
+bool app_write_REG_PORT_DIOS_OUT(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_OUT = reg;
+	app_regs.REG_PORT_DIOS_OUT = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_CONF                                                   */
+/* REG_PORT_DIOS_CONF                                                   */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_CONF(void)
+void app_read_REG_PORT_DIOS_CONF(void)
 {
-	//app_regs.REG_POKE_DIOS_CONF = 0;
+	//app_regs.REG_PORT_DIOS_CONF = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_CONF(void *a)
+bool app_write_REG_PORT_DIOS_CONF(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_CONF = reg;
+	app_regs.REG_PORT_DIOS_CONF = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_POKE_DIOS_IN                                                     */
+/* REG_PORT_DIOS_IN                                                     */
 /************************************************************************/
-void app_read_REG_POKE_DIOS_IN(void)
+void app_read_REG_PORT_DIOS_IN(void)
 {
-	//app_regs.REG_POKE_DIOS_IN = 0;
+	//app_regs.REG_PORT_DIOS_IN = 0;
 
 }
 
-bool app_write_REG_POKE_DIOS_IN(void *a)
+bool app_write_REG_PORT_DIOS_IN(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	app_regs.REG_POKE_DIOS_IN = reg;
+	app_regs.REG_PORT_DIOS_IN = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_ADC_AND_DECODER                                                  */
+/* REG_DATA                                                  */
 /************************************************************************/
 // This register is an array with 2 positions
-void app_read_REG_ADC_AND_DECODER(void) {}      // The register is always updated
-bool app_write_REG_ADC_AND_DECODER(void *a)     
+void app_read_REG_DATA(void) {}      // The register is always updated
+bool app_write_REG_DATA(void *a)     
 {
     uint16_t *reg = ((uint16_t*)a);
 
-    app_regs.REG_ADC_AND_DECODER[1] = reg[1];   // Write only to encoder counter
+    app_regs.REG_DATA[1] = reg[1];   // Write only to encoder counter
     
     return true;
 }
@@ -602,265 +581,96 @@ bool app_write_REG_ADC_AND_DECODER(void *a)
 /************************************************************************/
 /* REG_MODE_POKE0_LED                                                   */
 /************************************************************************/
-void app_read_REG_MODE_POKE0_LED(void) {}
-bool app_write_REG_MODE_POKE0_LED(void *a)
+void app_read_REG_OUTPUT_PULSE_EN(void) {}
+bool app_write_REG_OUTPUT_PULSE_EN(void *a)
 {
-	uint8_t reg = *((uint8_t*)a);
+	uint16_t reg = *((uint16_t*)a);
 
-	app_regs.REG_MODE_POKE0_LED = reg;
+	app_regs.REG_OUTPUT_PULSE_EN = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_MODE_POKE1_LED                                                   */
+/* REG_PULSE_PORT0_DO                                                  */
 /************************************************************************/
-void app_read_REG_MODE_POKE1_LED(void) {}
-bool app_write_REG_MODE_POKE1_LED(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_POKE1_LED = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_POKE2_LED                                                   */
-/************************************************************************/
-void app_read_REG_MODE_POKE2_LED(void) {}
-bool app_write_REG_MODE_POKE2_LED(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_POKE2_LED = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_POKE0_VALVE                                                 */
-/************************************************************************/
-void app_read_REG_MODE_POKE0_VALVE(void) {}
-bool app_write_REG_MODE_POKE0_VALVE(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_POKE0_VALVE = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_POKE1_VALVE                                                 */
-/************************************************************************/
-void app_read_REG_MODE_POKE1_VALVE(void) {}
-bool app_write_REG_MODE_POKE1_VALVE(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_POKE1_VALVE = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_POKE2_VALVE                                                 */
-/************************************************************************/
-void app_read_REG_MODE_POKE2_VALVE(void) {}
-bool app_write_REG_MODE_POKE2_VALVE(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_POKE2_VALVE = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_LED0                                                        */
-/************************************************************************/
-void app_read_REG_MODE_LED0(void) {}
-bool app_write_REG_MODE_LED0(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_LED0 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_LED1                                                        */
-/************************************************************************/
-void app_read_REG_MODE_LED1(void) {}
-bool app_write_REG_MODE_LED1(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_LED1 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_RGB0                                                        */
-/************************************************************************/
-void app_read_REG_MODE_RGB0(void) {}
-bool app_write_REG_MODE_RGB0(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_RGB0 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_RGB1                                                        */
-/************************************************************************/
-void app_read_REG_MODE_RGB1(void) {}
-bool app_write_REG_MODE_RGB1(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_RGB1 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_DO0                                                         */
-/************************************************************************/
-void app_read_REG_MODE_DO0(void) {}
-bool app_write_REG_MODE_DO0(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_DO0 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_DO1                                                         */
-/************************************************************************/
-void app_read_REG_MODE_DO1(void) {}
-bool app_write_REG_MODE_DO1(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_DO1 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_DO2                                                         */
-/************************************************************************/
-void app_read_REG_MODE_DO2(void) {}
-bool app_write_REG_MODE_DO2(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_DO2 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_MODE_DO3                                                         */
-/************************************************************************/
-void app_read_REG_MODE_DO3(void) {}
-bool app_write_REG_MODE_DO3(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_MODE_DO3 = reg;
-	return true;
-}
-
-
-/************************************************************************/
-/* REG_PULSE_POKE0_LED                                                  */
-/************************************************************************/
-void app_read_REG_PULSE_POKE0_LED(void) {}
-bool app_write_REG_PULSE_POKE0_LED(void *a)
+void app_read_REG_PULSE_PORT0_DO(void) {}
+bool app_write_REG_PULSE_PORT0_DO(void *a)
 {
 	if (*((uint16_t*)a) < 1)
         return false;
         
-	app_regs.REG_PULSE_POKE0_LED = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT0_DO = *((uint16_t*)a);
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_PULSE_POKE1_LED                                                  */
+/* REG_PULSE_PORT1_DO                                                  */
 /************************************************************************/
-void app_read_REG_PULSE_POKE1_LED(void) {}
-bool app_write_REG_PULSE_POKE1_LED(void *a)
+void app_read_REG_PULSE_PORT1_DO(void) {}
+bool app_write_REG_PULSE_PORT1_DO(void *a)
 {
     if (*((uint16_t*)a) < 1)
         return false;
     
-	app_regs.REG_PULSE_POKE1_LED = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT1_DO = *((uint16_t*)a);
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_PULSE_POKE2_LED                                                  */
+/* REG_PULSE_PORT2_DO                                                  */
 /************************************************************************/
-void app_read_REG_PULSE_POKE2_LED(void) {}
-bool app_write_REG_PULSE_POKE2_LED(void *a)
+void app_read_REG_PULSE_PORT2_DO(void) {}
+bool app_write_REG_PULSE_PORT2_DO(void *a)
 {
     if (*((uint16_t*)a) < 1)
         return false;
 
-	app_regs.REG_PULSE_POKE2_LED = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT2_DO = *((uint16_t*)a);
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_PULSE_POKE0_VALVE                                                */
+/* REG_PULSE_PORT0_12V                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE0_VALVE(void) {}
-bool app_write_REG_PULSE_POKE0_VALVE(void *a)
+void app_read_REG_PULSE_PORT0_12V(void) {}
+bool app_write_REG_PULSE_PORT0_12V(void *a)
 {
     if (*((uint16_t*)a) < 1)
         return false;
 
-	app_regs.REG_PULSE_POKE0_VALVE = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT0_12V = *((uint16_t*)a);
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_PULSE_POKE1_VALVE                                                */
+/* REG_PULSE_PORT1_12V                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE1_VALVE(void) {}
-bool app_write_REG_PULSE_POKE1_VALVE(void *a)
+void app_read_REG_PULSE_PORT1_12V(void) {}
+bool app_write_REG_PULSE_PORT1_12V(void *a)
 {
     if (*((uint16_t*)a) < 1)
         return false;
 
-	app_regs.REG_PULSE_POKE1_VALVE = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT1_12V = *((uint16_t*)a);
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_PULSE_POKE2_VALVE                                                */
+/* REG_PULSE_PORT2_12V                                                */
 /************************************************************************/
-void app_read_REG_PULSE_POKE2_VALVE(void) {}
-bool app_write_REG_PULSE_POKE2_VALVE(void *a)
+void app_read_REG_PULSE_PORT2_12V(void) {}
+bool app_write_REG_PULSE_PORT2_12V(void *a)
 {
     if (*((uint16_t*)a) < 1)
         return false;
 
-	app_regs.REG_PULSE_POKE2_VALVE = *((uint16_t*)a);
+	app_regs.REG_PULSE_PORT2_12V = *((uint16_t*)a);
 	return true;
 }
 
@@ -989,7 +799,7 @@ bool app_write_REG_FREQ_DO0(void *a)
         return false;
     
     calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do0, &timer_conf.target_do0);
-    timer_conf.dcycle_do0 = app_regs.REG_DCYCLE_DO0/100.0 * timer_conf.target_do0 + 0.5;
+    timer_conf.dcycle_do0 = app_regs.REG_DCYCLE_DO0/100.0 * timer_conf.target_do0 + 0.5;    
     is_new_timer_conf.pwm_do0 = true;
 
 	app_regs.REG_FREQ_DO0 = reg;
@@ -1009,7 +819,7 @@ bool app_write_REG_FREQ_DO1(void *a)
         return false;
     
     calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do1, &timer_conf.target_do1);
-    timer_conf.dcycle_do1 = app_regs.REG_DCYCLE_DO1/100.0 * timer_conf.target_do1 + 0.5;
+    timer_conf.dcycle_do1 = app_regs.REG_DCYCLE_DO1/100.0 * timer_conf.target_do1 + 0.5;    
     is_new_timer_conf.pwm_do1 = true;
 
 	app_regs.REG_FREQ_DO1 = reg;
@@ -1034,7 +844,7 @@ bool app_write_REG_FREQ_DO2(void *a)
         return false;
     
     calculate_timer_16bits(32000000, reg, &timer_conf.prescaler_do2, &timer_conf.target_do2);
-    timer_conf.dcycle_do2 = app_regs.REG_DCYCLE_DO2/100.0 * timer_conf.target_do2 + 0.5;
+    timer_conf.dcycle_do2 = app_regs.REG_DCYCLE_DO2/100.0 * timer_conf.target_do2 + 0.5;    
     is_new_timer_conf.pwm_do2 = true;
 
 	app_regs.REG_FREQ_DO2 = reg;
@@ -1165,53 +975,65 @@ bool app_write_REG_DCYCLE_DO3(void *a)
 /************************************************************************/
 /* REG_PWM_START                                                        */
 /************************************************************************/
-void app_read_REG_PWM_START(void) {}
+void app_read_REG_PWM_START(void)
+{
+    app_regs.REG_PWM_START = 0;
+    
+    if(_states_.pwm.do0)
+    {
+        app_regs.REG_PWM_START |= B_PWM_DO0;
+    }
+    
+    if(_states_.pwm.do1)
+    {
+        app_regs.REG_PWM_START |= B_PWM_DO1;
+    }
+    
+    if(_states_.pwm.do2)
+    {
+        app_regs.REG_PWM_START |= B_PWM_DO2;
+    }
+    
+    if(_states_.pwm.do3)
+    {
+        app_regs.REG_PWM_START |= B_PWM_DO3;
+    }
+}
+
 bool app_write_REG_PWM_START(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
-	if (reg & B_PWM_DO0)
+	if ((reg & B_PWM_DO0) && !_states_.pwm.do0)
     {
-        if (TCF0_CTRLA == 0)
-        /* PWM on DO0 is not running */
-        {
-            timer_type0_pwm(&TCF0, timer_conf.prescaler_do0, timer_conf.target_do0, timer_conf.dcycle_do0, INT_LEVEL_LOW, INT_LEVEL_OFF);
-            is_new_timer_conf.pwm_do0 = false;
-            start_DO0;
-        }
+        timer_type0_pwm(&TCF0, timer_conf.prescaler_do0, timer_conf.target_do0, timer_conf.dcycle_do0, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        is_new_timer_conf.pwm_do0 = false;
+        _states_.pwm.do0 = true;
+        start_DO0;
     }    
     
-	if (reg & B_PWM_DO1)
+	if ((reg & B_PWM_DO1) && !_states_.pwm.do1)
 	{
-    	if (TCE0_CTRLA == 0)
-    	/* PWM on DO0 is not running */
-    	{
-        	timer_type0_pwm(&TCE0, timer_conf.prescaler_do1, timer_conf.target_do1, timer_conf.dcycle_do1, INT_LEVEL_LOW, INT_LEVEL_OFF);
-        	is_new_timer_conf.pwm_do1 = false;
-            start_DO1;
-    	}
+        timer_type0_pwm(&TCE0, timer_conf.prescaler_do1, timer_conf.target_do1, timer_conf.dcycle_do1, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        is_new_timer_conf.pwm_do1 = false;
+        _states_.pwm.do1 = true;
+        start_DO1;
 	}
     
-	if (reg & B_PWM_DO2)
+	if ((reg & B_PWM_DO2) && !_states_.pwm.do2)
 	{
-    	if (TCD0_CTRLA == 0)
-    	/* PWM on DO0 is not running */
-    	{
-        	timer_type0_pwm(&TCD0, timer_conf.prescaler_do2, timer_conf.target_do2, timer_conf.dcycle_do2, INT_LEVEL_LOW, INT_LEVEL_OFF);
-        	is_new_timer_conf.pwm_do2 = false;
-            start_DO2;
-    	}
+        timer_type0_pwm(&TCD0, timer_conf.prescaler_do2, timer_conf.target_do2, timer_conf.dcycle_do2, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        is_new_timer_conf.pwm_do2 = false;
+        _states_.pwm.do2 = true;
+        start_DO2;
 	}
     
-	if (reg & B_PWM_DO3)
-	{
-    	if (TCC0_CTRLA == 0)
-    	/* PWM on DO0 is not running */
-    	{
-        	timer_type0_pwm(&TCC0, timer_conf.prescaler_do3, timer_conf.target_do3, timer_conf.dcycle_do3, INT_LEVEL_LOW, INT_LEVEL_OFF);
-        	is_new_timer_conf.pwm_do3 = false;
-            start_DO3;
-    	}
+	if ((reg & B_PWM_DO3) && !_states_.pwm.do3)
+	{   	
+        timer_type0_pwm(&TCC0, timer_conf.prescaler_do3, timer_conf.target_do3, timer_conf.dcycle_do3, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        is_new_timer_conf.pwm_do3 = false;
+        _states_.pwm.do3 = true;
+        start_DO3;
 	}
     
     app_regs.REG_PWM_START = reg;
@@ -1227,28 +1049,32 @@ bool app_write_REG_PWM_STOP(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
     
-    if (reg & B_PWM_DO0)
+    if ((reg & B_PWM_DO0) && _states_.pwm.do0)
     {
         clr_DO0;
         timer_type0_stop(&TCF0);
+        _states_.pwm.do0 = false;
     }
 
-    if (reg & B_PWM_DO1)
+    if ((reg & B_PWM_DO1) && _states_.pwm.do0)
     {
         clr_DO1;
         timer_type0_stop(&TCE0);
+        _states_.pwm.do1 = false;
     }
     
-    if (reg & B_PWM_DO2)
+    if ((reg & B_PWM_DO2) && _states_.pwm.do0)
     {
         clr_DO2;
         timer_type0_stop(&TCD0);
+        _states_.pwm.do2 = false;
     }
     
-    if (reg & B_PWM_DO3)
+    if ((reg & B_PWM_DO3) && _states_.pwm.do0)
     {
         clr_DO3;
         timer_type0_stop(&TCC0);
+        _states_.pwm.do3 = false;
     }
 	
     app_regs.REG_PWM_START = ~reg & 0x0F;
@@ -1443,37 +1269,98 @@ bool app_write_REG_EVNT_ENABLE(void *a)
 
 
 /************************************************************************/
-/* REG_EN_CAMERAS                                                       */
+/* REG_START_CAMERAS                                                    */
 /************************************************************************/
-void app_read_REG_EN_CAMERAS(void)
+void start_cameras(TC0_t* timer, uint16_t freq)
 {
-	//app_regs.REG_EN_CAMERAS = 0;
-
+    if (freq < 8)
+    {
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV256, (32000000/256)/freq, (16000000/256)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+    }
+    else if (freq < 64)
+    {
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV64, (32000000/64)/freq, (16000000/64)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+    }
+    else if (freq < 128)
+    {
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV8, (32000000/8)/freq, (16000000/8)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+    }
+    else if (freq < 256)
+    {
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV4, (32000000/4)/freq, (16000000/4)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+    }
+    else if (freq <= 600)
+    {
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV2, (32000000/2)/freq, (16000000/2)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+    }
+}    
+        
+void app_read_REG_START_CAMERAS(void)
+{
+	app_regs.REG_START_CAMERAS = 0;
+	
+	if(_states_.camera.do0)
+    {
+    	app_regs.REG_START_CAMERAS |= B_EN_CAM_OUT0;
+    }        
+    
+    if(_states_.camera.do1)
+    {
+    	app_regs.REG_START_CAMERAS |= B_EN_CAM_OUT1;
+    }        
 }
-
-bool app_write_REG_EN_CAMERAS(void *a)
+bool app_write_REG_START_CAMERAS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+    
+    if ((reg & B_EN_CAM_OUT0) && !_states_.camera.do0)
+    {
+        /* Make sure the output pin is equal to 0 for a while before start triggering the camera */
+        clr_DO0;
+        _delay_us(32);
+        
+        /* Start the camera */
+        start_cameras(&TCF0, app_regs.REG_CAM_OUT0_FREQ);        
+        _states_.camera.do0 = true;
+    }
+    
+    if ((reg & B_EN_CAM_OUT1) && !_states_.camera.do1)
+    {
+        /* Make sure the output pin is equal to 0 for a while before start triggering the camera */
+        clr_DO1;
+        _delay_us(32);
+            
+        /* Start the camera */
+        start_cameras(&TCE0, app_regs.REG_CAM_OUT1_FREQ);
+        _states_.camera.do1 = true;
+    }
 
-	app_regs.REG_EN_CAMERAS = reg;
+	app_regs.REG_START_CAMERAS = reg;
 	return true;
 }
 
 
 /************************************************************************/
-/* REG_DIS_CAMERAS                                                      */
+/* REG_STOP_CAMERAS                                                     */
 /************************************************************************/
-void app_read_REG_DIS_CAMERAS(void)
-{
-	//app_regs.REG_DIS_CAMERAS = 0;
-
-}
-
-bool app_write_REG_DIS_CAMERAS(void *a)
+void app_read_REG_STOP_CAMERAS(void) {}
+bool app_write_REG_STOP_CAMERAS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+    
+    if ((reg & B_EN_CAM_OUT0) && _states_.camera.do0)
+    {
+        timer_type0_stop(&TCF0);
+        _states_.camera.do0 = false;
+    }
+        
+    if ((reg & B_EN_CAM_OUT1) && _states_.camera.do1)
+    {
+        timer_type0_stop(&TCE0);
+        _states_.camera.do1 = false;
+    }
 
-	app_regs.REG_DIS_CAMERAS = reg;
+	app_regs.REG_STOP_CAMERAS = reg;
 	return true;
 }
 
@@ -1483,13 +1370,34 @@ bool app_write_REG_DIS_CAMERAS(void *a)
 /************************************************************************/
 void app_read_REG_EN_SERVOS(void)
 {
-	//app_regs.REG_EN_SERVOS = 0;
-
+	app_regs.REG_EN_SERVOS = 0;
+    
+    if (_states_.servo.do2)
+    {
+        app_regs.REG_EN_SERVOS |= B_EN_SERVO_OUT2;        
+    }
+    
+    if (_states_.servo.do3)
+    {
+        app_regs.REG_EN_SERVOS |= B_EN_SERVO_OUT3;
+    }
 }
 
 bool app_write_REG_EN_SERVOS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+    
+    if ((reg & B_EN_SERVO_OUT2) && !_states_.servo.do2)
+    {
+        _states_.servo.do2 = true;
+        timer_type0_pwm(&TCD0, TIMER_PRESCALER_DIV64, (app_regs.REG_MOTOR_OUT2_PERIOD >> 1), (app_regs.REG_MOTOR_OUT2_PULSE >> 1), INT_LEVEL_OFF, INT_LEVEL_OFF);
+    }
+    
+    if ((reg & B_EN_SERVO_OUT3) && !_states_.servo.do3)
+    {
+        _states_.servo.do3 = true;
+        timer_type0_pwm(&TCC0, TIMER_PRESCALER_DIV64, (app_regs.REG_MOTOR_OUT3_PERIOD >> 1), (app_regs.REG_MOTOR_OUT3_PULSE >> 1), INT_LEVEL_OFF, INT_LEVEL_OFF);
+    }
 
 	app_regs.REG_EN_SERVOS = reg;
 	return true;
@@ -1499,16 +1407,23 @@ bool app_write_REG_EN_SERVOS(void *a)
 /************************************************************************/
 /* REG_DIS_SERVOS                                                       */
 /************************************************************************/
-void app_read_REG_DIS_SERVOS(void)
-{
-	//app_regs.REG_DIS_SERVOS = 0;
-
-}
-
+void app_read_REG_DIS_SERVOS(void) {}
 bool app_write_REG_DIS_SERVOS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
 
+    if ((reg & B_EN_SERVO_OUT2) && _states_.servo.do2)
+    {
+        _states_.servo.do2 = false;
+        timer_type0_stop(&TCD0);
+    }
+    
+    if ((reg & B_EN_SERVO_OUT3) && _states_.servo.do3)
+    {
+        _states_.servo.do3 = false;
+        timer_type0_stop(&TCC0);
+    }
+    
 	app_regs.REG_DIS_SERVOS = reg;
 	return true;
 }
@@ -1521,7 +1436,7 @@ void app_read_REG_EN_ENCODERS(void)
 {
 	app_regs.REG_EN_ENCODERS = 0;
     
-    if (TCD1_CTRLD == (TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc))
+    if(_states_.quad_counter.port2)
     {
         app_regs.REG_EN_ENCODERS |= B_EN_ENCODER_PORT2;
     }
@@ -1531,8 +1446,10 @@ bool app_write_REG_EN_ENCODERS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
     
-    if (reg & B_EN_ENCODER_PORT2)
+    if ((reg & B_EN_ENCODER_PORT2) && !_states_.quad_counter.port2)
     {        
+        _states_.quad_counter.port2 = true;
+        
         /* Turn off interrupts on the Encoder pins and redefine pins to input */
         PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
         PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
@@ -1556,6 +1473,25 @@ bool app_write_REG_EN_ENCODERS(void *a)
         TCD1_CTRLA=TC_CLKSEL_DIV1_gc;
     }
     
+    if (!(reg & B_EN_ENCODER_PORT2) && _states_.quad_counter.port2)
+    {
+        if (_states_.quad_counter.port2)
+        {
+            _states_.quad_counter.port2 = false;
+            
+            /* Stop and reset timer */
+            TCD1_CTRLA = TC_CLKSEL_OFF_gc;
+            TCD1_CTRLFSET = TC_CMD_RESET_gc;
+        
+            /* Turn inputs to default configuration (same as *init_ios()* func)  */
+            io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
+            io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<4), false);    // POKE2_IR
+        
+            /* Reset register */
+            app_regs.REG_DATA[1] = 0;
+        }
+    }
+    
     app_regs.REG_EN_ENCODERS = reg;
 	return true;
 }
@@ -1571,21 +1507,6 @@ void app_read_REG_DIS_ENCODERS(void)
 bool app_write_REG_DIS_ENCODERS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
-
-    if (reg & B_EN_ENCODER_PORT2)
-    {
-        /* Stop and reset timer */
-        TCD1_CTRLA = TC_CLKSEL_OFF_gc;
-        TCD1_CTRLFSET = TC_CMD_RESET_gc;
-        
-        /* Turn inputs to default configuration (same as *init_ios()* func)  */
-        io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
-        io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<4), false);    // POKE2_IR
-        
-        /* Reset register */
-        app_regs.REG_ADC_AND_DECODER[1] = 0;
-        app_regs.REG_EN_ENCODERS &= ~(B_EN_ENCODER_PORT2);
-    }
 
 	app_regs.REG_DIS_ENCODERS = reg;
 	return true;
@@ -1646,6 +1567,9 @@ void app_read_REG_CAM_OUT0_FREQ(void) {}
 bool app_write_REG_CAM_OUT0_FREQ(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+	
+    if (reg < 1 || reg > 600)
+    return false;    
 
 	app_regs.REG_CAM_OUT0_FREQ = reg;
 	return true;
@@ -1660,12 +1584,15 @@ bool app_write_REG_CAM_OUT1_FRAME_ACQUIRED(void *a) {return false;}
 /************************************************************************/
 /* REG_CAM_OUT2_FREQ                                                    */
 /************************************************************************/
-void app_read_REG_CAM_OUT2_FREQ(void) {}
-bool app_write_REG_CAM_OUT2_FREQ(void *a)
+void app_read_REG_CAM_OUT1_FREQ(void) {}
+bool app_write_REG_CAM_OUT1_FREQ(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 1 || reg > 600)
+        return false;
 
-	app_regs.REG_CAM_OUT2_FREQ = reg;
+	app_regs.REG_CAM_OUT1_FREQ = reg;
 	return true;
 }
 
@@ -1699,6 +1626,14 @@ void app_read_REG_MOTOR_OUT2_PERIOD(void) {}
 bool app_write_REG_MOTOR_OUT2_PERIOD(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 2 || reg > 65534)
+        return false;
+    
+    if (_states_.servo.do2)
+    {
+        TCD0_PER = (reg >> 1) - 1;
+    }
 
 	app_regs.REG_MOTOR_OUT2_PERIOD = reg;
 	return true;
@@ -1710,6 +1645,14 @@ void app_read_REG_MOTOR_OUT2_PULSE(void) {}
 bool app_write_REG_MOTOR_OUT2_PULSE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 6 || reg > 65530)
+        return false;
+        
+    if (_states_.servo.do2)
+    {
+        TCD0_CCA = (reg >> 1) - 1;
+    }
 
 	app_regs.REG_MOTOR_OUT2_PULSE = reg;
 	return true;
@@ -1723,6 +1666,14 @@ void app_read_REG_MOTOR_OUT3_PERIOD(void) {}
 bool app_write_REG_MOTOR_OUT3_PERIOD(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 2 || reg > 65534)
+        return false;
+    
+    if (_states_.servo.do3)
+    {
+        TCC0_PER = (reg >> 1) - 1;
+    }
 
 	app_regs.REG_MOTOR_OUT3_PERIOD = reg;
 	return true;
@@ -1734,6 +1685,14 @@ void app_read_REG_MOTOR_OUT3_PULSE(void) {}
 bool app_write_REG_MOTOR_OUT3_PULSE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
+    
+    if (reg < 6 || reg > 65530)
+        return false;
+        
+    if (_states_.servo.do3)
+    {
+        TCC0_CCA = (reg >> 1) - 1;
+    }
 
 	app_regs.REG_MOTOR_OUT3_PULSE = reg;
 	return true;
@@ -1772,7 +1731,10 @@ bool app_write_REG_ENCODERS_RESET(void *a)
     
     if (reg & B_RST_ENCODER_PORT2)
     {
-        TCD1_CNT = 0x8000;
+        if (_states_.quad_counter.port2)
+        {
+            TCD1_CNT = 0x8000;            
+        }
     }
 
 	app_regs.REG_ENCODERS_RESET = reg;

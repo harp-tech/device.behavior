@@ -90,7 +90,7 @@ ISR(TCF0_OVF_vect, ISR_NAKED)
     {
         if (is_new_timer_conf.pwm_do0)
         {
-            TCF0_PER = timer_conf.target_do0;
+            TCF0_PER = timer_conf.target_do0 - 1;
             TCF0_CCA = timer_conf.dcycle_do0;
             TCF0_CTRLA = timer_conf.prescaler_do0;
             is_new_timer_conf.pwm_do0 = false;
@@ -114,7 +114,7 @@ ISR(TCE0_OVF_vect, ISR_NAKED)
     {
         if (is_new_timer_conf.pwm_do1)
         {
-            TCE0_PER = timer_conf.target_do1;
+            TCE0_PER = timer_conf.target_do1 - 1;
             TCE0_CCA = timer_conf.dcycle_do1;
             TCE0_CTRLA = timer_conf.prescaler_do1;
             is_new_timer_conf.pwm_do1 = false;
@@ -138,7 +138,7 @@ ISR(TCD0_OVF_vect, ISR_NAKED)
     {
         if (is_new_timer_conf.pwm_do2)
         {
-            TCD0_PER = timer_conf.target_do2;
+            TCD0_PER = timer_conf.target_do2 - 1;
             TCD0_CCA = timer_conf.dcycle_do2;
             TCD0_CTRLA = timer_conf.prescaler_do2;
             is_new_timer_conf.pwm_do2 = false;
@@ -154,7 +154,7 @@ ISR(TCC0_OVF_vect, ISR_NAKED)
     {
         if (is_new_timer_conf.pwm_do3)
         {
-            TCC0_PER = timer_conf.target_do3;
+            TCC0_PER = timer_conf.target_do3 - 1;
             TCC0_CCA = timer_conf.dcycle_do3;
             TCC0_CTRLA = timer_conf.prescaler_do3;
             is_new_timer_conf.pwm_do3 = false;

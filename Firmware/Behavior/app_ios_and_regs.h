@@ -172,7 +172,7 @@ typedef struct
 	uint8_t REG_EN_SERVOS;
 	uint8_t REG_DIS_SERVOS;
 	uint8_t REG_EN_ENCODERS;
-	uint8_t REG_DIS_ENCODERS;
+	uint8_t REG_RESERVED1;
 	uint8_t REG_RESERVED2;
 	uint8_t REG_RESERVED3;
 	uint8_t REG_RESERVED4;
@@ -257,7 +257,7 @@ typedef struct
 #define ADD_REG_EN_SERVOS                   80 // U8     Enable servo motors control
 #define ADD_REG_DIS_SERVOS                  81 // U8     Disable servo motors control
 #define ADD_REG_EN_ENCODERS                 82 // U8     Enable encoders
-#define ADD_REG_DIS_ENCODERS                83 // U8     Not used -- The register EN_ENCODER contains the state of each encoder
+#define ADD_REG_RESERVED1                   83 // U8     Reserved for future use
 #define ADD_REG_RESERVED2                   84 // U8     Reserved for future use
 #define ADD_REG_RESERVED3                   85 // U8     Reserved for future use
 #define ADD_REG_RESERVED4                   86 // U8     Reserved for future use

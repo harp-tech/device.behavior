@@ -72,7 +72,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_EN_SERVOS,
 	&app_read_REG_DIS_SERVOS,
 	&app_read_REG_EN_ENCODERS,
-	&app_read_REG_DIS_ENCODERS,
+	&app_read_REG_RESERVED1,
 	&app_read_REG_RESERVED2,
 	&app_read_REG_RESERVED3,
 	&app_read_REG_RESERVED4,
@@ -154,7 +154,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_EN_SERVOS,
 	&app_write_REG_DIS_SERVOS,
 	&app_write_REG_EN_ENCODERS,
-	&app_write_REG_DIS_ENCODERS,
+	&app_write_REG_RESERVED1,
 	&app_write_REG_RESERVED2,
 	&app_write_REG_RESERVED3,
 	&app_write_REG_RESERVED4,
@@ -1498,21 +1498,10 @@ bool app_write_REG_EN_ENCODERS(void *a)
 
 
 /************************************************************************/
-/* REG_DIS_ENCODERS                                                     */
+/* REG_RESERVED1                                                        */
 /************************************************************************/
-void app_read_REG_DIS_ENCODERS(void)
-{
-    app_regs.REG_DIS_ENCODERS = 0;
-}
-bool app_write_REG_DIS_ENCODERS(void *a)
-{
-	uint8_t reg = *((uint8_t*)a);
-
-	app_regs.REG_DIS_ENCODERS = reg;
-	return true;
-}
-
-
+void app_read_REG_RESERVED1(void) {}
+bool app_write_REG_RESERVED1(void *a) {return true;}
 /************************************************************************/
 /* REG_RESERVED2                                                        */
 /************************************************************************/

@@ -1056,21 +1056,21 @@ bool app_write_REG_PWM_STOP(void *a)
         _states_.pwm.do0 = false;
     }
 
-    if ((reg & B_PWM_DO1) && _states_.pwm.do0)
+    if ((reg & B_PWM_DO1) && _states_.pwm.do1)
     {
         clr_DO1;
         timer_type0_stop(&TCE0);
         _states_.pwm.do1 = false;
     }
     
-    if ((reg & B_PWM_DO2) && _states_.pwm.do0)
+    if ((reg & B_PWM_DO2) && _states_.pwm.do2)
     {
         clr_DO2;
         timer_type0_stop(&TCD0);
         _states_.pwm.do2 = false;
     }
     
-    if ((reg & B_PWM_DO3) && _states_.pwm.do0)
+    if ((reg & B_PWM_DO3) && _states_.pwm.do3)
     {
         clr_DO3;
         timer_type0_stop(&TCC0);

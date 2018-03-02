@@ -380,28 +380,44 @@ void core_callback_t_500us(void)
 	}
 	
 	if (pulse_countdown.do0 > 0)
-	if (--pulse_countdown.do0 == 0)
-	{
-		clr_DO0;
-		timer_type0_stop(&TCF0);
-	}
+	    if (--pulse_countdown.do0 == 0)
+	    {
+    	    clr_DO0;
+    	    if (_states_.pwm.do0)
+    	    {
+        	    _states_.pwm.do0 = false;
+        	    timer_type0_stop(&TCF0);
+    	    }
+	    }
 	if (pulse_countdown.do1 > 0)
 	    if (--pulse_countdown.do1 == 0)
 	    {
     	    clr_DO1;
-    	    timer_type0_stop(&TCE0);
+    	    if (_states_.pwm.do1)
+    	    {
+        	    _states_.pwm.do1 = false;
+        	    timer_type0_stop(&TCE0);
+    	    }
 	    }
 	if (pulse_countdown.do2 > 0)
 	    if (--pulse_countdown.do2 == 0)
 	    {
     	    clr_DO2;
-    	    timer_type0_stop(&TCD0);
+    	    if (_states_.pwm.do2)
+    	    {
+        	    _states_.pwm.do2 = false;
+        	    timer_type0_stop(&TCD0);
+    	    }
 	    }
 	if (pulse_countdown.do3 > 0)
 	    if (--pulse_countdown.do3 == 0)
 	    {
     	    clr_DO3;
-    	    timer_type0_stop(&TCC0);
+    	    if (_states_.pwm.do3)
+    	    {
+        	    _states_.pwm.do3 = false;
+        	    timer_type0_stop(&TCC0);
+    	    }
 	    }
 }
 

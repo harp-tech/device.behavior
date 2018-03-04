@@ -567,17 +567,22 @@ bool app_write_REG_PORT_DIOS_IN(void *a)
 
 
 /************************************************************************/
-/* REG_DATA                                                  */
+/* REG_DATA                                                             */
 /************************************************************************/
 // This register is an array with 2 positions
 void app_read_REG_DATA(void) {}      // The register is always updated
 bool app_write_REG_DATA(void *a)     
 {
-    uint16_t *reg = ((uint16_t*)a);
+	uint16_t *reg = ((uint16_t*)a);
 
-    app_regs.REG_DATA[1] = reg[1];   // Write only to encoder counter
+	app_regs.REG_DATA[1] = reg[1];   // Write only to encoder counter
+
+	if (_states_.quad_counter.port2)
+	{
+		TCD1_CNT = 0x8000 + reg[1];	// Write only to encoder counter
+	}
     
-    return true;
+	return true;
 }
 
 

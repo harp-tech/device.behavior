@@ -1651,9 +1651,6 @@ bool app_write_REG_MOTOR_OUT2_PULSE(void *a)
    {
       TCD0_CCA = (reg >> 1) - 1;
    }
-	
-	uint8_t aux = B_EN_SERVO_OUT2;
-	app_write_REG_EN_SERVOS(&aux);
 
 	app_regs.REG_MOTOR_OUT2_PULSE = reg;
 	return true;
@@ -1694,9 +1691,6 @@ bool app_write_REG_MOTOR_OUT3_PULSE(void *a)
    {
       TCC0_CCA = (reg >> 1) - 1;
    }
-
-	uint8_t aux = B_EN_SERVO_OUT3;
-	app_write_REG_EN_SERVOS(&aux);
 
 	app_regs.REG_MOTOR_OUT3_PULSE = reg;
 	return true;

@@ -167,6 +167,9 @@ void core_callback_reset_registers(void)
     //app_regs.REG_PORT_DIOS_IN = 0;
     
     //app_regs.REG_ADC = 0;
+
+	 app_regs.REG_DATA[0] = 0;
+	 app_regs.REG_DATA[1] = 0;
     
     app_regs.REG_OUTPUT_PULSE_EN = B_PORT0_12V | B_PORT1_12V | B_PORT2_12V;
 
@@ -221,7 +224,9 @@ void core_callback_reset_registers(void)
     app_regs.REG_EVNT_ENABLE = B_EVT_PORT_DIS | B_EVT_PORT_DIOS_IN | B_EVT_DATA | B_EVT_CAM0 | B_EVT_CAM1;
     
     app_regs.REG_START_CAMERAS = 0;
+	 app_regs.REG_STOP_CAMERAS = 0;
     app_regs.REG_EN_SERVOS = 0;
+	 app_regs.REG_DIS_SERVOS = 0;
     app_regs.REG_EN_ENCODERS = 0;
     
     app_regs.REG_CAM_OUT0_FREQ = 30;

@@ -299,7 +299,8 @@ bool app_write_REG_OUTPUTS_SET(void *a)
 	if (reg & B_DO2) start_DO2;
 	if (reg & B_DO3) start_DO3;
     
-    app_regs.REG_OUTPUTS_OUT |= reg;
+   app_regs.REG_OUTPUTS_OUT |= reg;
+	app_regs.REG_OUTPUTS_SET = reg;
 	
 	return true;
 }
@@ -336,7 +337,8 @@ bool app_write_REG_OUTPUTS_CLEAR(void *a)
 	if (reg & B_DO2) clr_DO2;
 	if (reg & B_DO3) clr_DO3;
     
-    app_regs.REG_OUTPUTS_OUT &= ~reg;
+   app_regs.REG_OUTPUTS_OUT &= ~reg;	
+	app_regs.REG_OUTPUTS_CLEAR = reg;
 	
 	return true;
 }
@@ -386,7 +388,8 @@ bool app_write_REG_OUTPUTS_TOGGLE(void *a)
 	if (reg & B_DO2) { if (read_DO2) tgl_DO2; else start_DO2;}
 	if (reg & B_DO3) { if (read_DO3) tgl_DO3; else start_DO3;}
         
-    app_regs.REG_OUTPUTS_OUT ^= reg;
+	app_regs.REG_OUTPUTS_OUT ^= reg;
+	app_regs.REG_OUTPUTS_TOGGLE = reg;
 
 	return true;
 }
@@ -1048,37 +1051,38 @@ void app_read_REG_PWM_STOP(void) {}
 bool app_write_REG_PWM_STOP(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
-    
-    if ((reg & B_PWM_DO0) && _states_.pwm.do0)
-    {
-        clr_DO0;
-        timer_type0_stop(&TCF0);
-        _states_.pwm.do0 = false;
-    }
-
-    if ((reg & B_PWM_DO1) && _states_.pwm.do1)
-    {
-        clr_DO1;
-        timer_type0_stop(&TCE0);
-        _states_.pwm.do1 = false;
-    }
-    
-    if ((reg & B_PWM_DO2) && _states_.pwm.do2)
-    {
-        clr_DO2;
-        timer_type0_stop(&TCD0);
-        _states_.pwm.do2 = false;
-    }
-    
-    if ((reg & B_PWM_DO3) && _states_.pwm.do3)
-    {
-        clr_DO3;
-        timer_type0_stop(&TCC0);
-        _states_.pwm.do3 = false;
-    }
 	
-    app_regs.REG_PWM_START = ~reg & 0x0F;
-    
+	if ((reg & B_PWM_DO0) && _states_.pwm.do0)
+	{
+		clr_DO0;
+		timer_type0_stop(&TCF0);
+		_states_.pwm.do0 = false;
+	}
+
+	if ((reg & B_PWM_DO1) && _states_.pwm.do1)
+	{
+		clr_DO1;
+		timer_type0_stop(&TCE0);
+		_states_.pwm.do1 = false;
+	}
+	
+	if ((reg & B_PWM_DO2) && _states_.pwm.do2)
+	{
+		clr_DO2;
+		timer_type0_stop(&TCD0);
+		_states_.pwm.do2 = false;
+	}
+	
+	if ((reg & B_PWM_DO3) && _states_.pwm.do3)
+	{
+		clr_DO3;
+		timer_type0_stop(&TCC0);
+		_states_.pwm.do3 = false;
+	}
+	
+	app_regs.REG_PWM_START = ~reg & 0x0F;
+	app_regs.REG_PWM_STOP = reg;
+	
 	return true;
 }
 

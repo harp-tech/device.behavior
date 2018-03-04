@@ -1557,8 +1557,8 @@ bool app_write_REG_CAM_OUT0_FREQ(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
 	
-    if (reg < 1 || reg > 600)
-    return false;    
+    if (reg < 2 || reg > 600)
+		return false;    
 
 	app_regs.REG_CAM_OUT0_FREQ = reg;
 	return true;
@@ -1578,7 +1578,7 @@ bool app_write_REG_CAM_OUT1_FREQ(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
     
-    if (reg < 1 || reg > 600)
+    if (reg < 2 || reg > 600)
         return false;
 
 	app_regs.REG_CAM_OUT1_FREQ = reg;

@@ -1644,13 +1644,16 @@ bool app_write_REG_MOTOR_OUT2_PULSE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
     
-    if (reg < 6 || reg > 65530)
-        return false;
+   if (reg < 6 || reg > 65530)
+      return false;
         
-    if (_states_.servo.do2)
-    {
-        TCD0_CCA = (reg >> 1) - 1;
-    }
+   if (_states_.servo.do2)
+   {
+      TCD0_CCA = (reg >> 1) - 1;
+   }
+	
+	uint8_t aux = B_EN_SERVO_OUT2;
+	app_write_REG_EN_SERVOS(&aux);
 
 	app_regs.REG_MOTOR_OUT2_PULSE = reg;
 	return true;
@@ -1683,14 +1686,17 @@ void app_read_REG_MOTOR_OUT3_PULSE(void) {}
 bool app_write_REG_MOTOR_OUT3_PULSE(void *a)
 {
 	uint16_t reg = *((uint16_t*)a);
-    
-    if (reg < 6 || reg > 65530)
-        return false;
+   
+   if (reg < 6 || reg > 65530)
+      return false;
         
-    if (_states_.servo.do3)
-    {
-        TCC0_CCA = (reg >> 1) - 1;
-    }
+   if (_states_.servo.do3)
+   {
+      TCC0_CCA = (reg >> 1) - 1;
+   }
+
+	uint8_t aux = B_EN_SERVO_OUT3;
+	app_write_REG_EN_SERVOS(&aux);
 
 	app_regs.REG_MOTOR_OUT3_PULSE = reg;
 	return true;

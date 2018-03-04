@@ -1092,19 +1092,19 @@ bool app_write_REG_RGBS(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
 	
-	app_regs.REG_RGBS[0] = reg[0];
-	app_regs.REG_RGBS[1] = reg[1];
+	app_regs.REG_RGBS[0] = reg[1];
+	app_regs.REG_RGBS[1] = reg[0];
 	app_regs.REG_RGBS[2] = reg[2];
-	app_regs.REG_RGBS[3] = reg[3];
-	app_regs.REG_RGBS[4] = reg[4];
+	app_regs.REG_RGBS[3] = reg[4];
+	app_regs.REG_RGBS[4] = reg[3];
 	app_regs.REG_RGBS[5] = reg[5];
 
-	app_regs.REG_RGB0[0] = reg[0];
-	app_regs.REG_RGB0[1] = reg[1];
+	app_regs.REG_RGB0[0] = reg[1];
+	app_regs.REG_RGB0[1] = reg[0];
 	app_regs.REG_RGB0[2] = reg[2];
 	
-	app_regs.REG_RGB1[0] = reg[3];
-	app_regs.REG_RGB1[1] = reg[4];
+	app_regs.REG_RGB1[0] = reg[4];
+	app_regs.REG_RGB1[1] = reg[3];
 	app_regs.REG_RGB1[2] = reg[5];
    
 	handle_Rgbs(rgb0_on, rgb1_on);
@@ -1122,12 +1122,12 @@ bool app_write_REG_RGB0(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
     
-	app_regs.REG_RGBS[0] = reg[0];
-	app_regs.REG_RGBS[1] = reg[1];
+	app_regs.REG_RGBS[0] = reg[1];
+	app_regs.REG_RGBS[1] = reg[0];
 	app_regs.REG_RGBS[2] = reg[2];
 
-	app_regs.REG_RGB0[0] = reg[0];
-	app_regs.REG_RGB0[1] = reg[1];
+	app_regs.REG_RGB0[0] = reg[1];
+	app_regs.REG_RGB0[1] = reg[0];
 	app_regs.REG_RGB0[2] = reg[2];
 
 	handle_Rgbs(rgb0_on, rgb1_on);
@@ -1145,12 +1145,12 @@ bool app_write_REG_RGB1(void *a)
 {
 	uint8_t *reg = ((uint8_t*)a);
 	
-	app_regs.REG_RGBS[3] = reg[0];
-	app_regs.REG_RGBS[4] = reg[1];
+	app_regs.REG_RGBS[3] = reg[1];
+	app_regs.REG_RGBS[4] = reg[0];
 	app_regs.REG_RGBS[5] = reg[2];
 
-	app_regs.REG_RGB1[0] = reg[0];
-	app_regs.REG_RGB1[1] = reg[1];
+	app_regs.REG_RGB1[0] = reg[1];
+	app_regs.REG_RGB1[1] = reg[0];
 	app_regs.REG_RGB1[2] = reg[2];
 
 	handle_Rgbs(rgb0_on, rgb1_on);

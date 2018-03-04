@@ -166,9 +166,7 @@ void core_callback_reset_registers(void)
     app_regs.REG_PORT_DIOS_CONF = 0; // All as inputs
     //app_regs.REG_PORT_DIOS_IN = 0;
     
-    //app_regs.REG_ADC = 0;
-
-	 app_regs.REG_DATA[0] = 0;
+    //app_regs.REG_DATA[0] = 0;
 	 app_regs.REG_DATA[1] = 0;
     
     app_regs.REG_OUTPUT_PULSE_EN = B_PORT0_12V | B_PORT1_12V | B_PORT2_12V;

@@ -1284,23 +1284,23 @@ void start_cameras(TC0_t* timer, uint16_t freq)
 {
     if (freq < 8)
     {
-        timer_type0_pwm(timer, TIMER_PRESCALER_DIV256, (32000000/256)/freq, (16000000/256)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV256, (32000000/256)/freq, (16000000/256)/freq, INT_LEVEL_LOW, INT_LEVEL_LOW);
     }
     else if (freq < 64)
     {
-        timer_type0_pwm(timer, TIMER_PRESCALER_DIV64, (32000000/64)/freq, (16000000/64)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV64, (32000000/64)/freq, (16000000/64)/freq, INT_LEVEL_LOW, INT_LEVEL_LOW);
     }
     else if (freq < 128)
     {
-        timer_type0_pwm(timer, TIMER_PRESCALER_DIV8, (32000000/8)/freq, (16000000/8)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV8, (32000000/8)/freq, (16000000/8)/freq, INT_LEVEL_LOW, INT_LEVEL_LOW);
     }
     else if (freq < 256)
     {
-        timer_type0_pwm(timer, TIMER_PRESCALER_DIV4, (32000000/4)/freq, (16000000/4)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV4, (32000000/4)/freq, (16000000/4)/freq, INT_LEVEL_LOW, INT_LEVEL_LOW);
     }
     else if (freq <= 600)
     {
-        timer_type0_pwm(timer, TIMER_PRESCALER_DIV2, (32000000/2)/freq, (16000000/2)/freq, INT_LEVEL_LOW, INT_LEVEL_OFF);
+        timer_type0_pwm(timer, TIMER_PRESCALER_DIV2, (32000000/2)/freq, (16000000/2)/freq, INT_LEVEL_LOW, INT_LEVEL_LOW);
     }
 }    
         
@@ -1326,7 +1326,7 @@ bool app_write_REG_START_CAMERAS(void *a)
     {
         /* Make sure the output pin is equal to 0 for a while before start triggering the camera */
         clr_DO0;
-        _delay_us(32);
+        _delay_us(16);      // Measured, gives around 55us before the the first trigger pulse
         
         /* Start the camera */
         start_cameras(&TCF0, app_regs.REG_CAM_OUT0_FREQ);        
@@ -1337,7 +1337,7 @@ bool app_write_REG_START_CAMERAS(void *a)
     {
         /* Make sure the output pin is equal to 0 for a while before start triggering the camera */
         clr_DO1;
-        _delay_us(32);
+        _delay_us(16);      // Measured, gives around 55us before the the first trigger pulse
             
         /* Start the camera */
         start_cameras(&TCE0, app_regs.REG_CAM_OUT1_FREQ);
@@ -1352,6 +1352,9 @@ bool app_write_REG_START_CAMERAS(void *a)
 /************************************************************************/
 /* REG_STOP_CAMERAS                                                     */
 /************************************************************************/
+bool stop_camera_do0 = false;
+bool stop_camera_do1 = false;
+
 void app_read_REG_STOP_CAMERAS(void) {}
 bool app_write_REG_STOP_CAMERAS(void *a)
 {
@@ -1359,14 +1362,12 @@ bool app_write_REG_STOP_CAMERAS(void *a)
     
     if ((reg & B_EN_CAM_OUT0) && _states_.camera.do0)
     {
-        timer_type0_stop(&TCF0);
-        _states_.camera.do0 = false;
+        stop_camera_do0 = true;
     }
         
     if ((reg & B_EN_CAM_OUT1) && _states_.camera.do1)
     {
-        timer_type0_stop(&TCE0);
-        _states_.camera.do1 = false;
+        stop_camera_do1 = true;
     }
 
 	app_regs.REG_STOP_CAMERAS = reg;

@@ -84,6 +84,9 @@ is_new_timer_conf_t is_new_timer_conf;
 
 extern ports_state_t _states_;
 
+extern bool stop_camera_do0;
+extern bool stop_camera_do1;
+
 ISR(TCF0_OVF_vect, ISR_NAKED)
 {
     if (_states_.pwm.do0)
@@ -108,6 +111,23 @@ ISR(TCF0_OVF_vect, ISR_NAKED)
     reti();
 }
 
+ISR(TCF0_CCA_vect, ISR_NAKED)
+{
+    if (_states_.camera.do0)
+    {
+        if (stop_camera_do0)
+        {
+            stop_camera_do0 = false;
+        
+            clr_DO0;
+            timer_type0_stop(&TCF0);
+            _states_.camera.do0 = false;
+        }
+    }        
+    
+    reti();
+}
+
 ISR(TCE0_OVF_vect, ISR_NAKED)
 {
     if (_states_.pwm.do1)
@@ -128,6 +148,23 @@ ISR(TCE0_OVF_vect, ISR_NAKED)
             core_func_send_event(ADD_REG_CAM_OUT1_FRAME_ACQUIRED, true);
         }
     }       
+    
+    reti();
+}
+
+ISR(TCE0_CCA_vect, ISR_NAKED)
+{
+    if (_states_.camera.do1)
+    {
+        if (stop_camera_do1)
+        {
+            stop_camera_do1 = false;
+        
+            clr_DO1;
+            timer_type0_stop(&TCE0);
+            _states_.camera.do1 = false;
+        }
+    }        
     
     reti();
 }

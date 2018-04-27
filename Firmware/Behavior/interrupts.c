@@ -33,12 +33,17 @@ extern AppRegs app_regs;
 /************************************************************************/
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {	
-	app_regs.REG_PORT_DIS &= ~B_DI0;
+	uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   
+   app_regs.REG_PORT_DIS &= ~B_DI0;
 	app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_PORT_DIS, true);
+		if (reg_port_dis != app_regs.REG_PORT_DIS)
+      {
+         core_func_send_event(ADD_REG_PORT_DIS, true);
+      }
 	}
 
 	reti();
@@ -49,12 +54,17 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
 /************************************************************************/
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
+   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   
 	app_regs.REG_PORT_DIS &= ~B_DI1;
 	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_PORT_DIS, true);
+   	if (reg_port_dis != app_regs.REG_PORT_DIS)
+   	{
+      	core_func_send_event(ADD_REG_PORT_DIS, true);
+   	}
 	}
 
 	reti();
@@ -65,12 +75,17 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 /************************************************************************/
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
+   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   
 	app_regs.REG_PORT_DIS &= ~B_DI2;
 	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-		core_func_send_event(ADD_REG_PORT_DIS, true);
+   	if (reg_port_dis != app_regs.REG_PORT_DIS)
+   	{
+      	core_func_send_event(ADD_REG_PORT_DIS, true);
+   	}
 	}
 
 	reti();

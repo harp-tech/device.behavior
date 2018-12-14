@@ -127,20 +127,15 @@ void core_callback_1st_config_hw_after_boot(void)
 	// Note: For single measurements, Propagation Delay is equal to Conversion Time
 		
 	ADCA_CH0_CTRL = ADC_CH_INPUTMODE_SINGLEENDED_gc;	// Single-ended positive input signal
-	ADCA_CH0_MUXCTRL = 1 << 3;									// Pin 1 for zero calibration
 	ADCA_CH0_INTCTRL = ADC_CH_INTMODE_COMPLETE_gc;		// Rise interrupt flag when conversion is complete
 	ADCA_CH0_INTCTRL |= ADC_CH_INTLVL_OFF_gc;				// Interrupt is not used
 		
-	/* Wait 100 us to stabilization before measure the zero/GND value */
+	/* Wait 100 us to stabilization before measure the first time */
 	timer_type0_enable(&TCD0, TIMER_PRESCALER_DIV2, 1600, INT_LEVEL_OFF);
 	while(!timer_type0_get_flag(&TCD0));
 	timer_type0_stop(&TCD0);
-		
-	/* Measure and save adc offset */
-	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Start conversion
-	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
-	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
-	AdcOffset = ADCA_CH0_RES;									// Read offset
+   
+	AdcOffset = 180;
 
 	/* Point ADC to the right channel */
 	ADCA_CH0_MUXCTRL = 0 << 3;									// Select pin 0 for further conversions
@@ -302,40 +297,48 @@ extern void handle_Rgbs(bool use_rgb0, bool use_rgb1);
 extern bool rgb0_on;
 extern bool rgb1_on;
 
+uint8_t t1ms = 0;
+
 void core_callback_t_before_exec(void)
 {
-	/* Read ADC */
-    ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
-	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
-	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
+   if (t1ms++ & 1)
+   {
+	   /* Read ADC */
+      ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
+	   while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
+	   ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
 
-	if (ADCA_CH0_RES > AdcOffset)
-		app_regs.REG_DATA[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
-	else
-		app_regs.REG_DATA[0] = 0;
+	   if (ADCA_CH0_RES > AdcOffset)
+		   app_regs.REG_DATA[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
+	   else
+		   app_regs.REG_DATA[0] = 0;
         
-    /* Read encoder on Port 2 */
-    if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
-    {
-        int16_t timer_cnt = TCD1_CNT;
+       /* Read encoder on Port 2 */
+       if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
+       {
+           int16_t timer_cnt = TCD1_CNT;
     
-        if (timer_cnt > 32768)
-        {
-            app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
-        }
-        else
-        {
-            app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
-        }
-    }        
+           if (timer_cnt > 32768)
+           {
+               app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
+           }
+           else
+           {
+               app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
+           }
+       }        
 
-	if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
-	{
-		core_func_send_event(ADD_REG_DATA, true);
-	}        
+	   if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
+	   {
+		   core_func_send_event(ADD_REG_DATA, true);
+	   }
+   }      
 }
 void core_callback_t_after_exec(void) {}
-void core_callback_t_new_second(void) {}
+void core_callback_t_new_second(void)
+{
+   t1ms = 0;
+}
 
 void core_callback_t_500us(void)
 {

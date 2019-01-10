@@ -119,6 +119,7 @@ ISR(TCF0_OVF_vect, ISR_NAKED)
     {
         if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM0)
         {
+            app_regs.REG_CAM_OUT0_FRAME_ACQUIRED = 1;
             core_func_send_event(ADD_REG_CAM_OUT0_FRAME_ACQUIRED, true);
         }
     }
@@ -160,6 +161,7 @@ ISR(TCE0_OVF_vect, ISR_NAKED)
     {
         if (app_regs.REG_EVNT_ENABLE & B_EVT_CAM1)
         {
+            app_regs.REG_CAM_OUT1_FRAME_ACQUIRED = 1;
             core_func_send_event(ADD_REG_CAM_OUT1_FRAME_ACQUIRED, true);
         }
     }       

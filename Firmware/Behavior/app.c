@@ -115,33 +115,9 @@ void core_callback_1st_config_hw_after_boot(void)
 	DACB.CTRLB = DAC_CHSEL_DUAL_gc;
 	DACB.CTRLC = DAC_REFSEL_INT1V_gc;
 	DACB.CTRLA = DAC_CH0EN_bm | DAC_CH1EN_bm | DAC_ENABLE_bm;
-
-	/* Initialize ADC */
-	PR_PRPA &= ~(PR_ADC_bm);									// Remove power reduction
-	ADCA_CTRLA = ADC_ENABLE_bm;								// Enable ADCA
-	ADCA_CTRLB = ADC_CURRLIMIT_HIGH_gc;						// High current limit, max. sampling rate 0.5MSPS
-	ADCA_CTRLB  |= ADC_RESOLUTION_12BIT_gc;				// 12-bit result, right adjusted
-	ADCA_REFCTRL = ADC_REFSEL_INTVCC_gc;					// VCC/1.6 = 3.3/1.6 = 2.0625 V
-	ADCA_PRESCALER = ADC_PRESCALER_DIV128_gc;				// 250 ksps
-	// Propagation Delay = (1 + 12[bits]/2 + 1[gain]) / fADC[125k] = 32 us
-	// Note: For single measurements, Propagation Delay is equal to Conversion Time
-		
-	ADCA_CH0_CTRL = ADC_CH_INPUTMODE_SINGLEENDED_gc;	// Single-ended positive input signal
-	ADCA_CH0_INTCTRL = ADC_CH_INTMODE_COMPLETE_gc;		// Rise interrupt flag when conversion is complete
-	ADCA_CH0_INTCTRL |= ADC_CH_INTLVL_OFF_gc;				// Interrupt is not used
-		
-	/* Wait 100 us to stabilization before measure the first time */
-	timer_type0_enable(&TCD0, TIMER_PRESCALER_DIV2, 1600, INT_LEVEL_OFF);
-	while(!timer_type0_get_flag(&TCD0));
-	timer_type0_stop(&TCD0);
    
-	AdcOffset = 180;
-
-	/* Point ADC to the right channel */
-	ADCA_CH0_MUXCTRL = 0 << 3;									// Select pin 0 for further conversions
-	ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
-	while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
-	ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
+   /* Initialize ADCA with single ended input */
+   adc_A_initialize_single_ended(ADC_REFSEL_INTVCC_gc);  // VCC/1.6 = 3.3/1.6 = 2.0625 V
 }
 
 void core_callback_reset_registers(void)
@@ -304,14 +280,12 @@ void core_callback_t_before_exec(void)
    if (t1ms++ & 1)
    {
 	   /* Read ADC */
-      ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Force the first conversion
-	   while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
-	   ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit
-
-	   if (ADCA_CH0_RES > AdcOffset)
-		   app_regs.REG_DATA[0] = (ADCA_CH0_RES & 0x0FFF) - AdcOffset;
-	   else
-		   app_regs.REG_DATA[0] = 0;
+      int16_t adc = adc_A_read_channel(0);
+      
+      if (adc < 0)
+         app_regs.REG_DATA[0] = 0;
+      else
+         app_regs.REG_DATA[0] = adc;
         
        /* Read encoder on Port 2 */
        if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)

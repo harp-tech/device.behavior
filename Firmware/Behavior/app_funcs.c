@@ -99,7 +99,19 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_RESERVED17,
 	&app_read_REG_ENCODERS_RESET,
 	&app_read_REG_RESERVED18,
-	&app_read_REG_RESERVED19
+	&app_read_REG_RESERVED19,   
+  	&app_read_REG_MIMIC_PORT0_IR,
+  	&app_read_REG_MIMIC_PORT1_IR,
+  	&app_read_REG_MIMIC_PORT2_IR,
+  	&app_read_REG_RESERVED20,
+  	&app_read_REG_RESERVED21,
+  	&app_read_REG_RESERVED22,
+  	&app_read_REG_MIMIC_PORT0_VALVE,
+  	&app_read_REG_MIMIC_PORT1_VALVE,
+  	&app_read_REG_MIMIC_PORT2_VALVE,
+  	&app_read_REG_RESERVED23,
+  	&app_read_REG_RESERVED24,
+  	&app_read_REG_RESERVED25
 };
 
 bool (*app_func_wr_pointer[])(void*) = {
@@ -181,7 +193,19 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_RESERVED17,
 	&app_write_REG_ENCODERS_RESET,
 	&app_write_REG_RESERVED18,
-	&app_write_REG_RESERVED19
+	&app_write_REG_RESERVED19,
+	&app_write_REG_MIMIC_PORT0_IR,
+	&app_write_REG_MIMIC_PORT1_IR,
+	&app_write_REG_MIMIC_PORT2_IR,
+	&app_write_REG_RESERVED20,
+	&app_write_REG_RESERVED21,
+	&app_write_REG_RESERVED22,
+	&app_write_REG_MIMIC_PORT0_VALVE,
+	&app_write_REG_MIMIC_PORT1_VALVE,
+	&app_write_REG_MIMIC_PORT2_VALVE,
+	&app_write_REG_RESERVED23,
+	&app_write_REG_RESERVED24,
+	&app_write_REG_RESERVED25
 };
 
 
@@ -204,7 +228,6 @@ void app_read_REG_RESERVED0(void) {}
 bool app_write_REG_RESERVED0(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
-
 	app_regs.REG_RESERVED0 = reg;
 	return true;
 }
@@ -1547,12 +1570,12 @@ bool app_write_REG_RESERVED7(void *a) {return true;}
 /************************************************************************/
 void app_read_REG_RESERVED8(void) {}
 bool app_write_REG_RESERVED8(void *a) {return true;}
+
 /************************************************************************/
 /* REG_RESERVED9                                                        */
 /************************************************************************/
 void app_read_REG_RESERVED9(void) {}
 bool app_write_REG_RESERVED9(void *a) {return true;}
-
 
 /************************************************************************/
 /* REG_CAM_OUT0_FRAME_ACQUIRED                                          */
@@ -1751,3 +1774,117 @@ bool app_write_REG_RESERVED18(void *a) {return true;}
 /************************************************************************/
 void app_read_REG_RESERVED19(void) {}
 bool app_write_REG_RESERVED19(void *a) {return true;}
+
+/************************************************************************/
+/* REG_MIMIC_PORT0_IR                                                   */
+/************************************************************************/
+void update_DIO_to_mimic (unsigned char reg)
+{
+   if (reg & GM_MIMIC_DIO0)
+      io_pin2out(&PORTD, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO0 to output
+   if (reg & GM_MIMIC_DIO0)
+      io_pin2out(&PORTE, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO1 to output
+   if (reg & GM_MIMIC_DIO0)
+      io_pin2out(&PORTF, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO2 to output
+}
+
+void app_read_REG_MIMIC_PORT0_IR(void) {}
+bool app_write_REG_MIMIC_PORT0_IR(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT0_IR = reg;
+   return true;
+}
+
+/************************************************************************/
+/* REG_MIMIC_PORT1_IR                                                   */
+/************************************************************************/
+void app_read_REG_MIMIC_PORT1_IR(void) {}
+bool app_write_REG_MIMIC_PORT1_IR(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT1_IR = reg;
+   return true;
+}
+
+/************************************************************************/
+/* REG_MIMIC_PORT2_IR                                                   */
+/************************************************************************/
+void app_read_REG_MIMIC_PORT2_IR(void) {}
+bool app_write_REG_MIMIC_PORT2_IR(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT2_IR = reg;
+   return true;
+}
+   
+/************************************************************************/
+/* REG_RESERVED20                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED20(void)  {}
+bool app_write_REG_RESERVED20(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED21                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED21(void) {}
+bool app_write_REG_RESERVED21(void *a) {return true;}   
+/************************************************************************/
+/* REG_RESERVED22                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED22(void) {}
+bool app_write_REG_RESERVED22(void *a) {return true;} 
+
+/************************************************************************/
+/* REG_MIMIC_PORT0_VALVE                                                */
+/************************************************************************/
+void app_read_REG_MIMIC_PORT0_VALVE(void) {}
+bool app_write_REG_MIMIC_PORT0_VALVE(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT0_VALVE = reg;
+   return true;
+}
+
+/************************************************************************/
+/* REG_MIMIC_PORT1_VALVE                                                */
+/************************************************************************/
+void app_read_REG_MIMIC_PORT1_VALVE(void) {}
+bool app_write_REG_MIMIC_PORT1_VALVE(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT1_VALVE = reg;
+   return true;
+}
+
+/************************************************************************/
+/* REG_MIMIC_PORT2_VALVE                                                */
+/************************************************************************/
+void app_read_REG_MIMIC_PORT2_VALVE(void) {}
+bool app_write_REG_MIMIC_PORT2_VALVE(void *a)
+{
+   uint8_t reg = *((uint8_t*)a);
+   update_DIO_to_mimic(reg);
+   app_regs.REG_MIMIC_PORT2_VALVE = reg;
+   return true;
+}
+   
+/************************************************************************/
+/* REG_RESERVED23                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED23(void)  {}
+bool app_write_REG_RESERVED23(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED24                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED24(void) {}
+bool app_write_REG_RESERVED24(void *a) {return true;}
+/************************************************************************/
+/* REG_RESERVED25                                                       */
+/************************************************************************/
+void app_read_REG_RESERVED25(void) {}
+bool app_write_REG_RESERVED25(void *a) {return true;}

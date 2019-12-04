@@ -3,6 +3,12 @@
 #include "cpu.h"
 
 void init_ios(void);
+
+void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
+#define _SET_IO_ 0
+#define _CLR_IO_ 1
+#define _TGL_IO_ 2
+
 /************************************************************************/
 /* Definition of input pins                                             */
 /************************************************************************/
@@ -86,9 +92,9 @@ void init_ios(void);
 #define read_POKE0_LED read_io(PORTD, 6)
 
 /* POKE0_VALVE */
-#define set_POKE0_VALVE set_io(PORTD, 7)
-#define clr_POKE0_VALVE clear_io(PORTD, 7)
-#define tgl_POKE0_VALVE toggle_io(PORTD, 7)
+#define set_POKE0_VALVE do { set_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _SET_IO_); } while(0)
+#define clr_POKE0_VALVE do { clear_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _CLR_IO_); } while(0)
+#define tgl_POKE0_VALVE do { toggle_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _TGL_IO_);  } while(0)
 #define read_POKE0_VALVE read_io(PORTD, 7)
 
 /* POKE1_LED */
@@ -98,9 +104,9 @@ void init_ios(void);
 #define read_POKE1_LED read_io(PORTE, 6)
 
 /* POKE1_VALVE */
-#define set_POKE1_VALVE set_io(PORTE, 7)
-#define clr_POKE1_VALVE clear_io(PORTE, 7)
-#define tgl_POKE1_VALVE toggle_io(PORTE, 7)
+#define set_POKE1_VALVE do { set_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _SET_IO_); } while(0)
+#define clr_POKE1_VALVE do { clear_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _CLR_IO_); } while(0)
+#define tgl_POKE1_VALVE do { toggle_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _TGL_IO_); } while(0)
 #define read_POKE1_VALVE read_io(PORTE, 7)
 
 /* POKE2_LED */
@@ -110,9 +116,9 @@ void init_ios(void);
 #define read_POKE2_LED read_io(PORTF, 6)
 
 /* POKE2_VALVE */
-#define set_POKE2_VALVE set_io(PORTF, 7)
-#define clr_POKE2_VALVE clear_io(PORTF, 7)
-#define tgl_POKE2_VALVE toggle_io(PORTF, 7)
+#define set_POKE2_VALVE do { set_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _SET_IO_); } while(0)
+#define clr_POKE2_VALVE do { clear_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _CLR_IO_); } while(0)
+#define tgl_POKE2_VALVE do { toggle_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _TGL_IO_); } while(0)
 #define read_POKE2_VALVE read_io(PORTF, 7)
 
 
@@ -200,6 +206,18 @@ typedef struct
 	uint8_t REG_ENCODERS_RESET;
 	uint8_t REG_RESERVED18;
 	uint8_t REG_RESERVED19;
+	uint8_t REG_MIMIC_PORT0_IR;
+	uint8_t REG_MIMIC_PORT1_IR;
+	uint8_t REG_MIMIC_PORT2_IR;
+	uint8_t REG_RESERVED20;
+	uint8_t REG_RESERVED21;
+	uint8_t REG_RESERVED22;
+	uint8_t REG_MIMIC_PORT0_VALVE;
+	uint8_t REG_MIMIC_PORT1_VALVE;
+	uint8_t REG_MIMIC_PORT2_VALVE;
+	uint8_t REG_RESERVED23;
+	uint8_t REG_RESERVED24;
+	uint8_t REG_RESERVED25;
 } AppRegs;
 
 /************************************************************************/
@@ -285,6 +303,18 @@ typedef struct
 #define ADD_REG_ENCODERS_RESET             108 // U8     Resets the encoders counter to ZERO
 #define ADD_REG_RESERVED18                 109 // U8     Reserved for future use
 #define ADD_REG_RESERVED19                 110 // U8     Reserved for future use
+#define ADD_REG_MIMIC_PORT0_IR             111 // U8     
+#define ADD_REG_MIMIC_PORT1_IR             112 // U8     
+#define ADD_REG_MIMIC_PORT2_IR             113 // U8     
+#define ADD_REG_RESERVED20                 114 // U8     
+#define ADD_REG_RESERVED21                 115 // U8     
+#define ADD_REG_RESERVED22                 116 // U8     
+#define ADD_REG_MIMIC_PORT0_VALVE          117 // U8     
+#define ADD_REG_MIMIC_PORT1_VALVE          118 // U8     
+#define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     
+#define ADD_REG_RESERVED23                 120 // U8     
+#define ADD_REG_RESERVED24                 121 // U8     
+#define ADD_REG_RESERVED25                 122 // U8     
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */
@@ -294,8 +324,8 @@ typedef struct
 /************************************************************************/
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
-#define APP_REGS_ADD_MAX                    0x6E
-#define APP_NBYTES_OF_REG_BANK              120
+#define APP_REGS_ADD_MAX                    0x7A
+#define APP_NBYTES_OF_REG_BANK              132
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -336,5 +366,14 @@ typedef struct
 #define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
 #define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
 #define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
+#define MSK_MIMIC                          0x0F         // 
+#define GM_MIMIC_NONE                      0x00         // 
+#define GM_MIMIC_DIO0                      0x01         // Is reflected on DIO0
+#define GM_MIMIC_DIO1                      0x02         // Is reflected on DIO1
+#define GM_MIMIC_DIO2                      0x03         // Is reflected on DIO2
+#define GM_MIMIC_DO0                       0x04         // Is reflected on DO0
+#define GM_MIMIC_DO1                       0x05         // Is reflected on DO1
+#define GM_MIMIC_DO2                       0x06         // Is reflected on DO2
+#define GM_MIMIC_DO3                       0x07         // Is reflected on DO3
 
 #endif /* _APP_REGS_H_ */

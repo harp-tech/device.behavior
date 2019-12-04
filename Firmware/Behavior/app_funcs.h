@@ -99,6 +99,18 @@ void app_read_REG_RESERVED17(void);
 void app_read_REG_ENCODERS_RESET(void);
 void app_read_REG_RESERVED18(void);
 void app_read_REG_RESERVED19(void);
+void app_read_REG_MIMIC_PORT0_IR(void);
+void app_read_REG_MIMIC_PORT1_IR(void);
+void app_read_REG_MIMIC_PORT2_IR(void);
+void app_read_REG_RESERVED20(void);
+void app_read_REG_RESERVED21(void);
+void app_read_REG_RESERVED22(void);
+void app_read_REG_MIMIC_PORT0_VALVE(void);
+void app_read_REG_MIMIC_PORT1_VALVE(void);
+void app_read_REG_MIMIC_PORT2_VALVE(void);
+void app_read_REG_RESERVED23(void);
+void app_read_REG_RESERVED24(void);
+void app_read_REG_RESERVED25(void);
 
 bool app_write_REG_PORT_DIS(void *a);
 bool app_write_REG_RESERVED0(void *a);
@@ -179,6 +191,18 @@ bool app_write_REG_RESERVED17(void *a);
 bool app_write_REG_ENCODERS_RESET(void *a);
 bool app_write_REG_RESERVED18(void *a);
 bool app_write_REG_RESERVED19(void *a);
+bool app_write_REG_MIMIC_PORT0_IR(void *a);
+bool app_write_REG_MIMIC_PORT1_IR(void *a);
+bool app_write_REG_MIMIC_PORT2_IR(void *a);
+bool app_write_REG_RESERVED20(void *a);
+bool app_write_REG_RESERVED21(void *a);
+bool app_write_REG_RESERVED22(void *a);
+bool app_write_REG_MIMIC_PORT0_VALVE(void *a);
+bool app_write_REG_MIMIC_PORT1_VALVE(void *a);
+bool app_write_REG_MIMIC_PORT2_VALVE(void *a);
+bool app_write_REG_RESERVED23(void *a);
+bool app_write_REG_RESERVED24(void *a);
+bool app_write_REG_RESERVED25(void *a);
 
 
 #endif /* _APP_FUNCTIONS_H_ */

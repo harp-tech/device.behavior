@@ -37,6 +37,11 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
    
    app_regs.REG_PORT_DIS &= ~B_DI0;
 	app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
+   
+   if(read_POKE0_IR)
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_IR, _SET_IO_);
+   else
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_IR, _CLR_IO_);
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
@@ -58,6 +63,11 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
    
 	app_regs.REG_PORT_DIS &= ~B_DI1;
 	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
+   
+   if(read_POKE1_IR)
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_IR, _SET_IO_);
+   else
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_IR, _CLR_IO_);
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
@@ -79,7 +89,12 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
    
 	app_regs.REG_PORT_DIS &= ~B_DI2;
 	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
-
+      
+   if(read_POKE2_IR)
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_IR, _SET_IO_);
+   else
+      mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_IR, _CLR_IO_);
+   
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
    	if (reg_port_dis != app_regs.REG_PORT_DIS)

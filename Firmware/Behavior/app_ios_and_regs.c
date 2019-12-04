@@ -2,6 +2,26 @@
 #include "hwbp_core_types.h"
 #include "app_ios_and_regs.h"
 
+extern AppRegs app_regs;
+
+void mimic_ir_or_valve (uint8_t reg, uint8_t what_to_do)
+{
+   if (reg & MSK_MIMIC)
+   {
+      switch (reg)
+      {
+         case GM_MIMIC_DO0:  if (what_to_do == _SET_IO_) set_DO0;          if (what_to_do == _CLR_IO_) clr_DO0;            if (what_to_do == _TGL_IO_) tgl_DO0; break;
+         case GM_MIMIC_DO1:  if (what_to_do == _SET_IO_) set_DO1;          if (what_to_do == _CLR_IO_) clr_DO1;            if (what_to_do == _TGL_IO_) tgl_DO1; break;
+         case GM_MIMIC_DO2:  if (what_to_do == _SET_IO_) set_DO2;          if (what_to_do == _CLR_IO_) clr_DO2;            if (what_to_do == _TGL_IO_) tgl_DO2; break;
+         case GM_MIMIC_DO3:  if (what_to_do == _SET_IO_) set_DO3;          if (what_to_do == _CLR_IO_) clr_DO3;            if (what_to_do == _TGL_IO_) tgl_DO3; break;
+         case GM_MIMIC_DIO0: if (what_to_do == _SET_IO_) set_io(PORTD, 5); if (what_to_do == _CLR_IO_) clear_io(PORTD, 5); if (what_to_do == _TGL_IO_) toggle_io(PORTD, 5); break;
+         case GM_MIMIC_DIO1: if (what_to_do == _SET_IO_) set_io(PORTE, 5); if (what_to_do == _CLR_IO_) clear_io(PORTE, 5); if (what_to_do == _TGL_IO_) toggle_io(PORTE, 5); break;
+         case GM_MIMIC_DIO2: if (what_to_do == _SET_IO_) set_io(PORTF, 5); if (what_to_do == _CLR_IO_) clear_io(PORTF, 5); if (what_to_do == _TGL_IO_) toggle_io(PORTF, 5); break;
+      }
+   }      
+}
+
+
 /************************************************************************/
 /* Configure and initialize IOs                                         */
 /************************************************************************/
@@ -134,6 +154,18 @@ uint8_t app_regs_type[] = {
 	TYPE_U8,
 	TYPE_U8,
 	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
+	TYPE_U8,
 	TYPE_U8
 };
 
@@ -179,6 +211,18 @@ uint16_t app_regs_n_elements[] = {
 	6,
 	3,
 	3,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 	1,
 	1,
 	1,
@@ -298,5 +342,17 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_RESERVED17),
 	(uint8_t*)(&app_regs.REG_ENCODERS_RESET),
 	(uint8_t*)(&app_regs.REG_RESERVED18),
-	(uint8_t*)(&app_regs.REG_RESERVED19)
+	(uint8_t*)(&app_regs.REG_RESERVED19),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT0_IR),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT1_IR),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT2_IR),
+	(uint8_t*)(&app_regs.REG_RESERVED20),
+	(uint8_t*)(&app_regs.REG_RESERVED21),
+	(uint8_t*)(&app_regs.REG_RESERVED22),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT0_VALVE),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT1_VALVE),
+	(uint8_t*)(&app_regs.REG_MIMIC_PORT2_VALVE),
+	(uint8_t*)(&app_regs.REG_RESERVED23),
+	(uint8_t*)(&app_regs.REG_RESERVED24),
+	(uint8_t*)(&app_regs.REG_RESERVED25)
 };

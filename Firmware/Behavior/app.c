@@ -32,7 +32,7 @@ void hwbp_app_initialize(void)
     uint8_t hwH = 1;
     uint8_t hwL = 2;
     uint8_t fwH = 2;
-    uint8_t fwL = 4;
+    uint8_t fwL = 5;
     uint8_t ass = 0;    
     
    	/* Start core */
@@ -210,8 +210,11 @@ void core_callback_reset_registers(void)
 extern ports_state_t _states_;
 
 void core_callback_registers_were_reinitialized(void)
-{
-	_states_.pwm.do0 = false;
+{   
+    uint8_t aux8b;
+    uint16_t aux16b;
+    
+    _states_.pwm.do0 = false;
     _states_.pwm.do1 = false;
     _states_.pwm.do2 = false;
     _states_.pwm.do3 = false;
@@ -227,10 +230,10 @@ void core_callback_registers_were_reinitialized(void)
     _states_.quad_counter.port1 = false;
     _states_.quad_counter.port2 = false;
     
-    uint16_t aux16b = app_regs.REG_OUTPUTS_OUT;
+    aux16b  = app_regs.REG_OUTPUTS_OUT;
     app_write_REG_OUTPUTS_OUT(&aux16b);
     
-    uint8_t aux8b = app_regs.REG_LED0_CURRENT;
+    aux8b = app_regs.REG_LED0_CURRENT;
     app_write_REG_LED0_CURRENT(&aux8b);
     aux8b = app_regs.REG_LED1_CURRENT;
     app_write_REG_LED1_CURRENT(&aux8b);
@@ -249,6 +252,20 @@ void core_callback_registers_were_reinitialized(void)
     
     aux8b = app_regs.REG_EN_ENCODERS;
     app_write_REG_EN_ENCODERS(&aux8b);
+    
+    aux8b = app_regs.REG_MIMIC_PORT0_IR;
+    app_write_REG_MIMIC_PORT0_IR(&aux8b);
+    aux8b = app_regs.REG_MIMIC_PORT1_IR;
+    app_write_REG_MIMIC_PORT1_IR(&aux8b);
+    aux8b = app_regs.REG_MIMIC_PORT2_IR;
+    app_write_REG_MIMIC_PORT2_IR(&aux8b);
+        
+    aux8b = app_regs.REG_MIMIC_PORT0_VALVE;
+    app_write_REG_MIMIC_PORT0_VALVE(&aux8b);
+    aux8b = app_regs.REG_MIMIC_PORT1_VALVE;
+    app_write_REG_MIMIC_PORT1_VALVE(&aux8b);
+    aux8b = app_regs.REG_MIMIC_PORT2_VALVE;
+    app_write_REG_MIMIC_PORT2_VALVE(&aux8b);
 }
 
 /************************************************************************/

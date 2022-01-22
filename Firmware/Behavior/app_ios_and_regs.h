@@ -217,7 +217,7 @@ typedef struct
 	uint8_t REG_MIMIC_PORT2_VALVE;
 	uint8_t REG_RESERVED23;
 	uint8_t REG_RESERVED24;
-	uint8_t REG_RESERVED25;
+	uint8_t REG_POKE_INPUT_FILTER_MS;
 } AppRegs;
 
 /************************************************************************/
@@ -314,7 +314,7 @@ typedef struct
 #define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     
 #define ADD_REG_RESERVED23                 120 // U8     
 #define ADD_REG_RESERVED24                 121 // U8     
-#define ADD_REG_RESERVED25                 122 // U8     
+#define ADD_REG_POKE_INPUT_FILTER_MS       122 // U8     
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */

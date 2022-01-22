@@ -31,6 +31,8 @@ extern AppRegs app_regs;
 /************************************************************************/ 
 /* POKE0_IR                                                             */
 /************************************************************************/
+extern uint8_t int0_enable_counter;
+
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {	
 	uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
@@ -46,9 +48,15 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
 		if (reg_port_dis != app_regs.REG_PORT_DIS)
-      {
-         core_func_send_event(ADD_REG_PORT_DIS, true);
-      }
+		{
+			core_func_send_event(ADD_REG_PORT_DIS, true);
+		 
+			if (app_regs.REG_POKE_INPUT_FILTER_MS)
+			{
+				PORTD_INTCTRL &= 0xFC;	// Disable interrupt
+				int0_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+			}
+		}
 	}
 
 	reti();
@@ -57,6 +65,8 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
 /************************************************************************/ 
 /* POKE1_IR                                                             */
 /************************************************************************/
+extern uint8_t int1_enable_counter;
+
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
    uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
@@ -71,10 +81,16 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-   	if (reg_port_dis != app_regs.REG_PORT_DIS)
-   	{
-      	core_func_send_event(ADD_REG_PORT_DIS, true);
-   	}
+   		if (reg_port_dis != app_regs.REG_PORT_DIS)
+   		{
+      		core_func_send_event(ADD_REG_PORT_DIS, true);
+			  
+      		if (app_regs.REG_POKE_INPUT_FILTER_MS)
+      		{
+	      		PORTE_INTCTRL &= 0xFC;	// Disable interrupt
+      			int1_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+			}
+   		}
 	}
 
 	reti();
@@ -83,6 +99,8 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
 /************************************************************************/ 
 /* POKE2_IR                                                             */
 /************************************************************************/
+extern uint8_t int2_enable_counter;
+
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
    uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
@@ -97,10 +115,16 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
    
 	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
 	{
-   	if (reg_port_dis != app_regs.REG_PORT_DIS)
-   	{
-      	core_func_send_event(ADD_REG_PORT_DIS, true);
-   	}
+   		if (reg_port_dis != app_regs.REG_PORT_DIS)
+   		{
+      		core_func_send_event(ADD_REG_PORT_DIS, true);
+		  
+      		if (app_regs.REG_POKE_INPUT_FILTER_MS)
+      		{
+	      		PORTF_INTCTRL &= 0xFC;	// Disable interrupt
+      			int2_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
+			  }
+   		}
 	}
 
 	reti();

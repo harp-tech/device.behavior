@@ -111,7 +111,7 @@ void (*app_func_rd_pointer[])(void) = {
   	&app_read_REG_MIMIC_PORT2_VALVE,
   	&app_read_REG_RESERVED23,
   	&app_read_REG_RESERVED24,
-  	&app_read_REG_RESERVED25
+  	&app_read_REG_POKE_INPUT_FILTER_MS
 };
 
 bool (*app_func_wr_pointer[])(void*) = {
@@ -205,7 +205,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_MIMIC_PORT2_VALVE,
 	&app_write_REG_RESERVED23,
 	&app_write_REG_RESERVED24,
-	&app_write_REG_RESERVED25
+	&app_write_REG_POKE_INPUT_FILTER_MS
 };
 
 
@@ -1886,5 +1886,10 @@ bool app_write_REG_RESERVED24(void *a) {return true;}
 /************************************************************************/
 /* REG_RESERVED25                                                       */
 /************************************************************************/
-void app_read_REG_RESERVED25(void) {}
-bool app_write_REG_RESERVED25(void *a) {return true;}
+void app_read_REG_POKE_INPUT_FILTER_MS(void) {}
+bool app_write_REG_POKE_INPUT_FILTER_MS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+	app_regs.REG_POKE_INPUT_FILTER_MS = reg;	
+	return true;
+}

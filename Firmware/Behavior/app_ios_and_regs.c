@@ -354,5 +354,5 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_MIMIC_PORT2_VALVE),
 	(uint8_t*)(&app_regs.REG_RESERVED23),
 	(uint8_t*)(&app_regs.REG_RESERVED24),
-	(uint8_t*)(&app_regs.REG_RESERVED25)
+	(uint8_t*)(&app_regs.REG_POKE_INPUT_FILTER_MS)
 };

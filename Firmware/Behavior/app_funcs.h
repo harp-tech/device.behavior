@@ -110,7 +110,8 @@ void app_read_REG_MIMIC_PORT1_VALVE(void);
 void app_read_REG_MIMIC_PORT2_VALVE(void);
 void app_read_REG_RESERVED23(void);
 void app_read_REG_RESERVED24(void);
-void app_read_REG_RESERVED25(void);
+void app_read_REG_POKE_INPUT_FILTER_MS(void);
+
 
 bool app_write_REG_PORT_DIS(void *a);
 bool app_write_REG_RESERVED0(void *a);
@@ -202,7 +203,7 @@ bool app_write_REG_MIMIC_PORT1_VALVE(void *a);
 bool app_write_REG_MIMIC_PORT2_VALVE(void *a);
 bool app_write_REG_RESERVED23(void *a);
 bool app_write_REG_RESERVED24(void *a);
-bool app_write_REG_RESERVED25(void *a);
+bool app_write_REG_POKE_INPUT_FILTER_MS(void *a);
 
 
 #endif /* _APP_FUNCTIONS_H_ */

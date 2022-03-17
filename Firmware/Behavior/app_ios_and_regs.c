@@ -35,9 +35,9 @@ void init_ios(void)
 	io_pin2in(&PORTF, 5, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // POKE2_IO
 
 	/* Configure input interrupts */
-	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (1<<4), false);                 // POKE0_IR
-	io_set_int(&PORTE, INT_LEVEL_LOW, 0, (1<<4), false);                 // POKE1_IR
-	io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<4), false);                 // POKE2_IR
+	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (3<<4), false);                 // POKE0_IR
+	io_set_int(&PORTE, INT_LEVEL_LOW, 0, (3<<4), false);                 // POKE1_IR
+	io_set_int(&PORTF, INT_LEVEL_LOW, 0, (3<<4), false);                 // POKE2_IR
 
 	/* Configure output pins */
 	io_pin2out(&PORTC, 0, OUT_IO_DIGITAL, IN_EN_IO_EN);                  // DO3

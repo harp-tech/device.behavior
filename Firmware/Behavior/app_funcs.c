@@ -577,6 +577,10 @@ bool app_write_REG_PORT_DIOS_CONF(void *a)
 void app_read_REG_PORT_DIOS_IN(void)
 {
 	//app_regs.REG_PORT_DIOS_IN = 0;
+	
+	app_regs.REG_PORT_DIOS_IN = (read_POKE0_IO) ? B_DIO0 : 0; 
+	app_regs.REG_PORT_DIOS_IN |= (read_POKE1_IO) ? B_DIO1 : 0; 
+	app_regs.REG_PORT_DIOS_IN |= (read_POKE2_IO) ? B_DIO2 : 0; 
 
 }
 
@@ -1518,8 +1522,8 @@ bool app_write_REG_EN_ENCODERS(void *a)
         
             /* Turn inputs to default configuration (same as *init_ios()* func)  */
             io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
-            io_set_int(&PORTF, INT_LEVEL_LOW, 0, (1<<4), false);    // POKE2_IR
-        
+            io_set_int(&PORTF, INT_LEVEL_LOW, 0, (3<<4), false);    // POKE2_IR  & IO IN
+		
             /* Reset register */
             app_regs.REG_DATA[1] = 0;
         }

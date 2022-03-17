@@ -35,11 +35,16 @@ extern uint8_t int0_enable_counter;
 
 ISR(PORTD_INT0_vect, ISR_NAKED)
 {	
-	uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
    
    app_regs.REG_PORT_DIS &= ~B_DI0;
-	app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
-   
+   app_regs.REG_PORT_DIS |= (read_POKE0_IR) ? B_DI0 : 0;
+		
+   app_regs.REG_PORT_DIOS_IN &= ~B_DIO0;                      
+   app_regs.REG_PORT_DIOS_IN |= (read_POKE0_IO) ? B_DIO0 : 0; 
+	
+	   
    if(read_POKE0_IR)
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_IR, _SET_IO_);
    else
@@ -57,6 +62,11 @@ ISR(PORTD_INT0_vect, ISR_NAKED)
 				int0_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
 			}
 		}
+		
+		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN) 
+		{
+			core_func_send_event(ADD_REG_PORT_DIOS_IN, true); 
+		}
 	}
 
 	reti();
@@ -70,9 +80,13 @@ extern uint8_t int1_enable_counter;
 ISR(PORTE_INT0_vect, ISR_NAKED)
 {
    uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
    
-	app_regs.REG_PORT_DIS &= ~B_DI1;
-	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
+   app_regs.REG_PORT_DIS &= ~B_DI1;
+   app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
+	
+   app_regs.REG_PORT_DIOS_IN &= ~B_DIO1;                       
+   app_regs.REG_PORT_DIOS_IN |= (read_POKE1_IO) ? B_DIO1 : 0; 
    
    if(read_POKE1_IR)
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_IR, _SET_IO_);
@@ -91,6 +105,11 @@ ISR(PORTE_INT0_vect, ISR_NAKED)
       			int1_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
 			}
    		}
+	
+		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN) 
+		{
+			core_func_send_event(ADD_REG_PORT_DIOS_IN, true); 
+		}
 	}
 
 	reti();
@@ -104,9 +123,13 @@ extern uint8_t int2_enable_counter;
 ISR(PORTF_INT0_vect, ISR_NAKED)
 {
    uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+   uint8_t reg_port_dios_in = app_regs.REG_PORT_DIOS_IN; 
    
-	app_regs.REG_PORT_DIS &= ~B_DI2;
-	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
+   app_regs.REG_PORT_DIS &= ~B_DI2;
+   app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
+	
+   app_regs.REG_PORT_DIOS_IN &= ~B_DIO2;                       
+   app_regs.REG_PORT_DIOS_IN |= (read_POKE2_IO) ? B_DIO2 : 0;
       
    if(read_POKE2_IR)
       mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_IR, _SET_IO_);
@@ -125,6 +148,10 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
       			int2_enable_counter = app_regs.REG_POKE_INPUT_FILTER_MS;
 			  }
    		}
+		if (reg_port_dios_in != app_regs.REG_PORT_DIOS_IN)
+		{
+			core_func_send_event(ADD_REG_PORT_DIOS_IN, true);
+		}
 	}
 
 	reti();

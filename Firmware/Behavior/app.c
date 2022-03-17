@@ -32,7 +32,7 @@ void hwbp_app_initialize(void)
     uint8_t hwH = 1;
     uint8_t hwL = 2;
     uint8_t fwH = 2;
-    uint8_t fwL = 5;
+    uint8_t fwL = 6;
     uint8_t ass = 0;    
     
    	/* Start core */
@@ -205,6 +205,8 @@ void core_callback_reset_registers(void)
     app_regs.REG_MOTOR_OUT2_PULSE = 1500;
     app_regs.REG_MOTOR_OUT3_PERIOD = 20000;
     app_regs.REG_MOTOR_OUT3_PULSE = 1500;
+	
+	app_regs.REG_POKE_INPUT_FILTER_MS = 1;
 }
 
 extern ports_state_t _states_;
@@ -266,6 +268,8 @@ void core_callback_registers_were_reinitialized(void)
     app_write_REG_MIMIC_PORT1_VALVE(&aux8b);
     aux8b = app_regs.REG_MIMIC_PORT2_VALVE;
     app_write_REG_MIMIC_PORT2_VALVE(&aux8b);
+	
+	app_regs.REG_POKE_INPUT_FILTER_MS = 2;	
 }
 
 /************************************************************************/
@@ -325,7 +329,8 @@ void core_callback_t_before_exec(void)
 	   }
    }      
 }
-void core_callback_t_after_exec(void) {}
+
+void core_callback_t_after_exec(void){}	
 void core_callback_t_new_second(void)
 {
    t1ms = 0;
@@ -418,7 +423,24 @@ void core_callback_t_500us(void)
 	    }
 }
 
-void core_callback_t_1ms(void) {}
+uint8_t int0_enable_counter = 0;
+uint8_t int1_enable_counter = 0;
+uint8_t int2_enable_counter = 0;
+
+void core_callback_t_1ms(void)
+{
+	if (int0_enable_counter)
+		if ((--int0_enable_counter) == 0)
+			PORTD_INTCTRL |= INT_LEVEL_LOW;
+	
+	if (int1_enable_counter)
+		if ((--int1_enable_counter) == 0)
+			PORTE_INTCTRL |= INT_LEVEL_LOW;
+	
+	if (int2_enable_counter)
+		if ((--int2_enable_counter) == 0)
+			PORTF_INTCTRL |= INT_LEVEL_LOW;
+}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */

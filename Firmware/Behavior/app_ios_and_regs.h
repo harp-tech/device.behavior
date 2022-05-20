@@ -25,6 +25,7 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 #define read_POKE1_IO read_io(PORTE, 5)         // POKE1_IO
 #define read_POKE2_IR read_io(PORTF, 4)         // POKE2_IR
 #define read_POKE2_IO read_io(PORTF, 5)         // POKE2_IO
+#define read_ADC1_AVAILABLE read_io(PORTJ, 0)   // ADC1_AVAILABLE
 
 /************************************************************************/
 /* Definition of output pins                                            */
@@ -139,7 +140,7 @@ typedef struct
 	uint8_t REG_PORT_DIOS_OUT;
 	uint8_t REG_PORT_DIOS_CONF;
 	uint8_t REG_PORT_DIOS_IN;
-	int16_t REG_DATA[2];
+	int16_t REG_DATA[3];
 	uint16_t REG_OUTPUT_PULSE_EN;
 	uint16_t REG_PULSE_PORT0_DO;
 	uint16_t REG_PULSE_PORT1_DO;
@@ -325,7 +326,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x7A
-#define APP_NBYTES_OF_REG_BANK              132
+#define APP_NBYTES_OF_REG_BANK              134
 
 /************************************************************************/
 /* Registers' bits                                                      */

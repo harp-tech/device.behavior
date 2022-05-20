@@ -283,3 +283,57 @@ ISR(TCC0_OVF_vect, ISR_NAKED)
         
     reti();
 }
+
+/************************************************************************/
+/* ADC                                                                  */
+/************************************************************************/
+extern int16_t AdcOffset;
+
+extern bool first_adc_channel;
+
+ISR(ADCA_CH0_vect, ISR_NAKED)
+{
+	bool send_event = false;
+	
+	if (first_adc_channel)
+	{
+		first_adc_channel = false;
+		
+		/* Read ADC0 Channel 0 */
+		app_regs.REG_DATA[0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		
+		if (read_ADC1_AVAILABLE)
+		{
+			/* Start conversation on ADCA Channel 2*/
+			ADCA_CH0_MUXCTRL = 2 << 3;
+			ADCA_CH0_CTRL |= ADC_CH_START_bm;
+		}
+		else
+		{
+			send_event = true;
+		}
+	}
+	else
+	{		
+		/* Read ADC0 Channel 2 */
+		app_regs.REG_DATA[2] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		
+		/* Validate readings */
+		if (app_regs.REG_DATA[0] < 0)
+			app_regs.REG_DATA[0] = 0;			
+		if (app_regs.REG_DATA[2] < 0)
+			app_regs.REG_DATA[2] = 0;
+			
+		send_event = true;
+	}
+	
+	if (send_event)
+	{
+		if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
+		{
+			core_func_send_event(ADD_REG_DATA, false);
+		}
+	}	
+		
+	reti();
+}

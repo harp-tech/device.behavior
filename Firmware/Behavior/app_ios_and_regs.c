@@ -33,6 +33,7 @@ void init_ios(void)
 	io_pin2in(&PORTE, 5, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // POKE1_IO
 	io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // POKE2_IR
 	io_pin2in(&PORTF, 5, PULL_IO_UP, SENSE_IO_EDGES_BOTH);               // POKE2_IO
+	io_pin2in(&PORTJ, 0, PULL_IO_DOWN, SENSE_IO_EDGES_BOTH);             // ADC1_AVAILABLE
 
 	/* Configure input interrupts */
 	io_set_int(&PORTD, INT_LEVEL_LOW, 0, (3<<4), false);                 // POKE0_IR
@@ -182,7 +183,7 @@ uint16_t app_regs_n_elements[] = {
 	1,
 	1,
 	1,
-	2,
+	3,
 	1,
 	1,
 	1,

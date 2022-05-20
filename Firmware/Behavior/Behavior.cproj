@@ -48,11 +48,14 @@
         <InterfaceName>PDI</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
-      <ToolNumber>J41800031896</ToolNumber>
+      <ToolNumber>J42700022647</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <ResetRule>0</ResetRule>
     <EraseKey />
+    <avrtoolserialnumber>J42700022647</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E974C</avrdeviceexpectedsignature>
+    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>

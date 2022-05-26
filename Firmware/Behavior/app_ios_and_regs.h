@@ -26,6 +26,7 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 #define read_POKE2_IR read_io(PORTF, 4)         // POKE2_IR
 #define read_POKE2_IO read_io(PORTF, 5)         // POKE2_IO
 #define read_ADC1_AVAILABLE read_io(PORTJ, 0)   // ADC1_AVAILABLE
+#define read_DI3 read_io(PORTH, 0)              // DI3
 
 /************************************************************************/
 /* Definition of output pins                                            */
@@ -334,6 +335,7 @@ typedef struct
 #define B_DI0                              (1<<0)       // Port 0 digital input
 #define B_DI1                              (1<<1)       // Port 1 digital input
 #define B_DI2                              (1<<2)       // Port 2 digital input
+#define B_DI3                              (1<<3)       // Digital input DI3
 #define B_PORT0_DO                         (1<<0)       // 
 #define B_PORT1_DO                         (1<<1)       // 
 #define B_PORT2_DO                         (1<<2)       // 

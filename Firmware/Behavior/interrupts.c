@@ -225,6 +225,9 @@ ISR(TCF0_CCA_vect, ISR_NAKED)
             clr_DO0;
             timer_type0_stop(&TCF0);
             _states_.camera.do0 = false;
+				
+				app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT0;
+				core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
     
@@ -267,6 +270,9 @@ ISR(TCE0_CCA_vect, ISR_NAKED)
             clr_DO1;
             timer_type0_stop(&TCE0);
             _states_.camera.do1 = false;
+            
+            app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT1;
+            core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
     

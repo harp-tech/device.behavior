@@ -1,3 +1,7 @@
+## Harp BehVIOR##
+
+![HarpBehavior](Pics/behavior.png)
+
 ## Interface ##
 
 The interface with the Harp Behavior can be done through [Bonsai](https://bonsai-rx.org/) or a dedicated GUI (Graphical User Interface).

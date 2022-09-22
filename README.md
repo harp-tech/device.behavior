@@ -1,4 +1,4 @@
-## Harp BehVIOR##
+## Harp Behavior##
 
 ![HarpBehavior](Pics/behavior.png)
 

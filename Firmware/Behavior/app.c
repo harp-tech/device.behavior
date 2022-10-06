@@ -322,7 +322,29 @@ void core_callback_visualen_to_off(void) {}
 /************************************************************************/
 /* Callbacks: Change on the operation mode                              */
 /************************************************************************/
-void core_callback_device_to_standby(void) {}
+extern bool stop_camera_do0;
+extern bool stop_camera_do1;
+
+void core_callback_device_to_standby(void)
+{
+	if (_states_.camera.do0)
+	{
+		stop_camera_do0 = false;
+		
+		clr_DO0;
+		timer_type0_stop(&TCF0);
+		_states_.camera.do0 = false;
+	}
+	
+	if (_states_.camera.do1)
+	{
+		stop_camera_do1 = false;
+		
+		clr_DO1;
+		timer_type0_stop(&TCE0);
+		_states_.camera.do1 = false;
+	}
+}
 void core_callback_device_to_active(void) {}
 void core_callback_device_to_enchanced_active(void) {}
 void core_callback_device_to_speed(void) {}

@@ -158,6 +158,27 @@ ISR(PORTF_INT0_vect, ISR_NAKED)
 }
 
 /************************************************************************/
+/* DI3                                                                  */
+/************************************************************************/
+ISR(PORTH_INT0_vect, ISR_NAKED)
+{
+	uint8_t reg_port_dis = app_regs.REG_PORT_DIS;
+	
+	app_regs.REG_PORT_DIS &= ~B_DI3;
+	app_regs.REG_PORT_DIS |= (read_DI3) ? B_DI3 : 0;
+	
+	if (app_regs.REG_EVNT_ENABLE & B_EVT_PORT_DIS)
+	{
+		if (reg_port_dis != app_regs.REG_PORT_DIS)
+		{
+			core_func_send_event(ADD_REG_PORT_DIS, true);
+		}
+	}
+
+	reti();
+}
+
+/************************************************************************/
 /* PWM DOx                                                              */
 /************************************************************************/
 timer_conf_t timer_conf;
@@ -204,6 +225,9 @@ ISR(TCF0_CCA_vect, ISR_NAKED)
             clr_DO0;
             timer_type0_stop(&TCF0);
             _states_.camera.do0 = false;
+				
+				app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT0;
+				core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
     
@@ -246,6 +270,9 @@ ISR(TCE0_CCA_vect, ISR_NAKED)
             clr_DO1;
             timer_type0_stop(&TCE0);
             _states_.camera.do1 = false;
+            
+            app_regs.REG_STOP_CAMERAS = B_EN_CAM_OUT1;
+            core_func_send_event(ADD_REG_STOP_CAMERAS, true);
         }
     }        
     
@@ -282,4 +309,58 @@ ISR(TCC0_OVF_vect, ISR_NAKED)
     }
         
     reti();
+}
+
+/************************************************************************/
+/* ADC                                                                  */
+/************************************************************************/
+extern int16_t AdcOffset;
+
+extern bool first_adc_channel;
+
+ISR(ADCA_CH0_vect, ISR_NAKED)
+{
+	bool send_event = false;
+	
+	if (first_adc_channel)
+	{
+		first_adc_channel = false;
+		
+		/* Read ADC0 Channel 0 */
+		app_regs.REG_DATA[0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		
+		if (read_ADC1_AVAILABLE)
+		{
+			/* Start conversation on ADCA Channel 2*/
+			ADCA_CH0_MUXCTRL = 2 << 3;
+			ADCA_CH0_CTRL |= ADC_CH_START_bm;
+		}
+		else
+		{
+			send_event = true;
+		}
+	}
+	else
+	{		
+		/* Read ADC0 Channel 2 */
+		app_regs.REG_DATA[2] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		
+		/* Validate readings */
+		if (app_regs.REG_DATA[0] < 0)
+			app_regs.REG_DATA[0] = 0;			
+		if (app_regs.REG_DATA[2] < 0)
+			app_regs.REG_DATA[2] = 0;
+			
+		send_event = true;
+	}
+	
+	if (send_event)
+	{
+		if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
+		{
+			core_func_send_event(ADD_REG_DATA, false);
+		}
+	}	
+		
+	reti();
 }

@@ -2,12 +2,16 @@
 #include "hwbp_core_regs.h"
 #include "hwbp_core_types.h"
 
+#include "cpu.h"
 #include "app.h"
 #include "app_funcs.h"
 #include "app_ios_and_regs.h"
 
 #include "WS2812S.h"
 #include "structs.h"
+
+#define F_CPU 32000000
+#include <util/delay.h>
 
 
 /************************************************************************/
@@ -29,10 +33,10 @@ static const uint8_t default_device_name[] = "Behavior";
 void hwbp_app_initialize(void)
 {
     /* Define versions */
-    uint8_t hwH = 1;
-    uint8_t hwL = 2;
-    uint8_t fwH = 2;
-    uint8_t fwL = 7;
+    uint8_t hwH = 2;
+    uint8_t hwL = 0;
+    uint8_t fwH = 3;
+    uint8_t fwL = 0;
     uint8_t ass = 0;    
     
    	/* Start core */
@@ -44,7 +48,9 @@ void hwbp_app_initialize(void)
    	    (uint8_t*)(&app_regs),
    	    APP_NBYTES_OF_REG_BANK,
    	    APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1,
-   	    default_device_name
+   	    default_device_name,
+   	    true,	// The device is _not_ able to repeat the harp timestamp clock
+   	    true		// The device is _not_ able to generate the harp timestamp clock
    	);
 }
 
@@ -91,13 +97,18 @@ countdown_t pulse_countdown;
 /************************************************************************/
 /* Initialization Callbacks                                             */
 /************************************************************************/
-uint16_t AdcOffset;
+int16_t AdcOffset;
+#define ADC_OFFSET_CONSECUTIVE_EQUAL_READINGS 8
 
 #define DAC_GAINCAL 0x83
 #define DAC_OFFSETCAL 0x85
 
-void core_callback_1st_config_hw_after_boot(void)
+void core_callback_define_clock_default(void) {}
+
+void core_callback_initialize_hardware(void)
 {
+	uint16_t adc[ADC_OFFSET_CONSECUTIVE_EQUAL_READINGS];
+	
 	/* Initialize IOs */
 	/* Don't delete this function!!! */
 	init_ios();
@@ -117,7 +128,37 @@ void core_callback_1st_config_hw_after_boot(void)
 	DACB.CTRLA = DAC_CH0EN_bm | DAC_CH1EN_bm | DAC_ENABLE_bm;
    
    /* Initialize ADCA with single ended input */
-   adc_A_initialize_single_ended(ADC_REFSEL_INTVCC_gc);  // VCC/1.6 = 3.3/1.6 = 2.0625 V
+   adc_A_initialize_single_ended(ADC_REFSEL_INTVCC_gc);		// VCC/1.6 = 3.3/1.6 = 2.0625 V
+	ADCA_CH0_INTCTRL |= ADC_CH_INTLVL_LO_gc;						// Enable ADC0 interrupt
+	_delay_ms(100);
+	
+	/* Save ADC offset */
+	bool reading_adc_offset = true;
+	
+	ADCA_CH0_MUXCTRL = 1 << 3;											// Select pin 1
+	
+	do
+	{
+		for (uint8_t i = 0; i < ADC_OFFSET_CONSECUTIVE_EQUAL_READINGS; i++)
+		{			
+			ADCA_CH0_CTRL |= ADC_CH_START_bm;						// Start conversion
+			while(!(ADCA_CH0_INTFLAGS & ADC_CH_CHIF_bm));		// Wait for conversion to finish
+			ADCA_CH0_INTFLAGS = ADC_CH_CHIF_bm;						// Clear interrupt bit		
+			adc[i] = ADCA_CH0_RES;										// Save offset
+		}
+		
+		reading_adc_offset = false;
+		
+		for (uint8_t i = 0; i < ADC_OFFSET_CONSECUTIVE_EQUAL_READINGS-1; i++)
+		{
+			if (adc[i] != adc[i+1])
+			{
+				reading_adc_offset |= true;
+			}
+		}
+	} while (reading_adc_offset);
+	
+	AdcOffset = adc[0];
 }
 
 void core_callback_reset_registers(void)
@@ -269,7 +310,7 @@ void core_callback_registers_were_reinitialized(void)
     aux8b = app_regs.REG_MIMIC_PORT2_VALVE;
     app_write_REG_MIMIC_PORT2_VALVE(&aux8b);
 	
-	app_regs.REG_POKE_INPUT_FILTER_MS = 2;	
+	app_regs.REG_POKE_INPUT_FILTER_MS = 1;	
 }
 
 /************************************************************************/
@@ -281,7 +322,29 @@ void core_callback_visualen_to_off(void) {}
 /************************************************************************/
 /* Callbacks: Change on the operation mode                              */
 /************************************************************************/
-void core_callback_device_to_standby(void) {}
+extern bool stop_camera_do0;
+extern bool stop_camera_do1;
+
+void core_callback_device_to_standby(void)
+{
+	if (_states_.camera.do0)
+	{
+		stop_camera_do0 = false;
+		
+		clr_DO0;
+		timer_type0_stop(&TCF0);
+		_states_.camera.do0 = false;
+	}
+	
+	if (_states_.camera.do1)
+	{
+		stop_camera_do1 = false;
+		
+		clr_DO1;
+		timer_type0_stop(&TCE0);
+		_states_.camera.do1 = false;
+	}
+}
 void core_callback_device_to_active(void) {}
 void core_callback_device_to_enchanced_active(void) {}
 void core_callback_device_to_speed(void) {}
@@ -296,18 +359,20 @@ extern bool rgb1_on;
 
 uint8_t t1ms = 0;
 
+bool first_adc_channel;
+
 void core_callback_t_before_exec(void)
 {
    if (t1ms++ & 1)
    {
-	   /* Read ADC */
-      int16_t adc = adc_A_read_channel(0);
-      
-      if (adc < 0)
-         app_regs.REG_DATA[0] = 0;
-      else
-         app_regs.REG_DATA[0] = adc;
-        
+       /* Read ADC */
+       core_func_mark_user_timestamp();
+       
+       /* Start conversation on ADCA Channel 0*/
+       first_adc_channel = true;
+		 ADCA_CH0_MUXCTRL = 0 << 3;
+       ADCA_CH0_CTRL |= ADC_CH_START_bm;
+       
        /* Read encoder on Port 2 */
        if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
        {
@@ -321,12 +386,7 @@ void core_callback_t_before_exec(void)
            {
                app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
            }
-       }        
-
-	   if (app_regs.REG_EVNT_ENABLE & B_EVT_DATA)
-	   {
-		   core_func_send_event(ADD_REG_DATA, true);
-	   }
+       } 
    }      
 }
 
@@ -441,6 +501,14 @@ void core_callback_t_1ms(void)
 		if ((--int2_enable_counter) == 0)
 			PORTF_INTCTRL |= INT_LEVEL_LOW;
 }
+
+/************************************************************************/
+/* Callbacks: cloc control                                              */
+/************************************************************************/
+void core_callback_clock_to_repeater(void) {}
+void core_callback_clock_to_generator(void) {}
+void core_callback_clock_to_unlock(void) {}
+void core_callback_clock_to_lock(void) {}
 
 /************************************************************************/
 /* Callbacks: uart control                                              */

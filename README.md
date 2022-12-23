@@ -1,9 +1,7 @@
-## Harp Behavior ##
-
+## Harp Behavior
 This is a multi-purpose device tailored to behavioral experiments. It allows control of pokes, RGB LEDs, LEDs, cameras, servo motors and a quadrature counter.
 
-
-![HarpBehavior](Pics/behavior.png)
+![HarpBehavior](./Assets/pcb.png)
 
 ### Key Features ###
 
@@ -27,6 +25,7 @@ This is a multi-purpose device tailored to behavioral experiments. It allows con
 * 1x ADC (5V) [screw terminal]
 
 ## Interface ##
+
 
 The interface with the Harp Behavior can be done through [Bonsai](https://bonsai-rx.org/) or a dedicated GUI (Graphical User Interface).
 

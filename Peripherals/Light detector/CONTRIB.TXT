@@ -1,2 +1,0 @@
-hardware@neuro.fchampalimaud.org
-hardware@research.fchampalimaud.org

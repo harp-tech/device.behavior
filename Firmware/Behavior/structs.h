@@ -44,6 +44,11 @@ typedef struct
     bool port0, port1, port2;
 } quad_counter_possibilities_t;
 
+typedef struct
+{
+	bool port2;
+} timestamp_TX_possibilities_t;
+
 
 typedef struct
 {
@@ -51,6 +56,7 @@ typedef struct
     camera_possibilities_t camera;
     motor_possibilities_t servo;
     quad_counter_possibilities_t quad_counter;
+	 timestamp_TX_possibilities_t timestamp_tx;
 } ports_state_t;
 
 #endif /* _STRUCT_H_ */

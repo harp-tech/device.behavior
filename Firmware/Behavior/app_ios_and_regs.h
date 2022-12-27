@@ -207,7 +207,7 @@ typedef struct
 	uint8_t REG_RESERVED17;
 	uint8_t REG_ENCODERS_RESET;
 	uint8_t REG_RESERVED18;
-	uint8_t REG_RESERVED19;
+	uint8_t REG_ENABLE_SERIAL_TIMESTAMP;
 	uint8_t REG_MIMIC_PORT0_IR;
 	uint8_t REG_MIMIC_PORT1_IR;
 	uint8_t REG_MIMIC_PORT2_IR;
@@ -304,7 +304,7 @@ typedef struct
 #define ADD_REG_RESERVED17                 107 // U8     Reserved for future use
 #define ADD_REG_ENCODERS_RESET             108 // U8     Resets the encoders counter to ZERO
 #define ADD_REG_RESERVED18                 109 // U8     Reserved for future use
-#define ADD_REG_RESERVED19                 110 // U8     Reserved for future use
+#define ADD_REG_ENABLE_SERIAL_TIMESTAMP    110 // U8     Enables the timestamp TX
 #define ADD_REG_MIMIC_PORT0_IR             111 // U8     
 #define ADD_REG_MIMIC_PORT1_IR             112 // U8     
 #define ADD_REG_MIMIC_PORT2_IR             113 // U8     
@@ -369,6 +369,7 @@ typedef struct
 #define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
 #define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
 #define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
+#define B_EN_SRL_TSTAMP_PORT2              (1<<2)       // Enable the serial timestamp TX on Port 2
 #define MSK_MIMIC                          0x0F         // 
 #define GM_MIMIC_NONE                      0x00         // 
 #define GM_MIMIC_DIO0                      0x01         // Is reflected on DIO0

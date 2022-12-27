@@ -99,7 +99,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_RESERVED17,
 	&app_read_REG_ENCODERS_RESET,
 	&app_read_REG_RESERVED18,
-	&app_read_REG_RESERVED19,   
+	&app_read_REG_ENABLE_SERIAL_TIMESTAMP,   
   	&app_read_REG_MIMIC_PORT0_IR,
   	&app_read_REG_MIMIC_PORT1_IR,
   	&app_read_REG_MIMIC_PORT2_IR,
@@ -193,7 +193,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_RESERVED17,
 	&app_write_REG_ENCODERS_RESET,
 	&app_write_REG_RESERVED18,
-	&app_write_REG_RESERVED19,
+	&app_write_REG_ENABLE_SERIAL_TIMESTAMP,
 	&app_write_REG_MIMIC_PORT0_IR,
 	&app_write_REG_MIMIC_PORT1_IR,
 	&app_write_REG_MIMIC_PORT2_IR,
@@ -1773,11 +1773,76 @@ bool app_write_REG_ENCODERS_RESET(void *a)
 /************************************************************************/
 void app_read_REG_RESERVED18(void)  {}
 bool app_write_REG_RESERVED18(void *a) {return true;}
+
+
 /************************************************************************/
-/* REG_RESERVED19                                                       */
+/* REG_ENABLE_SERIAL_TIMESTAMP                                          */
 /************************************************************************/
-void app_read_REG_RESERVED19(void) {}
-bool app_write_REG_RESERVED19(void *a) {return true;}
+void app_read_REG_ENABLE_SERIAL_TIMESTAMP(void) {}
+bool app_write_REG_ENABLE_SERIAL_TIMESTAMP(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+	
+	if ((reg & B_EN_SRL_TSTAMP_PORT2) && !_states_.timestamp_tx.port2)
+	{
+		_states_.timestamp_tx.port2 = true;
+		
+		/* Enable serial TX @ 1Kbps */
+		// https://www.dolman-wim.nl/xmega/tools/baudratecalculator/index.php
+		
+		uint8_t BSCALE = 0;
+		uint16_t BSEL = 3999;		
+		
+		USARTF1.CTRLC = USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_DISABLED_gc | USART_CHSIZE_8BIT_gc;
+		USARTF1.BAUDCTRLA = *((uint8_t*)&BSEL);
+		USARTF1.BAUDCTRLB = (*(1+(uint8_t*)&BSEL) & 0x0F) | ((BSCALE<<4) & 0xF0);
+		USARTF1.CTRLB |= USART_CLK2X_bm;
+		USARTF1.CTRLB |= USART_TXEN_bm;
+		USARTF1.STATUS = USART_DREIF_bm;
+		
+	}
+	
+	if (!(reg & B_EN_ENCODER_PORT2) && _states_.timestamp_tx.port2)
+	{
+		_states_.timestamp_tx.port2 = false;
+		
+		/* Disable serial TX */
+		USARTF1.CTRLB &= ~(USART_TXEN_bm);
+		
+	}
+	
+	app_regs.REG_ENABLE_SERIAL_TIMESTAMP = reg;
+	return true;
+}
+
+uint32_t timestamp_tx;
+uint8_t timestamp_tx_index;
+
+void timestamp_tx_streaming(void)
+{	
+	if (_states_.timestamp_tx.port2)
+	{	
+		timestamp_tx = core_func_read_R_TIMESTAMP_SECOND();
+		timestamp_tx_index = 0;
+		
+		USARTF1.STATUS = USART_DREIF_bm;
+		USARTF1.CTRLA |= USART_DREINTLVL_LO_gc;
+		USARTF1_DATA = *((uint8_t*)(&timestamp_tx) + timestamp_tx_index);
+	}
+}
+
+ISR(USARTF1_DRE_vect, ISR_NAKED)
+{
+	timestamp_tx_index++;
+	
+	USARTF1_DATA = *((uint8_t*)(&timestamp_tx) + timestamp_tx_index);
+	
+	if (timestamp_tx_index == 3)
+	{
+		USARTF1.CTRLA &= ~(USART_DREINTLVL_OFF_gc | USART_DREINTLVL_gm);
+	}
+	reti();
+}
 
 /************************************************************************/
 /* REG_MIMIC_PORT0_IR                                                   */

@@ -353,6 +353,7 @@ void core_callback_device_to_speed(void) {}
 /* Callbacks: 1 ms timer                                                */
 /************************************************************************/
 extern void handle_Rgbs(bool use_rgb0, bool use_rgb1);
+extern void timestamp_tx_streaming(void);
 
 extern bool rgb0_on;
 extern bool rgb1_on;
@@ -393,6 +394,9 @@ void core_callback_t_before_exec(void)
 void core_callback_t_after_exec(void){}	
 void core_callback_t_new_second(void)
 {
+	/* Xmit current timestamp through serial */
+	timestamp_tx_streaming();
+	
    t1ms = 0;
 }
 

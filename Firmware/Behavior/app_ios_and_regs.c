@@ -347,7 +347,7 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_RESERVED17),
 	(uint8_t*)(&app_regs.REG_ENCODERS_RESET),
 	(uint8_t*)(&app_regs.REG_RESERVED18),
-	(uint8_t*)(&app_regs.REG_RESERVED19),
+	(uint8_t*)(&app_regs.REG_ENABLE_SERIAL_TIMESTAMP),
 	(uint8_t*)(&app_regs.REG_MIMIC_PORT0_IR),
 	(uint8_t*)(&app_regs.REG_MIMIC_PORT1_IR),
 	(uint8_t*)(&app_regs.REG_MIMIC_PORT2_IR),

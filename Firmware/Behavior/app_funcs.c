@@ -99,7 +99,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_RESERVED17,
 	&app_read_REG_ENCODERS_RESET,
 	&app_read_REG_RESERVED18,
-	&app_read_REG_RESERVED19,   
+	&app_read_REG_ENABLE_SERIAL_TIMESTAMP,   
   	&app_read_REG_MIMIC_PORT0_IR,
   	&app_read_REG_MIMIC_PORT1_IR,
   	&app_read_REG_MIMIC_PORT2_IR,
@@ -193,7 +193,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_RESERVED17,
 	&app_write_REG_ENCODERS_RESET,
 	&app_write_REG_RESERVED18,
-	&app_write_REG_RESERVED19,
+	&app_write_REG_ENABLE_SERIAL_TIMESTAMP,
 	&app_write_REG_MIMIC_PORT0_IR,
 	&app_write_REG_MIMIC_PORT1_IR,
 	&app_write_REG_MIMIC_PORT2_IR,
@@ -1773,11 +1773,19 @@ bool app_write_REG_ENCODERS_RESET(void *a)
 /************************************************************************/
 void app_read_REG_RESERVED18(void)  {}
 bool app_write_REG_RESERVED18(void *a) {return true;}
+
+
 /************************************************************************/
-/* REG_RESERVED19                                                       */
+/* REG_ENABLE_SERIAL_TIMESTAMP                                          */
 /************************************************************************/
-void app_read_REG_RESERVED19(void) {}
-bool app_write_REG_RESERVED19(void *a) {return true;}
+void app_read_REG_ENABLE_SERIAL_TIMESTAMP(void) {}
+bool app_write_REG_ENABLE_SERIAL_TIMESTAMP(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+	
+	app_regs.REG_ENABLE_SERIAL_TIMESTAMP = reg;
+	return true;
+}
 
 /************************************************************************/
 /* REG_MIMIC_PORT0_IR                                                   */

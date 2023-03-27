@@ -32,97 +32,97 @@ namespace Harp.Behavior
         string INamedElement.Name => nameof(Behavior);
 
         /// <summary>
-        /// Gets a read-only mapping from address to register name.
+        /// Gets a read-only mapping from address to register type.
         /// </summary>
-        public static new IReadOnlyDictionary<int, string> RegisterMap { get; } = new Dictionary<int, string>
+        public static new IReadOnlyDictionary<int, Type> RegisterMap { get; } = new Dictionary<int, Type>
             (Bonsai.Harp.Device.RegisterMap.ToDictionary(entry => entry.Key, entry => entry.Value))
         {
-            { 32, "PortDigitalInput" },
-            { 34, "OutputSet" },
-            { 35, "OutputClear" },
-            { 36, "OutputToggle" },
-            { 37, "OutputState" },
-            { 38, "PortDIOSet" },
-            { 39, "PortDIOClear" },
-            { 40, "PortDIOToggle" },
-            { 41, "PortDIOState" },
-            { 42, "PortDIODirection" },
-            { 43, "PortDIOStateEvent" },
-            { 44, "AnalogData" },
-            { 45, "OutputPulseEnable" },
-            { 46, "PulseDOPort0" },
-            { 47, "PulseDOPort1" },
-            { 48, "PulseDOPort2" },
-            { 49, "PulseSupplyPort0" },
-            { 50, "PulseSupplyPort1" },
-            { 51, "PulseSupplyPort2" },
-            { 52, "PulseLed0" },
-            { 53, "PulseLed1" },
-            { 54, "PulseRgb0" },
-            { 55, "PulseRgb1" },
-            { 56, "PulseDO0" },
-            { 57, "PulseDO1" },
-            { 58, "PulseDO2" },
-            { 59, "PulseDO3" },
-            { 60, "PwmFrequencyDO0" },
-            { 61, "PwmFrequencyDO1" },
-            { 62, "PwmFrequencyDO2" },
-            { 63, "PwmFrequencyDO3" },
-            { 64, "PwmDutyCycleDO0" },
-            { 65, "PwmDutyCycleDO1" },
-            { 66, "PwmDutyCycleDO2" },
-            { 67, "PwmDutyCycleDO3" },
-            { 68, "PwmStart" },
-            { 69, "PwmStop" },
-            { 70, "RgbAll" },
-            { 71, "Rgb0" },
-            { 72, "Rgb1" },
-            { 73, "Led0Current" },
-            { 74, "Led1Current" },
-            { 75, "Led0MaxCurrent" },
-            { 76, "Led1MaxCurrent" },
-            { 77, "EventEnable" },
-            { 78, "StartCameras" },
-            { 79, "StopCameras" },
-            { 80, "EnableServos" },
-            { 81, "DisableServos" },
-            { 82, "EnableEncoders" },
-            { 92, "Camera0Frame" },
-            { 93, "Camera0Frequency" },
-            { 94, "Camera1Frame" },
-            { 95, "Camera1Frequency" },
-            { 100, "ServoMotor2Period" },
-            { 101, "ServoMotor2Pulse" },
-            { 102, "ServoMotor3Period" },
-            { 103, "ServoMotor3Pulse" },
-            { 108, "EncoderReset" },
-            { 110, "EnableSerialTimestamp" },
-            { 111, "MimicPort0IR" },
-            { 112, "MimicPort1IR" },
-            { 113, "MimicPort2IR" },
-            { 117, "MimicPort0Valve" },
-            { 118, "MimicPort1Valve" },
-            { 119, "MimicPort2Valve" },
-            { 122, "PokeInputFilter" }
+            { 32, typeof(PortDigitalInput) },
+            { 34, typeof(OutputSet) },
+            { 35, typeof(OutputClear) },
+            { 36, typeof(OutputToggle) },
+            { 37, typeof(OutputState) },
+            { 38, typeof(PortDIOSet) },
+            { 39, typeof(PortDIOClear) },
+            { 40, typeof(PortDIOToggle) },
+            { 41, typeof(PortDIOState) },
+            { 42, typeof(PortDIODirection) },
+            { 43, typeof(PortDIOStateEvent) },
+            { 44, typeof(AnalogData) },
+            { 45, typeof(OutputPulseEnable) },
+            { 46, typeof(PulseDOPort0) },
+            { 47, typeof(PulseDOPort1) },
+            { 48, typeof(PulseDOPort2) },
+            { 49, typeof(PulseSupplyPort0) },
+            { 50, typeof(PulseSupplyPort1) },
+            { 51, typeof(PulseSupplyPort2) },
+            { 52, typeof(PulseLed0) },
+            { 53, typeof(PulseLed1) },
+            { 54, typeof(PulseRgb0) },
+            { 55, typeof(PulseRgb1) },
+            { 56, typeof(PulseDO0) },
+            { 57, typeof(PulseDO1) },
+            { 58, typeof(PulseDO2) },
+            { 59, typeof(PulseDO3) },
+            { 60, typeof(PwmFrequencyDO0) },
+            { 61, typeof(PwmFrequencyDO1) },
+            { 62, typeof(PwmFrequencyDO2) },
+            { 63, typeof(PwmFrequencyDO3) },
+            { 64, typeof(PwmDutyCycleDO0) },
+            { 65, typeof(PwmDutyCycleDO1) },
+            { 66, typeof(PwmDutyCycleDO2) },
+            { 67, typeof(PwmDutyCycleDO3) },
+            { 68, typeof(PwmStart) },
+            { 69, typeof(PwmStop) },
+            { 70, typeof(RgbAll) },
+            { 71, typeof(Rgb0) },
+            { 72, typeof(Rgb1) },
+            { 73, typeof(Led0Current) },
+            { 74, typeof(Led1Current) },
+            { 75, typeof(Led0MaxCurrent) },
+            { 76, typeof(Led1MaxCurrent) },
+            { 77, typeof(EventEnable) },
+            { 78, typeof(StartCameras) },
+            { 79, typeof(StopCameras) },
+            { 80, typeof(EnableServos) },
+            { 81, typeof(DisableServos) },
+            { 82, typeof(EnableEncoders) },
+            { 92, typeof(Camera0Frame) },
+            { 93, typeof(Camera0Frequency) },
+            { 94, typeof(Camera1Frame) },
+            { 95, typeof(Camera1Frequency) },
+            { 100, typeof(ServoMotor2Period) },
+            { 101, typeof(ServoMotor2Pulse) },
+            { 102, typeof(ServoMotor3Period) },
+            { 103, typeof(ServoMotor3Pulse) },
+            { 108, typeof(EncoderReset) },
+            { 110, typeof(EnableSerialTimestamp) },
+            { 111, typeof(MimicPort0IR) },
+            { 112, typeof(MimicPort1IR) },
+            { 113, typeof(MimicPort2IR) },
+            { 117, typeof(MimicPort0Valve) },
+            { 118, typeof(MimicPort1Valve) },
+            { 119, typeof(MimicPort2Valve) },
+            { 122, typeof(PokeInputFilter) }
         };
     }
 
     /// <summary>
-    /// Represents an operator that groups the sequence of <see cref="Behavior"/>" messages by register name.
+    /// Represents an operator that groups the sequence of <see cref="Behavior"/>" messages by register type.
     /// </summary>
-    [Description("Groups the sequence of Behavior messages by register name.")]
-    public partial class GroupByRegister : Combinator<HarpMessage, IGroupedObservable<string, HarpMessage>>
+    [Description("Groups the sequence of Behavior messages by register type.")]
+    public partial class GroupByRegister : Combinator<HarpMessage, IGroupedObservable<Type, HarpMessage>>
     {
         /// <summary>
         /// Groups an observable sequence of <see cref="Behavior"/> messages
-        /// by register name.
+        /// by register type.
         /// </summary>
         /// <param name="source">The sequence of Harp device messages.</param>
         /// <returns>
         /// A sequence of observable groups, each of which corresponds to a unique
         /// <see cref="Behavior"/> register.
         /// </returns>
-        public override IObservable<IGroupedObservable<string, HarpMessage>> Process(IObservable<HarpMessage> source)
+        public override IObservable<IGroupedObservable<Type, HarpMessage>> Process(IObservable<HarpMessage> source)
         {
             return source.GroupBy(message => Device.RegisterMap[message.Address]);
         }
@@ -132,82 +132,154 @@ namespace Harp.Behavior
     /// Represents an operator that filters register-specific messages
     /// reported by the <see cref="Behavior"/> device.
     /// </summary>
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDigitalInput>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<OutputSet>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<OutputClear>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<OutputToggle>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<OutputState>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIOSet>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIOClear>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIOToggle>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIOState>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIODirection>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PortDIOStateEvent>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<AnalogData>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<OutputPulseEnable>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDOPort0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDOPort1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDOPort2>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseSupplyPort0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseSupplyPort1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseSupplyPort2>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseLed0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseLed1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseRgb0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseRgb1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDO0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDO1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDO2>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PulseDO3>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmFrequencyDO0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmFrequencyDO1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmFrequencyDO2>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmFrequencyDO3>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmDutyCycleDO0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmDutyCycleDO1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmDutyCycleDO2>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmDutyCycleDO3>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmStart>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PwmStop>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<RgbAll>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Rgb0>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Rgb1>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Led0Current>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Led1Current>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Led0MaxCurrent>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Led1MaxCurrent>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<EventEnable>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<StartCameras>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<StopCameras>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<EnableServos>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<DisableServos>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<EnableEncoders>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Camera0Frame>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Camera0Frequency>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Camera1Frame>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<Camera1Frequency>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<ServoMotor2Period>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<ServoMotor2Pulse>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<ServoMotor3Period>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<ServoMotor3Pulse>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<EncoderReset>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<EnableSerialTimestamp>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort0IR>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort1IR>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort2IR>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort0Valve>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort1Valve>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<MimicPort2Valve>))]
-    [XmlInclude(typeof(Bonsai.Expressions.TypeMapping<PokeInputFilter>))]
+    /// <seealso cref="PortDigitalInput"/>
+    /// <seealso cref="OutputSet"/>
+    /// <seealso cref="OutputClear"/>
+    /// <seealso cref="OutputToggle"/>
+    /// <seealso cref="OutputState"/>
+    /// <seealso cref="PortDIOSet"/>
+    /// <seealso cref="PortDIOClear"/>
+    /// <seealso cref="PortDIOToggle"/>
+    /// <seealso cref="PortDIOState"/>
+    /// <seealso cref="PortDIODirection"/>
+    /// <seealso cref="PortDIOStateEvent"/>
+    /// <seealso cref="AnalogData"/>
+    /// <seealso cref="OutputPulseEnable"/>
+    /// <seealso cref="PulseDOPort0"/>
+    /// <seealso cref="PulseDOPort1"/>
+    /// <seealso cref="PulseDOPort2"/>
+    /// <seealso cref="PulseSupplyPort0"/>
+    /// <seealso cref="PulseSupplyPort1"/>
+    /// <seealso cref="PulseSupplyPort2"/>
+    /// <seealso cref="PulseLed0"/>
+    /// <seealso cref="PulseLed1"/>
+    /// <seealso cref="PulseRgb0"/>
+    /// <seealso cref="PulseRgb1"/>
+    /// <seealso cref="PulseDO0"/>
+    /// <seealso cref="PulseDO1"/>
+    /// <seealso cref="PulseDO2"/>
+    /// <seealso cref="PulseDO3"/>
+    /// <seealso cref="PwmFrequencyDO0"/>
+    /// <seealso cref="PwmFrequencyDO1"/>
+    /// <seealso cref="PwmFrequencyDO2"/>
+    /// <seealso cref="PwmFrequencyDO3"/>
+    /// <seealso cref="PwmDutyCycleDO0"/>
+    /// <seealso cref="PwmDutyCycleDO1"/>
+    /// <seealso cref="PwmDutyCycleDO2"/>
+    /// <seealso cref="PwmDutyCycleDO3"/>
+    /// <seealso cref="PwmStart"/>
+    /// <seealso cref="PwmStop"/>
+    /// <seealso cref="RgbAll"/>
+    /// <seealso cref="Rgb0"/>
+    /// <seealso cref="Rgb1"/>
+    /// <seealso cref="Led0Current"/>
+    /// <seealso cref="Led1Current"/>
+    /// <seealso cref="Led0MaxCurrent"/>
+    /// <seealso cref="Led1MaxCurrent"/>
+    /// <seealso cref="EventEnable"/>
+    /// <seealso cref="StartCameras"/>
+    /// <seealso cref="StopCameras"/>
+    /// <seealso cref="EnableServos"/>
+    /// <seealso cref="DisableServos"/>
+    /// <seealso cref="EnableEncoders"/>
+    /// <seealso cref="Camera0Frame"/>
+    /// <seealso cref="Camera0Frequency"/>
+    /// <seealso cref="Camera1Frame"/>
+    /// <seealso cref="Camera1Frequency"/>
+    /// <seealso cref="ServoMotor2Period"/>
+    /// <seealso cref="ServoMotor2Pulse"/>
+    /// <seealso cref="ServoMotor3Period"/>
+    /// <seealso cref="ServoMotor3Pulse"/>
+    /// <seealso cref="EncoderReset"/>
+    /// <seealso cref="EnableSerialTimestamp"/>
+    /// <seealso cref="MimicPort0IR"/>
+    /// <seealso cref="MimicPort1IR"/>
+    /// <seealso cref="MimicPort2IR"/>
+    /// <seealso cref="MimicPort0Valve"/>
+    /// <seealso cref="MimicPort1Valve"/>
+    /// <seealso cref="MimicPort2Valve"/>
+    /// <seealso cref="PokeInputFilter"/>
+    [XmlInclude(typeof(PortDigitalInput))]
+    [XmlInclude(typeof(OutputSet))]
+    [XmlInclude(typeof(OutputClear))]
+    [XmlInclude(typeof(OutputToggle))]
+    [XmlInclude(typeof(OutputState))]
+    [XmlInclude(typeof(PortDIOSet))]
+    [XmlInclude(typeof(PortDIOClear))]
+    [XmlInclude(typeof(PortDIOToggle))]
+    [XmlInclude(typeof(PortDIOState))]
+    [XmlInclude(typeof(PortDIODirection))]
+    [XmlInclude(typeof(PortDIOStateEvent))]
+    [XmlInclude(typeof(AnalogData))]
+    [XmlInclude(typeof(OutputPulseEnable))]
+    [XmlInclude(typeof(PulseDOPort0))]
+    [XmlInclude(typeof(PulseDOPort1))]
+    [XmlInclude(typeof(PulseDOPort2))]
+    [XmlInclude(typeof(PulseSupplyPort0))]
+    [XmlInclude(typeof(PulseSupplyPort1))]
+    [XmlInclude(typeof(PulseSupplyPort2))]
+    [XmlInclude(typeof(PulseLed0))]
+    [XmlInclude(typeof(PulseLed1))]
+    [XmlInclude(typeof(PulseRgb0))]
+    [XmlInclude(typeof(PulseRgb1))]
+    [XmlInclude(typeof(PulseDO0))]
+    [XmlInclude(typeof(PulseDO1))]
+    [XmlInclude(typeof(PulseDO2))]
+    [XmlInclude(typeof(PulseDO3))]
+    [XmlInclude(typeof(PwmFrequencyDO0))]
+    [XmlInclude(typeof(PwmFrequencyDO1))]
+    [XmlInclude(typeof(PwmFrequencyDO2))]
+    [XmlInclude(typeof(PwmFrequencyDO3))]
+    [XmlInclude(typeof(PwmDutyCycleDO0))]
+    [XmlInclude(typeof(PwmDutyCycleDO1))]
+    [XmlInclude(typeof(PwmDutyCycleDO2))]
+    [XmlInclude(typeof(PwmDutyCycleDO3))]
+    [XmlInclude(typeof(PwmStart))]
+    [XmlInclude(typeof(PwmStop))]
+    [XmlInclude(typeof(RgbAll))]
+    [XmlInclude(typeof(Rgb0))]
+    [XmlInclude(typeof(Rgb1))]
+    [XmlInclude(typeof(Led0Current))]
+    [XmlInclude(typeof(Led1Current))]
+    [XmlInclude(typeof(Led0MaxCurrent))]
+    [XmlInclude(typeof(Led1MaxCurrent))]
+    [XmlInclude(typeof(EventEnable))]
+    [XmlInclude(typeof(StartCameras))]
+    [XmlInclude(typeof(StopCameras))]
+    [XmlInclude(typeof(EnableServos))]
+    [XmlInclude(typeof(DisableServos))]
+    [XmlInclude(typeof(EnableEncoders))]
+    [XmlInclude(typeof(Camera0Frame))]
+    [XmlInclude(typeof(Camera0Frequency))]
+    [XmlInclude(typeof(Camera1Frame))]
+    [XmlInclude(typeof(Camera1Frequency))]
+    [XmlInclude(typeof(ServoMotor2Period))]
+    [XmlInclude(typeof(ServoMotor2Pulse))]
+    [XmlInclude(typeof(ServoMotor3Period))]
+    [XmlInclude(typeof(ServoMotor3Pulse))]
+    [XmlInclude(typeof(EncoderReset))]
+    [XmlInclude(typeof(EnableSerialTimestamp))]
+    [XmlInclude(typeof(MimicPort0IR))]
+    [XmlInclude(typeof(MimicPort1IR))]
+    [XmlInclude(typeof(MimicPort2IR))]
+    [XmlInclude(typeof(MimicPort0Valve))]
+    [XmlInclude(typeof(MimicPort1Valve))]
+    [XmlInclude(typeof(MimicPort2Valve))]
+    [XmlInclude(typeof(PokeInputFilter))]
     [Description("Filters register-specific messages reported by the Behavior device.")]
-    public class FilterMessage : FilterMessageBuilder
+    public class FilterMessage : FilterMessageBuilder, INamedElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterMessage"/> class.
         /// </summary>
         public FilterMessage()
         {
-            Register = new Bonsai.Expressions.TypeMapping<PortDigitalInput>();
+            Register = new PortDigitalInput();
+        }
+
+        string INamedElement.Name
+        {
+            get => $"{nameof(Behavior)}.{GetElementDisplayName(Register)}";
         }
     }
 
@@ -583,10 +655,10 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents an operator that reflects the state of DI digital lines of each Port.
+    /// Represents a register that reflects the state of DI digital lines of each Port.
     /// </summary>
     [Description("Reflects the state of DI digital lines of each Port")]
-    public partial class PortDigitalInput : HarpCombinator
+    public partial class PortDigitalInput
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDigitalInput"/> register. This field is constant.
@@ -602,14 +674,6 @@ namespace Harp.Behavior
         /// Represents the length of the <see cref="PortDigitalInput"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PortDigitalInput"/> class.
-        /// </summary>
-        public PortDigitalInput()
-        {
-            MessageType = MessageType.Event;
-        }
 
         /// <summary>
         /// Returns the payload data for <see cref="PortDigitalInput"/> register messages.
@@ -661,83 +725,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDigitalInput"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalInputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalInputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDigitalInput"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalInputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDigitalInput"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalInputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDigitalInput"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalInputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDigitalInput"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalInputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDigitalInput register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDigitalInput register.
     /// </summary>
+    /// <seealso cref="PortDigitalInput"/>
     [Description("Filters and selects timestamped messages from the PortDigitalInput register.")]
-    public partial class TimestampedPortDigitalInput : HarpCombinator
+    public partial class TimestampedPortDigitalInput
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDigitalInput"/> register.
+        /// Represents the address of the <see cref="PortDigitalInput"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalInputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalInputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDigitalInput.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDigitalInput"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalInputs> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDigitalInput.Address, MessageType).Select(PortDigitalInput.GetTimestampedPayload);
+            return PortDigitalInput.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that set the specified digital output lines.
+    /// Represents a register that set the specified digital output lines.
     /// </summary>
     [Description("Set the specified digital output lines.")]
-    public partial class OutputSet : HarpCombinator
+    public partial class OutputSet
     {
         /// <summary>
         /// Represents the address of the <see cref="OutputSet"/> register. This field is constant.
@@ -804,83 +822,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, (ushort)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="OutputSet"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="OutputSet"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="OutputSet"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="OutputSet"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="OutputSet"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the OutputSet register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// OutputSet register.
     /// </summary>
+    /// <seealso cref="OutputSet"/>
     [Description("Filters and selects timestamped messages from the OutputSet register.")]
-    public partial class TimestampedOutputSet : HarpCombinator
+    public partial class TimestampedOutputSet
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="OutputSet"/> register.
+        /// Represents the address of the <see cref="OutputSet"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = OutputSet.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="OutputSet"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(OutputSet.Address, MessageType).Select(OutputSet.GetTimestampedPayload);
+            return OutputSet.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that clear the specified digital output lines.
+    /// Represents a register that clear the specified digital output lines.
     /// </summary>
     [Description("Clear the specified digital output lines")]
-    public partial class OutputClear : HarpCombinator
+    public partial class OutputClear
     {
         /// <summary>
         /// Represents the address of the <see cref="OutputClear"/> register. This field is constant.
@@ -947,83 +919,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, (ushort)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="OutputClear"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="OutputClear"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="OutputClear"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="OutputClear"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="OutputClear"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the OutputClear register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// OutputClear register.
     /// </summary>
+    /// <seealso cref="OutputClear"/>
     [Description("Filters and selects timestamped messages from the OutputClear register.")]
-    public partial class TimestampedOutputClear : HarpCombinator
+    public partial class TimestampedOutputClear
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="OutputClear"/> register.
+        /// Represents the address of the <see cref="OutputClear"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = OutputClear.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="OutputClear"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(OutputClear.Address, MessageType).Select(OutputClear.GetTimestampedPayload);
+            return OutputClear.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that toggle the specified digital output lines.
+    /// Represents a register that toggle the specified digital output lines.
     /// </summary>
     [Description("Toggle the specified digital output lines")]
-    public partial class OutputToggle : HarpCombinator
+    public partial class OutputToggle
     {
         /// <summary>
         /// Represents the address of the <see cref="OutputToggle"/> register. This field is constant.
@@ -1090,83 +1016,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, (ushort)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="OutputToggle"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="OutputToggle"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="OutputToggle"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="OutputToggle"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="OutputToggle"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the OutputToggle register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// OutputToggle register.
     /// </summary>
+    /// <seealso cref="OutputToggle"/>
     [Description("Filters and selects timestamped messages from the OutputToggle register.")]
-    public partial class TimestampedOutputToggle : HarpCombinator
+    public partial class TimestampedOutputToggle
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="OutputToggle"/> register.
+        /// Represents the address of the <see cref="OutputToggle"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = OutputToggle.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="OutputToggle"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(OutputToggle.Address, MessageType).Select(OutputToggle.GetTimestampedPayload);
+            return OutputToggle.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that write the state of all digital output lines.
+    /// Represents a register that write the state of all digital output lines.
     /// </summary>
     [Description("Write the state of all digital output lines")]
-    public partial class OutputState : HarpCombinator
+    public partial class OutputState
     {
         /// <summary>
         /// Represents the address of the <see cref="OutputState"/> register. This field is constant.
@@ -1233,83 +1113,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, (ushort)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="OutputState"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="OutputState"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="OutputState"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="OutputState"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="OutputState"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the OutputState register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// OutputState register.
     /// </summary>
+    /// <seealso cref="OutputState"/>
     [Description("Filters and selects timestamped messages from the OutputState register.")]
-    public partial class TimestampedOutputState : HarpCombinator
+    public partial class TimestampedOutputState
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="OutputState"/> register.
+        /// Represents the address of the <see cref="OutputState"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = OutputState.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="OutputState"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(OutputState.Address, MessageType).Select(OutputState.GetTimestampedPayload);
+            return OutputState.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that set the specified port DIO lines.
+    /// Represents a register that set the specified port DIO lines.
     /// </summary>
     [Description("Set the specified port DIO lines")]
-    public partial class PortDIOSet : HarpCombinator
+    public partial class PortDIOSet
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIOSet"/> register. This field is constant.
@@ -1376,83 +1210,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIOSet"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIOSet"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIOSet"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIOSet"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIOSet"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIOSet register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIOSet register.
     /// </summary>
+    /// <seealso cref="PortDIOSet"/>
     [Description("Filters and selects timestamped messages from the PortDIOSet register.")]
-    public partial class TimestampedPortDIOSet : HarpCombinator
+    public partial class TimestampedPortDIOSet
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIOSet"/> register.
+        /// Represents the address of the <see cref="PortDIOSet"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIOSet.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIOSet"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIOSet.Address, MessageType).Select(PortDIOSet.GetTimestampedPayload);
+            return PortDIOSet.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that clear the specified port DIO lines.
+    /// Represents a register that clear the specified port DIO lines.
     /// </summary>
     [Description("Clear the specified port DIO lines")]
-    public partial class PortDIOClear : HarpCombinator
+    public partial class PortDIOClear
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIOClear"/> register. This field is constant.
@@ -1519,83 +1307,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIOClear"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIOClear"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIOClear"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIOClear"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIOClear"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIOClear register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIOClear register.
     /// </summary>
+    /// <seealso cref="PortDIOClear"/>
     [Description("Filters and selects timestamped messages from the PortDIOClear register.")]
-    public partial class TimestampedPortDIOClear : HarpCombinator
+    public partial class TimestampedPortDIOClear
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIOClear"/> register.
+        /// Represents the address of the <see cref="PortDIOClear"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIOClear.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIOClear"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIOClear.Address, MessageType).Select(PortDIOClear.GetTimestampedPayload);
+            return PortDIOClear.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that toggle the specified port DIO lines.
+    /// Represents a register that toggle the specified port DIO lines.
     /// </summary>
     [Description("Toggle the specified port DIO lines")]
-    public partial class PortDIOToggle : HarpCombinator
+    public partial class PortDIOToggle
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIOToggle"/> register. This field is constant.
@@ -1662,83 +1404,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIOToggle"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIOToggle"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIOToggle"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIOToggle"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIOToggle"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIOToggle register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIOToggle register.
     /// </summary>
+    /// <seealso cref="PortDIOToggle"/>
     [Description("Filters and selects timestamped messages from the PortDIOToggle register.")]
-    public partial class TimestampedPortDIOToggle : HarpCombinator
+    public partial class TimestampedPortDIOToggle
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIOToggle"/> register.
+        /// Represents the address of the <see cref="PortDIOToggle"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIOToggle.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIOToggle"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIOToggle.Address, MessageType).Select(PortDIOToggle.GetTimestampedPayload);
+            return PortDIOToggle.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that write the state of all port DIO lines.
+    /// Represents a register that write the state of all port DIO lines.
     /// </summary>
     [Description("Write the state of all port DIO lines")]
-    public partial class PortDIOState : HarpCombinator
+    public partial class PortDIOState
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIOState"/> register. This field is constant.
@@ -1805,83 +1501,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIOState"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIOState"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIOState"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIOState"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIOState"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIOState register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIOState register.
     /// </summary>
+    /// <seealso cref="PortDIOState"/>
     [Description("Filters and selects timestamped messages from the PortDIOState register.")]
-    public partial class TimestampedPortDIOState : HarpCombinator
+    public partial class TimestampedPortDIOState
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIOState"/> register.
+        /// Represents the address of the <see cref="PortDIOState"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIOState.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIOState"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIOState.Address, MessageType).Select(PortDIOState.GetTimestampedPayload);
+            return PortDIOState.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies which of the port DIO lines are outputs.
+    /// Represents a register that specifies which of the port DIO lines are outputs.
     /// </summary>
     [Description("Specifies which of the port DIO lines are outputs")]
-    public partial class PortDIODirection : HarpCombinator
+    public partial class PortDIODirection
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIODirection"/> register. This field is constant.
@@ -1948,83 +1598,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIODirection"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIODirection"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIODirection"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIODirection"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIODirection"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIODirection register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIODirection register.
     /// </summary>
+    /// <seealso cref="PortDIODirection"/>
     [Description("Filters and selects timestamped messages from the PortDIODirection register.")]
-    public partial class TimestampedPortDIODirection : HarpCombinator
+    public partial class TimestampedPortDIODirection
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIODirection"/> register.
+        /// Represents the address of the <see cref="PortDIODirection"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIODirection.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIODirection"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIODirection.Address, MessageType).Select(PortDIODirection.GetTimestampedPayload);
+            return PortDIODirection.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the state of the port DIO lines on a line change.
+    /// Represents a register that specifies the state of the port DIO lines on a line change.
     /// </summary>
     [Description("Specifies the state of the port DIO lines on a line change")]
-    public partial class PortDIOStateEvent : HarpCombinator
+    public partial class PortDIOStateEvent
     {
         /// <summary>
         /// Represents the address of the <see cref="PortDIOStateEvent"/> register. This field is constant.
@@ -2040,14 +1644,6 @@ namespace Harp.Behavior
         /// Represents the length of the <see cref="PortDIOStateEvent"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PortDIOStateEvent"/> class.
-        /// </summary>
-        public PortDIOStateEvent()
-        {
-            MessageType = MessageType.Event;
-        }
 
         /// <summary>
         /// Returns the payload data for <see cref="PortDIOStateEvent"/> register messages.
@@ -2099,83 +1695,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PortDIOStateEvent"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PortDigitalIOS> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PortDIOStateEvent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PortDigitalIOS"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PortDIOStateEvent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PortDigitalIOS> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PortDIOStateEvent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PortDIOStateEvent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PortDigitalIOS>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PortDIOStateEvent register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PortDIOStateEvent register.
     /// </summary>
+    /// <seealso cref="PortDIOStateEvent"/>
     [Description("Filters and selects timestamped messages from the PortDIOStateEvent register.")]
-    public partial class TimestampedPortDIOStateEvent : HarpCombinator
+    public partial class TimestampedPortDIOStateEvent
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PortDIOStateEvent"/> register.
+        /// Represents the address of the <see cref="PortDIOStateEvent"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PortDigitalIOS"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PortDigitalIOS>> Process(IObservable<HarpMessage> source)
+        public const int Address = PortDIOStateEvent.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PortDIOStateEvent"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
         {
-            return source.Where(PortDIOStateEvent.Address, MessageType).Select(PortDIOStateEvent.GetTimestampedPayload);
+            return PortDIOStateEvent.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that voltage at the ADC input and encoder value on Port 2.
+    /// Represents a register that voltage at the ADC input and encoder value on Port 2.
     /// </summary>
     [Description("Voltage at the ADC input and encoder value on Port 2")]
-    public partial class AnalogData : HarpCombinator
+    public partial class AnalogData
     {
         /// <summary>
         /// Represents the address of the <see cref="AnalogData"/> register. This field is constant.
@@ -2191,14 +1741,6 @@ namespace Harp.Behavior
         /// Represents the length of the <see cref="AnalogData"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 2;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AnalogData"/> class.
-        /// </summary>
-        public AnalogData()
-        {
-            MessageType = MessageType.Event;
-        }
 
         static AnalogDataPayload ParsePayload(short[] payload)
         {
@@ -2267,83 +1809,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromInt16(Address, timestamp, messageType, FormatPayload(value));
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="AnalogData"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="AnalogDataPayload"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<AnalogDataPayload> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="AnalogData"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="AnalogDataPayload"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="AnalogData"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<AnalogDataPayload> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="AnalogData"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="AnalogDataPayload"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="AnalogData"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<AnalogDataPayload>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the AnalogData register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// AnalogData register.
     /// </summary>
+    /// <seealso cref="AnalogData"/>
     [Description("Filters and selects timestamped messages from the AnalogData register.")]
-    public partial class TimestampedAnalogData : HarpCombinator
+    public partial class TimestampedAnalogData
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="AnalogData"/> register.
+        /// Represents the address of the <see cref="AnalogData"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="AnalogDataPayload"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<AnalogDataPayload>> Process(IObservable<HarpMessage> source)
+        public const int Address = AnalogData.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="AnalogData"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<AnalogDataPayload> GetPayload(HarpMessage message)
         {
-            return source.Where(AnalogData.Address, MessageType).Select(AnalogData.GetTimestampedPayload);
+            return AnalogData.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that enables the pulse function for the specified output lines.
+    /// Represents a register that enables the pulse function for the specified output lines.
     /// </summary>
     [Description("Enables the pulse function for the specified output lines")]
-    public partial class OutputPulseEnable : HarpCombinator
+    public partial class OutputPulseEnable
     {
         /// <summary>
         /// Represents the address of the <see cref="OutputPulseEnable"/> register. This field is constant.
@@ -2410,83 +1906,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, (ushort)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="OutputPulseEnable"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<DigitalOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="OutputPulseEnable"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="DigitalOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="OutputPulseEnable"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<DigitalOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="OutputPulseEnable"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="OutputPulseEnable"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<DigitalOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the OutputPulseEnable register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// OutputPulseEnable register.
     /// </summary>
+    /// <seealso cref="OutputPulseEnable"/>
     [Description("Filters and selects timestamped messages from the OutputPulseEnable register.")]
-    public partial class TimestampedOutputPulseEnable : HarpCombinator
+    public partial class TimestampedOutputPulseEnable
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="OutputPulseEnable"/> register.
+        /// Represents the address of the <see cref="OutputPulseEnable"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="DigitalOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<DigitalOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = OutputPulseEnable.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="OutputPulseEnable"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<DigitalOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(OutputPulseEnable.Address, MessageType).Select(OutputPulseEnable.GetTimestampedPayload);
+            return OutputPulseEnable.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDOPort0 : HarpCombinator
+    public partial class PulseDOPort0
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDOPort0"/> register. This field is constant.
@@ -2552,83 +2002,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDOPort0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDOPort0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDOPort0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDOPort0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDOPort0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDOPort0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDOPort0 register.
     /// </summary>
+    /// <seealso cref="PulseDOPort0"/>
     [Description("Filters and selects timestamped messages from the PulseDOPort0 register.")]
-    public partial class TimestampedPulseDOPort0 : HarpCombinator
+    public partial class TimestampedPulseDOPort0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDOPort0"/> register.
+        /// Represents the address of the <see cref="PulseDOPort0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDOPort0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDOPort0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDOPort0.Address, MessageType).Select(PulseDOPort0.GetTimestampedPayload);
+            return PulseDOPort0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDOPort1 : HarpCombinator
+    public partial class PulseDOPort1
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDOPort1"/> register. This field is constant.
@@ -2694,83 +2098,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDOPort1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDOPort1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDOPort1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDOPort1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDOPort1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDOPort1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDOPort1 register.
     /// </summary>
+    /// <seealso cref="PulseDOPort1"/>
     [Description("Filters and selects timestamped messages from the PulseDOPort1 register.")]
-    public partial class TimestampedPulseDOPort1 : HarpCombinator
+    public partial class TimestampedPulseDOPort1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDOPort1"/> register.
+        /// Represents the address of the <see cref="PulseDOPort1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDOPort1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDOPort1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDOPort1.Address, MessageType).Select(PulseDOPort1.GetTimestampedPayload);
+            return PulseDOPort1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDOPort2 : HarpCombinator
+    public partial class PulseDOPort2
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDOPort2"/> register. This field is constant.
@@ -2836,83 +2194,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDOPort2"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDOPort2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDOPort2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDOPort2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDOPort2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDOPort2 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDOPort2 register.
     /// </summary>
+    /// <seealso cref="PulseDOPort2"/>
     [Description("Filters and selects timestamped messages from the PulseDOPort2 register.")]
-    public partial class TimestampedPulseDOPort2 : HarpCombinator
+    public partial class TimestampedPulseDOPort2
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDOPort2"/> register.
+        /// Represents the address of the <see cref="PulseDOPort2"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDOPort2.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDOPort2"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDOPort2.Address, MessageType).Select(PulseDOPort2.GetTimestampedPayload);
+            return PulseDOPort2.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseSupplyPort0 : HarpCombinator
+    public partial class PulseSupplyPort0
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseSupplyPort0"/> register. This field is constant.
@@ -2978,83 +2290,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseSupplyPort0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseSupplyPort0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseSupplyPort0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseSupplyPort0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseSupplyPort0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseSupplyPort0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseSupplyPort0 register.
     /// </summary>
+    /// <seealso cref="PulseSupplyPort0"/>
     [Description("Filters and selects timestamped messages from the PulseSupplyPort0 register.")]
-    public partial class TimestampedPulseSupplyPort0 : HarpCombinator
+    public partial class TimestampedPulseSupplyPort0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseSupplyPort0"/> register.
+        /// Represents the address of the <see cref="PulseSupplyPort0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseSupplyPort0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseSupplyPort0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseSupplyPort0.Address, MessageType).Select(PulseSupplyPort0.GetTimestampedPayload);
+            return PulseSupplyPort0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseSupplyPort1 : HarpCombinator
+    public partial class PulseSupplyPort1
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseSupplyPort1"/> register. This field is constant.
@@ -3120,83 +2386,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseSupplyPort1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseSupplyPort1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseSupplyPort1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseSupplyPort1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseSupplyPort1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseSupplyPort1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseSupplyPort1 register.
     /// </summary>
+    /// <seealso cref="PulseSupplyPort1"/>
     [Description("Filters and selects timestamped messages from the PulseSupplyPort1 register.")]
-    public partial class TimestampedPulseSupplyPort1 : HarpCombinator
+    public partial class TimestampedPulseSupplyPort1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseSupplyPort1"/> register.
+        /// Represents the address of the <see cref="PulseSupplyPort1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseSupplyPort1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseSupplyPort1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseSupplyPort1.Address, MessageType).Select(PulseSupplyPort1.GetTimestampedPayload);
+            return PulseSupplyPort1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseSupplyPort2 : HarpCombinator
+    public partial class PulseSupplyPort2
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseSupplyPort2"/> register. This field is constant.
@@ -3262,83 +2482,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseSupplyPort2"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseSupplyPort2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseSupplyPort2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseSupplyPort2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseSupplyPort2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseSupplyPort2 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseSupplyPort2 register.
     /// </summary>
+    /// <seealso cref="PulseSupplyPort2"/>
     [Description("Filters and selects timestamped messages from the PulseSupplyPort2 register.")]
-    public partial class TimestampedPulseSupplyPort2 : HarpCombinator
+    public partial class TimestampedPulseSupplyPort2
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseSupplyPort2"/> register.
+        /// Represents the address of the <see cref="PulseSupplyPort2"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseSupplyPort2.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseSupplyPort2"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseSupplyPort2.Address, MessageType).Select(PulseSupplyPort2.GetTimestampedPayload);
+            return PulseSupplyPort2.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseLed0 : HarpCombinator
+    public partial class PulseLed0
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseLed0"/> register. This field is constant.
@@ -3404,83 +2578,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseLed0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseLed0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseLed0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseLed0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseLed0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseLed0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseLed0 register.
     /// </summary>
+    /// <seealso cref="PulseLed0"/>
     [Description("Filters and selects timestamped messages from the PulseLed0 register.")]
-    public partial class TimestampedPulseLed0 : HarpCombinator
+    public partial class TimestampedPulseLed0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseLed0"/> register.
+        /// Represents the address of the <see cref="PulseLed0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseLed0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseLed0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseLed0.Address, MessageType).Select(PulseLed0.GetTimestampedPayload);
+            return PulseLed0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseLed1 : HarpCombinator
+    public partial class PulseLed1
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseLed1"/> register. This field is constant.
@@ -3546,83 +2674,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseLed1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseLed1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseLed1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseLed1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseLed1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseLed1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseLed1 register.
     /// </summary>
+    /// <seealso cref="PulseLed1"/>
     [Description("Filters and selects timestamped messages from the PulseLed1 register.")]
-    public partial class TimestampedPulseLed1 : HarpCombinator
+    public partial class TimestampedPulseLed1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseLed1"/> register.
+        /// Represents the address of the <see cref="PulseLed1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseLed1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseLed1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseLed1.Address, MessageType).Select(PulseLed1.GetTimestampedPayload);
+            return PulseLed1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseRgb0 : HarpCombinator
+    public partial class PulseRgb0
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseRgb0"/> register. This field is constant.
@@ -3688,83 +2770,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseRgb0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseRgb0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseRgb0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseRgb0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseRgb0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseRgb0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseRgb0 register.
     /// </summary>
+    /// <seealso cref="PulseRgb0"/>
     [Description("Filters and selects timestamped messages from the PulseRgb0 register.")]
-    public partial class TimestampedPulseRgb0 : HarpCombinator
+    public partial class TimestampedPulseRgb0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseRgb0"/> register.
+        /// Represents the address of the <see cref="PulseRgb0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseRgb0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseRgb0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseRgb0.Address, MessageType).Select(PulseRgb0.GetTimestampedPayload);
+            return PulseRgb0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseRgb1 : HarpCombinator
+    public partial class PulseRgb1
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseRgb1"/> register. This field is constant.
@@ -3830,83 +2866,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseRgb1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseRgb1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseRgb1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseRgb1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseRgb1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseRgb1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseRgb1 register.
     /// </summary>
+    /// <seealso cref="PulseRgb1"/>
     [Description("Filters and selects timestamped messages from the PulseRgb1 register.")]
-    public partial class TimestampedPulseRgb1 : HarpCombinator
+    public partial class TimestampedPulseRgb1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseRgb1"/> register.
+        /// Represents the address of the <see cref="PulseRgb1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseRgb1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseRgb1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseRgb1.Address, MessageType).Select(PulseRgb1.GetTimestampedPayload);
+            return PulseRgb1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDO0 : HarpCombinator
+    public partial class PulseDO0
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDO0"/> register. This field is constant.
@@ -3972,83 +2962,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDO0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDO0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDO0 register.
     /// </summary>
+    /// <seealso cref="PulseDO0"/>
     [Description("Filters and selects timestamped messages from the PulseDO0 register.")]
-    public partial class TimestampedPulseDO0 : HarpCombinator
+    public partial class TimestampedPulseDO0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDO0"/> register.
+        /// Represents the address of the <see cref="PulseDO0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDO0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDO0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDO0.Address, MessageType).Select(PulseDO0.GetTimestampedPayload);
+            return PulseDO0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDO1 : HarpCombinator
+    public partial class PulseDO1
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDO1"/> register. This field is constant.
@@ -4114,83 +3058,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDO1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDO1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDO1 register.
     /// </summary>
+    /// <seealso cref="PulseDO1"/>
     [Description("Filters and selects timestamped messages from the PulseDO1 register.")]
-    public partial class TimestampedPulseDO1 : HarpCombinator
+    public partial class TimestampedPulseDO1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDO1"/> register.
+        /// Represents the address of the <see cref="PulseDO1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDO1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDO1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDO1.Address, MessageType).Select(PulseDO1.GetTimestampedPayload);
+            return PulseDO1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDO2 : HarpCombinator
+    public partial class PulseDO2
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDO2"/> register. This field is constant.
@@ -4256,83 +3154,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDO2"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDO2 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDO2 register.
     /// </summary>
+    /// <seealso cref="PulseDO2"/>
     [Description("Filters and selects timestamped messages from the PulseDO2 register.")]
-    public partial class TimestampedPulseDO2 : HarpCombinator
+    public partial class TimestampedPulseDO2
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDO2"/> register.
+        /// Represents the address of the <see cref="PulseDO2"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDO2.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDO2"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDO2.Address, MessageType).Select(PulseDO2.GetTimestampedPayload);
+            return PulseDO2.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duration of the output pulse in milliseconds.
+    /// Represents a register that specifies the duration of the output pulse in milliseconds.
     /// </summary>
     [Description("Specifies the duration of the output pulse in milliseconds.")]
-    public partial class PulseDO3 : HarpCombinator
+    public partial class PulseDO3
     {
         /// <summary>
         /// Represents the address of the <see cref="PulseDO3"/> register. This field is constant.
@@ -4398,83 +3250,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PulseDO3"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PulseDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PulseDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PulseDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PulseDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PulseDO3 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PulseDO3 register.
     /// </summary>
+    /// <seealso cref="PulseDO3"/>
     [Description("Filters and selects timestamped messages from the PulseDO3 register.")]
-    public partial class TimestampedPulseDO3 : HarpCombinator
+    public partial class TimestampedPulseDO3
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PulseDO3"/> register.
+        /// Represents the address of the <see cref="PulseDO3"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PulseDO3.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PulseDO3"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PulseDO3.Address, MessageType).Select(PulseDO3.GetTimestampedPayload);
+            return PulseDO3.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the frequency of the PWM at DO0.
+    /// Represents a register that specifies the frequency of the PWM at DO0.
     /// </summary>
     [Description("Specifies the frequency of the PWM at DO0.")]
-    public partial class PwmFrequencyDO0 : HarpCombinator
+    public partial class PwmFrequencyDO0
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmFrequencyDO0"/> register. This field is constant.
@@ -4540,83 +3346,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmFrequencyDO0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmFrequencyDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmFrequencyDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmFrequencyDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmFrequencyDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmFrequencyDO0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmFrequencyDO0 register.
     /// </summary>
+    /// <seealso cref="PwmFrequencyDO0"/>
     [Description("Filters and selects timestamped messages from the PwmFrequencyDO0 register.")]
-    public partial class TimestampedPwmFrequencyDO0 : HarpCombinator
+    public partial class TimestampedPwmFrequencyDO0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmFrequencyDO0"/> register.
+        /// Represents the address of the <see cref="PwmFrequencyDO0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmFrequencyDO0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmFrequencyDO0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmFrequencyDO0.Address, MessageType).Select(PwmFrequencyDO0.GetTimestampedPayload);
+            return PwmFrequencyDO0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the frequency of the PWM at DO1.
+    /// Represents a register that specifies the frequency of the PWM at DO1.
     /// </summary>
     [Description("Specifies the frequency of the PWM at DO1.")]
-    public partial class PwmFrequencyDO1 : HarpCombinator
+    public partial class PwmFrequencyDO1
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmFrequencyDO1"/> register. This field is constant.
@@ -4682,83 +3442,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmFrequencyDO1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmFrequencyDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmFrequencyDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmFrequencyDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmFrequencyDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmFrequencyDO1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmFrequencyDO1 register.
     /// </summary>
+    /// <seealso cref="PwmFrequencyDO1"/>
     [Description("Filters and selects timestamped messages from the PwmFrequencyDO1 register.")]
-    public partial class TimestampedPwmFrequencyDO1 : HarpCombinator
+    public partial class TimestampedPwmFrequencyDO1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmFrequencyDO1"/> register.
+        /// Represents the address of the <see cref="PwmFrequencyDO1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmFrequencyDO1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmFrequencyDO1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmFrequencyDO1.Address, MessageType).Select(PwmFrequencyDO1.GetTimestampedPayload);
+            return PwmFrequencyDO1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the frequency of the PWM at DO2.
+    /// Represents a register that specifies the frequency of the PWM at DO2.
     /// </summary>
     [Description("Specifies the frequency of the PWM at DO2.")]
-    public partial class PwmFrequencyDO2 : HarpCombinator
+    public partial class PwmFrequencyDO2
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmFrequencyDO2"/> register. This field is constant.
@@ -4824,83 +3538,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmFrequencyDO2"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmFrequencyDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmFrequencyDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmFrequencyDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmFrequencyDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmFrequencyDO2 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmFrequencyDO2 register.
     /// </summary>
+    /// <seealso cref="PwmFrequencyDO2"/>
     [Description("Filters and selects timestamped messages from the PwmFrequencyDO2 register.")]
-    public partial class TimestampedPwmFrequencyDO2 : HarpCombinator
+    public partial class TimestampedPwmFrequencyDO2
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmFrequencyDO2"/> register.
+        /// Represents the address of the <see cref="PwmFrequencyDO2"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmFrequencyDO2.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmFrequencyDO2"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmFrequencyDO2.Address, MessageType).Select(PwmFrequencyDO2.GetTimestampedPayload);
+            return PwmFrequencyDO2.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the frequency of the PWM at DO3.
+    /// Represents a register that specifies the frequency of the PWM at DO3.
     /// </summary>
     [Description("Specifies the frequency of the PWM at DO3.")]
-    public partial class PwmFrequencyDO3 : HarpCombinator
+    public partial class PwmFrequencyDO3
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmFrequencyDO3"/> register. This field is constant.
@@ -4966,83 +3634,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmFrequencyDO3"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmFrequencyDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmFrequencyDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmFrequencyDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmFrequencyDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmFrequencyDO3 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmFrequencyDO3 register.
     /// </summary>
+    /// <seealso cref="PwmFrequencyDO3"/>
     [Description("Filters and selects timestamped messages from the PwmFrequencyDO3 register.")]
-    public partial class TimestampedPwmFrequencyDO3 : HarpCombinator
+    public partial class TimestampedPwmFrequencyDO3
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmFrequencyDO3"/> register.
+        /// Represents the address of the <see cref="PwmFrequencyDO3"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmFrequencyDO3.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmFrequencyDO3"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmFrequencyDO3.Address, MessageType).Select(PwmFrequencyDO3.GetTimestampedPayload);
+            return PwmFrequencyDO3.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duty cycle of the PWM at DO0.
+    /// Represents a register that specifies the duty cycle of the PWM at DO0.
     /// </summary>
     [Description("Specifies the duty cycle of the PWM at DO0.")]
-    public partial class PwmDutyCycleDO0 : HarpCombinator
+    public partial class PwmDutyCycleDO0
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmDutyCycleDO0"/> register. This field is constant.
@@ -5108,83 +3730,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmDutyCycleDO0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmDutyCycleDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmDutyCycleDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmDutyCycleDO0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmDutyCycleDO0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmDutyCycleDO0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmDutyCycleDO0 register.
     /// </summary>
+    /// <seealso cref="PwmDutyCycleDO0"/>
     [Description("Filters and selects timestamped messages from the PwmDutyCycleDO0 register.")]
-    public partial class TimestampedPwmDutyCycleDO0 : HarpCombinator
+    public partial class TimestampedPwmDutyCycleDO0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmDutyCycleDO0"/> register.
+        /// Represents the address of the <see cref="PwmDutyCycleDO0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmDutyCycleDO0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmDutyCycleDO0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmDutyCycleDO0.Address, MessageType).Select(PwmDutyCycleDO0.GetTimestampedPayload);
+            return PwmDutyCycleDO0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duty cycle of the PWM at DO1.
+    /// Represents a register that specifies the duty cycle of the PWM at DO1.
     /// </summary>
     [Description("Specifies the duty cycle of the PWM at DO1.")]
-    public partial class PwmDutyCycleDO1 : HarpCombinator
+    public partial class PwmDutyCycleDO1
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmDutyCycleDO1"/> register. This field is constant.
@@ -5250,83 +3826,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmDutyCycleDO1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmDutyCycleDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmDutyCycleDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmDutyCycleDO1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmDutyCycleDO1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmDutyCycleDO1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmDutyCycleDO1 register.
     /// </summary>
+    /// <seealso cref="PwmDutyCycleDO1"/>
     [Description("Filters and selects timestamped messages from the PwmDutyCycleDO1 register.")]
-    public partial class TimestampedPwmDutyCycleDO1 : HarpCombinator
+    public partial class TimestampedPwmDutyCycleDO1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmDutyCycleDO1"/> register.
+        /// Represents the address of the <see cref="PwmDutyCycleDO1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmDutyCycleDO1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmDutyCycleDO1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmDutyCycleDO1.Address, MessageType).Select(PwmDutyCycleDO1.GetTimestampedPayload);
+            return PwmDutyCycleDO1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duty cycle of the PWM at DO2.
+    /// Represents a register that specifies the duty cycle of the PWM at DO2.
     /// </summary>
     [Description("Specifies the duty cycle of the PWM at DO2.")]
-    public partial class PwmDutyCycleDO2 : HarpCombinator
+    public partial class PwmDutyCycleDO2
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmDutyCycleDO2"/> register. This field is constant.
@@ -5392,83 +3922,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmDutyCycleDO2"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmDutyCycleDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmDutyCycleDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmDutyCycleDO2"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmDutyCycleDO2"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmDutyCycleDO2 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmDutyCycleDO2 register.
     /// </summary>
+    /// <seealso cref="PwmDutyCycleDO2"/>
     [Description("Filters and selects timestamped messages from the PwmDutyCycleDO2 register.")]
-    public partial class TimestampedPwmDutyCycleDO2 : HarpCombinator
+    public partial class TimestampedPwmDutyCycleDO2
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmDutyCycleDO2"/> register.
+        /// Represents the address of the <see cref="PwmDutyCycleDO2"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmDutyCycleDO2.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmDutyCycleDO2"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmDutyCycleDO2.Address, MessageType).Select(PwmDutyCycleDO2.GetTimestampedPayload);
+            return PwmDutyCycleDO2.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the duty cycle of the PWM at DO3.
+    /// Represents a register that specifies the duty cycle of the PWM at DO3.
     /// </summary>
     [Description("Specifies the duty cycle of the PWM at DO3.")]
-    public partial class PwmDutyCycleDO3 : HarpCombinator
+    public partial class PwmDutyCycleDO3
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmDutyCycleDO3"/> register. This field is constant.
@@ -5534,83 +4018,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmDutyCycleDO3"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmDutyCycleDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmDutyCycleDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmDutyCycleDO3"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmDutyCycleDO3"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmDutyCycleDO3 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmDutyCycleDO3 register.
     /// </summary>
+    /// <seealso cref="PwmDutyCycleDO3"/>
     [Description("Filters and selects timestamped messages from the PwmDutyCycleDO3 register.")]
-    public partial class TimestampedPwmDutyCycleDO3 : HarpCombinator
+    public partial class TimestampedPwmDutyCycleDO3
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmDutyCycleDO3"/> register.
+        /// Represents the address of the <see cref="PwmDutyCycleDO3"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmDutyCycleDO3.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmDutyCycleDO3"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmDutyCycleDO3.Address, MessageType).Select(PwmDutyCycleDO3.GetTimestampedPayload);
+            return PwmDutyCycleDO3.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that starts the PWM on the selected output lines.
+    /// Represents a register that starts the PWM on the selected output lines.
     /// </summary>
     [Description("Starts the PWM on the selected output lines.")]
-    public partial class PwmStart : HarpCombinator
+    public partial class PwmStart
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmStart"/> register. This field is constant.
@@ -5677,83 +4115,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmStart"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="PwmOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<PwmOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmStart"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="PwmOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmStart"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<PwmOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmStart"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="PwmOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmStart"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<PwmOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmStart register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmStart register.
     /// </summary>
+    /// <seealso cref="PwmStart"/>
     [Description("Filters and selects timestamped messages from the PwmStart register.")]
-    public partial class TimestampedPwmStart : HarpCombinator
+    public partial class TimestampedPwmStart
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmStart"/> register.
+        /// Represents the address of the <see cref="PwmStart"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="PwmOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<PwmOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmStart.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmStart"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<PwmOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmStart.Address, MessageType).Select(PwmStart.GetTimestampedPayload);
+            return PwmStart.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that stops the PWM on the selected output lines.
+    /// Represents a register that stops the PWM on the selected output lines.
     /// </summary>
     [Description("Stops the PWM on the selected output lines.")]
-    public partial class PwmStop : HarpCombinator
+    public partial class PwmStop
     {
         /// <summary>
         /// Represents the address of the <see cref="PwmStop"/> register. This field is constant.
@@ -5819,83 +4211,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PwmStop"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PwmStop"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PwmStop"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PwmStop"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PwmStop"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PwmStop register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PwmStop register.
     /// </summary>
+    /// <seealso cref="PwmStop"/>
     [Description("Filters and selects timestamped messages from the PwmStop register.")]
-    public partial class TimestampedPwmStop : HarpCombinator
+    public partial class TimestampedPwmStop
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PwmStop"/> register.
+        /// Represents the address of the <see cref="PwmStop"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PwmStop.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PwmStop"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PwmStop.Address, MessageType).Select(PwmStop.GetTimestampedPayload);
+            return PwmStop.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the state of all RGB LED channels.
+    /// Represents a register that specifies the state of all RGB LED channels.
     /// </summary>
     [Description("Specifies the state of all RGB LED channels.")]
-    public partial class RgbAll : HarpCombinator
+    public partial class RgbAll
     {
         /// <summary>
         /// Represents the address of the <see cref="RgbAll"/> register. This field is constant.
@@ -5987,83 +4333,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, FormatPayload(value));
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="RgbAll"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="RgbAllPayload"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<RgbAllPayload> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="RgbAll"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="RgbAllPayload"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="RgbAll"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<RgbAllPayload> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="RgbAll"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="RgbAllPayload"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="RgbAll"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<RgbAllPayload>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the RgbAll register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// RgbAll register.
     /// </summary>
+    /// <seealso cref="RgbAll"/>
     [Description("Filters and selects timestamped messages from the RgbAll register.")]
-    public partial class TimestampedRgbAll : HarpCombinator
+    public partial class TimestampedRgbAll
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="RgbAll"/> register.
+        /// Represents the address of the <see cref="RgbAll"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="RgbAllPayload"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<RgbAllPayload>> Process(IObservable<HarpMessage> source)
+        public const int Address = RgbAll.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="RgbAll"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<RgbAllPayload> GetPayload(HarpMessage message)
         {
-            return source.Where(RgbAll.Address, MessageType).Select(RgbAll.GetTimestampedPayload);
+            return RgbAll.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the state of the RGB0 LED channels.
+    /// Represents a register that specifies the state of the RGB0 LED channels.
     /// </summary>
     [Description("Specifies the state of the RGB0 LED channels.")]
-    public partial class Rgb0 : HarpCombinator
+    public partial class Rgb0
     {
         /// <summary>
         /// Represents the address of the <see cref="Rgb0"/> register. This field is constant.
@@ -6149,83 +4449,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, FormatPayload(value));
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Rgb0"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="RgbPayload"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<RgbPayload> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Rgb0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="RgbPayload"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Rgb0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<RgbPayload> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Rgb0"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="RgbPayload"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Rgb0"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<RgbPayload>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Rgb0 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Rgb0 register.
     /// </summary>
+    /// <seealso cref="Rgb0"/>
     [Description("Filters and selects timestamped messages from the Rgb0 register.")]
-    public partial class TimestampedRgb0 : HarpCombinator
+    public partial class TimestampedRgb0
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Rgb0"/> register.
+        /// Represents the address of the <see cref="Rgb0"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="RgbPayload"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<RgbPayload>> Process(IObservable<HarpMessage> source)
+        public const int Address = Rgb0.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Rgb0"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<RgbPayload> GetPayload(HarpMessage message)
         {
-            return source.Where(Rgb0.Address, MessageType).Select(Rgb0.GetTimestampedPayload);
+            return Rgb0.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the state of the RGB1 LED channels.
+    /// Represents a register that specifies the state of the RGB1 LED channels.
     /// </summary>
     [Description("Specifies the state of the RGB1 LED channels.")]
-    public partial class Rgb1 : HarpCombinator
+    public partial class Rgb1
     {
         /// <summary>
         /// Represents the address of the <see cref="Rgb1"/> register. This field is constant.
@@ -6311,83 +4565,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, FormatPayload(value));
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Rgb1"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="RgbPayload"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<RgbPayload> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Rgb1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="RgbPayload"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Rgb1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<RgbPayload> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Rgb1"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="RgbPayload"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Rgb1"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<RgbPayload>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Rgb1 register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Rgb1 register.
     /// </summary>
+    /// <seealso cref="Rgb1"/>
     [Description("Filters and selects timestamped messages from the Rgb1 register.")]
-    public partial class TimestampedRgb1 : HarpCombinator
+    public partial class TimestampedRgb1
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Rgb1"/> register.
+        /// Represents the address of the <see cref="Rgb1"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="RgbPayload"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<RgbPayload>> Process(IObservable<HarpMessage> source)
+        public const int Address = Rgb1.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Rgb1"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<RgbPayload> GetPayload(HarpMessage message)
         {
-            return source.Where(Rgb1.Address, MessageType).Select(Rgb1.GetTimestampedPayload);
+            return Rgb1.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the configuration of current to drive LED 0.
+    /// Represents a register that specifies the configuration of current to drive LED 0.
     /// </summary>
     [Description("Specifies the configuration of current to drive LED 0.")]
-    public partial class Led0Current : HarpCombinator
+    public partial class Led0Current
     {
         /// <summary>
         /// Represents the address of the <see cref="Led0Current"/> register. This field is constant.
@@ -6453,83 +4661,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Led0Current"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Led0Current"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Led0Current"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Led0Current"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Led0Current"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Led0Current register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Led0Current register.
     /// </summary>
+    /// <seealso cref="Led0Current"/>
     [Description("Filters and selects timestamped messages from the Led0Current register.")]
-    public partial class TimestampedLed0Current : HarpCombinator
+    public partial class TimestampedLed0Current
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Led0Current"/> register.
+        /// Represents the address of the <see cref="Led0Current"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = Led0Current.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Led0Current"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(Led0Current.Address, MessageType).Select(Led0Current.GetTimestampedPayload);
+            return Led0Current.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the configuration of current to drive LED 1.
+    /// Represents a register that specifies the configuration of current to drive LED 1.
     /// </summary>
     [Description("Specifies the configuration of current to drive LED 1.")]
-    public partial class Led1Current : HarpCombinator
+    public partial class Led1Current
     {
         /// <summary>
         /// Represents the address of the <see cref="Led1Current"/> register. This field is constant.
@@ -6595,83 +4757,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Led1Current"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Led1Current"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Led1Current"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Led1Current"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Led1Current"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Led1Current register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Led1Current register.
     /// </summary>
+    /// <seealso cref="Led1Current"/>
     [Description("Filters and selects timestamped messages from the Led1Current register.")]
-    public partial class TimestampedLed1Current : HarpCombinator
+    public partial class TimestampedLed1Current
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Led1Current"/> register.
+        /// Represents the address of the <see cref="Led1Current"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = Led1Current.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Led1Current"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(Led1Current.Address, MessageType).Select(Led1Current.GetTimestampedPayload);
+            return Led1Current.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the configuration of current to drive LED 0.
+    /// Represents a register that specifies the configuration of current to drive LED 0.
     /// </summary>
     [Description("Specifies the configuration of current to drive LED 0.")]
-    public partial class Led0MaxCurrent : HarpCombinator
+    public partial class Led0MaxCurrent
     {
         /// <summary>
         /// Represents the address of the <see cref="Led0MaxCurrent"/> register. This field is constant.
@@ -6737,83 +4853,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Led0MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Led0MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Led0MaxCurrent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Led0MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Led0MaxCurrent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Led0MaxCurrent register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Led0MaxCurrent register.
     /// </summary>
+    /// <seealso cref="Led0MaxCurrent"/>
     [Description("Filters and selects timestamped messages from the Led0MaxCurrent register.")]
-    public partial class TimestampedLed0MaxCurrent : HarpCombinator
+    public partial class TimestampedLed0MaxCurrent
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Led0MaxCurrent"/> register.
+        /// Represents the address of the <see cref="Led0MaxCurrent"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = Led0MaxCurrent.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Led0MaxCurrent"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(Led0MaxCurrent.Address, MessageType).Select(Led0MaxCurrent.GetTimestampedPayload);
+            return Led0MaxCurrent.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the configuration of current to drive LED 1.
+    /// Represents a register that specifies the configuration of current to drive LED 1.
     /// </summary>
     [Description("Specifies the configuration of current to drive LED 1.")]
-    public partial class Led1MaxCurrent : HarpCombinator
+    public partial class Led1MaxCurrent
     {
         /// <summary>
         /// Represents the address of the <see cref="Led1MaxCurrent"/> register. This field is constant.
@@ -6879,83 +4949,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Led1MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Led1MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Led1MaxCurrent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Led1MaxCurrent"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Led1MaxCurrent"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Led1MaxCurrent register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Led1MaxCurrent register.
     /// </summary>
+    /// <seealso cref="Led1MaxCurrent"/>
     [Description("Filters and selects timestamped messages from the Led1MaxCurrent register.")]
-    public partial class TimestampedLed1MaxCurrent : HarpCombinator
+    public partial class TimestampedLed1MaxCurrent
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Led1MaxCurrent"/> register.
+        /// Represents the address of the <see cref="Led1MaxCurrent"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = Led1MaxCurrent.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Led1MaxCurrent"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(Led1MaxCurrent.Address, MessageType).Select(Led1MaxCurrent.GetTimestampedPayload);
+            return Led1MaxCurrent.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the active events in the device.
+    /// Represents a register that specifies the active events in the device.
     /// </summary>
     [Description("Specifies the active events in the device.")]
-    public partial class EventEnable : HarpCombinator
+    public partial class EventEnable
     {
         /// <summary>
         /// Represents the address of the <see cref="EventEnable"/> register. This field is constant.
@@ -7022,83 +5046,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="EventEnable"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="Events"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<Events> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="EventEnable"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="Events"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="EventEnable"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Events> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="EventEnable"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="Events"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="EventEnable"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<Events>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the EventEnable register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// EventEnable register.
     /// </summary>
+    /// <seealso cref="EventEnable"/>
     [Description("Filters and selects timestamped messages from the EventEnable register.")]
-    public partial class TimestampedEventEnable : HarpCombinator
+    public partial class TimestampedEventEnable
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="EventEnable"/> register.
+        /// Represents the address of the <see cref="EventEnable"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="Events"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<Events>> Process(IObservable<HarpMessage> source)
+        public const int Address = EventEnable.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EventEnable"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<Events> GetPayload(HarpMessage message)
         {
-            return source.Where(EventEnable.Address, MessageType).Select(EventEnable.GetTimestampedPayload);
+            return EventEnable.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the camera outputs to enable in the device.
+    /// Represents a register that specifies the camera outputs to enable in the device.
     /// </summary>
     [Description("Specifies the camera outputs to enable in the device.")]
-    public partial class StartCameras : HarpCombinator
+    public partial class StartCameras
     {
         /// <summary>
         /// Represents the address of the <see cref="StartCameras"/> register. This field is constant.
@@ -7165,83 +5143,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="StartCameras"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="CameraOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<CameraOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="StartCameras"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="CameraOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="StartCameras"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<CameraOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="StartCameras"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="CameraOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="StartCameras"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<CameraOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the StartCameras register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// StartCameras register.
     /// </summary>
+    /// <seealso cref="StartCameras"/>
     [Description("Filters and selects timestamped messages from the StartCameras register.")]
-    public partial class TimestampedStartCameras : HarpCombinator
+    public partial class TimestampedStartCameras
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="StartCameras"/> register.
+        /// Represents the address of the <see cref="StartCameras"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="CameraOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<CameraOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = StartCameras.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="StartCameras"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<CameraOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(StartCameras.Address, MessageType).Select(StartCameras.GetTimestampedPayload);
+            return StartCameras.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the camera outputs to disable in the device.
+    /// Represents a register that specifies the camera outputs to disable in the device.
     /// </summary>
     [Description("Specifies the camera outputs to disable in the device.")]
-    public partial class StopCameras : HarpCombinator
+    public partial class StopCameras
     {
         /// <summary>
         /// Represents the address of the <see cref="StopCameras"/> register. This field is constant.
@@ -7308,83 +5240,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="StopCameras"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="CameraOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<CameraOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="StopCameras"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="CameraOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="StopCameras"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<CameraOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="StopCameras"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="CameraOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="StopCameras"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<CameraOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the StopCameras register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// StopCameras register.
     /// </summary>
+    /// <seealso cref="StopCameras"/>
     [Description("Filters and selects timestamped messages from the StopCameras register.")]
-    public partial class TimestampedStopCameras : HarpCombinator
+    public partial class TimestampedStopCameras
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="StopCameras"/> register.
+        /// Represents the address of the <see cref="StopCameras"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="CameraOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<CameraOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = StopCameras.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="StopCameras"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<CameraOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(StopCameras.Address, MessageType).Select(StopCameras.GetTimestampedPayload);
+            return StopCameras.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the servo outputs to enable in the device.
+    /// Represents a register that specifies the servo outputs to enable in the device.
     /// </summary>
     [Description("Specifies the servo outputs to enable in the device.")]
-    public partial class EnableServos : HarpCombinator
+    public partial class EnableServos
     {
         /// <summary>
         /// Represents the address of the <see cref="EnableServos"/> register. This field is constant.
@@ -7451,83 +5337,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="EnableServos"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ServoOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ServoOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="EnableServos"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ServoOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="EnableServos"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ServoOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="EnableServos"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ServoOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="EnableServos"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ServoOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the EnableServos register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// EnableServos register.
     /// </summary>
+    /// <seealso cref="EnableServos"/>
     [Description("Filters and selects timestamped messages from the EnableServos register.")]
-    public partial class TimestampedEnableServos : HarpCombinator
+    public partial class TimestampedEnableServos
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="EnableServos"/> register.
+        /// Represents the address of the <see cref="EnableServos"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ServoOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ServoOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = EnableServos.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EnableServos"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ServoOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(EnableServos.Address, MessageType).Select(EnableServos.GetTimestampedPayload);
+            return EnableServos.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the servo outputs to disable in the device.
+    /// Represents a register that specifies the servo outputs to disable in the device.
     /// </summary>
     [Description("Specifies the servo outputs to disable in the device.")]
-    public partial class DisableServos : HarpCombinator
+    public partial class DisableServos
     {
         /// <summary>
         /// Represents the address of the <see cref="DisableServos"/> register. This field is constant.
@@ -7594,83 +5434,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="DisableServos"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ServoOutputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ServoOutputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="DisableServos"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ServoOutputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="DisableServos"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ServoOutputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="DisableServos"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ServoOutputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="DisableServos"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ServoOutputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the DisableServos register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// DisableServos register.
     /// </summary>
+    /// <seealso cref="DisableServos"/>
     [Description("Filters and selects timestamped messages from the DisableServos register.")]
-    public partial class TimestampedDisableServos : HarpCombinator
+    public partial class TimestampedDisableServos
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="DisableServos"/> register.
+        /// Represents the address of the <see cref="DisableServos"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ServoOutputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ServoOutputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = DisableServos.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="DisableServos"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ServoOutputs> GetPayload(HarpMessage message)
         {
-            return source.Where(DisableServos.Address, MessageType).Select(DisableServos.GetTimestampedPayload);
+            return DisableServos.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the port quadrature counters to enable in the device.
+    /// Represents a register that specifies the port quadrature counters to enable in the device.
     /// </summary>
     [Description("Specifies the port quadrature counters to enable in the device.")]
-    public partial class EnableEncoders : HarpCombinator
+    public partial class EnableEncoders
     {
         /// <summary>
         /// Represents the address of the <see cref="EnableEncoders"/> register. This field is constant.
@@ -7737,83 +5531,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="EnableEncoders"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="EncoderInputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<EncoderInputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="EnableEncoders"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="EncoderInputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="EnableEncoders"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<EncoderInputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="EnableEncoders"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="EncoderInputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="EnableEncoders"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<EncoderInputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the EnableEncoders register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// EnableEncoders register.
     /// </summary>
+    /// <seealso cref="EnableEncoders"/>
     [Description("Filters and selects timestamped messages from the EnableEncoders register.")]
-    public partial class TimestampedEnableEncoders : HarpCombinator
+    public partial class TimestampedEnableEncoders
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="EnableEncoders"/> register.
+        /// Represents the address of the <see cref="EnableEncoders"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="EncoderInputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<EncoderInputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = EnableEncoders.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EnableEncoders"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<EncoderInputs> GetPayload(HarpMessage message)
         {
-            return source.Where(EnableEncoders.Address, MessageType).Select(EnableEncoders.GetTimestampedPayload);
+            return EnableEncoders.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies that a frame was acquired on camera 0.
+    /// Represents a register that specifies that a frame was acquired on camera 0.
     /// </summary>
     [Description("Specifies that a frame was acquired on camera 0.")]
-    public partial class Camera0Frame : HarpCombinator
+    public partial class Camera0Frame
     {
         /// <summary>
         /// Represents the address of the <see cref="Camera0Frame"/> register. This field is constant.
@@ -7829,14 +5577,6 @@ namespace Harp.Behavior
         /// Represents the length of the <see cref="Camera0Frame"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Camera0Frame"/> class.
-        /// </summary>
-        public Camera0Frame()
-        {
-            MessageType = MessageType.Event;
-        }
 
         /// <summary>
         /// Returns the payload data for <see cref="Camera0Frame"/> register messages.
@@ -7888,83 +5628,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Camera0Frame"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="FrameAcquired"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<FrameAcquired> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Camera0Frame"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="FrameAcquired"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Camera0Frame"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<FrameAcquired> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Camera0Frame"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="FrameAcquired"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Camera0Frame"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<FrameAcquired>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Camera0Frame register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Camera0Frame register.
     /// </summary>
+    /// <seealso cref="Camera0Frame"/>
     [Description("Filters and selects timestamped messages from the Camera0Frame register.")]
-    public partial class TimestampedCamera0Frame : HarpCombinator
+    public partial class TimestampedCamera0Frame
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Camera0Frame"/> register.
+        /// Represents the address of the <see cref="Camera0Frame"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="FrameAcquired"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<FrameAcquired>> Process(IObservable<HarpMessage> source)
+        public const int Address = Camera0Frame.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Camera0Frame"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<FrameAcquired> GetPayload(HarpMessage message)
         {
-            return source.Where(Camera0Frame.Address, MessageType).Select(Camera0Frame.GetTimestampedPayload);
+            return Camera0Frame.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the trigger frequency for camera 0.
+    /// Represents a register that specifies the trigger frequency for camera 0.
     /// </summary>
     [Description("Specifies the trigger frequency for camera 0.")]
-    public partial class Camera0Frequency : HarpCombinator
+    public partial class Camera0Frequency
     {
         /// <summary>
         /// Represents the address of the <see cref="Camera0Frequency"/> register. This field is constant.
@@ -8030,83 +5724,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Camera0Frequency"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Camera0Frequency"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Camera0Frequency"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Camera0Frequency"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Camera0Frequency"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Camera0Frequency register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Camera0Frequency register.
     /// </summary>
+    /// <seealso cref="Camera0Frequency"/>
     [Description("Filters and selects timestamped messages from the Camera0Frequency register.")]
-    public partial class TimestampedCamera0Frequency : HarpCombinator
+    public partial class TimestampedCamera0Frequency
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Camera0Frequency"/> register.
+        /// Represents the address of the <see cref="Camera0Frequency"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = Camera0Frequency.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Camera0Frequency"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(Camera0Frequency.Address, MessageType).Select(Camera0Frequency.GetTimestampedPayload);
+            return Camera0Frequency.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies that a frame was acquired on camera 1.
+    /// Represents a register that specifies that a frame was acquired on camera 1.
     /// </summary>
     [Description("Specifies that a frame was acquired on camera 1.")]
-    public partial class Camera1Frame : HarpCombinator
+    public partial class Camera1Frame
     {
         /// <summary>
         /// Represents the address of the <see cref="Camera1Frame"/> register. This field is constant.
@@ -8122,14 +5770,6 @@ namespace Harp.Behavior
         /// Represents the length of the <see cref="Camera1Frame"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Camera1Frame"/> class.
-        /// </summary>
-        public Camera1Frame()
-        {
-            MessageType = MessageType.Event;
-        }
 
         /// <summary>
         /// Returns the payload data for <see cref="Camera1Frame"/> register messages.
@@ -8181,83 +5821,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Camera1Frame"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="FrameAcquired"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<FrameAcquired> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Camera1Frame"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="FrameAcquired"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Camera1Frame"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<FrameAcquired> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Camera1Frame"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="FrameAcquired"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Camera1Frame"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<FrameAcquired>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Camera1Frame register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Camera1Frame register.
     /// </summary>
+    /// <seealso cref="Camera1Frame"/>
     [Description("Filters and selects timestamped messages from the Camera1Frame register.")]
-    public partial class TimestampedCamera1Frame : HarpCombinator
+    public partial class TimestampedCamera1Frame
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Camera1Frame"/> register.
+        /// Represents the address of the <see cref="Camera1Frame"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="FrameAcquired"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<FrameAcquired>> Process(IObservable<HarpMessage> source)
+        public const int Address = Camera1Frame.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Camera1Frame"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<FrameAcquired> GetPayload(HarpMessage message)
         {
-            return source.Where(Camera1Frame.Address, MessageType).Select(Camera1Frame.GetTimestampedPayload);
+            return Camera1Frame.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the trigger frequency for camera 1.
+    /// Represents a register that specifies the trigger frequency for camera 1.
     /// </summary>
     [Description("Specifies the trigger frequency for camera 1.")]
-    public partial class Camera1Frequency : HarpCombinator
+    public partial class Camera1Frequency
     {
         /// <summary>
         /// Represents the address of the <see cref="Camera1Frequency"/> register. This field is constant.
@@ -8323,83 +5917,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="Camera1Frequency"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="Camera1Frequency"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="Camera1Frequency"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="Camera1Frequency"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="Camera1Frequency"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the Camera1Frequency register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// Camera1Frequency register.
     /// </summary>
+    /// <seealso cref="Camera1Frequency"/>
     [Description("Filters and selects timestamped messages from the Camera1Frequency register.")]
-    public partial class TimestampedCamera1Frequency : HarpCombinator
+    public partial class TimestampedCamera1Frequency
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="Camera1Frequency"/> register.
+        /// Represents the address of the <see cref="Camera1Frequency"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = Camera1Frequency.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="Camera1Frequency"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(Camera1Frequency.Address, MessageType).Select(Camera1Frequency.GetTimestampedPayload);
+            return Camera1Frequency.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the period of the servo motor in DO2, in microseconds.
+    /// Represents a register that specifies the period of the servo motor in DO2, in microseconds.
     /// </summary>
     [Description("Specifies the period of the servo motor in DO2, in microseconds.")]
-    public partial class ServoMotor2Period : HarpCombinator
+    public partial class ServoMotor2Period
     {
         /// <summary>
         /// Represents the address of the <see cref="ServoMotor2Period"/> register. This field is constant.
@@ -8465,83 +6013,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="ServoMotor2Period"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="ServoMotor2Period"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="ServoMotor2Period"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="ServoMotor2Period"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="ServoMotor2Period"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the ServoMotor2Period register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// ServoMotor2Period register.
     /// </summary>
+    /// <seealso cref="ServoMotor2Period"/>
     [Description("Filters and selects timestamped messages from the ServoMotor2Period register.")]
-    public partial class TimestampedServoMotor2Period : HarpCombinator
+    public partial class TimestampedServoMotor2Period
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="ServoMotor2Period"/> register.
+        /// Represents the address of the <see cref="ServoMotor2Period"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = ServoMotor2Period.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="ServoMotor2Period"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(ServoMotor2Period.Address, MessageType).Select(ServoMotor2Period.GetTimestampedPayload);
+            return ServoMotor2Period.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the pulse of the servo motor in DO2, in microseconds.
+    /// Represents a register that specifies the pulse of the servo motor in DO2, in microseconds.
     /// </summary>
     [Description("Specifies the pulse of the servo motor in DO2, in microseconds.")]
-    public partial class ServoMotor2Pulse : HarpCombinator
+    public partial class ServoMotor2Pulse
     {
         /// <summary>
         /// Represents the address of the <see cref="ServoMotor2Pulse"/> register. This field is constant.
@@ -8607,83 +6109,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="ServoMotor2Pulse"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="ServoMotor2Pulse"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="ServoMotor2Pulse"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="ServoMotor2Pulse"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="ServoMotor2Pulse"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the ServoMotor2Pulse register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// ServoMotor2Pulse register.
     /// </summary>
+    /// <seealso cref="ServoMotor2Pulse"/>
     [Description("Filters and selects timestamped messages from the ServoMotor2Pulse register.")]
-    public partial class TimestampedServoMotor2Pulse : HarpCombinator
+    public partial class TimestampedServoMotor2Pulse
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="ServoMotor2Pulse"/> register.
+        /// Represents the address of the <see cref="ServoMotor2Pulse"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = ServoMotor2Pulse.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="ServoMotor2Pulse"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(ServoMotor2Pulse.Address, MessageType).Select(ServoMotor2Pulse.GetTimestampedPayload);
+            return ServoMotor2Pulse.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the period of the servo motor in DO3, in microseconds.
+    /// Represents a register that specifies the period of the servo motor in DO3, in microseconds.
     /// </summary>
     [Description("Specifies the period of the servo motor in DO3, in microseconds.")]
-    public partial class ServoMotor3Period : HarpCombinator
+    public partial class ServoMotor3Period
     {
         /// <summary>
         /// Represents the address of the <see cref="ServoMotor3Period"/> register. This field is constant.
@@ -8749,83 +6205,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="ServoMotor3Period"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="ServoMotor3Period"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="ServoMotor3Period"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="ServoMotor3Period"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="ServoMotor3Period"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the ServoMotor3Period register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// ServoMotor3Period register.
     /// </summary>
+    /// <seealso cref="ServoMotor3Period"/>
     [Description("Filters and selects timestamped messages from the ServoMotor3Period register.")]
-    public partial class TimestampedServoMotor3Period : HarpCombinator
+    public partial class TimestampedServoMotor3Period
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="ServoMotor3Period"/> register.
+        /// Represents the address of the <see cref="ServoMotor3Period"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = ServoMotor3Period.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="ServoMotor3Period"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(ServoMotor3Period.Address, MessageType).Select(ServoMotor3Period.GetTimestampedPayload);
+            return ServoMotor3Period.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the pulse of the servo motor in DO3, in microseconds.
+    /// Represents a register that specifies the pulse of the servo motor in DO3, in microseconds.
     /// </summary>
     [Description("Specifies the pulse of the servo motor in DO3, in microseconds.")]
-    public partial class ServoMotor3Pulse : HarpCombinator
+    public partial class ServoMotor3Pulse
     {
         /// <summary>
         /// Represents the address of the <see cref="ServoMotor3Pulse"/> register. This field is constant.
@@ -8891,83 +6301,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromUInt16(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="ServoMotor3Pulse"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<ushort> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="ServoMotor3Pulse"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="ushort"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="ServoMotor3Pulse"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<ushort> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="ServoMotor3Pulse"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="ushort"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="ServoMotor3Pulse"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<ushort>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the ServoMotor3Pulse register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// ServoMotor3Pulse register.
     /// </summary>
+    /// <seealso cref="ServoMotor3Pulse"/>
     [Description("Filters and selects timestamped messages from the ServoMotor3Pulse register.")]
-    public partial class TimestampedServoMotor3Pulse : HarpCombinator
+    public partial class TimestampedServoMotor3Pulse
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="ServoMotor3Pulse"/> register.
+        /// Represents the address of the <see cref="ServoMotor3Pulse"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="ushort"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<ushort>> Process(IObservable<HarpMessage> source)
+        public const int Address = ServoMotor3Pulse.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="ServoMotor3Pulse"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<ushort> GetPayload(HarpMessage message)
         {
-            return source.Where(ServoMotor3Pulse.Address, MessageType).Select(ServoMotor3Pulse.GetTimestampedPayload);
+            return ServoMotor3Pulse.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that reset the counter of the specified encoders to zero.
+    /// Represents a register that reset the counter of the specified encoders to zero.
     /// </summary>
     [Description("Reset the counter of the specified encoders to zero.")]
-    public partial class EncoderReset : HarpCombinator
+    public partial class EncoderReset
     {
         /// <summary>
         /// Represents the address of the <see cref="EncoderReset"/> register. This field is constant.
@@ -9034,83 +6398,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="EncoderReset"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="EncoderInputs"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<EncoderInputs> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="EncoderReset"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="EncoderInputs"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="EncoderReset"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<EncoderInputs> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="EncoderReset"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="EncoderInputs"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="EncoderReset"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<EncoderInputs>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the EncoderReset register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// EncoderReset register.
     /// </summary>
+    /// <seealso cref="EncoderReset"/>
     [Description("Filters and selects timestamped messages from the EncoderReset register.")]
-    public partial class TimestampedEncoderReset : HarpCombinator
+    public partial class TimestampedEncoderReset
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="EncoderReset"/> register.
+        /// Represents the address of the <see cref="EncoderReset"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="EncoderInputs"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<EncoderInputs>> Process(IObservable<HarpMessage> source)
+        public const int Address = EncoderReset.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EncoderReset"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<EncoderInputs> GetPayload(HarpMessage message)
         {
-            return source.Where(EncoderReset.Address, MessageType).Select(EncoderReset.GetTimestampedPayload);
+            return EncoderReset.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that enables the timestamp for serial TX.
+    /// Represents a register that enables the timestamp for serial TX.
     /// </summary>
     [Description("Enables the timestamp for serial TX.")]
-    public partial class EnableSerialTimestamp : HarpCombinator
+    public partial class EnableSerialTimestamp
     {
         /// <summary>
         /// Represents the address of the <see cref="EnableSerialTimestamp"/> register. This field is constant.
@@ -9176,83 +6494,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="EnableSerialTimestamp"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="EnableSerialTimestamp"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="EnableSerialTimestamp"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="EnableSerialTimestamp"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="EnableSerialTimestamp"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the EnableSerialTimestamp register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// EnableSerialTimestamp register.
     /// </summary>
+    /// <seealso cref="EnableSerialTimestamp"/>
     [Description("Filters and selects timestamped messages from the EnableSerialTimestamp register.")]
-    public partial class TimestampedEnableSerialTimestamp : HarpCombinator
+    public partial class TimestampedEnableSerialTimestamp
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="EnableSerialTimestamp"/> register.
+        /// Represents the address of the <see cref="EnableSerialTimestamp"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = EnableSerialTimestamp.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EnableSerialTimestamp"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(EnableSerialTimestamp.Address, MessageType).Select(EnableSerialTimestamp.GetTimestampedPayload);
+            return EnableSerialTimestamp.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 0 IR state.
+    /// Represents a register that specifies the digital output to mimic the Port 0 IR state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 0 IR state.")]
-    public partial class MimicPort0IR : HarpCombinator
+    public partial class MimicPort0IR
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort0IR"/> register. This field is constant.
@@ -9319,83 +6591,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort0IR"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort0IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort0IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort0IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort0IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort0IR register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort0IR register.
     /// </summary>
+    /// <seealso cref="MimicPort0IR"/>
     [Description("Filters and selects timestamped messages from the MimicPort0IR register.")]
-    public partial class TimestampedMimicPort0IR : HarpCombinator
+    public partial class TimestampedMimicPort0IR
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort0IR"/> register.
+        /// Represents the address of the <see cref="MimicPort0IR"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort0IR.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort0IR"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort0IR.Address, MessageType).Select(MimicPort0IR.GetTimestampedPayload);
+            return MimicPort0IR.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 1 IR state.
+    /// Represents a register that specifies the digital output to mimic the Port 1 IR state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 1 IR state.")]
-    public partial class MimicPort1IR : HarpCombinator
+    public partial class MimicPort1IR
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort1IR"/> register. This field is constant.
@@ -9462,83 +6688,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort1IR"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort1IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort1IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort1IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort1IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort1IR register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort1IR register.
     /// </summary>
+    /// <seealso cref="MimicPort1IR"/>
     [Description("Filters and selects timestamped messages from the MimicPort1IR register.")]
-    public partial class TimestampedMimicPort1IR : HarpCombinator
+    public partial class TimestampedMimicPort1IR
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort1IR"/> register.
+        /// Represents the address of the <see cref="MimicPort1IR"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort1IR.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort1IR"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort1IR.Address, MessageType).Select(MimicPort1IR.GetTimestampedPayload);
+            return MimicPort1IR.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 2 IR state.
+    /// Represents a register that specifies the digital output to mimic the Port 2 IR state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 2 IR state.")]
-    public partial class MimicPort2IR : HarpCombinator
+    public partial class MimicPort2IR
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort2IR"/> register. This field is constant.
@@ -9605,83 +6785,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort2IR"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort2IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort2IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort2IR"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort2IR"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort2IR register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort2IR register.
     /// </summary>
+    /// <seealso cref="MimicPort2IR"/>
     [Description("Filters and selects timestamped messages from the MimicPort2IR register.")]
-    public partial class TimestampedMimicPort2IR : HarpCombinator
+    public partial class TimestampedMimicPort2IR
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort2IR"/> register.
+        /// Represents the address of the <see cref="MimicPort2IR"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort2IR.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort2IR"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort2IR.Address, MessageType).Select(MimicPort2IR.GetTimestampedPayload);
+            return MimicPort2IR.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 0 valve state.
+    /// Represents a register that specifies the digital output to mimic the Port 0 valve state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 0 valve state.")]
-    public partial class MimicPort0Valve : HarpCombinator
+    public partial class MimicPort0Valve
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort0Valve"/> register. This field is constant.
@@ -9748,83 +6882,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort0Valve"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort0Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort0Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort0Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort0Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort0Valve register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort0Valve register.
     /// </summary>
+    /// <seealso cref="MimicPort0Valve"/>
     [Description("Filters and selects timestamped messages from the MimicPort0Valve register.")]
-    public partial class TimestampedMimicPort0Valve : HarpCombinator
+    public partial class TimestampedMimicPort0Valve
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort0Valve"/> register.
+        /// Represents the address of the <see cref="MimicPort0Valve"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort0Valve.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort0Valve"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort0Valve.Address, MessageType).Select(MimicPort0Valve.GetTimestampedPayload);
+            return MimicPort0Valve.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 1 valve state.
+    /// Represents a register that specifies the digital output to mimic the Port 1 valve state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 1 valve state.")]
-    public partial class MimicPort1Valve : HarpCombinator
+    public partial class MimicPort1Valve
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort1Valve"/> register. This field is constant.
@@ -9891,83 +6979,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort1Valve"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort1Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort1Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort1Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort1Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort1Valve register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort1Valve register.
     /// </summary>
+    /// <seealso cref="MimicPort1Valve"/>
     [Description("Filters and selects timestamped messages from the MimicPort1Valve register.")]
-    public partial class TimestampedMimicPort1Valve : HarpCombinator
+    public partial class TimestampedMimicPort1Valve
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort1Valve"/> register.
+        /// Represents the address of the <see cref="MimicPort1Valve"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort1Valve.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort1Valve"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort1Valve.Address, MessageType).Select(MimicPort1Valve.GetTimestampedPayload);
+            return MimicPort1Valve.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the digital output to mimic the Port 2 valve state.
+    /// Represents a register that specifies the digital output to mimic the Port 2 valve state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 2 valve state.")]
-    public partial class MimicPort2Valve : HarpCombinator
+    public partial class MimicPort2Valve
     {
         /// <summary>
         /// Represents the address of the <see cref="MimicPort2Valve"/> register. This field is constant.
@@ -10034,83 +7076,37 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="MimicPort2Valve"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<MimicOutput> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="MimicPort2Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="MimicOutput"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="MimicPort2Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<MimicOutput> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="MimicPort2Valve"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="MimicPort2Valve"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<MimicOutput>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the MimicPort2Valve register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// MimicPort2Valve register.
     /// </summary>
+    /// <seealso cref="MimicPort2Valve"/>
     [Description("Filters and selects timestamped messages from the MimicPort2Valve register.")]
-    public partial class TimestampedMimicPort2Valve : HarpCombinator
+    public partial class TimestampedMimicPort2Valve
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="MimicPort2Valve"/> register.
+        /// Represents the address of the <see cref="MimicPort2Valve"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="MimicOutput"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<MimicOutput>> Process(IObservable<HarpMessage> source)
+        public const int Address = MimicPort2Valve.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="MimicPort2Valve"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<MimicOutput> GetPayload(HarpMessage message)
         {
-            return source.Where(MimicPort2Valve.Address, MessageType).Select(MimicPort2Valve.GetTimestampedPayload);
+            return MimicPort2Valve.GetTimestampedPayload(message);
         }
     }
 
     /// <summary>
-    /// Represents an operator that specifies the low pass filter time value for poke inputs, in ms.
+    /// Represents a register that specifies the low pass filter time value for poke inputs, in ms.
     /// </summary>
     [Description("Specifies the low pass filter time value for poke inputs, in ms.")]
-    public partial class PokeInputFilter : HarpCombinator
+    public partial class PokeInputFilter
     {
         /// <summary>
         /// Represents the address of the <see cref="PokeInputFilter"/> register. This field is constant.
@@ -10176,75 +7172,29 @@ namespace Harp.Behavior
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, value);
         }
-
-        /// <summary>
-        /// Filters and selects an observable sequence of messages from the
-        /// <see cref="PokeInputFilter"/> register.
-        /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </returns>
-        public IObservable<byte> Process(IObservable<HarpMessage> source)
-        {
-            return source.Where(Address, MessageType).Select(GetPayload);
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into Harp messages
-        /// for the <see cref="PokeInputFilter"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of <see cref="byte"/> objects representing the
-        /// message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects formatted for the
-        /// <see cref="PokeInputFilter"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<byte> source)
-        {
-            return source.Select(value => FromPayload(MessageType, value));
-        }
-
-        /// <summary>
-        /// Formats an observable sequence of values into timestamped Harp messages
-        /// for the <see cref="PokeInputFilter"/> register.
-        /// </summary>
-        /// <param name="source">
-        /// A sequence of timestamped <see cref="byte"/> objects representing
-        /// the message payload.
-        /// </param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="HarpMessage"/> objects formatted for
-        /// the <see cref="PokeInputFilter"/> register.
-        /// </returns>
-        public IObservable<HarpMessage> Process(IObservable<Timestamped<byte>> source)
-        {
-            return source.Select(payload => FromPayload(payload.Seconds, MessageType, payload.Value));
-        }
     }
 
     /// <summary>
-    /// Represents an operator that filters and selects a sequence of timestamped messages
-    /// from the PokeInputFilter register.
+    /// Provides methods for manipulating timestamped messages from the
+    /// PokeInputFilter register.
     /// </summary>
+    /// <seealso cref="PokeInputFilter"/>
     [Description("Filters and selects timestamped messages from the PokeInputFilter register.")]
-    public partial class TimestampedPokeInputFilter : HarpCombinator
+    public partial class TimestampedPokeInputFilter
     {
         /// <summary>
-        /// Filters and selects an observable sequence of timestamped messages from
-        /// the <see cref="PokeInputFilter"/> register.
+        /// Represents the address of the <see cref="PokeInputFilter"/> register. This field is constant.
         /// </summary>
-        /// <param name="source">The sequence of Harp device messages.</param>
-        /// <returns>
-        /// A sequence of timestamped <see cref="byte"/> objects
-        /// representing the register payload.
-        /// </returns>
-        public IObservable<Timestamped<byte>> Process(IObservable<HarpMessage> source)
+        public const int Address = PokeInputFilter.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="PokeInputFilter"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<byte> GetPayload(HarpMessage message)
         {
-            return source.Where(PokeInputFilter.Address, MessageType).Select(PokeInputFilter.GetTimestampedPayload);
+            return PokeInputFilter.GetTimestampedPayload(message);
         }
     }
 
@@ -10252,6 +7202,7 @@ namespace Harp.Behavior
     /// Represents an operator which creates standard message payloads for the
     /// Behavior device.
     /// </summary>
+    /// <seealso cref="CreatePortDigitalInputPayload"/>
     /// <seealso cref="CreateOutputSetPayload"/>
     /// <seealso cref="CreateOutputClearPayload"/>
     /// <seealso cref="CreateOutputTogglePayload"/>
@@ -10261,6 +7212,8 @@ namespace Harp.Behavior
     /// <seealso cref="CreatePortDIOTogglePayload"/>
     /// <seealso cref="CreatePortDIOStatePayload"/>
     /// <seealso cref="CreatePortDIODirectionPayload"/>
+    /// <seealso cref="CreatePortDIOStateEventPayload"/>
+    /// <seealso cref="CreateAnalogDataPayload"/>
     /// <seealso cref="CreateOutputPulseEnablePayload"/>
     /// <seealso cref="CreatePulseDOPort0Payload"/>
     /// <seealso cref="CreatePulseDOPort1Payload"/>
@@ -10299,7 +7252,9 @@ namespace Harp.Behavior
     /// <seealso cref="CreateEnableServosPayload"/>
     /// <seealso cref="CreateDisableServosPayload"/>
     /// <seealso cref="CreateEnableEncodersPayload"/>
+    /// <seealso cref="CreateCamera0FramePayload"/>
     /// <seealso cref="CreateCamera0FrequencyPayload"/>
+    /// <seealso cref="CreateCamera1FramePayload"/>
     /// <seealso cref="CreateCamera1FrequencyPayload"/>
     /// <seealso cref="CreateServoMotor2PeriodPayload"/>
     /// <seealso cref="CreateServoMotor2PulsePayload"/>
@@ -10314,6 +7269,7 @@ namespace Harp.Behavior
     /// <seealso cref="CreateMimicPort1ValvePayload"/>
     /// <seealso cref="CreateMimicPort2ValvePayload"/>
     /// <seealso cref="CreatePokeInputFilterPayload"/>
+    [XmlInclude(typeof(CreatePortDigitalInputPayload))]
     [XmlInclude(typeof(CreateOutputSetPayload))]
     [XmlInclude(typeof(CreateOutputClearPayload))]
     [XmlInclude(typeof(CreateOutputTogglePayload))]
@@ -10323,6 +7279,8 @@ namespace Harp.Behavior
     [XmlInclude(typeof(CreatePortDIOTogglePayload))]
     [XmlInclude(typeof(CreatePortDIOStatePayload))]
     [XmlInclude(typeof(CreatePortDIODirectionPayload))]
+    [XmlInclude(typeof(CreatePortDIOStateEventPayload))]
+    [XmlInclude(typeof(CreateAnalogDataPayload))]
     [XmlInclude(typeof(CreateOutputPulseEnablePayload))]
     [XmlInclude(typeof(CreatePulseDOPort0Payload))]
     [XmlInclude(typeof(CreatePulseDOPort1Payload))]
@@ -10361,7 +7319,9 @@ namespace Harp.Behavior
     [XmlInclude(typeof(CreateEnableServosPayload))]
     [XmlInclude(typeof(CreateDisableServosPayload))]
     [XmlInclude(typeof(CreateEnableEncodersPayload))]
+    [XmlInclude(typeof(CreateCamera0FramePayload))]
     [XmlInclude(typeof(CreateCamera0FrequencyPayload))]
+    [XmlInclude(typeof(CreateCamera1FramePayload))]
     [XmlInclude(typeof(CreateCamera1FrequencyPayload))]
     [XmlInclude(typeof(CreateServoMotor2PeriodPayload))]
     [XmlInclude(typeof(CreateServoMotor2PulsePayload))]
@@ -10384,10 +7344,58 @@ namespace Harp.Behavior
         /// </summary>
         public CreateMessage()
         {
-            Payload = new CreateOutputSetPayload();
+            Payload = new CreatePortDigitalInputPayload();
         }
 
         string INamedElement.Name => $"{nameof(Behavior)}.{GetElementDisplayName(Payload)}";
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a sequence of message payloads
+    /// that reflects the state of DI digital lines of each Port.
+    /// </summary>
+    [DisplayName("PortDigitalInputPayload")]
+    [WorkflowElementCategory(ElementCategory.Transform)]
+    [Description("Creates a sequence of message payloads that reflects the state of DI digital lines of each Port.")]
+    public partial class CreatePortDigitalInputPayload : HarpCombinator
+    {
+        /// <summary>
+        /// Gets or sets the value that reflects the state of DI digital lines of each Port.
+        /// </summary>
+        [Description("The value that reflects the state of DI digital lines of each Port.")]
+        public DigitalInputs Value { get; set; }
+
+        /// <summary>
+        /// Creates an observable sequence that contains a single message
+        /// that reflects the state of DI digital lines of each Port.
+        /// </summary>
+        /// <returns>
+        /// A sequence containing a single <see cref="HarpMessage"/> object
+        /// representing the created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process()
+        {
+            return Process(Observable.Return(System.Reactive.Unit.Default));
+        }
+
+        /// <summary>
+        /// Creates an observable sequence of message payloads
+        /// that reflects the state of DI digital lines of each Port.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements in the <paramref name="source"/> sequence.
+        /// </typeparam>
+        /// <param name="source">
+        /// The sequence containing the notifications used for emitting message payloads.
+        /// </param>
+        /// <returns>
+        /// A sequence of <see cref="HarpMessage"/> objects representing each
+        /// created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        {
+            return source.Select(_ => PortDigitalInput.FromPayload(MessageType, Value));
+        }
     }
 
     /// <summary>
@@ -10819,6 +7827,114 @@ namespace Harp.Behavior
         public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
         {
             return source.Select(_ => PortDIODirection.FromPayload(MessageType, Value));
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a sequence of message payloads
+    /// that specifies the state of the port DIO lines on a line change.
+    /// </summary>
+    [DisplayName("PortDIOStateEventPayload")]
+    [WorkflowElementCategory(ElementCategory.Transform)]
+    [Description("Creates a sequence of message payloads that specifies the state of the port DIO lines on a line change.")]
+    public partial class CreatePortDIOStateEventPayload : HarpCombinator
+    {
+        /// <summary>
+        /// Gets or sets the value that specifies the state of the port DIO lines on a line change.
+        /// </summary>
+        [Description("The value that specifies the state of the port DIO lines on a line change.")]
+        public PortDigitalIOS Value { get; set; }
+
+        /// <summary>
+        /// Creates an observable sequence that contains a single message
+        /// that specifies the state of the port DIO lines on a line change.
+        /// </summary>
+        /// <returns>
+        /// A sequence containing a single <see cref="HarpMessage"/> object
+        /// representing the created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process()
+        {
+            return Process(Observable.Return(System.Reactive.Unit.Default));
+        }
+
+        /// <summary>
+        /// Creates an observable sequence of message payloads
+        /// that specifies the state of the port DIO lines on a line change.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements in the <paramref name="source"/> sequence.
+        /// </typeparam>
+        /// <param name="source">
+        /// The sequence containing the notifications used for emitting message payloads.
+        /// </param>
+        /// <returns>
+        /// A sequence of <see cref="HarpMessage"/> objects representing each
+        /// created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        {
+            return source.Select(_ => PortDIOStateEvent.FromPayload(MessageType, Value));
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a sequence of message payloads
+    /// that voltage at the ADC input and encoder value on Port 2.
+    /// </summary>
+    [DisplayName("AnalogDataPayload")]
+    [WorkflowElementCategory(ElementCategory.Transform)]
+    [Description("Creates a sequence of message payloads that voltage at the ADC input and encoder value on Port 2.")]
+    public partial class CreateAnalogDataPayload : HarpCombinator
+    {
+        /// <summary>
+        /// Gets or sets a value that the voltage at the output of the ADC.
+        /// </summary>
+        [Description("The voltage at the output of the ADC")]
+        public short AnalogInput { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that the quadrature counter value on Port 2.
+        /// </summary>
+        [Description("The quadrature counter value on Port 2")]
+        public short Encoder { get; set; }
+
+        /// <summary>
+        /// Creates an observable sequence that contains a single message
+        /// that voltage at the ADC input and encoder value on Port 2.
+        /// </summary>
+        /// <returns>
+        /// A sequence containing a single <see cref="HarpMessage"/> object
+        /// representing the created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process()
+        {
+            return Process(Observable.Return(System.Reactive.Unit.Default));
+        }
+
+        /// <summary>
+        /// Creates an observable sequence of message payloads
+        /// that voltage at the ADC input and encoder value on Port 2.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements in the <paramref name="source"/> sequence.
+        /// </typeparam>
+        /// <param name="source">
+        /// The sequence containing the notifications used for emitting message payloads.
+        /// </param>
+        /// <returns>
+        /// A sequence of <see cref="HarpMessage"/> objects representing each
+        /// created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        {
+            return source.Select(_ =>
+            {
+                AnalogDataPayload value;
+                value.AnalogInput = AnalogInput;
+                value.Encoder = Encoder;
+                return AnalogData.FromPayload(MessageType, value);
+            });
         }
     }
 
@@ -12780,6 +9896,54 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates a sequence of message payloads
+    /// that specifies that a frame was acquired on camera 0.
+    /// </summary>
+    [DisplayName("Camera0FramePayload")]
+    [WorkflowElementCategory(ElementCategory.Transform)]
+    [Description("Creates a sequence of message payloads that specifies that a frame was acquired on camera 0.")]
+    public partial class CreateCamera0FramePayload : HarpCombinator
+    {
+        /// <summary>
+        /// Gets or sets the value that specifies that a frame was acquired on camera 0.
+        /// </summary>
+        [Description("The value that specifies that a frame was acquired on camera 0.")]
+        public FrameAcquired Value { get; set; }
+
+        /// <summary>
+        /// Creates an observable sequence that contains a single message
+        /// that specifies that a frame was acquired on camera 0.
+        /// </summary>
+        /// <returns>
+        /// A sequence containing a single <see cref="HarpMessage"/> object
+        /// representing the created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process()
+        {
+            return Process(Observable.Return(System.Reactive.Unit.Default));
+        }
+
+        /// <summary>
+        /// Creates an observable sequence of message payloads
+        /// that specifies that a frame was acquired on camera 0.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements in the <paramref name="source"/> sequence.
+        /// </typeparam>
+        /// <param name="source">
+        /// The sequence containing the notifications used for emitting message payloads.
+        /// </param>
+        /// <returns>
+        /// A sequence of <see cref="HarpMessage"/> objects representing each
+        /// created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        {
+            return source.Select(_ => Camera0Frame.FromPayload(MessageType, Value));
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a sequence of message payloads
     /// that specifies the trigger frequency for camera 0.
     /// </summary>
     [DisplayName("Camera0FrequencyPayload")]
@@ -12825,6 +9989,54 @@ namespace Harp.Behavior
         public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
         {
             return source.Select(_ => Camera0Frequency.FromPayload(MessageType, Value));
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a sequence of message payloads
+    /// that specifies that a frame was acquired on camera 1.
+    /// </summary>
+    [DisplayName("Camera1FramePayload")]
+    [WorkflowElementCategory(ElementCategory.Transform)]
+    [Description("Creates a sequence of message payloads that specifies that a frame was acquired on camera 1.")]
+    public partial class CreateCamera1FramePayload : HarpCombinator
+    {
+        /// <summary>
+        /// Gets or sets the value that specifies that a frame was acquired on camera 1.
+        /// </summary>
+        [Description("The value that specifies that a frame was acquired on camera 1.")]
+        public FrameAcquired Value { get; set; }
+
+        /// <summary>
+        /// Creates an observable sequence that contains a single message
+        /// that specifies that a frame was acquired on camera 1.
+        /// </summary>
+        /// <returns>
+        /// A sequence containing a single <see cref="HarpMessage"/> object
+        /// representing the created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process()
+        {
+            return Process(Observable.Return(System.Reactive.Unit.Default));
+        }
+
+        /// <summary>
+        /// Creates an observable sequence of message payloads
+        /// that specifies that a frame was acquired on camera 1.
+        /// </summary>
+        /// <typeparam name="TSource">
+        /// The type of the elements in the <paramref name="source"/> sequence.
+        /// </typeparam>
+        /// <param name="source">
+        /// The sequence containing the notifications used for emitting message payloads.
+        /// </param>
+        /// <returns>
+        /// A sequence of <see cref="HarpMessage"/> objects representing each
+        /// created message payload.
+        /// </returns>
+        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        {
+            return source.Select(_ => Camera1Frame.FromPayload(MessageType, Value));
         }
     }
 

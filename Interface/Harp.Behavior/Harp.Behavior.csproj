@@ -7,19 +7,19 @@
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <Description>Bonsai Library containing interfaces for data acquisition and control of Harp.Behavior devices.</Description>
     <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
-    <PackageTags>Harp Harp.Behavior Bonsai Rx</PackageTags>
+    <PackageTags>Harp Behavior Bonsai Rx</PackageTags>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageIcon></PackageIcon>
     <PackageOutputPath></PackageOutputPath>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>build032301</VersionSuffix>
+    <VersionSuffix>build032701</VersionSuffix>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bonsai.Harp" Version="3.5.0-build032301" GeneratePathProperty="true" />
+    <PackageReference Include="Bonsai.Harp" Version="3.5.0-build032701" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
     <Authors></Authors>
     <Copyright>Copyright © harp-tech 2023</Copyright>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-    <Description>Bonsai Library containing interfaces for data acquisition and control of Harp.Behavior devices.</Description>
+    <Description>Bonsai Library containing interfaces for data acquisition and control of Harp Behavior devices.</Description>
     <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
     <PackageTags>Harp Behavior Bonsai Rx</PackageTags>
     <PackageProjectUrl></PackageProjectUrl>

@@ -1,0 +1,501 @@
+%YAML 1.1
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/reflex-generator/main/schema/device.json
+device: Behavior
+whoAmI: 1216
+firmwareVersion: "3.0"
+hardwareTargets: "2.0"
+registers:
+  PortDigitalInput:
+    address: 32
+    access: Event
+    type: U8
+    maskType: DigitalInputs
+    description: Reflects the state of DI digital lines of each Port
+  Reserved0: &reserved
+    address: 33
+    type: U8
+    access: Read
+    description: Reserved for future use
+    visibility: private
+  OutputSet: &output
+    address: 34
+    type: U16
+    access: Write
+    maskType: DigitalOutputs
+    description: Set the specified digital output lines.
+  OutputClear:
+    <<: *output
+    address: 35
+    description: Clear the specified digital output lines
+  OutputToggle:
+    <<: *output
+    address: 36
+    description: Toggle the specified digital output lines
+  OutputState:
+    <<: *output
+    address: 37
+    description: Write the state of all digital output lines
+  PortDIOSet: &portDIO
+    address: 38
+    type: U8
+    access: Write
+    maskType: PortDigitalIOS
+    description: Set the specified port DIO lines
+  PortDIOClear:
+    <<: *portDIO
+    address: 39
+    description: Clear the specified port DIO lines
+  PortDIOToggle:
+    <<: *portDIO
+    address: 40
+    description: Toggle the specified port DIO lines
+  PortDIOState:
+    <<: *portDIO
+    address: 41
+    description: Write the state of all port DIO lines
+  PortDIODirection:
+    <<: *portDIO
+    address: 42
+    description: Specifies which of the port DIO lines are outputs
+  PortDIOStateEvent:
+    <<: *portDIO
+    address: 43
+    access: Event
+    description: Specifies the state of the port DIO lines on a line change
+  AnalogData:
+    address: 44
+    type: S16
+    length: 2
+    access: Event
+    description: Voltage at the ADC input and encoder value on Port 2
+    payloadSpec:
+      AnalogInput:
+        offset: 0
+        description: The voltage at the output of the ADC
+      Encoder:
+        offset: 1
+        description: The quadrature counter value on Port 2
+  OutputPulseEnable:
+    <<: *output
+    address: 45
+    description: Enables the pulse function for the specified output lines
+  PulseDOPort0: &pulseDO
+    address: 46
+    type: U16
+    access: Write
+    minValue: 1
+    description: Specifies the duration of the output pulse in milliseconds.
+  PulseDOPort1:
+    <<: *pulseDO
+    address: 47
+  PulseDOPort2:
+    <<: *pulseDO
+    address: 48
+  PulseSupplyPort0:
+    <<: *pulseDO
+    address: 49
+  PulseSupplyPort1:
+    <<: *pulseDO
+    address: 50
+  PulseSupplyPort2:
+    <<: *pulseDO
+    address: 51
+  PulseLed0:
+    <<: *pulseDO
+    address: 52
+  PulseLed1:
+    <<: *pulseDO
+    address: 53
+  PulseRgb0:
+    <<: *pulseDO
+    address: 54
+  PulseRgb1:
+    <<: *pulseDO
+    address: 55
+  PulseDO0:
+    <<: *pulseDO
+    address: 56
+  PulseDO1:
+    <<: *pulseDO
+    address: 57
+  PulseDO2:
+    <<: *pulseDO
+    address: 58
+  PulseDO3:
+    <<: *pulseDO
+    address: 59
+  PwmFrequencyDO0: &pwmFreq
+    address: 60
+    type: U16
+    access: Write
+    minValue: 1
+    description: Specifies the frequency of the PWM at DO0.
+  PwmFrequencyDO1:
+    <<: *pwmFreq
+    address: 61
+    description: Specifies the frequency of the PWM at DO1.
+  PwmFrequencyDO2:
+    <<: *pwmFreq
+    address: 62
+    description: Specifies the frequency of the PWM at DO2.
+  PwmFrequencyDO3:
+    <<: *pwmFreq
+    address: 63
+    description: Specifies the frequency of the PWM at DO3.
+  PwmDutyCycleDO0: &pwmDutyCycle
+    address: 64
+    type: U8
+    access: Write
+    minValue: 1
+    maxValue: 99
+    description: Specifies the duty cycle of the PWM at DO0.
+  PwmDutyCycleDO1:
+    <<: *pwmDutyCycle
+    address: 65
+    description: Specifies the duty cycle of the PWM at DO1.
+  PwmDutyCycleDO2:
+    <<: *pwmDutyCycle
+    address: 66
+    description: Specifies the duty cycle of the PWM at DO2.
+  PwmDutyCycleDO3:
+    <<: *pwmDutyCycle
+    address: 67
+    description: Specifies the duty cycle of the PWM at DO3.
+  PwmStart: &pwmStartStop
+    address: 68
+    type: U8
+    access: Write
+    maskType: PwmOutputs
+    description: Starts the PWM on the selected output lines.
+  PwmStop:
+    <<: *pwmDutyCycle 
+    address: 69
+    description: Stops the PWM on the selected output lines.
+  RgbAll:
+    address: 70
+    type: &rgbType U8
+    length: 6
+    access: &rgbAccess Write
+    description: Specifies the state of all RGB LED channels.
+    payloadSpec:
+      Green0:
+        offset: 0
+        description: The intensity of the green channel in the RGB0 LED.
+      Red0:
+        offset: 1
+        description: The intensity of the red channel in the RGB0 LED.
+      Blue0:
+        offset: 2
+        description: The intensity of the blue channel in the RGB0 LED.
+      Green1:
+        offset: 3
+        description: The intensity of the green channel in the RGB1 LED.
+      Red1:
+        offset: 4
+        description: The intensity of the red channel in the RGB1 LED.
+      Blue1:
+        offset: 5
+        description: The intensity of the blue channel in the RGB1 LED.
+  Rgb0: &rgbRegister
+    address: 71
+    type: *rgbType
+    length: 3
+    access: *rgbAccess
+    description: Specifies the state of the RGB0 LED channels.
+    interfaceType: RgbPayload
+    payloadSpec:
+      Green:
+        offset: 0
+        description: The intensity of the green channel in the RGB LED.
+      Red:
+        offset: 1
+        description: The intensity of the red channel in the RGB LED.
+      Blue:
+        offset: 2
+        description: The intensity of the blue channel in the RGB LED.
+  Rgb1:
+    <<: *rgbRegister
+    address: 72
+    description: Specifies the state of the RGB1 LED channels.
+  Led0Current: &ledCurrent
+    address: 73
+    type: U8
+    access: Write
+    minValue: 2
+    maxValue: 100
+    description: Specifies the configuration of current to drive LED 0.
+  Led1Current:
+    <<: *ledCurrent
+    address: 74
+    description: Specifies the configuration of current to drive LED 1.
+  Led0MaxCurrent: &ledMaxCurrent
+    address: 75
+    type: U8
+    access: Write
+    minValue: 5
+    maxValue: 100
+    description: Specifies the configuration of current to drive LED 0.
+  Led1MaxCurrent:
+    <<: *ledMaxCurrent
+    address: 76
+    description: Specifies the configuration of current to drive LED 1.
+  EventEnable:
+    address: 77
+    type: U8
+    access: Write
+    maskType: Events
+    description: Specifies the active events in the device.
+  StartCameras: &cameraControl
+    address: 78
+    type: U8
+    access: Write
+    maskType: CameraOutputs
+    description: Specifies the camera outputs to enable in the device.
+  StopCameras:
+    <<: *cameraControl
+    address: 79
+    description: Specifies the camera outputs to disable in the device.
+  EnableServos: &servoControl
+    address: 80
+    type: U8
+    access: Write
+    maskType: ServoOutputs
+    description: Specifies the servo outputs to enable in the device.
+  DisableServos:
+    <<: *servoControl
+    address: 81
+    description: Specifies the servo outputs to disable in the device.
+  EnableEncoders:
+    address: 82
+    type: U8
+    access: Write
+    maskType: EncoderInputs
+    description: Specifies the port quadrature counters to enable in the device.
+  Reserved1:
+    <<: *reserved
+    address: 83
+  Reserved2:
+    <<: *reserved
+    address: 84
+  Reserved3:
+    <<: *reserved
+    address: 85
+  Reserved4:
+    <<: *reserved
+    address: 86
+  Reserved5:
+    <<: *reserved
+    address: 87
+  Reserved6:
+    <<: *reserved
+    address: 88
+  Reserved7:
+    <<: *reserved
+    address: 89
+  Reserved8:
+    <<: *reserved
+    address: 90
+  Reserved9:
+    <<: *reserved
+    address: 91
+  Camera0Frame: &frameAcquired
+    address: 92
+    type: U8
+    access: Event
+    maskType: FrameAcquired
+    description: Specifies that a frame was acquired on camera 0.
+  Camera0Frequency: &cameraFreq
+    address: 93
+    type: U16
+    access: Write
+    minValue: 1
+    maxValue: 600
+    description: Specifies the trigger frequency for camera 0.
+  Camera1Frame:
+    <<: *frameAcquired
+    address: 94
+    description: Specifies that a frame was acquired on camera 1.
+  Camera1Frequency:
+    <<: *cameraFreq
+    address: 95
+    description: Specifies the trigger frequency for camera 1.
+  Reserved10:
+    <<: *reserved
+    address: 96
+  Reserved11:
+    <<: *reserved
+    address: 97
+  Reserved12:
+    <<: *reserved
+    address: 98
+  Reserved13:
+    <<: *reserved
+    address: 99
+  ServoMotor2Period: &servoPeriod
+    address: 100
+    type: U16
+    access: Write
+    description: Specifies the period of the servo motor in DO2, in microseconds.
+  ServoMotor2Pulse: &servoPulse
+    address: 101
+    type: U16
+    access: Write
+    description: Specifies the pulse of the servo motor in DO2, in microseconds.
+  ServoMotor3Period:
+    <<: *servoPeriod
+    address: 102
+    description: Specifies the period of the servo motor in DO3, in microseconds.
+  ServoMotor3Pulse:
+    <<: *servoPulse
+    address: 103
+    description: Specifies the pulse of the servo motor in DO3, in microseconds.
+  Reserved14:
+    <<: *reserved
+    address: 104
+  Reserved15:
+    <<: *reserved
+    address: 105
+  Reserved16:
+    <<: *reserved
+    address: 106
+  Reserved17:
+    <<: *reserved
+    address: 107
+  EncoderReset:
+    address: 108
+    type: U8
+    access: Write
+    maskType: EncoderInputs
+    description: Reset the counter of the specified encoders to zero.
+  Reserved18:
+    <<: *reserved
+    address: 109
+  EnableSerialTimestamp:
+    address: 110
+    type: U8
+    access: Write
+    description: Enables the timestamp for serial TX.
+  MimicPort0IR: &mimic
+    address: 111
+    type: U8
+    access: Write
+    maskType: MimicOutput
+    description: Specifies the digital output to mimic the Port 0 IR state.
+  MimicPort1IR:
+    <<: *mimic
+    address: 112
+    description: Specifies the digital output to mimic the Port 1 IR state.
+  MimicPort2IR:
+    <<: *mimic
+    address: 113
+    description: Specifies the digital output to mimic the Port 2 IR state.
+  Reserved20:
+    <<: *reserved
+    address: 114
+  Reserved21:
+    <<: *reserved
+    address: 115
+  Reserved22:
+    <<: *reserved
+    address: 116
+  MimicPort0Valve:
+    <<: *mimic
+    address: 117
+    description: Specifies the digital output to mimic the Port 0 valve state.
+  MimicPort1Valve:
+    <<: *mimic
+    address: 118
+    description: Specifies the digital output to mimic the Port 1 valve state.
+  MimicPort2Valve:
+    <<: *mimic
+    address: 119
+    description: Specifies the digital output to mimic the Port 2 valve state.
+  Reserved23:
+    <<: *reserved
+    address: 120
+  Reserved24:
+    <<: *reserved
+    address: 121
+  PokeInputFilter:
+    address: 122
+    type: U8
+    access: Write
+    description: Specifies the low pass filter time value for poke inputs, in ms.
+bitMasks:
+  DigitalInputs:
+    description: Specifies the state of port digital input lines.
+    bits:
+      DI0: 0x1
+      DI1: 0x2
+      DI2: 0x4
+      DI3: 0x8
+  DigitalOutputs:
+    description: Specifies the state of port digital output lines.
+    bits:
+      DOPort0: 0x1
+      DOPort1: 0x2
+      DOPort2: 0x4
+      SupplyPort0: 0x8
+      SupplyPort1: 0x10
+      SupplyPort2: 0x20
+      Led0: 0x40
+      Led1: 0x80
+      Rgb0: 0x100
+      Rgb1: 0x200
+      DO0: 0x400
+      DO1: 0x800
+      DO2: 0x1000
+      DO3: 0x2000
+  PortDigitalIOS:
+    description: Specifies the state of the port DIO lines.
+    bits:
+      DIO0: 0x1
+      DIO1: 0x2
+      DIO2: 0x4
+  PwmOutputs:
+    description: Specifies the state of PWM output lines.
+    bits:
+      PwmDO0: 0x1
+      PwmDO1: 0x2
+      PwmDO2: 0x4
+      PwmDO3: 0x8
+  Events:
+    description: Specifies the active events in the device.
+    bits:
+      PortDI: 0x1
+      PortDIO: 0x2
+      AnalogData: 0x4
+      Camera0: 0x8
+      Camera1: 0x10
+  CameraOutputs:
+    description: Specifies camera output enable bits.
+    bits:
+      CameraOutput0: 0x1
+      CameraOutput1: 0x2
+  ServoOutputs:
+    description: Specifies servo output enable bits.
+    bits:
+      ServoOutput2: 0x4
+      ServoOutput3: 0x8
+  EncoderInputs:
+    description: Specifies quadrature counter enable bits.
+    bits:
+      EncoderPort2: 0x4
+  FrameAcquired:
+    description: Specifies that camera frame was acquired.
+    bits:
+      FrameAcquired: 0x1
+groupMasks:
+  MimicOutput:
+    description: Specifies the target IO on which to mimic the specified register.
+    values:
+      None: 0
+      DIO0: 1
+      DIO1: 2
+      DIO2: 3
+      DO0: 4
+      DO1: 5
+      DO2: 6
+      DO3: 7      
+  

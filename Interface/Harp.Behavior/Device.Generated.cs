@@ -1740,22 +1740,24 @@ namespace Harp.Behavior
         /// <summary>
         /// Represents the length of the <see cref="AnalogData"/> register. This field is constant.
         /// </summary>
-        public const int RegisterLength = 2;
+        public const int RegisterLength = 3;
 
         static AnalogDataPayload ParsePayload(short[] payload)
         {
             AnalogDataPayload result;
-            result.AnalogInput = payload[0];
+            result.AnalogInput0 = payload[0];
             result.Encoder = payload[1];
+            result.AnalogInput1 = payload[2];
             return result;
         }
 
         static short[] FormatPayload(AnalogDataPayload value)
         {
             short[] result;
-            result = new short[2];
-            result[0] = value.AnalogInput;
+            result = new short[3];
+            result[0] = value.AnalogInput0;
             result[1] = value.Encoder;
+            result[2] = value.AnalogInput1;
             return result;
         }
 
@@ -7888,16 +7890,22 @@ namespace Harp.Behavior
     public partial class CreateAnalogDataPayload : HarpCombinator
     {
         /// <summary>
-        /// Gets or sets a value that the voltage at the output of the ADC.
+        /// Gets or sets a value that the voltage at the output of the ADC channel 0.
         /// </summary>
-        [Description("The voltage at the output of the ADC")]
-        public short AnalogInput { get; set; }
+        [Description("The voltage at the output of the ADC channel 0.")]
+        public short AnalogInput0 { get; set; }
 
         /// <summary>
         /// Gets or sets a value that the quadrature counter value on Port 2.
         /// </summary>
         [Description("The quadrature counter value on Port 2")]
         public short Encoder { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that the voltage at the output of the ADC channel 1.
+        /// </summary>
+        [Description("The voltage at the output of the ADC channel 1.")]
+        public short AnalogInput1 { get; set; }
 
         /// <summary>
         /// Creates an observable sequence that contains a single message
@@ -7931,8 +7939,9 @@ namespace Harp.Behavior
             return source.Select(_ =>
             {
                 AnalogDataPayload value;
-                value.AnalogInput = AnalogInput;
+                value.AnalogInput0 = AnalogInput0;
                 value.Encoder = Encoder;
+                value.AnalogInput1 = AnalogInput1;
                 return AnalogData.FromPayload(MessageType, value);
             });
         }
@@ -10722,25 +10731,33 @@ namespace Harp.Behavior
         /// <summary>
         /// Initializes a new instance of the <see cref="AnalogDataPayload"/> structure.
         /// </summary>
-        /// <param name="analogInput">The voltage at the output of the ADC</param>
+        /// <param name="analogInput0">The voltage at the output of the ADC channel 0.</param>
         /// <param name="encoder">The quadrature counter value on Port 2</param>
+        /// <param name="analogInput1">The voltage at the output of the ADC channel 1.</param>
         public AnalogDataPayload(
-            short analogInput,
-            short encoder)
+            short analogInput0,
+            short encoder,
+            short analogInput1)
         {
-            AnalogInput = analogInput;
+            AnalogInput0 = analogInput0;
             Encoder = encoder;
+            AnalogInput1 = analogInput1;
         }
 
         /// <summary>
-        /// The voltage at the output of the ADC
+        /// The voltage at the output of the ADC channel 0.
         /// </summary>
-        public short AnalogInput;
+        public short AnalogInput0;
 
         /// <summary>
         /// The quadrature counter value on Port 2
         /// </summary>
         public short Encoder;
+
+        /// <summary>
+        /// The voltage at the output of the ADC channel 1.
+        /// </summary>
+        public short AnalogInput1;
     }
 
     /// <summary>

@@ -70,15 +70,15 @@ registers:
     access: Event
     description: Voltage at the ADC input and encoder value on Port 2
     payloadSpec:
-      AnalogInput:
+      AnalogInput0:
         offset: 0
         description: The voltage at the output of the ADC channel 0.
-      AnalogInput1:
-        offset: 2
-        description: The voltage at the output of the ADC channel 1.
       Encoder:
         offset: 1
         description: The quadrature counter value on Port 2
+      AnalogInput1:
+        offset: 2
+        description: The voltage at the output of the ADC channel 1.
   OutputPulseEnable:
     <<: *output
     address: 45

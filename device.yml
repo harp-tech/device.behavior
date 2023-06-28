@@ -172,7 +172,7 @@ registers:
     maskType: PwmOutputs
     description: Starts the PWM on the selected output lines.
   PwmStop:
-    <<: *pwmDutyCycle 
+    <<: *pwmStartStop
     address: 69
     description: Stops the PWM on the selected output lines.
   RgbAll:

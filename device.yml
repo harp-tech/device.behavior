@@ -6,7 +6,7 @@ whoAmI: 1216
 firmwareVersion: "3.0"
 hardwareTargets: "2.0"
 registers:
-  PortDigitalInput:
+  DigitalInputState:
     address: 32
     access: Event
     type: U8
@@ -172,7 +172,7 @@ registers:
     maskType: PwmOutputs
     description: Starts the PWM on the selected output lines.
   PwmStop:
-    <<: *pwmDutyCycle 
+    <<: *pwmStartStop
     address: 69
     description: Stops the PWM on the selected output lines.
   RgbAll:
@@ -429,9 +429,9 @@ bitMasks:
   DigitalInputs:
     description: Specifies the state of port digital input lines.
     bits:
-      DI0: 0x1
-      DI1: 0x2
-      DI2: 0x4
+      DIPort0: 0x1
+      DIPort1: 0x2
+      DIPort2: 0x4
       DI3: 0x8
   DigitalOutputs:
     description: Specifies the state of port digital output lines.

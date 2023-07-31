@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bonsai.Harp" Version="3.5.0-build032701" />
+    <PackageReference Include="Bonsai.Harp" Version="3.5.0-build062701" />
   </ItemGroup>
 
 </Project>

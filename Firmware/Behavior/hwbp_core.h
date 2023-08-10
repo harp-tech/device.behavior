@@ -126,7 +126,8 @@ void core_func_start_core (
     const uint8_t num_of_app_registers,
     const uint8_t *device_name,
 	const bool	device_is_able_to_repeat_clock,
-	const bool	device_is_able_to_generate_clock
+	const bool	device_is_able_to_generate_clock,
+	const uint8_t default_timestamp_offset
 	);
 
 // Call this function in case of error

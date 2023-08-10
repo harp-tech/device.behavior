@@ -10,8 +10,8 @@
 #define ADD_R_HW_VERSION_H      0x01    // U8
 #define ADD_R_HW_VERSION_L      0x02    // U8
 #define ADD_R_ASSEMBLY_VERSION  0x03    // U8
-#define ADD_R_HARP_VERSION_H    0x04    // U8
-#define ADD_R_HARP_VERSION_L    0x05    // U8
+#define ADD_R_CORE_VERSION_H    0x04    // U8
+#define ADD_R_CORE_VERSION_L    0x05    // U8
 #define ADD_R_FW_VERSION_H      0x06    // U8
 #define ADD_R_FW_VERSION_L      0x07    // U8
 #define ADD_R_TIMESTAMP_SECOND  0x08    // U32
@@ -21,9 +21,10 @@
 #define ADD_R_DEVICE_NAME       0x0C    // U8
 #define ADD_R_SERIAL_NUMBER     0x0D    // U16
 #define ADD_R_CONFIG            0x0E    // U8
+#define ADD_R_TIMESTAMP_OFFSET  0x0F    // U8
 
 /* Memory limits */
-#define COMMON_BANK_ADD_MAX             0x0E
+#define COMMON_BANK_ADD_MAX             0x0F
 #define COMMON_BANK_ABSOLUTE_ADD_MAX    0x1C
 
 /* R_OPERATION_CTRL */

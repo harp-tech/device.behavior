@@ -180,7 +180,7 @@ typedef struct
 	uint8_t REG_EN_SERVOS;
 	uint8_t REG_DIS_SERVOS;
 	uint8_t REG_EN_ENCODERS;
-	uint8_t REG_RESERVED1;
+	uint8_t REG_CONF_ENCODERS;
 	uint8_t REG_RESERVED2;
 	uint8_t REG_RESERVED3;
 	uint8_t REG_RESERVED4;
@@ -277,7 +277,7 @@ typedef struct
 #define ADD_REG_EN_SERVOS                   80 // U8     Enable servo motors control
 #define ADD_REG_DIS_SERVOS                  81 // U8     Disable servo motors control
 #define ADD_REG_EN_ENCODERS                 82 // U8     Enable encoders
-#define ADD_REG_RESERVED1                   83 // U8     Reserved for future use
+#define ADD_REG_CONF_ENCODERS               83 // U8     Configure the operation mode of the quadrature encoders
 #define ADD_REG_RESERVED2                   84 // U8     Reserved for future use
 #define ADD_REG_RESERVED3                   85 // U8     Reserved for future use
 #define ADD_REG_RESERVED4                   86 // U8     Reserved for future use
@@ -367,6 +367,9 @@ typedef struct
 #define B_EN_SERVO_OUT2                    (1<<2)       // Servo on digital output 2
 #define B_EN_SERVO_OUT3                    (1<<3)       // Servo on digital output 3
 #define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
+#define MSK_ENCODERS_MODE                  0x01         // 
+#define GM_POSITION                        0x00         // 
+#define GM_DISPLACEMENT                    0x01         // 
 #define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
 #define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
 #define B_EN_SRL_TSTAMP_PORT2              (1<<2)       // Enable the serial timestamp TX on Port 2

@@ -320,7 +320,7 @@ uint8_t *app_regs_pointer[] = {
 	(uint8_t*)(&app_regs.REG_EN_SERVOS),
 	(uint8_t*)(&app_regs.REG_DIS_SERVOS),
 	(uint8_t*)(&app_regs.REG_EN_ENCODERS),
-	(uint8_t*)(&app_regs.REG_RESERVED1),
+	(uint8_t*)(&app_regs.REG_CONF_ENCODERS),
 	(uint8_t*)(&app_regs.REG_RESERVED2),
 	(uint8_t*)(&app_regs.REG_RESERVED3),
 	(uint8_t*)(&app_regs.REG_RESERVED4),

@@ -275,9 +275,12 @@ registers:
     access: Write
     maskType: EncoderInputs
     description: Specifies the port quadrature counters to enable in the device.
-  Reserved1:
-    <<: *reserved
+  ConfigureEncoders:
     address: 83
+    type: U8
+    access: Write
+    maskType: EncoderMode
+    description: Configures the operation mode of the quadrature encoders.
   Reserved2:
     <<: *reserved
     address: 84
@@ -501,4 +504,9 @@ groupMasks:
       DO1: 5
       DO2: 6
       DO3: 7      
+  EncoderMode:
+    description: Specifies the type of reading made from the quadrature encoder.
+    values:
+      Position: 0
+      Displacement: 1
   

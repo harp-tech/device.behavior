@@ -363,6 +363,8 @@ uint8_t t1ms = 0;
 
 bool first_adc_channel;
 
+int16_t previous_encoder_poke2;
+
 void core_callback_t_before_exec(void)
 {
    if (t1ms++ & 1)
@@ -379,15 +381,25 @@ void core_callback_t_before_exec(void)
        if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
        {
            int16_t timer_cnt = TCD1_CNT;
-    
-           if (timer_cnt > 32768)
-           {
-               app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
-           }
-           else
-           {
-               app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
-           }
+           
+           if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+			  {               
+               if (timer_cnt > 32768)
+               {
+                   app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
+               }
+               else
+               {
+					    app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
+               }
+			  }
+			  else
+			  {
+			        app_regs.REG_DATA[1] = previous_encoder_poke2 - timer_cnt;			        
+					  
+			        previous_encoder_poke2 = timer_cnt;
+			  }
+			  
        } 
    }      
 }

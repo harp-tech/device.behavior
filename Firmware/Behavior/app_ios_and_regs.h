@@ -316,7 +316,7 @@ typedef struct
 #define ADD_REG_MIMIC_PORT2_VALVE          119 // U8     
 #define ADD_REG_RESERVED23                 120 // U8     
 #define ADD_REG_RESERVED24                 121 // U8     
-#define ADD_REG_POKE_INPUT_FILTER_MS       122 // U8     
+#define ADD_REG_POKE_INPUT_FILTER_MS       122 // U8     Set the low pass filter time value for the pokes inputs (ms)
 
 /************************************************************************/
 /* PWM Generator registers' memory limits                               */

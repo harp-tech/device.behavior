@@ -3,7 +3,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/reflex-generator/main/schema/device.json
 device: Behavior
 whoAmI: 1216
-firmwareVersion: "3.1"
+firmwareVersion: "3.2"
 hardwareTargets: "1.1"
 registers:
   DigitalInputState:

@@ -339,11 +339,15 @@ registers:
     address: 100
     type: U16
     access: Write
+    minValue: 2
+    maxValue: 65534
     description: Specifies the period of the servo motor in DO2, in microseconds.
   ServoMotor2Pulse: &servoPulse
     address: 101
     type: U16
     access: Write
+    minValue: 6
+    maxValue: 65530
     description: Specifies the pulse of the servo motor in DO2, in microseconds.
   ServoMotor3Period:
     <<: *servoPeriod

@@ -72,7 +72,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_EN_SERVOS,
 	&app_read_REG_DIS_SERVOS,
 	&app_read_REG_EN_ENCODERS,
-	&app_read_REG_RESERVED1,
+	&app_read_REG_CONF_ENCODERS,
 	&app_read_REG_RESERVED2,
 	&app_read_REG_RESERVED3,
 	&app_read_REG_RESERVED4,
@@ -166,7 +166,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_EN_SERVOS,
 	&app_write_REG_DIS_SERVOS,
 	&app_write_REG_EN_ENCODERS,
-	&app_write_REG_RESERVED1,
+	&app_write_REG_CONF_ENCODERS,
 	&app_write_REG_RESERVED2,
 	&app_write_REG_RESERVED3,
 	&app_write_REG_RESERVED4,
@@ -1469,6 +1469,8 @@ bool app_write_REG_DIS_SERVOS(void *a)
 /************************************************************************/
 /* REG_EN_ENCODERS                                                      */
 /************************************************************************/
+extern int16_t previous_encoder_poke2;
+
 void app_read_REG_EN_ENCODERS(void)
 {
 	app_regs.REG_EN_ENCODERS = 0;
@@ -1505,6 +1507,7 @@ bool app_write_REG_EN_ENCODERS(void *a)
         TCD1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc;	                // P. 180-1
         TCD1_PER = 0xFFFF;
         TCD1_CNT = 0x8000;
+		  previous_encoder_poke2 = 0x8000;
         
         /* Start timer */
         TCD1_CTRLA=TC_CLKSEL_DIV1_gc;
@@ -1535,10 +1538,18 @@ bool app_write_REG_EN_ENCODERS(void *a)
 
 
 /************************************************************************/
-/* REG_RESERVED1                                                        */
+/* REG_CONF_ENCODERS                                                    */
 /************************************************************************/
-void app_read_REG_RESERVED1(void) {}
-bool app_write_REG_RESERVED1(void *a) {return true;}
+void app_read_REG_CONF_ENCODERS(void) {}
+bool app_write_REG_CONF_ENCODERS(void *a)
+{
+	uint8_t reg = *((uint8_t*)a);
+	
+	if (reg & ~MSK_ENCODERS_MODE) return false;
+	
+	app_regs.REG_CONF_ENCODERS = reg;
+	return true;
+}
 /************************************************************************/
 /* REG_RESERVED2                                                        */
 /************************************************************************/
@@ -1759,7 +1770,8 @@ bool app_write_REG_ENCODERS_RESET(void *a)
     {
         if (_states_.quad_counter.port2)
         {
-            TCD1_CNT = 0x8000;            
+            TCD1_CNT = 0x8000;
+				previous_encoder_poke2 = 0x8000;
         }
     }
 

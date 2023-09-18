@@ -36,7 +36,7 @@ void hwbp_app_initialize(void)
     uint8_t hwH = 2;
     uint8_t hwL = 0;
     uint8_t fwH = 3;
-    uint8_t fwL = 1;
+    uint8_t fwL = 2;
     uint8_t ass = 0;    
     
    	/* Start core */
@@ -49,9 +49,9 @@ void hwbp_app_initialize(void)
    	    APP_NBYTES_OF_REG_BANK,
    	    APP_REGS_ADD_MAX - APP_REGS_ADD_MIN + 1,
    	    default_device_name,
-   	    true,	// The device is _not_ able to repeat the harp timestamp clock
-   	    true,	// The device is _not_ able to generate the harp timestamp clock
-   	    3		// Default timestamp offset
+   	    false,	// The device is _not_ able to repeat the harp timestamp clock
+   	    false,	// The device is _not_ able to generate the harp timestamp clock
+   	    0		// Default timestamp offset
    	);
 }
 
@@ -363,6 +363,8 @@ uint8_t t1ms = 0;
 
 bool first_adc_channel;
 
+int16_t previous_encoder_poke2;
+
 void core_callback_t_before_exec(void)
 {
    if (t1ms++ & 1)
@@ -379,15 +381,25 @@ void core_callback_t_before_exec(void)
        if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
        {
            int16_t timer_cnt = TCD1_CNT;
-    
-           if (timer_cnt > 32768)
-           {
-               app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
-           }
-           else
-           {
-               app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
-           }
+           
+           if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+			  {               
+               if (timer_cnt > 32768)
+               {
+                   app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
+               }
+               else
+               {
+					    app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
+               }
+			  }
+			  else
+			  {
+			        app_regs.REG_DATA[1] = previous_encoder_poke2 - timer_cnt;			        
+					  
+			        previous_encoder_poke2 = timer_cnt;
+			  }
+			  
        } 
    }      
 }

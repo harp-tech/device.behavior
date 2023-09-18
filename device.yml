@@ -3,7 +3,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/reflex-generator/main/schema/device.json
 device: Behavior
 whoAmI: 1216
-firmwareVersion: "3.1"
+firmwareVersion: "3.2"
 hardwareTargets: "1.1"
 registers:
   DigitalInputState:
@@ -275,9 +275,12 @@ registers:
     access: Write
     maskType: EncoderInputs
     description: Specifies the port quadrature counters to enable in the device.
-  Reserved1:
-    <<: *reserved
+  EncoderMode:
     address: 83
+    type: U8
+    access: Write
+    maskType: EncoderModeConfig
+    description: Configures the operation mode of the quadrature encoders.
   Reserved2:
     <<: *reserved
     address: 84
@@ -504,5 +507,9 @@ groupMasks:
       DO0: 4
       DO1: 5
       DO2: 6
-      DO3: 7      
-  
+      DO3: 7
+  EncoderModeConfig:
+    description: Specifies the type of reading made from the quadrature encoder.
+    values:
+      Position: 0
+      Displacement: 1

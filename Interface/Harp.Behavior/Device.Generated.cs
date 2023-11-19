@@ -87,6 +87,7 @@ namespace Harp.Behavior
             { 80, typeof(EnableServos) },
             { 81, typeof(DisableServos) },
             { 82, typeof(EnableEncoders) },
+            { 83, typeof(EncoderMode) },
             { 92, typeof(Camera0Frame) },
             { 93, typeof(Camera0Frequency) },
             { 94, typeof(Camera1Frame) },
@@ -182,6 +183,7 @@ namespace Harp.Behavior
     /// <seealso cref="EnableServos"/>
     /// <seealso cref="DisableServos"/>
     /// <seealso cref="EnableEncoders"/>
+    /// <seealso cref="EncoderMode"/>
     /// <seealso cref="Camera0Frame"/>
     /// <seealso cref="Camera0Frequency"/>
     /// <seealso cref="Camera1Frame"/>
@@ -249,6 +251,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(EnableServos))]
     [XmlInclude(typeof(DisableServos))]
     [XmlInclude(typeof(EnableEncoders))]
+    [XmlInclude(typeof(EncoderMode))]
     [XmlInclude(typeof(Camera0Frame))]
     [XmlInclude(typeof(Camera0Frequency))]
     [XmlInclude(typeof(Camera1Frame))]
@@ -337,6 +340,7 @@ namespace Harp.Behavior
     /// <seealso cref="EnableServos"/>
     /// <seealso cref="DisableServos"/>
     /// <seealso cref="EnableEncoders"/>
+    /// <seealso cref="EncoderMode"/>
     /// <seealso cref="Camera0Frame"/>
     /// <seealso cref="Camera0Frequency"/>
     /// <seealso cref="Camera1Frame"/>
@@ -404,6 +408,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(EnableServos))]
     [XmlInclude(typeof(DisableServos))]
     [XmlInclude(typeof(EnableEncoders))]
+    [XmlInclude(typeof(EncoderMode))]
     [XmlInclude(typeof(Camera0Frame))]
     [XmlInclude(typeof(Camera0Frequency))]
     [XmlInclude(typeof(Camera1Frame))]
@@ -471,6 +476,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(TimestampedEnableServos))]
     [XmlInclude(typeof(TimestampedDisableServos))]
     [XmlInclude(typeof(TimestampedEnableEncoders))]
+    [XmlInclude(typeof(TimestampedEncoderMode))]
     [XmlInclude(typeof(TimestampedCamera0Frame))]
     [XmlInclude(typeof(TimestampedCamera0Frequency))]
     [XmlInclude(typeof(TimestampedCamera1Frame))]
@@ -556,6 +562,7 @@ namespace Harp.Behavior
     /// <seealso cref="EnableServos"/>
     /// <seealso cref="DisableServos"/>
     /// <seealso cref="EnableEncoders"/>
+    /// <seealso cref="EncoderMode"/>
     /// <seealso cref="Camera0Frame"/>
     /// <seealso cref="Camera0Frequency"/>
     /// <seealso cref="Camera1Frame"/>
@@ -623,6 +630,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(EnableServos))]
     [XmlInclude(typeof(DisableServos))]
     [XmlInclude(typeof(EnableEncoders))]
+    [XmlInclude(typeof(EncoderMode))]
     [XmlInclude(typeof(Camera0Frame))]
     [XmlInclude(typeof(Camera0Frequency))]
     [XmlInclude(typeof(Camera1Frame))]
@@ -5561,6 +5569,103 @@ namespace Harp.Behavior
     }
 
     /// <summary>
+    /// Represents a register that configures the operation mode of the quadrature encoders.
+    /// </summary>
+    [Description("Configures the operation mode of the quadrature encoders.")]
+    public partial class EncoderMode
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="EncoderMode"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 83;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="EncoderMode"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="EncoderMode"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+
+        /// <summary>
+        /// Returns the payload data for <see cref="EncoderMode"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the message payload.</returns>
+        public static EncoderModeConfig GetPayload(HarpMessage message)
+        {
+            return (EncoderModeConfig)message.GetPayloadByte();
+        }
+
+        /// <summary>
+        /// Returns the timestamped payload data for <see cref="EncoderMode"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<EncoderModeConfig> GetTimestampedPayload(HarpMessage message)
+        {
+            var payload = message.GetTimestampedPayloadByte();
+            return Timestamped.Create((EncoderModeConfig)payload.Value, payload.Seconds);
+        }
+
+        /// <summary>
+        /// Returns a Harp message for the <see cref="EncoderMode"/> register.
+        /// </summary>
+        /// <param name="messageType">The type of the Harp message.</param>
+        /// <param name="value">The value to be stored in the message payload.</param>
+        /// <returns>
+        /// A <see cref="HarpMessage"/> object for the <see cref="EncoderMode"/> register
+        /// with the specified message type and payload.
+        /// </returns>
+        public static HarpMessage FromPayload(MessageType messageType, EncoderModeConfig value)
+        {
+            return HarpMessage.FromByte(Address, messageType, (byte)value);
+        }
+
+        /// <summary>
+        /// Returns a timestamped Harp message for the <see cref="EncoderMode"/>
+        /// register.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">The type of the Harp message.</param>
+        /// <param name="value">The value to be stored in the message payload.</param>
+        /// <returns>
+        /// A <see cref="HarpMessage"/> object for the <see cref="EncoderMode"/> register
+        /// with the specified message type, timestamp, and payload.
+        /// </returns>
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, EncoderModeConfig value)
+        {
+            return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
+        }
+    }
+
+    /// <summary>
+    /// Provides methods for manipulating timestamped messages from the
+    /// EncoderMode register.
+    /// </summary>
+    /// <seealso cref="EncoderMode"/>
+    [Description("Filters and selects timestamped messages from the EncoderMode register.")]
+    public partial class TimestampedEncoderMode
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="EncoderMode"/> register. This field is constant.
+        /// </summary>
+        public const int Address = EncoderMode.Address;
+
+        /// <summary>
+        /// Returns timestamped payload data for <see cref="EncoderMode"/> register messages.
+        /// </summary>
+        /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
+        /// <returns>A value representing the timestamped message payload.</returns>
+        public static Timestamped<EncoderModeConfig> GetPayload(HarpMessage message)
+        {
+            return EncoderMode.GetTimestampedPayload(message);
+        }
+    }
+
+    /// <summary>
     /// Represents a register that specifies that a frame was acquired on camera 0.
     /// </summary>
     [Description("Specifies that a frame was acquired on camera 0.")]
@@ -7255,6 +7360,7 @@ namespace Harp.Behavior
     /// <seealso cref="CreateEnableServosPayload"/>
     /// <seealso cref="CreateDisableServosPayload"/>
     /// <seealso cref="CreateEnableEncodersPayload"/>
+    /// <seealso cref="CreateEncoderModePayload"/>
     /// <seealso cref="CreateCamera0FramePayload"/>
     /// <seealso cref="CreateCamera0FrequencyPayload"/>
     /// <seealso cref="CreateCamera1FramePayload"/>
@@ -7322,6 +7428,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(CreateEnableServosPayload))]
     [XmlInclude(typeof(CreateDisableServosPayload))]
     [XmlInclude(typeof(CreateEnableEncodersPayload))]
+    [XmlInclude(typeof(CreateEncoderModePayload))]
     [XmlInclude(typeof(CreateCamera0FramePayload))]
     [XmlInclude(typeof(CreateCamera0FrequencyPayload))]
     [XmlInclude(typeof(CreateCamera1FramePayload))]
@@ -7389,6 +7496,7 @@ namespace Harp.Behavior
     [XmlInclude(typeof(CreateTimestampedEnableServosPayload))]
     [XmlInclude(typeof(CreateTimestampedDisableServosPayload))]
     [XmlInclude(typeof(CreateTimestampedEnableEncodersPayload))]
+    [XmlInclude(typeof(CreateTimestampedEncoderModePayload))]
     [XmlInclude(typeof(CreateTimestampedCamera0FramePayload))]
     [XmlInclude(typeof(CreateTimestampedCamera0FrequencyPayload))]
     [XmlInclude(typeof(CreateTimestampedCamera1FramePayload))]
@@ -10259,6 +10367,60 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates a message payload
+    /// that configures the operation mode of the quadrature encoders.
+    /// </summary>
+    [DisplayName("EncoderModePayload")]
+    [Description("Creates a message payload that configures the operation mode of the quadrature encoders.")]
+    public partial class CreateEncoderModePayload
+    {
+        /// <summary>
+        /// Gets or sets the value that configures the operation mode of the quadrature encoders.
+        /// </summary>
+        [Description("The value that configures the operation mode of the quadrature encoders.")]
+        public EncoderModeConfig EncoderMode { get; set; }
+
+        /// <summary>
+        /// Creates a message payload for the EncoderMode register.
+        /// </summary>
+        /// <returns>The created message payload value.</returns>
+        public EncoderModeConfig GetPayload()
+        {
+            return EncoderMode;
+        }
+
+        /// <summary>
+        /// Creates a message that configures the operation mode of the quadrature encoders.
+        /// </summary>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the EncoderMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
+        {
+            return Harp.Behavior.EncoderMode.FromPayload(messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a timestamped message payload
+    /// that configures the operation mode of the quadrature encoders.
+    /// </summary>
+    [DisplayName("TimestampedEncoderModePayload")]
+    [Description("Creates a timestamped message payload that configures the operation mode of the quadrature encoders.")]
+    public partial class CreateTimestampedEncoderModePayload : CreateEncoderModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that configures the operation mode of the quadrature encoders.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the EncoderMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.Behavior.EncoderMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that specifies that a frame was acquired on camera 0.
     /// </summary>
     [DisplayName("Camera0FramePayload")]
@@ -10488,8 +10650,10 @@ namespace Harp.Behavior
         /// <summary>
         /// Gets or sets the value that specifies the period of the servo motor in DO2, in microseconds.
         /// </summary>
+        [Range(min: 2, max: 65534)]
+        [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that specifies the period of the servo motor in DO2, in microseconds.")]
-        public ushort ServoMotor2Period { get; set; }
+        public ushort ServoMotor2Period { get; set; } = 2;
 
         /// <summary>
         /// Creates a message payload for the ServoMotor2Period register.
@@ -10542,8 +10706,10 @@ namespace Harp.Behavior
         /// <summary>
         /// Gets or sets the value that specifies the pulse of the servo motor in DO2, in microseconds.
         /// </summary>
+        [Range(min: 6, max: 65530)]
+        [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that specifies the pulse of the servo motor in DO2, in microseconds.")]
-        public ushort ServoMotor2Pulse { get; set; }
+        public ushort ServoMotor2Pulse { get; set; } = 6;
 
         /// <summary>
         /// Creates a message payload for the ServoMotor2Pulse register.
@@ -10596,8 +10762,10 @@ namespace Harp.Behavior
         /// <summary>
         /// Gets or sets the value that specifies the period of the servo motor in DO3, in microseconds.
         /// </summary>
+        [Range(min: 2, max: 65534)]
+        [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that specifies the period of the servo motor in DO3, in microseconds.")]
-        public ushort ServoMotor3Period { get; set; }
+        public ushort ServoMotor3Period { get; set; } = 2;
 
         /// <summary>
         /// Creates a message payload for the ServoMotor3Period register.
@@ -10650,8 +10818,10 @@ namespace Harp.Behavior
         /// <summary>
         /// Gets or sets the value that specifies the pulse of the servo motor in DO3, in microseconds.
         /// </summary>
+        [Range(min: 6, max: 65530)]
+        [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that specifies the pulse of the servo motor in DO3, in microseconds.")]
-        public ushort ServoMotor3Pulse { get; set; }
+        public ushort ServoMotor3Pulse { get; set; } = 6;
 
         /// <summary>
         /// Creates a message payload for the ServoMotor3Pulse register.
@@ -11444,5 +11614,14 @@ namespace Harp.Behavior
         DO1 = 5,
         DO2 = 6,
         DO3 = 7
+    }
+
+    /// <summary>
+    /// Specifies the type of reading made from the quadrature encoder.
+    /// </summary>
+    public enum EncoderModeConfig : byte
+    {
+        Position = 0,
+        Displacement = 1
     }
 }

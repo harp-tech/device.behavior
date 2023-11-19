@@ -38,6 +38,7 @@ namespace Harp.Behavior
             (Bonsai.Harp.Device.RegisterMap.ToDictionary(entry => entry.Key, entry => entry.Value))
         {
             { 32, typeof(DigitalInputState) },
+            { 33, typeof(Reserved0) },
             { 34, typeof(OutputSet) },
             { 35, typeof(OutputClear) },
             { 36, typeof(OutputToggle) },
@@ -88,22 +89,44 @@ namespace Harp.Behavior
             { 81, typeof(DisableServos) },
             { 82, typeof(EnableEncoders) },
             { 83, typeof(EncoderMode) },
+            { 84, typeof(Reserved2) },
+            { 85, typeof(Reserved3) },
+            { 86, typeof(Reserved4) },
+            { 87, typeof(Reserved5) },
+            { 88, typeof(Reserved6) },
+            { 89, typeof(Reserved7) },
+            { 90, typeof(Reserved8) },
+            { 91, typeof(Reserved9) },
             { 92, typeof(Camera0Frame) },
             { 93, typeof(Camera0Frequency) },
             { 94, typeof(Camera1Frame) },
             { 95, typeof(Camera1Frequency) },
+            { 96, typeof(Reserved10) },
+            { 97, typeof(Reserved11) },
+            { 98, typeof(Reserved12) },
+            { 99, typeof(Reserved13) },
             { 100, typeof(ServoMotor2Period) },
             { 101, typeof(ServoMotor2Pulse) },
             { 102, typeof(ServoMotor3Period) },
             { 103, typeof(ServoMotor3Pulse) },
+            { 104, typeof(Reserved14) },
+            { 105, typeof(Reserved15) },
+            { 106, typeof(Reserved16) },
+            { 107, typeof(Reserved17) },
             { 108, typeof(EncoderReset) },
+            { 109, typeof(Reserved18) },
             { 110, typeof(EnableSerialTimestamp) },
             { 111, typeof(MimicPort0IR) },
             { 112, typeof(MimicPort1IR) },
             { 113, typeof(MimicPort2IR) },
+            { 114, typeof(Reserved20) },
+            { 115, typeof(Reserved21) },
+            { 116, typeof(Reserved22) },
             { 117, typeof(MimicPort0Valve) },
             { 118, typeof(MimicPort1Valve) },
             { 119, typeof(MimicPort2Valve) },
+            { 120, typeof(Reserved23) },
+            { 121, typeof(Reserved24) },
             { 122, typeof(PokeInputFilter) }
         };
     }
@@ -757,6 +780,28 @@ namespace Harp.Behavior
         {
             return DigitalInputState.GetTimestampedPayload(message);
         }
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved0
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 33;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
     }
 
     /// <summary>
@@ -5666,6 +5711,182 @@ namespace Harp.Behavior
     }
 
     /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved2
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved2"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 84;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved2"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved2"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved3
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved3"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 85;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved3"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved3"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved4
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved4"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 86;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved4"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved4"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved5
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved5"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 87;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved5"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved5"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved6
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved6"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 88;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved6"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved6"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved7
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved7"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 89;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved7"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved7"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved8
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved8"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 90;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved8"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved8"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved9
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved9"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 91;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved9"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved9"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
     /// Represents a register that specifies that a frame was acquired on camera 0.
     /// </summary>
     [Description("Specifies that a frame was acquired on camera 0.")]
@@ -6049,6 +6270,94 @@ namespace Harp.Behavior
         {
             return Camera1Frequency.GetTimestampedPayload(message);
         }
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved10
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved10"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 96;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved10"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved10"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved11
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved11"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 97;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved11"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved11"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved12
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved12"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 98;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved12"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved12"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved13
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved13"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 99;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved13"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved13"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
     }
 
     /// <summary>
@@ -6436,6 +6745,94 @@ namespace Harp.Behavior
     }
 
     /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved14
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved14"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 104;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved14"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved14"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved15
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved15"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 105;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved15"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved15"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved16
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved16"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 106;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved16"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved16"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved17
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved17"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 107;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved17"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved17"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
     /// Represents a register that reset the counter of the specified encoders to zero.
     /// </summary>
     [Description("Reset the counter of the specified encoders to zero.")]
@@ -6530,6 +6927,28 @@ namespace Harp.Behavior
         {
             return EncoderReset.GetTimestampedPayload(message);
         }
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved18
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved18"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 109;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved18"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved18"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
     }
 
     /// <summary>
@@ -6920,6 +7339,72 @@ namespace Harp.Behavior
     }
 
     /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved20
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved20"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 114;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved20"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved20"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved21
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved21"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 115;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved21"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved21"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved22
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved22"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 116;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved22"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved22"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
     /// Represents a register that specifies the digital output to mimic the Port 0 valve state.
     /// </summary>
     [Description("Specifies the digital output to mimic the Port 0 valve state.")]
@@ -7208,6 +7693,50 @@ namespace Harp.Behavior
         {
             return MimicPort2Valve.GetTimestampedPayload(message);
         }
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved23
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved23"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 120;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved23"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved23"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use")]
+    internal partial class Reserved24
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved24"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 121;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved24"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved24"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
     }
 
     /// <summary>

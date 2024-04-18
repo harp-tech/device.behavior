@@ -18,7 +18,7 @@
     <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <VersionPrefix>0.2.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
+    <VersionSuffix>build240401</VersionSuffix>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
@@ -29,6 +29,7 @@
   <ItemGroup>
     <Content Include="..\LICENSE" PackagePath="/" />
     <Content Include="..\icon.png" PackagePath="/" />
+    <EmbeddedResource Include="..\..\device.yml" />
   </ItemGroup>
 
 </Project>

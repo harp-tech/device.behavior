@@ -259,7 +259,7 @@ registers:
     <<: *cameraControl
     access: Write, Event
     address: 79
-    description: Specifies the camera outputs to disable in the device.
+    description: Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
   EnableServos: &servoControl
     address: 80
     type: U8

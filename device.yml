@@ -257,7 +257,7 @@ registers:
     description: Specifies the camera outputs to enable in the device.
   StopCameras:
     <<: *cameraControl
-    access: Write, Event
+    access: [Write, Event]
     address: 79
     description: Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
   EnableServos: &servoControl

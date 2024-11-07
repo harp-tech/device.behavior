@@ -129,6 +129,41 @@ namespace Harp.Behavior
             { 121, typeof(Reserved24) },
             { 122, typeof(PokeInputFilter) }
         };
+
+        /// <summary>
+        /// Gets the contents of the metadata file describing the <see cref="Behavior"/>
+        /// device registers.
+        /// </summary>
+        public static readonly string Metadata = GetDeviceMetadata();
+
+        static string GetDeviceMetadata()
+        {
+            var deviceType = typeof(Device);
+            using var metadataStream = deviceType.Assembly.GetManifestResourceStream($"{deviceType.Namespace}.device.yml");
+            using var streamReader = new System.IO.StreamReader(metadataStream);
+            return streamReader.ReadToEnd();
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that returns the contents of the metadata file
+    /// describing the <see cref="Behavior"/> device registers.
+    /// </summary>
+    [Description("Returns the contents of the metadata file describing the Behavior device registers.")]
+    public partial class GetMetadata : Source<string>
+    {
+        /// <summary>
+        /// Returns an observable sequence with the contents of the metadata file
+        /// describing the <see cref="Behavior"/> device registers.
+        /// </summary>
+        /// <returns>
+        /// A sequence with a single <see cref="string"/> object representing the
+        /// contents of the metadata file.
+        /// </returns>
+        public override IObservable<string> Generate()
+        {
+            return Observable.Return(Device.Metadata);
+        }
     }
 
     /// <summary>
@@ -5226,9 +5261,9 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents a register that specifies the camera outputs to disable in the device.
+    /// Represents a register that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
     /// </summary>
-    [Description("Specifies the camera outputs to disable in the device.")]
+    [Description("Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.")]
     public partial class StopCameras
     {
         /// <summary>
@@ -10680,16 +10715,16 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates a message payload
-    /// that specifies the camera outputs to disable in the device.
+    /// that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
     /// </summary>
     [DisplayName("StopCamerasPayload")]
-    [Description("Creates a message payload that specifies the camera outputs to disable in the device.")]
+    [Description("Creates a message payload that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.")]
     public partial class CreateStopCamerasPayload
     {
         /// <summary>
-        /// Gets or sets the value that specifies the camera outputs to disable in the device.
+        /// Gets or sets the value that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
         /// </summary>
-        [Description("The value that specifies the camera outputs to disable in the device.")]
+        [Description("The value that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.")]
         public CameraOutputs StopCameras { get; set; }
 
         /// <summary>
@@ -10702,7 +10737,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Creates a message that specifies the camera outputs to disable in the device.
+        /// Creates a message that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
         /// <returns>A new message for the StopCameras register.</returns>
@@ -10714,14 +10749,14 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates a timestamped message payload
-    /// that specifies the camera outputs to disable in the device.
+    /// that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
     /// </summary>
     [DisplayName("TimestampedStopCamerasPayload")]
-    [Description("Creates a timestamped message payload that specifies the camera outputs to disable in the device.")]
+    [Description("Creates a timestamped message payload that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.")]
     public partial class CreateTimestampedStopCamerasPayload : CreateStopCamerasPayload
     {
         /// <summary>
-        /// Creates a timestamped message that specifies the camera outputs to disable in the device.
+        /// Creates a timestamped message that specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
@@ -11913,6 +11948,23 @@ namespace Harp.Behavior
         /// The voltage at the output of the ADC channel 1.
         /// </summary>
         public short AnalogInput1;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the AnalogData register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// AnalogData register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "AnalogDataPayload { " +
+                "AnalogInput0 = " + AnalogInput0 + ", " +
+                "Encoder = " + Encoder + ", " +
+                "AnalogInput1 = " + AnalogInput1 + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -11974,6 +12026,26 @@ namespace Harp.Behavior
         /// The intensity of the blue channel in the RGB1 LED.
         /// </summary>
         public byte Blue1;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the RgbAll register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// RgbAll register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "RgbAllPayload { " +
+                "Green0 = " + Green0 + ", " +
+                "Red0 = " + Red0 + ", " +
+                "Blue0 = " + Blue0 + ", " +
+                "Green1 = " + Green1 + ", " +
+                "Red1 = " + Red1 + ", " +
+                "Blue1 = " + Blue1 + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -12011,6 +12083,23 @@ namespace Harp.Behavior
         /// The intensity of the blue channel in the RGB LED.
         /// </summary>
         public byte Blue;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the Rgb register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// Rgb register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "RgbPayload { " +
+                "Green = " + Green + ", " +
+                "Red = " + Red + ", " +
+                "Blue = " + Blue + " " +
+            "}";
+        }
     }
 
     /// <summary>

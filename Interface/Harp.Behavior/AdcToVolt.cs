@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -58,7 +58,7 @@ namespace Harp.Behavior
         private static float AdcToVoltConverter(short adcValue)
         {
             // Full adc scale 4096 -> 3.3/1.6 = 2.0625V
-            // In pratice, HW supports max 5V which translates
+            // In practice, HW supports max 5V which translates
             // to = 15/39 (given by resistor) * 5V = 1.9231 VMax
             // input to the ADC.
             // 1.9231V/2.0625V * 4095 = 3818 @ 5V analog input

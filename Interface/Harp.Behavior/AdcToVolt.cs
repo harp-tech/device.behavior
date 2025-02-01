@@ -57,10 +57,12 @@ namespace Harp.Behavior
         /// <returns>The converted voltage value.</returns>
         private static float AdcToVoltConverter(short adcValue)
         {
-            // ADC input = 2.0 V means 5.0 V on boards input
-            // 4096 -> 3.3/1.6 = 2.0625 V
-            // ~3972 -> 2.0 V @ ADC -> 5.0 V @ Analog input
-            return (float)(5.0 / 3972.0) * adcValue;
+            // Full adc scale 4096 -> 3.3/1.6 = 2.0625V
+            // In pratice, HW supports max 5V which translates
+            // to = 15/39 (given by resistor) * 5V = 1.9231 VMax
+            // input to the ADC.
+            // 1.9231V/2.0625V * 4095 = 3818 @ 5V analog input
+            return (float)(5.0 / 3818) * adcValue;
         }
     }
 

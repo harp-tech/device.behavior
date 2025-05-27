@@ -1,10 +1,21 @@
 ## About
 
-`Harp.Behavior` provides operators for data acquisition and control of [Harp Behavior](https://harp-tech.org/api/Harp.Behavior.html) devices in the [Bonsai](https://bonsai-rx.org) visual reactive programming language.
+`Harp.Behavior` provides an asynchronous API and reactive operators for data acquisition and control of [Harp Behavior](https://harp-tech.org/api/Harp.Behavior.html) devices.
 
 ## How to Use
 
 To use `Harp.Behavior` for visual reactive programming, please install this package using the [Bonsai package manager](https://bonsai-rx.org/docs/articles/packages.html).
+
+The package can also be used from any .NET application:
+```c#
+using Harp.Behavior;
+
+using var device = await Device.CreateAsync("COM3");
+var whoAmI = await device.ReadWhoAmIAsync();
+var deviceName = await device.ReadDeviceNameAsync();
+var timestamp = await device.ReadTimestampSecondsAsync();
+Console.WriteLine($"{deviceName} WhoAmI: {whoAmI} Timestamp (s): {timestamp}");
+```
 
 ## Additional Documentation
 

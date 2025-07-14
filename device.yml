@@ -3,7 +3,7 @@
 # yaml-language-server: $schema=https://harp-tech.org/draft-02/schema/device.json
 device: Behavior
 whoAmI: 1216
-firmwareVersion: "3.2"
+firmwareVersion: "3.3"
 hardwareTargets: "1.1"
 registers:
   DigitalInputState:
@@ -66,18 +66,15 @@ registers:
   AnalogData:
     address: 44
     type: S16
-    length: 3
+    length: 2
     access: Event
-    description: Voltage at the ADC input and encoder value on Port 2
+    description: Voltage at the ADC inputs and encoder values
     payloadSpec:
       AnalogInput0:
         offset: 0
         description: The voltage at the output of the ADC channel 0.
-      Encoder:
-        offset: 1
-        description: The quadrature counter value on Port 2
       AnalogInput1:
-        offset: 2
+        offset: 1
         description: The voltage at the output of the ADC channel 1.
   OutputPulseEnable:
     <<: *output
@@ -282,9 +279,22 @@ registers:
     access: Write
     maskType: EncoderModeConfig
     description: Configures the operation mode of the quadrature encoders.
-  Reserved2:
-    <<: *reserved
+  EncoderData:
     address: 84
+    type: S16
+    length: 3
+    access: Event
+    description: Current values for the active encoders
+    payloadSpec:
+      Encoder0:
+        offset: 0
+        description: The quadrature counter value on Port 0
+      Encoder1:
+        offset: 1
+        description: The quadrature counter value on Port 1
+      Encoder2:
+        offset: 2
+        description: The quadrature counter value on Port 2
   Reserved3:
     <<: *reserved
     address: 85
@@ -433,6 +443,7 @@ registers:
     type: U8
     access: Write
     description: Specifies the low pass filter time value for poke inputs, in ms.
+
 bitMasks:
   DigitalInputs:
     description: Specifies the state of port digital input lines.
@@ -488,10 +499,12 @@ bitMasks:
     description: Specifies servo output enable bits.
     bits:
       ServoOutput2: 0x4
-      ServoOutput3: 0x8
+      ServoOutput3: 0x8 
   EncoderInputs:
     description: Specifies quadrature counter enable bits.
     bits:
+      EncoderPort0: 0x1
+      EncoderPort1: 0x2
       EncoderPort2: 0x4
   FrameAcquired:
     description: Specifies that camera frame was acquired.

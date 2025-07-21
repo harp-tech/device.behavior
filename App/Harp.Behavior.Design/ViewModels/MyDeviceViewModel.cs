@@ -42,6 +42,14 @@ public class BehaviorViewModel : ViewModelBase
 
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO0StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO0StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO1StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO1StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO2StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO2StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO3StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> PwmDO3StopCommand { get; }
 
     #endregion
 
@@ -3258,8 +3266,73 @@ public class BehaviorViewModel : ViewModelBase
                 IsEncoderPort2Enabled_EncoderReset = x.HasFlag(EncoderInputs.EncoderPort2);
             });
 
+        PwmDO0StartCommand = ReactiveCommand.Create(ExecutePwmDO0Start, canChangeConfig);
+        PwmDO0StopCommand = ReactiveCommand.Create(ExecutePwmDO0Stop, canChangeConfig);
+        PwmDO1StartCommand = ReactiveCommand.Create(ExecutePwmDO1Start, canChangeConfig);
+        PwmDO1StopCommand = ReactiveCommand.Create(ExecutePwmDO1Stop, canChangeConfig);
+        PwmDO2StartCommand = ReactiveCommand.Create(ExecutePwmDO2Start, canChangeConfig);
+        PwmDO2StopCommand = ReactiveCommand.Create(ExecutePwmDO2Stop, canChangeConfig);
+        PwmDO3StartCommand = ReactiveCommand.Create(ExecutePwmDO3Start, canChangeConfig);
+        PwmDO3StopCommand = ReactiveCommand.Create(ExecutePwmDO3Stop, canChangeConfig);
+
         // force initial population of currently connected ports
         LoadUsbInformation();
+    }
+
+    private void ExecutePwmDO0Start()
+    {
+        // Set the PWM DO0 start state
+        IsPwmDO0Enabled_PwmStart = true;
+        IsPwmDO0Enabled_PwmStop = false;
+    }
+
+    private void ExecutePwmDO0Stop()
+    {
+        // Set the PWM DO0 stop state  
+        IsPwmDO0Enabled_PwmStop = true;
+        IsPwmDO0Enabled_PwmStart = false;
+    }
+
+    private void ExecutePwmDO1Start()
+    {
+        // Set the PWM DO1 start state
+        IsPwmDO1Enabled_PwmStart = true;
+        IsPwmDO1Enabled_PwmStop = false;
+    }
+
+    private void ExecutePwmDO1Stop()
+    {
+        // Set the PWM DO1 stop state  
+        IsPwmDO1Enabled_PwmStop = true;
+        IsPwmDO1Enabled_PwmStart = false;
+    }
+
+    private void ExecutePwmDO2Start()
+    {
+        // Set the PWM DO2 start state
+        IsPwmDO2Enabled_PwmStart = true;
+        IsPwmDO2Enabled_PwmStop = false;
+    }
+
+    private void ExecutePwmDO2Stop()
+    {
+        // Set the PWM DO2 stop state  
+        IsPwmDO2Enabled_PwmStop = true;
+        IsPwmDO2Enabled_PwmStart = false;
+    }
+
+    private void ExecutePwmDO3Start()
+    {
+        // Set the PWM DO3 start state
+        IsPwmDO3Enabled_PwmStart = true;
+        IsPwmDO3Enabled_PwmStop = false;
+    }
+
+    private void ExecutePwmDO3Stop()
+    {
+        // Set the PWM DO3 stop state  
+        IsPwmDO3Enabled_PwmStop = true;
+        IsPwmDO3Enabled_PwmStart = false;
     }
 
     private IObservable<Unit> LoadUsbInformation()
@@ -3525,6 +3598,14 @@ public class BehaviorViewModel : ViewModelBase
                     observer.OnNext($"PortDIOStateEvent: {PortDIOStateEventResult}");
                     var StopCamerasResult = await device.ReadStopCamerasAsync(cancellationToken);
                     observer.OnNext($"StopCameras: {StopCamerasResult}");
+
+
+                    // NOTE: These in the yalm are yet not considered events but write
+                    var OutputStateResult = await device.ReadOutputStateAsync(cancellationToken);
+                    OutputState = OutputStateResult;
+                    observer.OnNext($"OutputState: {OutputStateResult}");
+
+                    // var PortDIOStateResult = await device.
 
                     // Wait a short while before polling again. Adjust delay as necessary.
                     await Task.Delay(TimeSpan.FromMilliseconds(10), cancellationToken);

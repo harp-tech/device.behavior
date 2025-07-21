@@ -147,11 +147,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                   </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
 
                   <!-- Digital Outputs Section -->
                   <StackPanel Grid.Row="0" Margin="0,0,0,30">
                     <TextBlock Text="Digital Outputs (DO0-DO3)" FontSize="18" FontWeight="Bold"
-                               Margin="0,0,0,20"/>
+                               Margin="0,0,0,10"/>
 
                     <Grid>
                       <Grid.RowDefinitions>
@@ -162,220 +166,269 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" MinWidth="80"/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers -->
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Pulse Control" FontWeight="Bold"
-                                 HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                                  Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="PWM Control" FontWeight="Bold"
-                                 HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                                  Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Output Control" FontWeight="Bold"
-                                 HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                                  Margin="0,0,0,5" />
 
                       <!-- DO0 -->
-                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,15,20,15">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital Output 0 control and status</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 0 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
-                          <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="1" Grid.Column="1" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
-                                         Width="100" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}">
+                            Enable Pulse Mode
+                          </CheckBox>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}">
-                          Enable Pulse Mode
-                        </CheckBox>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="1" Grid.Column="2" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <CheckBox IsChecked="{Binding IsPwmDO0Enabled_PwmStart}">Start</CheckBox>
-                          <CheckBox IsChecked="{Binding IsPwmDO0Enabled_PwmStop}">Stop</CheckBox>
-                        </StackPanel>
-                      </StackPanel>
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          
 
-                      <StackPanel Grid.Row="1" Grid.Column="3" Spacing="8" Margin="0,15,0,15">
-                        <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>
-                      </StackPanel>
+                          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+                            <Button Command="{Binding PwmDO0StartCommand}">Start</Button>
+                            <Button Command="{Binding PwmDO0StopCommand}">Stop</Button>
+                          </StackPanel>
 
+                         
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Spacing="8">
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set Output</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
                       <!-- DO1 -->
-                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,15,20,15">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital Output 1 control and status</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 1 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
-                          <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="2" Grid.Column="1" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
-                                         Width="100" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}">
+                            Enable Pulse Mode
+                          </CheckBox>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}">
-                          Enable Pulse Mode
-                        </CheckBox>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="2" Grid.Column="2" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStart}">Start</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStop}">Stop</CheckBox>
+                          </StackPanel>-->
+                          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+                            <Button Command="{Binding PwmDO1StartCommand}">Start</Button>
+                            <Button Command="{Binding PwmDO1StopCommand}">Stop</Button>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStart}">Start</CheckBox>
-                          <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStop}">Stop</CheckBox>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="2" Grid.Column="3" Spacing="8" Margin="0,15,0,15">
-                        <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>
-                      </StackPanel>
-
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Spacing="8">
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set Output</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+                      
+                      
                       <!-- DO2 -->
-                      <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,15,20,15">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital Output 2 control and status</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 2 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
-                          <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="3" Grid.Column="1" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
-                                         Width="100" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}">
+                            Enable Pulse Mode
+                          </CheckBox>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}">
-                          Enable Pulse Mode
-                        </CheckBox>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="3" Grid.Column="2" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStart}">Start</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStop}">Stop</CheckBox>
+                          </StackPanel>-->
+                          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+                            <Button Command="{Binding PwmDO2StartCommand}">Start</Button>
+                            <Button Command="{Binding PwmDO2StopCommand}">Stop</Button>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStart}">Start</CheckBox>
-                          <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStop}">Stop</CheckBox>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="3" Grid.Column="3" Spacing="8" Margin="0,15,0,15">
-                        <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>
-                      </StackPanel>
+                      <Border Grid.Row="3" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Spacing="8">
+                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set Output</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
 
                       <!-- DO3 -->
-                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,15,20,15">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital Output 3 control and status</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 3 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
-                          <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="4" Grid.Column="1" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
-                                         Width="100" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="4" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}">
+                            Enable Pulse Mode
+                          </CheckBox>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}">
-                          Enable Pulse Mode
-                        </CheckBox>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="4" Grid.Column="2" Spacing="10" Margin="0,15,10,15">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <Border Grid.Row="4" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
+                        <StackPanel Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStart}">Start</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStop}">Stop</CheckBox>
+                          </StackPanel>-->
+                          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
+                            <Button Command="{Binding PwmDO3StartCommand}">Start</Button>
+                            <Button Command="{Binding PwmDO3StopCommand}">Stop</Button>
+                          </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
-                                         Width="80" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                          <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStart}">Start</CheckBox>
-                          <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStop}">Stop</CheckBox>
-                        </StackPanel>
-                      </StackPanel>
+                      </Border>
 
-                      <StackPanel Grid.Row="4" Grid.Column="3" Spacing="8" Margin="0,15,0,15">
-                        <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear Output</CheckBox>
-                        <CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>
-                      </StackPanel>
+                      <Border Grid.Row="4" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Spacing="8">
+                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set Output</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+       
                     </Grid>
                   </StackPanel>
 
                   <!-- LEDs & RGB Section -->
-                  <Grid Grid.Row="1" ColumnDefinitions="*,*" Margin="0,0,0,30">
+                  <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="*,*" Margin="0,0,0,30">
 
                     <!-- LEDs Section -->
                     <StackPanel Grid.Column="0" Margin="0,0,20,0">
@@ -1464,7 +1517,7 @@
             </TabItem>
 
             <TabItem Header="Motion Control" FontSize="20" FontWeight="SemiBold">
-              <Grid Margin="10,0,0,10" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,*">
+              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,*">
 
                 <!-- Headers -->
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Cameras" FontSize="18" FontWeight="Bold"
@@ -1712,7 +1765,7 @@
                         <ToolTip.Tip>Current encoder value on Port 2</ToolTip.Tip>
                       </heroIcons:HeroIcon>
                     </StackPanel>
-                    <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="5" Padding="15" Background="LightGray">
+                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
                       <Grid ColumnDefinitions="Auto,*">
                         <TextBlock Grid.Column="0" Text="Encoder Value:" VerticalAlignment="Center"
                                    FontWeight="SemiBold" Margin="0,0,15,0"/>

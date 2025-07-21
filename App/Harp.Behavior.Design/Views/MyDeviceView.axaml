@@ -225,11 +225,17 @@
                           
 
                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
-                            <Button Command="{Binding PwmDO0StartCommand}">Start</Button>
-                            <Button Command="{Binding PwmDO0StopCommand}">Stop</Button>
+                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStart}"
+                                          Command="{Binding PwmDO0StartCommand}">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStop}"
+                                          Command="{Binding PwmDO0StopCommand}">
+                              Stop
+                            </ToggleButton>
                           </StackPanel>
+                          
 
-                         
                         </StackPanel>
                       </Border>
 
@@ -282,13 +288,15 @@
                             <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
-                            <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStart}">Start</CheckBox>
-                            <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStop}">Stop</CheckBox>
-                          </StackPanel>-->
                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
-                            <Button Command="{Binding PwmDO1StartCommand}">Start</Button>
-                            <Button Command="{Binding PwmDO1StopCommand}">Stop</Button>
+                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStart}"
+                                          Command="{Binding PwmDO1StartCommand}">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStop}"
+                                          Command="{Binding PwmDO1StopCommand}">
+                              Stop
+                            </ToggleButton>
                           </StackPanel>
                         </StackPanel>
                       </Border>
@@ -344,13 +352,15 @@
                             <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
-                            <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStart}">Start</CheckBox>
-                            <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStop}">Stop</CheckBox>
-                          </StackPanel>-->
                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
-                            <Button Command="{Binding PwmDO2StartCommand}">Start</Button>
-                            <Button Command="{Binding PwmDO2StopCommand}">Stop</Button>
+                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStart}"
+                                          Command="{Binding PwmDO2StartCommand}">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStop}"
+                                          Command="{Binding PwmDO2StopCommand}">
+                              Stop
+                            </ToggleButton>
                           </StackPanel>
                         </StackPanel>
                       </Border>
@@ -405,13 +415,15 @@
                             <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          <!--<StackPanel Orientation="Horizontal" Spacing="10">
-                            <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStart}">Start</CheckBox>
-                            <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStop}">Stop</CheckBox>
-                          </StackPanel>-->
                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
-                            <Button Command="{Binding PwmDO3StartCommand}">Start</Button>
-                            <Button Command="{Binding PwmDO3StopCommand}">Stop</Button>
+                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStart}"
+                                          Command="{Binding PwmDO3StartCommand}">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStop}"
+                                          Command="{Binding PwmDO3StopCommand}">
+                              Stop
+                            </ToggleButton>
                           </StackPanel>
                         </StackPanel>
                       </Border>

@@ -51,6 +51,16 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> PwmDO3StartCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO3StopCommand { get; }
 
+    public ReactiveCommand<Unit, Unit> ServoOutput2StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> ServoOutput2StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> ServoOutput3StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> ServoOutput3StopCommand { get; }
+
+    public ReactiveCommand<Unit, Unit> Camera0StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> Camera0StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> Camera1StartCommand { get; }
+    public ReactiveCommand<Unit, Unit> Camera1StopCommand { get; }
+
     #endregion
 
     #region Device basic information
@@ -3275,6 +3285,16 @@ public class BehaviorViewModel : ViewModelBase
         PwmDO3StartCommand = ReactiveCommand.Create(ExecutePwmDO3Start, canChangeConfig);
         PwmDO3StopCommand = ReactiveCommand.Create(ExecutePwmDO3Stop, canChangeConfig);
 
+        ServoOutput2StartCommand = ReactiveCommand.Create(ExecuteServoOuput2Start, canChangeConfig);
+        ServoOutput2StopCommand = ReactiveCommand.Create(ExecuteServoOuput2Stop, canChangeConfig);
+        ServoOutput3StartCommand = ReactiveCommand.Create(ExecuteServoOuput3Start, canChangeConfig);
+        ServoOutput3StopCommand = ReactiveCommand.Create(ExecuteServoOuput3Stop, canChangeConfig);
+
+        Camera0StartCommand = ReactiveCommand.Create(ExecuteCamera0Start, canChangeConfig);
+        Camera0StopCommand = ReactiveCommand.Create(ExecuteCamera0Stop, canChangeConfig);
+        Camera1StartCommand = ReactiveCommand.Create(ExecuteCamera1Start, canChangeConfig);
+        Camera1StopCommand = ReactiveCommand.Create(ExecuteCamera1Stop, canChangeConfig);
+
         // force initial population of currently connected ports
         LoadUsbInformation();
     }
@@ -3333,6 +3353,48 @@ public class BehaviorViewModel : ViewModelBase
         // Set the PWM DO3 stop state  
         IsPwmDO3Enabled_PwmStop = true;
         IsPwmDO3Enabled_PwmStart = false;
+    }
+
+    private void ExecuteServoOuput2Start()
+    {
+        IsServoOutput2Enabled_EnableServos = true;
+        IsServoOutput2Enabled_DisableServos = false;
+    }
+    private void ExecuteServoOuput2Stop()
+    {
+        IsServoOutput2Enabled_EnableServos = false;
+        IsServoOutput2Enabled_DisableServos = true;
+    }
+    private void ExecuteServoOuput3Start()
+    {
+        IsServoOutput3Enabled_EnableServos = true;
+        IsServoOutput3Enabled_DisableServos = false;
+    }
+    private void ExecuteServoOuput3Stop()
+    {
+        IsServoOutput3Enabled_EnableServos = false;
+        IsServoOutput3Enabled_DisableServos = true;
+    }
+
+    private void ExecuteCamera0Start()
+    {
+        IsCameraOutput0Enabled_StartCameras = true;
+        IsCameraOutput0Enabled_StopCameras = false;
+    }
+    private void ExecuteCamera0Stop()
+    {
+        IsCameraOutput0Enabled_StartCameras = false;
+        IsCameraOutput0Enabled_StopCameras = true;
+    }
+    private void ExecuteCamera1Start()
+    {
+        IsCameraOutput1Enabled_StartCameras = true;
+        IsCameraOutput1Enabled_StopCameras = false;
+    }
+    private void ExecuteCamera1Stop()
+    {
+        IsCameraOutput1Enabled_StartCameras = false;
+        IsCameraOutput1Enabled_StopCameras = true;
     }
 
     private IObservable<Unit> LoadUsbInformation()
@@ -3605,6 +3667,20 @@ public class BehaviorViewModel : ViewModelBase
                     OutputState = OutputStateResult;
                     observer.OnNext($"OutputState: {OutputStateResult}");
 
+
+                    //var resultRgb0 = await device.ReadRgb0Async(cancellationToken);
+                    //Rgb0 = resultRgb0;
+
+                    //observer.OnNext($"Rgb0: {resultRgb0}");
+
+                    //var resultRgb1 = await device.ReadRgb1Async(cancellationToken);
+                    //Rgb1 = resultRgb1;
+                    //observer.OnNext($"Rgb1: {resultRgb1}");
+
+                    //var resultRgbAll = await device.ReadRgbAllAsync(cancellationToken);
+                    //RgbAll = resultRgbAll;
+                    //observer.OnNext($"RgbAll: {resultRgbAll}");
+
                     // var PortDIOStateResult = await device.
 
                     // Wait a short while before polling again. Adjust delay as necessary.
@@ -3632,25 +3708,33 @@ public class BehaviorViewModel : ViewModelBase
             if (_device == null)
                 throw new Exception("You need to connect to the device first");
 
+            //RgbAllAdapter.UpdateFromRegister(RgbAll);
+            //Rgb0Adapter.UpdateFromRegister(Rgb0);
+            //Rgb1Adapter.UpdateFromRegister(Rgb1);
+            //Rgb0Adapter.LinkToParent(RgbAllAdapter, 0);
+            //Rgb1Adapter.LinkToParent(RgbAllAdapter, 1);
+
+            //Rgb1Adapter.ToRegisterValue();
+
             /*****************************************************************
             * TODO: Please REVIEW all these registers and update the values
             * ****************************************************************/
-            await WriteAndLogAsync(
-                value => _device.WriteOutputSetAsync(value),
-                OutputSet,
-                "OutputSet");
-            await WriteAndLogAsync(
-                value => _device.WriteOutputClearAsync(value),
-                OutputClear,
-                "OutputClear");
-            await WriteAndLogAsync(
-                value => _device.WriteOutputToggleAsync(value),
-                OutputToggle,
-                "OutputToggle");
-            await WriteAndLogAsync(
-                value => _device.WriteOutputStateAsync(value),
-                OutputState,
-                "OutputState");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputSetAsync(value),
+            //    OutputSet,
+            //    "OutputSet");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputClearAsync(value),
+            //    OutputClear,
+            //    "OutputClear");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputToggleAsync(value),
+            //    OutputToggle,
+            //    "OutputToggle");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputStateAsync(value),
+            //    OutputState,
+            //    "OutputState");
             await WriteAndLogAsync(
                 value => _device.WritePortDIOSetAsync(value),
                 PortDIOSet,
@@ -3775,6 +3859,17 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WriteRgbAllAsync(value),
                 RgbAll,
                 "RgbAll");
+
+            var c0 = Rgb0Adapter.Color;
+            var c1 = Rgb1Adapter.Color;
+            RgbAll = new RgbAllPayload(
+                c0.R, c0.G, c0.B,
+                c1.R, c1.G, c1.B);
+
+            Rgb0 = new RgbPayload(c0.R, c0.G, c0.B);
+            Rgb1 = new RgbPayload(c1.R, c1.G, c1.B);
+            //Rgb0 = Rgb0Adapter.ToRegisterValue();
+            //Rgb0 = Rgb0Adapter.ToRegisterValue();
             await WriteAndLogAsync(
                 value => _device.WriteRgb0Async(value),
                 Rgb0,
@@ -3784,7 +3879,15 @@ public class BehaviorViewModel : ViewModelBase
                 Rgb1,
                 "Rgb1");
             await WriteAndLogAsync(
-                value => _device.WriteLed0CurrentAsync(value),
+                value => _device.WritePulseRgb0Async(value),
+                PulseRgb0,
+                "PulseRgb0");
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb1Async(value),
+                PulseRgb1,
+                "PulseRgb1");
+            await WriteAndLogAsync(
+                value => _device.WriteLed0CurrentAsync(value), 
                 Led0Current,
                 "Led0Current");
             await WriteAndLogAsync(
@@ -3883,6 +3986,22 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WritePokeInputFilterAsync(value),
                 PokeInputFilter,
                 "PokeInputFilter");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                OutputSet,
+                "OutputSet");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                OutputClear,
+                "OutputClear");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputToggleAsync(value),
+            //    OutputToggle,
+            //    "OutputToggle");
+            //await WriteAndLogAsync(
+            //    value => _device.WriteOutputStateAsync(value),
+            //    OutputState,
+            //    "OutputState");
 
             // Save the configuration to the device permanently
             if (savePermanently)

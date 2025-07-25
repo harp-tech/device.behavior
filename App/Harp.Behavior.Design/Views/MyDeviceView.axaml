@@ -19,6 +19,20 @@
     <conv:VisualStatusColorConverter x:Key="VisualStatusColorConverter"/>
   </UserControl.Resources>
 
+  <UserControl.Styles>
+
+    <Style Selector="Expander:expanded /template/ Border#ExpanderContent">
+      <Setter Property="Background" Value="Red"/>
+      <Setter Property="BorderThickness" Value="0"/>
+
+    </Style>
+
+    <Style Selector="Expander:expanded /template/ Border#ExpanderContent">
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+  </UserControl.Styles>
+
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -136,7 +150,977 @@
           </Grid>
         </Grid>
         <StackPanel>
-          <TabControl Margin="10,0,0,10" TabStripPlacement="Top">
+          <TabControl Margin="0,0,0,0" TabStripPlacement="Top">
+
+            <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
+              <ScrollViewer>
+                <Grid Margin="20">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+
+                  <!--Digital Outputs (DO0-DO3)-->
+                  <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                    <TextBlock Text="Digital Outputs" FontSize="18" FontWeight="Bold"
+                               Margin="0,0,0,5"/>
+
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Headers (reordered) -->
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold"
+                                  Margin="0,0,0,5" />
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold"
+                                  Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="PWM Control" FontWeight="Bold"
+                                  Margin="0,0,0,5"/>
+
+                      <!-- DO0 -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 0 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <!-- Output Control - Set and Clear side by side -->
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+
+                      <!-- Pulse Control - Duration and Enable side by side -->
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <!-- PWM Control - All controls on one line -->
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStart}"
+                                          Command="{Binding PwmDO0StartCommand}" MinWidth="45">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStop}"
+                                          Command="{Binding PwmDO0StopCommand}" MinWidth="45">
+                              Stop
+                            </ToggleButton>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+
+                      <!-- DO1 -->
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 1 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStart}"
+                                          Command="{Binding PwmDO1StartCommand}" MinWidth="45">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStop}"
+                                          Command="{Binding PwmDO1StopCommand}" MinWidth="45">
+                              Stop
+                            </ToggleButton>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+
+                      <!-- DO2 -->
+                      <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 2 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="3" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStart}"
+                                          Command="{Binding PwmDO2StartCommand}" MinWidth="45">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStop}"
+                                          Command="{Binding PwmDO2StopCommand}" MinWidth="45">
+                              Stop
+                            </ToggleButton>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+
+                      <!-- DO3 -->
+                      <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital Output 3 control and status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="4" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="4" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="4" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStart}"
+                                          Command="{Binding PwmDO3StartCommand}" MinWidth="45">
+                              Start
+                            </ToggleButton>
+                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStop}"
+                                          Command="{Binding PwmDO3StopCommand}" MinWidth="45">
+                              Stop
+                            </ToggleButton>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+
+                    </Grid>
+                  </StackPanel>
+
+                  <!-- Port Outputs Section -->
+                  <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                    <TextBlock Text="Port Outputs" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                    <!-- PORT 0 -->
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Headers - Only once at the beginning -->
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                      <!-- Port 0 Digital Output -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 0 digital output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDOPort0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDOPort0Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <!-- Port 0 Supply Output -->
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12V</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 0 supply output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+                    </Grid>
+
+                    <!-- PORT 1 -->
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Port 1 Digital Output -->
+                      <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 1 digital output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDOPort1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDOPort1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDOPort1Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDOPort1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <!-- Port 1 Supply Output -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 12 V</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 1 supply output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsSupplyPort1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsSupplyPort1Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseSupplyPort1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+                    </Grid>
+
+                    <!-- PORT 2 -->
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Port 2 Digital Output -->
+                      <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 2 digital output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDOPort2Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsDOPort2Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDOPort2Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseDOPort2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <!-- Port 2 Supply Output -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 12V</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Port 2 supply output control</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsSupplyPort2Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsSupplyPort2Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseSupplyPort2}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+                    </Grid>
+                  </StackPanel>
+
+                  <!-- LEDs Section -->
+                  <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                    <TextBlock Text="LED Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+
+
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Current Control" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                      <!-- LED 0 -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">LED 0</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>LED 0 current and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsLed0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsLed0Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseLed0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                          </Grid.RowDefinitions>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Current (mA):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding Led0Current}" Minimum="2" Maximum="100"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="Max (mA):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding Led0MaxCurrent}" Minimum="2" Maximum="100"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+
+                      <!-- LED 1 -->
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">LED 1</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>LED 1 current and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsLed1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsLed1Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseLed1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <Grid>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                          </Grid.RowDefinitions>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Current (mA):" VerticalAlignment="Center" MinWidth="70"/>
+                            <NumericUpDown Value="{Binding Led1Current}" Minimum="5" Maximum="100"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="Max (mA):" VerticalAlignment="Center" MinWidth="60"/>
+                            <NumericUpDown Value="{Binding Led1MaxCurrent}" Minimum="5" Maximum="100"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                        </Grid>
+                      </Border>
+                    </Grid>
+                  </StackPanel>
+
+                  <!-- RGB Section -->
+                  <StackPanel Grid.Row="3" Margin="0,0,0,0">
+                    <TextBlock Text="RGB Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Color Control" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                      <!-- RGB 0 -->
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">RGB 0</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>RGB 0 color and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsRgb0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsRgb0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsRgb0Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseRgb0}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <controls:RgbRegisterControl DataContext="{Binding Rgb0Adapter}" HorizontalAlignment="Center"/>
+                      </Border>
+
+                      <!-- RGB 1 -->
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">RGB 1</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>RGB 1 color and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsRgb1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                          <CheckBox IsChecked="{Binding IsRgb1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsRgb1Enabled_OutputClear}">Clear</CheckBox>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                            <NumericUpDown Value="{Binding PulseRgb1}" Minimum="1" Maximum="65535"
+                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                          </StackPanel>
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                            Enable
+                          </CheckBox>
+                        </Grid>
+                      </Border>
+
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                        <controls:RgbRegisterControl DataContext="{Binding Rgb1Adapter}" HorizontalAlignment="Center"/>
+                      </Border>
+                    </Grid>
+           
+                  </StackPanel>
+
+
+
+                  <!-- Global Output Controls Section --><!--
+                  <StackPanel Grid.Row="3">
+                    <TextBlock Text="Global Output Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                    <Grid ColumnDefinitions="*,*,*">
+                      --><!-- All Outputs Control --><!--
+                      <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,15">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">All Outputs Control</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Control all digital outputs simultaneously</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10" Margin="10,0,0,0">
+                          <Button Content="Set All Outputs" Padding="10,8" HorizontalAlignment="Stretch"/>
+                          <Button Content="Clear All Outputs" Padding="10,8" HorizontalAlignment="Stretch"/>
+                          <Button Content="Toggle All Outputs" Padding="10,8" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                      </StackPanel>
+
+                      --><!-- PWM Control --><!--
+                      <StackPanel Grid.Column="1" Margin="15,0,15,0">
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,15">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PWM Control</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Control PWM functionality for all digital outputs</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10" Margin="10,0,0,0">
+                          <StackPanel Orientation="Horizontal" Spacing="10">
+                            <CheckBox IsChecked="{Binding IsPwmDO0Enabled_PwmStart}">DO0</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStart}">DO1</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStart}">DO2</CheckBox>
+                            <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStart}">DO3</CheckBox>
+                          </StackPanel>
+                          <Button Content="Start Selected PWM" Padding="10,8" HorizontalAlignment="Stretch"/>
+                          <Button Content="Stop All PWM" Padding="10,8" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                      </StackPanel>
+
+                      --><!-- Pulse Control --><!--
+                      <StackPanel Grid.Column="2" Margin="15,0,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,15">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">Pulse Control</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Enable/disable pulse modes for outputs</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+
+                        <StackPanel Spacing="10" Margin="10,0,0,0">
+                          <CheckBox Content="Enable All DO Pulses" />
+                          <CheckBox Content="Enable All LED Pulses" />
+                          <CheckBox Content="Enable All RGB Pulses" />
+                          <CheckBox Content="Enable All Port Pulses" />
+                        </StackPanel>
+                      </StackPanel>
+                    </Grid>
+                  </StackPanel>-->
+                </Grid>
+              </ScrollViewer>
+            </TabItem>
+
+
 
             <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
@@ -205,7 +1189,7 @@
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
                           <CheckBox IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}">
-                            Enable Pulse Mode
+                            Enable
                           </CheckBox>
                         </StackPanel>
                       </Border>
@@ -222,7 +1206,7 @@
                             <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          
+
 
                           <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20">
                             <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStart}"
@@ -234,15 +1218,15 @@
                               Stop
                             </ToggleButton>
                           </StackPanel>
-                          
+
 
                         </StackPanel>
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
                         <StackPanel Spacing="8">
-                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set Output</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear</CheckBox>
                           <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>-->
                         </StackPanel>
                       </Border>
@@ -271,7 +1255,7 @@
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
                           <CheckBox IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}">
-                            Enable Pulse Mode
+                            Enable
                           </CheckBox>
                         </StackPanel>
                       </Border>
@@ -303,13 +1287,13 @@
 
                       <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
                         <StackPanel Spacing="8">
-                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set Output</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set</CheckBox>
+                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear</CheckBox>
                           <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>-->
                         </StackPanel>
                       </Border>
-                      
-                      
+
+
                       <!-- DO2 -->
                       <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,10,5">
                         <StackPanel>
@@ -335,7 +1319,7 @@
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
                           <CheckBox IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}">
-                            Enable Pulse Mode
+                            Enable
                           </CheckBox>
                         </StackPanel>
                       </Border>
@@ -367,8 +1351,8 @@
 
                       <Border Grid.Row="3" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
                         <StackPanel Spacing="8">
-                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set Output</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear</CheckBox>-->
                           <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>-->
                         </StackPanel>
                       </Border>
@@ -398,7 +1382,7 @@
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
                           <CheckBox IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}">
-                            Enable Pulse Mode
+                            Enable
                           </CheckBox>
                         </StackPanel>
                       </Border>
@@ -430,12 +1414,12 @@
 
                       <Border Grid.Row="4" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
                         <StackPanel Spacing="8">
-                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set Output</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear Output</CheckBox>-->
+                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set</CheckBox>
+                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear</CheckBox>-->
                           <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>-->
                         </StackPanel>
                       </Border>
-       
+
                     </Grid>
                   </StackPanel>
 
@@ -447,91 +1431,96 @@
                       <TextBlock Text="LED Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
 
                       <!-- LED 0 -->
-                      <StackPanel Orientation="Vertical" Spacing="10" Margin="0,0,0,25">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">LED 0</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>LED 0 current and pulse configuration</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Orientation="Vertical" Spacing="10" Margin="0,0,0,25">
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">LED 0</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>LED 0 current and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="10,0,0,0">
+                            <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+
+                          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="10,10,0,0">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led0Current}"
+                                           Minimum="2" Maximum="100" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led0MaxCurrent}"
+                                           Minimum="2" Maximum="100" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed0}"
+                                           Minimum="1" Maximum="65535" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                      IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" Margin="0,10,0,5">
+                              Enable
+                            </CheckBox>
+
+                            <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                      IsChecked="{Binding IsLed0Enabled_OutputSet}" Margin="0,5,0,0">
+                              Set Active
+                            </CheckBox>
+                          </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="10,0,0,0">
-                          <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="10,10,0,0">
-                          <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led0Current}"
-                                         Minimum="2" Maximum="100" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led0MaxCurrent}"
-                                         Minimum="2" Maximum="100" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed0}"
-                                         Minimum="1" Maximum="65535" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                    IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                            Enable Pulse Mode
-                          </CheckBox>
-
-                          <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                    IsChecked="{Binding IsLed0Enabled_OutputSet}" Margin="0,5,0,0">
-                            Set Output Active
-                          </CheckBox>
-                        </Grid>
-                      </StackPanel>
+                      </Border>
 
                       <!-- LED 1 -->
-                      <StackPanel Orientation="Vertical" Spacing="10">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">LED 1</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>LED 1 current and pulse configuration</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                      <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15" Margin="0,5,0,5">
+                        <StackPanel Orientation="Vertical" Spacing="10">
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">LED 1</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>LED 1 current and pulse configuration</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="10,0,0,0">
+                            <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+
+                          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="10,10,0,0">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led1Current}"
+                                           Minimum="5" Maximum="100" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led1MaxCurrent}"
+                                           Minimum="5" Maximum="100" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed1}"
+                                           Minimum="1" Maximum="65535" Width="150" ClipValueToMinMax="True"
+                                           Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
+
+                            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                      IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" Margin="0,10,0,5">
+                              Enable
+                            </CheckBox>
+
+                            <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                      IsChecked="{Binding IsLed1Enabled_OutputSet}" Margin="0,5,0,0">
+                              Set Active
+                            </CheckBox>
+                          </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="10,0,0,0">
-                          <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="15" Height="15"/>
-                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="10,10,0,0">
-                          <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led1Current}"
-                                         Minimum="5" Maximum="100" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led1MaxCurrent}"
-                                         Minimum="5" Maximum="100" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5" VerticalAlignment="Center"/>
-                          <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed1}"
-                                         Minimum="1" Maximum="65535" Width="150" ClipValueToMinMax="True"
-                                         Increment="1" FormatString="F0" HorizontalAlignment="Left"/>
-
-                          <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                    IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                            Enable Pulse Mode
-                          </CheckBox>
-
-                          <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                    IsChecked="{Binding IsLed1Enabled_OutputSet}" Margin="0,5,0,0">
-                            Set Output Active
-                          </CheckBox>
-                        </Grid>
-                      </StackPanel>
+                      </Border>
                     </StackPanel>
 
                     <!-- RGB Section -->
+                    
                     <StackPanel Grid.Column="1" Margin="20,0,0,0">
                       <TextBlock Text="RGB Controls" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
 
@@ -560,12 +1549,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsRgb0Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -596,12 +1585,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsRgb1Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -640,12 +1629,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort0Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -672,12 +1661,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -709,12 +1698,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort1Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -741,12 +1730,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -778,12 +1767,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsDOPort2Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -810,12 +1799,12 @@
 
                             <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                              Enable Pulse Mode
+                              Enable
                             </CheckBox>
 
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}" Margin="0,5,0,0">
-                              Set Output Active
+                              Set Active
                             </CheckBox>
                           </Grid>
                         </StackPanel>
@@ -890,643 +1879,6 @@
               </ScrollViewer>
             </TabItem>
 
-            <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
-              <ScrollViewer>
-                <Grid Margin="20">
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                  </Grid.RowDefinitions>
-
-                  <!-- Digital Outputs Section -->
-                  <Border Grid.Row="0" BorderBrush="DarkBlue" BorderThickness="2" CornerRadius="8"
-                          Padding="20" Margin="0,0,0,20" Background="AliceBlue">
-                    <StackPanel>
-                      <TextBlock Text="Digital Outputs (DO0-DO3)" FontSize="18" FontWeight="Bold"
-                                 Foreground="DarkBlue" Margin="0,0,0,20"/>
-
-                      <Grid>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="Auto" MinWidth="80"/>
-                          <ColumnDefinition Width="*" MinWidth="200"/>
-                          <ColumnDefinition Width="*" MinWidth="200"/>
-                          <ColumnDefinition Width="*" MinWidth="150"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Headers -->
-                        <TextBlock Grid.Column="1" Text="Pulse Control" FontWeight="Bold"
-                                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
-                        <TextBlock Grid.Column="2" Text="PWM Control" FontWeight="Bold"
-                                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
-                        <TextBlock Grid.Column="3" Text="Output Control" FontWeight="Bold"
-                                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
-
-                        <!-- DO0 -->
-                        <StackPanel Grid.Column="0" Margin="0,15,20,15">
-                          <TextBlock Text="DO 0" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                          <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="16" Height="16"/>
-                            <TextBlock Text="Active" FontSize="11" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-
-                        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                              <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
-                                             Width="120" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <CheckBox IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}">
-                              Enable Pulse Mode
-                            </CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <CheckBox IsChecked="{Binding IsPwmDO0Enabled_PwmStart}">Start</CheckBox>
-                              <CheckBox IsChecked="{Binding IsPwmDO0Enabled_PwmStop}">Stop</CheckBox>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,0,15">
-                          <StackPanel Spacing="8">
-                            <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- DO1 -->
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,15,20,15">
-                          <TextBlock Text="DO 1" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                          <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="16" Height="16"/>
-                            <TextBlock Text="Active" FontSize="11" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-
-                        <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                              <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
-                                             Width="120" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <CheckBox IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}">
-                              Enable Pulse Mode
-                            </CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStart}">Start</CheckBox>
-                              <CheckBox IsChecked="{Binding IsPwmDO1Enabled_PwmStop}">Stop</CheckBox>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,0,15">
-                          <StackPanel Spacing="8">
-                            <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- DO2 -->
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,15,20,15">
-                          <TextBlock Text="DO 2" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                          <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="16" Height="16"/>
-                            <TextBlock Text="Active" FontSize="11" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-
-                        <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                              <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
-                                             Width="120" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <CheckBox IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}">
-                              Enable Pulse Mode
-                            </CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStart}">Start</CheckBox>
-                              <CheckBox IsChecked="{Binding IsPwmDO2Enabled_PwmStop}">Stop</CheckBox>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,0,15">
-                          <StackPanel Spacing="8">
-                            <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- DO3 -->
-                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,15,20,15">
-                          <TextBlock Text="DO 3" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                          <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="16" Height="16"/>
-                            <TextBlock Text="Active" FontSize="11" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-
-                        <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                              <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
-                                             Width="120" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <CheckBox IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}">
-                              Enable Pulse Mode
-                            </CheckBox>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,10,15">
-                          <StackPanel Spacing="10">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="70"/>
-                              <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
-                                             Width="100" ClipValueToMinMax="True"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                              <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStart}">Start</CheckBox>
-                              <CheckBox IsChecked="{Binding IsPwmDO3Enabled_PwmStop}">Stop</CheckBox>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="3" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,15,0,15">
-                          <StackPanel Spacing="8">
-                            <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear Output</CheckBox>
-                            <CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>
-                          </StackPanel>
-                        </Border>
-                      </Grid>
-                    </StackPanel>
-                  </Border>
-
-                  <!-- LEDs & RGB Section -->
-                  <Grid Grid.Row="1" ColumnDefinitions="*,*" Margin="0,0,0,20">
-
-                    <!-- LEDs Section -->
-                    <Border Grid.Column="0" BorderBrush="DarkGreen" BorderThickness="2" CornerRadius="8"
-                            Padding="20" Margin="0,0,10,0" Background="Honeydew">
-                      <StackPanel>
-                        <TextBlock Text="LED Controls" FontSize="18" FontWeight="Bold"
-                                   Foreground="DarkGreen" Margin="0,0,0,20"/>
-
-                        <!-- LED 0 -->
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,0,0,15" Background="White">
-                          <StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,15">
-                              <TextBlock Text="LED 0" FontWeight="SemiBold" FontSize="14"/>
-                              <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="16" Height="16"/>
-                            </StackPanel>
-
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-                              <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led0Current}"
-                                             Minimum="2" Maximum="100" Width="120" ClipValueToMinMax="True"/>
-
-                              <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led0MaxCurrent}"
-                                             Minimum="2" Maximum="100" Width="120" ClipValueToMinMax="True"/>
-
-                              <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed0}"
-                                             Minimum="1" Maximum="65535" Width="120" ClipValueToMinMax="True"/>
-
-                              <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                                Enable Pulse Mode
-                              </CheckBox>
-
-                              <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsLed0Enabled_OutputSet}" Margin="0,5,0,0">
-                                Set Output Active
-                              </CheckBox>
-                            </Grid>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- LED 1 -->
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Background="White">
-                          <StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,15">
-                              <TextBlock Text="LED 1" FontWeight="SemiBold" FontSize="14"/>
-                              <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="16" Height="16"/>
-                            </StackPanel>
-
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-                              <TextBlock Grid.Row="0" Grid.Column="0" Text="Current (mA):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Led1Current}"
-                                             Minimum="5" Maximum="100" Width="120" ClipValueToMinMax="True"/>
-
-                              <TextBlock Grid.Row="1" Grid.Column="0" Text="Max Current (mA):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Led1MaxCurrent}"
-                                             Minimum="5" Maximum="100" Width="120" ClipValueToMinMax="True"/>
-
-                              <TextBlock Grid.Row="2" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseLed1}"
-                                             Minimum="1" Maximum="65535" Width="120" ClipValueToMinMax="True"/>
-
-                              <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                                Enable Pulse Mode
-                              </CheckBox>
-
-                              <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsLed1Enabled_OutputSet}" Margin="0,5,0,0">
-                                Set Output Active
-                              </CheckBox>
-                            </Grid>
-                          </StackPanel>
-                        </Border>
-                      </StackPanel>
-                    </Border>
-
-                    <!-- RGB Section -->
-                    <Border Grid.Column="1" BorderBrush="DarkMagenta" BorderThickness="2" CornerRadius="8"
-                            Padding="20" Margin="10,0,0,0" Background="Lavender">
-                      <StackPanel>
-                        <TextBlock Text="RGB Controls" FontSize="18" FontWeight="Bold"
-                                   Foreground="DarkMagenta" Margin="0,0,0,20"/>
-
-                        <!-- RGB 0 -->
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,0,0,15" Background="White">
-                          <StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,15">
-                              <TextBlock Text="RGB 0" FontWeight="SemiBold" FontSize="14"/>
-                              <controls:VisualStatus Status="{Binding IsRgb0Enabled_OutputState}" Width="16" Height="16"/>
-                            </StackPanel>
-
-                            <controls:RgbRegisterControl DataContext="{Binding Rgb0Adapter}" Margin="0,0,0,15"/>
-
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                              <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseRgb0}"
-                                             Minimum="1" Maximum="65535" Width="120" ClipValueToMinMax="True"/>
-
-                              <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                                Enable Pulse Mode
-                              </CheckBox>
-
-                              <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsRgb0Enabled_OutputSet}" Margin="0,5,0,0">
-                                Set Output Active
-                              </CheckBox>
-                            </Grid>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- RGB 1 -->
-                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Background="White">
-                          <StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,15">
-                              <TextBlock Text="RGB 1" FontWeight="SemiBold" FontSize="14"/>
-                              <controls:VisualStatus Status="{Binding IsRgb1Enabled_OutputState}" Width="16" Height="16"/>
-                            </StackPanel>
-
-                            <controls:RgbRegisterControl DataContext="{Binding Rgb1Adapter}" Margin="0,0,0,15"/>
-
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                              <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse Duration (ms):" Margin="0,5,15,5"/>
-                              <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseRgb1}"
-                                             Minimum="1" Maximum="65535" Width="120" ClipValueToMinMax="True"/>
-
-                              <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" Margin="0,10,0,5">
-                                Enable Pulse Mode
-                              </CheckBox>
-
-                              <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                        IsChecked="{Binding IsRgb1Enabled_OutputSet}" Margin="0,5,0,0">
-                                Set Output Active
-                              </CheckBox>
-                            </Grid>
-                          </StackPanel>
-                        </Border>
-                      </StackPanel>
-                    </Border>
-                  </Grid>
-
-                  <!-- Port Outputs Section -->
-                  <Border Grid.Row="2" BorderBrush="DarkOrange" BorderThickness="2" CornerRadius="8"
-                          Padding="20" Margin="0,0,0,20" Background="FloralWhite">
-                    <StackPanel>
-                      <TextBlock Text="Port Outputs" FontSize="18" FontWeight="Bold"
-                                 Foreground="DarkOrange" Margin="0,0,0,20"/>
-
-                      <Grid ColumnDefinitions="*,*,*">
-                        <!-- Port 0 -->
-                        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,0,10,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="PORT 0" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <!-- DO 0 -->
-                            <StackPanel Margin="0,0,0,15">
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="DO 0" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseDOPort0}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort0Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-
-                            <!-- Supply -->
-                            <StackPanel>
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="Supply" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseSupplyPort0}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- Port 1 -->
-                        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="5,0,5,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="PORT 1" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <!-- DO 0 -->
-                            <StackPanel Margin="0,0,0,15">
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="DO 0" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsDOPort1Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseDOPort1}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort1Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-
-                            <!-- Supply -->
-                            <StackPanel>
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="Supply" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsSupplyPort1Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseSupplyPort1}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- Port 2 -->
-                        <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="10,0,0,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="PORT 2" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <!-- DO 0 -->
-                            <StackPanel Margin="0,0,0,15">
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="DO 0" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsDOPort2Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseDOPort2}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsDOPort2Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-
-                            <!-- Supply -->
-                            <StackPanel>
-                              <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
-                                <TextBlock Text="Supply" FontWeight="SemiBold"/>
-                                <controls:VisualStatus Status="{Binding IsSupplyPort2Enabled_OutputState}" Width="14" Height="14"/>
-                              </StackPanel>
-
-                              <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Pulse (ms):" Margin="0,5,10,5"/>
-                                <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding PulseSupplyPort2}"
-                                               Minimum="1" Maximum="65535" Width="100" ClipValueToMinMax="True"/>
-
-                                <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" Margin="0,8,0,5">
-                                  Enable Pulse
-                                </CheckBox>
-
-                                <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                          IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}" Margin="0,5,0,0">
-                                  Set Active
-                                </CheckBox>
-                              </Grid>
-                            </StackPanel>
-                          </StackPanel>
-                        </Border>
-                      </Grid>
-                    </StackPanel>
-                  </Border>
-
-                  <!-- Quick Actions Section -->
-                  <Border Grid.Row="3" BorderBrush="DarkRed" BorderThickness="2" CornerRadius="8"
-                          Padding="20" Background="MistyRose">
-                    <StackPanel>
-                      <TextBlock Text="Quick Actions" FontSize="18" FontWeight="Bold"
-                                 Foreground="DarkRed" Margin="0,0,0,20"/>
-
-                      <Grid ColumnDefinitions="*,*,*">
-                        <!-- All Outputs Control -->
-                        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="0,0,10,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="All Outputs Control" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <Button Content="Set All Outputs" Padding="10,5" Margin="0,0,0,10"
-                                    HorizontalAlignment="Stretch"/>
-                            <Button Content="Clear All Outputs" Padding="10,5" Margin="0,0,0,10"
-                                    HorizontalAlignment="Stretch"/>
-                            <Button Content="Toggle All Outputs" Padding="10,5"
-                                    HorizontalAlignment="Stretch"/>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- PWM Control -->
-                        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="5,0,5,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="PWM Control" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <Button Content="Start All PWM" Padding="10,5" Margin="0,0,0,10"
-                                    HorizontalAlignment="Stretch"/>
-                            <Button Content="Stop All PWM" Padding="10,5" Margin="0,0,0,10"
-                                    HorizontalAlignment="Stretch"/>
-                            <CheckBox Content="Enable All Pulse Modes" Margin="0,10,0,0"/>
-                          </StackPanel>
-                        </Border>
-
-                        <!-- Status Overview -->
-                        <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-                                Padding="15" Margin="10,0,0,0" Background="White">
-                          <StackPanel>
-                            <TextBlock Text="System Status" FontWeight="Bold" FontSize="14" Margin="0,0,0,15"/>
-
-                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto">
-                              <TextBlock Grid.Row="0" Grid.Column="0" Text="Active DO:" Margin="0,2,10,2"/>
-                              <TextBlock Grid.Row="0" Grid.Column="1" Text="2/4" FontWeight="Bold"/>
-
-                              <TextBlock Grid.Row="1" Grid.Column="0" Text="Active LEDs:" Margin="0,2,10,2"/>
-                              <TextBlock Grid.Row="1" Grid.Column="1" Text="1/2" FontWeight="Bold"/>
-
-                              <TextBlock Grid.Row="2" Grid.Column="0" Text="Active RGBs:" Margin="0,2,10,2"/>
-                              <TextBlock Grid.Row="2" Grid.Column="1" Text="0/2" FontWeight="Bold"/>
-
-                              <TextBlock Grid.Row="3" Grid.Column="0" Text="PWM Running:" Margin="0,2,10,2"/>
-                              <TextBlock Grid.Row="3" Grid.Column="1" Text="1/4" FontWeight="Bold"/>
-                            </Grid>
-                          </StackPanel>
-                        </Border>
-                      </Grid>
-                    </StackPanel>
-                  </Border>
-                </Grid>
-              </ScrollViewer>
-            </TabItem>
 
             <TabItem Header="Motion Control" FontSize="20" FontWeight="SemiBold">
               <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,*">
@@ -1599,12 +1951,20 @@
                       <StackPanel Orientation="Vertical" Spacing="8">
                         <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
                         <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
-                          <CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}" IsEnabled="True">
+                          <!--<CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}" IsEnabled="True">
                             Start
                           </CheckBox>
                           <CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}" IsEnabled="True">
                             Stop
-                          </CheckBox>
+                          </CheckBox>-->
+                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}"
+                                          Command="{Binding Camera0StartCommand}">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}"
+                                        Command="{Binding Camera0StopCommand}">
+                            Stop
+                          </ToggleButton>
                         </StackPanel>
                       </StackPanel>
                     </StackPanel>
@@ -1650,12 +2010,20 @@
                       <StackPanel Orientation="Vertical" Spacing="8">
                         <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
                         <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
-                          <CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}" IsEnabled="True">
+                          <!--<CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}" IsEnabled="True">
                             Start
                           </CheckBox>
                           <CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}" IsEnabled="True">
                             Stop
-                          </CheckBox>
+                          </CheckBox>-->
+                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}"
+                                          Command="{Binding Camera1StartCommand}">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}"
+                                        Command="{Binding Camera1StopCommand}">
+                            Stop
+                          </ToggleButton>
                         </StackPanel>
                       </StackPanel>
                     </StackPanel>
@@ -1676,17 +2044,33 @@
                     </StackPanel>
                     <Grid ColumnDefinitions="Auto,Auto,Auto" Margin="10,0,0,0">
                       <TextBlock Grid.Column="0" Text="Servo Output 2:" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                      <CheckBox Grid.Column="1" IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
+                      <!--<CheckBox Grid.Column="1" IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
                                 IsEnabled="True" Margin="0,0,15,0">Enable</CheckBox>
                       <CheckBox Grid.Column="2" IsChecked="{Binding IsServoOutput2Enabled_DisableServos}"
-                                IsEnabled="True">Disable</CheckBox>
+                                IsEnabled="True">Disable</CheckBox>-->
+                      <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
+                                          Command="{Binding ServoOutput2StartCommand}">
+                        Enable
+                      </ToggleButton>
+                      <ToggleButton Grid.Column="2" IsChecked="{Binding IsServoOutput2Enabled_DisableServos}"
+                                    Command="{Binding ServoOutput2StopCommand}">
+                        Disable
+                      </ToggleButton>
                     </Grid>
                     <Grid ColumnDefinitions="Auto,Auto,Auto" Margin="10,0,0,0">
                       <TextBlock Grid.Column="0" Text="Servo Output 3:" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                      <CheckBox Grid.Column="1" IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
+                      <!--<CheckBox Grid.Column="1" IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
                                 IsEnabled="True" Margin="0,0,15,0">Enable</CheckBox>
                       <CheckBox Grid.Column="2" IsChecked="{Binding IsServoOutput3Enabled_DisableServos}"
-                                IsEnabled="True">Disable</CheckBox>
+                                IsEnabled="True">Disable</CheckBox>-->
+                      <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
+                                          Command="{Binding ServoOutput3StartCommand}">
+                        Enable
+                      </ToggleButton>
+                      <ToggleButton Grid.Column="2" IsChecked="{Binding IsServoOutput3Enabled_DisableServos}"
+                                    Command="{Binding ServoOutput3StopCommand}">
+                        Disable
+                      </ToggleButton>
                     </Grid>
                   </StackPanel>
 
@@ -1841,337 +2225,6 @@
                       </StackPanel>
                     </StackPanel>
                   </Border>
-                </StackPanel>
-              </Grid>
-            </TabItem>
-
-            <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
-              <Grid>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="*"/>
-                  <ColumnDefinition Width="*"/>
-                  <ColumnDefinition Width="*"/>
-                  <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- PULSE -->
-                <StackPanel Grid.Column="0" Margin="20,0,0,0">
-
-                  <Grid Margin="0,20,0,0">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="Auto"/>
-                      <ColumnDefinition Width="150"/>
-                      <ColumnDefinition Width="100"/>
-                      <ColumnDefinition Width="200"/>
-                      <ColumnDefinition Width="150"/>
-                      <ColumnDefinition Width="50"/>
-                      <ColumnDefinition Width="70"/>
-                      <ColumnDefinition Width="70"/>
-                      <ColumnDefinition Width="70"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Vertical Lines -->
-                    <Rectangle Grid.Row="1" Grid.Column="2" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="70,0,10,0"/>
-                    <Rectangle Grid.Row="1" Grid.Column="4" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="170,0,0,0"/>
-                    <Rectangle Grid.Row="1" Grid.Column="5" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="70,0,0,0"/>
-                    <!--<Rectangle Grid.Row="1" Grid.Column="6" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="70,0,0,0"/>-->
-                    <Rectangle Grid.Row="1" Grid.Column="7" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="70,0,0,0"/>
-                    <!--<Rectangle Grid.Row="1" Grid.Column="8" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="70,0,0,0"/>-->
-
-                    <!-- Digital Outputs Section -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Text="Digital Outputs" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
-                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
-
-                    <!-- Digital Outputs Headers -->
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="3" Text="PWM Frequency (Hz)" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="4" Text="Duty Cycle (%)" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="6" Text="PWM Start" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="7" Text="PWM Stop" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="1" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- Digital Output Controls -->
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="DO 1" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="DO 2" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="DO 3" VerticalAlignment="Center" Margin="10"/>
-
-                    <!-- DO Controls -->
-                    <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding PulseDO0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="3" Grid.Column="1" Value="{Binding PulseDO1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="4" Grid.Column="1" Value="{Binding PulseDO2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="5" Grid.Column="1" Value="{Binding PulseDO3}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <NumericUpDown Grid.Row="2" Grid.Column="3" Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="3" Grid.Column="3" Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="4" Grid.Column="3" Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="5" Grid.Column="3" Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <NumericUpDown Grid.Row="2" Grid.Column="4" Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="3" Grid.Column="4" Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="4" Grid.Column="4" Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="5" Grid.Column="4" Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <!-- Set checkboxes for DO -->
-                    <CheckBox Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="3" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="4" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="5" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO3Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start checkboxes for DO -->
-                    <CheckBox Grid.Row="2" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO0Enabled_PwmStart}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="3" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO1Enabled_PwmStart}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="4" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO2Enabled_PwmStart}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="5" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO3Enabled_PwmStart}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Stop checkboxes for DO -->
-                    <CheckBox Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO0Enabled_PwmStop}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO1Enabled_PwmStop}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO2Enabled_PwmStop}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsPwmDO3Enabled_PwmStop}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- State visual status for DO -->
-                    <StackPanel Grid.Row="2" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="3" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="4" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="5" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-
-                    <!-- LEDs Section -->
-                    <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="9" Text="LEDs" FontWeight="Bold" VerticalAlignment="Center" Margin="5,30,5,0"/>
-                    <Rectangle Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- LED Headers -->
-                    <TextBlock Grid.Row="7" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="7" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="7" Grid.Column="3" Text="Current (mA)" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="7" Grid.Column="4" Text="Max Current (mA)" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="7" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <!-- PWM Start and PWM Stop columns are blank for LEDs -->
-                    <TextBlock Grid.Row="7" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- LED Controls -->
-                    <TextBlock Grid.Row="8" Grid.Column="0" Text="LED 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="LED 1" VerticalAlignment="Center" Margin="10"/>
-
-                    <NumericUpDown Grid.Row="8" Grid.Column="1" Value="{Binding PulseLed0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="9" Grid.Column="1" Value="{Binding PulseLed1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <NumericUpDown Grid.Row="8" Grid.Column="3" Value="{Binding Led0Current}" Minimum="2" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="9" Grid.Column="3" Value="{Binding Led1Current}" Minimum="5" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <NumericUpDown Grid.Row="8" Grid.Column="4" Value="{Binding Led0MaxCurrent}" Minimum="2" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="9" Grid.Column="4" Value="{Binding Led1MaxCurrent}" Minimum="5" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <!-- Set checkboxes for LEDs -->
-                    <CheckBox Grid.Row="8" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="9" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start and PWM Stop columns are blank for LEDs (columns 6 and 7) -->
-
-                    <!-- State visual status for LEDs -->
-                    <StackPanel Grid.Row="8" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="9" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-
-                    <!-- RGBs Section -->
-                    <TextBlock Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="9" Text="RGBs" FontWeight="Bold" VerticalAlignment="Center" Margin="5,30,5,0"/>
-                    <Rectangle Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- RGB Headers -->
-                    <TextBlock Grid.Row="11" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="11" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="11" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <!-- PWM Start and PWM Stop columns are blank for RGBs -->
-                    <TextBlock Grid.Row="11" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- RGB Controls -->
-                    <TextBlock Grid.Row="12" Grid.Column="0" Text="RGB 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="13" Grid.Column="0" Text="RGB 1" VerticalAlignment="Center" Margin="10"/>
-
-                    <NumericUpDown Grid.Row="12" Grid.Column="1" Value="{Binding PulseRgb0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="13" Grid.Column="1" Value="{Binding PulseRgb1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="12" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="13" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <controls:RgbRegisterControl Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="2" DataContext="{Binding Rgb0Adapter}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
-                    <controls:RgbRegisterControl Grid.Row="13" Grid.Column="3" Grid.ColumnSpan="2" DataContext="{Binding Rgb1Adapter}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
-
-                    <!-- Set checkboxes for RGBs -->
-                    <CheckBox Grid.Row="12" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="13" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start and PWM Stop columns are blank for RGBs (columns 6 and 7) -->
-
-                    <!-- State visual status for RGBs -->
-                    <StackPanel Grid.Row="12" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsRgb0Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="13" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsRgb1Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-
-                    <!-- PORT 0 Section -->
-                    <TextBlock Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="9" Text="PORT 0" FontWeight="Bold" VerticalAlignment="Center" Margin="5,30,5,0"/>
-                    <Rectangle Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- PORT 0 Headers -->
-                    <TextBlock Grid.Row="15" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="15" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="15" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 0 -->
-                    <TextBlock Grid.Row="15" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- PORT 0 Controls -->
-                    <TextBlock Grid.Row="16" Grid.Column="0" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="17" Grid.Column="0" Text="Supply" VerticalAlignment="Center" Margin="10"/>
-
-                    <NumericUpDown Grid.Row="16" Grid.Column="1" Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="17" Grid.Column="1" Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="16" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="17" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- Set checkboxes for PORT 0 -->
-                    <CheckBox Grid.Row="16" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="17" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 0 (columns 6 and 7) -->
-
-                    <!-- State visual status for PORT 0 -->
-                    <StackPanel Grid.Row="16" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="17" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-
-                    <!-- PORT 1 Section -->
-                    <TextBlock Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="9" Text="PORT 1" FontWeight="Bold" VerticalAlignment="Center" Margin="5,30,5,0"/>
-                    <Rectangle Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- PORT 1 Headers -->
-                    <TextBlock Grid.Row="19" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="19" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="19" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 1 -->
-                    <TextBlock Grid.Row="19" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- PORT 1 Controls -->
-                    <TextBlock Grid.Row="20" Grid.Column="0" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="21" Grid.Column="0" Text="Supply" VerticalAlignment="Center" Margin="10"/>
-
-                    <NumericUpDown Grid.Row="20" Grid.Column="1" Value="{Binding PulseDOPort1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="21" Grid.Column="1" Value="{Binding PulseSupplyPort1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="21" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- Set checkboxes for PORT 1 -->
-                    <CheckBox Grid.Row="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="21" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 1 (columns 6 and 7) -->
-
-                    <!-- State visual status for PORT 1 -->
-                    <StackPanel Grid.Row="20" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDOPort1Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="21" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsSupplyPort1Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-
-                    <!-- PORT 2 Section -->
-                    <TextBlock Grid.Row="22" Grid.Column="0" Grid.ColumnSpan="9" Text="PORT 2" FontWeight="Bold" VerticalAlignment="Center" Margin="5,30,5,0"/>
-                    <Rectangle Grid.Row="22" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- PORT 2 Headers -->
-                    <TextBlock Grid.Row="23" Grid.Column="1" Text="Pulse Duration (ms)" FontWeight="Bold" Margin="0,15,10,10"/>
-                    <TextBlock Grid.Row="23" Grid.Column="2" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <TextBlock Grid.Row="23" Grid.Column="5" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 2 -->
-                    <TextBlock Grid.Row="23" Grid.Column="8" Text="State" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,15,0,10"/>
-
-                    <!-- PORT 2 Controls -->
-                    <TextBlock Grid.Row="24" Grid.Column="0" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Grid.Row="25" Grid.Column="0" Text="Supply" VerticalAlignment="Center" Margin="10"/>
-
-                    <NumericUpDown Grid.Row="24" Grid.Column="1" Value="{Binding PulseDOPort2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-                    <NumericUpDown Grid.Row="25" Grid.Column="1" Value="{Binding PulseSupplyPort2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="150" HorizontalAlignment="Left" Margin="0,5,0,0"/>
-
-                    <CheckBox Grid.Row="24" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="25" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- Set checkboxes for PORT 2 -->
-                    <CheckBox Grid.Row="24" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-                    <CheckBox Grid.Row="25" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
-
-                    <!-- PWM Start and PWM Stop columns are blank for PORT 2 (columns 6 and 7) -->
-                    <Rectangle Grid.Row="25" Grid.Column="0" Grid.ColumnSpan="9" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,30,0,0"/>
-
-                    <!-- State visual status for PORT 2 -->
-                    <StackPanel Grid.Row="24" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsDOPort2Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="25" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center">
-                      <controls:VisualStatus Status="{Binding IsSupplyPort2Enabled_OutputState}" Width="15" Height="15"/>
-                    </StackPanel>
-                  </Grid>
                 </StackPanel>
               </Grid>
             </TabItem>
@@ -2472,8 +2525,294 @@
                 </StackPanel>
               </Grid>
             </TabItem>
+            
+            
 
+            <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <!-- PULSE -->
+                <StackPanel Grid.Column="0" Margin="20,0,0,0">
+
+                  <Grid Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="120"/>
+                      <!-- Section names -->
+                      <ColumnDefinition Width="80"/>
+                      <!-- Output names -->
+                      <ColumnDefinition Width="50"/>
+                      <!-- Set -->
+                      <ColumnDefinition Width="50"/>
+                      <!-- State -->
+                      <ColumnDefinition Width="150"/>
+                      <!-- Pulse Duration -->
+                      <ColumnDefinition Width="80"/>
+                      <!-- Enable -->
+                      <ColumnDefinition Width="150"/>
+                      <!-- PWM Frequency/Current -->
+                      <ColumnDefinition Width="150"/>
+                      <!-- Duty Cycle/Max Current -->
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Vertical Lines -->
+                    <Rectangle Grid.Row="1" Grid.Column="3" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="50,0,0,0"/>
+                    <Rectangle Grid.Row="1" Grid.Column="5" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="80,0,0,0"/>
+                    <Rectangle Grid.Row="1" Grid.Column="6" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="150,0,0,0"/>
+                    <Rectangle Grid.Row="1" Grid.Column="7" Grid.RowSpan="26" Width="1" Fill="LightGray" Margin="150,0,0,0"/>
+
+                    <!-- Headers -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Section" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Output" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Set" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="State" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Pulse Duration (ms)" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="5" Text="Enable" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="6" Text="PWM Frequency (Hz)" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="7" Text="Duty Cycle (%)" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+
+                    <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+
+                    <!-- Digital Outputs Section -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Text="Digital&#x0a;Outputs" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" TextAlignment="Center"/>
+
+                    <!-- Digital Output Controls -->
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="DO 1" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="DO 2" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="DO 3" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for DO -->
+                    <CheckBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO3Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for DO -->
+                    <StackPanel Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <!-- DO Controls -->
+                    <NumericUpDown Grid.Row="1" Grid.Column="4" Value="{Binding PulseDO0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="2" Grid.Column="4" Value="{Binding PulseDO1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="3" Grid.Column="4" Value="{Binding PulseDO2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="4" Grid.Column="4" Value="{Binding PulseDO3}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="3" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="4" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <NumericUpDown Grid.Row="1" Grid.Column="6" Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="2" Grid.Column="6" Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="3" Grid.Column="6" Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="4" Grid.Column="6" Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <NumericUpDown Grid.Row="1" Grid.Column="7" Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="2" Grid.Column="7" Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="3" Grid.Column="7" Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="4" Grid.Column="7" Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <!-- LEDs Section -->
+                    <Rectangle Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                    <TextBlock Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" Text="LEDs" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- Update column headers for LEDs -->
+                    <TextBlock Grid.Row="5" Grid.Column="6" Text="Current (mA)" FontWeight="Bold" VerticalAlignment="Center" Margin="5,15,0,0"/>
+                    <TextBlock Grid.Row="5" Grid.Column="7" Text="Max Current (mA)" FontWeight="Bold" VerticalAlignment="Center" Margin="5,15,0,0"/>
+
+                    <!-- LED Controls -->
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="LED 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="7" Grid.Column="1" Text="LED 1" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for LEDs -->
+                    <CheckBox Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for LEDs -->
+                    <StackPanel Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsLed0Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsLed1Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <NumericUpDown Grid.Row="6" Grid.Column="4" Value="{Binding PulseLed0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="7" Grid.Column="4" Value="{Binding PulseLed1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="6" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="7" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <NumericUpDown Grid.Row="6" Grid.Column="6" Value="{Binding Led0Current}" Minimum="2" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="7" Grid.Column="6" Value="{Binding Led1Current}" Minimum="5" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <NumericUpDown Grid.Row="6" Grid.Column="7" Value="{Binding Led0MaxCurrent}" Minimum="2" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="7" Grid.Column="7" Value="{Binding Led1MaxCurrent}" Minimum="5" Maximum="100" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <!-- RGBs Section -->
+                    <Rectangle Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                    <TextBlock Grid.Row="9" Grid.Column="0" Grid.RowSpan="2" Text="RGBs" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- Clear headers for RGBs (columns 6-7 not used) -->
+                    <TextBlock Grid.Row="8" Grid.Column="6" Text="" Margin="5,15,0,0"/>
+                    <TextBlock Grid.Row="8" Grid.Column="7" Text="" Margin="5,15,0,0"/>
+
+                    <!-- RGB Controls -->
+                    <TextBlock Grid.Row="9" Grid.Column="1" Text="RGB 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="10" Grid.Column="1" Text="RGB 1" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for RGBs -->
+                    <CheckBox Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for RGBs -->
+                    <StackPanel Grid.Row="9" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsRgb0Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="10" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsRgb1Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <NumericUpDown Grid.Row="9" Grid.Column="4" Value="{Binding PulseRgb0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="10" Grid.Column="4" Value="{Binding PulseRgb1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="9" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="10" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <controls:RgbRegisterControl Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="2" DataContext="{Binding Rgb0Adapter}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                    <controls:RgbRegisterControl Grid.Row="10" Grid.Column="6" Grid.ColumnSpan="2" DataContext="{Binding Rgb1Adapter}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
+
+                    <!-- PORT 0 Section -->
+                    <Rectangle Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                    <TextBlock Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Text="PORT 0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- PORT 0 Controls -->
+                    <TextBlock Grid.Row="12" Grid.Column="1" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="13" Grid.Column="1" Text="Supply" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for PORT 0 -->
+                    <CheckBox Grid.Row="12" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="13" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for PORT 0 -->
+                    <StackPanel Grid.Row="12" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="13" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <NumericUpDown Grid.Row="12" Grid.Column="4" Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="13" Grid.Column="4" Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="12" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="13" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- PORT 1 Section -->
+                    <Rectangle Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                    <TextBlock Grid.Row="15" Grid.Column="0" Grid.RowSpan="2" Text="PORT 1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- PORT 1 Controls -->
+                    <TextBlock Grid.Row="15" Grid.Column="1" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="16" Grid.Column="1" Text="Supply" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for PORT 1 -->
+                    <CheckBox Grid.Row="15" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="16" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for PORT 1 -->
+                    <StackPanel Grid.Row="15" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDOPort1Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="16" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsSupplyPort1Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <NumericUpDown Grid.Row="15" Grid.Column="4" Value="{Binding PulseDOPort1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="16" Grid.Column="4" Value="{Binding PulseSupplyPort1}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="15" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="16" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- PORT 2 Section -->
+                    <Rectangle Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="8" Height="1" Fill="LightGray" VerticalAlignment="Center" Margin="0,10,0,10"/>
+                    <TextBlock Grid.Row="18" Grid.Column="0" Grid.RowSpan="2" Text="PORT 2" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+
+                    <!-- PORT 2 Controls -->
+                    <TextBlock Grid.Row="18" Grid.Column="1" Text="DO 0" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Grid.Row="19" Grid.Column="1" Text="Supply" VerticalAlignment="Center" Margin="10"/>
+
+                    <!-- Set checkboxes for PORT 2 -->
+                    <CheckBox Grid.Row="18" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="19" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                    <!-- State visual status for PORT 2 -->
+                    <StackPanel Grid.Row="18" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsDOPort2Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="19" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <controls:VisualStatus Status="{Binding IsSupplyPort2Enabled_OutputState}" Width="15" Height="15"/>
+                    </StackPanel>
+
+                    <NumericUpDown Grid.Row="18" Grid.Column="4" Value="{Binding PulseDOPort2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <NumericUpDown Grid.Row="19" Grid.Column="4" Value="{Binding PulseSupplyPort2}" Minimum="1" Maximum="65535" ClipValueToMinMax="True" Increment="1" FormatString="F0" Width="140" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+
+                    <CheckBox Grid.Row="18" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+                    <CheckBox Grid.Row="19" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" IsEnabled="True" Margin="0,0,0,0"/>
+
+                  </Grid>
+                </StackPanel>
+              </Grid>
+            </TabItem>
 
             <TabItem Header="Configuration" FontSize="20" FontWeight="SemiBold">
               <!--<TextBlock Text="Configuration" VerticalAlignment="Center" FontSize="20" FontWeight="SemiBold"

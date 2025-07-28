@@ -153,7 +153,10 @@
         <StackPanel>
           <TabControl Margin="0,0,0,0" TabStripPlacement="Top">
 
-            <TabItem Header="Control Outputs" FontSize="20" FontWeight="SemiBold">
+            <!--<TabItem Header="Events" FontSize="20" FontWeight="SemiBold">
+            </TabItem>-->
+
+            <TabItem Header="Digital I/O" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
                 <Grid Margin="20">
                   <Grid.RowDefinitions>
@@ -188,6 +191,8 @@
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers (reordered) -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold"
+                                  Margin="0,0,0,5" />
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold"
                                   Margin="0,0,0,5" />
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold"
@@ -214,10 +219,15 @@
 
                       <!-- Output Control - Set and Clear side by side -->
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDO0Enabled_OutputClear}">Clear</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO0Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputSet}"
+                                      Command="{Binding DO0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputClear}"
+                                        Command="{Binding DO0ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -287,11 +297,17 @@
                         </StackPanel>
                       </Border>
 
+                      <!-- Output Control - Set and Clear side by side -->
                       <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDO1Enabled_OutputClear}">Clear</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO1Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputSet}"
+                                      Command="{Binding DO1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputClear}"
+                                        Command="{Binding DO1ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -359,11 +375,17 @@
                         </StackPanel>
                       </Border>
 
+                      <!-- Output Control - Set and Clear side by side -->
                       <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDO2Enabled_OutputClear}">Clear</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO2Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputSet}"
+                                      Command="{Binding DO2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputClear}"
+                                        Command="{Binding DO2ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -431,11 +453,17 @@
                         </StackPanel>
                       </Border>
 
+                      <!-- Output Control - Set and Clear side by side -->
                       <Border Grid.Row="4" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDO3Enabled_OutputClear}">Clear</CheckBox>
-                          <!--<CheckBox IsChecked="{Binding IsDO3Enabled_OutputToggle}">Toggle Output</CheckBox>-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputSet}"
+                                      Command="{Binding DO3SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputClear}"
+                                        Command="{Binding DO3ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -499,6 +527,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140"/>
@@ -508,6 +538,7 @@
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers - Only once at the beginning -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -530,9 +561,15 @@
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDOPort0Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDOPort0Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
+                                      Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputClear}"
+                                        Command="{Binding DOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -589,9 +626,15 @@
                       </Border>
 
                       <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
+                                      Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}"
+                                        Command="{Binding SupplyPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -629,11 +672,46 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
+
+                      <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital input port 0 status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIPort0Enabled_DigitalInputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
                     </Grid>
 
                     <!-- PORT 1 -->
                     <Grid Margin="0,0,0,15">
                       <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
@@ -662,9 +740,15 @@
                       </Border>
 
                       <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDOPort1Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDOPort1Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDOPort1Enabled_OutputSet}"
+                                      Command="{Binding DOPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDOPort1Enabled_OutputClear}"
+                                        Command="{Binding DOPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -721,9 +805,15 @@
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsSupplyPort1Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}"
+                                      Command="{Binding SupplyPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsSupplyPort1Enabled_OutputClear}"
+                                        Command="{Binding SupplyPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -761,11 +851,44 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
+                      <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DIO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+                      <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DI</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital input port 1 status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIPort1Enabled_DigitalInputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
                     </Grid>
 
                     <!-- PORT 2 -->
                     <Grid Margin="0,0,0,15">
                       <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
@@ -794,9 +917,15 @@
                       </Border>
 
                       <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsDOPort2Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsDOPort2Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDOPort2Enabled_OutputSet}"
+                                      Command="{Binding DOPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDOPort2Enabled_OutputClear}"
+                                        Command="{Binding DOPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -853,9 +982,15 @@
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsSupplyPort2Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}"
+                                      Command="{Binding SupplyPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsSupplyPort2Enabled_OutputClear}"
+                                        Command="{Binding SupplyPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -893,8 +1028,60 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
+                      <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DIO</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>DIO 2 state event status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIO2Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+                      <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DI</Label>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                              <ToolTip.Tip>Digital input port 2 status</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                            <controls:VisualStatus Status="{Binding IsDIPort2Enabled_DigitalInputState}" Width="15" Height="15"/>
+                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                          </StackPanel>
+                        </StackPanel>
+                      </Border>
+
                     </Grid>
                   </StackPanel>
+
+
+
+
+                </Grid>
+              </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="RGBs and LEDs" FontSize="20" FontWeight="SemiBold">
+              <ScrollViewer>
+                <Grid Margin="20">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
 
                   <!-- LEDs Section -->
                   <StackPanel Grid.Row="2" Margin="0,0,0,15">
@@ -915,6 +1102,7 @@
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Current Control" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -937,9 +1125,15 @@
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsLed0Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsLed0Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsLed0Enabled_OutputSet}"
+                                      Command="{Binding Led0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsLed0Enabled_OutputClear}"
+                                        Command="{Binding Led0ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -1001,9 +1195,15 @@
                       </Border>
 
                       <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsLed1Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsLed1Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsLed1Enabled_OutputSet}"
+                                      Command="{Binding Led1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsLed1Enabled_OutputClear}"
+                                        Command="{Binding Led1ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -1067,6 +1267,7 @@
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Color Control" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -1089,9 +1290,15 @@
                       </Border>
 
                       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsRgb0Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsRgb0Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsRgb0Enabled_OutputSet}"
+                                      Command="{Binding Rgb0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsRgb0Enabled_OutputClear}"
+                                        Command="{Binding Rgb0ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -1134,9 +1341,15 @@
                       </Border>
 
                       <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <StackPanel Orientation="Horizontal" Spacing="15">
-                          <CheckBox IsChecked="{Binding IsRgb1Enabled_OutputSet}">Set</CheckBox>
-                          <CheckBox IsChecked="{Binding IsRgb1Enabled_OutputClear}">Clear</CheckBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsRgb1Enabled_OutputSet}"
+                                      Command="{Binding Rgb1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsRgb1Enabled_OutputClear}"
+                                        Command="{Binding Rgb1ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -1164,25 +1377,85 @@
 
                   </StackPanel>
 
-
                 </Grid>
               </ScrollViewer>
             </TabItem>
 
-            <TabItem Header="Motion Control" FontSize="20" FontWeight="SemiBold">
-              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,*">
+            <TabItem Header="Advanced Controls" FontSize="20" FontWeight="SemiBold">
+              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto, Auto" RowDefinitions="Auto,*">
 
                 <!-- Headers -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Cameras" FontSize="18" FontWeight="Bold"
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Analog Inputs" FontSize="18" FontWeight="Bold"
                            Margin="0,0,40,20" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Servo Motors" FontSize="18" FontWeight="Bold"
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Cameras" FontSize="18" FontWeight="Bold"
                            Margin="0,0,40,20" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Quadrature Encoder" FontSize="18" FontWeight="Bold"
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Servo Motors" FontSize="18" FontWeight="Bold"
+                           Margin="0,0,40,20" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Quadrature Encoder" FontSize="18" FontWeight="Bold"
                            Margin="0,0,0,20" HorizontalAlignment="Left"/>
 
+                <!-- Analog Inputs Section -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                  <TextBlock Text="Analog Inputs" FontSize="18" FontWeight="Bold"
+                             Margin="0,0,0,5"/>
+
+                  <Grid Margin="0,0,0,15">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="200"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Voltage Reading" FontWeight="Bold"
+                                Margin="0,0,0,5" />
+
+                    <!-- AnalogInput0 -->
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Label FontWeight="Bold" FontSize="14" Padding="0">AnalogInput0</Label>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                          <ToolTip.Tip>Voltage reading from analog input 0</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                      </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <TextBlock Text="{Binding AnalogData,
+                        Converter={StaticResource PayloadFieldConverter},
+                        ConverterParameter='AnalogInput0'}"
+                                 VerticalAlignment="Center"
+                                 FontSize="14" />
+                    </Border>
+
+                    <!-- AnalogInput1 -->
+                    <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Label FontWeight="Bold" FontSize="14" Padding="0">AnalogInput1</Label>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                          <ToolTip.Tip>Voltage reading from analog input 1</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                      </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <TextBlock Text="{Binding AnalogData,
+                        Converter={StaticResource PayloadFieldConverter},
+                        ConverterParameter='AnalogInput1'}"
+                                 VerticalAlignment="Center"
+                                 FontSize="14" />
+                    </Border>
+                  </Grid>
+                </StackPanel>
+
                 <!-- Camera Controls -->
-                <!-- Camera Controls -->
-                <StackPanel Grid.Row="1" Grid.Column="0" Spacing="20" Margin="0,0,40,0" MinWidth="300">
+                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="20" Margin="0,0,40,0" MinWidth="300">
 
                   <!-- Camera 0 Configuration -->
                   <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
@@ -1332,8 +1605,7 @@
                 </StackPanel>
 
                 <!-- Servo Motor Controls -->
-                <!-- Servo Motor Controls -->
-                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="20" Margin="0,0,40,0" MinWidth="280">
+                <StackPanel Grid.Row="1" Grid.Column="2" Spacing="20" Margin="0,0,40,0" MinWidth="280">
 
                   <!-- Servo Motor 2 (DO2) Configuration -->
                   <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
@@ -1461,7 +1733,7 @@
                 </StackPanel>
 
                 <!-- Quadrature Encoder Controls -->
-                <StackPanel Grid.Row="1" Grid.Column="2" Spacing="20" MinWidth="280">
+                <StackPanel Grid.Row="1" Grid.Column="3" Spacing="20" MinWidth="280">
 
                   <!-- Encoder Data Display -->
                   <StackPanel Orientation="Vertical" Spacing="10">
@@ -1539,6 +1811,7 @@
                 </StackPanel>
               </Grid>
             </TabItem>
+
             <TabItem Header="Inputs" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
                 <Grid Margin="20">
@@ -3485,7 +3758,7 @@
               </Grid>
             </TabItem>
 
-   
+
           </TabControl>
         </StackPanel>
       </StackPanel>

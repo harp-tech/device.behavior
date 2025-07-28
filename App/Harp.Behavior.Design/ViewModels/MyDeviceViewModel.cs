@@ -42,6 +42,51 @@ public class BehaviorViewModel : ViewModelBase
 
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO0ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO1ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO2ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO3ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort0ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort1ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort2ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort0ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort1ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort2ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led0ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led1ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb0ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb1ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort0ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort1ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort2ConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO1ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO2SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO2ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO3SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DO3ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort1ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort1ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort2SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DOPort2ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort2SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort2ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> Led1ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> Rgb1ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO0StartCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO0StopCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO1StartCommand { get; }
@@ -3276,6 +3321,42 @@ public class BehaviorViewModel : ViewModelBase
                 IsEncoderPort2Enabled_EncoderReset = x.HasFlag(EncoderInputs.EncoderPort2);
             });
 
+
+        DO0SetCommand = ReactiveCommand.Create(ExecuteDO0Set, canChangeConfig);
+        DO0ClearCommand = ReactiveCommand.Create(ExecuteDO0Clear, canChangeConfig);
+        DO1SetCommand = ReactiveCommand.Create(ExecuteDO1Set, canChangeConfig);
+        DO1ClearCommand = ReactiveCommand.Create(ExecuteDO1Clear, canChangeConfig);
+        DO2SetCommand = ReactiveCommand.Create(ExecuteDO2Set, canChangeConfig);
+        DO2ClearCommand = ReactiveCommand.Create(ExecuteDO2Clear, canChangeConfig);
+        DO3SetCommand = ReactiveCommand.Create(ExecuteDO3Set, canChangeConfig);
+        DO3ClearCommand = ReactiveCommand.Create(ExecuteDO3Clear, canChangeConfig);
+
+        DOPort0SetCommand = ReactiveCommand.Create(ExecuteDOPort0Set, canChangeConfig);
+        DOPort0ClearCommand = ReactiveCommand.Create(ExecuteDOPort0Clear, canChangeConfig);
+        DOPort1SetCommand = ReactiveCommand.Create(ExecuteDOPort1Set, canChangeConfig);
+        DOPort1ClearCommand = ReactiveCommand.Create(ExecuteDOPort1Clear, canChangeConfig);
+        DOPort2SetCommand = ReactiveCommand.Create(ExecuteDOPort2Set, canChangeConfig);
+        DOPort2ClearCommand = ReactiveCommand.Create(ExecuteDOPort2Clear, canChangeConfig);
+        SupplyPort0SetCommand = ReactiveCommand.Create(ExecuteSupplyPort0Set, canChangeConfig);
+        SupplyPort0ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort0Clear, canChangeConfig);
+        SupplyPort1SetCommand = ReactiveCommand.Create(ExecuteSupplyPort1Set, canChangeConfig);
+        SupplyPort1ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort1Clear, canChangeConfig);
+        SupplyPort2SetCommand = ReactiveCommand.Create(ExecuteSupplyPort2Set, canChangeConfig);
+        SupplyPort2ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort2Clear, canChangeConfig);
+
+        Led0SetCommand = ReactiveCommand.Create(ExecuteLed0Set, canChangeConfig);
+        Led0ClearCommand = ReactiveCommand.Create(ExecuteLed0Clear, canChangeConfig);
+        Led1SetCommand = ReactiveCommand.Create(ExecuteLed1Set, canChangeConfig);
+        Led1ClearCommand = ReactiveCommand.Create(ExecuteLed1Clear, canChangeConfig);
+        Rgb0SetCommand = ReactiveCommand.Create(ExecuteRgb0Set, canChangeConfig);
+        Rgb0ClearCommand = ReactiveCommand.Create(ExecuteRgb0Clear, canChangeConfig);
+        Rgb1SetCommand = ReactiveCommand.Create(ExecuteRgb1Set, canChangeConfig);
+        Rgb1ClearCommand = ReactiveCommand.Create(ExecuteRgb1Clear, canChangeConfig);
+
+        //Apply Buttons
+
+
+
         PwmDO0StartCommand = ReactiveCommand.Create(ExecutePwmDO0Start, canChangeConfig);
         PwmDO0StopCommand = ReactiveCommand.Create(ExecutePwmDO0Stop, canChangeConfig);
         PwmDO1StartCommand = ReactiveCommand.Create(ExecutePwmDO1Start, canChangeConfig);
@@ -3295,9 +3376,207 @@ public class BehaviorViewModel : ViewModelBase
         Camera1StartCommand = ReactiveCommand.Create(ExecuteCamera1Start, canChangeConfig);
         Camera1StopCommand = ReactiveCommand.Create(ExecuteCamera1Stop, canChangeConfig);
 
+        Rgb0ApplyConfigurationCommand =
+            ReactiveCommand.Create(ExecuteRgb0ApplyConfiguration, canChangeConfig);
+        Rgb1ApplyConfigurationCommand =
+            ReactiveCommand.Create(ExecuteRgb1ApplyConfiguration, canChangeConfig);
+
+
         // force initial population of currently connected ports
         LoadUsbInformation();
     }
+
+    private void ExecuteRgb0ApplyConfiguration()
+    {
+        if (_device == null)
+            return;
+        var color = Rgb0Adapter.Color;
+        var payload = new RgbPayload(color.R, color.G, color.B);
+        _device.WriteRgb0Async(payload);
+    }
+
+    private void ExecuteRgb1ApplyConfiguration()
+    {
+        if (_device == null)
+            return;
+        var color = Rgb1Adapter.Color;
+        var payload = new RgbPayload(color.R, color.G, color.B);
+        _device.WriteRgb1Async(payload);
+    }
+
+    private void ExecuteDO0Set()
+    {
+        // Set the value of the DO0
+        IsDO0Enabled_OutputSet = true;
+        IsDO0Enabled_OutputClear = false;
+    }
+    private void ExecuteDO0Clear()
+    {
+        // Set the value of the DO0
+        IsDO0Enabled_OutputSet = false;
+        IsDO0Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDO1Set()
+    {
+        // Set the value of the DO0
+        IsDO1Enabled_OutputSet = true;
+        IsDO1Enabled_OutputClear = false;
+    }
+    private void ExecuteDO1Clear()
+    {
+        // Set the value of the DO0
+        IsDO1Enabled_OutputSet = false;
+        IsDO1Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDO2Set()
+    {
+        // Set the value of the DO0
+        IsDO2Enabled_OutputSet = true;
+        IsDO2Enabled_OutputClear = false;
+    }
+    private void ExecuteDO2Clear()
+    {
+        // Set the value of the DO0
+        IsDO2Enabled_OutputSet = false;
+        IsDO2Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDO3Set()
+    {
+        // Set the value of the DO0
+        IsDO3Enabled_OutputSet = true;
+        IsDO3Enabled_OutputClear = false;
+    }
+    private void ExecuteDO3Clear()
+    {
+        // Set the value of the DO0
+        IsDO3Enabled_OutputSet = false;
+        IsDO3Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDOPort0Set()
+    {
+        // Set the value of the DO0
+        IsDOPort0Enabled_OutputSet = true;
+        IsDOPort0Enabled_OutputClear = false;
+    }
+    private void ExecuteDOPort0Clear()
+    {
+        // Set the value of the DO0
+        IsDOPort0Enabled_OutputSet = false;
+        IsDOPort0Enabled_OutputClear = true;
+    }
+
+    private void ExecuteSupplyPort0Set()
+    {
+        // Set the value of the DO0
+        IsSupplyPort0Enabled_OutputSet = true;
+        IsSupplyPort0Enabled_OutputClear = false;
+    }
+    private void ExecuteSupplyPort0Clear()
+    {
+        // Set the value of the DO0
+        IsSupplyPort0Enabled_OutputSet = false;
+        IsSupplyPort0Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDOPort1Set()
+    {
+        // Set the value of the DO0
+        IsDOPort1Enabled_OutputSet = true;
+        IsDOPort1Enabled_OutputClear = false;
+    }
+    private void ExecuteDOPort1Clear()
+    {
+        // Set the value of the DO0
+        IsDOPort1Enabled_OutputSet = false;
+        IsDOPort1Enabled_OutputClear = true;
+    }
+
+    private void ExecuteSupplyPort1Set()
+    {
+        // Set the value of the DO0
+        IsSupplyPort1Enabled_OutputSet = true;
+        IsSupplyPort1Enabled_OutputClear = false;
+    }
+    private void ExecuteSupplyPort1Clear()
+    {
+        // Set the value of the DO0
+        IsSupplyPort1Enabled_OutputSet = false;
+        IsSupplyPort1Enabled_OutputClear = true;
+    }
+
+    private void ExecuteDOPort2Set()
+    {
+        // Set the value of the DO0
+        IsDOPort2Enabled_OutputSet = true;
+        IsDOPort2Enabled_OutputClear = false;
+    }
+    private void ExecuteDOPort2Clear()
+    {
+        // Set the value of the DO0
+        IsDOPort2Enabled_OutputSet = false;
+        IsDOPort2Enabled_OutputClear = true;
+    }
+
+    private void ExecuteSupplyPort2Set()
+    {
+        // Set the value of the DO0
+        IsSupplyPort2Enabled_OutputSet = true;
+        IsSupplyPort2Enabled_OutputClear = false;
+    }
+    private void ExecuteSupplyPort2Clear()
+    {
+        // Set the value of the DO0
+        IsSupplyPort2Enabled_OutputSet = false;
+        IsSupplyPort2Enabled_OutputClear = true;
+    }
+
+    private void ExecuteLed0Set()
+    {
+        IsLed0Enabled_OutputSet = true;
+        IsLed0Enabled_OutputClear = false;
+    }
+    private void ExecuteLed0Clear()
+    {
+        IsLed0Enabled_OutputSet = false;
+        IsLed0Enabled_OutputClear = true;
+    }
+
+    private void ExecuteLed1Set()
+    {
+        IsLed1Enabled_OutputSet = true;
+        IsLed1Enabled_OutputClear = false;
+    }
+    private void ExecuteLed1Clear()
+    {
+        IsLed1Enabled_OutputSet = false;
+        IsLed1Enabled_OutputClear = true;
+    }
+    private void ExecuteRgb0Set()
+    {
+        IsRgb0Enabled_OutputSet = true;
+        IsRgb0Enabled_OutputClear = false;
+    }
+    private void ExecuteRgb0Clear()
+    {
+        IsRgb0Enabled_OutputSet = false;
+        IsRgb0Enabled_OutputClear = true;
+    }
+
+    private void ExecuteRgb1Set()
+    {
+        IsRgb1Enabled_OutputSet = true;
+        IsRgb1Enabled_OutputClear = false;
+    }
+    private void ExecuteRgb1Clear()
+    {
+        IsRgb1Enabled_OutputSet = false;
+        IsRgb1Enabled_OutputClear = true;
+    }
+
 
     private void ExecutePwmDO0Start()
     {

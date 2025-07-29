@@ -42,10 +42,6 @@ public class BehaviorViewModel : ViewModelBase
 
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> DO0ApplyConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> DO1ApplyConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> DO2ApplyConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> DO3ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort0ConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort1ConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort2ConfigurationCommand { get; }
@@ -54,8 +50,6 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> SupplyPort2ConfigurationCommand { get; }
     public ReactiveCommand<int, Unit> LedApplyConfigurationCommand { get; }  // TESTING
     public ReactiveCommand<int, Unit> DOApplyConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> Led0ApplyConfigurationCommand { get; }
-    public ReactiveCommand<Unit, Unit> Led1ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb0ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb1ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> DIOPort0ConfigurationCommand { get; }

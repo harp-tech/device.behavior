@@ -82,6 +82,7 @@ public class RgbRegisterAdapter : ReactiveObject
                 string gName = Colors.Count == 1 ? "Green" : $"Green{i}";
                 string bName = Colors.Count == 1 ? "Blue" : $"Blue{i}";
 
+                // FIXME: exchanges here to compensate the error in the firmware
                 var r = GetByteField(type, registerValue, rName);
                 var g = GetByteField(type, registerValue, gName);
                 var b = GetByteField(type, registerValue, bName);

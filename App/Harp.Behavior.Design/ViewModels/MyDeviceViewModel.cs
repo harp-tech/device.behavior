@@ -52,6 +52,8 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> SupplyPort0ConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> SupplyPort1ConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> SupplyPort2ConfigurationCommand { get; }
+    public ReactiveCommand<int, Unit> LedApplyConfigurationCommand { get; }  // TESTING
+    public ReactiveCommand<int, Unit> DOApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Led0ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Led1ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb0ApplyConfigurationCommand { get; }
@@ -3045,6 +3047,15 @@ public class BehaviorViewModel : ViewModelBase
             //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
             Console.WriteLine($"Error saving configuration with error: {ex}"));
 
+/*        Rgb0ApplyConfigurationCommand =
+            ReactiveCommand.CreateFromObservable<Unit, Unit>(ExecuteRgb0ApplyConfiguration);*/
+        //Rgb0ApplyConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsSaving);
+        //Rgb0ApplyConfigurationCommand.ThrownExceptions.Subscribe(ex =>
+        //    //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
+        //    Console.WriteLine($"Error saving configuration with error: {ex}"));
+
+        
+
         ResetConfigurationCommand = ReactiveCommand.CreateFromObservable(ResetConfiguration, canChangeConfig);
         ResetConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsResetting);
         ResetConfigurationCommand.ThrownExceptions.Subscribe(ex =>
@@ -3376,45 +3387,360 @@ public class BehaviorViewModel : ViewModelBase
         Camera1StartCommand = ReactiveCommand.Create(ExecuteCamera1Start, canChangeConfig);
         Camera1StopCommand = ReactiveCommand.Create(ExecuteCamera1Stop, canChangeConfig);
 
-        Rgb0ApplyConfigurationCommand =
-            ReactiveCommand.Create(ExecuteRgb0ApplyConfiguration, canChangeConfig);
-        Rgb1ApplyConfigurationCommand =
-            ReactiveCommand.Create(ExecuteRgb1ApplyConfiguration, canChangeConfig);
+        //Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(
+        //    (bool parameter) => ExecuteRgb0ApplyConfiguration(parameter),
+        //    canChangeConfig
+        //);
+
+        DOApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
+            doIndex => ExecuteDOApplyConfiguration(doIndex),
+            canChangeConfig
+            );
+
+
+        Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb0ApplyConfiguration, canChangeConfig);
+        Rgb1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1ApplyConfiguration, canChangeConfig);
+
+        LedApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
+            ledIndex => ExecuteLedApplyConfiguration(ledIndex),
+            canChangeConfig
+        );
 
 
         // force initial population of currently connected ports
         LoadUsbInformation();
     }
 
-    private void ExecuteRgb0ApplyConfiguration()
+    private IObservable<Unit> ExecuteRgb0ApplyConfiguration()
     {
-        if (_device == null)
-            return;
-        var color = Rgb0Adapter.Color;
-        var payload = new RgbPayload(color.R, color.G, color.B);
-        _device.WriteRgb0Async(payload);
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteRgbAllAsync(value),
+                RgbAll,
+                "RgbAll");
+
+            var c0 = Rgb0Adapter.Color;
+            var c1 = Rgb1Adapter.Color;
+            RgbAll = new RgbAllPayload(
+                c0.R, c0.G, c0.B,
+                c1.R, c1.G, c1.B);
+
+            Rgb0 = new RgbPayload(c0.R, c0.G, c0.B);
+            Rgb1 = new RgbPayload(c1.R, c1.G, c1.B);
+            await WriteAndLogAsync(
+                value => _device.WriteRgb0Async(value),
+                Rgb0,
+                "Rgb0");
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb0Async(value),
+                PulseRgb0,
+                "PulseRgb0");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Rgb0,
+                "OutputSet");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                OutputClear,
+                "OutputClear");
+        });
     }
 
-    private void ExecuteRgb1ApplyConfiguration()
+    private IObservable<Unit> ExecuteRgb1ApplyConfiguration()
     {
-        if (_device == null)
-            return;
-        var color = Rgb1Adapter.Color;
-        var payload = new RgbPayload(color.R, color.G, color.B);
-        _device.WriteRgb1Async(payload);
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            // Update Rgb1 and RgbAll from adapter
+            var c0 = Rgb0Adapter.Color;
+            var c1 = Rgb1Adapter.Color;
+            RgbAll = new RgbAllPayload(
+                c0.R, c0.G, c0.B,
+                c1.R, c1.G, c1.B);
+
+            Rgb0 = new RgbPayload(c0.R, c0.G, c0.B);
+            Rgb1 = new RgbPayload(c1.R, c1.G, c1.B);
+
+            // Write Rgb1 and related registers
+            await WriteAndLogAsync(
+                value => _device.WriteRgb1Async(value),
+                Rgb1,
+                "Rgb1");
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb1Async(value),
+                PulseRgb1,
+                "PulseRgb1");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Rgb1,
+                "OutputSet");
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                OutputClear,
+                "OutputClear");
+        });
     }
+
+    private IObservable<Unit> ExecuteDOApplyConfiguration(int doIndex)
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            DigitalOutputs doOutput;
+            ushort pulseValue = 0;
+            ushort pwmFrequency = 0;
+            byte pwmDutyCycle = 0;
+            //PwmOutputs pwmOutput = 0;
+
+            // Enable pulse (if needed)
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+
+            switch (doIndex)
+            {
+                case 0:
+                    doOutput = DigitalOutputs.DO0;
+                    pulseValue = PulseDO0;
+                    pwmFrequency = PwmFrequencyDO0;
+                    pwmDutyCycle = PwmDutyCycleDO0;
+                    //pwmOutput = PwmOutputs.PwmDO0;
+                    await WriteAndLogAsync(
+                        value => _device.WritePulseDO0Async(value),
+                        pulseValue,
+                        "PulseDO0");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmFrequencyDO0Async(value),
+                        pwmFrequency,
+                        "PwmFrequencyDO0");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmDutyCycleDO0Async(value),
+                        pwmDutyCycle,
+                        "PwmDutyCycleDO0");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO0,
+                        "PwmStart");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO0,
+                        "PwmStop");
+                    break;
+                case 1:
+                    doOutput = DigitalOutputs.DO1;
+                    pulseValue = PulseDO1;
+                    pwmFrequency = PwmFrequencyDO1;
+                    pwmDutyCycle = PwmDutyCycleDO1;
+                    //pwmOutput = PwmOutputs.PwmDO1;
+                    await WriteAndLogAsync(
+                        value => _device.WritePulseDO1Async(value),
+                        pulseValue,
+                        "PulseDO1");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmFrequencyDO1Async(value),
+                        pwmFrequency,
+                        "PwmFrequencyDO1");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmDutyCycleDO1Async(value),
+                        pwmDutyCycle,
+                        "PwmDutyCycleDO1");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO1,
+                        "PwmStart");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO1,
+                        "PwmStop");
+                    break;
+                case 2:
+                    doOutput = DigitalOutputs.DO2;
+                    pulseValue = PulseDO2;
+                    pwmFrequency = PwmFrequencyDO2;
+                    pwmDutyCycle = PwmDutyCycleDO2;
+                    //pwmOutput = PwmOutputs.PwmDO2;
+                    await WriteAndLogAsync(
+                        value => _device.WritePulseDO2Async(value),
+                        pulseValue,
+                        "PulseDO2");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmFrequencyDO2Async(value),
+                        pwmFrequency,
+                        "PwmFrequencyDO2");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmDutyCycleDO2Async(value),
+                        pwmDutyCycle,
+                        "PwmDutyCycleDO2");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO2,
+                        "PwmStart");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO2,
+                        "PwmStop");
+                    break;
+                case 3:
+                    doOutput = DigitalOutputs.DO3;
+                    pulseValue = PulseDO3;
+                    pwmFrequency = PwmFrequencyDO3;
+                    pwmDutyCycle = PwmDutyCycleDO3;
+                    //pwmOutput = PwmOutputs.PwmDO3;
+                    await WriteAndLogAsync(
+                        value => _device.WritePulseDO3Async(value),
+                        pulseValue,
+                        "PulseDO3");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmFrequencyDO3Async(value),
+                        pwmFrequency,
+                        "PwmFrequencyDO3");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmDutyCycleDO3Async(value),
+                        pwmDutyCycle,
+                        "PwmDutyCycleDO3");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO3,
+                        "PwmStart");
+                    await WriteAndLogAsync(
+                        value => _device.WritePwmStartAsync(value),
+                        PwmOutputs.PwmDO3,
+                        "PwmStop");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(doIndex), "DO index must be 0-3.");
+            }
+
+            //// Start PWM
+            //await WriteAndLogAsync(
+            //    value => _device.WritePwmStartAsync(value),
+            //    PwmOutputs.PwmDO0,
+            //    "PwmStart");
+
+            // Optionally, you may want to stop PWM as well, depending on your logic
+            await WriteAndLogAsync(
+                value => _device.WritePwmStopAsync(value),
+                PwmStop,
+                "PwmStop");
+            // Set the output
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                doOutput,
+                "OutputSet");
+
+            // Clear the output (if needed, or use OutputClear property)
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                OutputClear,
+                "OutputClear");
+        });
+    }
+
+    private IObservable<Unit> ExecuteLedApplyConfiguration(int ledIndex)
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            if (ledIndex == 0)
+            {
+                // Write current and max current for LED 0
+                await WriteAndLogAsync(
+                    value => _device.WriteLed0CurrentAsync(value),
+                    Led0Current,
+                    "Led0Current");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteLed0MaxCurrentAsync(value),
+                    Led0MaxCurrent,
+                    "Led0MaxCurrent");
+
+                // Write pulse duration for LED 0
+                await WriteAndLogAsync(
+                    value => _device.WritePulseLed0Async(value),
+                    PulseLed0,
+                    "PulseLed0");
+
+                // Optionally, set/clear/toggle LED 0 in the digital outputs if needed
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputSetAsync(value),
+                    DigitalOutputs.Led0,
+                    "OutputSet");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputClearAsync(value),
+                    OutputClear,
+                    "OutputClear");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputPulseEnableAsync(value),
+                    OutputPulseEnable,
+                    "OutputPulseEnable");
+            }
+            else if (ledIndex == 1)
+            {
+                // Write current and max current for LED 1
+                await WriteAndLogAsync(
+                    value => _device.WriteLed1CurrentAsync(value),
+                    Led1Current,
+                    "Led1Current");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteLed1MaxCurrentAsync(value),
+                    Led1MaxCurrent,
+                    "Led1MaxCurrent");
+
+                // Write pulse duration for LED 1
+                await WriteAndLogAsync(
+                    value => _device.WritePulseLed1Async(value),
+                    PulseLed1,
+                    "PulseLed1");
+
+                // Optionally, set/clear/toggle LED 1 in the digital outputs if needed
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputSetAsync(value),
+                    DigitalOutputs.Led1,
+                    "OutputSet");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputClearAsync(value),
+                    OutputClear,
+                    "OutputClear");
+
+                await WriteAndLogAsync(
+                    value => _device.WriteOutputPulseEnableAsync(value),
+                    OutputPulseEnable,
+                    "OutputPulseEnable");
+            }
+
+        });
+    }
+
 
     private void ExecuteDO0Set()
     {
-        // Set the value of the DO0
+        // Toggle the value of DO0 OutputSet
+        //IsDO0Enabled_OutputSet = !IsDO0Enabled_OutputSet;
         IsDO0Enabled_OutputSet = true;
+        // Always clear OutputClear to ensure mutual exclusion
         IsDO0Enabled_OutputClear = false;
     }
     private void ExecuteDO0Clear()
     {
-        // Set the value of the DO0
         IsDO0Enabled_OutputSet = false;
+        // Always clear OutputClear to ensure mutual exclusion
         IsDO0Enabled_OutputClear = true;
+
     }
 
     private void ExecuteDO1Set()
@@ -3507,7 +3833,6 @@ public class BehaviorViewModel : ViewModelBase
         IsSupplyPort1Enabled_OutputSet = false;
         IsSupplyPort1Enabled_OutputClear = true;
     }
-
     private void ExecuteDOPort2Set()
     {
         // Set the value of the DO0
@@ -3520,7 +3845,6 @@ public class BehaviorViewModel : ViewModelBase
         IsDOPort2Enabled_OutputSet = false;
         IsDOPort2Enabled_OutputClear = true;
     }
-
     private void ExecuteSupplyPort2Set()
     {
         // Set the value of the DO0
@@ -3533,7 +3857,6 @@ public class BehaviorViewModel : ViewModelBase
         IsSupplyPort2Enabled_OutputSet = false;
         IsSupplyPort2Enabled_OutputClear = true;
     }
-
     private void ExecuteLed0Set()
     {
         IsLed0Enabled_OutputSet = true;
@@ -3544,7 +3867,6 @@ public class BehaviorViewModel : ViewModelBase
         IsLed0Enabled_OutputSet = false;
         IsLed0Enabled_OutputClear = true;
     }
-
     private void ExecuteLed1Set()
     {
         IsLed1Enabled_OutputSet = true;
@@ -3565,7 +3887,6 @@ public class BehaviorViewModel : ViewModelBase
         IsRgb0Enabled_OutputSet = false;
         IsRgb0Enabled_OutputClear = true;
     }
-
     private void ExecuteRgb1Set()
     {
         IsRgb1Enabled_OutputSet = true;
@@ -3576,64 +3897,54 @@ public class BehaviorViewModel : ViewModelBase
         IsRgb1Enabled_OutputSet = false;
         IsRgb1Enabled_OutputClear = true;
     }
-
-
     private void ExecutePwmDO0Start()
     {
         // Set the PWM DO0 start state
         IsPwmDO0Enabled_PwmStart = true;
         IsPwmDO0Enabled_PwmStop = false;
     }
-
     private void ExecutePwmDO0Stop()
     {
         // Set the PWM DO0 stop state  
         IsPwmDO0Enabled_PwmStop = true;
         IsPwmDO0Enabled_PwmStart = false;
     }
-
     private void ExecutePwmDO1Start()
     {
         // Set the PWM DO1 start state
         IsPwmDO1Enabled_PwmStart = true;
         IsPwmDO1Enabled_PwmStop = false;
     }
-
     private void ExecutePwmDO1Stop()
     {
         // Set the PWM DO1 stop state  
         IsPwmDO1Enabled_PwmStop = true;
         IsPwmDO1Enabled_PwmStart = false;
     }
-
     private void ExecutePwmDO2Start()
     {
         // Set the PWM DO2 start state
         IsPwmDO2Enabled_PwmStart = true;
         IsPwmDO2Enabled_PwmStop = false;
     }
-
     private void ExecutePwmDO2Stop()
     {
         // Set the PWM DO2 stop state  
         IsPwmDO2Enabled_PwmStop = true;
         IsPwmDO2Enabled_PwmStart = false;
     }
-
     private void ExecutePwmDO3Start()
     {
         // Set the PWM DO3 start state
         IsPwmDO3Enabled_PwmStart = true;
         IsPwmDO3Enabled_PwmStop = false;
     }
-
     private void ExecutePwmDO3Stop()
     {
         // Set the PWM DO3 stop state  
         IsPwmDO3Enabled_PwmStop = true;
         IsPwmDO3Enabled_PwmStart = false;
     }
-
     private void ExecuteServoOuput2Start()
     {
         IsServoOutput2Enabled_EnableServos = true;
@@ -3654,7 +3965,6 @@ public class BehaviorViewModel : ViewModelBase
         IsServoOutput3Enabled_EnableServos = false;
         IsServoOutput3Enabled_DisableServos = true;
     }
-
     private void ExecuteCamera0Start()
     {
         IsCameraOutput0Enabled_StartCameras = true;

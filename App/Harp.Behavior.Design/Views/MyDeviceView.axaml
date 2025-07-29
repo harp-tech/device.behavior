@@ -153,8 +153,103 @@
         <StackPanel>
           <TabControl Margin="0,0,0,0" TabStripPlacement="Top">
 
-            <!--<TabItem Header="Events" FontSize="20" FontWeight="SemiBold">
-            </TabItem>-->
+            <TabItem Header="Event Configuration" FontSize="20" FontWeight="SemiBold">
+              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,*">
+
+                <!-- Header -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Device Events" FontSize="18" FontWeight="Bold"
+                           Margin="0,0,40,20" HorizontalAlignment="Left"/>
+
+                <!-- Main Content Area -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Spacing="20" Margin="0,0,40,0" MinWidth="400">
+
+                  <!-- Event Enable Configuration -->
+                  <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
+                    <StackPanel Spacing="15">
+                      <StackPanel Orientation="Horizontal" Spacing="5">
+                        <TextBlock Text="EventEnable Register" FontWeight="Bold" FontSize="14"/>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                          <ToolTip.Tip>Specifies the active events in the device. Enable the events you want to monitor.</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                      </StackPanel>
+
+                      <!-- Port Events Section -->
+                      <StackPanel Orientation="Vertical" Spacing="12">
+                        <TextBlock Text="Port Events" FontWeight="SemiBold" FontSize="12"/>
+
+                        <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <CheckBox IsChecked="{Binding IsPortDIEnabled}" IsEnabled="True">
+                              PortDI
+                            </CheckBox>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                              <ToolTip.Tip>Enable digital input port events</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <CheckBox IsChecked="{Binding IsPortDIOEnabled}" IsEnabled="True">
+                              PortDIO
+                            </CheckBox>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                              <ToolTip.Tip>Enable digital input/output port events</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                        </StackPanel>
+                      </StackPanel>
+
+                      <!-- Analog Events Section -->
+                      <StackPanel Orientation="Vertical" Spacing="12">
+                        <TextBlock Text="Analog Events" FontWeight="SemiBold" FontSize="12"/>
+
+                        <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <CheckBox IsChecked="{Binding IsAnalogDataEnabled}" IsEnabled="True">
+                              AnalogData
+                            </CheckBox>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                              <ToolTip.Tip>Enable analog data acquisition events</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                        </StackPanel>
+                      </StackPanel>
+
+                      <!-- Camera Events Section -->
+                      <StackPanel Orientation="Vertical" Spacing="12">
+                        <TextBlock Text="Camera Events" FontWeight="SemiBold" FontSize="12"/>
+
+                        <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <CheckBox IsChecked="{Binding IsCamera0Enabled}" IsEnabled="True">
+                              Camera0
+                            </CheckBox>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                              <ToolTip.Tip>Enable Camera 0 frame acquisition events</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <CheckBox IsChecked="{Binding IsCamera1Enabled}" IsEnabled="True">
+                              Camera1
+                            </CheckBox>
+                            <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                                Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                              <ToolTip.Tip>Enable Camera 1 frame acquisition events</ToolTip.Tip>
+                            </heroIcons:HeroIcon>
+                          </StackPanel>
+                        </StackPanel>
+                      </StackPanel>
+                    </StackPanel>
+                  </Border>
+
+                </StackPanel>
+              </Grid>
+            </TabItem>
 
             <TabItem Header="Digital I/O" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
@@ -2125,10 +2220,6 @@
               <Grid Margin="10,0,0,10" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowDefinitions="*,*,*,*">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Events" FontSize="16" FontWeight="SemiBold" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="Other" FontSize="16" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse" FontSize="16" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="0" Grid.Column="3" Text="PWM" Margin="20,0,0,0" FontSize="16" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="LEDs" Margin="20,0,0,0" FontSize="16" FontWeight="SemiBold" />
-                <TextBlock Grid.Row="0" Grid.Column="5" Text="RGBs" FontSize="16" FontWeight="SemiBold" />
 
 
                 <!-- Events Column -->

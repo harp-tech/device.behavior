@@ -167,7 +167,7 @@
                   <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
                     <StackPanel Spacing="15">
                       <StackPanel Orientation="Horizontal" Spacing="5">
-                        <TextBlock Text="EventEnable Register" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="Event Enable Register" FontWeight="Bold" FontSize="14"/>
                         <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                             Foreground="{Binding IconColor}" VerticalAlignment="Top">
                           <ToolTip.Tip>Specifies the active events in the device. Enable the events you want to monitor.</ToolTip.Tip>
@@ -181,7 +181,7 @@
                         <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <CheckBox IsChecked="{Binding IsPortDIEnabled}" IsEnabled="True">
-                              PortDI
+                              Port DI
                             </CheckBox>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -191,7 +191,7 @@
 
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <CheckBox IsChecked="{Binding IsPortDIOEnabled}" IsEnabled="True">
-                              PortDIO
+                              Port DIO
                             </CheckBox>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -208,7 +208,7 @@
                         <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <CheckBox IsChecked="{Binding IsAnalogDataEnabled}" IsEnabled="True">
-                              AnalogData
+                              Analog Data
                             </CheckBox>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -225,7 +225,7 @@
                         <StackPanel Orientation="Vertical" Spacing="8" Margin="10,0,0,0">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <CheckBox IsChecked="{Binding IsCamera0Enabled}" IsEnabled="True">
-                              Camera0
+                              Camera 0
                             </CheckBox>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -235,7 +235,7 @@
 
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <CheckBox IsChecked="{Binding IsCamera1Enabled}" IsEnabled="True">
-                              Camera1
+                              Camera 1
                             </CheckBox>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -652,6 +652,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers - Only once at the beginning -->
@@ -659,6 +660,16 @@
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
+                      <Button Grid.Row="2" Grid.Column="4" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
 
                       <!-- Port 0 Digital Output -->
                       <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
@@ -790,6 +801,7 @@
                         </StackPanel>
                       </Border>
 
+                      <!-- Port 0 DIO -->
                       <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
@@ -803,6 +815,19 @@
                             <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
                             <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                           </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
+                                      Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOClear}"
+                                        Command="{Binding DIOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
 
@@ -837,7 +862,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
+
+                      <Button Grid.Row="0" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
+                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
 
                       <!-- Port 1 Digital Output -->
                       <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
@@ -983,6 +1020,19 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
+
+                      <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDIO1Enabled_PortDIOSet}"
+                                      Command="{Binding DIOPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDIO1Enabled_PortDIOClear}"
+                                        Command="{Binding DIOPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
+                        </StackPanel>
+                      </Border>
                       <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1014,7 +1064,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
+
+                      <Button Grid.Row="0" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
+                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
 
                       <!-- Port 2 Digital Output -->
                       <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
@@ -1158,6 +1220,19 @@
                             <controls:VisualStatus Status="{Binding IsDIO2Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
                             <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                           </StackPanel>
+                        </StackPanel>
+                      </Border>
+
+                      <Border Grid.Row="3" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsDIO2Enabled_PortDIOSet}"
+                                      Command="{Binding DIOPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                            Set
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsDIO2Enabled_PortDIOClear}"
+                                        Command="{Binding DIOPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                            Clear
+                          </ToggleButton>
                         </StackPanel>
                       </Border>
                       <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
@@ -1607,18 +1682,25 @@
                     <StackPanel Spacing="15">
                       <TextBlock Text="Camera 0" FontWeight="Bold" FontSize="14"/>
 
-                      <!-- Camera 0 Events -->
+                      <!-- Camera 0 Control -->
                       <StackPanel Orientation="Vertical" Spacing="8">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Events</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Enable camera frame acquisition events</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                        <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
+                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
+                          <!--<CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}" IsEnabled="True">
+                            Start
+                          </CheckBox>
+                          <CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}" IsEnabled="True">
+                            Stop
+                          </CheckBox>-->
+                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}"
+                                          Command="{Binding Camera0StartCommand}">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}"
+                                        Command="{Binding Camera0StopCommand}">
+                            Stop
+                          </ToggleButton>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsCamera0Enabled}" IsEnabled="True" Margin="10,0,0,0">
-                          Camera 0 Events
-                        </CheckBox>
                       </StackPanel>
 
                       <!-- Camera 0 Frame Status -->
@@ -1652,26 +1734,16 @@
                                      HorizontalAlignment="Left" Margin="10,0,0,0" />
                       </StackPanel>
 
-                      <!-- Camera 0 Control -->
-                      <StackPanel Orientation="Vertical" Spacing="8">
-                        <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
-                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
-                          <!--<CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}" IsEnabled="True">
-                            Start
-                          </CheckBox>
-                          <CheckBox IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}" IsEnabled="True">
-                            Stop
-                          </CheckBox>-->
-                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StartCameras}"
-                                          Command="{Binding Camera0StartCommand}">
-                            Start
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsCameraOutput0Enabled_StopCameras}"
-                                        Command="{Binding Camera0StopCommand}">
-                            Stop
-                          </ToggleButton>
-                        </StackPanel>
-                      </StackPanel>
+                      <!-- Camera 0 Apply Button -->
+                      <Button Content="Apply"
+                              Command="{Binding CameraApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
                     </StackPanel>
                   </Border>
 
@@ -1680,18 +1752,25 @@
                     <StackPanel Spacing="15">
                       <TextBlock Text="Camera 1" FontWeight="Bold" FontSize="14"/>
 
-                      <!-- Camera 1 Events -->
+                      <!-- Camera 1 Control -->
                       <StackPanel Orientation="Vertical" Spacing="8">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Events</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Enable camera frame acquisition events</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
+                        <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
+                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
+                          <!--<CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}" IsEnabled="True">
+                            Start
+                          </CheckBox>
+                          <CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}" IsEnabled="True">
+                            Stop
+                          </CheckBox>-->
+                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}"
+                                          Command="{Binding Camera1StartCommand}">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}"
+                                        Command="{Binding Camera1StopCommand}">
+                            Stop
+                          </ToggleButton>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsCamera1Enabled}" IsEnabled="True" Margin="10,0,0,0">
-                          Camera 1 Events
-                        </CheckBox>
                       </StackPanel>
 
                       <!-- Camera 1 Frame Status -->
@@ -1725,26 +1804,16 @@
                                      HorizontalAlignment="Left" Margin="10,0,0,0" />
                       </StackPanel>
 
-                      <!-- Camera 1 Control -->
-                      <StackPanel Orientation="Vertical" Spacing="8">
-                        <Label FontWeight="SemiBold" FontSize="12" Padding="0">Camera Control</Label>
-                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,0">
-                          <!--<CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}" IsEnabled="True">
-                            Start
-                          </CheckBox>
-                          <CheckBox IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}" IsEnabled="True">
-                            Stop
-                          </CheckBox>-->
-                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StartCameras}"
-                                          Command="{Binding Camera1StartCommand}">
-                            Start
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsCameraOutput1Enabled_StopCameras}"
-                                        Command="{Binding Camera1StopCommand}">
-                            Stop
-                          </ToggleButton>
-                        </StackPanel>
-                      </StackPanel>
+                      <!-- Camera 1 Apply Button -->
+                      <Button Content="Apply"
+                              Command="{Binding CameraApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
                     </StackPanel>
                   </Border>
                 </StackPanel>
@@ -1811,6 +1880,17 @@
                                      Increment="1" FormatString="F0" Width="200"
                                      HorizontalAlignment="Left" Margin="10,0,0,0" />
                       </StackPanel>
+
+                      <!-- Servo 2 Apply Button -->
+                      <Button Content="Apply"
+                              Command="{Binding ServoApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>0</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
                     </StackPanel>
                   </Border>
 
@@ -1873,6 +1953,17 @@
                                      Increment="1" FormatString="F0" Width="200"
                                      HorizontalAlignment="Left" Margin="10,0,0,0" />
                       </StackPanel>
+
+                      <!-- Servo 2 Apply Button -->
+                      <Button Content="Apply"
+                              Command="{Binding ServoApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                        <Button.CommandParameter>
+                          <x:Int32>1</x:Int32>
+                        </Button.CommandParameter>
+                      </Button>
                     </StackPanel>
                   </Border>
                 </StackPanel>
@@ -1951,6 +2042,14 @@
                           Reset Port 2 Encoder
                         </CheckBox>
                       </StackPanel>
+
+                      <!-- Servo 2 Apply Button -->
+                      <Button Content="Apply"
+                              Command="{Binding EncoderApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                      </Button>
                     </StackPanel>
                   </Border>
                 </StackPanel>

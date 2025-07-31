@@ -4693,8 +4693,11 @@ public class BehaviorViewModel : ViewModelBase
                     // The following registers have Event access but don't have a direct mapping to event flags
                     // These should be moved to appropriate event validation sections once their triggering events are identified
                     var DigitalInputStateResult = await device.ReadDigitalInputStateAsync(cancellationToken);
+                    DigitalInputState = DigitalInputStateResult;
                     observer.OnNext($"DigitalInputState: {DigitalInputStateResult}");
+
                     var PortDIOStateEventResult = await device.ReadPortDIOStateEventAsync(cancellationToken);
+                    PortDIOStateEvent = PortDIOStateEventResult;
                     observer.OnNext($"PortDIOStateEvent: {PortDIOStateEventResult}");
                     var StopCamerasResult = await device.ReadStopCamerasAsync(cancellationToken);
                     observer.OnNext($"StopCameras: {StopCamerasResult}");

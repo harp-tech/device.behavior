@@ -264,6 +264,7 @@
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                   </Grid.ColumnDefinitions>
 
                   <!--Digital Outputs (DO0-DO3)-->
@@ -657,7 +658,7 @@
                       </Grid.ColumnDefinitions>
 
                       <!-- Headers - Only once at the beginning -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 0 Status" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -802,7 +803,7 @@
                         </StackPanel>
                       </Border>
 
-                      <!-- Port 0 DIO -->
+                      <!-- Port 0 DIO --><!--
                       <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
@@ -861,7 +862,7 @@
                             <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                           </StackPanel>
                         </StackPanel>
-                      </Border>
+                      </Border>-->
                     </Grid>
 
                     <!-- PORT 1 -->
@@ -880,20 +881,24 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 1 Status" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
 
-                      <Button Grid.Row="0" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="2" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>1</x:Int32>
                         </Button.CommandParameter>
                       </Button>
 
                       <!-- Port 1 Digital Output -->
-                      <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DO</Label>
@@ -909,7 +914,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
                           <ToggleButton IsChecked="{Binding IsDOPort1Enabled_OutputSet}"
                                       Command="{Binding DOPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
@@ -922,7 +927,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <Grid>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -939,7 +944,7 @@
                         </Grid>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
                         <StackPanel Orientation="Vertical" Spacing="5">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <TextBlock Text="IR:" VerticalAlignment="Center" MinWidth="30"/>
@@ -958,7 +963,7 @@
                       </Border>
 
                       <!-- Port 1 Supply Output -->
-                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 12 V</Label>
@@ -974,7 +979,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
                           <ToggleButton IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}"
                                       Command="{Binding SupplyPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
@@ -987,7 +992,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <Grid>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -1004,7 +1009,7 @@
                         </Grid>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
                         <StackPanel Orientation="Vertical" Spacing="5">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <TextBlock Text="Valve:" VerticalAlignment="Center" MinWidth="30"/>
@@ -1049,20 +1054,33 @@
                           </ToggleButton>
                         </StackPanel>
                       </Border>
+
+                      
                       <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
-                        <ComboBox SelectedItem="{Binding IsDIO1Enabled_PortDIODirection, Mode=TwoWay}"
+                        <Grid>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                            <TextBlock Text="Direction:" VerticalAlignment="Center" MinWidth="80"/>
+                            <ComboBox SelectedItem="{Binding IsDIO1Enabled_PortDIODirection, Mode=TwoWay}"
                             IsEnabled="True"
                             Width="120"
                             Margin="0,5,0,0"
+                            VerticalAlignment="Center" 
                             HorizontalAlignment="Left">
-                          <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                              <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
-                            </DataTemplate>
-                          </ComboBox.ItemTemplate>
-                          <system:Boolean>True</system:Boolean>
-                          <system:Boolean>False</system:Boolean>
-                        </ComboBox>
+                              <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                  <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
+                                </DataTemplate>
+                              </ComboBox.ItemTemplate>
+                              <system:Boolean>True</system:Boolean>
+                              <system:Boolean>False</system:Boolean>
+                            </ComboBox>
+                          </StackPanel>
+                        </Grid>
+                        
                       </Border>
                       <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
@@ -1079,11 +1097,16 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
+                      <Border Grid.Row="5" Grid.Column="1" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
+                      <Border Grid.Row="5" Grid.Column="2" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
                     </Grid>
 
                     <!-- PORT 2 -->
                     <Grid Margin="0,0,0,15">
                       <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -1097,20 +1120,24 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 2 Status" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
 
-                      <Button Grid.Row="0" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="2" Grid.Column="4" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>1</x:Int32>
                         </Button.CommandParameter>
                       </Button>
 
                       <!-- Port 2 Digital Output -->
-                      <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DO</Label>
@@ -1126,7 +1153,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
                           <ToggleButton IsChecked="{Binding IsDOPort2Enabled_OutputSet}"
                                       Command="{Binding DOPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
@@ -1139,7 +1166,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <Grid>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -1156,7 +1183,7 @@
                         </Grid>
                       </Border>
 
-                      <Border Grid.Row="0" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
                         <StackPanel Orientation="Vertical" Spacing="5">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <TextBlock Text="IR:" VerticalAlignment="Center" MinWidth="30"/>
@@ -1175,7 +1202,7 @@
                       </Border>
 
                       <!-- Port 2 Supply Output -->
-                      <Border Grid.Row="1" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 12V</Label>
@@ -1191,7 +1218,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
                           <ToggleButton IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}"
                                       Command="{Binding SupplyPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
@@ -1204,7 +1231,7 @@
                         </StackPanel>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="2" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <Grid>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -1221,7 +1248,7 @@
                         </Grid>
                       </Border>
 
-                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
                         <StackPanel Orientation="Vertical" Spacing="5">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <TextBlock Text="Valve:" VerticalAlignment="Center" MinWidth="30"/>
@@ -1299,8 +1326,6 @@
 
                     </Grid>
                   </StackPanel>
-
-
 
 
                 </Grid>

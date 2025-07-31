@@ -880,18 +880,20 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                       </Grid.ColumnDefinitions>
                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 1 Status" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
 
-                      <Button Grid.Row="1" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="2" Grid.Column="4" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>1</x:Int32>
                         </Button.CommandParameter>
@@ -943,24 +945,11 @@
                           </CheckBox>
                         </Grid>
                       </Border>
-
-                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
-                        <StackPanel Orientation="Vertical" Spacing="5">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <TextBlock Text="IR:" VerticalAlignment="Center" MinWidth="30"/>
-                            <ComboBox SelectedItem="{Binding MimicPort1IR, Mode=TwoWay}" Width="120">
-                              <x:Static Member="local:MimicOutput.None" />
-                              <x:Static Member="local:MimicOutput.DIO0" />
-                              <x:Static Member="local:MimicOutput.DIO1" />
-                              <x:Static Member="local:MimicOutput.DIO2" />
-                              <x:Static Member="local:MimicOutput.DO0" />
-                              <x:Static Member="local:MimicOutput.DO1" />
-                              <x:Static Member="local:MimicOutput.DO2" />
-                              <x:Static Member="local:MimicOutput.DO3" />
-                            </ComboBox>
-                          </StackPanel>
-                        </StackPanel>
+                      <Border Grid.Row="1" Grid.Column="3" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                       </Border>
+                      <Border Grid.Row="1" Grid.Column="4" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2" HorizontalAlignment="Stretch">
+                      </Border>
+
 
                       <!-- Port 1 Supply Output -->
                       <Border Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
@@ -1008,11 +997,15 @@
                           </CheckBox>
                         </Grid>
                       </Border>
+                      
+                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
 
-                      <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,0,2">
-                        <StackPanel Orientation="Vertical" Spacing="5">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <TextBlock Text="Valve:" VerticalAlignment="Center" MinWidth="30"/>
+                      <Border Grid.Row="2" Grid.Column="4" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+
+                        
+                          <StackPanel Orientation="Horizontal" Spacing="5" >
+                            <TextBlock Text="Valve:" VerticalAlignment="Center"/>
                             <ComboBox SelectedItem="{Binding MimicPort1Valve, Mode=TwoWay}" Width="120">
                               <x:Static Member="local:MimicOutput.None" />
                               <x:Static Member="local:MimicOutput.DIO0" />
@@ -1024,8 +1017,14 @@
                               <x:Static Member="local:MimicOutput.DO3" />
                             </ComboBox>
                           </StackPanel>
-                        </StackPanel>
+                          
+                        
+                        
+                          
+                      
                       </Border>
+
+                      <!-- Port 1 DIO -->
                       <Border Grid.Row="3" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1055,21 +1054,20 @@
                         </StackPanel>
                       </Border>
 
-                      
-                      <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="3" Grid.Column="2" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
+                      <Border Grid.Row="3" Grid.Column="3" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <Grid>
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                           </Grid.ColumnDefinitions>
                           <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Direction:" VerticalAlignment="Center" MinWidth="80"/>
                             <ComboBox SelectedItem="{Binding IsDIO1Enabled_PortDIODirection, Mode=TwoWay}"
                             IsEnabled="True"
                             Width="120"
                             Margin="0,5,0,0"
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Left">
+                            HorizontalAlignment="Center">
                               <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                   <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
@@ -1082,6 +1080,10 @@
                         </Grid>
                         
                       </Border>
+                      <Border Grid.Row="3" Grid.Column="4" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
+
+                      <!-- Port 1 DI -->
                       <Border Grid.Row="4" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                         <StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1097,9 +1099,29 @@
                           </StackPanel>
                         </StackPanel>
                       </Border>
-                      <Border Grid.Row="5" Grid.Column="1" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      
+                      <Border Grid.Row="4" Grid.Column="1" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
                       </Border>
-                      <Border Grid.Row="5" Grid.Column="2" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      <Border Grid.Row="4" Grid.Column="2" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
+                      <Border Grid.Row="4" Grid.Column="3" BorderBrush="LightGray" Background="#F0F0F0" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                      </Border>
+                      <Border Grid.Row="4" Grid.Column="4" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,2,10,2">
+                        
+                          <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="IR:" VerticalAlignment="Center"/>
+                            <ComboBox SelectedItem="{Binding MimicPort1IR, Mode=TwoWay}" Width="120">
+                              <x:Static Member="local:MimicOutput.None" />
+                              <x:Static Member="local:MimicOutput.DIO0" />
+                              <x:Static Member="local:MimicOutput.DIO1" />
+                              <x:Static Member="local:MimicOutput.DIO2" />
+                              <x:Static Member="local:MimicOutput.DO0" />
+                              <x:Static Member="local:MimicOutput.DO1" />
+                              <x:Static Member="local:MimicOutput.DO2" />
+                              <x:Static Member="local:MimicOutput.DO3" />
+                            </ComboBox>
+                          </StackPanel>
+                    
                       </Border>
                     </Grid>
 

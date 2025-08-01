@@ -2866,7 +2866,7 @@
             </TabItem>
 
             <TabItem Header="Advanced Controls" FontSize="20" FontWeight="SemiBold">
-              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto, Auto" RowDefinitions="Auto,*">
+              <Grid Margin="10,10,0,10" ColumnDefinitions="Auto,Auto,Auto, Auto, Auto" RowDefinitions="Auto,*">
 
                 <!-- Headers -->
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Analog Inputs" FontSize="18" FontWeight="Bold"
@@ -2876,7 +2876,9 @@
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Servo Motors" FontSize="18" FontWeight="Bold"
                            Margin="0,0,40,20" HorizontalAlignment="Left"/>
                 <TextBlock Grid.Row="0" Grid.Column="3" Text="Quadrature Encoder" FontSize="18" FontWeight="Bold"
-                           Margin="0,0,0,20" HorizontalAlignment="Left"/>
+                           Margin="0,0,40,20" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Serial Timestamp" FontSize="18" FontWeight="Bold"
+                           Margin="0,0,40,20" HorizontalAlignment="Left"/>
 
                 <!-- Analog Inputs Section -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Spacing="20" Margin="0,0,40,0" MinWidth="280">
@@ -3231,7 +3233,7 @@
                 </StackPanel>
 
                 <!-- Quadrature Encoder Controls -->
-                <StackPanel Grid.Row="1" Grid.Column="3" Spacing="20" MinWidth="280">
+                <StackPanel Grid.Row="1" Grid.Column="3" Spacing="20" Margin="0,0,40,0" MinWidth="280">
 
                   <!-- Encoder Data Display -->
                   <StackPanel Orientation="Vertical" Spacing="10">
@@ -3315,6 +3317,42 @@
                     </StackPanel>
                   </Border>
                 </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="4" Spacing="20" Margin="0,0,40,0" MinWidth="280">
+
+                  <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Padding="15">
+                    <StackPanel Spacing="15">
+                      <TextBlock Text="Input Value" FontWeight="Bold" FontSize="14"/>
+ 
+                      
+                      <StackPanel Orientation="Vertical" Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="SemiBold" FontSize="12" Padding="0">Register Value</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Direct numeric value for EnableSerialTimestamp register (0-255)</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+                        <NumericUpDown Value="{Binding EnableSerialTimestamp}"
+                                       Minimum="0"
+                                       Maximum="255"
+                                       ClipValueToMinMax="True"
+                                       Increment="1"
+                                       FormatString="F0"
+                                       Width="200"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0" />
+                      </StackPanel>
+
+                      <Button Content="Apply"
+                              Command="{Binding SerialTimestampApplyConfigurationCommand}"
+                              Margin="0,10,0,0"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center">
+                      </Button>
+                    </StackPanel>
+                  </Border>
+                 </StackPanel>
               </Grid>
             </TabItem>
 

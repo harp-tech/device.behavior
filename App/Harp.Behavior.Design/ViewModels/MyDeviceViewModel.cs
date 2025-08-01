@@ -59,9 +59,8 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<int, Unit> CameraApplyConfigurationCommand { get; }
     public ReactiveCommand<int, Unit> ServoApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> EncoderApplyConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DIOPort0ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DIOPort1ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DIOPort2ConfigurationCommand { get; }
+
+    public ReactiveCommand<Unit, Unit> SerialTimestampApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> DO0SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DO0ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DO1SetCommand { get; }
@@ -3449,9 +3448,25 @@ public class BehaviorViewModel : ViewModelBase
             canChangeConfig
         );
 
+        SerialTimestampApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteSerialTimestampApplyConfiguration, canChangeConfig);
+
 
         // force initial population of currently connected ports
         LoadUsbInformation();
+    }
+
+    private IObservable<Unit> ExecuteSerialTimestampApplyConfiguration()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteEnableSerialTimestampAsync(value),
+                EnableSerialTimestamp,
+                "EnableSerialTimestamp");
+        });
     }
 
     private IObservable<Unit> ExecuteRgb0ApplyConfiguration()
@@ -4119,7 +4134,7 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-    private IObservable<Unit> ExecuteEncoderApplyConfiguration()
+    public IObservable<Unit> ExecuteEncoderApplyConfiguration()
     {
         return Observable.StartAsync(async () =>
         {
@@ -4138,7 +4153,10 @@ public class BehaviorViewModel : ViewModelBase
                value => _device.WriteEncoderResetAsync(value),
                EncoderReset,
                "EncoderReset");
+
+            IsEncoderPort2Enabled_EncoderReset = false;
         });
+        
     }
     private void ExecuteDO0Set()
     {
@@ -4896,10 +4914,7 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WritePwmStopAsync(value),
                 PwmStop,
                 "PwmStop");
-            await WriteAndLogAsync(
-                value => _device.WriteRgbAllAsync(value),
-                RgbAll,
-                "RgbAll");
+            
 
             var c0 = Rgb0Adapter.Color;
             var c1 = Rgb1Adapter.Color;
@@ -4927,6 +4942,10 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WritePulseRgb1Async(value),
                 PulseRgb1,
                 "PulseRgb1");
+            await WriteAndLogAsync(
+                value => _device.WriteRgbAllAsync(value),
+                RgbAll,
+                "RgbAll");
             await WriteAndLogAsync(
                 value => _device.WriteLed0CurrentAsync(value), 
                 Led0Current,
@@ -5035,6 +5054,8 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WriteOutputClearAsync(value),
                 OutputClear,
                 "OutputClear");
+
+            IsEncoderPort2Enabled_EncoderReset = false; // Uncheck after apply
             //await WriteAndLogAsync(
             //    value => _device.WriteOutputToggleAsync(value),
             //    OutputToggle,

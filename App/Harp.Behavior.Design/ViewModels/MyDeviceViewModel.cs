@@ -3541,9 +3541,9 @@ public class BehaviorViewModel : ViewModelBase
             ushort pulseValue = 0;
             ushort pwmFrequency = 0;
             byte pwmDutyCycle = 0;
-            //PwmOutputs pwmOutput = 0;
+            PwmOutputs pwmOutput = 0;
 
-            // Enable pulse (if needed)
+            // Enable pulse
             await WriteAndLogAsync(
                 value => _device.WriteOutputPulseEnableAsync(value),
                 OutputPulseEnable,
@@ -3556,7 +3556,7 @@ public class BehaviorViewModel : ViewModelBase
                     pulseValue = PulseDO0;
                     pwmFrequency = PwmFrequencyDO0;
                     pwmDutyCycle = PwmDutyCycleDO0;
-                    //pwmOutput = PwmOutputs.PwmDO0;
+                    pwmOutput = PwmOutputs.PwmDO0;
                     await WriteAndLogAsync(
                         value => _device.WritePulseDO0Async(value),
                         pulseValue,
@@ -3575,7 +3575,7 @@ public class BehaviorViewModel : ViewModelBase
                         "PwmStart");
                     await WriteAndLogAsync(
                         value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO0,
+                        pwmOutput,
                         "PwmStop");
                     break;
                 case 1:
@@ -3669,7 +3669,7 @@ public class BehaviorViewModel : ViewModelBase
             //    PwmOutputs.PwmDO0,
             //    "PwmStart");
 
-            // Optionally, you may want to stop PWM as well, depending on your logic
+            // Optionally, you may want to stop PWM as well, depending on my logic lol not sure how this is going
             await WriteAndLogAsync(
                 value => _device.WritePwmStopAsync(value),
                 PwmStop,
@@ -3790,20 +3790,9 @@ public class BehaviorViewModel : ViewModelBase
                         PulseDOPort0,
                         "PulseDOPort0");
                     await WriteAndLogAsync(
-                       value => _device.WriteMimicPort0IRAsync(value),
-                       MimicPort0IR,
-                       "MimicPort0IR");
-
-
-                    await WriteAndLogAsync(
                         value => _device.WriteOutputSetAsync(value),
                         DigitalOutputs.DOPort0,
                         "OutputSet");
-
-                    //await WriteAndLogAsync(
-                    //    value => _device.WriteOutputClearAsync(value),
-                    //    DigitalOutputs.DOPort0,
-                    //    "OutputClear");
                     await WriteAndLogAsync(
                         value => _device.WriteOutputClearAsync(value),
                         OutputClear,
@@ -3846,6 +3835,13 @@ public class BehaviorViewModel : ViewModelBase
                         "PortDIOClear");
                     break;
 
+                case 3: // DI
+                    await WriteAndLogAsync(
+                       value => _device.WriteMimicPort0IRAsync(value),
+                       MimicPort0IR,
+                       "MimicPort0IR");
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(port0Index), "Port0 index must be 0 (DO), 1 (12V), or 2 (DIO).");
             }
@@ -3875,11 +3871,6 @@ public class BehaviorViewModel : ViewModelBase
                         value => _device.WritePulseDOPort1Async(value),
                         PulseDOPort1,
                         "PulseDOPort1");
-                    await WriteAndLogAsync(
-                       value => _device.WriteMimicPort1IRAsync(value),
-                       MimicPort1IR,
-                       "MimicPort0IR");
-
 
                     await WriteAndLogAsync(
                         value => _device.WriteOutputSetAsync(value),
@@ -3924,6 +3915,13 @@ public class BehaviorViewModel : ViewModelBase
                         "PortDIOClear");
                     break;
 
+                    case 3:
+                    await WriteAndLogAsync(
+                        value => _device.WriteMimicPort1IRAsync(value),
+                        MimicPort1IR,
+                        "MimicPort1IR");
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(port1Index), "Port1 index must be 0 (DO), 1 (12V), or 2 (DIO).");
             }
@@ -3949,11 +3947,6 @@ public class BehaviorViewModel : ViewModelBase
                         value => _device.WritePulseDOPort2Async(value),
                         PulseDOPort2,
                         "PulseDOPort2");
-                    await WriteAndLogAsync(
-                       value => _device.WriteMimicPort2IRAsync(value),
-                       MimicPort2IR,
-                       "MimicPort2IR");
-
                     await WriteAndLogAsync(
                         value => _device.WriteOutputSetAsync(value),
                         DigitalOutputs.DOPort2,
@@ -3995,6 +3988,13 @@ public class BehaviorViewModel : ViewModelBase
                         value => _device.WritePortDIOClearAsync(value),
                         PortDIOClear,
                         "PortDIOClear");
+                    break;
+
+                case 3: // DI
+                    await WriteAndLogAsync(
+                        value => _device.WriteMimicPort2IRAsync(value),
+                        MimicPort2IR,
+                        "MimicPort2IR");
                     break;
 
                 default:

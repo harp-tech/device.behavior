@@ -1452,48 +1452,31 @@
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="4"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="4"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="4"/>
+                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="4"/>
+                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="4"/>
+                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="4"/>
+
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
 
                       <!-- Headers (reordered) -->
                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold"
-                                  Margin="0,0,0,5" />
+                                  Margin="12,5,0,5" />
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold"
-                                  Margin="0,0,0,5" />
+                                  Margin="12,5,0,5" />
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold"
-                                  Margin="0,0,0,5"/>
+                                  Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="PWM Control" FontWeight="Bold"
-                                  Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Action" FontWeight="Bold"
-                                  Margin="0,0,0,5"/>
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding DOApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>0</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding DOApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>1</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding DOApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>2</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding DOApplyConfigurationCommand}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>3</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-
+                                  Margin="12,5,0,5"/>
 
                       <!-- DO0 -->
-                   
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1509,8 +1492,7 @@
                     
 
                       <!-- Output Control - Set and Clear side by side -->
-
-                        <StackPanel  Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel  Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputSet}"
                                       Command="{Binding DO0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1520,11 +1502,10 @@
                             Clear
                           </ToggleButton>
                         </StackPanel>
- 
+
 
                       <!-- Pulse Control - Duration and Enable side by side -->
-      
-                        <Grid Grid.Row="1" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1542,7 +1523,7 @@
 
                       <!-- PWM Control - All controls on one line -->
                     
-                        <Grid Grid.Row="1" Grid.Column="3" Margin="0,12,10,12">
+                        <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1573,7 +1554,7 @@
 
                       <!-- DO1 -->
             
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1590,7 +1571,7 @@
 
                       <!-- Output Control - Set and Clear side by side -->
              
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputSet}"
                                       Command="{Binding DO1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1602,7 +1583,7 @@
                         </StackPanel>
                  
 
-                        <Grid Grid.Row="2" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1618,7 +1599,7 @@
                         </Grid>
  
          
-                        <Grid Grid.Row="2" Grid.Column="3" Margin="0,12,10,12">
+                        <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1648,7 +1629,7 @@
 
                       <!-- DO2 -->
                       
-                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1665,7 +1646,7 @@
 
                       <!-- Output Control - Set and Clear side by side -->
                     
-                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputSet}"
                                       Command="{Binding DO2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1676,7 +1657,7 @@
                           </ToggleButton>
                         </StackPanel>
                    
-                        <Grid Grid.Row="3" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid Grid.Row="3" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1692,7 +1673,7 @@
                         </Grid>
      
 
-                        <Grid Grid.Row="3" Grid.Column="3" Margin="0,12,0,12">
+                        <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1723,7 +1704,7 @@
 
                       <!-- DO3 -->
              
-                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1738,7 +1719,7 @@
                         </StackPanel>
                       
                       <!-- Output Control - Set and Clear side by side -->
-                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputSet}"
                                       Command="{Binding DO3SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1750,7 +1731,7 @@
                         </StackPanel>
 
              
-                        <Grid  Grid.Row="4" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid  Grid.Row="4" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1765,7 +1746,7 @@
                           </CheckBox>
                         </Grid>
                
-                        <Grid Grid.Row="4" Grid.Column="3" Margin="0,12,10,12">
+                        <Grid Grid.Row="4" Grid.Column="3" Margin="20,12,10,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1818,19 +1799,28 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
+
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="5" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
 
                       <!-- Headers - Only once at the beginning -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 0 Status" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="5" Text="Action" FontWeight="Bold" Margin="0,0,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 0 Status" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      
                       <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
@@ -1854,7 +1844,7 @@
 
                       <!-- Port 0 Digital Output -->
                      
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1868,7 +1858,7 @@
                           </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="0,12,20,12">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
                                       Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1879,7 +1869,7 @@
                           </ToggleButton>
                         </StackPanel>
            
-                        <Grid Grid.Row="1" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1897,7 +1887,7 @@
                
                       <!-- Port 0 Supply Output -->
                       
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1911,7 +1901,7 @@
                           </StackPanel>
                         </StackPanel>
                   
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
                                       Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1922,7 +1912,7 @@
                           </ToggleButton>
                         </StackPanel>
                   
-                        <Grid Grid.Row="2" Grid.Column="2" Margin="0,12,20,12">
+                        <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -1937,7 +1927,7 @@
                           </CheckBox>
                         </Grid>
       
-                        <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="0,12,20,12" >
+                        <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
                           <TextBlock Text="Valve:" VerticalAlignment="Center"/>
                           <ComboBox SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120">
                             <x:Static Member="local:MimicOutput.None" />
@@ -1954,7 +1944,7 @@
 
                       <!-- Port 0 DIO -->
                   
-                        <StackPanel Grid.Row="3" Grid.Column="0"  Margin="0,12,20,12">
+                        <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -1969,7 +1959,7 @@
                         </StackPanel>
                
 
-                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
                           <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
                                       Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                             Set
@@ -1982,7 +1972,7 @@
                   
                    
 
-                        <Grid Grid.Row="3" Grid.Column="3" Margin="0,12,20,12">
+                        <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -2006,7 +1996,7 @@
 
                       <!-- Port 0 DI -->
    
-                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,12,20,12">
+                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                           <StackPanel Orientation="Horizontal" Spacing="5">
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -2021,7 +2011,7 @@
                         </StackPanel>
   
 
-                        <Grid Grid.Row="4" Grid.Column="4" Margin="0,12,20,12">
+                        <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="45"/>
                             <ColumnDefinition Width="*"/>
@@ -2057,35 +2047,43 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="5" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
 
                       <!-- Headers - Only once at the beginning -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 0 Status" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="5" Text="Action" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 1 Status" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
+
+                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>1</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>2</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>3</x:Int32>
                         </Button.CommandParameter>
@@ -2093,42 +2091,42 @@
 
                       <!-- Port 0 Digital Output -->
 
-                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 0 digital output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 1 digital output control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDOPort1Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
-                                    Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDOPort1Enabled_OutputSet}"
+                                    Command="{Binding DOPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputClear}"
-                                      Command="{Binding DOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsDOPort1Enabled_OutputClear}"
+                                      Command="{Binding DOPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
-                      <Grid Grid.Row="1" Grid.Column="2" Margin="0,12,20,12">
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
+                          <NumericUpDown Value="{Binding PulseDOPort1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
                       </Grid>
@@ -2136,49 +2134,49 @@
 
                       <!-- Port 0 Supply Output -->
 
-                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 0 supply output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 1 supply output control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsSupplyPort1Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
-                                    Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsSupplyPort1Enabled_OutputSet}"
+                                    Command="{Binding SupplyPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}"
-                                      Command="{Binding SupplyPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsSupplyPort1Enabled_OutputClear}"
+                                      Command="{Binding SupplyPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
-                      <Grid Grid.Row="2" Grid.Column="2" Margin="0,12,20,12">
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
+                          <NumericUpDown Value="{Binding PulseSupplyPort1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
                       </Grid>
 
-                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="0,12,20,12" >
+                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
                         <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                        <ComboBox SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120">
+                        <ComboBox SelectedItem="{Binding MimicPort1Valve, Mode=TwoWay}" Width="120">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -2193,41 +2191,41 @@
 
                       <!-- Port 0 DIO -->
 
-                      <StackPanel Grid.Row="3" Grid.Column="0"  Margin="0,12,20,12">
+                      <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
+                            <ToolTip.Tip>DIO 1 state event status</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDIO1Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
 
-                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
-                                    Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDIO1Enabled_PortDIOSet}"
+                                    Command="{Binding DIOPort1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOClear}"
-                                      Command="{Binding DIOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsDIO1Enabled_PortDIOClear}"
+                                      Command="{Binding DIOPort1ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
 
 
-                      <Grid Grid.Row="3" Grid.Column="3" Margin="0,12,20,12">
+                      <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
-                          <ComboBox SelectedItem="{Binding IsDIO0Enabled_PortDIODirection, Mode=TwoWay}"
+                          <ComboBox SelectedItem="{Binding IsDIO1Enabled_PortDIODirection, Mode=TwoWay}"
                           IsEnabled="True"
                           Width="120"
                           HorizontalAlignment="Center">
@@ -2245,28 +2243,28 @@
 
                       <!-- Port 0 DI -->
 
-                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital input port 0 status</ToolTip.Tip>
+                            <ToolTip.Tip>Digital input port 1 status</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDIPort0Enabled_DigitalInputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDIPort1Enabled_DigitalInputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
 
-                      <Grid Grid.Row="4" Grid.Column="4" Margin="0,12,20,12">
+                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="45"/>
                           <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="IR:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort1IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -2296,35 +2294,42 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
-                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="6"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="2" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="3" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Row="4" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
+                      <Rectangle Grid.Column="5" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="5"/>
 
                       <!-- Headers - Only once at the beginning -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 0 Status" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="5" Text="Action" FontWeight="Bold" Margin="0,0,0,5"/>
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Port 2 Status" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>0</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>1</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>2</x:Int32>
                         </Button.CommandParameter>
                       </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.CommandParameter>
                           <x:Int32>3</x:Int32>
                         </Button.CommandParameter>
@@ -2332,42 +2337,42 @@
 
                       <!-- Port 0 Digital Output -->
 
-                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 0 digital output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 2 digital output control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDOPort2Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
-                                    Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDOPort2Enabled_OutputSet}"
+                                    Command="{Binding DOPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputClear}"
-                                      Command="{Binding DOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsDOPort2Enabled_OutputClear}"
+                                      Command="{Binding DOPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
-                      <Grid Grid.Row="1" Grid.Column="2" Margin="0,12,20,12">
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
+                          <NumericUpDown Value="{Binding PulseDOPort2}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
                       </Grid>
@@ -2375,32 +2380,32 @@
 
                       <!-- Port 0 Supply Output -->
 
-                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 0 supply output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 2 supply output control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsSupplyPort2Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
-                                    Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsSupplyPort2Enabled_OutputSet}"
+                                    Command="{Binding SupplyPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}"
-                                      Command="{Binding SupplyPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsSupplyPort2Enabled_OutputClear}"
+                                      Command="{Binding SupplyPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
-                      <Grid Grid.Row="2" Grid.Column="2" Margin="0,12,20,12">
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
@@ -2410,14 +2415,14 @@
                           <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
                       </Grid>
 
-                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="0,12,20,12" >
+                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
                         <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                        <ComboBox SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120">
+                        <ComboBox SelectedItem="{Binding MimicPort2Valve, Mode=TwoWay}" Width="120">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -2432,7 +2437,7 @@
 
                       <!-- Port 0 DIO -->
 
-                      <StackPanel Grid.Row="3" Grid.Column="0"  Margin="0,12,20,12">
+                      <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
@@ -2441,32 +2446,32 @@
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDIO2Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
 
-                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
-                                    Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDIO2Enabled_PortDIOSet}"
+                                    Command="{Binding DIOPort2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
                           Set
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOClear}"
-                                      Command="{Binding DIOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                        <ToggleButton IsChecked="{Binding IsDIO2Enabled_PortDIOClear}"
+                                      Command="{Binding DIOPort2ClearCommand}" Width="55" HorizontalContentAlignment="Center">
                           Clear
                         </ToggleButton>
                       </StackPanel>
 
 
 
-                      <Grid Grid.Row="3" Grid.Column="3" Margin="0,12,20,12">
+                      <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
-                          <ComboBox SelectedItem="{Binding IsDIO0Enabled_PortDIODirection, Mode=TwoWay}"
+                          <ComboBox SelectedItem="{Binding IsDIO2Enabled_PortDIODirection, Mode=TwoWay}"
                           IsEnabled="True"
                           Width="120"
                           HorizontalAlignment="Center">
@@ -2484,28 +2489,28 @@
 
                       <!-- Port 0 DI -->
 
-                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,12,20,12">
+                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital input port 0 status</ToolTip.Tip>
+                            <ToolTip.Tip>Digital input port 2 status</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsDIPort0Enabled_DigitalInputState}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDIPort2Enabled_DigitalInputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
 
 
-                      <Grid Grid.Row="4" Grid.Column="4" Margin="0,12,20,12">
+                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="45"/>
                           <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="IR:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort2IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />

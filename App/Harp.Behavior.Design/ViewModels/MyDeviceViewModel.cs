@@ -151,7 +151,24 @@ public class BehaviorViewModel : ViewModelBase
     [Reactive] public ushort PulseLed1 { get; set; }
     [Reactive] public ushort PulseRgb0 { get; set; }
     [Reactive] public ushort PulseRgb1 { get; set; }
-    [Reactive] public ushort PulseDO0 { get; set; }
+    //[Reactive] public ushort PulseDO0 { get; set; }
+    private ushort _pulseDO0;
+
+    public ushort PulseDO0
+    {
+        get => _pulseDO0;
+        set
+        {
+            if (_pulseDO0 != value) // Compare the current value with the new value
+            {
+                _pulseDO0 = value; // Update the value
+                this.RaisePropertyChanged(nameof(PulseDO0)); // Notify property change
+
+                // Automatically uncheck the enable flag when pulse duration is changed
+                IsDO0Enabled_OutputPulseEnable = false;
+            }
+        }
+    }
     [Reactive] public ushort PulseDO1 { get; set; }
     [Reactive] public ushort PulseDO2 { get; set; }
     [Reactive] public ushort PulseDO3 { get; set; }
@@ -2406,10 +2423,54 @@ public class BehaviorViewModel : ViewModelBase
             if (value)
             {
                 OutputPulseEnable |= DigitalOutputs.DO0;
+
+                // When pulse is enabled, write the pulse duration to the device
+                if (_device != null && Connected)
+                {
+                    Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await WriteAndLogAsync(
+                                val => _device.WritePulseDO0Async(val),
+                                PulseDO0,
+                                "PulseDO0");
+
+                            // Also write the OutputPulseEnable register to enable pulse function
+                            await WriteAndLogAsync(
+                                val => _device.WriteOutputPulseEnableAsync(val),
+                                OutputPulseEnable,
+                                "OutputPulseEnable");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error writing pulse DO0 configuration: {ex.Message}");
+                        }
+                    });
+                }
             }
             else
             {
                 OutputPulseEnable &= ~DigitalOutputs.DO0;
+
+                // When pulse is disabled, write the updated OutputPulseEnable register
+                if (_device != null && Connected)
+                {
+                    Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await WriteAndLogAsync(
+                                val => _device.WriteOutputPulseEnableAsync(val),
+                                OutputPulseEnable,
+                                "OutputPulseEnable");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error disabling pulse DO0: {ex.Message}");
+                        }
+                    });
+                }
             }
 
             // Notify the UI about the change
@@ -2417,6 +2478,7 @@ public class BehaviorViewModel : ViewModelBase
             this.RaisePropertyChanged(nameof(OutputPulseEnable));
         }
     }
+
 
     public bool IsDO1Enabled_OutputPulseEnable
     {
@@ -3338,34 +3400,40 @@ public class BehaviorViewModel : ViewModelBase
                 IsEncoderPort2Enabled_EncoderReset = x.HasFlag(EncoderInputs.EncoderPort2);
             });
 
+        this.WhenAnyValue(x => x.PulseDO0)
+            .Skip(1) // Skip the initial value
+            .Subscribe(_ => IsDO0Enabled_OutputPulseEnable = false);
 
-        DO0SetCommand = ReactiveCommand.Create(ExecuteDO0Set, canChangeConfig);
-        DO0ClearCommand = ReactiveCommand.Create(ExecuteDO0Clear, canChangeConfig);
-        DO1SetCommand = ReactiveCommand.Create(ExecuteDO1Set, canChangeConfig);
-        DO1ClearCommand = ReactiveCommand.Create(ExecuteDO1Clear, canChangeConfig);
-        DO2SetCommand = ReactiveCommand.Create(ExecuteDO2Set, canChangeConfig);
-        DO2ClearCommand = ReactiveCommand.Create(ExecuteDO2Clear, canChangeConfig);
-        DO3SetCommand = ReactiveCommand.Create(ExecuteDO3Set, canChangeConfig);
-        DO3ClearCommand = ReactiveCommand.Create(ExecuteDO3Clear, canChangeConfig);
 
-        DOPort0SetCommand = ReactiveCommand.Create(ExecuteDOPort0Set, canChangeConfig);
-        DOPort0ClearCommand = ReactiveCommand.Create(ExecuteDOPort0Clear, canChangeConfig);
-        DOPort1SetCommand = ReactiveCommand.Create(ExecuteDOPort1Set, canChangeConfig);
-        DOPort1ClearCommand = ReactiveCommand.Create(ExecuteDOPort1Clear, canChangeConfig);
-        DOPort2SetCommand = ReactiveCommand.Create(ExecuteDOPort2Set, canChangeConfig);
-        DOPort2ClearCommand = ReactiveCommand.Create(ExecuteDOPort2Clear, canChangeConfig);
-        SupplyPort0SetCommand = ReactiveCommand.Create(ExecuteSupplyPort0Set, canChangeConfig);
-        SupplyPort0ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort0Clear, canChangeConfig);
-        SupplyPort1SetCommand = ReactiveCommand.Create(ExecuteSupplyPort1Set, canChangeConfig);
-        SupplyPort1ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort1Clear, canChangeConfig);
-        SupplyPort2SetCommand = ReactiveCommand.Create(ExecuteSupplyPort2Set, canChangeConfig);
-        SupplyPort2ClearCommand = ReactiveCommand.Create(ExecuteSupplyPort2Clear, canChangeConfig);
-        DIOPort0SetCommand = ReactiveCommand.Create(ExecuteDIOPort0Set, canChangeConfig);
-        DIOPort0ClearCommand = ReactiveCommand.Create(ExecuteDIOPort0Clear, canChangeConfig);
-        DIOPort1SetCommand = ReactiveCommand.Create(ExecuteDIOPort1Set, canChangeConfig);
-        DIOPort1ClearCommand = ReactiveCommand.Create(ExecuteDIOPort1Clear, canChangeConfig);
-        DIOPort2SetCommand = ReactiveCommand.Create(ExecuteDIOPort2Set, canChangeConfig);
-        DIOPort2ClearCommand = ReactiveCommand.Create(ExecuteDIOPort2Clear, canChangeConfig);
+
+        DO0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO0Set, canChangeConfig);
+        DO0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDO0Clear, canChangeConfig);
+        DO1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO1Set, canChangeConfig);
+        DO1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDO1Clear, canChangeConfig);
+        DO2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO2Set, canChangeConfig);
+        DO2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDO2Clear, canChangeConfig);
+        DO3SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO3Set, canChangeConfig);
+        DO3ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDO3Clear, canChangeConfig);
+
+        DOPort0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort0Set, canChangeConfig);
+        DOPort0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort0Clear, canChangeConfig);
+        DOPort1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort1Set, canChangeConfig);
+        DOPort1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort1Clear, canChangeConfig);
+        DOPort2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort2Set, canChangeConfig);
+        DOPort2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDOPort2Clear, canChangeConfig);
+        SupplyPort0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort0Set, canChangeConfig);
+        SupplyPort0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort0Clear, canChangeConfig);
+        SupplyPort1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort1Set, canChangeConfig);
+        SupplyPort1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort1Clear, canChangeConfig);
+        SupplyPort2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort2Set, canChangeConfig);
+        SupplyPort2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteSupplyPort2Clear, canChangeConfig);
+        DIOPort0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort0Set, canChangeConfig);
+        DIOPort0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort0Clear, canChangeConfig);
+        DIOPort1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort1Set, canChangeConfig);
+        DIOPort1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort1Clear, canChangeConfig);
+        DIOPort2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Set, canChangeConfig);
+        DIOPort2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Clear, canChangeConfig);
+
 
         Led0SetCommand = ReactiveCommand.Create(ExecuteLed0Set, canChangeConfig);
         Led0ClearCommand = ReactiveCommand.Create(ExecuteLed0Clear, canChangeConfig);
@@ -3380,14 +3448,14 @@ public class BehaviorViewModel : ViewModelBase
 
 
 
-        PwmDO0StartCommand = ReactiveCommand.Create(ExecutePwmDO0Start, canChangeConfig);
-        PwmDO0StopCommand = ReactiveCommand.Create(ExecutePwmDO0Stop, canChangeConfig);
-        PwmDO1StartCommand = ReactiveCommand.Create(ExecutePwmDO1Start, canChangeConfig);
-        PwmDO1StopCommand = ReactiveCommand.Create(ExecutePwmDO1Stop, canChangeConfig);
-        PwmDO2StartCommand = ReactiveCommand.Create(ExecutePwmDO2Start, canChangeConfig);
-        PwmDO2StopCommand = ReactiveCommand.Create(ExecutePwmDO2Stop, canChangeConfig);
-        PwmDO3StartCommand = ReactiveCommand.Create(ExecutePwmDO3Start, canChangeConfig);
-        PwmDO3StopCommand = ReactiveCommand.Create(ExecutePwmDO3Stop, canChangeConfig);
+        PwmDO0StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Start, canChangeConfig);
+        PwmDO0StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Stop, canChangeConfig);
+        PwmDO1StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO1Start, canChangeConfig);
+        PwmDO1StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO1Stop, canChangeConfig);
+        PwmDO2StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO2Start, canChangeConfig);
+        PwmDO2StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO2Stop, canChangeConfig);
+        PwmDO3StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO3Start, canChangeConfig);
+        PwmDO3StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO3Stop, canChangeConfig);
 
         ServoOutput2StartCommand = ReactiveCommand.Create(ExecuteServoOuput2Start, canChangeConfig);
         ServoOutput2StopCommand = ReactiveCommand.Create(ExecuteServoOuput2Stop, canChangeConfig);
@@ -4158,172 +4226,449 @@ public class BehaviorViewModel : ViewModelBase
         });
         
     }
-    private void ExecuteDO0Set()
+
+    private IObservable<Unit> ExecuteDO0Set()
     {
-        // Toggle the value of DO0 OutputSet
-        //IsDO0Enabled_OutputSet = !IsDO0Enabled_OutputSet;
-        IsDO0Enabled_OutputSet = true;
-        // Always clear OutputClear to ensure mutual exclusion
-        IsDO0Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO0Enabled_OutputSet = true;
+            IsDO0Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DO0, 
+                "OutputSet");
+        });
     }
-    private void ExecuteDO0Clear()
+    private IObservable<Unit> ExecuteDO0Clear()
     {
-        IsDO0Enabled_OutputSet = false;
-        // Always clear OutputClear to ensure mutual exclusion
-        IsDO0Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO0Enabled_OutputSet = false;
+            IsDO0Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DO0,
+                "OutputClear");
+        });
 
     }
 
-    private void ExecuteDO1Set()
+    private IObservable<Unit> ExecuteDO1Set()
     {
-        // Set the value of the DO0
-        IsDO1Enabled_OutputSet = true;
-        IsDO1Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO1Enabled_OutputSet = true;
+            IsDO1Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DO1,
+                "OutputSet");
+        });
     }
-    private void ExecuteDO1Clear()
+    private IObservable<Unit> ExecuteDO1Clear()
     {
-        // Set the value of the DO0
-        IsDO1Enabled_OutputSet = false;
-        IsDO1Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO1Enabled_OutputSet = false;
+            IsDO1Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DO1,
+                "OutputClear");
+        });
+
     }
 
-    private void ExecuteDO2Set()
+    private IObservable<Unit> ExecuteDO2Set()
     {
-        // Set the value of the DO0
-        IsDO2Enabled_OutputSet = true;
-        IsDO2Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO2Enabled_OutputSet = true;
+            IsDO2Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DO2,
+                "OutputSet");
+        });
     }
-    private void ExecuteDO2Clear()
+    private IObservable<Unit> ExecuteDO2Clear()
     {
-        // Set the value of the DO0
-        IsDO2Enabled_OutputSet = false;
-        IsDO2Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO2Enabled_OutputSet = false;
+            IsDO2Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DO2,
+                "OutputClear");
+        });
+
     }
 
-    private void ExecuteDO3Set()
+    private IObservable<Unit> ExecuteDO3Set()
     {
-        // Set the value of the DO0
-        IsDO3Enabled_OutputSet = true;
-        IsDO3Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO3Enabled_OutputSet = true;
+            IsDO3Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DO3,
+                "OutputSet");
+        });
     }
-    private void ExecuteDO3Clear()
+    private IObservable<Unit> ExecuteDO3Clear()
     {
-        // Set the value of the DO0
-        IsDO3Enabled_OutputSet = false;
-        IsDO3Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDO3Enabled_OutputSet = false;
+            IsDO3Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DO3,
+                "OutputClear");
+        });
+
     }
 
-    private void ExecuteDOPort0Set()
+    private IObservable<Unit> ExecuteDOPort0Set()
     {
-        // Set the value of the DO0
-        IsDOPort0Enabled_OutputSet = true;
-        IsDOPort0Enabled_OutputClear = false;
-    }
-    private void ExecuteDOPort0Clear()
-    {
-        // Set the value of the DO0
-        IsDOPort0Enabled_OutputSet = false;
-        IsDOPort0Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort0Enabled_OutputSet = true;
+            IsDOPort0Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DOPort0,
+                "OutputSet");
+        });
     }
 
-    private void ExecuteSupplyPort0Set()
+    private IObservable<Unit> ExecuteDOPort0Clear()
     {
-        // Set the value of the DO0
-        IsSupplyPort0Enabled_OutputSet = true;
-        IsSupplyPort0Enabled_OutputClear = false;
-    }
-    private void ExecuteSupplyPort0Clear()
-    {
-        // Set the value of the DO0
-        IsSupplyPort0Enabled_OutputSet = false;
-        IsSupplyPort0Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort0Enabled_OutputSet = false;
+            IsDOPort0Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DOPort0,
+                "OutputClear");
+        });
     }
 
-    private void ExecuteDIOPort0Set()
+    private IObservable<Unit> ExecuteDOPort1Set()
     {
-        // Set the value of the DO0
-        IsDIO0Enabled_PortDIOSet = true;
-        IsDIO0Enabled_PortDIOClear = false;
-    }
-    private void ExecuteDIOPort0Clear()
-    {
-        // Set the value of the DO0
-        IsDIO0Enabled_PortDIOSet = false;
-        IsDIO0Enabled_PortDIOClear = true;
-    }
-    private void ExecuteDOPort1Set()
-    {
-        // Set the value of the DO0
-        IsDOPort1Enabled_OutputSet = true;
-        IsDOPort1Enabled_OutputClear = false;
-    }
-    private void ExecuteDOPort1Clear()
-    {
-        // Set the value of the DO0
-        IsDOPort1Enabled_OutputSet = false;
-        IsDOPort1Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort1Enabled_OutputSet = true;
+            IsDOPort1Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DOPort1,
+                "OutputSet");
+        });
     }
 
-    private void ExecuteSupplyPort1Set()
+    private IObservable<Unit> ExecuteDOPort1Clear()
     {
-        // Set the value of the DO0
-        IsSupplyPort1Enabled_OutputSet = true;
-        IsSupplyPort1Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort1Enabled_OutputSet = false;
+            IsDOPort1Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DOPort1,
+                "OutputClear");
+        });
     }
-    private void ExecuteSupplyPort1Clear()
+
+    private IObservable<Unit> ExecuteDOPort2Set()
     {
-        // Set the value of the DO0
-        IsSupplyPort1Enabled_OutputSet = false;
-        IsSupplyPort1Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort2Enabled_OutputSet = true;
+            IsDOPort2Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.DOPort2,
+                "OutputSet");
+        });
     }
-    private void ExecuteDIOPort1Set()
+
+    private IObservable<Unit> ExecuteDOPort2Clear()
     {
-        // Set the value of the DO0
-        IsDIO1Enabled_PortDIOSet = true;
-        IsDIO1Enabled_PortDIOClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDOPort2Enabled_OutputSet = false;
+            IsDOPort2Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.DOPort2,
+                "OutputClear");
+        });
     }
-    private void ExecuteDIOPort1Clear()
+
+    private IObservable<Unit> ExecuteSupplyPort0Set()
     {
-        // Set the value of the DO0
-        IsDIO1Enabled_PortDIOSet = false;
-        IsDIO1Enabled_PortDIOClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort0Enabled_OutputSet = true;
+            IsSupplyPort0Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.SupplyPort0,
+                "OutputSet");
+        });
     }
-    private void ExecuteDOPort2Set()
+
+    private IObservable<Unit> ExecuteSupplyPort0Clear()
     {
-        // Set the value of the DO0
-        IsDOPort2Enabled_OutputSet = true;
-        IsDOPort2Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort0Enabled_OutputSet = false;
+            IsSupplyPort0Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.SupplyPort0,
+                "OutputClear");
+        });
     }
-    private void ExecuteDOPort2Clear()
+
+    private IObservable<Unit> ExecuteSupplyPort1Set()
     {
-        // Set the value of the DO0
-        IsDOPort2Enabled_OutputSet = false;
-        IsDOPort2Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort1Enabled_OutputSet = true;
+            IsSupplyPort1Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.SupplyPort1,
+                "OutputSet");
+        });
     }
-    private void ExecuteSupplyPort2Set()
+
+    private IObservable<Unit> ExecuteSupplyPort1Clear()
     {
-        // Set the value of the DO0
-        IsSupplyPort2Enabled_OutputSet = true;
-        IsSupplyPort2Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort1Enabled_OutputSet = false;
+            IsSupplyPort1Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.SupplyPort1,
+                "OutputClear");
+        });
     }
-    private void ExecuteSupplyPort2Clear()
+
+    private IObservable<Unit> ExecuteSupplyPort2Set()
     {
-        // Set the value of the DO0
-        IsSupplyPort2Enabled_OutputSet = false;
-        IsSupplyPort2Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort2Enabled_OutputSet = true;
+            IsSupplyPort2Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.SupplyPort2,
+                "OutputSet");
+        });
     }
-    private void ExecuteDIOPort2Set()
+
+    private IObservable<Unit> ExecuteSupplyPort2Clear()
     {
-        // Set the value of the DO0
-        IsDIO2Enabled_PortDIOSet = true;
-        IsDIO2Enabled_PortDIOClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsSupplyPort2Enabled_OutputSet = false;
+            IsSupplyPort2Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.SupplyPort2,
+                "OutputClear");
+        });
     }
-    private void ExecuteDIOPort2Clear()
+
+    private IObservable<Unit> ExecuteDIOPort0Set()
     {
-        // Set the value of the DO0
-        IsDIO2Enabled_PortDIOSet = false;
-        IsDIO2Enabled_PortDIOClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO0Enabled_PortDIOSet = true;
+            IsDIO0Enabled_PortDIOClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOSetAsync(value),
+                PortDigitalIOS.DIO0,
+                "PortDIOSet");
+        });
     }
+
+    private IObservable<Unit> ExecuteDIOPort0Clear()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO0Enabled_PortDIOSet = false;
+            IsDIO0Enabled_PortDIOClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOClearAsync(value),
+                PortDigitalIOS.DIO0,
+                "PortDIOClear");
+        });
+    }
+
+    private IObservable<Unit> ExecuteDIOPort1Set()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO1Enabled_PortDIOSet = true;
+            IsDIO1Enabled_PortDIOClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOSetAsync(value),
+                PortDigitalIOS.DIO1,
+                "PortDIOSet");
+        });
+    }
+
+    private IObservable<Unit> ExecuteDIOPort1Clear()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO1Enabled_PortDIOSet = false;
+            IsDIO1Enabled_PortDIOClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOClearAsync(value),
+                PortDigitalIOS.DIO1,
+                "PortDIOClear");
+        });
+    }
+
+    private IObservable<Unit> ExecuteDIOPort2Set()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO2Enabled_PortDIOSet = true;
+            IsDIO2Enabled_PortDIOClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOSetAsync(value),
+                PortDigitalIOS.DIO2,
+                "PortDIOSet");
+        });
+    }
+
+    private IObservable<Unit> ExecuteDIOPort2Clear()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsDIO2Enabled_PortDIOSet = false;
+            IsDIO2Enabled_PortDIOClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIOClearAsync(value),
+                PortDigitalIOS.DIO2,
+                "PortDIOClear");
+        });
+    }
+
     private void ExecuteLed0Set()
     {
         IsLed0Enabled_OutputSet = true;
@@ -4364,54 +4709,175 @@ public class BehaviorViewModel : ViewModelBase
         IsRgb1Enabled_OutputSet = false;
         IsRgb1Enabled_OutputClear = true;
     }
-    private void ExecutePwmDO0Start()
+
+    private IObservable<Unit> ExecutePwmDO0Start()
     {
-        // Set the PWM DO0 start state
-        IsPwmDO0Enabled_PwmStart = true;
-        IsPwmDO0Enabled_PwmStop = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO0Enabled_PwmStart = true;
+            IsPwmDO0Enabled_PwmStop = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmFrequencyDO0Async(value),
+                PwmFrequencyDO0,
+                "PwmFrequencyDO0");
+            await WriteAndLogAsync(
+                value => _device.WritePwmDutyCycleDO0Async(value),
+                PwmDutyCycleDO0,
+                "PwmDutyCycleDO0");
+            await WriteAndLogAsync(
+                value => _device.WritePwmStartAsync(value),
+                PwmOutputs.PwmDO0,
+                "PwmStart");
+        });
+
     }
-    private void ExecutePwmDO0Stop()
+    private IObservable<Unit> ExecutePwmDO0Stop()
     {
-        // Set the PWM DO0 stop state  
-        IsPwmDO0Enabled_PwmStop = true;
-        IsPwmDO0Enabled_PwmStart = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO0Enabled_PwmStart = false;
+            IsPwmDO0Enabled_PwmStop = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmStopAsync(value),
+                PwmOutputs.PwmDO0,
+                "PwmStop");
+        });
+
     }
-    private void ExecutePwmDO1Start()
+    private IObservable<Unit> ExecutePwmDO1Start()
     {
-        // Set the PWM DO1 start state
-        IsPwmDO1Enabled_PwmStart = true;
-        IsPwmDO1Enabled_PwmStop = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO1Enabled_PwmStart = true;
+            IsPwmDO1Enabled_PwmStop = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmFrequencyDO1Async(value),
+                PwmFrequencyDO1,
+                "PwmFrequencyDO1");
+            await WriteAndLogAsync(
+                value => _device.WritePwmDutyCycleDO1Async(value),
+                PwmDutyCycleDO1,
+                "PwmDutyCycleDO1");
+            await WriteAndLogAsync(
+                value => _device.WritePwmStartAsync(value),
+                PwmOutputs.PwmDO1,
+                "PwmStart");
+        });
     }
-    private void ExecutePwmDO1Stop()
+
+    private IObservable<Unit> ExecutePwmDO1Stop()
     {
-        // Set the PWM DO1 stop state  
-        IsPwmDO1Enabled_PwmStop = true;
-        IsPwmDO1Enabled_PwmStart = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO1Enabled_PwmStart = false;
+            IsPwmDO1Enabled_PwmStop = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmStopAsync(value),
+                PwmOutputs.PwmDO1,
+                "PwmStop");
+        });
     }
-    private void ExecutePwmDO2Start()
+
+    private IObservable<Unit> ExecutePwmDO2Start()
     {
-        // Set the PWM DO2 start state
-        IsPwmDO2Enabled_PwmStart = true;
-        IsPwmDO2Enabled_PwmStop = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO2Enabled_PwmStart = true;
+            IsPwmDO2Enabled_PwmStop = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmFrequencyDO2Async(value),
+                PwmFrequencyDO2,
+                "PwmFrequencyDO2");
+            await WriteAndLogAsync(
+                value => _device.WritePwmDutyCycleDO2Async(value),
+                PwmDutyCycleDO2,
+                "PwmDutyCycleDO2");
+            await WriteAndLogAsync(
+                value => _device.WritePwmStartAsync(value),
+                PwmOutputs.PwmDO2,
+                "PwmStart");
+        });
     }
-    private void ExecutePwmDO2Stop()
+
+    private IObservable<Unit> ExecutePwmDO2Stop()
     {
-        // Set the PWM DO2 stop state  
-        IsPwmDO2Enabled_PwmStop = true;
-        IsPwmDO2Enabled_PwmStart = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO2Enabled_PwmStart = false;
+            IsPwmDO2Enabled_PwmStop = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmStopAsync(value),
+                PwmOutputs.PwmDO2,
+                "PwmStop");
+        });
     }
-    private void ExecutePwmDO3Start()
+
+    private IObservable<Unit> ExecutePwmDO3Start()
     {
-        // Set the PWM DO3 start state
-        IsPwmDO3Enabled_PwmStart = true;
-        IsPwmDO3Enabled_PwmStop = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO3Enabled_PwmStart = true;
+            IsPwmDO3Enabled_PwmStop = false;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmFrequencyDO3Async(value),
+                PwmFrequencyDO3,
+                "PwmFrequencyDO3");
+            await WriteAndLogAsync(
+                value => _device.WritePwmDutyCycleDO3Async(value),
+                PwmDutyCycleDO3,
+                "PwmDutyCycleDO3");
+            await WriteAndLogAsync(
+                value => _device.WritePwmStartAsync(value),
+                PwmOutputs.PwmDO3,
+                "PwmStart");
+        });
     }
-    private void ExecutePwmDO3Stop()
+
+    private IObservable<Unit> ExecutePwmDO3Stop()
     {
-        // Set the PWM DO3 stop state  
-        IsPwmDO3Enabled_PwmStop = true;
-        IsPwmDO3Enabled_PwmStart = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsPwmDO3Enabled_PwmStart = false;
+            IsPwmDO3Enabled_PwmStop = true;
+
+            await WriteAndLogAsync(
+                value => _device.WritePwmStopAsync(value),
+                PwmOutputs.PwmDO3,
+                "PwmStop");
+        });
     }
+
     private void ExecuteServoOuput2Start()
     {
         IsServoOutput2Enabled_EnableServos = true;

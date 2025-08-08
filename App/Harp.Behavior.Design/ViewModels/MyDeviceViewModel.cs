@@ -103,6 +103,12 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> PwmDO2StopCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO3StartCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO3StopCommand { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDO0Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDO1Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDO2Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDO3Command { get; }
+
+
 
     public ReactiveCommand<Unit, Unit> ServoOutput2StartCommand { get; }
     public ReactiveCommand<Unit, Unit> ServoOutput2StopCommand { get; }
@@ -151,24 +157,7 @@ public class BehaviorViewModel : ViewModelBase
     [Reactive] public ushort PulseLed1 { get; set; }
     [Reactive] public ushort PulseRgb0 { get; set; }
     [Reactive] public ushort PulseRgb1 { get; set; }
-    //[Reactive] public ushort PulseDO0 { get; set; }
-    private ushort _pulseDO0;
-
-    public ushort PulseDO0
-    {
-        get => _pulseDO0;
-        set
-        {
-            if (_pulseDO0 != value) // Compare the current value with the new value
-            {
-                _pulseDO0 = value; // Update the value
-                this.RaisePropertyChanged(nameof(PulseDO0)); // Notify property change
-
-                // Automatically uncheck the enable flag when pulse duration is changed
-                IsDO0Enabled_OutputPulseEnable = false;
-            }
-        }
-    }
+    [Reactive] public ushort PulseDO0 { get; set; }
     [Reactive] public ushort PulseDO1 { get; set; }
     [Reactive] public ushort PulseDO2 { get; set; }
     [Reactive] public ushort PulseDO3 { get; set; }
@@ -2423,54 +2412,10 @@ public class BehaviorViewModel : ViewModelBase
             if (value)
             {
                 OutputPulseEnable |= DigitalOutputs.DO0;
-
-                // When pulse is enabled, write the pulse duration to the device
-                if (_device != null && Connected)
-                {
-                    Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await WriteAndLogAsync(
-                                val => _device.WritePulseDO0Async(val),
-                                PulseDO0,
-                                "PulseDO0");
-
-                            // Also write the OutputPulseEnable register to enable pulse function
-                            await WriteAndLogAsync(
-                                val => _device.WriteOutputPulseEnableAsync(val),
-                                OutputPulseEnable,
-                                "OutputPulseEnable");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Error writing pulse DO0 configuration: {ex.Message}");
-                        }
-                    });
-                }
             }
             else
             {
                 OutputPulseEnable &= ~DigitalOutputs.DO0;
-
-                // When pulse is disabled, write the updated OutputPulseEnable register
-                if (_device != null && Connected)
-                {
-                    Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await WriteAndLogAsync(
-                                val => _device.WriteOutputPulseEnableAsync(val),
-                                OutputPulseEnable,
-                                "OutputPulseEnable");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Error disabling pulse DO0: {ex.Message}");
-                        }
-                    });
-                }
             }
 
             // Notify the UI about the change
@@ -2478,7 +2423,6 @@ public class BehaviorViewModel : ViewModelBase
             this.RaisePropertyChanged(nameof(OutputPulseEnable));
         }
     }
-
 
     public bool IsDO1Enabled_OutputPulseEnable
     {
@@ -3400,9 +3344,6 @@ public class BehaviorViewModel : ViewModelBase
                 IsEncoderPort2Enabled_EncoderReset = x.HasFlag(EncoderInputs.EncoderPort2);
             });
 
-        this.WhenAnyValue(x => x.PulseDO0)
-            .Skip(1) // Skip the initial value
-            .Subscribe(_ => IsDO0Enabled_OutputPulseEnable = false);
 
 
 
@@ -3434,7 +3375,6 @@ public class BehaviorViewModel : ViewModelBase
         DIOPort2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Set, canChangeConfig);
         DIOPort2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Clear, canChangeConfig);
 
-
         Led0SetCommand = ReactiveCommand.Create(ExecuteLed0Set, canChangeConfig);
         Led0ClearCommand = ReactiveCommand.Create(ExecuteLed0Clear, canChangeConfig);
         Led1SetCommand = ReactiveCommand.Create(ExecuteLed1Set, canChangeConfig);
@@ -3445,9 +3385,6 @@ public class BehaviorViewModel : ViewModelBase
         Rgb1ClearCommand = ReactiveCommand.Create(ExecuteRgb1Clear, canChangeConfig);
 
         //Apply Buttons
-
-
-
         PwmDO0StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Start, canChangeConfig);
         PwmDO0StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Stop, canChangeConfig);
         PwmDO1StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO1Start, canChangeConfig);
@@ -3518,9 +3455,93 @@ public class BehaviorViewModel : ViewModelBase
 
         SerialTimestampApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteSerialTimestampApplyConfiguration, canChangeConfig);
 
+        
+        SavePulseConfigDO0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO0, canChangeConfig);
+        SavePulseConfigDO1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO1, canChangeConfig);
+        SavePulseConfigDO2Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO2, canChangeConfig);
+        SavePulseConfigDO3Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO3, canChangeConfig);
+
+
 
         // force initial population of currently connected ports
         LoadUsbInformation();
+    }
+    private IObservable<Unit> ExecuteSavePulseConfigDO0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDO0Async(value),
+                PulseDO0,
+                "PulseDO0");
+        });
+    }
+
+    private IObservable<Unit> ExecuteSavePulseConfigDO1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            ushort pulseValue = 0;
+            pulseValue = PulseDO1;
+
+            // Enable
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+
+            // Duration
+            await WriteAndLogAsync(
+                value => _device.WritePulseDO1Async(value),
+                pulseValue,
+                "PulseDO1");
+
+            // Wait 2 seconds
+            await Task.Delay(2000);
+
+
+        });
+    }
+    private IObservable<Unit> ExecuteSavePulseConfigDO2()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDO2Async(value),
+                PulseDO2,
+                "PulseDO2");
+        });
+    }
+
+    private IObservable<Unit> ExecuteSavePulseConfigDO3()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDO3Async(value),
+                PulseDO3,
+                "PulseDO3");
+        });
     }
 
     private IObservable<Unit> ExecuteSerialTimestampApplyConfiguration()

@@ -690,26 +690,6 @@
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>0</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>1</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>2</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port0ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>3</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
 
                       <!-- Port 0 Digital Output -->
                      
@@ -742,15 +722,18 @@
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                           </Grid.ColumnDefinitions>
                           <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                             <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                             <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                             Enable
                           </CheckBox>
+                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDOPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                          </Button>
                         </Grid>
                   
                
@@ -785,15 +768,18 @@
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                           </Grid.ColumnDefinitions>
                           <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                             <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                             <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
                                            Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                           </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                             Enable
                           </CheckBox>
+                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                          </Button>
                         </Grid>
       
                         <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
@@ -808,6 +794,10 @@
                             <x:Static Member="local:MimicOutput.DO2" />
                             <x:Static Member="local:MimicOutput.DO3" />
                           </ComboBox>
+                          <Button Content="Apply" Command="{Binding SaveMimicConfigPort0ValveCommand}"
+         Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                          </Button>
+                          
                         </StackPanel>
                   
 
@@ -896,6 +886,9 @@
                             <x:Static Member="local:MimicOutput.DO2" />
                             <x:Static Member="local:MimicOutput.DO3" />
                           </ComboBox>
+                          <Button Content="Apply" Command="{Binding SaveMimicConfigPort0IRCommand}"
+        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                          </Button>
                         </Grid>
                     </Grid>
 
@@ -937,27 +930,6 @@
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
 
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>0</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>1</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>2</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port1ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>3</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-
                       <!-- Port 0 Digital Output -->
 
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
@@ -989,15 +961,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseDOPort1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDOPort1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
 
@@ -1032,15 +1007,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseSupplyPort1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
@@ -1055,6 +1033,9 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
+                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort1ValveCommand}"
+        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </StackPanel>
 
 
@@ -1143,6 +1124,9 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
+                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort1IRCommand}"
+        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
                     </Grid>
 
@@ -1183,26 +1167,6 @@
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <Button Grid.Row="1" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>0</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="2" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>1</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="3" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>2</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="4" Grid.Column="5" Content="Apply" Command="{Binding Port2ApplyConfigurationCommand}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>3</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
 
                       <!-- Port 0 Digital Output -->
 
@@ -1235,15 +1199,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseDOPort2}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort2Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDOPort2Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
 
@@ -1278,15 +1245,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
@@ -1301,6 +1271,9 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
+                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort2ValveCommand}"
+        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </StackPanel>
 
 
@@ -1389,6 +1362,9 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
+                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort2IRCommand}"
+        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
                     </Grid>
                   </StackPanel>
@@ -1494,15 +1470,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseLed0}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsLed0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigLed0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,10,12">
@@ -1556,15 +1535,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseLed1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsLed1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigLed1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,10,12">
@@ -1670,15 +1652,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseRgb0}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigRgb0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,10,12">
@@ -1715,15 +1700,18 @@
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
                           <NumericUpDown Value="{Binding PulseRgb1}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" VerticalAlignment="Center">
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsRgb1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigRgb1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,10,12">
@@ -2257,7 +2245,7 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
@@ -2313,14 +2301,14 @@
                   <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Camera Controls" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                    <Grid MinWidth="350">
+                    <Grid>
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
@@ -2409,14 +2397,14 @@
                   <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Servo Motors" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                    <Grid MinWidth="400">
+                    <Grid>
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>

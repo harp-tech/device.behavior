@@ -107,6 +107,26 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO1Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO2Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO3Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort0Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort1Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort2Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort0Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort1Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort2Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigRgb0Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigRgb1Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigLed0Command { get; }
+    public ReactiveCommand<Unit, Unit> SavePulseConfigLed1Command { get; }
+    public ReactiveCommand<Unit, Unit> SaveDirectionConfigCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort0IRCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1IRCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2IRCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort0ValveCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1ValveCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2ValveCommand { get; }
+
+
+
 
 
 
@@ -3461,6 +3481,29 @@ public class BehaviorViewModel : ViewModelBase
         SavePulseConfigDO2Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO2, canChangeConfig);
         SavePulseConfigDO3Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO3, canChangeConfig);
 
+        SavePulseConfigDOPort0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDOPort0, canChangeConfig);
+        SavePulseConfigDOPort1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDOPort1, canChangeConfig);
+        SavePulseConfigDOPort2Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDOPort2, canChangeConfig);
+        SavePulseConfigSupplyPort0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigSupplyPort0, canChangeConfig);
+        SavePulseConfigSupplyPort1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigSupplyPort1, canChangeConfig);
+        SavePulseConfigSupplyPort2Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigSupplyPort2, canChangeConfig);
+
+        SavePulseConfigRgb0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigRgb0, canChangeConfig);
+        SavePulseConfigRgb1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigRgb1, canChangeConfig);
+        SavePulseConfigLed0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigLed0, canChangeConfig);
+        SavePulseConfigLed1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigLed1, canChangeConfig);
+
+        SaveDirectionConfigCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveDirectionConfig, canChangeConfig);
+        SaveMimicConfigPort0IRCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort0IR, canChangeConfig);
+        SaveMimicConfigPort1IRCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort1IR, canChangeConfig);
+        SaveMimicConfigPort2IRCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort2IR, canChangeConfig);
+        SaveMimicConfigPort0ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort0Valve, canChangeConfig);
+        SaveMimicConfigPort1ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort1Valve, canChangeConfig);
+        SaveMimicConfigPort2ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort2Valve, canChangeConfig);
+
+
+
+
 
 
         // force initial population of currently connected ports
@@ -3482,7 +3525,6 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO0");
         });
     }
-
     private IObservable<Unit> ExecuteSavePulseConfigDO1()
     {
         return Observable.StartAsync(async () =>
@@ -3503,11 +3545,6 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WritePulseDO1Async(value),
                 pulseValue,
                 "PulseDO1");
-
-            // Wait 2 seconds
-            await Task.Delay(2000);
-
-
         });
     }
     private IObservable<Unit> ExecuteSavePulseConfigDO2()
@@ -3526,7 +3563,6 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO2");
         });
     }
-
     private IObservable<Unit> ExecuteSavePulseConfigDO3()
     {
         return Observable.StartAsync(async () =>
@@ -3543,6 +3579,303 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO3");
         });
     }
+
+    // Port 0 DO pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigDOPort0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDOPort0Async(value),
+                PulseDOPort0,
+                "PulseDOPort0");
+        });
+    }
+
+    // Port 1 DO pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigDOPort1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDOPort1Async(value),
+                PulseDOPort1,
+                "PulseDOPort1");
+        });
+    }
+
+    // Port 2 DO pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigDOPort2()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseDOPort2Async(value),
+                PulseDOPort2,
+                "PulseDOPort2");
+        });
+    }
+
+    // Port 0 12V Supply pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigSupplyPort0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseSupplyPort0Async(value),
+                PulseSupplyPort0,
+                "PulseSupplyPort0");
+        });
+    }
+
+    // Port 1 12V Supply pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigSupplyPort1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseSupplyPort1Async(value),
+                PulseSupplyPort1,
+                "PulseSupplyPort1");
+        });
+    }
+
+    // Port 2 12V Supply pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigSupplyPort2()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseSupplyPort2Async(value),
+                PulseSupplyPort2,
+                "PulseSupplyPort2");
+        });
+    }
+
+    // RGB 0 pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigRgb0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb0Async(value),
+                PulseRgb0,
+                "PulseRgb0");
+        });
+    }
+
+    // RGB 1 pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigRgb1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb1Async(value),
+                PulseRgb1,
+                "PulseRgb1");
+        });
+    }
+
+    // LED 0 pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigLed0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseLed0Async(value),
+                PulseLed0,
+                "PulseLed0");
+        });
+    }
+
+    // LED 1 pulse configuration
+    private IObservable<Unit> ExecuteSavePulseConfigLed1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+            await WriteAndLogAsync(
+                value => _device.WritePulseLed1Async(value),
+                PulseLed1,
+                "PulseLed1");
+        });
+    }
+
+    // Port DIO Direction configuration
+    private IObservable<Unit> ExecuteSaveDirectionConfig()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WritePortDIODirectionAsync(value),
+                PortDIODirection,
+                "PortDIODirection");
+        });
+    }
+
+    // Port 0 IR Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort0IR()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort0IRAsync(value),
+                MimicPort0IR,
+                "MimicPort0IR");
+        });
+    }
+
+    // Port 1 IR Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort1IR()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort1IRAsync(value),
+                MimicPort1IR,
+                "MimicPort1IR");
+        });
+    }
+
+    // Port 2 IR Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort2IR()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort2IRAsync(value),
+                MimicPort2IR,
+                "MimicPort2IR");
+        });
+    }
+
+    // Port 0 Valve Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort0Valve()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort0ValveAsync(value),
+                MimicPort0Valve,
+                "MimicPort0Valve");
+        });
+    }
+
+    // Port 1 Valve Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort1Valve()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort1ValveAsync(value),
+                MimicPort1Valve,
+                "MimicPort1Valve");
+        });
+    }
+
+    // Port 2 Valve Mimic configuration
+    private IObservable<Unit> ExecuteSaveMimicConfigPort2Valve()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            await WriteAndLogAsync(
+                value => _device.WriteMimicPort2ValveAsync(value),
+                MimicPort2Valve,
+                "MimicPort2Valve");
+        });
+    }
+
+
 
     private IObservable<Unit> ExecuteSerialTimestampApplyConfiguration()
     {

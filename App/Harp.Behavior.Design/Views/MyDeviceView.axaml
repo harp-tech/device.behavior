@@ -2318,6 +2318,7 @@
                         <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
                       <!-- Table lines -->
@@ -2330,6 +2331,7 @@
                       <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
                       <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
                       <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
+
 
                       <!-- Headers -->
                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Camera" FontWeight="Bold" Margin="12,5,0,5"/>
@@ -2362,10 +2364,20 @@
                         </ToggleButton>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding Camera0Frequency}" Minimum="1" Maximum="600"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <NumericUpDown Grid.Column="0" Value="{Binding Camera0Frequency}" Minimum="1" Maximum="600"
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="0,0,15,0"/>
+                        <Button Grid.Column="1" Content="Apply" Command="{Binding CameraApplyConfigurationCommand}"
+                                VerticalAlignment="Center">
+                          <Button.CommandParameter>
+                            <x:Int32>0</x:Int32>
+                          </Button.CommandParameter>
+                        </Button>
+                      </Grid>
 
                       <!-- Camera 1 -->
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
@@ -2393,10 +2405,20 @@
                         </ToggleButton>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding Camera1Frequency}" Minimum="1" Maximum="600"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <NumericUpDown Grid.Column="0" Value="{Binding Camera1Frequency}" Minimum="1" Maximum="600"
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="0,0,15,0"/>
+                        <Button Grid.Column="1" Content="Apply" Command="{Binding CameraApplyConfigurationCommand}"
+                                VerticalAlignment="Center">
+                          <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                          </Button.CommandParameter>
+                        </Button>
+                      </Grid>
                     </Grid>
                   </StackPanel>
 
@@ -2412,6 +2434,7 @@
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -2459,12 +2482,12 @@
 
                       <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
                         <NumericUpDown Value="{Binding ServoMotor2Period}" Minimum="2" Maximum="65534"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
 
                       <StackPanel Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
                         <NumericUpDown Value="{Binding ServoMotor2Pulse}" Minimum="6" Maximum="65530"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
 
                       <!-- Servo 3 -->
@@ -2491,12 +2514,12 @@
 
                       <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
                         <NumericUpDown Value="{Binding ServoMotor3Period}" Minimum="2" Maximum="65534"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
 
                       <StackPanel Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
                         <NumericUpDown Value="{Binding ServoMotor3Pulse}" Minimum="6" Maximum="65530"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
                     </Grid>
                   </StackPanel>
@@ -2596,7 +2619,7 @@
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <NumericUpDown Value="{Binding EnableSerialTimestamp}" Minimum="0" Maximum="255"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
                     </Grid>
                   </StackPanel>
@@ -2644,7 +2667,7 @@
 
                       <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
                         <NumericUpDown Value="{Binding EnableSerialTimestamp}" Minimum="0" Maximum="255"
-                                       Width="120" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                       </StackPanel>
 
                       <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">

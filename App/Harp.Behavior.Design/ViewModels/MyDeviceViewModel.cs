@@ -3422,15 +3422,16 @@ public class BehaviorViewModel : ViewModelBase
         PwmDO3StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO3Start, canChangeConfig);
         PwmDO3StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO3Stop, canChangeConfig);
 
-        ServoOutput2StartCommand = ReactiveCommand.Create(ExecuteServoOuput2Start, canChangeConfig);
-        ServoOutput2StopCommand = ReactiveCommand.Create(ExecuteServoOuput2Stop, canChangeConfig);
-        ServoOutput3StartCommand = ReactiveCommand.Create(ExecuteServoOuput3Start, canChangeConfig);
-        ServoOutput3StopCommand = ReactiveCommand.Create(ExecuteServoOuput3Stop, canChangeConfig);
+        ServoOutput2StartCommand = ReactiveCommand.CreateFromObservable(ExecuteServoOuput2Start, canChangeConfig);
+        ServoOutput2StopCommand = ReactiveCommand.CreateFromObservable(ExecuteServoOuput2Stop, canChangeConfig);
+        ServoOutput3StartCommand = ReactiveCommand.CreateFromObservable(ExecuteServoOuput3Start, canChangeConfig);
+        ServoOutput3StopCommand = ReactiveCommand.CreateFromObservable(ExecuteServoOuput3Stop, canChangeConfig);
 
-        Camera0StartCommand = ReactiveCommand.Create(ExecuteCamera0Start, canChangeConfig);
-        Camera0StopCommand = ReactiveCommand.Create(ExecuteCamera0Stop, canChangeConfig);
-        Camera1StartCommand = ReactiveCommand.Create(ExecuteCamera1Start, canChangeConfig);
-        Camera1StopCommand = ReactiveCommand.Create(ExecuteCamera1Stop, canChangeConfig);
+        Camera0StartCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera0Start, canChangeConfig);
+        Camera0StopCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera0Stop, canChangeConfig);
+        Camera1StartCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Start, canChangeConfig);
+        Camera1StopCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Stop, canChangeConfig);
+
 
         //Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(
         //    (bool parameter) => ExecuteRgb0ApplyConfiguration(parameter),
@@ -5498,46 +5499,142 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-    private void ExecuteServoOuput2Start()
+    private IObservable<Unit> ExecuteServoOuput2Start()
     {
-        IsServoOutput2Enabled_EnableServos = true;
-        IsServoOutput2Enabled_DisableServos = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsServoOutput2Enabled_EnableServos = true;
+            IsServoOutput2Enabled_DisableServos = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteEnableServosAsync(value),
+                ServoOutputs.ServoOutput2,
+                "EnableServos");
+        });
     }
-    private void ExecuteServoOuput2Stop()
+
+    private IObservable<Unit> ExecuteServoOuput2Stop()
     {
-        IsServoOutput2Enabled_EnableServos = false;
-        IsServoOutput2Enabled_DisableServos = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsServoOutput2Enabled_EnableServos = false;
+            IsServoOutput2Enabled_DisableServos = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteDisableServosAsync(value),
+                ServoOutputs.ServoOutput2,
+                "DisableServos");
+        });
     }
-    private void ExecuteServoOuput3Start()
+
+    private IObservable<Unit> ExecuteServoOuput3Start()
     {
-        IsServoOutput3Enabled_EnableServos = true;
-        IsServoOutput3Enabled_DisableServos = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsServoOutput3Enabled_EnableServos = true;
+            IsServoOutput3Enabled_DisableServos = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteEnableServosAsync(value),
+                ServoOutputs.ServoOutput3,
+                "EnableServos");
+        });
     }
-    private void ExecuteServoOuput3Stop()
+
+    private IObservable<Unit> ExecuteServoOuput3Stop()
     {
-        IsServoOutput3Enabled_EnableServos = false;
-        IsServoOutput3Enabled_DisableServos = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsServoOutput3Enabled_EnableServos = false;
+            IsServoOutput3Enabled_DisableServos = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteDisableServosAsync(value),
+                ServoOutputs.ServoOutput3,
+                "DisableServos");
+        });
     }
-    private void ExecuteCamera0Start()
+
+    private IObservable<Unit> ExecuteCamera0Start()
     {
-        IsCameraOutput0Enabled_StartCameras = true;
-        IsCameraOutput0Enabled_StopCameras = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsCameraOutput0Enabled_StartCameras = true;
+            IsCameraOutput0Enabled_StopCameras = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteStartCamerasAsync(value),
+                CameraOutputs.CameraOutput0,
+                "StartCameras");
+        });
     }
-    private void ExecuteCamera0Stop()
+
+    private IObservable<Unit> ExecuteCamera0Stop()
     {
-        IsCameraOutput0Enabled_StartCameras = false;
-        IsCameraOutput0Enabled_StopCameras = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsCameraOutput0Enabled_StartCameras = false;
+            IsCameraOutput0Enabled_StopCameras = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteStopCamerasAsync(value),
+                CameraOutputs.CameraOutput0,
+                "StopCameras");
+        });
     }
-    private void ExecuteCamera1Start()
+
+    private IObservable<Unit> ExecuteCamera1Start()
     {
-        IsCameraOutput1Enabled_StartCameras = true;
-        IsCameraOutput1Enabled_StopCameras = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsCameraOutput1Enabled_StartCameras = true;
+            IsCameraOutput1Enabled_StopCameras = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteStartCamerasAsync(value),
+                CameraOutputs.CameraOutput1,
+                "StartCameras");
+        });
     }
-    private void ExecuteCamera1Stop()
+
+    private IObservable<Unit> ExecuteCamera1Stop()
     {
-        IsCameraOutput1Enabled_StartCameras = false;
-        IsCameraOutput1Enabled_StopCameras = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsCameraOutput1Enabled_StartCameras = false;
+            IsCameraOutput1Enabled_StopCameras = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteStopCamerasAsync(value),
+                CameraOutputs.CameraOutput1,
+                "StopCameras");
+        });
     }
+
 
     private IObservable<Unit> LoadUsbInformation()
     {

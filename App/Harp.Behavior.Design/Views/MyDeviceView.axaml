@@ -782,9 +782,16 @@
                           </Button>
                         </Grid>
       
-                        <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
+                        <Grid Grid.Row="2" Grid.Column="4" Margin="20,12,20,12" >
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
                           <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                          <ComboBox SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120">
+                          </StackPanel>
+                          <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
                             <x:Static Member="local:MimicOutput.None" />
                             <x:Static Member="local:MimicOutput.DIO0" />
                             <x:Static Member="local:MimicOutput.DIO1" />
@@ -794,11 +801,9 @@
                             <x:Static Member="local:MimicOutput.DO2" />
                             <x:Static Member="local:MimicOutput.DO3" />
                           </ComboBox>
-                          <Button Content="Apply" Command="{Binding SaveMimicConfigPort0ValveCommand}"
-         Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                          <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort0ValveCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                           </Button>
-                          
-                        </StackPanel>
+                        </Grid>
                   
 
                       <!-- Port 0 DIO -->
@@ -868,31 +873,35 @@
                             <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                           </StackPanel>
                         </StackPanel>
-  
 
-                        <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="*"/>
-                          </Grid.ColumnDefinitions>
-                          <TextBlock Grid.Column="0" Text="IR:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                          <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
-                            <x:Static Member="local:MimicOutput.None" />
-                            <x:Static Member="local:MimicOutput.DIO0" />
-                            <x:Static Member="local:MimicOutput.DIO1" />
-                            <x:Static Member="local:MimicOutput.DIO2" />
-                            <x:Static Member="local:MimicOutput.DO0" />
-                            <x:Static Member="local:MimicOutput.DO1" />
-                            <x:Static Member="local:MimicOutput.DO2" />
-                            <x:Static Member="local:MimicOutput.DO3" />
-                          </ComboBox>
-                          <Button Content="Apply" Command="{Binding SaveMimicConfigPort0IRCommand}"
-        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-                    </Grid>
 
-                    <!-- PORT 1 -->
+                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12" >
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                          <TextBlock Text="IR:" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0IR, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
+                          <x:Static Member="local:MimicOutput.None" />
+                          <x:Static Member="local:MimicOutput.DIO0" />
+                          <x:Static Member="local:MimicOutput.DIO1" />
+                          <x:Static Member="local:MimicOutput.DIO2" />
+                          <x:Static Member="local:MimicOutput.DO0" />
+                          <x:Static Member="local:MimicOutput.DO1" />
+                          <x:Static Member="local:MimicOutput.DO2" />
+                          <x:Static Member="local:MimicOutput.DO3" />
+                        </ComboBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort0IRCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+                      
+                  </Grid>
+
+
+                      <!-- PORT 1 -->
                     <Grid Margin="0,0,0,30">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -930,7 +939,7 @@
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
 
-                      <!-- Port 0 Digital Output -->
+                      <!-- Port 1 Digital Output -->
 
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -976,7 +985,7 @@
                       </Grid>
 
 
-                      <!-- Port 0 Supply Output -->
+                      <!-- Port 1 Supply Output -->
 
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1021,9 +1030,16 @@
                         </Button>
                       </Grid>
 
-                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
-                        <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                        <ComboBox SelectedItem="{Binding MimicPort1Valve, Mode=TwoWay}" Width="120">
+                      <Grid Grid.Row="2" Grid.Column="4" Margin="20,12,20,12" >
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                          <TextBlock Text="Valve:" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort1Valve, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -1033,10 +1049,10 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
-                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort1ValveCommand}"
-        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort1ValveCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
-                      </StackPanel>
+                      </Grid>
+
 
 
                       <!-- Port 0 DIO -->
@@ -1108,13 +1124,16 @@
                       </StackPanel>
 
 
-                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
+                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12" >
                         <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="45"/>
-                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="IR:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort1IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                          <TextBlock Text="IR:" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort1IR, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -1124,10 +1143,10 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
-                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort1IRCommand}"
-        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort1IRCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
                       </Grid>
+
                     </Grid>
 
                     <!-- PORT 2 -->
@@ -1168,7 +1187,7 @@
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
 
-                      <!-- Port 0 Digital Output -->
+                      <!-- Port 2 Digital Output -->
 
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1214,7 +1233,7 @@
                       </Grid>
 
 
-                      <!-- Port 0 Supply Output -->
+                      <!-- Port 2 Supply Output -->
 
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1259,9 +1278,16 @@
                         </Button>
                       </Grid>
 
-                      <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" >
-                        <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                        <ComboBox SelectedItem="{Binding MimicPort2Valve, Mode=TwoWay}" Width="120">
+                      <Grid Grid.Row="2" Grid.Column="4" Margin="20,12,20,12" >
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                          <TextBlock Text="Valve:" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort2Valve, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -1271,13 +1297,13 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
-                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort2ValveCommand}"
-        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort2ValveCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
-                      </StackPanel>
+                      </Grid>
 
 
-                      <!-- Port 0 DIO -->
+
+                      <!-- Port 2 DIO -->
 
                       <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1329,7 +1355,7 @@
                       </Grid>
 
 
-                      <!-- Port 0 DI -->
+                      <!-- Port 2 DI -->
 
                       <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1346,13 +1372,16 @@
                       </StackPanel>
 
 
-                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12">
+                      <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12" >
                         <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="45"/>
-                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="IR:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort2IR, Mode=TwoWay}" Width="120" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                          <TextBlock Text="IR:" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort2IR, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
                           <x:Static Member="local:MimicOutput.None" />
                           <x:Static Member="local:MimicOutput.DIO0" />
                           <x:Static Member="local:MimicOutput.DIO1" />
@@ -1362,10 +1391,10 @@
                           <x:Static Member="local:MimicOutput.DO2" />
                           <x:Static Member="local:MimicOutput.DO3" />
                         </ComboBox>
-                        <Button Content="Apply" Command="{Binding SaveMimicConfigPort2IRCommand}"
-        Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort2IRCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
                       </Grid>
+
                     </Grid>
                   </StackPanel>
                 </Grid>

@@ -2245,14 +2245,14 @@
                   <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Analog Inputs" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                    <Grid MinWidth="250">
+                    <Grid MinWidth="400">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
@@ -2315,7 +2315,7 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
@@ -2411,7 +2411,7 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -2501,7 +2501,7 @@
                     </Grid>
                   </StackPanel>
 
-                  <!-- Quadrature Encoder Section - More Horizontal Layout -->
+                  <!-- Quadrature Encoder Section -->
                   <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Quadrature Encoder" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
@@ -2511,7 +2511,7 @@
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -2605,13 +2605,13 @@
                   <StackPanel Grid.Row="5" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Serial Timestamp" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                    <Grid MinWidth="250">
+                    <Grid MinWidth="400">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
@@ -2634,8 +2634,8 @@
                       <!-- Register Value -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="12" Padding="0">Register Value</Label>
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="12" Height="12"
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">Register Value</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>EnableSerialTimestamp register value (0-255)</ToolTip.Tip>
                           </heroIcons:HeroIcon>
@@ -2656,6 +2656,7 @@
                 </Grid>
               </ScrollViewer>
             </TabItem>
+
 
           </TabControl>
         </StackPanel>

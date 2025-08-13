@@ -42,9 +42,9 @@ public class BehaviorViewModel : ViewModelBase
 
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
-    public ReactiveCommand<int, Unit> Port0ApplyConfigurationCommand { get; }
-    public ReactiveCommand<int, Unit> Port1ApplyConfigurationCommand { get; }
-    public ReactiveCommand<int, Unit> Port2ApplyConfigurationCommand { get; }
+    //public ReactiveCommand<int, Unit> Port0ApplyConfigurationCommand { get; }
+    //public ReactiveCommand<int, Unit> Port1ApplyConfigurationCommand { get; }
+    //public ReactiveCommand<int, Unit> Port2ApplyConfigurationCommand { get; }
     //public ReactiveCommand<Unit, Unit> DOPort0ConfigurationCommand { get; }
     //public ReactiveCommand<Unit, Unit> DOPort1ConfigurationCommand { get; }
     //public ReactiveCommand<Unit, Unit> DOPort2ConfigurationCommand { get; }
@@ -125,6 +125,13 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1ValveCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2ValveCommand { get; }
 
+    // LED Configuration Commands
+    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed0Command { get; }
+    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed1Command { get; }
+
+    // RGB Configuration Commands  
+    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb0Command { get; }
+    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb1Command { get; }
 
 
 
@@ -3395,14 +3402,15 @@ public class BehaviorViewModel : ViewModelBase
         DIOPort2SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Set, canChangeConfig);
         DIOPort2ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDIOPort2Clear, canChangeConfig);
 
-        Led0SetCommand = ReactiveCommand.Create(ExecuteLed0Set, canChangeConfig);
-        Led0ClearCommand = ReactiveCommand.Create(ExecuteLed0Clear, canChangeConfig);
-        Led1SetCommand = ReactiveCommand.Create(ExecuteLed1Set, canChangeConfig);
-        Led1ClearCommand = ReactiveCommand.Create(ExecuteLed1Clear, canChangeConfig);
-        Rgb0SetCommand = ReactiveCommand.Create(ExecuteRgb0Set, canChangeConfig);
-        Rgb0ClearCommand = ReactiveCommand.Create(ExecuteRgb0Clear, canChangeConfig);
-        Rgb1SetCommand = ReactiveCommand.Create(ExecuteRgb1Set, canChangeConfig);
-        Rgb1ClearCommand = ReactiveCommand.Create(ExecuteRgb1Clear, canChangeConfig);
+        Led0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteLed0Set, canChangeConfig);
+        Led0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteLed0Clear, canChangeConfig);
+        Led1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteLed1Set, canChangeConfig);
+        Led1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteLed1Clear, canChangeConfig);
+        Rgb0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb0Set, canChangeConfig);
+        Rgb0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb0Clear, canChangeConfig);
+        Rgb1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1Set, canChangeConfig);
+        Rgb1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1Clear, canChangeConfig);
+
 
         //Apply Buttons
         PwmDO0StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Start, canChangeConfig);
@@ -3434,19 +3442,19 @@ public class BehaviorViewModel : ViewModelBase
             canChangeConfig
             );
 
-        Port0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            port0Index => ExecutePort0ApplyConfiguration(port0Index),
-            canChangeConfig
-            );
+        //Port0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
+        //    port0Index => ExecutePort0ApplyConfiguration(port0Index),
+        //    canChangeConfig
+        //    );
 
-        Port1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            port1Index => ExecutePort1ApplyConfiguration(port1Index),
-            canChangeConfig
-            );
-        Port2ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            port2Index => ExecutePort2ApplyConfiguration(port2Index),
-            canChangeConfig
-        );
+        //Port1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
+        //    port1Index => ExecutePort1ApplyConfiguration(port1Index),
+        //    canChangeConfig
+        //    );
+        //Port2ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
+        //    port2Index => ExecutePort2ApplyConfiguration(port2Index),
+        //    canChangeConfig
+        //);
 
         CameraApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
             cameraIndex => ExecuteCameraApplyConfiguration(cameraIndex),
@@ -3500,6 +3508,15 @@ public class BehaviorViewModel : ViewModelBase
         SaveMimicConfigPort0ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort0Valve, canChangeConfig);
         SaveMimicConfigPort1ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort1Valve, canChangeConfig);
         SaveMimicConfigPort2ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort2Valve, canChangeConfig);
+
+        // LED Configuration Commands
+        SaveLedConfigCurrentLed0Command = ReactiveCommand.CreateFromObservable(ExecuteSaveLedConfigCurrentLed0, canChangeConfig);
+        SaveLedConfigCurrentLed1Command = ReactiveCommand.CreateFromObservable(ExecuteSaveLedConfigCurrentLed1, canChangeConfig);
+
+        // RGB Configuration Commands
+        SaveRgbConfigColorRgb0Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb0, canChangeConfig);
+        SaveRgbConfigColorRgb1Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb1, canChangeConfig);
+
 
 
 
@@ -3874,6 +3891,159 @@ public class BehaviorViewModel : ViewModelBase
                 "MimicPort2Valve");
         });
     }
+
+    // LED 0 Configuration
+    private IObservable<Unit> ExecuteSaveLedConfigCurrentLed0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            // Write LED current settings
+            await WriteAndLogAsync(
+                value => _device.WriteLed0CurrentAsync(value),
+                Led0Current,
+                "Led0Current");
+
+            await WriteAndLogAsync(
+                value => _device.WriteLed0MaxCurrentAsync(value),
+                Led0MaxCurrent,
+                "Led0MaxCurrent");
+
+            // Write pulse configuration
+            await WriteAndLogAsync(
+                value => _device.WritePulseLed0Async(value),
+                PulseLed0,
+                "PulseLed0");
+
+            // Write pulse enable state
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+        });
+    }
+
+    // LED 1 Configuration
+    private IObservable<Unit> ExecuteSaveLedConfigCurrentLed1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            // Write LED current settings
+            await WriteAndLogAsync(
+                value => _device.WriteLed1CurrentAsync(value),
+                Led1Current,
+                "Led1Current");
+
+            await WriteAndLogAsync(
+                value => _device.WriteLed1MaxCurrentAsync(value),
+                Led1MaxCurrent,
+                "Led1MaxCurrent");
+
+            // Write pulse configuration
+            await WriteAndLogAsync(
+                value => _device.WritePulseLed1Async(value),
+                PulseLed1,
+                "PulseLed1");
+
+            // Write pulse enable state
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+        });
+    }
+
+    // RGB 0 Configuration
+    private IObservable<Unit> ExecuteSaveRgbConfigColorRgb0()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            // Update RGB values from adapter
+            var c0 = Rgb0Adapter.Color;
+            Rgb0 = new RgbPayload(c0.R, c0.G, c0.B);
+
+            // Write RGB color
+            await WriteAndLogAsync(
+                value => _device.WriteRgb0Async(value),
+                Rgb0,
+                "Rgb0");
+
+            // Write pulse configuration
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb0Async(value),
+                PulseRgb0,
+                "PulseRgb0");
+
+            // Write pulse enable state
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+
+            // Update RgbAll register to keep it in sync
+            var c1 = Rgb1Adapter.Color;
+            RgbAll = new RgbAllPayload(
+                c0.R, c0.G, c0.B,
+                c1.R, c1.G, c1.B);
+
+            await WriteAndLogAsync(
+                value => _device.WriteRgbAllAsync(value),
+                RgbAll,
+                "RgbAll");
+        });
+    }
+
+    // RGB 1 Configuration
+    private IObservable<Unit> ExecuteSaveRgbConfigColorRgb1()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            // Update RGB values from adapter
+            var c1 = Rgb1Adapter.Color;
+            Rgb1 = new RgbPayload(c1.R, c1.G, c1.B);
+
+            // Write RGB color
+            await WriteAndLogAsync(
+                value => _device.WriteRgb1Async(value),
+                Rgb1,
+                "Rgb1");
+
+            // Write pulse configuration
+            await WriteAndLogAsync(
+                value => _device.WritePulseRgb1Async(value),
+                PulseRgb1,
+                "PulseRgb1");
+
+            // Write pulse enable state
+            await WriteAndLogAsync(
+                value => _device.WriteOutputPulseEnableAsync(value),
+                OutputPulseEnable,
+                "OutputPulseEnable");
+
+            // Update RgbAll register to keep it in sync
+            var c0 = Rgb0Adapter.Color;
+            RgbAll = new RgbAllPayload(
+                c0.R, c0.G, c0.B,
+                c1.R, c1.G, c1.B);
+
+            await WriteAndLogAsync(
+                value => _device.WriteRgbAllAsync(value),
+                RgbAll,
+                "RgbAll");
+        });
+    }
+
 
 
 
@@ -5023,46 +5193,142 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-    private void ExecuteLed0Set()
+    private IObservable<Unit> ExecuteLed0Set()
     {
-        IsLed0Enabled_OutputSet = true;
-        IsLed0Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsLed0Enabled_OutputSet = true;
+            IsLed0Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Led0,
+                "OutputSet");
+        });
     }
-    private void ExecuteLed0Clear()
+
+    private IObservable<Unit> ExecuteLed0Clear()
     {
-        IsLed0Enabled_OutputSet = false;
-        IsLed0Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsLed0Enabled_OutputSet = false;
+            IsLed0Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.Led0,
+                "OutputClear");
+        });
     }
-    private void ExecuteLed1Set()
+
+    private IObservable<Unit> ExecuteLed1Set()
     {
-        IsLed1Enabled_OutputSet = true;
-        IsLed1Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsLed1Enabled_OutputSet = true;
+            IsLed1Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Led1,
+                "OutputSet");
+        });
     }
-    private void ExecuteLed1Clear()
+
+    private IObservable<Unit> ExecuteLed1Clear()
     {
-        IsLed1Enabled_OutputSet = false;
-        IsLed1Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsLed1Enabled_OutputSet = false;
+            IsLed1Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.Led1,
+                "OutputClear");
+        });
     }
-    private void ExecuteRgb0Set()
+
+    private IObservable<Unit> ExecuteRgb0Set()
     {
-        IsRgb0Enabled_OutputSet = true;
-        IsRgb0Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsRgb0Enabled_OutputSet = true;
+            IsRgb0Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Rgb0,
+                "OutputSet");
+        });
     }
-    private void ExecuteRgb0Clear()
+
+    private IObservable<Unit> ExecuteRgb0Clear()
     {
-        IsRgb0Enabled_OutputSet = false;
-        IsRgb0Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsRgb0Enabled_OutputSet = false;
+            IsRgb0Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.Rgb0,
+                "OutputClear");
+        });
     }
-    private void ExecuteRgb1Set()
+
+    private IObservable<Unit> ExecuteRgb1Set()
     {
-        IsRgb1Enabled_OutputSet = true;
-        IsRgb1Enabled_OutputClear = false;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsRgb1Enabled_OutputSet = true;
+            IsRgb1Enabled_OutputClear = false;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputSetAsync(value),
+                DigitalOutputs.Rgb1,
+                "OutputSet");
+        });
     }
-    private void ExecuteRgb1Clear()
+
+    private IObservable<Unit> ExecuteRgb1Clear()
     {
-        IsRgb1Enabled_OutputSet = false;
-        IsRgb1Enabled_OutputClear = true;
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+
+            IsRgb1Enabled_OutputSet = false;
+            IsRgb1Enabled_OutputClear = true;
+
+            await WriteAndLogAsync(
+                value => _device.WriteOutputClearAsync(value),
+                DigitalOutputs.Rgb1,
+                "OutputClear");
+        });
     }
+
 
     private IObservable<Unit> ExecutePwmDO0Start()
     {

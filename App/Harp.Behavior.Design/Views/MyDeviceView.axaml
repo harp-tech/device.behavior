@@ -1451,24 +1451,6 @@
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Current Control" FontWeight="Bold" Margin="12,5,0,5"/>
 
-                      <!-- Apply Buttons -->
-                      <Button Grid.Row="1" Grid.Column="4" Content="Apply"
-                          Command="{Binding LedApplyConfigurationCommand}" Margin="10,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>0</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-                      <Button Grid.Row="2" Grid.Column="4" Content="Apply"
-                            Command="{Binding LedApplyConfigurationCommand}" Margin="10,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
-                        <Button.CommandParameter>
-                          <x:Int32>1</x:Int32>
-                        </Button.CommandParameter>
-                      </Button>
-
                       <!-- LED 0 -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
@@ -1513,25 +1495,24 @@
                         </Button>
                       </Grid>
 
-                      <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,10,12">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="Auto"/>
-                          <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                      <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
                           <TextBlock Text="Current (mA):" VerticalAlignment="Center" MinWidth="70"/>
                           <NumericUpDown Value="{Binding Led0Current}" Minimum="2" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,15,0">
                           <TextBlock Text="Max (mA):" VerticalAlignment="Center" MinWidth="60"/>
                           <NumericUpDown Value="{Binding Led0MaxCurrent}" Minimum="2" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveLedConfigCurrentLed0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <!-- LED 1 -->
@@ -1578,12 +1559,9 @@
                         </Button>
                       </Grid>
 
-                      <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,10,12">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="Auto"/>
-                          <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                      <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
@@ -1592,11 +1570,13 @@
                           <NumericUpDown Value="{Binding Led1Current}" Minimum="5" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,15,0">
                           <TextBlock Text="Max (mA):" VerticalAlignment="Center" MinWidth="60"/>
                           <NumericUpDown Value="{Binding Led1MaxCurrent}" Minimum="5" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveLedConfigCurrentLed1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
                     </Grid>
                   </StackPanel>
@@ -1636,20 +1616,6 @@
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Output Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Color Control" FontWeight="Bold" Margin="12,5,0,5"/>
-
-                      <!-- Apply Buttons -->
-                      <Button  Grid.Row="1" Grid.Column="4"
-                          Content="Apply"
-                          Command="{Binding Rgb0ApplyConfigurationCommand}"
-                          Margin="10,0,0,0"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"/>
-                      <Button  Grid.Row="2" Grid.Column="4"
-                          Content="Apply"
-                          Command="{Binding Rgb1ApplyConfigurationCommand}"
-                          Margin="10,0,0,0"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"/>
 
                       <!-- RGB 0 -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
@@ -1695,8 +1661,14 @@
                         </Button>
                       </Grid>
 
-                      <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,10,12">
-                        <controls:RgbRegisterControl DataContext="{Binding Rgb0Adapter}" HorizontalAlignment="Center"/>
+                      <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:RgbRegisterControl Grid.Column="0" DataContext="{Binding Rgb0Adapter}" HorizontalAlignment="Center" Margin="0,0,15,0"/>
+                        <Button Grid.Column="1" Content="Apply" Command="{Binding SaveRgbConfigColorRgb0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
 
                       <!-- RGB 1 -->
@@ -1743,8 +1715,14 @@
                         </Button>
                       </Grid>
 
-                      <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,10,12">
-                        <controls:RgbRegisterControl DataContext="{Binding Rgb1Adapter}" HorizontalAlignment="Center"/>
+                      <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:RgbRegisterControl Grid.Column="0" DataContext="{Binding Rgb1Adapter}" HorizontalAlignment="Center" Margin="0,0,15,0"/>
+                        <Button Grid.Column="1" Content="Apply" Command="{Binding SaveRgbConfigColorRgb1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
                       </Grid>
                     </Grid>
                   </StackPanel>

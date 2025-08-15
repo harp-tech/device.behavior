@@ -2563,100 +2563,75 @@
                   <!-- Quadrature Encoder Section -->
                   <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Quadrature Encoder" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-
-                    <Grid MinWidth="700">
+                    <Grid>
                       <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
-                      <!-- Table lines -->
+                      <!-- Table lines (optional, for visual consistency) -->
                       <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
                       <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
 
-                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="5" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-
-                      <!-- Headers -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Current Value" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Enable" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Mode" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Reset" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="4" Text="Serial Timestamp" FontWeight="Bold" Margin="12,5,0,5"/>
-
-                      <!-- Encoder Data Row -->
-                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,5">
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Current encoder counter value</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
-                        </StackPanel>
+                      <!-- Current Value -->
+                      <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
+                        <TextBlock Text="Value:" FontSize="14" VerticalAlignment="Center"/>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                          <ToolTip.Tip>Current encoder counter value</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
                         <TextBlock Text="{Binding AnalogData, Converter={StaticResource PayloadFieldConverter}, ConverterParameter='Encoder'}"
-                                   FontWeight="Bold" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                   FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,12,20,12" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,5">
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Enable encoder on Port 2</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
-                        </StackPanel>
-                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EnableEncoders}"
-                                  VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <!-- Enable -->
+                      <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
+                        <TextBlock Text="Enable:" FontSize="14" VerticalAlignment="Center"/>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                          <ToolTip.Tip>Enable encoder on Port 2</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EnableEncoders}" VerticalAlignment="Center" Margin="5,0,0,0">
                           Port 2
                         </CheckBox>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,5">
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Encoder operation mode</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
-                        </StackPanel>
-                        <ComboBox SelectedItem="{Binding EncoderMode, Mode=TwoWay}" Width="120" HorizontalAlignment="Center">
+                      <!-- Mode -->
+                      <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
+                        <TextBlock Text="Mode:" FontSize="14" VerticalAlignment="Center"/>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                          <ToolTip.Tip>Encoder operation mode</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                        <ComboBox SelectedItem="{Binding EncoderMode, Mode=TwoWay}" Width="120" HorizontalAlignment="Center" Margin="5,0,0,0">
                           <x:Static Member="local:EncoderModeConfig.Position" />
                           <x:Static Member="local:EncoderModeConfig.Displacement" />
                         </ComboBox>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="3" Margin="20,12,20,12" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,5">
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Reset encoder counter to zero</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
-                        </StackPanel>
-                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EncoderReset}"
-                                  VerticalAlignment="Center" HorizontalAlignment="Center">
+                      <!-- Reset -->
+                      <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
+                        <TextBlock Text="Reset:" FontSize="14" VerticalAlignment="Center"/>
+                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                          <ToolTip.Tip>Reset encoder counter to zero</ToolTip.Tip>
+                        </heroIcons:HeroIcon>
+                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EncoderReset}" VerticalAlignment="Center" Margin="5,0,0,0">
                           Reset
                         </CheckBox>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="4" Margin="20,12,20,12" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,5">
-                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>EnableSerialTimestamp register value (0-255)</ToolTip.Tip>
-                          </heroIcons:HeroIcon>
-                        </StackPanel>
-                        <NumericUpDown Value="{Binding EnableSerialTimestamp}" Minimum="0" Maximum="255"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
                     </Grid>
                   </StackPanel>
 
@@ -2672,28 +2647,27 @@
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                      
                       </Grid.ColumnDefinitions>
 
                       <!-- Table lines -->
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
-                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
 
                       <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
                       <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
                       <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
 
                       <!-- Headers -->
                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Parameter" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Value" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Apply" FontWeight="Bold" Margin="12,5,0,5"/>
 
                       <!-- Register Value -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">Register Value</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">Value</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>EnableSerialTimestamp register value (0-255)</ToolTip.Tip>
@@ -2701,14 +2675,25 @@
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding EnableSerialTimestamp}" Minimum="0" Maximum="255"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
-
-                      <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
-                        <Button Content="Apply" Command="{Binding SerialTimestampApplyConfigurationCommand}"/>
-                      </StackPanel>
+                      <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <NumericUpDown Grid.Column="0"
+                                       Value="{Binding EnableSerialTimestamp}"
+                                       Minimum="0"
+                                       Maximum="255"
+                                       Width="150"
+                                       ClipValueToMinMax="True"
+                                       Increment="1"
+                                       FormatString="F0"/>
+                        <Button Grid.Column="1"
+                                Content="Apply"
+                                Command="{Binding SerialTimestampApplyConfigurationCommand}"
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"/>
+                      </Grid>
                     </Grid>
                   </StackPanel>
 

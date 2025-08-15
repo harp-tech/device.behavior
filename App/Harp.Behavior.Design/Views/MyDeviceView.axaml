@@ -2222,7 +2222,7 @@
               </Grid>
             </TabItem>
 
-            <TabItem Header="rEmAkE" FontSize="20" FontWeight="SemiBold">
+            <TabItem Header="Advanced Control" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
                 <Grid Margin="20">
                   <Grid.RowDefinitions>
@@ -2467,20 +2467,29 @@
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
+                      <Grid Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Grid.Column="0" IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
                                       Command="{Binding ServoOutput2StartCommand}" Width="50" HorizontalContentAlignment="Center">
                           Enable
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsServoOutput2Enabled_DisableServos}"
-                                      Command="{Binding ServoOutput2StopCommand}" Width="50" HorizontalContentAlignment="Center">
+                        <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput2Enabled_DisableServos}"
+                                      Command="{Binding ServoOutput2StopCommand}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0">
                           Disable
                         </ToggleButton>
-                      </StackPanel>
+                      </Grid>
 
-                      <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Spacing="20" Margin="20,12,20,12">
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <!-- Period -->
-                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
                           <TextBlock Text="Period (μs):" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -2490,7 +2499,7 @@
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
                         </StackPanel>
                         <!-- Pulse -->
-                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center" Margin="20,0,0,0">
                           <TextBlock Text="Pulse (μs):" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -2499,13 +2508,14 @@
                           <NumericUpDown Value="{Binding ServoMotor2Pulse}" Minimum="6" Maximum="65530"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
                         </StackPanel>
-                        <Button Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
+                        <!-- Apply Button -->
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
                                 Margin="20,0,0,0" VerticalAlignment="Center">
                           <Button.CommandParameter>
                             <x:Int32>0</x:Int32>
                           </Button.CommandParameter>
                         </Button>
-                      </StackPanel>
+                      </Grid>
 
                       <!-- Servo 3 -->
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
@@ -2518,20 +2528,29 @@
                         </StackPanel>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                        <ToggleButton IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
+                      <Grid Grid.Row="2" Grid.Column="1" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Grid.Column="0" IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
                                       Command="{Binding ServoOutput3StartCommand}" Width="50" HorizontalContentAlignment="Center">
                           Enable
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsServoOutput3Enabled_DisableServos}"
-                                      Command="{Binding ServoOutput3StopCommand}" Width="50" HorizontalContentAlignment="Center">
+                        <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput3Enabled_DisableServos}"
+                                      Command="{Binding ServoOutput3StopCommand}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0">
                           Disable
                         </ToggleButton>
-                      </StackPanel>
+                      </Grid>
 
-                      <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" Spacing="20" Margin="20,12,20,12">
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
                         <!-- Period -->
-                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
                           <TextBlock Text="Period (μs):" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -2541,7 +2560,7 @@
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
                         </StackPanel>
                         <!-- Pulse -->
-                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center" Margin="20,0,0,0">
                           <TextBlock Text="Pulse (μs):" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -2550,13 +2569,14 @@
                           <NumericUpDown Value="{Binding ServoMotor3Pulse}" Minimum="6" Maximum="65530"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
                         </StackPanel>
-                        <Button Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
+                        <!-- Apply Button -->
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
                                 Margin="20,0,0,0" VerticalAlignment="Center">
                           <Button.CommandParameter>
                             <x:Int32>1</x:Int32>
                           </Button.CommandParameter>
                         </Button>
-                      </StackPanel>
+                      </Grid>
                     </Grid>
                   </StackPanel>
 

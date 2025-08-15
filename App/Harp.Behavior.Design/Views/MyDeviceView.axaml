@@ -2253,6 +2253,7 @@
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
@@ -2437,7 +2438,6 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
                       <!-- Table lines -->
@@ -2450,20 +2450,18 @@
                       <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
                       <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
                       <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
-                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="3"/>
 
                       <!-- Headers -->
                       <TextBlock Grid.Row="0" Grid.Column="0" Text="Servo" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="1" Text="Control" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Period (μs)" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="3" Text="Pulse (μs)" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="2" Text="Parameters" FontWeight="Bold" Margin="12,5,0,5"/>
 
                       <!-- Servo 2 -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">SRV 2</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                                             Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Servo Motor 2 (DO2) control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
@@ -2480,14 +2478,33 @@
                         </ToggleButton>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding ServoMotor2Period}" Minimum="2" Maximum="65534"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
-
-                      <StackPanel Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding ServoMotor2Pulse}" Minimum="6" Maximum="65530"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Spacing="20" Margin="20,12,20,12">
+                        <!-- Period -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Period (μs):" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Period of the servo motor in DO2, in microseconds (2-65534)</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <NumericUpDown Value="{Binding ServoMotor2Period}" Minimum="2" Maximum="65534"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <!-- Pulse -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Pulse (μs):" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Pulse width of the servo motor in DO2, in microseconds (6-65530)</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <NumericUpDown Value="{Binding ServoMotor2Pulse}" Minimum="6" Maximum="65530"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <Button Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
+                                Margin="20,0,0,0" VerticalAlignment="Center">
+                          <Button.CommandParameter>
+                            <x:Int32>0</x:Int32>
+                          </Button.CommandParameter>
+                        </Button>
                       </StackPanel>
 
                       <!-- Servo 3 -->
@@ -2495,7 +2512,7 @@
                         <StackPanel Orientation="Horizontal" Spacing="5">
                           <Label FontWeight="Bold" FontSize="14" Padding="0">SRV 3</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                                             Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Servo Motor 3 (DO3) control</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
@@ -2512,14 +2529,33 @@
                         </ToggleButton>
                       </StackPanel>
 
-                      <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding ServoMotor3Period}" Minimum="2" Maximum="65534"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                      </StackPanel>
-
-                      <StackPanel Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
-                        <NumericUpDown Value="{Binding ServoMotor3Pulse}" Minimum="6" Maximum="65530"
-                                       Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                      <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" Spacing="20" Margin="20,12,20,12">
+                        <!-- Period -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Period (μs):" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Period of the servo motor in DO3, in microseconds (2-65534)</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <NumericUpDown Value="{Binding ServoMotor3Period}" Minimum="2" Maximum="65534"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <!-- Pulse -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Pulse (μs):" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Pulse width of the servo motor in DO3, in microseconds (6-65530)</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <NumericUpDown Value="{Binding ServoMotor3Pulse}" Minimum="6" Maximum="65530"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <Button Content="Apply" Command="{Binding ServoApplyConfigurationCommand}"
+                                Margin="20,0,0,0" VerticalAlignment="Center">
+                          <Button.CommandParameter>
+                            <x:Int32>1</x:Int32>
+                          </Button.CommandParameter>
+                        </Button>
                       </StackPanel>
                     </Grid>
                   </StackPanel>

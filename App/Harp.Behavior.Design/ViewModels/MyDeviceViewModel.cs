@@ -5900,8 +5900,17 @@ public class BehaviorViewModel : ViewModelBase
                     var PortDIOStateEventResult = await device.ReadPortDIOStateEventAsync(cancellationToken);
                     PortDIOStateEvent = PortDIOStateEventResult;
                     observer.OnNext($"PortDIOStateEvent: {PortDIOStateEventResult}");
-                    var StopCamerasResult = await device.ReadStopCamerasAsync(cancellationToken);
-                    observer.OnNext($"StopCameras: {StopCamerasResult}");
+
+
+
+                    //var StartCamerasResult = await device.ReadStartCamerasAsync(cancellationToken);
+                    //StartCameras = StartCamerasResult;  
+                    //observer.OnNext($"StartCameras: {StartCamerasResult}");
+
+
+                    //var StopCamerasResult = await device.ReadStopCamerasAsync(cancellationToken);
+                    //StopCameras = StopCamerasResult;
+                    //observer.OnNext($"StopCameras: {StopCamerasResult}");
 
 
                     // NOTE: These in the yalm are yet not considered events but write

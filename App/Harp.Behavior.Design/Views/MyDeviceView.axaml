@@ -2222,7 +2222,7 @@
               </Grid>
             </TabItem>
 
-            <TabItem Header="Advanced Control" FontSize="20" FontWeight="SemiBold">
+            <TabItem Header="Advanced Controls" FontSize="20" FontWeight="SemiBold">
               <ScrollViewer>
                 <Grid Margin="20">
                   <Grid.RowDefinitions>

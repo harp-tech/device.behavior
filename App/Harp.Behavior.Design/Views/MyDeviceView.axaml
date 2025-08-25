@@ -2700,8 +2700,8 @@
                       <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
 
                       <!-- Headers -->
-                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Parameter" FontWeight="Bold" Margin="12,5,0,5"/>
-                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Value" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Timestamp" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Parameter" FontWeight="Bold" Margin="12,5,0,5"/>
 
                       <!-- Register Value -->
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">

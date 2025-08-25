@@ -833,29 +833,35 @@
                             Clear
                           </ToggleButton>
                         </StackPanel>
-                  
-                   
 
-                        <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <ComboBox SelectedItem="{Binding IsDIO0Enabled_PortDIODirection, Mode=TwoWay}"
-                            IsEnabled="True"
-                            Width="120"
-                            HorizontalAlignment="Center">
-                              <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                  <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
-                                </DataTemplate>
-                              </ComboBox.ItemTemplate>
-                              <system:Boolean>True</system:Boolean>
-                              <system:Boolean>False</system:Boolean>
-                            </ComboBox>
-                          </StackPanel>
-                        </Grid>
+
+
+                      <!-- Port 0 DIO Direction Control (add Apply button) -->
+                      <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                          <ComboBox SelectedItem="{Binding IsDIO0Enabled_PortDIODirection, Mode=TwoWay}"
+                                    IsEnabled="True"
+                                    Width="120"
+                                    HorizontalAlignment="Center">
+                            <ComboBox.ItemTemplate>
+                              <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
+                              </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            <system:Boolean>True</system:Boolean>
+                            <system:Boolean>False</system:Boolean>
+                          </ComboBox>
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Content="Apply"
+                                Command="{Binding Port0DirectionApplyCommand}"
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"/>
+                      </Grid>
                   
 
                       <!-- Port 0 DI -->
@@ -1083,8 +1089,7 @@
                         </ToggleButton>
                       </StackPanel>
 
-
-
+                      <!-- Port 1 DIO Direction Control (add Apply button) -->
                       <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
@@ -1092,9 +1097,9 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                           <ComboBox SelectedItem="{Binding IsDIO1Enabled_PortDIODirection, Mode=TwoWay}"
-                          IsEnabled="True"
-                          Width="120"
-                          HorizontalAlignment="Center">
+                                    IsEnabled="True"
+                                    Width="120"
+                                    HorizontalAlignment="Center">
                             <ComboBox.ItemTemplate>
                               <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
@@ -1104,6 +1109,11 @@
                             <system:Boolean>False</system:Boolean>
                           </ComboBox>
                         </StackPanel>
+                        <Button Grid.Column="1"
+                                Content="Apply"
+                                Command="{Binding Port1DirectionApplyCommand}"
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"/>
                       </Grid>
 
 
@@ -1331,8 +1341,7 @@
                         </ToggleButton>
                       </StackPanel>
 
-
-
+                      <!-- Port 2 DIO Direction Control (add Apply button) -->
                       <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
                         <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="Auto"/>
@@ -1340,9 +1349,9 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                           <ComboBox SelectedItem="{Binding IsDIO2Enabled_PortDIODirection, Mode=TwoWay}"
-                          IsEnabled="True"
-                          Width="120"
-                          HorizontalAlignment="Center">
+                                    IsEnabled="True"
+                                    Width="120"
+                                    HorizontalAlignment="Center">
                             <ComboBox.ItemTemplate>
                               <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource BooleanConverter}}" />
@@ -1352,8 +1361,12 @@
                             <system:Boolean>False</system:Boolean>
                           </ComboBox>
                         </StackPanel>
+                        <Button Grid.Column="1"
+                                Content="Apply"
+                                Command="{Binding Port2DirectionApplyCommand}"
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"/>
                       </Grid>
-
 
                       <!-- Port 2 DI -->
 

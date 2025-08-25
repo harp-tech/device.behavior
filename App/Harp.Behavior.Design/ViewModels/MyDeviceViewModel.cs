@@ -121,6 +121,10 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> SavePulseConfigLed0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigLed1Command { get; }
     public ReactiveCommand<Unit, Unit> SaveDirectionConfigCommand { get; }
+    public ReactiveCommand<Unit, Unit> Port0DirectionApplyCommand { get; }
+    public ReactiveCommand<Unit, Unit> Port1DirectionApplyCommand { get; }
+    public ReactiveCommand<Unit, Unit> Port2DirectionApplyCommand { get; }
+
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort0IRCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1IRCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2IRCommand { get; }
@@ -3523,6 +3527,12 @@ public class BehaviorViewModel : ViewModelBase
         SaveRgbConfigColorRgb0Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb0, canChangeConfig);
         SaveRgbConfigColorRgb1Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb1, canChangeConfig);
 
+        Port0DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort0DirectionApply, canChangeConfig);
+        Port1DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort1DirectionApply, canChangeConfig);
+        Port2DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort2DirectionApply, canChangeConfig);
+
+
+
 
 
 
@@ -3897,6 +3907,47 @@ public class BehaviorViewModel : ViewModelBase
                 "MimicPort2Valve");
         });
     }
+
+    private IObservable<Unit> ExecutePort0DirectionApply()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WritePortDIODirectionAsync(value),
+                PortDIODirection,
+                "PortDIODirection (Port0)");
+        });
+    }
+
+    private IObservable<Unit> ExecutePort1DirectionApply()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WritePortDIODirectionAsync(value),
+                PortDIODirection,
+                "PortDIODirection (Port1)");
+        });
+    }
+
+    private IObservable<Unit> ExecutePort2DirectionApply()
+    {
+        return Observable.StartAsync(async () =>
+        {
+            if (_device == null)
+                return;
+            await WriteAndLogAsync(
+                value => _device.WritePortDIODirectionAsync(value),
+                PortDIODirection,
+                "PortDIODirection (Port2)");
+        });
+    }
+
+
 
     // LED 0 Configuration
     private IObservable<Unit> ExecuteSaveLedConfigCurrentLed0()

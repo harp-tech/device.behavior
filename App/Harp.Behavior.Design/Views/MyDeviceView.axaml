@@ -2486,11 +2486,11 @@
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <ToggleButton Grid.Column="0" IsChecked="{Binding IsServoOutput2Enabled_EnableServos}"
-                                      Command="{Binding ServoOutput2StartCommand}" Width="50" HorizontalContentAlignment="Center">
+                                      Command="{Binding ServoOutput2StartCommand}" HorizontalContentAlignment="Center">
                           Enable
                         </ToggleButton>
                         <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput2Enabled_DisableServos}"
-                                      Command="{Binding ServoOutput2StopCommand}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0">
+                                      Command="{Binding ServoOutput2StopCommand}"  HorizontalContentAlignment="Center" Margin="10,0,0,0">
                           Disable
                         </ToggleButton>
                       </Grid>
@@ -2547,11 +2547,11 @@
                           <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <ToggleButton Grid.Column="0" IsChecked="{Binding IsServoOutput3Enabled_EnableServos}"
-                                      Command="{Binding ServoOutput3StartCommand}" Width="50" HorizontalContentAlignment="Center">
+                                      Command="{Binding ServoOutput3StartCommand}" HorizontalContentAlignment="Center">
                           Enable
                         </ToggleButton>
                         <ToggleButton Grid.Column="1" IsChecked="{Binding IsServoOutput3Enabled_DisableServos}"
-                                      Command="{Binding ServoOutput3StopCommand}" Width="50" HorizontalContentAlignment="Center" Margin="10,0,0,0">
+                                      Command="{Binding ServoOutput3StopCommand}" HorizontalContentAlignment="Center" Margin="10,0,0,0">
                           Disable
                         </ToggleButton>
                       </Grid>

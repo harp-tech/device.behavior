@@ -2583,29 +2583,31 @@
                   <!-- Quadrature Encoder Section -->
                   <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,30,30">
                     <TextBlock Text="Quadrature Encoder" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <Grid>
+                    <Grid MinWidth="400">
                       <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                       </Grid.RowDefinitions>
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                       </Grid.ColumnDefinitions>
 
-                      <!-- Table lines (optional, for visual consistency) -->
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
-                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
-                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
-                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
-                      <Rectangle Grid.Column="3" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
-                      <Rectangle Grid.Column="4" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                      <!-- Table lines -->
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
 
-                      <!-- Current Value -->
-                      <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
+                      <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Encoder" FontWeight="Bold" Margin="12,5,0,5"/>
+                      <TextBlock Grid.Row="0" Grid.Column="1" Text="Parameters" FontWeight="Bold" Margin="12,5,0,5"/>
+
+                      <!-- Encoder Value -->
+                      <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
                         <TextBlock Text="Value:" FontSize="14" VerticalAlignment="Center"/>
                         <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                             Foreground="{Binding IconColor}" VerticalAlignment="Center">
@@ -2615,43 +2617,47 @@
                                    FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
                       </StackPanel>
 
-                      <!-- Enable -->
-                      <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
-                        <TextBlock Text="Enable:" FontSize="14" VerticalAlignment="Center"/>
-                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                          <ToolTip.Tip>Enable encoder on Port 2</ToolTip.Tip>
-                        </heroIcons:HeroIcon>
-                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EnableEncoders}" VerticalAlignment="Center" Margin="5,0,0,0">
-                          Port 2
-                        </CheckBox>
+                      <!-- Encoder Properties (all in one horizontal line) -->
+                      <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Spacing="20" Margin="20,12,20,12" VerticalAlignment="Center">
+                        <!-- Enable -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Enable:" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Enable encoder on Port 2</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EnableEncoders}" VerticalAlignment="Center" Margin="5,0,0,0">
+                            Port 2
+                          </CheckBox>
+                        </StackPanel>
+                        <!-- Mode -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Mode:" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Encoder operation mode</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <ComboBox SelectedItem="{Binding EncoderMode, Mode=TwoWay}" Width="120" HorizontalAlignment="Center" Margin="5,0,0,0">
+                            <x:Static Member="local:EncoderModeConfig.Position" />
+                            <x:Static Member="local:EncoderModeConfig.Displacement" />
+                          </ComboBox>
+                        </StackPanel>
+                        <!-- Reset + Apply -->
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                          <TextBlock Text="Reset:" FontSize="14" VerticalAlignment="Center"/>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Center">
+                            <ToolTip.Tip>Reset encoder counter to zero</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                          <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EncoderReset}" VerticalAlignment="Center" Margin="5,0,0,0">
+                            Reset
+                          </CheckBox>
+                          <Button Content="Apply"
+                                  Command="{Binding EncoderApplyConfigurationCommand}"
+                                  Margin="10,0,0,0"
+                                  VerticalAlignment="Center"/>
+                        </StackPanel>
                       </StackPanel>
-
-                      <!-- Mode -->
-                      <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
-                        <TextBlock Text="Mode:" FontSize="14" VerticalAlignment="Center"/>
-                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                          <ToolTip.Tip>Encoder operation mode</ToolTip.Tip>
-                        </heroIcons:HeroIcon>
-                        <ComboBox SelectedItem="{Binding EncoderMode, Mode=TwoWay}" Width="120" HorizontalAlignment="Center" Margin="5,0,0,0">
-                          <x:Static Member="local:EncoderModeConfig.Position" />
-                          <x:Static Member="local:EncoderModeConfig.Displacement" />
-                        </ComboBox>
-                      </StackPanel>
-
-                      <!-- Reset -->
-                      <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Spacing="5" Margin="20,12,20,12" VerticalAlignment="Center">
-                        <TextBlock Text="Reset:" FontSize="14" VerticalAlignment="Center"/>
-                        <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                            Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                          <ToolTip.Tip>Reset encoder counter to zero</ToolTip.Tip>
-                        </heroIcons:HeroIcon>
-                        <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EncoderReset}" VerticalAlignment="Center" Margin="5,0,0,0">
-                          Reset
-                        </CheckBox>
-                      </StackPanel>
-
                     </Grid>
                   </StackPanel>
 

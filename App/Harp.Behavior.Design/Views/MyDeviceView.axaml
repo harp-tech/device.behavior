@@ -1871,7 +1871,7 @@
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsFrameAcquiredEnabled_Camera0Frame}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
@@ -1912,7 +1912,7 @@
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                          <controls:VisualStatus Status="{Binding IsFrameAcquiredEnabled_Camera1Frame}" Width="15" Height="15"/>
+                          <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>

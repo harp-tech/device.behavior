@@ -40,6 +40,9 @@ public class BehaviorViewModel : ViewModelBase
 
     #region Operations
 
+    [Reactive] public int SelectedTabIndex { get; set; }
+
+
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
     //public ReactiveCommand<int, Unit> Port0ApplyConfigurationCommand { get; }
@@ -3076,6 +3079,8 @@ public class BehaviorViewModel : ViewModelBase
         ConnectAndGetBaseInfoCommand.ThrownExceptions.Subscribe(ex =>
             //Log.Error(ex, "Error connecting to device with error: {Exception}", ex));
             Console.WriteLine($"Error connecting to device with error: {ex}"));
+
+        SelectedTabIndex = 1;
 
         var canChangeConfig = this.WhenAnyValue(x => x.Connected).Select(connected => connected);
         // Handle Save and Reset

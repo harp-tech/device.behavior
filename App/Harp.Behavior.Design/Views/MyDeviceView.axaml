@@ -1521,7 +1521,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,15,0">
                           <TextBlock Text="Max (mA):" VerticalAlignment="Center" MinWidth="60"/>
-                          <NumericUpDown Value="{Binding Led0MaxCurrent}" Minimum="2" Maximum="100"
+                          <NumericUpDown Value="{Binding Led0MaxCurrent}" Minimum="5" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
                         <Button Grid.Column="2" Content="Apply" Command="{Binding SaveLedConfigCurrentLed0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -1580,7 +1580,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
                           <TextBlock Text="Current (mA):" VerticalAlignment="Center" MinWidth="70"/>
-                          <NumericUpDown Value="{Binding Led1Current}" Minimum="5" Maximum="100"
+                          <NumericUpDown Value="{Binding Led1Current}" Minimum="2" Maximum="100"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,15,0">

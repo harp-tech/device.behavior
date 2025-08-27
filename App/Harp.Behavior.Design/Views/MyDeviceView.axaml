@@ -949,7 +949,7 @@
 
                       <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Port 1 digital output control</ToolTip.Tip>
@@ -995,7 +995,7 @@
 
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Port 1 supply output control</ToolTip.Tip>
@@ -1061,11 +1061,11 @@
 
 
 
-                      <!-- Port 0 DIO -->
+                      <!-- Port 1 DIO -->
 
                       <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DIO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>DIO 1 state event status</ToolTip.Tip>
@@ -1117,11 +1117,11 @@
                       </Grid>
 
 
-                      <!-- Port 0 DI -->
+                      <!-- Port 1 DI -->
 
                       <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Digital input port 1 status</ToolTip.Tip>
@@ -1247,7 +1247,7 @@
 
                       <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Port 2 supply output control</ToolTip.Tip>
@@ -1278,13 +1278,13 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
                           <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                          <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
+                          <NumericUpDown Value="{Binding PulseSupplyPort2}" Minimum="1" Maximum="65535"
                                          Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
                         </StackPanel>
                         <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort2Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
                           Enable
                         </CheckBox>
-                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort2Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
                       </Grid>
 
@@ -1317,10 +1317,10 @@
 
                       <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DIO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
+                            <ToolTip.Tip>DIO 2 state event status</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1372,7 +1372,7 @@
 
                       <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
                         <StackPanel Orientation="Horizontal" Spacing="5">
-                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
                             <ToolTip.Tip>Digital input port 2 status</ToolTip.Tip>

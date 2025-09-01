@@ -281,6 +281,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                   </Grid.RowDefinitions>
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -288,8 +289,52 @@
                     <ColumnDefinition Width="Auto"/>
                   </Grid.ColumnDefinitions>
 
-                  <!--Digital Outputs (DO0-DO3)-->
+                  <!-- Digital Input Section -->
                   <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                    <TextBlock Text="Digital Input" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+
+                    <Grid Margin="0,0,0,15">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                      </Grid.RowDefinitions>
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+
+                      <!-- Table lines -->
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="0" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+                      <Rectangle Grid.Row="1" Height="1" Fill="LightGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+
+                      <Rectangle Grid.Column="0" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+                      <Rectangle Grid.Column="1" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+                      <Rectangle Grid.Column="2" Width="1" Fill="LightGray" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+
+                      <!-- Headers -->
+                      <TextBlock Grid.Row="0" Grid.Column="0" Text="Status" FontWeight="Bold" Margin="12,5,0,5"/>
+
+                      <!-- Digital Input 3 -->
+                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">DI 3</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital Input 3 control and status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDI3Enabled_DigitalInputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+                      
+                    </Grid>
+                  </StackPanel>
+
+                  <!--Digital Outputs (DO0-DO3)-->
+                  <StackPanel Grid.Row="1" Margin="0,0,0,15">
                     <TextBlock Text="Digital Outputs" FontSize="18" FontWeight="Bold"
                                Margin="0,0,0,5"/>
 
@@ -648,7 +693,7 @@
                   </StackPanel>
 
                   <!-- Port Outputs Section -->
-                  <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                  <StackPanel Grid.Row="2" Margin="0,0,0,15">
                     <TextBlock Text="Port Outputs" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
 
                     <!-- PORT 0 -->

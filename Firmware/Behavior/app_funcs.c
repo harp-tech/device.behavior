@@ -217,6 +217,7 @@ void app_read_REG_PORT_DIS(void)
 	app_regs.REG_PORT_DIS = (read_POKE0_IR) ? B_DI0 : 0;
 	app_regs.REG_PORT_DIS |= (read_POKE1_IR) ? B_DI1 : 0;
 	app_regs.REG_PORT_DIS |= (read_POKE2_IR) ? B_DI2 : 0;
+	app_regs.REG_PORT_DIS |= (read_DI3) ? B_DI3 : 0;
 }
 bool app_write_REG_PORT_DIS(void *a) { return false; }
 

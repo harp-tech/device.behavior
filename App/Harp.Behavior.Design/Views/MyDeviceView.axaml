@@ -743,7 +743,7 @@
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Port 0 digital output control</ToolTip.Tip>
+                              <ToolTip.Tip>Port 0 digital output control/ Poke 0 LED</ToolTip.Tip>
                             </heroIcons:HeroIcon>
                           </StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -789,7 +789,7 @@
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Port 0 supply output control</ToolTip.Tip>
+                              <ToolTip.Tip>Port 0 supply output control/ Poke 0 Valve</ToolTip.Tip>
                             </heroIcons:HeroIcon>
                           </StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -916,7 +916,7 @@
                             <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
                             <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                                 Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital input port 0 status</ToolTip.Tip>
+                              <ToolTip.Tip>Digital input port 0 status/ Poke 0 Infrared</ToolTip.Tip>
                             </heroIcons:HeroIcon>
                           </StackPanel>
                           <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -997,7 +997,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 1 digital output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 1 digital output control/ Poke 1 LED</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1043,7 +1043,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 1 supply output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 1 supply output control/ Poke 1 Valve</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1169,7 +1169,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 1 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital input port 1 status</ToolTip.Tip>
+                            <ToolTip.Tip>Digital input port 1 status/ Poke 1 Infrared</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1249,7 +1249,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DO</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 2 digital output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 2 digital output control/ Poke 2 LED</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1295,7 +1295,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 12 V</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Port 2 supply output control</ToolTip.Tip>
+                            <ToolTip.Tip>Port 2 supply output control/ Poke 2 Valve</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -1420,7 +1420,7 @@
                           <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 2 DI</Label>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                            <ToolTip.Tip>Digital input port 2 status</ToolTip.Tip>
+                            <ToolTip.Tip>Digital input port 2 status/ Poke 2 Infrared</ToolTip.Tip>
                           </heroIcons:HeroIcon>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
@@ -2289,12 +2289,9 @@
                       </Grid>
                     </Grid>
                   </StackPanel>
-
                 </Grid>
               </ScrollViewer>
             </TabItem>
-
-
           </TabControl>
         </StackPanel>
       </StackPanel>

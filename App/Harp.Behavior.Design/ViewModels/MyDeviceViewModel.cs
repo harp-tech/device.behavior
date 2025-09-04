@@ -39,31 +39,34 @@ public class BehaviorViewModel : ViewModelBase
     #endregion
 
     #region Operations
-
-    [Reactive] public int SelectedTabIndex { get; set; }
-
-
+    [Reactive] public int SelectedTabIndex { get; set; } // Allow for the opening tab to configurable
+    #region Configuration Commands
     public ReactiveCommand<bool, Unit> SaveConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ResetConfigurationCommand { get; }
-    //public ReactiveCommand<int, Unit> Port0ApplyConfigurationCommand { get; }
-    //public ReactiveCommand<int, Unit> Port1ApplyConfigurationCommand { get; }
-    //public ReactiveCommand<int, Unit> Port2ApplyConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DOPort0ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DOPort1ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> DOPort2ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> SupplyPort0ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> SupplyPort1ConfigurationCommand { get; }
-    //public ReactiveCommand<Unit, Unit> SupplyPort2ConfigurationCommand { get; }
-    public ReactiveCommand<int, Unit> LedApplyConfigurationCommand { get; }  // TESTING
-    public ReactiveCommand<int, Unit> DOApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveDirectionConfigCommand { get; }
+    #endregion
+
+    #region RGB Configuration Commands
     public ReactiveCommand<Unit, Unit> Rgb0ApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb1ApplyConfigurationCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb0Command { get; }
+    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb1Command { get; }
+    #endregion
 
-    public ReactiveCommand<int, Unit> CameraApplyConfigurationCommand { get; }
-    public ReactiveCommand<int, Unit> ServoApplyConfigurationCommand { get; }
+    #region LED Configuration Commands
+    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed0Command { get; }
+    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed1Command { get; }
+    #endregion
+
+    #region Encoder Configuration Commands
     public ReactiveCommand<Unit, Unit> EncoderApplyConfigurationCommand { get; }
+    #endregion
 
+    #region Serial/Timestamp Configuration Commands
     public ReactiveCommand<Unit, Unit> SerialTimestampApplyConfigurationCommand { get; }
+    #endregion
+
+    #region Digital Output (DO) Control Commands
     public ReactiveCommand<Unit, Unit> DO0SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DO0ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DO1SetCommand { get; }
@@ -72,32 +75,55 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> DO2ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DO3SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DO3ClearCommand { get; }
+    #endregion
+
+    #region Port Control Commands
+    // DOPort Commands
     public ReactiveCommand<Unit, Unit> DOPort0SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort0ClearCommand { get; }
-    public ReactiveCommand<Unit, Unit> DIOPort0SetCommand { get; }
-    public ReactiveCommand<Unit, Unit> DIOPort0ClearCommand { get; }
-    public ReactiveCommand<Unit, Unit> SupplyPort0SetCommand { get; }
-    public ReactiveCommand<Unit, Unit> SupplyPort0ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort1SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort1ClearCommand { get; }
-    public ReactiveCommand<Unit, Unit> DIOPort1SetCommand { get; }
-    public ReactiveCommand<Unit, Unit> DIOPort1ClearCommand { get; }
-    public ReactiveCommand<Unit, Unit> SupplyPort1SetCommand { get; }
-    public ReactiveCommand<Unit, Unit> SupplyPort1ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort2SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DOPort2ClearCommand { get; }
+
+    // DIOPort Commands
+    public ReactiveCommand<Unit, Unit> DIOPort0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> DIOPort1ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> DIOPort2SetCommand { get; }
     public ReactiveCommand<Unit, Unit> DIOPort2ClearCommand { get; }
+
+    // SupplyPort Commands
+    public ReactiveCommand<Unit, Unit> SupplyPort0SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort0ClearCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort1SetCommand { get; }
+    public ReactiveCommand<Unit, Unit> SupplyPort1ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> SupplyPort2SetCommand { get; }
     public ReactiveCommand<Unit, Unit> SupplyPort2ClearCommand { get; }
+    #endregion
+
+    #region Port Direction Commands
+    public ReactiveCommand<Unit, Unit> Port0DirectionApplyCommand { get; }
+    public ReactiveCommand<Unit, Unit> Port1DirectionApplyCommand { get; }
+    public ReactiveCommand<Unit, Unit> Port2DirectionApplyCommand { get; }
+    #endregion
+
+    #region LED Control Commands
     public ReactiveCommand<Unit, Unit> Led0SetCommand { get; }
     public ReactiveCommand<Unit, Unit> Led0ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> Led1SetCommand { get; }
     public ReactiveCommand<Unit, Unit> Led1ClearCommand { get; }
+    #endregion
+
+    #region RGB Control Commands
     public ReactiveCommand<Unit, Unit> Rgb0SetCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb0ClearCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb1SetCommand { get; }
     public ReactiveCommand<Unit, Unit> Rgb1ClearCommand { get; }
+    #endregion
+
+    #region PWM Control Commands
     public ReactiveCommand<Unit, Unit> PwmDO0StartCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO0StopCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO1StartCommand { get; }
@@ -106,54 +132,58 @@ public class BehaviorViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> PwmDO2StopCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO3StartCommand { get; }
     public ReactiveCommand<Unit, Unit> PwmDO3StopCommand { get; }
+    #endregion
+
+    #region Pulse Configuration Commands
+    // Digital Output Pulse Config
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO1Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO2Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDO3Command { get; }
+
+    // Port Pulse Config
     public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort1Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigDOPort2Command { get; }
+
+    // Supply Port Pulse Config
     public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort1Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigSupplyPort2Command { get; }
+
+    // RGB and LED Pulse Config
     public ReactiveCommand<Unit, Unit> SavePulseConfigRgb0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigRgb1Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigLed0Command { get; }
     public ReactiveCommand<Unit, Unit> SavePulseConfigLed1Command { get; }
-    public ReactiveCommand<Unit, Unit> SaveDirectionConfigCommand { get; }
-    public ReactiveCommand<Unit, Unit> Port0DirectionApplyCommand { get; }
-    public ReactiveCommand<Unit, Unit> Port1DirectionApplyCommand { get; }
-    public ReactiveCommand<Unit, Unit> Port2DirectionApplyCommand { get; }
+    #endregion
 
+    #region Mimic Configuration Commands
+    // IR Mimic Config
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort0IRCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1IRCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2IRCommand { get; }
+
+    // Valve Mimic Config
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort0ValveCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort1ValveCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveMimicConfigPort2ValveCommand { get; }
+    #endregion
 
-    // LED Configuration Commands
-    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed0Command { get; }
-    public ReactiveCommand<Unit, Unit> SaveLedConfigCurrentLed1Command { get; }
-
-    // RGB Configuration Commands  
-    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb0Command { get; }
-    public ReactiveCommand<Unit, Unit> SaveRgbConfigColorRgb1Command { get; }
-
-
-
-
-
+    #region Servo Configuration Commands
+    public ReactiveCommand<int, Unit> ServoApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> ServoOutput2StartCommand { get; }
     public ReactiveCommand<Unit, Unit> ServoOutput2StopCommand { get; }
     public ReactiveCommand<Unit, Unit> ServoOutput3StartCommand { get; }
     public ReactiveCommand<Unit, Unit> ServoOutput3StopCommand { get; }
+    #endregion
 
+    #region Camera Configuration Commands
+    public ReactiveCommand<int, Unit> CameraApplyConfigurationCommand { get; }
     public ReactiveCommand<Unit, Unit> Camera0StartCommand { get; }
     public ReactiveCommand<Unit, Unit> Camera0StopCommand { get; }
     public ReactiveCommand<Unit, Unit> Camera1StartCommand { get; }
     public ReactiveCommand<Unit, Unit> Camera1StopCommand { get; }
-
     #endregion
 
     #region Device basic information
@@ -3029,6 +3059,8 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
+    #endregion
+
     #region Application State
 
     [ObservableAsProperty] public bool IsLoadingPorts { get; }
@@ -3095,14 +3127,14 @@ public class BehaviorViewModel : ViewModelBase
             //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
             Console.WriteLine($"Error saving configuration with error: {ex}"));
 
-/*        Rgb0ApplyConfigurationCommand =
-            ReactiveCommand.CreateFromObservable<Unit, Unit>(ExecuteRgb0ApplyConfiguration);*/
+        /*        Rgb0ApplyConfigurationCommand =
+                    ReactiveCommand.CreateFromObservable<Unit, Unit>(ExecuteRgb0ApplyConfiguration);*/
         //Rgb0ApplyConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsSaving);
         //Rgb0ApplyConfigurationCommand.ThrownExceptions.Subscribe(ex =>
         //    //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
         //    Console.WriteLine($"Error saving configuration with error: {ex}"));
 
-        
+
 
         ResetConfigurationCommand = ReactiveCommand.CreateFromObservable(ResetConfiguration, canChangeConfig);
         ResetConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsResetting);
@@ -3441,31 +3473,6 @@ public class BehaviorViewModel : ViewModelBase
         Camera1StartCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Start, canChangeConfig);
         Camera1StopCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Stop, canChangeConfig);
 
-
-        //Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(
-        //    (bool parameter) => ExecuteRgb0ApplyConfiguration(parameter),
-        //    canChangeConfig
-        //);
-
-        DOApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            doIndex => ExecuteDOApplyConfiguration(doIndex),
-            canChangeConfig
-            );
-
-        //Port0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-        //    port0Index => ExecutePort0ApplyConfiguration(port0Index),
-        //    canChangeConfig
-        //    );
-
-        //Port1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-        //    port1Index => ExecutePort1ApplyConfiguration(port1Index),
-        //    canChangeConfig
-        //    );
-        //Port2ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-        //    port2Index => ExecutePort2ApplyConfiguration(port2Index),
-        //    canChangeConfig
-        //);
-
         CameraApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
             cameraIndex => ExecuteCameraApplyConfiguration(cameraIndex),
             canChangeConfig
@@ -3486,14 +3493,10 @@ public class BehaviorViewModel : ViewModelBase
         Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb0ApplyConfiguration, canChangeConfig);
         Rgb1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1ApplyConfiguration, canChangeConfig);
 
-        LedApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            ledIndex => ExecuteLedApplyConfiguration(ledIndex),
-            canChangeConfig
-        );
 
         SerialTimestampApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteSerialTimestampApplyConfiguration, canChangeConfig);
 
-        
+
         SavePulseConfigDO0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO0, canChangeConfig);
         SavePulseConfigDO1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO1, canChangeConfig);
         SavePulseConfigDO2Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO2, canChangeConfig);
@@ -4101,9 +4104,6 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-
-
-
     private IObservable<Unit> ExecuteSerialTimestampApplyConfiguration()
     {
         return Observable.StartAsync(async () =>
@@ -4193,480 +4193,6 @@ public class BehaviorViewModel : ViewModelBase
                 "OutputClear");
         });
     }
-
-    private IObservable<Unit> ExecuteDOApplyConfiguration(int doIndex)
-    {
-        return Observable.StartAsync(async () =>
-        {
-            if (_device == null)
-                return;
-
-            DigitalOutputs doOutput;
-            ushort pulseValue = 0;
-            ushort pwmFrequency = 0;
-            byte pwmDutyCycle = 0;
-            PwmOutputs pwmOutput = 0;
-
-            // Enable pulse
-            await WriteAndLogAsync(
-                value => _device.WriteOutputPulseEnableAsync(value),
-                OutputPulseEnable,
-                "OutputPulseEnable");
-
-            switch (doIndex)
-            {
-                case 0:
-                    doOutput = DigitalOutputs.DO0;
-                    pulseValue = PulseDO0;
-                    pwmFrequency = PwmFrequencyDO0;
-                    pwmDutyCycle = PwmDutyCycleDO0;
-                    pwmOutput = PwmOutputs.PwmDO0;
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDO0Async(value),
-                        pulseValue,
-                        "PulseDO0");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmFrequencyDO0Async(value),
-                        pwmFrequency,
-                        "PwmFrequencyDO0");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmDutyCycleDO0Async(value),
-                        pwmDutyCycle,
-                        "PwmDutyCycleDO0");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO0,
-                        "PwmStart");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        pwmOutput,
-                        "PwmStop");
-                    break;
-                case 1:
-                    doOutput = DigitalOutputs.DO1;
-                    pulseValue = PulseDO1;
-                    pwmFrequency = PwmFrequencyDO1;
-                    pwmDutyCycle = PwmDutyCycleDO1;
-                    //pwmOutput = PwmOutputs.PwmDO1;
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDO1Async(value),
-                        pulseValue,
-                        "PulseDO1");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmFrequencyDO1Async(value),
-                        pwmFrequency,
-                        "PwmFrequencyDO1");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmDutyCycleDO1Async(value),
-                        pwmDutyCycle,
-                        "PwmDutyCycleDO1");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO1,
-                        "PwmStart");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO1,
-                        "PwmStop");
-                    break;
-                case 2:
-                    doOutput = DigitalOutputs.DO2;
-                    pulseValue = PulseDO2;
-                    pwmFrequency = PwmFrequencyDO2;
-                    pwmDutyCycle = PwmDutyCycleDO2;
-                    //pwmOutput = PwmOutputs.PwmDO2;
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDO2Async(value),
-                        pulseValue,
-                        "PulseDO2");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmFrequencyDO2Async(value),
-                        pwmFrequency,
-                        "PwmFrequencyDO2");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmDutyCycleDO2Async(value),
-                        pwmDutyCycle,
-                        "PwmDutyCycleDO2");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO2,
-                        "PwmStart");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO2,
-                        "PwmStop");
-                    break;
-                case 3:
-                    doOutput = DigitalOutputs.DO3;
-                    pulseValue = PulseDO3;
-                    pwmFrequency = PwmFrequencyDO3;
-                    pwmDutyCycle = PwmDutyCycleDO3;
-                    //pwmOutput = PwmOutputs.PwmDO3;
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDO3Async(value),
-                        pulseValue,
-                        "PulseDO3");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmFrequencyDO3Async(value),
-                        pwmFrequency,
-                        "PwmFrequencyDO3");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmDutyCycleDO3Async(value),
-                        pwmDutyCycle,
-                        "PwmDutyCycleDO3");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO3,
-                        "PwmStart");
-                    await WriteAndLogAsync(
-                        value => _device.WritePwmStartAsync(value),
-                        PwmOutputs.PwmDO3,
-                        "PwmStop");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(doIndex), "DO index must be 0-3.");
-            }
-
-            //// Start PWM
-            //await WriteAndLogAsync(
-            //    value => _device.WritePwmStartAsync(value),
-            //    PwmOutputs.PwmDO0,
-            //    "PwmStart");
-
-            // Optionally, you may want to stop PWM as well, depending on my logic lol not sure how this is going
-            await WriteAndLogAsync(
-                value => _device.WritePwmStopAsync(value),
-                PwmStop,
-                "PwmStop");
-            // Set the output
-            await WriteAndLogAsync(
-                value => _device.WriteOutputSetAsync(value),
-                doOutput,
-                "OutputSet");
-
-            // Clear the output (if needed, or use OutputClear property)
-            await WriteAndLogAsync(
-                value => _device.WriteOutputClearAsync(value),
-                OutputClear,
-                "OutputClear");
-        });
-    }
-
-    private IObservable<Unit> ExecuteLedApplyConfiguration(int ledIndex)
-    {
-        return Observable.StartAsync(async () =>
-        {
-            if (_device == null)
-                return;
-
-            if (ledIndex == 0)
-            {
-                // Write current and max current for LED 0
-                await WriteAndLogAsync(
-                    value => _device.WriteLed0CurrentAsync(value),
-                    Led0Current,
-                    "Led0Current");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteLed0MaxCurrentAsync(value),
-                    Led0MaxCurrent,
-                    "Led0MaxCurrent");
-
-                // Write pulse duration for LED 0
-                await WriteAndLogAsync(
-                    value => _device.WritePulseLed0Async(value),
-                    PulseLed0,
-                    "PulseLed0");
-
-                // Optionally, set/clear/toggle LED 0 in the digital outputs if needed
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputSetAsync(value),
-                    DigitalOutputs.Led0,
-                    "OutputSet");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputClearAsync(value),
-                    OutputClear,
-                    "OutputClear");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputPulseEnableAsync(value),
-                    OutputPulseEnable,
-                    "OutputPulseEnable");
-            }
-            else if (ledIndex == 1)
-            {
-                // Write current and max current for LED 1
-                await WriteAndLogAsync(
-                    value => _device.WriteLed1CurrentAsync(value),
-                    Led1Current,
-                    "Led1Current");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteLed1MaxCurrentAsync(value),
-                    Led1MaxCurrent,
-                    "Led1MaxCurrent");
-
-                // Write pulse duration for LED 1
-                await WriteAndLogAsync(
-                    value => _device.WritePulseLed1Async(value),
-                    PulseLed1,
-                    "PulseLed1");
-
-                // Optionally, set/clear/toggle LED 1 in the digital outputs if needed
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputSetAsync(value),
-                    DigitalOutputs.Led1,
-                    "OutputSet");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputClearAsync(value),
-                    OutputClear,
-                    "OutputClear");
-
-                await WriteAndLogAsync(
-                    value => _device.WriteOutputPulseEnableAsync(value),
-                    OutputPulseEnable,
-                    "OutputPulseEnable");
-            }
-
-        });
-    }
-
-
-    private IObservable<Unit> ExecutePort0ApplyConfiguration(int port0Index)
-    {
-        return Observable.StartAsync(async () =>
-        {
-            if (_device == null)
-                return;
-
-            await WriteAndLogAsync(
-                value => _device.WriteOutputPulseEnableAsync(value),
-                OutputPulseEnable,
-                "OutputPulseEnable");
-
-            switch (port0Index)
-            {
-                case 0: // DO
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDOPort0Async(value),
-                        PulseDOPort0,
-                        "PulseDOPort0");
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.DOPort0,
-                        "OutputSet");
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 1: // 12 V
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseSupplyPort0Async(value),
-                        PulseSupplyPort0,
-                        "PulseSupplyPort0");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.SupplyPort0,
-                        "OutputSet");
-
-                    //await WriteAndLogAsync(
-                    //    value => _device.WriteOutputClearAsync(value),
-                    //    DigitalOutputs.SupplyPort0,
-                    //    "OutputClear");
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 2: // DIO
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIODirectionAsync(value),
-                        PortDIODirection,
-                        "PortDIODirection");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOSetAsync(value),
-                        PortDIOSet,
-                        "PortDIOSet");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOClearAsync(value),
-                        PortDIOClear,
-                        "PortDIOClear");
-                    break;
-
-                case 3: // DI
-                    await WriteAndLogAsync(
-                       value => _device.WriteMimicPort0IRAsync(value),
-                       MimicPort0IR,
-                       "MimicPort0IR");
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(port0Index), "Port0 index must be 0 (DO), 1 (12V), or 2 (DIO).");
-            }
-
-
-
-            
-        });
-    }
-
-    private IObservable<Unit> ExecutePort1ApplyConfiguration(int port1Index)
-    {
-        return Observable.StartAsync(async () =>
-        {
-            if (_device == null)
-                return;
-
-            await WriteAndLogAsync(
-                value => _device.WriteOutputPulseEnableAsync(value),
-                OutputPulseEnable,
-                "OutputPulseEnable");
-
-            switch (port1Index)
-            {
-                case 0: // DO
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDOPort1Async(value),
-                        PulseDOPort1,
-                        "PulseDOPort1");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.DOPort1,
-                        "OutputSet");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 1: // 12 V
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseSupplyPort1Async(value),
-                        PulseSupplyPort1,
-                        "PulseSupplyPort1");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.SupplyPort1,
-                        "OutputSet");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 2: // DIO
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIODirectionAsync(value),
-                        PortDIODirection,
-                        "PortDIODirection");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOSetAsync(value),
-                        PortDIOSet,
-                        "PortDIOSet");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOClearAsync(value),
-                        PortDIOClear,
-                        "PortDIOClear");
-                    break;
-
-                    case 3:
-                    await WriteAndLogAsync(
-                        value => _device.WriteMimicPort1IRAsync(value),
-                        MimicPort1IR,
-                        "MimicPort1IR");
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(port1Index), "Port1 index must be 0 (DO), 1 (12V), or 2 (DIO).");
-            }
-        });
-    }
-
-    private IObservable<Unit> ExecutePort2ApplyConfiguration(int port2Index)
-    {
-        return Observable.StartAsync(async () =>
-        {
-            if (_device == null)
-                return;
-
-            await WriteAndLogAsync(
-                value => _device.WriteOutputPulseEnableAsync(value),
-                OutputPulseEnable,
-                "OutputPulseEnable");
-
-            switch (port2Index)
-            {
-                case 0: // DO
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseDOPort2Async(value),
-                        PulseDOPort2,
-                        "PulseDOPort2");
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.DOPort2,
-                        "OutputSet");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 1: // 12 V
-                    await WriteAndLogAsync(
-                        value => _device.WritePulseSupplyPort2Async(value),
-                        PulseSupplyPort2,
-                        "PulseSupplyPort2");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputSetAsync(value),
-                        DigitalOutputs.SupplyPort2,
-                        "OutputSet");
-
-                    await WriteAndLogAsync(
-                        value => _device.WriteOutputClearAsync(value),
-                        OutputClear,
-                        "OutputClear");
-                    break;
-
-                case 2: // DIO
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIODirectionAsync(value),
-                        PortDIODirection,
-                        "PortDIODirection");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOSetAsync(value),
-                        PortDIOSet,
-                        "PortDIOSet");
-                    await WriteAndLogAsync(
-                        value => _device.WritePortDIOClearAsync(value),
-                        PortDIOClear,
-                        "PortDIOClear");
-                    break;
-
-                case 3: // DI
-                    await WriteAndLogAsync(
-                        value => _device.WriteMimicPort2IRAsync(value),
-                        MimicPort2IR,
-                        "MimicPort2IR");
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(port2Index), "Port2 index must be 0 (DO), 1 (12V), or 2 (DIO).");
-            }
-        });
-    }
-
     private IObservable<Unit> ExecuteCameraApplyConfiguration(int cameraIndex)
     {
         return Observable.StartAsync(async () =>
@@ -4805,7 +4331,7 @@ public class BehaviorViewModel : ViewModelBase
 
             IsEncoderPort2Enabled_EncoderReset = false;
         });
-        
+
     }
 
     private IObservable<Unit> ExecuteDO0Set()
@@ -4820,7 +4346,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WriteOutputSetAsync(value),
-                DigitalOutputs.DO0, 
+                DigitalOutputs.DO0,
                 "OutputSet");
         });
     }
@@ -5791,9 +5317,6 @@ public class BehaviorViewModel : ViewModelBase
             // Device does not have a serial number, simply continue by ignoring the exception
         }
 
-        /*****************************************************************
-        * TODO: Please REVIEW all these registers and update the values
-        * ****************************************************************/
         DigitalInputState = await _device.ReadDigitalInputStateAsync();
         OutputSet = await _device.ReadOutputSetAsync();
         OutputClear = await _device.ReadOutputClearAsync();
@@ -5899,8 +5422,6 @@ public class BehaviorViewModel : ViewModelBase
                     if (IsPortDIEnabled)
                     {
                         var result = await device.ReadPortDIOSetAsync(cancellationToken);
-                        // Update the corresponding property with the result
-                        // FIXME: this might not be the most appropriate action, please review for each case
                         PortDIOSet = result;
                         observer.OnNext($"PortDI: {result}");
                     }
@@ -5909,8 +5430,6 @@ public class BehaviorViewModel : ViewModelBase
                     if (IsPortDIOEnabled)
                     {
                         var result = await device.ReadPortDIOSetAsync(cancellationToken);
-                        // Update the corresponding property with the result
-                        // FIXME: this might not be the most appropriate action, please review for each case
                         PortDIOSet = result;
                         observer.OnNext($"PortDIO: {result}");
                     }
@@ -5919,8 +5438,6 @@ public class BehaviorViewModel : ViewModelBase
                     if (IsAnalogDataEnabled)
                     {
                         var result = await device.ReadAnalogDataAsync(cancellationToken);
-                        // Update the corresponding property with the result
-                        // FIXME: this might not be the most appropriate action, please review for each case
                         AnalogData = result;
                         observer.OnNext($"AnalogData: {result}");
                     }
@@ -5930,7 +5447,6 @@ public class BehaviorViewModel : ViewModelBase
                     {
                         var result = await device.ReadCamera0FrameAsync(cancellationToken);
                         // Update the corresponding property with the result
-                        // FIXME: this might not be the most appropriate action, please review for each case
                         Camera0Frame = result;
                         observer.OnNext($"Camera0: {result}");
                     }
@@ -5939,16 +5455,10 @@ public class BehaviorViewModel : ViewModelBase
                     if (IsCamera1Enabled)
                     {
                         var result = await device.ReadCamera1FrameAsync(cancellationToken);
-                        // Update the corresponding property with the result
-                        // FIXME: this might not be the most appropriate action, please review for each case
                         Camera1Frame = result;
                         observer.OnNext($"Camera1: {result}");
                     }
 
-
-                    // NOTE: Move the below entries to the correct event validation.
-                    // The following registers have Event access but don't have a direct mapping to event flags
-                    // These should be moved to appropriate event validation sections once their triggering events are identified
                     var DigitalInputStateResult = await device.ReadDigitalInputStateAsync(cancellationToken);
                     DigitalInputState = DigitalInputStateResult;
                     observer.OnNext($"DigitalInputState: {DigitalInputStateResult}");
@@ -5957,38 +5467,10 @@ public class BehaviorViewModel : ViewModelBase
                     PortDIOStateEvent = PortDIOStateEventResult;
                     observer.OnNext($"PortDIOStateEvent: {PortDIOStateEventResult}");
 
-
-
-                    //var StartCamerasResult = await device.ReadStartCamerasAsync(cancellationToken);
-                    //StartCameras = StartCamerasResult;  
-                    //observer.OnNext($"StartCameras: {StartCamerasResult}");
-
-
-                    //var StopCamerasResult = await device.ReadStopCamerasAsync(cancellationToken);
-                    //StopCameras = StopCamerasResult;
-                    //observer.OnNext($"StopCameras: {StopCamerasResult}");
-
-
                     // NOTE: These in the yalm are yet not considered events but write
                     var OutputStateResult = await device.ReadOutputStateAsync(cancellationToken);
                     OutputState = OutputStateResult;
                     observer.OnNext($"OutputState: {OutputStateResult}");
-
-
-                    //var resultRgb0 = await device.ReadRgb0Async(cancellationToken);
-                    //Rgb0 = resultRgb0;
-
-                    //observer.OnNext($"Rgb0: {resultRgb0}");
-
-                    //var resultRgb1 = await device.ReadRgb1Async(cancellationToken);
-                    //Rgb1 = resultRgb1;
-                    //observer.OnNext($"Rgb1: {resultRgb1}");
-
-                    //var resultRgbAll = await device.ReadRgbAllAsync(cancellationToken);
-                    //RgbAll = resultRgbAll;
-                    //observer.OnNext($"RgbAll: {resultRgbAll}");
-
-                    // var PortDIOStateResult = await device.
 
                     // Wait a short while before polling again. Adjust delay as necessary.
                     await Task.Delay(TimeSpan.FromMilliseconds(10), cancellationToken);
@@ -6015,33 +5497,6 @@ public class BehaviorViewModel : ViewModelBase
             if (_device == null)
                 throw new Exception("You need to connect to the device first");
 
-            //RgbAllAdapter.UpdateFromRegister(RgbAll);
-            //Rgb0Adapter.UpdateFromRegister(Rgb0);
-            //Rgb1Adapter.UpdateFromRegister(Rgb1);
-            //Rgb0Adapter.LinkToParent(RgbAllAdapter, 0);
-            //Rgb1Adapter.LinkToParent(RgbAllAdapter, 1);
-
-            //Rgb1Adapter.ToRegisterValue();
-
-            /*****************************************************************
-            * TODO: Please REVIEW all these registers and update the values
-            * ****************************************************************/
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputSetAsync(value),
-            //    OutputSet,
-            //    "OutputSet");
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputClearAsync(value),
-            //    OutputClear,
-            //    "OutputClear");
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputToggleAsync(value),
-            //    OutputToggle,
-            //    "OutputToggle");
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputStateAsync(value),
-            //    OutputState,
-            //    "OutputState");
             await WriteAndLogAsync(
                 value => _device.WritePortDIOSetAsync(value),
                 PortDIOSet,
@@ -6162,7 +5617,7 @@ public class BehaviorViewModel : ViewModelBase
                 value => _device.WritePwmStopAsync(value),
                 PwmStop,
                 "PwmStop");
-            
+
 
             var c0 = Rgb0Adapter.Color;
             var c1 = Rgb1Adapter.Color;
@@ -6172,8 +5627,7 @@ public class BehaviorViewModel : ViewModelBase
 
             Rgb0 = new RgbPayload(c0.R, c0.G, c0.B);
             Rgb1 = new RgbPayload(c1.R, c1.G, c1.B);
-            //Rgb0 = Rgb0Adapter.ToRegisterValue();
-            //Rgb0 = Rgb0Adapter.ToRegisterValue();
+
             await WriteAndLogAsync(
                 value => _device.WriteRgb0Async(value),
                 Rgb0,
@@ -6195,7 +5649,7 @@ public class BehaviorViewModel : ViewModelBase
                 RgbAll,
                 "RgbAll");
             await WriteAndLogAsync(
-                value => _device.WriteLed0CurrentAsync(value), 
+                value => _device.WriteLed0CurrentAsync(value),
                 Led0Current,
                 "Led0Current");
             await WriteAndLogAsync(
@@ -6304,14 +5758,6 @@ public class BehaviorViewModel : ViewModelBase
                 "OutputClear");
 
             IsEncoderPort2Enabled_EncoderReset = false; // Uncheck after apply
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputToggleAsync(value),
-            //    OutputToggle,
-            //    "OutputToggle");
-            //await WriteAndLogAsync(
-            //    value => _device.WriteOutputStateAsync(value),
-            //    OutputState,
-            //    "OutputState");
 
             // Save the configuration to the device permanently
             if (savePermanently)
@@ -6387,22 +5833,6 @@ public class BehaviorViewModel : ViewModelBase
         }
     }
 
-    private void UpdateArrayCollection<T>(T[] array, ObservableCollection<ArrayItemWrapper<T>> collection)
-    {
-        if (array == null)
-            return;
-
-        RxApp.MainThreadScheduler.Schedule(() =>
-        {
-            collection.Clear();
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                collection.Add(new ArrayItemWrapper<T>(i, array[i]));
-            }
-        });
-    }
-
     public class RgbColorItem : ReactiveObject
     {
         [Reactive] public int Index { get; set; }
@@ -6437,60 +5867,5 @@ public class BehaviorViewModel : ViewModelBase
                     Color = Color.FromRgb(r, g, b);
                 });
         }
-    }
-
-    private void UpdateRgbArrayCollection(byte[] array, ObservableCollection<RgbColorItem> collection)
-    {
-        if (array == null)
-            return;
-
-        RxApp.MainThreadScheduler.Schedule(() =>
-        {
-            collection.Clear();
-
-            for (int i = 0; i < array.Length; i += 3)
-            {
-                if (i + 2 < array.Length)
-                {
-                    collection.Add(new RgbColorItem(i / 3, array[i], array[i + 1], array[i + 2]));
-                }
-            }
-        });
-    }
-
-    private void SetupRgbCollectionChangeTracking(ObservableCollection<RgbColorItem> collection, string propertyName)
-    {
-        // Subscribe to changes in the Items property of the collection
-        collection.CollectionChanged += (sender, args) =>
-        {
-            // When items are added, subscribe to their Color property changes
-            if (args.NewItems != null)
-            {
-                foreach (RgbColorItem item in args.NewItems)
-                {
-                    // Subscribe to this individual item's Color property changes
-                    item.WhenAnyValue(x => x.Color)
-                        .Skip(1) // Skip initial setting
-                        .Subscribe(color =>
-                        {
-                            // Find which byte array the collection is for using propertyName
-                            var byteArray = this.GetType().GetProperty(propertyName)?.GetValue(this) as byte[];
-                            if (byteArray != null && item.Index >= 0 && (item.Index * 3 + 2) < byteArray.Length)
-                            {
-                                // Update just this RGB triplet in the array
-                                byteArray[item.Index * 3] = color.R;
-                                byteArray[item.Index * 3 + 1] = color.G;
-                                byteArray[item.Index * 3 + 2] = color.B;
-
-                                // Notify that the array property has changed
-                                RxApp.MainThreadScheduler.Schedule(() =>
-                                {
-                                    this.RaisePropertyChanged(propertyName);
-                                });
-                            }
-                        });
-                }
-            }
-        };
     }
 }

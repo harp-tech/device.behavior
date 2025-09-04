@@ -329,7 +329,7 @@
                           <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
                       </StackPanel>
-                      
+
                     </Grid>
                   </StackPanel>
 
@@ -378,316 +378,316 @@
                                   Margin="12,5,0,5"/>
 
                       <!-- DO0 -->
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital Output 0 control and status</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
+                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 0</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital Output 0 control and status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
-                    
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDO0Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
 
                       <!-- Output Control - Set and Clear side by side -->
-                        <StackPanel  Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputSet}"
-                                      Command="{Binding DO0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputClear}"
-                                        Command="{Binding DO0ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Clear
-                          </ToggleButton>
-                        </StackPanel>
+                      <StackPanel  Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputSet}"
+                                    Command="{Binding DO0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDO0Enabled_OutputClear}"
+                                      Command="{Binding DO0ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
 
 
                       <!-- Pulse Control - Duration and Enable side by side -->
-                        <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-                      
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseDO0}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDO0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
 
                       <!-- PWM Control - All controls on one line -->
-                    
-                        <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStart}"
-                                          Command="{Binding PwmDO0StartCommand}" MinWidth="45">
-                              Start
-                            </ToggleButton>
-                            <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStop}"
-                                          Command="{Binding PwmDO0StopCommand}" MinWidth="45">
-                              Stop
-                            </ToggleButton>
-                          </StackPanel>
-                        </Grid>
-                
+
+                      <Grid Grid.Row="1" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmFrequencyDO0}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmDutyCycleDO0}" Minimum="1" Maximum="99"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStart}"
+                                        Command="{Binding PwmDO0StartCommand}" MinWidth="45">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsPwmDO0Enabled_PwmStop}"
+                                        Command="{Binding PwmDO0StopCommand}" MinWidth="45">
+                            Stop
+                          </ToggleButton>
+                        </StackPanel>
+                      </Grid>
+
 
                       <!-- DO1 -->
-            
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital Output 1 control and status</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
+
+                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 1</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital Output 1 control and status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
-                  
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDO1Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
 
                       <!-- Output Control - Set and Clear side by side -->
-             
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputSet}"
-                                      Command="{Binding DO1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
+
+                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputSet}"
+                                    Command="{Binding DO1SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputClear}"
+                                      Command="{Binding DO1ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
+
+
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
+
+                      <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStart}"
+                                        Command="{Binding PwmDO1StartCommand}" MinWidth="45">
+                            Start
                           </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDO1Enabled_OutputClear}"
-                                        Command="{Binding DO1ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Clear
+                          <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStop}"
+                                        Command="{Binding PwmDO1StopCommand}" MinWidth="45">
+                            Stop
                           </ToggleButton>
                         </StackPanel>
-                 
-
-                        <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseDO1}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO1Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO1Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
- 
-         
-                        <Grid Grid.Row="2" Grid.Column="3" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmFrequencyDO1}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmDutyCycleDO1}" Minimum="1" Maximum="99"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStart}"
-                                          Command="{Binding PwmDO1StartCommand}" MinWidth="45">
-                              Start
-                            </ToggleButton>
-                            <ToggleButton IsChecked="{Binding IsPwmDO1Enabled_PwmStop}"
-                                          Command="{Binding PwmDO1StopCommand}" MinWidth="45">
-                              Stop
-                            </ToggleButton>
-                          </StackPanel>
-                        </Grid>
+                      </Grid>
 
                       <!-- DO2 -->
-                      
-                        <StackPanel Grid.Row="3" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital Output 2 control and status</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
+
+                      <StackPanel Grid.Row="3" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 2</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital Output 2 control and status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
-               
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDO2Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
 
                       <!-- Output Control - Set and Clear side by side -->
-                    
-                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputSet}"
-                                      Command="{Binding DO2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
+
+                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputSet}"
+                                    Command="{Binding DO2SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputClear}"
+                                      Command="{Binding DO2ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
+
+                      <Grid Grid.Row="3" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO2Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
+
+                      <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStart}"
+                                        Command="{Binding PwmDO2StartCommand}" MinWidth="45">
+                            Start
                           </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDO2Enabled_OutputClear}"
-                                        Command="{Binding DO2ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Clear
+                          <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStop}"
+                                        Command="{Binding PwmDO2StopCommand}" MinWidth="45">
+                            Stop
                           </ToggleButton>
                         </StackPanel>
-                   
-                        <Grid Grid.Row="3" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseDO2}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO2Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO2Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-     
+                      </Grid>
 
-                        <Grid Grid.Row="3" Grid.Column="3" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmFrequencyDO2}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmDutyCycleDO2}" Minimum="1" Maximum="99"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStart}"
-                                          Command="{Binding PwmDO2StartCommand}" MinWidth="45">
-                              Start
-                            </ToggleButton>
-                            <ToggleButton IsChecked="{Binding IsPwmDO2Enabled_PwmStop}"
-                                          Command="{Binding PwmDO2StopCommand}" MinWidth="45">
-                              Stop
-                            </ToggleButton>
-                          </StackPanel>
-                        </Grid>
-      
 
                       <!-- DO3 -->
-             
-                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital Output 3 control and status</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-                      
-                      <!-- Output Control - Set and Clear side by side -->
-                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputSet}"
-                                      Command="{Binding DO3SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputClear}"
-                                        Command="{Binding DO3ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Clear
-                          </ToggleButton>
-                        </StackPanel>
 
-             
-                        <Grid  Grid.Row="4" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO3Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-               
-                        <Grid Grid.Row="4" Grid.Column="3" Margin="20,12,10,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
-                            <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
-                            <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStart}"
-                                          Command="{Binding PwmDO3StartCommand}" MinWidth="45">
-                              Start
-                            </ToggleButton>
-                            <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStop}"
-                                          Command="{Binding PwmDO3StopCommand}" MinWidth="45">
-                              Stop
-                            </ToggleButton>
-                          </StackPanel>
-                        </Grid>
-               
+                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">DO 3</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital Output 3 control and status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDO3Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
+                      <!-- Output Control - Set and Clear side by side -->
+                      <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputSet}"
+                                    Command="{Binding DO3SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDO3Enabled_OutputClear}"
+                                      Command="{Binding DO3ClearCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
+
+
+                      <Grid  Grid.Row="4" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseDO3}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDO3Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDO3Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
+                      <Grid Grid.Row="4" Grid.Column="3" Margin="20,12,10,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Freq (Hz):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmFrequencyDO3}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" Margin="0,0,10,0">
+                          <TextBlock Text="Duty (%):" VerticalAlignment="Center" MinWidth="60"/>
+                          <NumericUpDown Value="{Binding PwmDutyCycleDO3}" Minimum="1" Maximum="99"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                          <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStart}"
+                                        Command="{Binding PwmDO3StartCommand}" MinWidth="45">
+                            Start
+                          </ToggleButton>
+                          <ToggleButton IsChecked="{Binding IsPwmDO3Enabled_PwmStop}"
+                                        Command="{Binding PwmDO3StopCommand}" MinWidth="45">
+                            Stop
+                          </ToggleButton>
+                        </StackPanel>
+                      </Grid>
+
 
                     </Grid>
                   </StackPanel>
@@ -734,150 +734,150 @@
                       <TextBlock Grid.Row="0" Grid.Column="2" Text="Pulse Control" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="3" Text="Direction" FontWeight="Bold" Margin="12,5,0,5"/>
                       <TextBlock Grid.Row="0" Grid.Column="4" Text="Mimic Control" FontWeight="Bold" Margin="12,5,0,5"/>
-                      
+
 
                       <!-- Port 0 Digital Output -->
-                     
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Port 0 digital output control/ Poke 0 LED</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
-                                      Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputClear}"
-                                        Command="{Binding DOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
-                            Clear
-                          </ToggleButton>
+                      <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DO</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Port 0 digital output control/ Poke 0 LED</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
-           
-                        <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDOPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-                  
-               
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDOPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10"  Grid.Row="1" Grid.Column="1" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputSet}"
+                                    Command="{Binding DOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDOPort0Enabled_OutputClear}"
+                                      Command="{Binding DOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
+
+                      <Grid Grid.Row="1" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseDOPort0}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsDOPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigDOPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
+
                       <!-- Port 0 Supply Output -->
-                      
-                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Port 0 supply output control/ Poke 0 Valve</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
+
+                      <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 12 V</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Port 0 supply output control/ Poke 0 Valve</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
-                  
-                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
-                                      Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}"
-                                        Command="{Binding SupplyPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
-                            Clear
-                          </ToggleButton>
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsSupplyPort0Enabled_OutputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
-                  
-                        <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
-                            <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
-                            <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
-                                           Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
-                          </StackPanel>
-                          <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
-                            Enable
-                          </CheckBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-      
-                        <Grid Grid.Row="2" Grid.Column="4" Margin="20,12,20,12" >
-                          <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                          </Grid.ColumnDefinitions>
-                          <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
+                      </StackPanel>
+
+                      <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputSet}"
+                                    Command="{Binding SupplyPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsSupplyPort0Enabled_OutputClear}"
+                                      Command="{Binding SupplyPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
+
+                      <Grid Grid.Row="2" Grid.Column="2" Margin="20,12,20,12">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,15,0">
+                          <TextBlock Text="Duration (ms):" VerticalAlignment="Center" MinWidth="80"/>
+                          <NumericUpDown Value="{Binding PulseSupplyPort0}" Minimum="1" Maximum="65535"
+                                         Width="150" ClipValueToMinMax="True" Increment="1" FormatString="F0"/>
+                        </StackPanel>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding IsSupplyPort0Enabled_OutputPulseEnable}" Margin="0,0,15,0" VerticalAlignment="Center">
+                          Enable
+                        </CheckBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SavePulseConfigSupplyPort0Command}" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
+                      <Grid Grid.Row="2" Grid.Column="4" Margin="20,12,20,12" >
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="50"/>
+                          <ColumnDefinition Width="Auto"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" Margin="0,0,10,0">
                           <TextBlock Text="Valve:" VerticalAlignment="Center"/>
-                          </StackPanel>
-                          <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
-                            <x:Static Member="local:MimicOutput.None" />
-                            <x:Static Member="local:MimicOutput.DIO0" />
-                            <x:Static Member="local:MimicOutput.DIO1" />
-                            <x:Static Member="local:MimicOutput.DIO2" />
-                            <x:Static Member="local:MimicOutput.DO0" />
-                            <x:Static Member="local:MimicOutput.DO1" />
-                            <x:Static Member="local:MimicOutput.DO2" />
-                            <x:Static Member="local:MimicOutput.DO3" />
-                          </ComboBox>
-                          <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort0ValveCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                          </Button>
-                        </Grid>
-                  
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" SelectedItem="{Binding MimicPort0Valve, Mode=TwoWay}" Width="120" Margin="0,0,15,0">
+                          <x:Static Member="local:MimicOutput.None" />
+                          <x:Static Member="local:MimicOutput.DIO0" />
+                          <x:Static Member="local:MimicOutput.DIO1" />
+                          <x:Static Member="local:MimicOutput.DIO2" />
+                          <x:Static Member="local:MimicOutput.DO0" />
+                          <x:Static Member="local:MimicOutput.DO1" />
+                          <x:Static Member="local:MimicOutput.DO2" />
+                          <x:Static Member="local:MimicOutput.DO3" />
+                        </ComboBox>
+                        <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort0ValveCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </Button>
+                      </Grid>
+
 
                       <!-- Port 0 DIO -->
-                  
-                        <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
-                        </StackPanel>
-               
 
-                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
-                          <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
-                                      Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
-                            Set
-                          </ToggleButton>
-                          <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOClear}"
-                                        Command="{Binding DIOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
-                            Clear
-                          </ToggleButton>
+                      <StackPanel Grid.Row="3" Grid.Column="0"  Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DIO</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>DIO 0 state event status</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDIO0Enabled_PortDIOStateEvent}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
+
+
+                      <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="20,12,20,12">
+                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOSet}"
+                                    Command="{Binding DIOPort0SetCommand}" Width="55"  HorizontalContentAlignment="Center">
+                          Set
+                        </ToggleButton>
+                        <ToggleButton IsChecked="{Binding IsDIO0Enabled_PortDIOClear}"
+                                      Command="{Binding DIOPort0ClearCommand}" Width="55" HorizontalContentAlignment="Center">
+                          Clear
+                        </ToggleButton>
+                      </StackPanel>
 
 
 
@@ -907,23 +907,23 @@
                                 Margin="15,0,0,0"
                                 VerticalAlignment="Center"/>
                       </Grid>
-                  
+
 
                       <!-- Port 0 DI -->
-   
-                        <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
-                          <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
-                            <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
-                                                Foreground="{Binding IconColor}" VerticalAlignment="Top">
-                              <ToolTip.Tip>Digital input port 0 status/ Poke 0 Infrared</ToolTip.Tip>
-                            </heroIcons:HeroIcon>
-                          </StackPanel>
-                          <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
-                            <controls:VisualStatus Status="{Binding IsDIPort0Enabled_DigitalInputState}" Width="15" Height="15"/>
-                            <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
-                          </StackPanel>
+
+                      <StackPanel Grid.Row="4" Grid.Column="0" Margin="20,12,20,12">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                          <Label FontWeight="Bold" FontSize="14" Padding="0">PORT 0 DI</Label>
+                          <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
+                                              Foreground="{Binding IconColor}" VerticalAlignment="Top">
+                            <ToolTip.Tip>Digital input port 0 status/ Poke 0 Infrared</ToolTip.Tip>
+                          </heroIcons:HeroIcon>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="5" Margin="0,3,0,0">
+                          <controls:VisualStatus Status="{Binding IsDIPort0Enabled_DigitalInputState}" Width="15" Height="15"/>
+                          <TextBlock Text="Active" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+                      </StackPanel>
 
 
                       <Grid Grid.Row="4" Grid.Column="4" Margin="20,12,20,12" >
@@ -948,11 +948,11 @@
                         <Button Grid.Column="2" Content="Apply" Command="{Binding SaveMimicConfigPort0IRCommand}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         </Button>
                       </Grid>
-                      
-                  </Grid>
+
+                    </Grid>
 
 
-                      <!-- PORT 1 -->
+                    <!-- PORT 1 -->
                     <Grid Margin="0,0,0,30">
                       <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2240,7 +2240,7 @@
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140"/>
                         <ColumnDefinition Width="Auto"/>
-                      
+
                       </Grid.ColumnDefinitions>
 
                       <!-- Table lines -->

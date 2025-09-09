@@ -4883,7 +4883,6 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-
     private IObservable<Unit> ExecutePwmDO0Start()
     {
         return Observable.StartAsync(async () =>
@@ -5187,7 +5186,6 @@ public class BehaviorViewModel : ViewModelBase
                 "StopCameras");
         });
     }
-
 
     private IObservable<Unit> LoadUsbInformation()
     {

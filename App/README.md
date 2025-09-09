@@ -1,8 +1,8 @@
 # Harp.Behavior.App
 
-This repository folder contains the Behavior GUI application that allows its respective device configuration, developed by the Hardware & Software Platform at the Champalimaud Foundation.
+This repository contains the Behavior GUI application for device configuration, developed by the Hardware & Software Platform at the Champalimaud Foundation.
 
-The Behavior is a Harp device and has all the inherent Harp Devices functionalities.
+The Behavior is a Harp device with all the inherent functionalities of Harp devices.
 
 The GUI was developed using [.NET](https://dotnet.microsoft.com/), [AvaloniaUI](https://avaloniaui.net/) with ReactiveUI and makes direct use of the [Bonsai.Harp](https://github.com/bonsai-rx/harp) library.
 
@@ -18,7 +18,7 @@ Portable builds are also available.
 
 ### Linux
 
-Since the application accesses the serial port, your user needs to be on the `dialout`group or equivalent.
+Since the application accesses the serial port, your user needs to be on the `dialout` group or equivalent.
 
 There might be other alternatives to this, but at least on Ubuntu and Fedora que command that you need to run to add your user to the `dialout` group is:
 

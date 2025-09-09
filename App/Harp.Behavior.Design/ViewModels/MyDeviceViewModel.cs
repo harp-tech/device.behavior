@@ -3127,15 +3127,6 @@ public class BehaviorViewModel : ViewModelBase
             //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
             Console.WriteLine($"Error saving configuration with error: {ex}"));
 
-        /*        Rgb0ApplyConfigurationCommand =
-                    ReactiveCommand.CreateFromObservable<Unit, Unit>(ExecuteRgb0ApplyConfiguration);*/
-        //Rgb0ApplyConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsSaving);
-        //Rgb0ApplyConfigurationCommand.ThrownExceptions.Subscribe(ex =>
-        //    //Log.Error(ex, "Error saving configuration with error: {Exception}", ex));
-        //    Console.WriteLine($"Error saving configuration with error: {ex}"));
-
-
-
         ResetConfigurationCommand = ReactiveCommand.CreateFromObservable(ResetConfiguration, canChangeConfig);
         ResetConfigurationCommand.IsExecuting.ToPropertyEx(this, x => x.IsResetting);
         ResetConfigurationCommand.ThrownExceptions.Subscribe(ex =>
@@ -3521,6 +3512,7 @@ public class BehaviorViewModel : ViewModelBase
         // force initial population of currently connected ports
         LoadUsbInformation();
     }
+
     private IObservable<Unit> ExecuteSavePulseConfigDO0()
     {
         return Observable.StartAsync(async () =>
@@ -3537,6 +3529,7 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO0");
         });
     }
+
     private IObservable<Unit> ExecuteSavePulseConfigDO1()
     {
         return Observable.StartAsync(async () =>
@@ -3559,6 +3552,7 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO1");
         });
     }
+
     private IObservable<Unit> ExecuteSavePulseConfigDO2()
     {
         return Observable.StartAsync(async () =>
@@ -3575,6 +3569,7 @@ public class BehaviorViewModel : ViewModelBase
                 "PulseDO2");
         });
     }
+
     private IObservable<Unit> ExecuteSavePulseConfigDO3()
     {
         return Observable.StartAsync(async () =>
@@ -5435,18 +5430,18 @@ public class BehaviorViewModel : ViewModelBase
                         observer.OnNext($"Camera1: {result}");
                     }
 
-                    var DigitalInputStateResult = await device.ReadDigitalInputStateAsync(cancellationToken);
-                    DigitalInputState = DigitalInputStateResult;
-                    observer.OnNext($"DigitalInputState: {DigitalInputStateResult}");
+                    var digitalInputStateResult = await device.ReadDigitalInputStateAsync(cancellationToken);
+                    DigitalInputState = digitalInputStateResult;
+                    observer.OnNext($"DigitalInputState: {digitalInputStateResult}");
 
-                    var PortDIOStateEventResult = await device.ReadPortDIOStateEventAsync(cancellationToken);
-                    PortDIOStateEvent = PortDIOStateEventResult;
-                    observer.OnNext($"PortDIOStateEvent: {PortDIOStateEventResult}");
+                    var portDIOStateEventResult = await device.ReadPortDIOStateEventAsync(cancellationToken);
+                    PortDIOStateEvent = portDIOStateEventResult;
+                    observer.OnNext($"PortDIOStateEvent: {portDIOStateEventResult}");
 
-                    // NOTE: These in the yalm are yet not considered events but write
-                    var OutputStateResult = await device.ReadOutputStateAsync(cancellationToken);
-                    OutputState = OutputStateResult;
-                    observer.OnNext($"OutputState: {OutputStateResult}");
+                    // NOTE: These in the yaml are yet not considered events but write
+                    var outputStateResult = await device.ReadOutputStateAsync(cancellationToken);
+                    OutputState = outputStateResult;
+                    observer.OnNext($"OutputState: {outputStateResult}");
 
                     // Wait a short while before polling again. Adjust delay as necessary.
                     await Task.Delay(TimeSpan.FromMilliseconds(10), cancellationToken);
@@ -5794,54 +5789,4 @@ public class BehaviorViewModel : ViewModelBase
             );
     }
 
-
-    public class ArrayItemWrapper<T> : ReactiveObject
-    {
-        public int Index { get; }
-
-        [Reactive]
-        public T Value { get; set; }
-
-        public ArrayItemWrapper(int index, T value)
-        {
-            Index = index;
-            Value = value;
-        }
-    }
-
-    public class RgbColorItem : ReactiveObject
-    {
-        [Reactive] public int Index { get; set; }
-        [Reactive] public Color Color { get; set; }
-        [Reactive] public byte Red { get; set; }
-        [Reactive] public byte Green { get; set; }
-        [Reactive] public byte Blue { get; set; }
-
-        public RgbColorItem(int index, byte red, byte green, byte blue)
-        {
-            Index = index;
-            Red = red;
-            Green = green;
-            Blue = blue;
-            Color = Color.FromRgb(red, green, blue);
-
-            // Setup reactive properties to update the array when color changes
-            this.WhenAnyValue(x => x.Color)
-                .Subscribe(color =>
-                {
-                    Red = color.R;
-                    Green = color.G;
-                    Blue = color.B;
-                });
-
-            // Update Color when individual RGB components change
-            this.WhenAnyValue(x => x.Red, x => x.Green, x => x.Blue)
-                .Skip(1)
-                .Subscribe(tuple =>
-                {
-                    var (r, g, b) = tuple;
-                    Color = Color.FromRgb(r, g, b);
-                });
-        }
-    }
 }

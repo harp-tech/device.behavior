@@ -3412,9 +3412,6 @@ public class BehaviorViewModel : ViewModelBase
                 IsEncoderPort2Enabled_EncoderReset = x.HasFlag(EncoderInputs.EncoderPort2);
             });
 
-
-
-
         DO0SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO0Set, canChangeConfig);
         DO0ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteDO0Clear, canChangeConfig);
         DO1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteDO1Set, canChangeConfig);
@@ -3452,7 +3449,6 @@ public class BehaviorViewModel : ViewModelBase
         Rgb1SetCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1Set, canChangeConfig);
         Rgb1ClearCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1Clear, canChangeConfig);
 
-
         //Apply Buttons
         PwmDO0StartCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Start, canChangeConfig);
         PwmDO0StopCommand = ReactiveCommand.CreateFromObservable(ExecutePwmDO0Stop, canChangeConfig);
@@ -3473,29 +3469,19 @@ public class BehaviorViewModel : ViewModelBase
         Camera1StartCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Start, canChangeConfig);
         Camera1StopCommand = ReactiveCommand.CreateFromObservable(ExecuteCamera1Stop, canChangeConfig);
 
-        CameraApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            cameraIndex => ExecuteCameraApplyConfiguration(cameraIndex),
-            canChangeConfig
-        );
+        CameraApplyConfigurationCommand =
+            ReactiveCommand.CreateFromObservable<int, Unit>(ExecuteCameraApplyConfiguration, canChangeConfig);
 
-        ServoApplyConfigurationCommand = ReactiveCommand.CreateFromObservable<int, Unit>(
-            servoIndex => ExecuteServoApplyConfiguration(servoIndex),
-            canChangeConfig
-        );
+        ServoApplyConfigurationCommand =
+            ReactiveCommand.CreateFromObservable<int, Unit>(ExecuteServoApplyConfiguration, canChangeConfig);
 
-        EncoderApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(
-            ExecuteEncoderApplyConfiguration,
-            canChangeConfig
-        );
-
-
+        EncoderApplyConfigurationCommand =
+            ReactiveCommand.CreateFromObservable(ExecuteEncoderApplyConfiguration, canChangeConfig);
 
         Rgb0ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb0ApplyConfiguration, canChangeConfig);
         Rgb1ApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteRgb1ApplyConfiguration, canChangeConfig);
 
-
         SerialTimestampApplyConfigurationCommand = ReactiveCommand.CreateFromObservable(ExecuteSerialTimestampApplyConfiguration, canChangeConfig);
-
 
         SavePulseConfigDO0Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO0, canChangeConfig);
         SavePulseConfigDO1Command = ReactiveCommand.CreateFromObservable(ExecuteSavePulseConfigDO1, canChangeConfig);
@@ -3522,25 +3508,15 @@ public class BehaviorViewModel : ViewModelBase
         SaveMimicConfigPort1ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort1Valve, canChangeConfig);
         SaveMimicConfigPort2ValveCommand = ReactiveCommand.CreateFromObservable(ExecuteSaveMimicConfigPort2Valve, canChangeConfig);
 
-        // LED Configuration Commands
         SaveLedConfigCurrentLed0Command = ReactiveCommand.CreateFromObservable(ExecuteSaveLedConfigCurrentLed0, canChangeConfig);
         SaveLedConfigCurrentLed1Command = ReactiveCommand.CreateFromObservable(ExecuteSaveLedConfigCurrentLed1, canChangeConfig);
 
-        // RGB Configuration Commands
         SaveRgbConfigColorRgb0Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb0, canChangeConfig);
         SaveRgbConfigColorRgb1Command = ReactiveCommand.CreateFromObservable(ExecuteSaveRgbConfigColorRgb1, canChangeConfig);
 
         Port0DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort0DirectionApply, canChangeConfig);
         Port1DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort1DirectionApply, canChangeConfig);
         Port2DirectionApplyCommand = ReactiveCommand.CreateFromObservable(ExecutePort2DirectionApply, canChangeConfig);
-
-
-
-
-
-
-
-
 
         // force initial population of currently connected ports
         LoadUsbInformation();

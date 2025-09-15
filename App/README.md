@@ -37,9 +37,10 @@ sudo usermod -a -G dialout <USERNAME>
   ```
 - Run makesis to generate the installer
     ```
-     makensis.exe /DVERSION_MAJOR=1 /DVERSION_MINOR=2 /DVERSION_BUILD=0 .\Harp.Behavior.nsi
+     makensis.exe /DVERSION_MAJOR=1 /DVERSION_MINOR=2 /DVERSION_BUILD=0 /DARCHITECTURE=win-x64 .\Harp.Behavior.nsi
+     // Adjust the version numbers and architecture as needed (e.g., arm64)
     ```
-- The installer will be available at `.\bin\Release\net6.0\win-x64\Behavior.vx.x.x-win-x64.self-contained.exe`
+- The installer will be available at `.\bin\Release\net8.0\<ARCHITECTURE>\Harp.Behavior.App.vx.x.x-<ARCHITECTURE>.exe`
 
 ### Build .app image for macOS
 

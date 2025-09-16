@@ -1,0 +1,38 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ad="clr-namespace:Harp.Behavior.Design.Adapters"
+    xmlns:conv="clr-namespace:Harp.Behavior.Design.Converters"
+    xmlns:controls="clr-namespace:Harp.Behavior.Design.Controls"
+    x:Class="Harp.Behavior.Design.Controls.RgbRegisterControl"
+    x:DataType="ad:RgbRegisterAdapter"
+    mc:Ignorable="d"
+    d:DesignWidth="300" d:DesignHeight="80">
+
+    <UserControl.DataContext>
+        <ad:RgbRegisterAdapter />
+    </UserControl.DataContext>
+
+    <StackPanel Spacing="8">
+        <ItemsControl ItemsSource="{Binding Colors}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <controls:ExtendedColorPicker Color="{Binding Color, Mode=TwoWay}" Width="80"
+                          IsAccentColorsVisible="False"
+                          IsAlphaVisible="False"
+                          IsColorModelVisible="False"
+                          IsColorPaletteVisible="False"
+                          IsColorPreviewVisible="False"
+                          IsColorSpectrumVisible="False"
+                          IsColorSpectrumSliderVisible="False"
+                          IsHexInputVisible="False"
+                          SelectedIndex="2"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>

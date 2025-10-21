@@ -114,6 +114,24 @@ bool core_clock_to_unlock(void);
 
 
 // It is mandatory that this function is the first of the application code.
+void core_func_start_core_V2 (
+	const uint16_t who_am_i,
+    const uint8_t hwH,
+    const uint8_t hwL,
+	const uint8_t hwP,
+    const uint8_t fwH,
+    const uint8_t fwL,
+    const uint8_t fwP,
+    uint8_t *pointer_to_app_regs,
+    const uint16_t app_mem_size_to_save,
+    const uint8_t num_of_app_registers,
+    const uint8_t *device_name,
+    const bool	device_is_able_to_repeat_clock,
+    const bool	device_is_able_to_generate_clock,
+	const uint8_t default_timestamp_offset
+	);
+
+// Old initialization function. Use "core_func_start_core_V2()" instead.
 void core_func_start_core (
     const uint16_t who_am_i,
     const uint8_t hwH,
@@ -165,6 +183,10 @@ uint16_t core_func_read_R_TIMESTAMP_MICRO(void);
 bool core_bool_is_visual_enabled(void);
 // Return "true" if the device is in Speed Mode.
 bool core_bool_speed_mode_is_in_use(void);
+// Return "true" if the device is in Active Mode.
+bool core_bool_device_is_active(void);
+// Return "true" if the device is synchronized.
+bool core_bool_device_is_synchronized(void);
 
 
 

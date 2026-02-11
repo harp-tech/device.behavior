@@ -73,7 +73,7 @@ void (*app_func_rd_pointer[])(void) = {
 	&app_read_REG_DIS_SERVOS,
 	&app_read_REG_EN_ENCODERS,
 	&app_read_REG_CONF_ENCODERS,
-	&app_read_REG_RESERVED2,
+	&app_read_REG_DATA_ENCODERS,
 	&app_read_REG_RESERVED3,
 	&app_read_REG_RESERVED4,
 	&app_read_REG_RESERVED5,
@@ -167,7 +167,7 @@ bool (*app_func_wr_pointer[])(void*) = {
 	&app_write_REG_DIS_SERVOS,
 	&app_write_REG_EN_ENCODERS,
 	&app_write_REG_CONF_ENCODERS,
-	&app_write_REG_RESERVED2,
+	&app_write_REG_DATA_ENCODERS,
 	&app_write_REG_RESERVED3,
 	&app_write_REG_RESERVED4,
 	&app_write_REG_RESERVED5,
@@ -601,15 +601,6 @@ bool app_write_REG_PORT_DIOS_IN(void *a)
 void app_read_REG_DATA(void) {}      // The register is always updated
 bool app_write_REG_DATA(void *a)     
 {
-	uint16_t *reg = ((uint16_t*)a);
-
-	app_regs.REG_DATA[1] = reg[1];   // Write only to encoder counter
-
-	if (_states_.quad_counter.port2)
-	{
-		TCD1_CNT = 0x8000 + reg[1];	// Write only to encoder counter
-	}
-    
 	return true;
 }
 
@@ -1470,12 +1461,22 @@ bool app_write_REG_DIS_SERVOS(void *a)
 /************************************************************************/
 /* REG_EN_ENCODERS                                                      */
 /************************************************************************/
+extern int16_t previous_encoder_poke0;
+extern int16_t previous_encoder_poke1;
 extern int16_t previous_encoder_poke2;
 
 void app_read_REG_EN_ENCODERS(void)
 {
 	app_regs.REG_EN_ENCODERS = 0;
     
+    if(_states_.quad_counter.port0)
+    {
+	    app_regs.REG_EN_ENCODERS |= B_EN_ENCODER_PORT0;
+    }
+    if(_states_.quad_counter.port1)
+    {
+	    app_regs.REG_EN_ENCODERS |= B_EN_ENCODER_PORT1;
+    }
     if(_states_.quad_counter.port2)
     {
         app_regs.REG_EN_ENCODERS |= B_EN_ENCODER_PORT2;
@@ -1485,54 +1486,148 @@ void app_read_REG_EN_ENCODERS(void)
 bool app_write_REG_EN_ENCODERS(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
+
+    // Configuration for encoder port 0
+    if ((reg & B_EN_ENCODER_PORT0) && !_states_.quad_counter.port0)
+    {
+	    _states_.quad_counter.port0 = true;
+	    
+	    /* Turn off interrupts on the Encoder pins and redefine pins to input */
+	    PORTD_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTD
+	    io_pin2in(&PORTD, 4, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE0_IR
+	    io_pin2in(&PORTD, 5, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE0_IO
+	    
+	    /* Set up quadrature decoding event */
+	    EVSYS_CH0MUX = EVSYS_CHMUX_PORTD_PIN4_gc;                           // P. 77
+	    EVSYS_CH0CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78
+	    
+	    /* Stop and reset timer */
+	    TCD1_CTRLA = TC_CLKSEL_OFF_gc;
+	    TCD1_CTRLFSET = TC_CMD_RESET_gc;
+	    
+	    /* Configure timer */
+	    TCD1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc;	                // P. 180-1
+	    TCD1_PER = 0xFFFF;
+	    TCD1_CNT = 0x8000;
+	    previous_encoder_poke0 = 0x8000;
+	    
+	    /* Start timer */
+	    TCD1_CTRLA=TC_CLKSEL_DIV1_gc;
+    }
     
-    if ((reg & B_EN_ENCODER_PORT2) && !_states_.quad_counter.port2)
+    if (!(reg & B_EN_ENCODER_PORT0) && _states_.quad_counter.port0)
+    {
+	    if (_states_.quad_counter.port0)
+	    {
+		    _states_.quad_counter.port0 = false;
+		    
+		    /* Stop and reset timer */
+		    TCD1_CTRLA = TC_CLKSEL_OFF_gc;
+		    TCD1_CTRLFSET = TC_CMD_RESET_gc;
+		    
+		    /* Turn inputs to default configuration (same as *init_ios()* func)  */
+		    io_pin2in(&PORTD, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE1_IR
+		    io_set_int(&PORTD, INT_LEVEL_LOW, 0, (3<<4), false);    // POKE1_IR  & IO IN
+		    
+		    /* Reset register */
+		    app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = 0;
+	    }
+    }
+	
+    // Configuration for encoder port 1
+    if ((reg & B_EN_ENCODER_PORT1) && !_states_.quad_counter.port1)
     {        
-        _states_.quad_counter.port2 = true;
+        _states_.quad_counter.port1 = true;
         
         /* Turn off interrupts on the Encoder pins and redefine pins to input */
-        PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
-        PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
-        io_pin2in(&PORTF, 4, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IR
-        io_pin2in(&PORTF, 5, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IO
+        PORTE_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTE
+        io_pin2in(&PORTE, 4, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE1_IR
+        io_pin2in(&PORTE, 5, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE1_IO
         
         /* Set up quadrature decoding event */
-        EVSYS_CH0MUX = EVSYS_CHMUX_PORTF_PIN4_gc;                           // P. 77
-        EVSYS_CH0CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78
+		EVSYS_CH4MUX = EVSYS_CHMUX_PORTE_PIN4_gc;                           // P. 77
+		EVSYS_CH4CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78		
         
         /* Stop and reset timer */
-        TCD1_CTRLA = TC_CLKSEL_OFF_gc;
-        TCD1_CTRLFSET = TC_CMD_RESET_gc;
-        
+		TCE1_CTRLA = TC_CLKSEL_OFF_gc;
+		TCE1_CTRLFSET = TC_CMD_RESET_gc;
+		        
         /* Configure timer */
-        TCD1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH0_gc;	                // P. 180-1
-        TCD1_PER = 0xFFFF;
-        TCD1_CNT = 0x8000;
-		  previous_encoder_poke2 = 0x8000;
+		TCE1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH4_gc;	                // P. 180-1
+		TCE1_PER = 0xFFFF;
+		TCE1_CNT = 0x8000;
+		previous_encoder_poke1 = 0x8000;
         
         /* Start timer */
-        TCD1_CTRLA=TC_CLKSEL_DIV1_gc;
+    	TCE1_CTRLA=TC_CLKSEL_DIV1_gc;
+    }
+    
+    if (!(reg & B_EN_ENCODER_PORT1) && _states_.quad_counter.port1)
+    {
+        if (_states_.quad_counter.port1)
+        {
+            _states_.quad_counter.port1 = false;
+            
+            /* Stop and reset timer */
+			TCE1_CTRLA = TC_CLKSEL_OFF_gc;
+			TCE1_CTRLFSET = TC_CMD_RESET_gc;
+        
+            /* Turn inputs to default configuration (same as *init_ios()* func)  */
+            io_pin2in(&PORTE, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE1_IR
+            io_set_int(&PORTE, INT_LEVEL_LOW, 0, (3<<4), false);    // POKE1_IR  & IO IN
+		
+            /* Reset register */
+            app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = 0;
+        }
+    }
+
+    // Configuration for encoder port 2
+    if ((reg & B_EN_ENCODER_PORT2) && !_states_.quad_counter.port2)
+    {
+	    _states_.quad_counter.port2 = true;
+	    
+	    /* Turn off interrupts on the Encoder pins and redefine pins to input */
+	    PORTF_INTCTRL &= ~(PORT_INT0LVL_gm);                                // Shut down interrupts on PORTF
+	    io_pin2in(&PORTF, 4, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IR
+	    io_pin2in(&PORTF, 5, PULL_IO_TRISTATE, SENSE_IO_LOW_LEVEL);         // POKE2_IO
+	    
+	    /* Set up quadrature decoding event */
+	    EVSYS_CH2MUX = EVSYS_CHMUX_PORTF_PIN4_gc;                           // P. 77
+	    EVSYS_CH2CTRL = EVSYS_QDEN_bm | EVSYS_DIGFILT_2SAMPLES_gc;          // P. 78
+	    
+	    /* Stop and reset timer */
+	    TCF1_CTRLA = TC_CLKSEL_OFF_gc;
+	    TCF1_CTRLFSET = TC_CMD_RESET_gc;
+	    
+	    /* Configure timer */
+	    TCF1_CTRLD = TC_EVACT_QDEC_gc | TC_EVSEL_CH2_gc;	                // P. 180-1
+	    TCF1_PER = 0xFFFF;
+	    TCF1_CNT = 0x8000;
+	    previous_encoder_poke2 = 0x8000;
+	    
+	    /* Start timer */
+	    TCF1_CTRLA=TC_CLKSEL_DIV1_gc;
     }
     
     if (!(reg & B_EN_ENCODER_PORT2) && _states_.quad_counter.port2)
     {
-        if (_states_.quad_counter.port2)
-        {
-            _states_.quad_counter.port2 = false;
-            
-            /* Stop and reset timer */
-            TCD1_CTRLA = TC_CLKSEL_OFF_gc;
-            TCD1_CTRLFSET = TC_CMD_RESET_gc;
-        
-            /* Turn inputs to default configuration (same as *init_ios()* func)  */
-            io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
-            io_set_int(&PORTF, INT_LEVEL_LOW, 0, (3<<4), false);    // POKE2_IR  & IO IN
-		
-            /* Reset register */
-            app_regs.REG_DATA[1] = 0;
-        }
+	    if (_states_.quad_counter.port2)
+	    {
+		    _states_.quad_counter.port2 = false;
+		    
+		    /* Stop and reset timer */
+		    TCF1_CTRLA = TC_CLKSEL_OFF_gc;
+		    TCF1_CTRLFSET = TC_CMD_RESET_gc;
+		    
+		    /* Turn inputs to default configuration (same as *init_ios()* func)  */
+		    io_pin2in(&PORTF, 4, PULL_IO_UP, SENSE_IO_EDGES_BOTH);  // POKE2_IR
+		    io_set_int(&PORTF, INT_LEVEL_LOW, 0, (3<<4), false);    // POKE2_IR  & IO IN
+		    
+		    /* Reset register */
+		    app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = 0;
+	    }
     }
-    
+	
     app_regs.REG_EN_ENCODERS = reg;
 	return true;
 }
@@ -1552,10 +1647,36 @@ bool app_write_REG_CONF_ENCODERS(void *a)
 	return true;
 }
 /************************************************************************/
-/* REG_RESERVED2                                                        */
+/* REG_DATA_ENCODERS                                                      */
 /************************************************************************/
-void app_read_REG_RESERVED2(void) {}
-bool app_write_REG_RESERVED2(void *a) {return true;}
+void app_read_REG_DATA_ENCODERS(void) {}
+bool app_write_REG_DATA_ENCODERS(void *a) 
+{
+	uint16_t *reg = ((uint16_t*)a);
+
+	// Write the new values for the encoders only
+	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = reg[REG_DATA_ENCODERS_INDEX_ENCODER0];
+	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = reg[REG_DATA_ENCODERS_INDEX_ENCODER1];
+	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = reg[REG_DATA_ENCODERS_INDEX_ENCODER2];
+
+	// Now update the counters for the encoders that are active
+	if (_states_.quad_counter.port0)
+	{
+		TCD1_CNT = 0x8000 + reg[REG_DATA_ENCODERS_INDEX_ENCODER0];
+	}
+	if (_states_.quad_counter.port1)
+	{
+		TCE1_CNT = 0x8000 + reg[REG_DATA_ENCODERS_INDEX_ENCODER1];
+	}
+	if (_states_.quad_counter.port2)
+	{
+		TCF1_CNT = 0x8000 + reg[REG_DATA_ENCODERS_INDEX_ENCODER2];
+	}
+	
+	return true;
+}
+	
+	
 /************************************************************************/
 /* REG_RESERVED3                                                        */
 /************************************************************************/
@@ -1760,20 +1881,37 @@ bool app_write_REG_RESERVED17(void *a) {return true;}
 
 
 /************************************************************************/
-/* REG_ENCODER_PORT2_RESET                                              */
+/* REG_ENCODERS_RESET                                                    */
 /************************************************************************/
 void app_read_REG_ENCODERS_RESET(void) {}
 bool app_write_REG_ENCODERS_RESET(void *a)
 {
 	uint8_t reg = *((uint8_t*)a);
     
-    if (reg & B_RST_ENCODER_PORT2)
+    if (reg & B_RST_ENCODER_PORT0)
     {
-        if (_states_.quad_counter.port2)
+        if (_states_.quad_counter.port0)
         {
             TCD1_CNT = 0x8000;
-				previous_encoder_poke2 = 0x8000;
+			previous_encoder_poke0 = 0x8000;
         }
+    }
+
+    if (reg & B_RST_ENCODER_PORT1)
+    {
+	    if (_states_.quad_counter.port1)
+	    {
+		    TCE1_CNT = 0x8000;
+		    previous_encoder_poke1 = 0x8000;
+	    }
+    }
+    if (reg & B_RST_ENCODER_PORT2)
+    {
+	    if (_states_.quad_counter.port2)
+	    {
+		    TCF1_CNT = 0x8000;
+		    previous_encoder_poke2 = 0x8000;
+	    }
     }
 
 	app_regs.REG_ENCODERS_RESET = reg;

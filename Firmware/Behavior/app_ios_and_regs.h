@@ -141,7 +141,7 @@ typedef struct
 	uint8_t REG_PORT_DIOS_OUT;
 	uint8_t REG_PORT_DIOS_CONF;
 	uint8_t REG_PORT_DIOS_IN;
-	int16_t REG_DATA[3];
+	int16_t REG_DATA[2];
 	uint16_t REG_OUTPUT_PULSE_EN;
 	uint16_t REG_PULSE_PORT0_DO;
 	uint16_t REG_PULSE_PORT1_DO;
@@ -181,7 +181,7 @@ typedef struct
 	uint8_t REG_DIS_SERVOS;
 	uint8_t REG_EN_ENCODERS;
 	uint8_t REG_CONF_ENCODERS;
-	uint8_t REG_RESERVED2;
+	int16_t REG_DATA_ENCODERS[3];
 	uint8_t REG_RESERVED3;
 	uint8_t REG_RESERVED4;
 	uint8_t REG_RESERVED5;
@@ -238,7 +238,9 @@ typedef struct
 #define ADD_REG_PORT_DIOS_OUT               41 // U8     Control the correspondent DIO
 #define ADD_REG_PORT_DIOS_CONF              42 // U8     Set the DIOs direction (1 is output)
 #define ADD_REG_PORT_DIOS_IN                43 // U8     State of the DIOs
-#define ADD_REG_DATA                        44 // I16    Voltage at ADC input and decoder (poke 2) value
+#define ADD_REG_DATA                        44 // I16[2] Voltage at ADC input and decoder (poke 2) value
+#define REG_DATA_INDEX_ADC0						0	// Index for the value of ADC0
+#define REG_DATA_INDEX_ADC1						1   // Index for the value of ADC1
 #define ADD_REG_OUTPUT_PULSE_EN             45 // U16    Enable the output pulse for the selected output
 #define ADD_REG_PULSE_PORT0_DO              46 // U16    Configuration of the output pulse [1 : 65535]
 #define ADD_REG_PULSE_PORT1_DO              47 // U16    
@@ -278,7 +280,10 @@ typedef struct
 #define ADD_REG_DIS_SERVOS                  81 // U8     Disable servo motors control
 #define ADD_REG_EN_ENCODERS                 82 // U8     Enable encoders
 #define ADD_REG_CONF_ENCODERS               83 // U8     Configure the operation mode of the quadrature encoders
-#define ADD_REG_RESERVED2                   84 // U8     Reserved for future use
+#define ADD_REG_DATA_ENCODERS               84 // I16[3] Current position of the encoders
+#define REG_DATA_ENCODERS_INDEX_ENCODER0		0 // Index for the value of Encoder 0
+#define REG_DATA_ENCODERS_INDEX_ENCODER1		1 // Index for the value of Encoder 1
+#define REG_DATA_ENCODERS_INDEX_ENCODER2		2 // Index for the value of Encoder 2
 #define ADD_REG_RESERVED3                   85 // U8     Reserved for future use
 #define ADD_REG_RESERVED4                   86 // U8     Reserved for future use
 #define ADD_REG_RESERVED5                   87 // U8     Reserved for future use
@@ -327,7 +332,7 @@ typedef struct
 /* Memory limits */
 #define APP_REGS_ADD_MIN                    0x20
 #define APP_REGS_ADD_MAX                    0x7A
-#define APP_NBYTES_OF_REG_BANK              134
+#define APP_NBYTES_OF_REG_BANK              138
 
 /************************************************************************/
 /* Registers' bits                                                      */
@@ -366,11 +371,15 @@ typedef struct
 #define B_EN_CAM_OUT1                      (1<<1)       // Camera on digital output 1
 #define B_EN_SERVO_OUT2                    (1<<2)       // Servo on digital output 2
 #define B_EN_SERVO_OUT3                    (1<<3)       // Servo on digital output 3
+#define B_EN_ENCODER_PORT0                 (1<<0)       // Encoder on port 0
+#define B_EN_ENCODER_PORT1                 (1<<1)       // Encoder on port 1
 #define B_EN_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
 #define MSK_ENCODERS_MODE                  0x01         // 
 #define GM_POSITION                        0x00         // 
 #define GM_DISPLACEMENT                    0x01         // 
 #define B_CAM_ACQ                          (1<<0)       // Camera frame was triggered
+#define B_RST_ENCODER_PORT0                (1<<0)       // Reset the encoder counter on Port 0
+#define B_RST_ENCODER_PORT1                (1<<1)       // Reset the encoder counter on Port 1
 #define B_RST_ENCODER_PORT2                (1<<2)       // Reset the encoder counter on Port 2
 #define B_EN_SRL_TSTAMP_PORT2              (1<<2)       // Enable the serial timestamp TX on Port 2
 #define MSK_MIMIC                          0x0F         // 

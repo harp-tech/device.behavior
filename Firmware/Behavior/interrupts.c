@@ -325,9 +325,9 @@ ISR(ADCA_CH0_vect, ISR_NAKED)
 	if (first_adc_channel)
 	{
 		first_adc_channel = false;
-		
+				
 		/* Read ADC0 Channel 0 */
-		app_regs.REG_DATA[0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		app_regs.REG_DATA[REG_DATA_INDEX_ADC0] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
 		
 		if (read_ADC1_AVAILABLE)
 		{
@@ -343,14 +343,14 @@ ISR(ADCA_CH0_vect, ISR_NAKED)
 	else
 	{		
 		/* Read ADC0 Channel 2 */
-		app_regs.REG_DATA[2] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
+		app_regs.REG_DATA[REG_DATA_INDEX_ADC1] = ((int16_t)(ADCA_CH0_RES & 0x0FFF)) - AdcOffset;
 		
 		/* Validate readings */
-		if (app_regs.REG_DATA[0] < 0)
-			app_regs.REG_DATA[0] = 0;			
-		if (app_regs.REG_DATA[2] < 0)
-			app_regs.REG_DATA[2] = 0;
-			
+		if (app_regs.REG_DATA[REG_DATA_INDEX_ADC0] < 0)
+			app_regs.REG_DATA[REG_DATA_INDEX_ADC0] = 0;			
+		if (app_regs.REG_DATA[REG_DATA_INDEX_ADC1] < 0)
+			app_regs.REG_DATA[REG_DATA_INDEX_ADC1] = 0;
+		
 		send_event = true;
 	}
 	

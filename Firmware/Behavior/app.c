@@ -62,7 +62,7 @@ void core_callback_catastrophic_error_detected(void)
 {
     uint8_t led[3] = {0, 0, 0};
         
-	 timer_type0_stop(&TCF0); clr_DO0;
+	timer_type0_stop(&TCF0); clr_DO0;
     timer_type0_stop(&TCE0); clr_DO1;
     timer_type0_stop(&TCD0); clr_DO2;
     timer_type0_stop(&TCC0); clr_DO3;
@@ -180,7 +180,9 @@ void core_callback_reset_registers(void)
     //app_regs.REG_PORT_DIOS_IN = 0;
     
     //app_regs.REG_DATA[0] = 0;
-	 app_regs.REG_DATA[1] = 0;
+	 app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = 0;
+	 app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = 0;
+	 app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = 0;
     
     app_regs.REG_OUTPUT_PULSE_EN = B_PORT0_12V | B_PORT1_12V | B_PORT2_12V;
 
@@ -363,45 +365,98 @@ uint8_t t1ms = 0;
 
 bool first_adc_channel;
 
+int16_t previous_encoder_poke0;
+int16_t previous_encoder_poke1;
 int16_t previous_encoder_poke2;
+
+int16_t encoder0_value;
+int16_t encoder1_value;
+int16_t encoder2_value;
 
 void core_callback_t_before_exec(void)
 {
-   if (t1ms++ & 1)
-   {
-       /* Read ADC */
-       core_func_mark_user_timestamp();
+	if (t1ms++ & 1)
+	{
+		/* Read ADC */
+		core_func_mark_user_timestamp();
        
-       /* Start conversation on ADCA Channel 0*/
-       first_adc_channel = true;
-		 ADCA_CH0_MUXCTRL = 0 << 3;
-       ADCA_CH0_CTRL |= ADC_CH_START_bm;
+		/* Start conversation on ADCA Channel 0*/
+		first_adc_channel = true;
+		ADCA_CH0_MUXCTRL = 0 << 3;
+		ADCA_CH0_CTRL |= ADC_CH_START_bm;
        
-       /* Read encoder on Port 2 */
-       if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
-       {
-           int16_t timer_cnt = TCD1_CNT;
+	   	/* Read encoder on Port 0 */
+	   	if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT0)
+	   	{
+		   	int16_t timer_cnt = TCD1_CNT;
+		   		
+		   	if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+		   	{
+			   	if (timer_cnt > 32768)
+			   	{
+				   	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = 0xFFFF - timer_cnt;
+				   	encoder0_value = 0xFFFF - timer_cnt;
+			   	}
+			   	else
+			   	{
+				   	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = (32768 - timer_cnt) * -1;
+			   	}
+		   	}
+		   	else
+		   	{
+			   	app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER0] = previous_encoder_poke0 - timer_cnt;
+			   	previous_encoder_poke0 = timer_cnt;
+		   	}
+	   	}
+
+		/* Read encoder on Port 1 */
+		if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT1)
+		{
+			int16_t timer_cnt = TCE1_CNT;
+			
+			if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+			{
+				if (timer_cnt > 32768)
+				{
+					app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = 0xFFFF - timer_cnt;
+					encoder1_value = 0xFFFF - timer_cnt;
+				}
+				else
+				{
+					app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = (32768 - timer_cnt) * -1;
+				}
+			}
+			else
+			{
+				app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER1] = previous_encoder_poke1 - timer_cnt;
+				previous_encoder_poke1 = timer_cnt;
+			}
+		}
+	   
+		/* Read encoder on Port 2 */
+		if (app_regs.REG_EN_ENCODERS & B_EN_ENCODER_PORT2)
+		{
+			int16_t timer_cnt = TCF1_CNT;
            
-           if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
-			  {               
-               if (timer_cnt > 32768)
-               {
-                   app_regs.REG_DATA[1] = 0xFFFF - timer_cnt;
-               }
-               else
-               {
-					    app_regs.REG_DATA[1] = (32768 - timer_cnt) * -1;
-               }
-			  }
-			  else
-			  {
-			        app_regs.REG_DATA[1] = previous_encoder_poke2 - timer_cnt;			        
-					  
-			        previous_encoder_poke2 = timer_cnt;
-			  }
-			  
-       } 
-   }      
+			if (app_regs.REG_CONF_ENCODERS == GM_POSITION)
+			{               
+			if (timer_cnt > 32768)
+			{
+				app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = 0xFFFF - timer_cnt;
+				encoder2_value = 0xFFFF - timer_cnt;
+			}
+			else
+			{
+				app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = (32768 - timer_cnt) * -1;
+			}
+			}
+			else
+			{
+				app_regs.REG_DATA_ENCODERS[REG_DATA_ENCODERS_INDEX_ENCODER2] = previous_encoder_poke2 - timer_cnt;			        					  
+				previous_encoder_poke2 = timer_cnt;
+			}			  
+		}
+	}      
 }
 
 void core_callback_t_after_exec(void){}	
@@ -517,10 +572,16 @@ void core_callback_t_1ms(void)
 	if (int2_enable_counter)
 		if ((--int2_enable_counter) == 0)
 			PORTF_INTCTRL |= INT_LEVEL_LOW;
+			
+	// If any of the encoders is enabled, send the data
+	if (app_regs.REG_EN_ENCODERS)
+	{
+		core_func_send_event(ADD_REG_DATA_ENCODERS, false);
+	}			
 }
 
 /************************************************************************/
-/* Callbacks: cloc control                                              */
+/* Callbacks: clock control                                              */
 /************************************************************************/
 void core_callback_clock_to_repeater(void) {}
 void core_callback_clock_to_generator(void) {}

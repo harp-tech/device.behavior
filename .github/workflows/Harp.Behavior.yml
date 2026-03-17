@@ -82,8 +82,8 @@ jobs:
         with:
           dotnet-version: 8.x
 
-      - name: Set up T4
-        run: dotnet tool install -g dotnet-t4 --version 3.0.0
+      - name: Set up .NET tools
+        run: dotnet tool restore
 
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
@@ -91,11 +91,8 @@ jobs:
         uses: harp-tech/configure-build@v1
 
       # ----------------------------------------------------------------------- Regenerate
-      - name: Restore generators
-        run: dotnet restore Generators
-
       - name: Run generators
-        run: dotnet build Generators --no-restore --configuration ${{matrix.configuration}}
+        run: dotnet harp.toolkit generate interface -o Interface/${{github.workflow}}
 
       - name: Verify pre-generated code was up-to-date
         id: verify-dist

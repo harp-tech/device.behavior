@@ -49,7 +49,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the DigitalInputState register.
+        /// Asynchronously reads the contents of the <see cref="DigitalInputState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -65,7 +65,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the DigitalInputState register.
+        /// Asynchronously reads the timestamped contents of the <see cref="DigitalInputState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -81,7 +81,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the OutputSet register.
+        /// Asynchronously reads the contents of the <see cref="OutputSet"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -97,7 +97,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the OutputSet register.
+        /// Asynchronously reads the timestamped contents of the <see cref="OutputSet"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -113,7 +113,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the OutputSet register.
+        /// Asynchronously writes a value to the <see cref="OutputSet"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -127,7 +127,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the OutputClear register.
+        /// Asynchronously reads the contents of the <see cref="OutputClear"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -143,7 +143,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the OutputClear register.
+        /// Asynchronously reads the timestamped contents of the <see cref="OutputClear"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -159,7 +159,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the OutputClear register.
+        /// Asynchronously writes a value to the <see cref="OutputClear"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -173,7 +173,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the OutputToggle register.
+        /// Asynchronously reads the contents of the <see cref="OutputToggle"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -189,7 +189,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the OutputToggle register.
+        /// Asynchronously reads the timestamped contents of the <see cref="OutputToggle"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -205,7 +205,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the OutputToggle register.
+        /// Asynchronously writes a value to the <see cref="OutputToggle"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -219,7 +219,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the OutputState register.
+        /// Asynchronously reads the contents of the <see cref="OutputState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -235,7 +235,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the OutputState register.
+        /// Asynchronously reads the timestamped contents of the <see cref="OutputState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -251,7 +251,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the OutputState register.
+        /// Asynchronously writes a value to the <see cref="OutputState"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -265,7 +265,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIOSet register.
+        /// Asynchronously reads the contents of the <see cref="PortDIOSet"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -281,7 +281,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIOSet register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIOSet"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -297,7 +297,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PortDIOSet register.
+        /// Asynchronously writes a value to the <see cref="PortDIOSet"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -311,7 +311,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIOClear register.
+        /// Asynchronously reads the contents of the <see cref="PortDIOClear"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -327,7 +327,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIOClear register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIOClear"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -343,7 +343,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PortDIOClear register.
+        /// Asynchronously writes a value to the <see cref="PortDIOClear"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -357,7 +357,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIOToggle register.
+        /// Asynchronously reads the contents of the <see cref="PortDIOToggle"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -373,7 +373,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIOToggle register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIOToggle"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -389,7 +389,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PortDIOToggle register.
+        /// Asynchronously writes a value to the <see cref="PortDIOToggle"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -403,7 +403,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIOState register.
+        /// Asynchronously reads the contents of the <see cref="PortDIOState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -419,7 +419,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIOState register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIOState"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -435,7 +435,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PortDIOState register.
+        /// Asynchronously writes a value to the <see cref="PortDIOState"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -449,7 +449,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIODirection register.
+        /// Asynchronously reads the contents of the <see cref="PortDIODirection"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -465,7 +465,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIODirection register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIODirection"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -481,7 +481,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PortDIODirection register.
+        /// Asynchronously writes a value to the <see cref="PortDIODirection"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -495,7 +495,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PortDIOStateEvent register.
+        /// Asynchronously reads the contents of the <see cref="PortDIOStateEvent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -511,7 +511,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PortDIOStateEvent register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PortDIOStateEvent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -527,7 +527,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the AnalogData register.
+        /// Asynchronously reads the contents of the <see cref="AnalogData"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -543,7 +543,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the AnalogData register.
+        /// Asynchronously reads the timestamped contents of the <see cref="AnalogData"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -559,7 +559,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the OutputPulseEnable register.
+        /// Asynchronously reads the contents of the <see cref="OutputPulseEnable"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -575,7 +575,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the OutputPulseEnable register.
+        /// Asynchronously reads the timestamped contents of the <see cref="OutputPulseEnable"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -591,7 +591,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the OutputPulseEnable register.
+        /// Asynchronously writes a value to the <see cref="OutputPulseEnable"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -605,7 +605,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDOPort0 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDOPort0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -621,7 +621,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDOPort0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDOPort0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -637,7 +637,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDOPort0 register.
+        /// Asynchronously writes a value to the <see cref="PulseDOPort0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -651,7 +651,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDOPort1 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDOPort1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -667,7 +667,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDOPort1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDOPort1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -683,7 +683,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDOPort1 register.
+        /// Asynchronously writes a value to the <see cref="PulseDOPort1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -697,7 +697,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDOPort2 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDOPort2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -713,7 +713,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDOPort2 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDOPort2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -729,7 +729,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDOPort2 register.
+        /// Asynchronously writes a value to the <see cref="PulseDOPort2"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -743,7 +743,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseSupplyPort0 register.
+        /// Asynchronously reads the contents of the <see cref="PulseSupplyPort0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -759,7 +759,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseSupplyPort0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseSupplyPort0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -775,7 +775,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseSupplyPort0 register.
+        /// Asynchronously writes a value to the <see cref="PulseSupplyPort0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -789,7 +789,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseSupplyPort1 register.
+        /// Asynchronously reads the contents of the <see cref="PulseSupplyPort1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -805,7 +805,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseSupplyPort1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseSupplyPort1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -821,7 +821,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseSupplyPort1 register.
+        /// Asynchronously writes a value to the <see cref="PulseSupplyPort1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -835,7 +835,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseSupplyPort2 register.
+        /// Asynchronously reads the contents of the <see cref="PulseSupplyPort2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -851,7 +851,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseSupplyPort2 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseSupplyPort2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -867,7 +867,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseSupplyPort2 register.
+        /// Asynchronously writes a value to the <see cref="PulseSupplyPort2"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -881,7 +881,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseLed0 register.
+        /// Asynchronously reads the contents of the <see cref="PulseLed0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -897,7 +897,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseLed0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseLed0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -913,7 +913,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseLed0 register.
+        /// Asynchronously writes a value to the <see cref="PulseLed0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -927,7 +927,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseLed1 register.
+        /// Asynchronously reads the contents of the <see cref="PulseLed1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -943,7 +943,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseLed1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseLed1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -959,7 +959,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseLed1 register.
+        /// Asynchronously writes a value to the <see cref="PulseLed1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -973,7 +973,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseRgb0 register.
+        /// Asynchronously reads the contents of the <see cref="PulseRgb0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -989,7 +989,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseRgb0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseRgb0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1005,7 +1005,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseRgb0 register.
+        /// Asynchronously writes a value to the <see cref="PulseRgb0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1019,7 +1019,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseRgb1 register.
+        /// Asynchronously reads the contents of the <see cref="PulseRgb1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1035,7 +1035,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseRgb1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseRgb1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1051,7 +1051,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseRgb1 register.
+        /// Asynchronously writes a value to the <see cref="PulseRgb1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1065,7 +1065,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDO0 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1081,7 +1081,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDO0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1097,7 +1097,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDO0 register.
+        /// Asynchronously writes a value to the <see cref="PulseDO0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1111,7 +1111,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDO1 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1127,7 +1127,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDO1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1143,7 +1143,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDO1 register.
+        /// Asynchronously writes a value to the <see cref="PulseDO1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1157,7 +1157,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDO2 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1173,7 +1173,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDO2 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1189,7 +1189,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDO2 register.
+        /// Asynchronously writes a value to the <see cref="PulseDO2"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1203,7 +1203,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PulseDO3 register.
+        /// Asynchronously reads the contents of the <see cref="PulseDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1219,7 +1219,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PulseDO3 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PulseDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1235,7 +1235,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PulseDO3 register.
+        /// Asynchronously writes a value to the <see cref="PulseDO3"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1249,7 +1249,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmFrequencyDO0 register.
+        /// Asynchronously reads the contents of the <see cref="PwmFrequencyDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1265,7 +1265,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmFrequencyDO0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmFrequencyDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1281,7 +1281,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmFrequencyDO0 register.
+        /// Asynchronously writes a value to the <see cref="PwmFrequencyDO0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1295,7 +1295,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmFrequencyDO1 register.
+        /// Asynchronously reads the contents of the <see cref="PwmFrequencyDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1311,7 +1311,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmFrequencyDO1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmFrequencyDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1327,7 +1327,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmFrequencyDO1 register.
+        /// Asynchronously writes a value to the <see cref="PwmFrequencyDO1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1341,7 +1341,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmFrequencyDO2 register.
+        /// Asynchronously reads the contents of the <see cref="PwmFrequencyDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1357,7 +1357,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmFrequencyDO2 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmFrequencyDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1373,7 +1373,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmFrequencyDO2 register.
+        /// Asynchronously writes a value to the <see cref="PwmFrequencyDO2"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1387,7 +1387,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmFrequencyDO3 register.
+        /// Asynchronously reads the contents of the <see cref="PwmFrequencyDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1403,7 +1403,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmFrequencyDO3 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmFrequencyDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1419,7 +1419,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmFrequencyDO3 register.
+        /// Asynchronously writes a value to the <see cref="PwmFrequencyDO3"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1433,7 +1433,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmDutyCycleDO0 register.
+        /// Asynchronously reads the contents of the <see cref="PwmDutyCycleDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1449,7 +1449,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmDutyCycleDO0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmDutyCycleDO0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1465,7 +1465,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmDutyCycleDO0 register.
+        /// Asynchronously writes a value to the <see cref="PwmDutyCycleDO0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1479,7 +1479,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmDutyCycleDO1 register.
+        /// Asynchronously reads the contents of the <see cref="PwmDutyCycleDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1495,7 +1495,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmDutyCycleDO1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmDutyCycleDO1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1511,7 +1511,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmDutyCycleDO1 register.
+        /// Asynchronously writes a value to the <see cref="PwmDutyCycleDO1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1525,7 +1525,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmDutyCycleDO2 register.
+        /// Asynchronously reads the contents of the <see cref="PwmDutyCycleDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1541,7 +1541,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmDutyCycleDO2 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmDutyCycleDO2"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1557,7 +1557,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmDutyCycleDO2 register.
+        /// Asynchronously writes a value to the <see cref="PwmDutyCycleDO2"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1571,7 +1571,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmDutyCycleDO3 register.
+        /// Asynchronously reads the contents of the <see cref="PwmDutyCycleDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1587,7 +1587,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmDutyCycleDO3 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmDutyCycleDO3"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1603,7 +1603,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmDutyCycleDO3 register.
+        /// Asynchronously writes a value to the <see cref="PwmDutyCycleDO3"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1617,7 +1617,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmStart register.
+        /// Asynchronously reads the contents of the <see cref="PwmStart"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1633,7 +1633,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmStart register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmStart"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1649,7 +1649,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmStart register.
+        /// Asynchronously writes a value to the <see cref="PwmStart"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1663,7 +1663,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmStop register.
+        /// Asynchronously reads the contents of the <see cref="PwmStop"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1679,7 +1679,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmStop register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PwmStop"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1695,7 +1695,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmStop register.
+        /// Asynchronously writes a value to the <see cref="PwmStop"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1709,7 +1709,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the RgbAll register.
+        /// Asynchronously reads the contents of the <see cref="RgbAll"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1725,7 +1725,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the RgbAll register.
+        /// Asynchronously reads the timestamped contents of the <see cref="RgbAll"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1741,7 +1741,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the RgbAll register.
+        /// Asynchronously writes a value to the <see cref="RgbAll"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1755,7 +1755,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Rgb0 register.
+        /// Asynchronously reads the contents of the <see cref="Rgb0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1771,7 +1771,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Rgb0 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Rgb0"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1787,7 +1787,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Rgb0 register.
+        /// Asynchronously writes a value to the <see cref="Rgb0"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1801,7 +1801,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Rgb1 register.
+        /// Asynchronously reads the contents of the <see cref="Rgb1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1817,7 +1817,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Rgb1 register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Rgb1"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1833,7 +1833,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Rgb1 register.
+        /// Asynchronously writes a value to the <see cref="Rgb1"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1847,7 +1847,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Led0Current register.
+        /// Asynchronously reads the contents of the <see cref="Led0Current"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1863,7 +1863,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Led0Current register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Led0Current"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1879,7 +1879,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Led0Current register.
+        /// Asynchronously writes a value to the <see cref="Led0Current"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1893,7 +1893,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Led1Current register.
+        /// Asynchronously reads the contents of the <see cref="Led1Current"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1909,7 +1909,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Led1Current register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Led1Current"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1925,7 +1925,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Led1Current register.
+        /// Asynchronously writes a value to the <see cref="Led1Current"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1939,7 +1939,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Led0MaxCurrent register.
+        /// Asynchronously reads the contents of the <see cref="Led0MaxCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1955,7 +1955,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Led0MaxCurrent register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Led0MaxCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -1971,7 +1971,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Led0MaxCurrent register.
+        /// Asynchronously writes a value to the <see cref="Led0MaxCurrent"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -1985,7 +1985,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Led1MaxCurrent register.
+        /// Asynchronously reads the contents of the <see cref="Led1MaxCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2001,7 +2001,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Led1MaxCurrent register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Led1MaxCurrent"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2017,7 +2017,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Led1MaxCurrent register.
+        /// Asynchronously writes a value to the <see cref="Led1MaxCurrent"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2031,7 +2031,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EventEnable register.
+        /// Asynchronously reads the contents of the <see cref="EventEnable"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2047,7 +2047,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EventEnable register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EventEnable"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2063,7 +2063,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EventEnable register.
+        /// Asynchronously writes a value to the <see cref="EventEnable"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2077,7 +2077,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the StartCameras register.
+        /// Asynchronously reads the contents of the <see cref="StartCameras"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2093,7 +2093,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the StartCameras register.
+        /// Asynchronously reads the timestamped contents of the <see cref="StartCameras"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2109,7 +2109,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the StartCameras register.
+        /// Asynchronously writes a value to the <see cref="StartCameras"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2123,7 +2123,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the StopCameras register.
+        /// Asynchronously reads the contents of the <see cref="StopCameras"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2139,7 +2139,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the StopCameras register.
+        /// Asynchronously reads the timestamped contents of the <see cref="StopCameras"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2155,7 +2155,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the StopCameras register.
+        /// Asynchronously writes a value to the <see cref="StopCameras"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2169,7 +2169,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EnableServos register.
+        /// Asynchronously reads the contents of the <see cref="EnableServos"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2185,7 +2185,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EnableServos register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EnableServos"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2201,7 +2201,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EnableServos register.
+        /// Asynchronously writes a value to the <see cref="EnableServos"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2215,7 +2215,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the DisableServos register.
+        /// Asynchronously reads the contents of the <see cref="DisableServos"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2231,7 +2231,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the DisableServos register.
+        /// Asynchronously reads the timestamped contents of the <see cref="DisableServos"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2247,7 +2247,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the DisableServos register.
+        /// Asynchronously writes a value to the <see cref="DisableServos"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2261,7 +2261,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EnableEncoders register.
+        /// Asynchronously reads the contents of the <see cref="EnableEncoders"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2277,7 +2277,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EnableEncoders register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EnableEncoders"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2293,7 +2293,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EnableEncoders register.
+        /// Asynchronously writes a value to the <see cref="EnableEncoders"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2307,7 +2307,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EncoderMode register.
+        /// Asynchronously reads the contents of the <see cref="EncoderMode"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2323,7 +2323,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EncoderMode register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EncoderMode"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2339,7 +2339,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EncoderMode register.
+        /// Asynchronously writes a value to the <see cref="EncoderMode"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2353,7 +2353,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Camera0Frame register.
+        /// Asynchronously reads the contents of the <see cref="Camera0Frame"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2369,7 +2369,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Camera0Frame register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Camera0Frame"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2385,7 +2385,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Camera0Frequency register.
+        /// Asynchronously reads the contents of the <see cref="Camera0Frequency"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2401,7 +2401,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Camera0Frequency register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Camera0Frequency"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2417,7 +2417,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Camera0Frequency register.
+        /// Asynchronously writes a value to the <see cref="Camera0Frequency"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2431,7 +2431,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Camera1Frame register.
+        /// Asynchronously reads the contents of the <see cref="Camera1Frame"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2447,7 +2447,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Camera1Frame register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Camera1Frame"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2463,7 +2463,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the Camera1Frequency register.
+        /// Asynchronously reads the contents of the <see cref="Camera1Frequency"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2479,7 +2479,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the Camera1Frequency register.
+        /// Asynchronously reads the timestamped contents of the <see cref="Camera1Frequency"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2495,7 +2495,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the Camera1Frequency register.
+        /// Asynchronously writes a value to the <see cref="Camera1Frequency"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2509,7 +2509,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the ServoMotor2Period register.
+        /// Asynchronously reads the contents of the <see cref="ServoMotor2Period"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2525,7 +2525,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the ServoMotor2Period register.
+        /// Asynchronously reads the timestamped contents of the <see cref="ServoMotor2Period"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2541,7 +2541,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the ServoMotor2Period register.
+        /// Asynchronously writes a value to the <see cref="ServoMotor2Period"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2555,7 +2555,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the ServoMotor2Pulse register.
+        /// Asynchronously reads the contents of the <see cref="ServoMotor2Pulse"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2571,7 +2571,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the ServoMotor2Pulse register.
+        /// Asynchronously reads the timestamped contents of the <see cref="ServoMotor2Pulse"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2587,7 +2587,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the ServoMotor2Pulse register.
+        /// Asynchronously writes a value to the <see cref="ServoMotor2Pulse"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2601,7 +2601,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the ServoMotor3Period register.
+        /// Asynchronously reads the contents of the <see cref="ServoMotor3Period"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2617,7 +2617,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the ServoMotor3Period register.
+        /// Asynchronously reads the timestamped contents of the <see cref="ServoMotor3Period"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2633,7 +2633,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the ServoMotor3Period register.
+        /// Asynchronously writes a value to the <see cref="ServoMotor3Period"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2647,7 +2647,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the ServoMotor3Pulse register.
+        /// Asynchronously reads the contents of the <see cref="ServoMotor3Pulse"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2663,7 +2663,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the ServoMotor3Pulse register.
+        /// Asynchronously reads the timestamped contents of the <see cref="ServoMotor3Pulse"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2679,7 +2679,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the ServoMotor3Pulse register.
+        /// Asynchronously writes a value to the <see cref="ServoMotor3Pulse"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2693,7 +2693,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EncoderReset register.
+        /// Asynchronously reads the contents of the <see cref="EncoderReset"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2709,7 +2709,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EncoderReset register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EncoderReset"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2725,7 +2725,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EncoderReset register.
+        /// Asynchronously writes a value to the <see cref="EncoderReset"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2739,7 +2739,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the EnableSerialTimestamp register.
+        /// Asynchronously reads the contents of the <see cref="EnableSerialTimestamp"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2755,7 +2755,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the EnableSerialTimestamp register.
+        /// Asynchronously reads the timestamped contents of the <see cref="EnableSerialTimestamp"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2771,7 +2771,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the EnableSerialTimestamp register.
+        /// Asynchronously writes a value to the <see cref="EnableSerialTimestamp"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2785,7 +2785,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort0IR register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort0IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2801,7 +2801,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort0IR register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort0IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2817,7 +2817,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort0IR register.
+        /// Asynchronously writes a value to the <see cref="MimicPort0IR"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2831,7 +2831,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort1IR register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort1IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2847,7 +2847,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort1IR register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort1IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2863,7 +2863,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort1IR register.
+        /// Asynchronously writes a value to the <see cref="MimicPort1IR"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2877,7 +2877,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort2IR register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort2IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2893,7 +2893,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort2IR register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort2IR"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2909,7 +2909,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort2IR register.
+        /// Asynchronously writes a value to the <see cref="MimicPort2IR"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2923,7 +2923,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort0Valve register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort0Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2939,7 +2939,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort0Valve register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort0Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2955,7 +2955,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort0Valve register.
+        /// Asynchronously writes a value to the <see cref="MimicPort0Valve"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -2969,7 +2969,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort1Valve register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort1Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -2985,7 +2985,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort1Valve register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort1Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -3001,7 +3001,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort1Valve register.
+        /// Asynchronously writes a value to the <see cref="MimicPort1Valve"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -3015,7 +3015,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the MimicPort2Valve register.
+        /// Asynchronously reads the contents of the <see cref="MimicPort2Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -3031,7 +3031,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the MimicPort2Valve register.
+        /// Asynchronously reads the timestamped contents of the <see cref="MimicPort2Valve"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -3047,7 +3047,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the MimicPort2Valve register.
+        /// Asynchronously writes a value to the <see cref="MimicPort2Valve"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
@@ -3061,7 +3061,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PokeInputFilter register.
+        /// Asynchronously reads the contents of the <see cref="PokeInputFilter"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -3077,7 +3077,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PokeInputFilter register.
+        /// Asynchronously reads the timestamped contents of the <see cref="PokeInputFilter"/> register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -3093,7 +3093,7 @@ namespace Harp.Behavior
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PokeInputFilter register.
+        /// Asynchronously writes a value to the <see cref="PokeInputFilter"/> register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">

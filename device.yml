@@ -280,7 +280,7 @@ registers:
     address: 83
     type: U8
     access: Write
-    maskType: EncoderModeConfig
+    maskType: EncoderModeMask
     description: Configures the operation mode of the quadrature encoders.
   Reserved2:
     <<: *reserved
@@ -560,7 +560,7 @@ groupMasks:
       DO3:
         value: 7
         description: Is reflected on DO3
-  EncoderModeConfig:
+  EncoderModeMask:
     description: Specifies the type of reading made from the quadrature encoder.
     values:
       Position: 0

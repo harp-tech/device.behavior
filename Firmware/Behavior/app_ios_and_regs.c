@@ -6,7 +6,7 @@ extern AppRegs app_regs;
 
 void mimic_ir_or_valve (uint8_t reg, uint8_t what_to_do)
 {
-   if (reg & MSK_MIMIC_OUTPUT_SEL)
+   if (reg & MSK_MIMIC_OUTPUT)
    {
       switch (reg)
       {

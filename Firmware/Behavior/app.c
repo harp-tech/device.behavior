@@ -374,7 +374,7 @@ void core_callback_t_before_exec(void)
        {
            int16_t timer_cnt = TCD1_CNT;
            
-           if (app_regs.REG_ENCODER_MODE == GM_ENCODER_MODE_CONFIG_POSITION)
+           if (app_regs.REG_ENCODER_MODE == GM_ENCODER_MODE_POSITION)
 			  {               
                if (timer_cnt > 32768)
                {

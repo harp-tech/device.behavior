@@ -1,5 +1,9 @@
 <Project>
   <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <AvaloniaVersion>11.2.6</AvaloniaVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <!-- Force malformed versions to be an error -->
     <WarningsAsErrors>$(WarningsAsErrors);CS7035</WarningsAsErrors>
     <NoWarn>$(NoWarn);CS1591</NoWarn>

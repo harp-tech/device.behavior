@@ -1,7 +1,7 @@
 !define MUI_VERBOSE 1
 !include "FileFunc.nsh"
 
-!define CompanyName "Champalimaud Foundation"
+!define CompanyName "harp-tech"
 !define DeviceName "Harp.Behavior"
 !define AppName "${DeviceName}.App"
 !define AppNameNoSpaces "${DeviceName}.App"
@@ -25,7 +25,7 @@
 
 Unicode true
 Name "${AppName} v${AppVersion}"
-Icon "${DeviceName}.Design\Assets\cf-logo.ico"
+Icon "${DeviceName}.Design\Assets\logo.ico"
 
 ;--------------------------------
 ;Include Modern UI
@@ -55,7 +55,7 @@ RequestExecutionLevel user
 ;Interface Settings
   !define MUI_ABORTWARNING
   !define MUI_HEADERIMAGE
-  !define MUI_HEADERIMAGE_BITMAP "${DeviceName}.Design\Assets\cf-logo-small.bmp"
+  !define MUI_HEADERIMAGE_BITMAP "${DeviceName}.Design\Assets\logo.png"
   !define MUI_HEADERIMAGE_RIGHT
 ;--------------------------------
 ;Pages
@@ -101,7 +101,7 @@ Section "${AppName} v${AppVersion}" FirstSection
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "DisplayName" "${CompanyName} - ${AppName}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "InstallLocation" "$\"$INSTDIR$\""
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "DisplayIcon" "$\"$INSTDIR\cf-logo.ico$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "DisplayIcon" "$\"$INSTDIR\logo.ico$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "Publisher" "${CompanyName}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "DisplayVersion" "${AppVersion}"
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${CompanyName} ${AppName}" "VersionMajor" ${VERSION_MAJOR}

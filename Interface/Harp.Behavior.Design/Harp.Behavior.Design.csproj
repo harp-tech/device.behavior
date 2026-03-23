@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <OutputPath>..\bin\$(Configuration)</OutputPath>
-    <Version>$(AppVersion)</Version>
+    <TargetFrameworks>net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +23,6 @@
     <PackageReference Include="Markdown.Avalonia" Version="11.0.2" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
-    <ProjectReference Include="..\..\Interface\Harp.Behavior\Harp.Behavior.csproj" />
+    <ProjectReference Include="..\Harp.Behavior\Harp.Behavior.csproj" />
   </ItemGroup>
 </Project>

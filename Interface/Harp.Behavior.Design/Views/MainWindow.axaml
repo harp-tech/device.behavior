@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:Harp.Behavior.Design.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Harp.Behavior.Design.Views.MainWindow"
-        Icon="/Assets/cf-logo.ico"
+        Icon="/Assets/logo.ico"
         WindowStartupLocation="CenterScreen"
         Title="Harp.Behavior">
         <views:BehaviorView />

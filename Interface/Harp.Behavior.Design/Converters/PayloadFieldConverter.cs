@@ -9,10 +9,9 @@ public class PayloadFieldConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value == null || parameter == null)
+        if (value is null || parameter?.ToString() is not string fieldName)
             return null;
 
-        var fieldName = parameter.ToString();
         var valueType = value.GetType();
 
         // Handle struct types directly with field/property access
@@ -63,20 +62,18 @@ public class PayloadFieldConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value == null || parameter == null)
+        if (value is null || parameter?.ToString() is not string fieldName)
             return null;
-
-        var fieldName = parameter.ToString();
 
         // Handle struct types - boxed copy approach
         if (targetType.IsValueType && !targetType.IsPrimitive)
         {
             // Create a copy of the current target value if it exists
-            object currentValue = Activator.CreateInstance(targetType);
+            var currentValue = Activator.CreateInstance(targetType);
 
             // Set the field/property on the copy
             var fieldInfo = targetType.GetField(fieldName);
-            if (fieldInfo != null && currentValue != null)
+            if (fieldInfo is not null && currentValue is not null)
             {
                 object boxedCopy = currentValue;
                 fieldInfo.SetValue(boxedCopy, value);
@@ -84,7 +81,7 @@ public class PayloadFieldConverter : IValueConverter
             }
 
             var propInfo = targetType.GetProperty(fieldName);
-            if (propInfo != null && propInfo.CanWrite && currentValue != null)
+            if (propInfo is not null && propInfo.CanWrite && currentValue is not null)
             {
                 object boxedCopy = currentValue;
                 propInfo.SetValue(boxedCopy, value);
@@ -119,20 +116,18 @@ public class PayloadFieldConverter : IValueConverter
         return value;
     }
 
-    private int GetMaskForField(Type type, string fieldName)
+    private static int GetMaskForField(Type type, string fieldName)
     {
         // Try to find mask by reflection from payload specification
         // This assumes there's a static class or field with mask information
         try
         {
-            Type payloadSpecType = Type.GetType($"{type.Namespace}.{type.Name}PayloadSpec");
-            if (payloadSpecType != null)
+            if (type.Namespace is string typeNamespace &&
+                Type.GetType($"{typeNamespace}.{type.Name}PayloadSpec") is Type payloadSpecType)
             {
                 var maskField = payloadSpecType.GetField($"{fieldName}Mask", BindingFlags.Public | BindingFlags.Static);
-                if (maskField != null)
-                {
-                    return (int)maskField.GetValue(null);
-                }
+                if (maskField?.GetValue(null) is int value)
+                    return value;
             }
         }
         catch
@@ -142,7 +137,7 @@ public class PayloadFieldConverter : IValueConverter
         return 0;
     }
 
-    private int GetShiftForMask(int mask)
+    private static int GetShiftForMask(int mask)
     {
         int shift = 0;
         while ((mask & 1) == 0 && shift < 32)

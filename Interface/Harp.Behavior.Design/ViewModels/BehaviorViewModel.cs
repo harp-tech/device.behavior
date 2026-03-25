@@ -10,8 +10,8 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Media;
 using Bonsai.Harp;
 using Harp.Behavior.Design.Adapters;
 using Harp.Behavior.Design.Views;
@@ -25,13 +25,13 @@ namespace Harp.Behavior.Design.ViewModels;
 
 public class BehaviorViewModel : ViewModelBase
 {
-    public string AppVersion { get; set; }
+    public string AppVersion { get; set; } = string.Empty;
     public ReactiveCommand<Unit, Unit> LoadDeviceInformation { get; }
 
     #region Connection Information
 
     [Reactive] public ObservableCollection<string> Ports { get; set; }
-    [Reactive] public string SelectedPort { get; set; }
+    [Reactive] public string? SelectedPort { get; set; }
     [Reactive] public bool Connected { get; set; }
     [Reactive] public string ConnectButtonText { get; set; } = "Connect";
     public ReactiveCommand<Unit, Unit> ConnectAndGetBaseInfoCommand { get; }
@@ -189,9 +189,9 @@ public class BehaviorViewModel : ViewModelBase
     #region Device basic information
 
     [Reactive] public int DeviceID { get; set; }
-    [Reactive] public string DeviceName { get; set; }
-    [Reactive] public HarpVersion HardwareVersion { get; set; }
-    [Reactive] public HarpVersion FirmwareVersion { get; set; }
+    [Reactive] public string? DeviceName { get; set; }
+    [Reactive] public HarpVersion? HardwareVersion { get; set; }
+    [Reactive] public HarpVersion? FirmwareVersion { get; set; }
     [Reactive] public int SerialNumber { get; set; }
 
     #endregion
@@ -3080,7 +3080,7 @@ public class BehaviorViewModel : ViewModelBase
     #endregion
 
     private Harp.Behavior.AsyncDevice? _device;
-    private IObservable<string> _deviceEventsObservable;
+    private IObservable<string>? _deviceEventsObservable;
     private IDisposable? _deviceEventsSubscription;
 
     public BehaviorViewModel()
@@ -3108,8 +3108,13 @@ public class BehaviorViewModel : ViewModelBase
             .Select(selectedPort => !string.IsNullOrEmpty(selectedPort));
 
         ShowAboutCommand = ReactiveCommand.CreateFromTask(async () =>
-                await new About() { DataContext = new AboutViewModel() }.ShowDialog(
-                    (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow));
+        {
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime owner &&
+                owner.MainWindow is Window ownerWindow)
+            {
+                await new About() { DataContext = new AboutViewModel() }.ShowDialog(ownerWindow);
+            }
+        });
 
         ConnectAndGetBaseInfoCommand = ReactiveCommand.CreateFromTask(ConnectAndGetBaseInfo, canConnect);
         ConnectAndGetBaseInfoCommand.IsExecuting.ToPropertyEx(this, x => x.IsConnecting);
@@ -3169,10 +3174,10 @@ public class BehaviorViewModel : ViewModelBase
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(isConnected =>
             {
-                if (isConnected && _deviceEventsObservable != null)
+                if (isConnected && _deviceEventsObservable is not null)
                 {
                     // Subscribe on the UI thread so that the HarpEvents collection can be updated safely.
-                    SubscribeToEvents();
+                    SubscribeToEvents(_deviceEventsObservable);
                 }
                 else
                 {
@@ -5208,7 +5213,7 @@ public class BehaviorViewModel : ViewModelBase
     private async Task ConnectAndGetBaseInfo()
     {
         if (string.IsNullOrEmpty(SelectedPort))
-            throw new Exception("invalid parameter");
+            throw new InvalidOperationException("invalid parameter");
 
         if (Connected)
         {
@@ -5730,7 +5735,7 @@ public class BehaviorViewModel : ViewModelBase
             IsEncoderPort2Enabled_EncoderReset = false; // Uncheck after apply
 
             // Save the configuration to the device permanently
-            if (savePermanently)
+            if (savePermanently && _deviceEventsObservable is not null)
             {
                 // To prevent multiple calls to the device while it is resetting
                 _deviceEventsSubscription?.Dispose();
@@ -5745,7 +5750,7 @@ public class BehaviorViewModel : ViewModelBase
                 await Task.Delay(4000);
 
                 // Re-subscribe to the device events observable
-                SubscribeToEvents();
+                SubscribeToEvents(_deviceEventsObservable);
             }
         });
     }
@@ -5778,9 +5783,9 @@ public class BehaviorViewModel : ViewModelBase
         });
     }
 
-    private void SubscribeToEvents()
+    private void SubscribeToEvents(IObservable<string> deviceEvents)
     {
-        _deviceEventsSubscription = _deviceEventsObservable
+        _deviceEventsSubscription = deviceEvents
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(
                 msg => HarpEvents.Add(msg.ToString()),

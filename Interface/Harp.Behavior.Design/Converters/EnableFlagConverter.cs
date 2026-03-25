@@ -13,10 +13,10 @@ public class EnableFlagConverter : IValueConverter
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         // Convert from enum to bool (for IsChecked)
-        if (value == null)
-            return false;
+        if (value?.ToString() is string text)
+            return text.Contains("Enable");
 
-        return value.ToString().Contains("Enable");
+        return false;
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

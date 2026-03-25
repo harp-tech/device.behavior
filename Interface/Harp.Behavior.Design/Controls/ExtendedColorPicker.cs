@@ -16,7 +16,7 @@ public class ExtendedColorPicker : ColorPicker
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        // There might be a property set in xaml that get's overridden here
+        // There might be a property set in xaml that gets overridden here
         _selectedTabIndex = SelectedIndex;
         base.OnApplyTemplate(e);
     }

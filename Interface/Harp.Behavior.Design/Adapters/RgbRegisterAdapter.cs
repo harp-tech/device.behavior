@@ -40,9 +40,6 @@ public class RgbRegisterAdapter : ReactiveObject
         set { if (Colors.Count > 0) Colors[0].Color = value; this.RaisePropertyChanged(nameof(Color)); }
     }
 
-    private RgbRegisterAdapter _linkedAdapter;
-    private int _linkedOffset;
-
     /// <summary>
     /// Used for design-time data or default initialization.
     /// </summary>
@@ -94,11 +91,11 @@ public class RgbRegisterAdapter : ReactiveObject
     private static byte GetByteField(Type type, object obj, string name)
     {
         var prop = type.GetProperty(name);
-        if (prop != null && prop.PropertyType == typeof(byte))
-            return (byte)prop.GetValue(obj);
+        if (prop is not null && prop.PropertyType == typeof(byte))
+            return prop.GetValue(obj) is byte value ? value : (byte)0;
         var field = type.GetField(name);
-        if (field != null && field.FieldType == typeof(byte))
-            return (byte)field.GetValue(obj);
+        if (field is not null && field.FieldType == typeof(byte))
+            return field.GetValue(obj) is byte value ? value : (byte)0;
         return 0;
     }
 
@@ -122,9 +119,6 @@ public class RgbRegisterAdapter : ReactiveObject
     /// </summary>
     public void LinkToParent(RgbRegisterAdapter parent, int offset)
     {
-        _linkedAdapter = parent;
-        _linkedOffset = offset;
-
         // Sync initial values
         for (int i = 0; i < Colors.Count; i++)
         {

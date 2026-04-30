@@ -1947,7 +1947,10 @@
                           <TextBlock Text="Enable:" FontSize="14" VerticalAlignment="Center" />
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                            <ToolTip.Tip>Enable encoder on Port 2</ToolTip.Tip>
+                            <ToolTip.Tip>
+                              <Binding Source="{x:Type local:EnableEncoders}"
+                                       Converter="{StaticResource TypeDescriptionConverter}" />
+                            </ToolTip.Tip>
                           </heroIcons:HeroIcon>
                           <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EnableEncoders}"
                                     VerticalAlignment="Center" Margin="5,0,0,0">
@@ -1959,7 +1962,10 @@
                           <TextBlock Text="Mode:" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                            <ToolTip.Tip>Encoder operation mode</ToolTip.Tip>
+                            <ToolTip.Tip>
+                              <Binding Source="{x:Type local:EncoderMode}"
+                                       Converter="{StaticResource TypeDescriptionConverter}" />
+                            </ToolTip.Tip>
                           </heroIcons:HeroIcon>
                           <ComboBox SelectedItem="{Binding EncoderMode, Mode=TwoWay}" Width="120" HorizontalAlignment="Center" Margin="5,0,0,0">
                             <x:Static Member="local:EncoderModeMask.Position" />
@@ -1971,7 +1977,10 @@
                           <TextBlock Text="Reset:" FontSize="14" VerticalAlignment="Center"/>
                           <heroIcons:HeroIcon Type="InformationCircle" Width="14" Height="14"
                                               Foreground="{Binding IconColor}" VerticalAlignment="Center">
-                            <ToolTip.Tip>Reset encoder counter to zero</ToolTip.Tip>
+                            <ToolTip.Tip>
+                              <Binding Source="{x:Type local:EncoderReset}"
+                                       Converter="{StaticResource TypeDescriptionConverter}" />
+                            </ToolTip.Tip>
                           </heroIcons:HeroIcon>
                           <CheckBox IsChecked="{Binding IsEncoderPort2Enabled_EncoderReset}" VerticalAlignment="Center" Margin="5,0,0,0">
                             Reset

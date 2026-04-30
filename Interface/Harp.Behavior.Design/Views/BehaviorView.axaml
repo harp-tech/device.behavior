@@ -15,6 +15,10 @@
   <UserControl.Resources>
     <conv:PayloadFieldConverter x:Key="PayloadFieldConverter" />
     <conv:BooleanConverter x:Key="BooleanConverter" />
+    <conv:EnumDisplayConverter x:Key="EnumDisplayConverter" />
+    <DataTemplate x:Key="EnumDisplayTemplate">
+      <TextBlock Text="{Binding Converter={StaticResource EnumDisplayConverter}}" />
+    </DataTemplate>
   </UserControl.Resources>
 
   <Design.DataContext>
@@ -2017,7 +2021,9 @@
 
                       <Grid Grid.Row="1" Grid.Column="1" Margin="20,12,20,12"
                             ColumnDefinitions="Auto,Auto">
-                        <ComboBox SelectedItem="{Binding EnableSerialTimestamp, Mode=TwoWay}" Width="120" HorizontalAlignment="Center" Margin="5,0,0,0">
+                        <ComboBox SelectedItem="{Binding EnableSerialTimestamp, Mode=TwoWay}"
+                                  ItemTemplate="{StaticResource EnumDisplayTemplate}"
+                                  HorizontalAlignment="Center" Margin="5,0,0,0">
                           <x:Static Member="local:SerialTimestampPorts.None" />
                           <x:Static Member="local:SerialTimestampPorts.TimestampPort2" />
                         </ComboBox>

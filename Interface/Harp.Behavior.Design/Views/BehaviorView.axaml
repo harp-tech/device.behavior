@@ -16,7 +16,7 @@
     <conv:PayloadFieldConverter x:Key="PayloadFieldConverter" />
     <conv:BooleanConverter x:Key="BooleanConverter" />
     <conv:EnumDisplayConverter x:Key="EnumDisplayConverter" />
-    <DataTemplate x:Key="EnumDisplayTemplate">
+    <DataTemplate x:Key="EnumDisplayTemplate" DataType="system:Enum">
       <TextBlock Text="{Binding Converter={StaticResource EnumDisplayConverter}}" />
     </DataTemplate>
   </UserControl.Resources>

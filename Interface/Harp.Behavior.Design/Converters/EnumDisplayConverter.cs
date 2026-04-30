@@ -13,7 +13,8 @@ public class EnumDisplayConverter : IValueConverter
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Enum e) return value;
+        if (value is not Enum e)
+            return value;
         return _cache.GetOrAdd(e, static key =>
         {
             var field = key.GetType().GetField(key.ToString());

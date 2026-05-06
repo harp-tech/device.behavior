@@ -1,13 +1,5 @@
-
-desktop.ini
-
-# Visual studio files
-.vs
-.suo
-.nuget
-bin
-obj
-Debug
-Release
-packages
-*.componentinfo.xml
+.bonsai/Bonsai.exe*
+.bonsai/Packages/
+.bonsai/Settings/
+.vs/
+/artifacts/

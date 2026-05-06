@@ -1,7 +1,7 @@
 ## Harp Behavior
 This is a multi-purpose device tailored to behavioral experiments. It allows control of pokes, RGB LEDs, LEDs, cameras, servo motors and a quadrature counter.
 
-![HarpBehavior](./Assets/pcb.png)
+![HarpBehavior](./images/pcb.png)
 
 ### Key Features ###
 

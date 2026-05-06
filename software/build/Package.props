@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <PackageTags>Harp Behavior</PackageTags>
+    <PackageProjectUrl>https://harp-tech.org/device.behavior</PackageProjectUrl>
+
+    <Authors>harp-tech</Authors>
+    <Copyright>Copyright © harp-tech and Contributors</Copyright>
+  </PropertyGroup>
+</Project>

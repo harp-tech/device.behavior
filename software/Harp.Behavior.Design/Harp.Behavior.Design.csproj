@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
+    <Description>Design Library containing UI components for configuring Harp Behavior devices.</Description>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <OutputPath>..\bin\$(Configuration)</OutputPath>
+    <PackageTags>$(PackageTags) Design Bonsai Rx</PackageTags>
     <TargetFrameworks>net8.0</TargetFrameworks>
   </PropertyGroup>
 

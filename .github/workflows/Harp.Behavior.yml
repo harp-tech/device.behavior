@@ -112,6 +112,8 @@ jobs:
             collect-packages: true
     name: Build Interface (${{ matrix.platform.name }} ${{ matrix.configuration }})
     runs-on: ${{ matrix.platform.os }}
+    outputs:
+      need-workflow-image-render: ${{ steps.configure-build.outputs.need-workflow-image-render }}
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
@@ -242,7 +244,7 @@ jobs:
     name: Render workflow images
     runs-on: windows-latest
     needs: build-interface
-    if: needs.build.outputs.need-workflow-image-render == 'true'
+    if: needs.build-interface.outputs.need-workflow-image-render == 'true'
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout

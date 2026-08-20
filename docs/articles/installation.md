@@ -28,7 +28,7 @@ pip install harp-python
 
 The [Behavior GUI](behavior-gui.md) is a standalone graphical application for configuring and testing the device without using Bonsai.
 
-![Behavior GUI](../images/behavior-gui.png){width=600}
+![Behavior GUI](../images/behavior-GUI.png){width=600}
 
 - Download and install the [Behavior GUI](https://github.com/fchampalimaud/device.behavior/releases).
 

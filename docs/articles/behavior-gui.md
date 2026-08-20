@@ -4,7 +4,7 @@ The Behavior GUI is a standalone visual interface for configuring and testing th
 
 Before beginning, [install the GUI](installation.md#software-packages), follow the hardware setup [guide](connections.md), and connect the USB cable to the computer. Launch "Harp.Behavior.App" from the Windows Start menu.
 
-![Behavior GUI](../images/behavior-gui.png)
+![Behavior GUI](../images/behavior-GUI.png)
 
 > [!NOTE]
 > This is a pre-release version of the app, there have been changes since [then](https://github.com/harp-tech/device.behavior/pull/32), but binaries have not been generated. Remember to update the screenshots and add numbered labels for the new version.

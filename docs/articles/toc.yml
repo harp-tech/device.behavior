@@ -1,2 +1,36 @@
 - name: Introduction
+- name: Overview
   href: ../index.md
+- name: Specs
+- name: Behavior
+  href: behavior-overview.md
+- name: Peripherals
+  href: ./peripherals/toc.yml
+- name: Getting Started
+- name: Ports and Connections
+  href: connections.md
+- name: Installation
+  href: installation.md
+- name: Behavior GUI
+  href: behavior-gui.md
+- name: Bonsai
+  href: harp-bonsai.md
+- name: Bonsai Workflows
+- name: Acquire Analog Data
+  href: acquire-analog-data.md
+- name: Read Digital Inputs
+  href: read-digital-inputs.md
+- name: Control Digital Outputs
+  href: control-digital-outputs.md
+- name: Generate PWM
+  href: generate-pwm.md
+- name: Configure LEDs
+  href: configure-leds.md
+- name: Control Poke Peripheral
+  href: control-poke.md
+- name: Data Management
+- name: Logging and Analysis
+  href: logging-analysis.md
+- name: Troubleshooting
+- name: Errors
+  href: troubleshooting.md

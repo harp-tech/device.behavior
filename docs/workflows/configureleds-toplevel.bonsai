@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.9.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
+                 xmlns:p1="clr-namespace:Harp.Behavior;assembly=Harp.Behavior"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Annotation">
+        <Name>Harp Device Pattern</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
+        <rx:Name>Behavior Commands</rx:Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:Device">
+          <harp:OperationMode>Active</harp:OperationMode>
+          <harp:OperationLed>On</harp:OperationLed>
+          <harp:DumpRegisters>true</harp:DumpRegisters>
+          <harp:VisualIndicators>On</harp:VisualIndicators>
+          <harp:Heartbeat>Disabled</harp:Heartbeat>
+          <harp:IgnoreErrors>false</harp:IgnoreErrors>
+          <harp:PortName>COM8</harp:PortName>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:DeviceDataWriter">
+          <p1:Path>Behavior.harp</p1:Path>
+          <p1:Buffered>true</p1:Buffered>
+          <p1:Overwrite>false</p1:Overwrite>
+          <p1:FilterType>Include</p1:FilterType>
+          <p1:MessageType xsi:nil="true" />
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Behavior Events</Name>
+      </Expression>
+      <Expression xsi:type="Annotation">
+        <Name>Configure LED Current</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>A</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateLed0MaxCurrentPayload">
+          <p1:Led0MaxCurrent>20</p1:Led0MaxCurrent>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateLed0CurrentPayload">
+          <p1:Led0Current>10</p1:Led0Current>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Annotation">
+        <Name>Turn LEDs On and Off</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>S</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateOutputSetPayload">
+          <p1:OutputSet>Led0</p1:OutputSet>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>D</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateOutputClearPayload">
+          <p1:OutputClear>Led0</p1:OutputClear>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Annotation">
+        <Name>Set RGB Colors</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>F</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateRgbAllPayload">
+          <p1:Green0>0</p1:Green0>
+          <p1:Red0>255</p1:Red0>
+          <p1:Blue0>0</p1:Blue0>
+          <p1:Green1>0</p1:Green1>
+          <p1:Red1>0</p1:Red1>
+          <p1:Blue1>255</p1:Blue1>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Annotation">
+        <Name>Turn RGB LEDs On and Off</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>G</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateOutputSetPayload">
+          <p1:OutputSet>Rgb0 Rgb1</p1:OutputSet>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>H</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateOutputClearPayload">
+          <p1:OutputClear>Rgb0 Rgb1</p1:OutputClear>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="9" To="10" Label="Source1" />
+      <Edge From="12" To="13" Label="Source1" />
+      <Edge From="13" To="14" Label="Source1" />
+      <Edge From="15" To="16" Label="Source1" />
+      <Edge From="16" To="17" Label="Source1" />
+      <Edge From="19" To="20" Label="Source1" />
+      <Edge From="20" To="21" Label="Source1" />
+      <Edge From="23" To="24" Label="Source1" />
+      <Edge From="24" To="25" Label="Source1" />
+      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="27" To="28" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>

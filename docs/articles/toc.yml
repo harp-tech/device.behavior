@@ -28,6 +28,16 @@
   href: configure-leds.md
 - name: Control Poke Peripheral
   href: control-poke.md
+- name: Track Rotary Encoder
+  href: track-rotary-encoder.md
+- name: Trigger Cameras
+  href: trigger-cameras.md
+- name: Drive Servos
+  href: drive-servos.md
+- name: Mimic Signals
+  href: mimic-signals.md
+- name: Advanced Configuration
+  href: advanced-configuration.md
 - name: Data Management
 - name: Logging and Analysis
   href: logging-analysis.md

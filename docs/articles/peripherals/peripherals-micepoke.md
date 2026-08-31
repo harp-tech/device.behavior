@@ -9,10 +9,11 @@ The Harp Mice Poke is a nose-poke peripheral for the Behavior board. It detects 
 - Infrared beam poke detection.
 - Control of 2 onboard LEDs, with the option of connecting an external LED.
 - 12 V solenoid valve control for reward delivery.
+- Connects directly to a Behavior board peripheral port with a standard Ethernet cable (RJ45).
 
 ### Ports
 
-- RJ45 connector: Connects to a Behavior board [poke port](../connections.md) with a straight-through cable for direct control.
+- RJ45 connector: Connects to a Behavior board [peripheral port](../connections.md) with a straight-through cable for direct control.
 - Screw terminals: Alternative interface for operating the Mice Poke with other external devices. Contains the following pins:
     - 1x 5V supply (+5V)
     - 3x Ground (GND)
@@ -28,8 +29,8 @@ The Harp Mice Poke is a nose-poke peripheral for the Behavior board. It detects 
 
 ### Hardware
 
-| Version | Compatible Behavior | Notes |
-| ------- | ------------------- | ----- |
+| Version | Compatible Behavior Board | Notes |
+| ------- | ------------------------- | ----- |
 | 1.4 | > 1.0 | <ul><li> Update valve footprint </li><li> Increased LED resistor</li></ul> |
 | 1.3 | > 1.0 | <ul><li> To document </li></ul> |
 | 1.2 | > 1.0 | <ul><li> To document </li></ul> |

@@ -5,5 +5,5 @@ uid: Harp.Behavior.CreateEnableSerialTimestampPayload
 ### Stream Timestamps
 
 :::workflow
-![Stream Timestamps](../workflows/routesignals-serialtimestamp.bonsai)
+![Stream Timestamps](../workflows/advancedconfiguration-serialtimestamp.bonsai)
 :::

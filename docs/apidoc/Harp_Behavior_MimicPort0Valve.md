@@ -2,8 +2,8 @@
 uid: Harp.Behavior.MimicPort0Valve
 ---
 
-### Mimic Valves
+### Mimic Poke Valves
 
 :::workflow
-![Mimic Valves](../workflows/routesignals-mimicvalve.bonsai)
+![Mimic Poke Valves](../workflows/mimicsignals-mimicvalve.bonsai)
 :::

@@ -2,14 +2,15 @@
 
 The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** screw terminal. Refer to the [connections](./connections.md) article to set up the hardware connection.
 
+This article covers how to visualize the digital input events in Bonsai.
+
 The complete workflow is shown below:
 
 :::workflow
 ![Read Digital Inputs](../workflows/readdigitalinputs-toplevel.bonsai)
 :::
 
-> [!NOTE]
-> You can use the [Breakout](./peripherals/peripherals-portbreakout.md) extension board to adapt the poke ports as regular digital input/output pins if you need more digital inputs. Refer to the [Control Poke Peripheral](control-poke.md) article for more information on controlling those pins.
+[!INCLUDE [](breakout-note.md)]
 
 ### Visualize Digital Input Events
 
@@ -31,7 +32,7 @@ None@12.301823
 The first value is the payload, listing the digital inputs that are currently active, and the second value is the timestamp on the device clock. Both rising and falling edges generate an event, so `None` marks the moment the line returned low.
 
 > [!NOTE]
-> The [`PokeInputFilter`](control-poke.md#configure-input-filter) debounce applies only to the poke port inputs — **DI3** events are not filtered.
+> The [`PokeInputFilter`](control-poke.md#configure-input-filter) debounce applies only to the peripheral port inputs; **DI3** events are not filtered.
 
 [!INCLUDE [](version-footer.md)]
 

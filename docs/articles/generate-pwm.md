@@ -1,6 +1,6 @@
 ## Generate PWM
 
-The four general-purpose outputs **DO0** – **DO3** can generate hardware-timed pulse-width modulation (PWM) signals. The PWM signal can be tested with either a speaker (where the frequency controls the pitch) or a LED (where the duty cycles controls the brightness). Refer to the [connections](./connections.md) article to set up either accessory on **DO0**, which we will use for the rest of these examples.
+The four general-purpose outputs **DO0** – **DO3** can generate hardware-timed pulse-width modulation (PWM) signals. The PWM signal can be tested with either a [speaker](./peripherals/peripherals-speaker.md) (where the frequency controls the pitch) or an LED (where the duty cycle controls the brightness). Refer to the [connections](./connections.md) article to set up either accessory on **DO0**, which we will use for the rest of these examples.
 
 This article covers how to configure the frequency and duty cycle, as well as how to generate and stop the PWM in Bonsai.
 
@@ -28,7 +28,7 @@ Each output has its own [`PwmFrequencyDO0`] and [`PwmDutyCycleDO0`] registers.
     - `PwmDutyCycleDO0` - Set the duty cycle in percent (e.g. 50). Valid values are 1 to 99.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd> to configure a 1 kHz, 50% duty cycle waveform on **DO0**. Frequency and duty cycle can also be re-written while the PWM signal is running.
+Run the workflow and press <kbd>A</kbd> to configure a 1 kHz, 50% duty cycle waveform on **DO0**. Frequency and duty cycle can also be modified while the PWM signal is running.
 
 ### Start and Stop PWM
 
@@ -52,7 +52,7 @@ In a separate branch:
     - `PwmStop` - Select `PwmDO0`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>A</kbd> to configure, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the waveform on **DO0**.
+Run the workflow, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the waveform on **DO0**.
 
 ### Generate PWM Bursts
 
@@ -72,7 +72,9 @@ To generate a PWM train of fixed duration, enable the [pulse function](control-d
     - `PulseDO0` - Set the burst duration to 100 ms.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>F</kbd> once to configure the pulse, then press <kbd>S</kbd>. The PWM runs for 100 ms and stops on its own, which translates to either a short beep With a speaker, or a brief flash with an LED.
+Run the workflow, press <kbd>F</kbd> once to configure the pulse, then press <kbd>S</kbd>. The PWM runs for 100 ms and stops on its own, which translates to either a short beep with a speaker or a brief flash with an LED.
+
+[!INCLUDE [](outputpulseenable-warning.md)]
 
 [!INCLUDE [](version-footer.md)]
 

@@ -2,3 +2,9 @@
   href: peripherals-micepoke.md
 - name: Breakout
   href: peripherals-portbreakout.md
+- name: Rotary Encoder
+  href: peripherals-rotaryencoder.md
+- name: Speaker
+  href: peripherals-speaker.md
+- name: Photodiode
+  href: peripherals-photodiode.md

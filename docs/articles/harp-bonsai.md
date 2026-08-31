@@ -7,7 +7,7 @@ Bonsai is a visual reactive programming language for building interactive experi
 
 ### First Steps
 
-We will use a simple example to connect and test the device in Bonsai. This example visualizes the analog input stream that the Behavior board broadcasts at 1 kHz. We revisit this example in more detail in the "Bonsai Workflows" section.
+We will use a simple example to connect and test the device in Bonsai. This example visualizes the analog input stream that the Behavior board broadcasts at 1 kHz. You do not need to connect an analog input device, we will revisit this example later in more detail in the "Bonsai Workflows" section.
 
 Before beginning:
 - Connect the [USB](connections.md) cable to the computer.
@@ -29,9 +29,8 @@ Before beginning:
 A [visualizer](xref:Bonsai.Design.VisualizerWindow) will automatically open when the workflow starts, displaying the parsed [`AnalogData`] events streaming from the device:
 
 ```text
-AnalogInput0: 12
-Encoder: 0
-AnalogInput1: 8
+AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput = 13 }
+AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput = 14 }
 ```
 
 The device is ready to use! If, instead, an error appears in Bonsai, check out the [troubleshooting](troubleshooting.md) section.

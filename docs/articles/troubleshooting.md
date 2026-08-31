@@ -16,11 +16,11 @@ A: Only one interface connection to the Behavior board can be opened at one time
 
 **Q: Poke events stopped arriving from all ports.**
 
-A: If a mimic register was written with `DIO0`, `DIO2`, `DO1`, or `DO3` as the target, the current firmware erroneously reconfigures the poke infrared inputs (see [Route Signals](route-signals.md)). Power-cycle the device and use only `DO0` or `DO2` as mimic targets.
+A: If a mimic register was written with `DIO0`, `DIO2`, `DO1`, or `DO3` as the target, the current firmware erroneously reconfigures the poke infrared inputs (see [Mimic Signals](mimic-signals.md)). Power-cycle the device and use only `DO0` or `DO2` as mimic targets.
 
 **Q: Poke events stopped arriving from Port 2 only.**
 
-A: Port 2 repurposes its input lines while the [quadrature encoder](track-rotation.md) is enabled. Disable the encoder to restore poke detection.
+A: Port 2 repurposes its input lines while the [quadrature encoder](track-rotary-encoder.md) is enabled. Disable the encoder to restore poke detection.
 
 [!INCLUDE [](version-footer.md)]
 

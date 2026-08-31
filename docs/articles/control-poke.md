@@ -1,6 +1,6 @@
 ## Control Poke Peripheral
 
-The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose poke peripheral for the Behavior board which combines an infrared beam sensor for poke detection, cue LEDs, and a solenoid valve for reward delivery. Refer to the [connections](./connections.md) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
+The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose poke peripheral for the Behavior board which combines an infrared beam sensor for poke detection, cue LEDs, and a solenoid valve for reward delivery. Refer to the [connections](./connections.md) article to set up the hardware connection on peripheral port **P0**, which we will use for the rest of these examples.
 
 This article covers how to visualize poke events, debounce noisy inputs, drive the cue LED, and deliver rewards with the Mice Poke peripheral in Bonsai.
 
@@ -11,11 +11,11 @@ The complete workflow is shown below:
 :::
 
 > [!NOTE]
-> You can use the [Breakout](./peripherals/peripherals-portbreakout.md) extension board to adapt the poke ports as regular digital input/output pins to interface with other external devices or accessories.
+> To interface with other external devices or accessories, the [Breakout](./peripherals/peripherals-portbreakout.md) extension board makes the peripheral ports' pins available as regular screw-terminal inputs and outputs.
 
 ### Visualize Poke Events
 
-Beam breaks in the Mice Poke peripheral are reported as digital input events.  The three poke ports **P0 - P2** are represented as `DIPort0` - `DIPort2` in the digital input [`DigitalInputState`] event register.
+Beam breaks in the Mice Poke peripheral are reported as digital input events.  The three peripheral ports **P0 - P2** are represented as `DIPort0` - `DIPort2` in the [`DigitalInputState`] event register.
 
 :::workflow
 ![Detect Pokes Visualize Events](../workflows/controlpoke-visualizeevents.bonsai)
@@ -32,7 +32,7 @@ DIPort0@3.213504
 None@3.513823
 ```
 
-The first value is the payload, listing the digital inputs that are currently active, and the second value is the timestamp on the device clock. Both beam breaks and beam restores generate an event, so `None` marks the moment the poke was exited.
+The first value is the payload, listing the digital inputs that are currently active, and the second value is the timestamp on the device clock. Both beam breaks and beam restores generate an event, so `None` marks a poke exit.
 
 ### Configure Input Filter
 
@@ -48,14 +48,14 @@ A single poke can generate a burst of rapid transitions, for example, when the s
     - `PokeInputFilter` - Set the filter time to 5 ms.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd> — rapid repeated transitions within 5 ms of a poke event no longer generate events. Set the value to 0 to disable the filter. The default filter time is 1 ms.
+Run the workflow and press <kbd>A</kbd>. Rapid repeated transitions within 5 ms of a poke event no longer generate events. Set the value to 0 to disable the filter. The default filter time is 1 ms.
 
 > [!TIP]
 > The filter is blind to the cause of a transition, so values much longer than the animal's fastest re-entry will also ignore genuine consecutive pokes.
 
 ### Drive the Poke LED
 
-Each poke port carries an LED drive line (`DOPort0` - `DOPort2`). The LED is controlled like any other digital output. For instance, you can turn it on and off with the [`OutputSet`] and [`OutputClear`] registers:
+Each peripheral port carries an LED drive line (`DOPort0` - `DOPort2`). The LED is controlled like any other digital output. For instance, you can turn it on and off with the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Detect Pokes Drive LED](../workflows/controlpoke-driveled.bonsai)
@@ -79,7 +79,7 @@ Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LED on and <kb
 
 ### Deliver Rewards on Poke
 
-Each poke port carries a 12 V valve drive line for a solenoid valve that gates reward delivery. The valve outputs (`SupplyPort0`–`SupplyPort2`) boot with [pulse mode](control-digital-outputs.md#pulse-outputs) already enabled. The workflow below configures the pulse duration, then closes the loop in Bonsai where every poke at **P0** immediately triggers a reward at the same port.  The reward volume is calibrated by adjusting the pulse duration.
+Each peripheral port carries a 12 V valve drive line for a solenoid valve that gates reward delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, then closes the loop in Bonsai where every poke at **P0** immediately triggers a reward at the same port.  The reward volume is calibrated by adjusting the pulse duration.
 
 :::workflow
 ![Detect Pokes Deliver Rewards](../workflows/controlpoke-valve.bonsai)
@@ -87,8 +87,12 @@ Each poke port carries a 12 V valve drive line for a solenoid valve that gates r
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
+    - `Payload` - Select `OutputPulseEnablePayload`.
+    - `OutputPulseEnable` - Select `SupplyPort0` to enable pulse mode on the **P0** valve output.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PulseSupplyPort0Payload`.
-    - `PulseSupplyPort0` - Set the valve opening duration in ms (e.g. 15, the boot default).
+    - `PulseSupplyPort0` - Set the valve opening duration in ms (e.g. 15).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -102,7 +106,9 @@ In a separate branch:
     - `OutputSet` - Select `SupplyPort0`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>F</kbd> once to set the pulse duration, then block the infrared beam on the **P0** poke. The valve will opens for 15 ms and close on its own, delivering one reward per poke.
+Run the workflow, press <kbd>F</kbd> once to configure the valve pulse, then block the infrared beam on the **P0** poke. The valve will open for 15 ms and close on its own, delivering one reward per poke.
+
+[!INCLUDE [](outputpulseenable-warning.md)]
 
 [!INCLUDE [](version-footer.md)]
 

@@ -1,6 +1,6 @@
 ## Breakout
 
-The Breakout is an interface peripheral for the Behavior board that makes the pins of the Behavior board [poke ports](../connections.md) available on screw terminals without building a custom cable.
+The Harp Breakout is an interface peripheral for the Behavior board. It makes the pins of the Behavior board [peripheral ports](../connections.md) available on screw terminals without building a custom cable.
 
 !["Breakout board"](../../images/OEPS-Breakout.png){width=450}
 
@@ -22,8 +22,8 @@ The Breakout is an interface peripheral for the Behavior board that makes the pi
 
 For connection with a quadrature encoder:
 
-| Quadrature encoder pin | Breakout board pin |
-|---------------------   |------------------  |	                               
+| Quadrature Encoder Pin | Breakout Board Pin |
+| ---------------------- | ------------------ |	                               
 | A                      | DI 	              | 
 | B                      | DIO 	              |
 | Supply                 | +5V                |
@@ -34,7 +34,7 @@ For connection with a quadrature encoder:
 | Version | Compatible Behavior Board | Notes |
 | ------- | ------------------- | ----- |
 | 2.x | > 2.0 | <ul><li> Serial TX terminal replaces the +12V and SUP_RTN terminals </li><li> TX logic level jumper-selectable between 3.3 V and 5 V </li></ul> |
-| 1.1 | > 1.2 | <ul><li> Release version </li></ul> |
+| 1.1 | > 1.2 | <ul><li> Initial version </li></ul> |
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Breakout](https://github.com/harp-tech/peripheral.portbreakout) repository.
 

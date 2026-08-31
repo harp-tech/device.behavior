@@ -53,7 +53,7 @@ To update the firmware, use the device setup tool in Bonsai:
 6. Select the downloaded `.hex` file.
 7. Click "Update".
 
-After the update, the device will reboot with the new firmware and go through the [startup LED sequence](troubleshooting.md#indicator-lights).
+After the update, the device will reboot with the new firmware.
 
 [!INCLUDE [](version-footer.md)]
 

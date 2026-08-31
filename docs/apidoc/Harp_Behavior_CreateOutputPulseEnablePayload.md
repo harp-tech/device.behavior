@@ -2,6 +2,8 @@
 uid: Harp.Behavior.CreateOutputPulseEnablePayload
 ---
 
+[!INCLUDE [](../articles/outputpulseenable-warning.md)]
+
 ### Pulse Outputs
 
 :::workflow

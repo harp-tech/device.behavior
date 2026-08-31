@@ -10,9 +10,6 @@ The complete workflow is shown below:
 ![Configure LEDs](../workflows/configureleds-toplevel.bonsai)
 :::
 
-> [!WARNING]
-> The RGB section has not been tested as I do not have the hardware yet. There is also supposedly a regression introduced in firmware 3.4 which prevents the [`RgbAll`], [`Rgb0`], and [`Rgb1`] registers from updating the LED colors — the LEDs stay at their default colors (RGB0 green, RGB1 blue).
-
 ### Configure LED Current
 
 The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current register ([`Led0Current`], 2 – 100 mA) and a protection limit ([`Led0MaxCurrent`], 5 – 100 mA); writes above the limit are rejected by the device.
@@ -59,9 +56,9 @@ Run the workflow, then press <kbd>S</kbd> to light the LED and <kbd>D</kbd> to t
 
 ### Set RGB Colors
 
-The **RGB** connector drives WS2812-type addressable LEDs — often sold as "NeoPixel" LEDs, rings, or strips. The two LEDs form a serial chain on a single data line: RGB0 is the first LED in the chain and RGB1 the second. Plain and analog RGB LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead.
+The **RGB** connector drives WS2812-type addressable LEDs (often sold as "NeoPixel" LEDs, rings, or strips). The two LEDs form a serial chain on a single data line: RGB0 is the first LED in the chain and RGB1 the second. Plain and analog RGB LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead.
 
-The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255. To write one LED at a time, use [`Rgb0`] or [`Rgb1`] instead.
+The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 
 :::workflow
 ![Set RGB Colors](../workflows/configureleds-rgbcolors.bonsai)
@@ -75,6 +72,12 @@ The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each c
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>F</kbd> to load the colors. If the LEDs are currently on, the new colors take effect immediately.
+
+> [!NOTE]
+> To write one LED at a time, use [`Rgb0`] or [`Rgb1`] instead.
+
+> [!NOTE]
+> There is a bug 
 
 ### Turn RGB LEDs On and Off
 

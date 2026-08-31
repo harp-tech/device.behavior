@@ -10,12 +10,6 @@
       <Expression xsi:type="SubscribeSubject">
         <Name>Behavior Events</Name>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="harp:FilterMessageType">
-          <harp:FilterType>Include</harp:FilterType>
-          <harp:MessageType>Event</harp:MessageType>
-        </Combinator>
-      </Expression>
       <Expression xsi:type="p1:Parse">
         <harp:Register xsi:type="p1:TimestampedCamera0Frame" />
       </Expression>
@@ -35,7 +29,6 @@
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
       <Edge From="1" To="2" Label="Source1" />
-      <Edge From="2" To="3" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

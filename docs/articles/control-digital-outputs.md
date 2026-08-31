@@ -10,8 +10,7 @@ The complete workflow is shown below:
 ![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
 :::
 
-> [!NOTE]
-> You can use the [Breakout](./peripherals/peripherals-portbreakout.md) extension board to adapt the poke ports as regular digital input/output pins if you need more digital outputs. Refer to the [Control Poke Peripheral](control-poke.md) article for more information on controlling those pins. 
+[!INCLUDE [](breakout-note.md)]
 
 ### Set and Clear Outputs
 
@@ -51,14 +50,14 @@ The [`OutputToggle`] register inverts the current state of the selected output l
     - `OutputToggle` - Select `DO0`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>D</kbd> repeatedly — the **DO0** line inverts its state on every press.
+Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press.
 
 > [!TIP]
 > The [`OutputState`] register works like the other output registers but writes **all** output lines at once: selected lines are set and every other line is cleared. Use it to drive the whole output bank to a known state in one command.
 
 ### Pulse Outputs
 
-Instead of pairing a set command with a delayed clear command, the device can time pulses itself. When an output is selected in the [`OutputPulseEnable`] register, every set command starts a pulse whose duration comes from that output's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds).
+The device can generate hardware-timed pulses with a defined duration. Enable pulse mode by selecting output lines in the [`OutputPulseEnable`] register, and set the duration in the output line's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds). Sending an [`OutputSet`] command then starts a pulse that turns off after the elapsed time instead of remaining on.
 
 :::workflow
 ![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
@@ -74,10 +73,15 @@ Instead of pairing a set command with a delayed clear command, the device can ti
     - `PulseDO0` - Set the pulse duration to 500 ms.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs) — the **DO0** line goes high for 500 ms and returns low on its own.
+Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns low on its own.
+
+[!INCLUDE [](outputpulseenable-warning.md)]
 
 > [!TIP]
-> The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms — see [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
+> The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms; see [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
+
+> [!TIP]
+> This method is preferred to timing pulses in software (e.g. pairing a set command with a delay and a clear command); software timing is subject to non-real-time OS latencies and jitter, which are most noticeable on short pulses.
 
 ### Alternative: Set Outputs with Timer
 

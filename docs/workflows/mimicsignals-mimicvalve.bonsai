@@ -9,14 +9,14 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="wie:KeyDown">
-          <wie:Filter>A</wie:Filter>
+          <wie:Filter>D</wie:Filter>
           <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
         </Combinator>
       </Expression>
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
-        <harp:Payload xsi:type="p1:CreateServoMotor2PeriodPayload">
-          <p1:ServoMotor2Period>20000</p1:ServoMotor2Period>
+        <harp:Payload xsi:type="p1:CreateMimicPort0ValvePayload">
+          <p1:MimicPort0Valve>DO0</p1:MimicPort0Valve>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -24,14 +24,29 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="wie:KeyDown">
-          <wie:Filter>S</wie:Filter>
+          <wie:Filter>F</wie:Filter>
           <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
         </Combinator>
       </Expression>
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
-        <harp:Payload xsi:type="p1:CreateServoMotor2PulsePayload">
-          <p1:ServoMotor2Pulse>1500</p1:ServoMotor2Pulse>
+        <harp:Payload xsi:type="p1:CreateMimicPort0ValvePayload">
+          <p1:MimicPort0Valve>None</p1:MimicPort0Valve>
+        </harp:Payload>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Behavior Commands</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="wie:KeyDown">
+          <wie:Filter>G</wie:Filter>
+          <wie:SuppressRepetitions>false</wie:SuppressRepetitions>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="p1:CreateMessage">
+        <harp:MessageType>Write</harp:MessageType>
+        <harp:Payload xsi:type="p1:CreateOutputSetPayload">
+          <p1:OutputSet>SupplyPort0</p1:OutputSet>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -43,6 +58,8 @@
       <Edge From="1" To="2" Label="Source1" />
       <Edge From="3" To="4" Label="Source1" />
       <Edge From="4" To="5" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

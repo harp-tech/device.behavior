@@ -7,9 +7,3 @@ uid: Harp.Behavior.PulseDO0
 :::workflow
 ![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
-
-### Generate PWM Bursts
-
-:::workflow
-![Generate PWM Bursts](../workflows/generatepwm-pulseenable.bonsai)
-:::

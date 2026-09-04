@@ -16,13 +16,22 @@ These steps are only required the first time you connect the device to a new com
 - Launch Bonsai and install the `Harp.Behavior` package by searching for it in the [Bonsai package manager](https://bonsai-rx.org/docs/articles/packages.html).
 - (Optional) Install the `Bonsai.Windows.Input` package to follow along with the examples in this user guide.
 
-# [harp-python](#tab/harp-python)
+# [Python](#tab/python)
 
-The [harp-python](https://pypi.org/project/harp-python/) library is a Python package for [loading and manipulating](logging-analysis.md) binary data collected from Harp devices. Install it in a Python environment with:
+The [Harp](https://harp-tech.org/python/) library provides a Python interface for controlling Harp devices and [loading](logging-analysis.md) recorded data. To install the full library, install it in a Python environment with : 
 
 ```cmd
-pip install harp-python
+pip install harp
 ```
+
+To install only the package necessary for loading data:
+
+```cmd
+pip install harp-data
+```
+
+> [!NOTE]
+> Substitute `uv add` for `pip install` if you are using the [uv](https://docs.astral.sh/uv/) package manager.
 
 # [GUI](#tab/gui)
 

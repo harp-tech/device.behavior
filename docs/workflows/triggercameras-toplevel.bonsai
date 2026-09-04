@@ -51,8 +51,8 @@
       </Expression>
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
-        <harp:Payload xsi:type="p1:CreateCamera0FrequencyPayload">
-          <p1:Camera0Frequency>30</p1:Camera0Frequency>
+        <harp:Payload xsi:type="p1:CreateCamera1FrequencyPayload">
+          <p1:Camera1Frequency>30</p1:Camera1Frequency>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -71,7 +71,7 @@
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
         <harp:Payload xsi:type="p1:CreateStartCamerasPayload">
-          <p1:StartCameras>CameraOutput0</p1:StartCameras>
+          <p1:StartCameras>CameraOutput1</p1:StartCameras>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -86,7 +86,7 @@
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
         <harp:Payload xsi:type="p1:CreateStopCamerasPayload">
-          <p1:StopCameras>CameraOutput0</p1:StopCameras>
+          <p1:StopCameras>CameraOutput1</p1:StopCameras>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -100,7 +100,7 @@
         <Name>Behavior Events</Name>
       </Expression>
       <Expression xsi:type="p1:Parse">
-        <harp:Register xsi:type="p1:TimestampedCamera0Frame" />
+        <harp:Register xsi:type="p1:TimestampedCamera1Frame" />
       </Expression>
       <Expression xsi:type="ui:VisualizerWindow">
         <ui:Visible>true</ui:Visible>

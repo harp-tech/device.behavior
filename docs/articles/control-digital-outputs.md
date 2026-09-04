@@ -10,11 +10,14 @@ The complete workflow is shown below:
 ![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
 :::
 
+> [!NOTE]
+> Besides the general purpose digital output lines (`DO0` -`DO3`), the commands below can be used to control the peripheral port output lines (`DOPort0`–`DOPort2`), valve lines (`SupplyPort0`–`SupplyPort2`), and LED lines (`Led0`, `Led1`, `Rgb0`, `Rgb1`).
+
 [!INCLUDE [](breakout-note.md)]
 
 ### Set and Clear Outputs
 
-The [`OutputSet`] and [`OutputClear`] registers turn output lines on and off. Each bit in the payload selects one output line, so a single command can drive several outputs at once.
+Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and off.
 
 :::workflow
 ![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
@@ -36,6 +39,9 @@ In a separate branch:
 
 Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>S</kbd> to set it low.
 
+> [!NOTE]
+>  A single command can drive several outputs at once. To select multiple lines, type the names separated by a comma (e.g. `DO0`, `DO1`) in the payload field. Any lines not selected are left untouched. 
+
 ### Toggle Outputs
 
 The [`OutputToggle`] register inverts the current state of the selected output lines.
@@ -52,8 +58,24 @@ The [`OutputToggle`] register inverts the current state of the selected output l
 
 Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press.
 
-> [!TIP]
-> The [`OutputState`] register works like the other output registers but writes **all** output lines at once: selected lines are set and every other line is cleared. Use it to drive the whole output bank to a known state in one command.
+### Write All Outputs
+
+The [`OutputState`] register writes every output line in a single command: selected lines are set and all other lines are cleared. Use it to drive the whole output bank to a known state, for example when initializing an experiment.
+
+:::workflow
+![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
+:::
+
+- Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
+    - `Payload` - Select `OutputStatePayload`.
+    - `OutputState` - Select `DO0` and `DO1`.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
+
+Run the workflow and press <kbd>G</kbd>. The **DO0** and **DO1** lines go high and every other output goes low. Try setting other outputs first with the commands from the previous sections; the [`OutputState`] write overrides them all.
+
+> [!WARNING]
+> [`OutputState`] acts on every output of the Behavior board, including the peripheral port and LED lines. To change a few lines while leaving the rest untouched, use [`OutputSet`], [`OutputClear`] or [`OutputToggle`] instead.
 
 ### Pulse Outputs
 
@@ -81,7 +103,7 @@ Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a se
 > The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms; see [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
 
 > [!TIP]
-> This method is preferred to timing pulses in software (e.g. pairing a set command with a delay and a clear command); software timing is subject to non-real-time OS latencies and jitter, which are most noticeable on short pulses.
+> This method is preferred to timing pulses in software (e.g. pairing a set command with a delay and a clear command). Software timing is subject to non-real-time OS latency and jitter, which are most noticeable on short pulses.
 
 ### Alternative: Set Outputs with Timer
 

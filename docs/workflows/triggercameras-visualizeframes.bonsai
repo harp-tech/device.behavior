@@ -11,7 +11,7 @@
         <Name>Behavior Events</Name>
       </Expression>
       <Expression xsi:type="p1:Parse">
-        <harp:Register xsi:type="p1:TimestampedCamera0Frame" />
+        <harp:Register xsi:type="p1:TimestampedCamera1Frame" />
       </Expression>
       <Expression xsi:type="ui:VisualizerWindow">
         <ui:Visible>true</ui:Visible>

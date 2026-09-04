@@ -7,7 +7,7 @@ This article covers enabling the encoder mode, visualizing the reading, and rese
 The complete workflow is shown below:
 
 :::workflow
-![Track Rotary Encoder](../workflows/trackrotation-toplevel.bonsai)
+![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
 :::
 
 ### Enable the Encoder
@@ -15,7 +15,7 @@ The complete workflow is shown below:
 The encoder mode is enabled with the [`EnableEncoders`] register, its reading mode is selected with [`EncoderMode`], and its value is streamed in the `Encoder` field of the 1 kHz [`AnalogData`](acquire-analog-data.md) events. 
 
 :::workflow
-![Enable the Encoder](../workflows/trackrotation-enable.bonsai)
+![Enable the Encoder](../workflows/trackrotaryencoder-enable.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -36,7 +36,7 @@ Run the workflow and press <kbd>A</kbd>. The quadrature counter starts and its v
 ### Visualize Encoder Reading
 
 :::workflow
-![Visualize Encoder Reading](../workflows/trackrotation-visualize.bonsai)
+![Visualize Encoder Reading](../workflows/trackrotaryencoder-visualize.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
@@ -51,7 +51,7 @@ Run the workflow, press <kbd>A</kbd> to enable the encoder, and turn the encoder
 The [`EncoderReset`] register sets the counter of the selected encoders back to zero:
 
 :::workflow
-![Reset the Encoder](../workflows/trackrotation-reset.bonsai)
+![Reset the Encoder](../workflows/trackrotaryencoder-reset.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.

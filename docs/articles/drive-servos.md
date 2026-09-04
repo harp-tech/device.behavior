@@ -12,7 +12,7 @@ The complete workflow is shown below:
 
 ### Configure the Servo
 
-To configure the servo, set the period and pulse-width registers for the digital output ([`ServoMotor2Period`] and [`ServoMotor2Pulse`] for **DO2**) in microseconds. The period sets the refresh rate for the servo update and the pulse width sets the servo angle (typically 1000 – 2000 µs).
+To configure the servo, set the period and pulse-width registers for the digital output ([`ServoMotor2Period`] and [`ServoMotor2Pulse`] for **DO2**) in microseconds. The period sets the refresh rate for the servo update and the pulse width sets the servo angle.
 
 :::workflow
 ![Configure the Servo](../workflows/driveservos-configure.bonsai)
@@ -29,7 +29,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `ServoMotor2PulsePayload`.
-    - `ServoMotor2Pulse` - Set the pulse width in µs (e.g. 1500 for the center position of a standard servo).
+    - `ServoMotor2Pulse` - Set the pulse width in µs (e.g. 1500 for the center position of a standard servo, the range is typically 1000 – 2000 µs).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>A</kbd> to set the servo period and <kbd>S</kbd> to move the servo to the starting angle. The two registers are bound to separate keys, so you can reset the angle later without reconfiguring the period. Check your servo's datasheet for its period and pulse-width range if you are unsure about which values to use.
@@ -57,9 +57,6 @@ In a separate branch:
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>D</kbd> to enable the servo and <kbd>F</kbd> to stop. The servo moves to the position set by the pulse width and holds it while enabled.
-
-> [!WARNING]
-> Each output has a single hardware timer, shared between its servo and [PWM](generate-pwm.md) functions, so you can only run one function at a time for each output.
 
 ### Adjust the Position
 

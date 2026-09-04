@@ -12,7 +12,7 @@ This article covers how to mimic poke inputs and valve outputs in Bonsai.
 The complete workflow is shown below:
 
 :::workflow
-![Mimic Signals](../workflows/mimicsignals-toplevel.bonsai)
+![Mimic Poke Signals](../workflows/mimicpokesignals-toplevel.bonsai)
 :::
 
 ### Mimic Poke Inputs
@@ -20,7 +20,7 @@ The complete workflow is shown below:
 Set a mimic target output line for the poke's infrared inputs with the [`MimicPort0IR`] register (ports 1 and 2 have their own counterparts).
 
 :::workflow
-![Mimic Poke Inputs](../workflows/mimicsignals-mimicir.bonsai)
+![Mimic Poke Inputs](../workflows/mimicpokesignals-mimicir.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -47,7 +47,7 @@ Run the workflow, press <kbd>A</kbd> to enable the mimic target, and trigger the
 Similarly, to mimic the valve output, set a mimic target in the [`MimicPort0Valve`] register.
 
 :::workflow
-![Mimic Poke Valves](../workflows/mimicsignals-mimicvalve.bonsai)
+![Mimic Poke Valves](../workflows/mimicpokesignals-mimicvalve.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.

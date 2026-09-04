@@ -4,10 +4,10 @@
 
 ### Key Features
 
-- 3 peripheral ports, each combining an infrared beam input, an LED driver, a 12 V valve driver, and a general-purpose digital line.
+- 3 peripheral ports for plug-and-play peripherals.
 - Timed pulses and PWM (up to 10 kHz with configurable duty cycle) on every digital output.
-- Camera triggering, servo motor control, and quadrature encoder counting on the general-purpose outputs and ports.
-- Configurable LED drive current (up to 100 mA) with a settable maximum limit.
+- Support for camera triggering, servo motor control, and quadrature encoder counting.
+- Configurable LED drive current (up to 100 mA) and RGB LED driver.
 
 ### Specs
 

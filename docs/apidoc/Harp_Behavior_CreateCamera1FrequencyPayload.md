@@ -1,5 +1,5 @@
 ---
-uid: Harp.Behavior.Camera0Frequency
+uid: Harp.Behavior.CreateCamera1FrequencyPayload
 ---
 
 ### Configure Trigger Frequency

@@ -1,6 +1,6 @@
 ## Logging and Analysis
 
-This article covers how data from the device is logged to disk, and how to read and plot the logged data with `harp-python`.
+This article covers how data from the device is logged to disk, and how to read and plot the logged data with the [`harp-data`](installation.md#software-packages) Python package.
 
 ### Log Data
 
@@ -20,29 +20,33 @@ While the workflow is running, registers are logged as the device produces messa
 
 ### Analyze Data
 
-The `harp-python` library imports data stored in the Harp binary format as [pandas](https://pandas.pydata.org/) DataFrames, which can then be analyzed with any `pandas` compatible plotting or analysis library.
+The [`harp-data`](https://harp-tech.org/python/) package imports data stored in the Harp binary format as [pandas](https://pandas.pydata.org/) DataFrames, which can then be analyzed with any `pandas` compatible plotting or analysis library.
 
-The following example demonstrates how to read and plot data from the [`DigitalInputState`](control-poke.md) register.
+The following example demonstrates how to read and plot data from the [`AnalogData`](acquire-analog-data.md) register.
 
 > [!NOTE]
-> This example requires a Python environment with [harp-python](installation.md#software-packages) and [`matplotlib`](https://matplotlib.org/) installed.
+> This example requires a Python environment with [harp-data](installation.md#software-packages) and [`matplotlib`](https://matplotlib.org/) (used by `pandas` as a plotting backend) installed.
 
 ```python
 # Import the dependencies
-import harp
 import matplotlib.pyplot as plt
+from harp import data
 
-# Create a device object by loading the saved folder
-device = harp.create_reader("./Data/Behavior.harp")
+# Finds device.yml in the folder, builds the device module, returns a dataset reader
+reader = data.open_dataset("../data/Behavior.harp")
 
-# Read data from a specific register
-digital_input_state_df = device.DigitalInputState.read()
+# Lists every register in the reader by name and address
+print(reader.contents)
+
+# Load data from a particular register
+df = reader.read("AnalogData")  # by name
+df = reader.read(44)            # or by address
 
 # Inspect DataFrame
-print(digital_input_state_df.head())
+print(df.head())
 
-# Plot the poke beam states over time
-digital_input_state_df.plot()
+# Plot the analog data
+df.plot()
 plt.show()
 ```
 

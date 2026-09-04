@@ -13,13 +13,6 @@ The Harp Rotary Encoder is a peripheral for the Behavior board. It plugs directl
 ### Specs
 
 - Encoder: Alps Alpine EC12E24204A9 (mechanical, 24 pulses per revolution, with detents)
-- Connectors: RJ45
-- RJ45 connector: Connects to Behavior board port **P2**  with a straight-through cable.
-- Solder pads: Alternative interface for wiring an external quadrature encoder. Contains the following pads:
-    - 1x 5 V supply (+)
-    - 1x Quadrature channel A (A)
-    - 1x Quadrature channel B (B)
-    - 1x Ground (-)
 
 ### Hardware
 

@@ -4,7 +4,7 @@ This article covers device-wide configuration that goes beyond a single peripher
 
 This article covers how to select the active events and stream timestamps in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Advanced Configuration](../workflows/advancedconfiguration-toplevel.bonsai)

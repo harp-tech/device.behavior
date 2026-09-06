@@ -4,7 +4,7 @@ The Behavior board has four general-purpose digital outputs **DO0** – **DO3** 
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
@@ -107,7 +107,7 @@ Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a se
 
 ### Alternative: Set Outputs with Timer
 
-You can replace [`KeyDown`] with other operators to set outputs with other triggers in Bonsai, for instance a [`Timer`].
+You can replace [`KeyDown`] with other operators to set outputs with other triggers in Bonsai, for instance a [`Timer`] to send triggers at a set time.
 
 :::workflow
 ![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)

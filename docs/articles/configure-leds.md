@@ -4,7 +4,7 @@ The Behavior board drives two kinds of light output: two standard current-contro
 
 This article covers configuring LED drive current, setting RGB colors, and turning on both kinds of LED output in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Configure LEDs](../workflows/configureleds-toplevel.bonsai)

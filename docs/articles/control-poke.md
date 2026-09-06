@@ -4,7 +4,7 @@ The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose pok
 
 This article covers how to visualize poke events, debounce noisy inputs, drive the cue LED, and deliver rewards with the Mice Poke peripheral in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Detect Pokes](../workflows/controlpoke-toplevel.bonsai)

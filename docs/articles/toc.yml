@@ -44,3 +44,14 @@
 - name: Troubleshooting
 - name: Errors
   href: troubleshooting.md
+- name: Mockups
+- name: Digital Output (Original)
+  href: control-digital-outputs.md
+- name: Digital Output (Explain More All)
+  href: mockup-DO-explainmoreall.md
+- name: Digital Output (Explain More Once)
+  href: mockup-DO-explainmoreonce.md
+- name: Digital Output (Explain More Once, Simpler Bullets)
+  href: mockup-DO-explainonce.md
+- name: Digital Output (Explain Once For Copy)
+  href: mockup-DO-explainonceforcopy.md

@@ -4,7 +4,7 @@ The Behavior board has two analog inputs: **ADC0** is located on the **ADC** ter
 
 This article covers how to visualize the analog input streams and extract a single channel in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)

@@ -17,25 +17,25 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Set and Clear Outputs
 
-Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and off.
+First, we will walk through an in-depth example about how to send a command to the device by using the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and off using the keyboard. We will use the same pattern for the other examples, but substitute different keys for the trigger and different registers for the commands.
 
 :::workflow
 ![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::
 
-- Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
+- Insert a [`KeyDown`] source and set the `Filter` property to `A`. Every time the letter <kbd>A</kbd> is pressed on the keyboard, this triggers the generation of the command.
+- Insert a [`CreateMessage`] operator to construct the [`HarpMessage`] command that will be sent to the Behavior board once the key is pressed. Configure these properties to define that you want to turn an output line on, and which line it is:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This makes the output of this section feed into the Behavior device pattern we defined at the top of the workflow to actually send the commands to the device.
 
 In a separate branch:
 
-- Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
+- Insert a [`KeyDown`] source and set the `Filter` property to `S`. Every time the <kbd>S</kbd> is pressed, this triggers the opposite command.
+- Insert a [`CreateMessage`] operator and configure these properties to define that you want to turn an output line off, and which line it is:
     - `Payload` - Select `OutputClearPayload`.
     - `OutputClear` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This sends the clear command through the same device pattern.
 
 Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>S</kbd> to set it low.
 
@@ -44,7 +44,7 @@ Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>
 
 ### Toggle Outputs
 
-The [`OutputToggle`] register inverts the current state of the selected output lines.
+Use a different trigger key (<kbd>D</kbd>) and change the register to [`OutputToggle`] to invert the current state of the selected output lines.
 
 :::workflow
 ![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
@@ -125,6 +125,7 @@ Run the workflow and the **DO0** line goes high after 2 seconds and turns off au
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown
+[`HarpMessage`]: xref:Bonsai.Harp.HarpMessage
 [`Timer`]: xref:Bonsai.Reactive.Timer
 [`CreateMessage`]: xref:Harp.Behavior.CreateMessage
 [`MulticastSubject`]: xref:Bonsai.Expressions.MulticastSubject

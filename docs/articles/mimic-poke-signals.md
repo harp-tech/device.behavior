@@ -9,7 +9,7 @@ Refer to the [connections](./connections.md) article to set up the [Mice Poke](.
 
 This article covers how to mimic poke inputs and valve outputs in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Mimic Poke Signals](../workflows/mimicpokesignals-toplevel.bonsai)

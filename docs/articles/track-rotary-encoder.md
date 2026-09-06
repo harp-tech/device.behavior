@@ -4,7 +4,7 @@ The **P2** peripheral port of the Behavior board has an encoder mode that allows
 
 This article covers enabling the encoder mode, visualizing the reading, and resetting the count.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)

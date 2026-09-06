@@ -4,7 +4,7 @@ The Behavior board has one general-purpose 5 V digital input, **DI3**, located o
 
 This article covers how to visualize the digital input events in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Read Digital Inputs](../workflows/readdigitalinputs-toplevel.bonsai)

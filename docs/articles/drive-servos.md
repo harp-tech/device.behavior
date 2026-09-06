@@ -4,7 +4,7 @@ The digital outputs **DO2** and **DO3** can drive standard servo motors, which c
 
 This article covers how to configure the servo, enable and disable the pulse train, and adjust the position in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Drive Servos](../workflows/driveservos-toplevel.bonsai)

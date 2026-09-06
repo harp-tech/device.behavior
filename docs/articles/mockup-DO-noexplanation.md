@@ -4,7 +4,7 @@ The Behavior board has four general-purpose digital outputs **DO0** – **DO3** 
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 
-The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
+The complete workflow is shown below. Copy and paste it into Bonsai to get started. You can also copy and paste the individual examples in each section instead.
 
 :::workflow
 ![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
@@ -19,23 +19,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and off.
 
+> [!NOTE]
+> The examples in this article use key presses to generate the commands sent to the device. You can change which key triggers a command in the Filter property of the [`KeyDown`] operator. In the [`CreateMessage`] operator, the `Payload` field selects the register to target (e.g. `OutputSetPayload` for the [`OutputSet`] register), and the property of the same name (`OutputSet`) selects the output lines to act on (e.g. `DO0`). The examples come prefilled with sample values; remember to change them to suit your workflow.
+
 :::workflow
 ![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::
-
-- Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
-
-In a separate branch:
-
-- Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputClearPayload`.
-    - `OutputClear` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>S</kbd> to set it low.
 
@@ -44,17 +33,11 @@ Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>
 
 ### Toggle Outputs
 
-The [`OutputToggle`] register inverts the current state of the selected output lines.
+Use the [`OutputToggle`] register to invert the current state of the selected output lines.
 
 :::workflow
 ![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
 :::
-
-- Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputTogglePayload`.
-    - `OutputToggle` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press.
 
@@ -65,12 +48,6 @@ The [`OutputState`] register writes every output line in a single command: selec
 :::workflow
 ![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
 :::
-
-- Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputStatePayload`.
-    - `OutputState` - Select `DO0` and `DO1`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>G</kbd>. The **DO0** and **DO1** lines go high and every other output goes low. Try setting other outputs first with the commands from the previous sections; the [`OutputState`] write overrides them all.
 
@@ -84,16 +61,6 @@ The device can generate hardware-timed pulses with a defined duration. Enable pu
 :::workflow
 ![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
-
-- Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputPulseEnablePayload`.
-    - `OutputPulseEnable` - Select `DO0` to enable pulse mode on **DO0**.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `PulseDO0Payload`.
-    - `PulseDO0` - Set the pulse duration to 500 ms.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns low on its own.
 
@@ -113,21 +80,14 @@ You can replace [`KeyDown`] with other operators to set outputs with other trigg
 ![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)
 :::
 
-- Insert a [`Timer`] operator and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds).
-- Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
-
 Run the workflow and the **DO0** line goes high after 2 seconds and turns off automatically if pulse mode is enabled.
 
 [!INCLUDE [](version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown
-[`Timer`]: xref:Bonsai.Reactive.Timer
 [`CreateMessage`]: xref:Harp.Behavior.CreateMessage
-[`MulticastSubject`]: xref:Bonsai.Expressions.MulticastSubject
+[`Timer`]: xref:Bonsai.Reactive.Timer
 [`OutputSet`]: xref:Harp.Behavior.OutputSet
 [`OutputClear`]: xref:Harp.Behavior.OutputClear
 [`OutputToggle`]: xref:Harp.Behavior.OutputToggle

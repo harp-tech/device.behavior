@@ -4,7 +4,7 @@ The Behavior board can generate TTL signals for cameras that support external tr
 
 This article covers how to configure the trigger frequency, start and stop the cameras, and visualize frame events in Bonsai.
 
-The complete workflow is shown below:
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
 :::workflow
 ![Trigger Cameras](../workflows/triggercameras-toplevel.bonsai)

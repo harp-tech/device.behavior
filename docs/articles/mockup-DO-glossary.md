@@ -5,47 +5,41 @@ The Behavior board has four general-purpose digital outputs **DO0** – **DO3** 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
-
 :::workflow
 ![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
 :::
 
 > [!NOTE]
-> Besides the general purpose digital output lines (`DO0` -`DO3`), the commands below can be used to control the peripheral port output lines (`DOPort0`–`DOPort2`), valve lines (`SupplyPort0`–`SupplyPort2`), and LED lines (`Led0`, `Led1`, `Rgb0`, `Rgb1`).
+> Besides the general purpose digital output lines (`DO0` -`DO3`), the [commands](./mockup-glossary.md#command "A Write message that sets a register on the device, instructing it to act.") below can be used to control the peripheral port output lines (`DOPort0`–`DOPort2`), valve lines (`SupplyPort0`–`SupplyPort2`), and LED lines (`Led0`, `Led1`, `Rgb0`, `Rgb1`).
 
 [!INCLUDE [](breakout-note.md)]
 
 ### Set and Clear Outputs
 
-Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and off.
+Use the [`OutputSet`] and [`OutputClear`] [registers](./mockup-glossary.md#register "A named value at a fixed address on the device. Registers are the entire interface of a Harp device.") to turn output lines on and off.
 
 :::workflow
 ![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::
 
-<details>
-<summary>Step-by-step instructions</summary>
-
-- Insert a [`KeyDown`] source and set the `Filter` property to `A`. Every time the letter A is pressed on the keyboard, this triggers the command generation.
-- Insert a [`CreateMessage`] operator to construct the [`HarpMessage`] command that will be sent to the Behavior board once the key is pressed. Configure these properties to define that you want to turn an output line on, and which line it is:
+- Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This makes the output of this section feed into the Behavior device pattern we defined at the top of the workflow to actually send the commands to the device.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `S`. This triggers the opposite command.
-- Insert a [`CreateMessage`] operator and configure these properties to define that you want to turn an output line off, and which line it is:
+- Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputClearPayload`.
     - `OutputClear` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This sends the clear command through the same device pattern.
-
-</details>
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high and <kbd>S</kbd> to set it low.
 
 > [!NOTE]
->  A single command can drive several outputs at once. To select multiple lines, type the names separated by a comma (e.g. `DO0`, `DO1`) in the payload field. Any lines not selected are left untouched. 
+>  A single command can drive several outputs at once. To select multiple lines, type the names separated by a comma (e.g. `DO0`, `DO1`) in the [payload](./mockup-glossary.md#payload "The data carried by a Harp message: the value written to or reported from a register.") field. Any lines not selected are left untouched. Registers that select lines this way are [mask registers](./mockup-glossary.md#mask-register "A register where each bit of the payload selects one line, so a single command can act on several lines at once.").
 
 ### Toggle Outputs
 
@@ -55,16 +49,11 @@ The [`OutputToggle`] register inverts the current state of the selected output l
 ![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
 :::
 
-<details>
-<summary>Step-by-step instructions</summary>
-
-- Insert a [`KeyDown`] source and set the `Filter` property to `D`. Every time the letter D is pressed on the keyboard, this triggers the command generation.
-- Insert a [`CreateMessage`] operator to construct the command. Configure these properties to define that you want to invert the state of an output line, and which line it is:
+- Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputTogglePayload`.
     - `OutputToggle` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This feeds the command into the Behavior device pattern to send it to the device.
-
-</details>
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press.
 
@@ -76,16 +65,11 @@ The [`OutputState`] register writes every output line in a single command: selec
 ![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
 :::
 
-<details>
-<summary>Step-by-step instructions</summary>
-
-- Insert a [`KeyDown`] source and set the `Filter` property to `G`. Every time the letter G is pressed on the keyboard, this triggers the command generation.
-- Insert a [`CreateMessage`] operator to construct the command. Configure these properties to define the new state of the whole output bank, naming the lines that go high:
+- Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputStatePayload`.
-    - `OutputState` - Select `DO0` and `DO1`. Every line not selected here is cleared.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This feeds the command into the Behavior device pattern to send it to the device.
-
-</details>
+    - `OutputState` - Select `DO0` and `DO1`.
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>G</kbd>. The **DO0** and **DO1** lines go high and every other output goes low. Try setting other outputs first with the commands from the previous sections; the [`OutputState`] write overrides them all.
 
@@ -100,20 +84,15 @@ The device can generate hardware-timed pulses with a defined duration. Enable pu
 ![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
 
-<details>
-<summary>Step-by-step instructions</summary>
-
-- Insert a [`KeyDown`] source and set the `Filter` property to `F`. Every time the letter F is pressed on the keyboard, this triggers both configuration commands.
-- Insert a [`CreateMessage`] operator to construct the first configuration command. Configure these properties to define that you want pulse mode enabled, and on which line:
+- Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputPulseEnablePayload`.
     - `OutputPulseEnable` - Select `DO0` to enable pulse mode on **DO0**.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This feeds the command into the Behavior device pattern to send it to the device.
-- Insert a second [`CreateMessage`] operator to construct the second configuration command. Configure these properties to define how long each pulse on that line lasts:
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
+- Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PulseDO0Payload`.
     - `PulseDO0` - Set the pulse duration to 500 ms.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This sends the duration command through the same device pattern.
-
-</details>
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>F</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns low on its own.
 
@@ -133,16 +112,11 @@ You can replace [`KeyDown`] with other operators to set outputs with other trigg
 ![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)
 :::
 
-<details>
-<summary>Step-by-step instructions</summary>
-
-- Insert a [`Timer`] source and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds). When the time elapses, the [`Timer`] triggers the command generation, in place of a key press.
+- Insert a [`Timer`] operator and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds).
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0`.
-- Insert a [`MulticastSubject`] operator named `Behavior Commands`. This feeds the command into the Behavior device pattern to send it to the device.
-
-</details>
+- Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and the **DO0** line goes high after 2 seconds and turns off automatically if pulse mode is enabled.
 
@@ -150,7 +124,6 @@ Run the workflow and the **DO0** line goes high after 2 seconds and turns off au
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown
-[`HarpMessage`]: xref:Bonsai.Harp.HarpMessage
 [`Timer`]: xref:Bonsai.Reactive.Timer
 [`CreateMessage`]: xref:Harp.Behavior.CreateMessage
 [`MulticastSubject`]: xref:Bonsai.Expressions.MulticastSubject

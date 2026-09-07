@@ -23,7 +23,7 @@ Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and 
 ![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `A`. Every time the letter A is pressed on the keyboard, this provides a trigger to generate the command.
+- Insert a [`KeyDown`] source and set the `Filter` property to `A`. Every time the letter A is pressed on the keyboard, this triggers the command generation.
 - Insert a [`CreateMessage`] operator to construct the [`HarpMessage`] command that will be sent to the Behavior board once the key is pressed. Configure these properties to define that you want to turn an output line on, and which line it is:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0` for
@@ -31,7 +31,7 @@ Use the [`OutputSet`] and [`OutputClear`] registers to turn output lines on and 
 
 In a separate branch:
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `S`. This provides the trigger for the opposite command.
+- Insert a [`KeyDown`] source and set the `Filter` property to `S`. This triggers the opposite command.
 - Insert a [`CreateMessage`] operator and configure these properties to define that you want to turn an output line off, and which line it is:
     - `Payload` - Select `OutputClearPayload`.
     - `OutputClear` - Select `DO0`.
@@ -50,7 +50,7 @@ The [`OutputToggle`] register inverts the current state of the selected output l
 ![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
 :::
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `D`. Every time the letter D is pressed on the keyboard, this provides a trigger to generate the command.
+- Insert a [`KeyDown`] source and set the `Filter` property to `D`. Every time the letter D is pressed on the keyboard, this triggers the command generation.
 - Insert a [`CreateMessage`] operator to construct the command. Configure these properties to define that you want to invert the state of an output line, and which line it is:
     - `Payload` - Select `OutputTogglePayload`.
     - `OutputToggle` - Select `DO0`.
@@ -66,7 +66,7 @@ The [`OutputState`] register writes every output line in a single command: selec
 ![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
 :::
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `G`. Every time the letter G is pressed on the keyboard, this provides a trigger to generate the command.
+- Insert a [`KeyDown`] source and set the `Filter` property to `G`. Every time the letter G is pressed on the keyboard, this triggers the command generation.
 - Insert a [`CreateMessage`] operator to construct the command. Configure these properties to define the new state of the whole output bank, naming the lines that go high:
     - `Payload` - Select `OutputStatePayload`.
     - `OutputState` - Select `DO0` and `DO1`. Every line not selected here is cleared.
@@ -85,7 +85,7 @@ The device can generate hardware-timed pulses with a defined duration. Enable pu
 ![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
 
-- Insert a [`KeyDown`] source and set the `Filter` property to `F`. Every time the letter F is pressed on the keyboard, this provides a trigger to send both configuration commands.
+- Insert a [`KeyDown`] source and set the `Filter` property to `F`. Every time the letter F is pressed on the keyboard, this triggers both configuration commands.
 - Insert a [`CreateMessage`] operator to construct the first configuration command. Configure these properties to define that you want pulse mode enabled, and on which line:
     - `Payload` - Select `OutputPulseEnablePayload`.
     - `OutputPulseEnable` - Select `DO0` to enable pulse mode on **DO0**.
@@ -113,7 +113,7 @@ You can replace [`KeyDown`] with other operators to set outputs with other trigg
 ![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)
 :::
 
-- Insert a [`Timer`] source and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds). When the time elapses, the [`Timer`] provides the trigger to generate the command, in place of a key press.
+- Insert a [`Timer`] source and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds). When the time elapses, the [`Timer`] triggers the command generation, in place of a key press.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0`.

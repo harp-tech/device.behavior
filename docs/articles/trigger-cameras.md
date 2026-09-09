@@ -11,7 +11,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 :::
 
 > [!TIP]
-> Configure your camera to trigger on the rising edge of the pulse, and avoid modes that use the trigger pulse width to control exposure. The trigger signal is a 5 V square wave with a 50% duty cycle and the pulse width is not configurable.
+> Configure your camera to trigger on the rising edge of the pulse, and avoid modes that use the trigger pulse width to control exposure. Check that the voltage level is compatible with the camera's external trigger voltage level. The trigger signal is a 5 V square wave with a 50% duty cycle and the pulse width is not configurable.
 
 ### Configure Trigger Frequency
 
@@ -27,7 +27,7 @@ The trigger frequency of each camera is set with the appropriate register for th
     - `Camera1Frequency` - Set the trigger frequency in Hz (e.g. 30). Valid values are 2 to 600.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd> to set the trigger frequency. Configure the frequency before starting the camera; the value is read when triggering starts.
+Run the workflow and press <kbd>A</kbd> to set the trigger frequency. Configure the frequency before starting the camera. Once camera triggering starts, the frequency cannot be modified without stopping the camera.
 
 ### Start and Stop Cameras
 
@@ -40,7 +40,7 @@ Enable and disable the camera triggering with the [`StartCameras`] and [`StopCam
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `StartCamerasPayload`.
-    - `StartCameras` - Select `CameraOutput1`.
+    - `StartCameras` - Select `CameraOutput1` for the camera connected to **DO1**.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -48,14 +48,17 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `StopCamerasPayload`.
-    - `StopCameras` - Select `CameraOutput1`.
+    - `StopCameras` - Select `CameraOutput1` for the camera connected to **DO1**.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and <kbd>D</kbd> to stop it. Check the image stream in either Bonsai with the appropriate camera image operators or the camera vendor image acquisition software to confirm that the external trigger is working.
+Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and <kbd>D</kbd> to stop it. Check the image stream in either Bonsai with a camera source operator like [`CameraCapture`] or in your camera vendor's acquisition software to confirm that the external trigger is working.
+
+> [!NOTE]
+> Camera triggering stops automatically when the Bonsai workflow stops and the device goes into standby mode. This behavior is specific to camera triggering, other digital outputs keep their last state when the workflow stops. Remember to start the camera trigger again when you restart the workflow.
 
 ### Visualize Frame Events
 
-Each trigger pulse broadcasts a [`Camera1Frame`] event, giving the device timestamp of every captured frame:
+Each trigger pulse broadcasts a frame event tied to the port like [`Camera1Frame`]. Use it to verify that the trigger signal is being generated. Each message will also carry the recorded timestamp for the pulse on the device clock:
 
 :::workflow
 ![Visualize Frame Events](../workflows/triggercameras-visualizeframes.bonsai)
@@ -78,6 +81,7 @@ The first value confirms the frame trigger and the second is the timestamp on th
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown
+[`CameraCapture`]: xref:Bonsai.Vision.CameraCapture
 [`CreateMessage`]: xref:Harp.Behavior.CreateMessage
 [`MulticastSubject`]: xref:Bonsai.Expressions.MulticastSubject
 [`SubscribeSubject`]: xref:Bonsai.Expressions.SubscribeSubject

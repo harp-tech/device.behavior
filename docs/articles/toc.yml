@@ -24,8 +24,8 @@
   href: control-digital-outputs.md
 - name: Generate PWM
   href: generate-pwm.md
-- name: Configure LEDs
-  href: configure-leds.md
+- name: Control LEDs
+  href: control-leds.md
 - name: Control Poke Peripheral
   href: control-poke.md
 - name: Mimic Poke Signals

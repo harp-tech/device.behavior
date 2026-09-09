@@ -14,7 +14,7 @@ Check out the following in-depth guides to learn how to access the device functi
 - [Read Digital Inputs](../articles/read-digital-inputs.md)
 - [Control Digital Outputs](../articles/control-digital-outputs.md)
 - [Generate PWM](../articles/generate-pwm.md)
-- [Configure LEDs](../articles/configure-leds.md)
+- [Control LEDs](../articles/control-leds.md)
 - [Control Poke Peripheral](../articles/control-poke.md)
 - [Track Rotary Encoder](../articles/track-rotary-encoder.md)
 - [Trigger Cameras](../articles/trigger-cameras.md)

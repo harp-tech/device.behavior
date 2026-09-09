@@ -1,0 +1,63 @@
+- name: Introduction
+- name: Overview
+  href: ../index.md
+- name: Specs
+- name: Behavior
+  href: behavior-overview.md
+- name: Peripherals
+  href: ./peripherals/toc.yml
+- name: Getting Started
+- name: Ports and Connections
+  href: connections.md
+- name: Installation
+  href: installation.md
+- name: Behavior GUI
+  href: behavior-gui.md
+- name: Bonsai
+  href: harp-bonsai.md
+- name: Bonsai Workflows
+- name: Acquire Analog Data
+  href: acquire-analog-data.md
+- name: Read Digital Inputs
+  href: read-digital-inputs.md
+- name: Control Digital Outputs
+  href: control-digital-outputs.md
+- name: Generate PWM
+  href: generate-pwm.md
+- name: Control LEDs
+  href: control-leds.md
+- name: Control Poke Peripheral
+  href: control-poke.md
+- name: Mimic Poke Signals
+  href: mimic-poke-signals.md
+- name: Track Rotary Encoder
+  href: track-rotary-encoder.md
+- name: Trigger Cameras
+  href: trigger-cameras.md
+- name: Drive Servos
+  href: drive-servos.md
+- name: Advanced Configuration
+  href: advanced-configuration.md
+- name: Data Management
+- name: Logging and Analysis
+  href: logging-analysis.md
+- name: Troubleshooting
+- name: Errors
+  href: troubleshooting.md
+- name: Mockups
+- name: Digital Output (Original)
+  href: control-digital-outputs.md
+- name: Digital Output (Explain More All)
+  href: mockup-DO-explainmoreall.md
+- name: Digital Output (Explain More Once)
+  href: mockup-DO-explainmoreonce.md
+- name: Digital Output (Explain More Once, Simpler Bullets)
+  href: mockup-DO-explainonce.md
+- name: Digital Output (Explain Once For Copy)
+  href: mockup-DO-explainonceforcopy.md
+- name: Digital Output (Explain More All, Collapsible)
+  href: mockup-DO-collapsible.md
+# - name: Digital Output (Glossary Links)
+#   href: mockup-DO-glossary.md
+# - name: Glossary
+#   href: mockup-glossary.md

@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Visual tool for configuring Harp Behavior devices.</Description>
+    <PackageTags>$(PackageTags) App</PackageTags>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>harp.behavior</ToolCommandName>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\Harp.Behavior.Design\Assets\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CFBundleName>$(MSBuildProjectName)</CFBundleName>
+    <CFBundleDisplayName>$(MSBuildProjectName)</CFBundleDisplayName>
+    <CFBundleIdentifier>org.harp-tech</CFBundleIdentifier>
+    <CFBundleVersion Condition="'$(CiBuildVersion)' != ''">$(CiBuildVersion)</CFBundleVersion>
+    <CFBundleShortVersionString Condition="'$(CiBuildVersion)' != ''">$(CiBuildVersion)</CFBundleShortVersionString>
+    <CFBundlePackageType>AAPL</CFBundlePackageType>
+    <CFBundleSignature>.</CFBundleSignature>
+    <CFBundleExecutable>$(MSBuildProjectName)</CFBundleExecutable>
+    <CFBundleIconFile>logo.icns</CFBundleIconFile>
+    <NSPrincipalClass>NSApplication</NSPrincipalClass>
+    <NSHighResolutionCapable>true</NSHighResolutionCapable>
+    <ApplicationIcon>..\Harp.Behavior.Design\Assets\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <Target Name="CopyAssets" AfterTargets="Build">
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.icns" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\Harp.Behavior.Design\Assets\logo.ico" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <UsingTask
+    Condition="$(RuntimeIdentifier.StartsWith('osx'))"
+    TaskName="NeoBundle.BundleAppTask"
+    AssemblyFile="$(PkgNeoBundle)/lib/netstandard2.1/NeoBundle.dll" />
+
+  <Target
+    Name="BundleMacApp"
+    AfterTargets="Publish"
+    Condition="$(RuntimeIdentifier.StartsWith('osx'))">
+    <BundleAppTask
+      OutDir="$(OutDir)"
+      Version="$(Version)"
+      Authors="$(Authors)"
+      PublishDir="$(PublishDir)"
+      AppName="$(AssemblyName)"
+      IconFile="logo.icns"
+      Copyright="$(Copyright)"/>
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Condition="$(RuntimeIdentifier.StartsWith('osx'))" Include="NeoBundle" Version="1.0.3.1" ExcludeAssets="build;buildTransitive" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Harp.Behavior.Design\Harp.Behavior.Design.csproj" />
+  </ItemGroup>
+</Project>

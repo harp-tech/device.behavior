@@ -5,6 +5,7 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns:p1="clr-namespace:Harp.Behavior;assembly=Harp.Behavior"
+                 xmlns:ui="clr-namespace:Bonsai.Design;assembly=Bonsai.Design"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -39,6 +40,29 @@
         <Name>Behavior Events</Name>
       </Expression>
       <Expression xsi:type="Annotation">
+        <Name>Visualize Analog Data</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Behavior Events</Name>
+      </Expression>
+      <Expression xsi:type="p1:Parse">
+        <harp:Register xsi:type="p1:AnalogData" />
+      </Expression>
+      <Expression xsi:type="ui:VisualizerWindow">
+        <ui:VisualizerType xsi:type="TypeMapping" TypeArguments="ui:ObjectTextVisualizer" />
+        <ui:Visible>true</ui:Visible>
+        <ui:Location>
+          <ui:X>400</ui:X>
+          <ui:Y>100</ui:Y>
+        </ui:Location>
+        <ui:Size>
+          <ui:Width>400</ui:Width>
+          <ui:Height>300</ui:Height>
+        </ui:Size>
+        <ui:WindowState xsi:nil="true" />
+      </Expression>
+      <Expression xsi:type="Annotation">
         <Name>Select Active Events</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
@@ -51,7 +75,7 @@
       <Expression xsi:type="p1:CreateMessage">
         <harp:MessageType>Write</harp:MessageType>
         <harp:Payload xsi:type="p1:CreateEventEnablePayload">
-          <p1:EventEnable>PortDI PortDIO</p1:EventEnable>
+          <p1:EventEnable>PortDI PortDIO Camera0 Camera1</p1:EventEnable>
         </harp:Payload>
       </Expression>
       <Expression xsi:type="MulticastSubject">
@@ -85,6 +109,8 @@
       <Edge From="7" To="8" Label="Source1" />
       <Edge From="10" To="11" Label="Source1" />
       <Edge From="11" To="12" Label="Source1" />
+      <Edge From="14" To="15" Label="Source1" />
+      <Edge From="15" To="16" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

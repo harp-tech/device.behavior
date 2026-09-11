@@ -5,23 +5,23 @@
 ### Key Features
 
 - 3 peripheral ports for plug-and-play peripherals.
-- Timed pulses and PWM (up to 10 kHz with configurable duty cycle) on every digital output.
+- Hardware-timed pulses on every output line, and PWM (up to 10 kHz with configurable duty cycle) on the four digital outputs on the output connector.
 - Support for camera triggering, servo motor control, and quadrature encoder counting.
 - Configurable LED drive current (up to 100 mA) and RGB LED driver.
 
 ### Specs
 
-- Analog inputs: 2 (12-bit, sampled at 1 kHz)
-- Digital inputs: 1 (**DI3**, 5 V)
-- General-purpose digital outputs: 4 (5 V, with pulse and PWM support)
-- PWM frequency: 1 Hz – 10 kHz, duty cycle 1 – 99%
-- Peripheral ports: 3 (**P0**–**P2**; IR input, LED, 12 V valve, and DIO line per port)
-- LED outputs: 2 (**L0**/**L1**, 2 – 100 mA drive current)
-- RGB LED outputs: 2 (WS2812-type addressable LEDs on the **RGB** connector, driven as a serial chain)
+- Analog inputs: 2 (12-bit, sampled at 1 kHz; the second analog input is available on hardware 2.0 only)
+- Digital inputs: 4 (1 on the input connector available on hardware 2.0 only, 3 on the peripheral ports accessible with [Breakout](./peripherals/peripherals-portbreakout.md) board, 5V)
+- Digital outputs: 7 (4 on the output connector, 3 on the peripheral ports accessible with [Breakout](./peripherals/peripherals-portbreakout.md) board)
+- Digital output pulse duration: 1 – 65535 ms (supported on all digital outputs)
+- Digital output PWM: 1 Hz – 10 kHz, duty cycle 1 – 99% (supported on the output connector only).
+- Peripheral ports: 3 (Compatible with [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board)
+- LED outputs: 2 (2 – 100 mA drive current)
+- RGB LED outputs: 2 (WS2812-type addressable LEDs connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2 – 600 Hz)
 - Servo outputs: 2 (**DO2**/**DO3**, period and pulse width in µs)
 - Quadrature encoder inputs: 1 (on **P2**, read at 1 kHz)
-- Output pulse duration: 1 – 65535 ms
 - Timestamp resolution: 32 µs
 - Synchronization frequency: 1 Hz
 - Synchronization accuracy: 22 ± 16 µs (between clock generator and this device)
@@ -30,23 +30,23 @@
 
 | Version | Notes |
 | ------- | ----- |
-| 2.0 | <ul><li> Current version, documented in this guide </li></ul> |
-| 1.2 | <ul><li> Earlier revision, uses case_v1.1_v1.2 enclosure </li></ul> |
-| 1.1 | <ul><li> Earlier revision, uses case_v1.1_v1.2 enclosure </li></ul> |
+| 2.0 | <ul><li> Added the input connector with second analog input and the third digital input. </li></ul> |
+| 1.2 | <ul><li> ? </li></ul> |
+| 1.1 | <ul><li> Initial version </li></ul> |
 
 > [!WARNING]
-> **TODO**: Fill in what changed between hardware revisions 1.1, 1.2, and 2.0 (e.g. second analog input, connector changes). The repository records only the current 2.0 design files.
+> **TODO**: v1.1 pcb files are not available in the repository, v1.2 pcb is the earliest files. Confirm which is the earliest production version.
 
 ### Firmware
 
 | Version | Notes |
 | ------- | ----- |
-| 3.4 | <ul><li> Aligned firmware register naming with the interface and `device.yml` </li></ul> |
 | 3.3 | <ul><li> Fixed the read function of the digital inputs register </li></ul> |
-| 3.2 | <ul><li> Added the `EncoderMode` register </li></ul> |
-| 3.1 | <ul><li> Added an event when the last trigger is sent to the camera after stopping </li><li> Cameras stop when the device goes to standby mode </li><li> Added serial timestamp registers </li></ul> |
+| 3.2 | <ul><li> Add limits to ServoMotor registers </li><li> Create displacement reading option for quadrature encoder. </li></ul> |
+| 3.1 | <ul><li> Support for hardware 2.0 </li><li> Added serial timestamp registers </li></ul> |
+| 3.0 | <ul><li> Initial version </li></ul> |
 
 > [!WARNING]
-> **TODO**: The firmware notes above were derived from commit messages between release tags. Verify them against the release notes on the [releases page](https://github.com/harp-tech/device.behavior/releases), and extend the table with older releases if needed.
+> **TODO**: There are no earlier firmware versions than 3.0. See if there are any notes for the earlier versions.
 
 [!INCLUDE [](version-footer.md)]

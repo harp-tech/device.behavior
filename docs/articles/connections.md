@@ -23,46 +23,111 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 **Output (Screw Terminal)** - These general-purpose 5 V digital outputs can be used to communicate with external devices. **DO0**/**DO1** can generate [camera triggers](trigger-cameras.md) and **DO2**/**DO3** can drive [servo motors](drive-servos.md); all four support [PWM](generate-pwm.md).
 
-**Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection.
+**Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection. This connector is only available on hardware 2.0 and above boards.
 
 **RGB (3-pin Flick Lock)** - Connector for up to two WS2812-type (Neopixels) addressable RGB LEDs, driven as a serial chain on a single data line. Colors are set with the [RGB registers](control-leds.md#set-rgb-colors).
 
 **L0, L1 (Screw Terminal)** - These connectors control two regular current-controlled LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
-
-> [!NOTE]
-> Depending on the [hardware version](./behavior-overview.md) of your device, some of the ports above may be different. Always check the printed label on the PCB.
 
 ### Connections
 
 > [!NOTE]
 > Work in progress!
 
-#### Connect a Nose Poke
+# [Analog Input](#tab/analoginput)
 
-[placeholder - connection-poke.svg]
 
-1. Connect the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
-2. Refer to the [Control Poke Peripheral](control-poke.md) article to configure the Mice Poke peripheral in Bonsai.
+![Analog Input](../images/connection-analoginput.svg){width=600}
 
-#### Connect an Encoder
+1. Wire the analog signal (0 – 5 V) to either **AD0** on the **ADC** connector (shown above) or **AD1** (hardware > v2.0 only) on the **Input** connector. 
+2. Connect the ground wire to any **GND** pin.
+3. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the signal in Bonsai.
 
-[placeholder - connection-encoder.svg]
+# [Digital Input](#tab/digitalinput)
 
-1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable.
-2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai.
+[placeholder - connection-digitalinput.svg]{width=450}
 
-#### Connect a Speaker
+1. Wire the 5 V digital signal to **DI3** on the **Input** screw terminal (hardware 2.0 only) and its ground to the **GND** pin on the same terminal.
+2. Alternatively, connect a [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable, then wire the signal to its **DI** terminal and the ground to its **GND** terminal. These inputs are represented in the Bonsai interface as `DIPort0`–`DIPort2`.
+3. Refer to the [Read Digital Inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
-[placeholder - connection-speaker.svg]
+# [Digital Output](#tab/digitaloutput)
+
+[placeholder - connection-digitaloutput.svg]{width=450}
+
+1. Wire the external device's digital input to one of **DO0** – **DO3** on the **Output** screw terminal, and connect the external device's ground to a **GND** pin on the same terminal.
+2. Alternatively, connect a [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable, then wire the external device's digital input to its **DO** terminal and the external device's ground to its **GND** terminal. These outputs are represented in the Bonsai interface as `DOPort0`–`DOPort2`.
+3. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to switch the output in Bonsai.
+
+# [Photodiode](#tab/photodiode)
+
+[placeholder - connection-photodiode.svg]{width=450}
+
+1. Wire the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral to the **ADC** screw terminal: the supply wire to the 5 V pin, the ground wire to a **GND** pin, and the output wire to **AD0**.
+2. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity in Bonsai.
+
+# [Speaker](#tab/speaker)
+
+[placeholder - connection-speaker.svg]{width=450}
 
 1. Wire the [Speaker](./peripherals/peripherals-speaker.md) peripheral to the **Output** screw terminal: the signal pin to **DO0** and the ground pin to **GND**.
 2. Refer to the [Generate PWM](generate-pwm.md) article to play tones in Bonsai.
 
-#### Connect a Photodiode
+# [LED](#tab/led)
 
-[placeholder - connection-photodiode.svg]
+[placeholder - connection-led.svg]{width=450}
 
-1. Wire the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral to the **ADC** screw terminal: the supply wire to the 5 V pin, the ground wire to a **GND** pin, and the output wire to **AD0**.
-2. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity in Bonsai.
+1. Wire an LED to the **L0** terminal pair: the long leg (anode) to **A** and the short leg (cathode) to **K**. No series resistor is needed; the drive current is configured in software.
+2. Alternatively, connect up to two WS2812-type addressable RGB LEDs to the **RGB** connector as a serial chain.
+3. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
+
+# [Mice Poke](#tab/poke)
+
+[placeholder - connection-poke.svg]{width=450}
+
+1. Connect the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
+2. Refer to the [Control Poke Peripheral](control-poke.md) article to configure the Mice Poke peripheral in Bonsai.
+
+# [Encoder](#tab/encoder)
+
+[placeholder - connection-encoder.svg]{width=450}
+
+1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable.
+2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai.
+
+# [Camera](#tab/camera)
+
+[placeholder - connection-camera.svg]{width=450}
+
+1. Wire the camera's external trigger input to **DO0** or **DO1** on the **Output** screw terminal, and the camera's trigger ground to a **GND** pin on the same terminal.
+2. Check that the camera's trigger input accepts a 5 V signal. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
+3. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure and start the trigger in Bonsai.
+
+# [Servos](#tab/servo)
+
+[placeholder - connection-servo.svg]{width=450}
+
+1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** screw terminal.
+2. Connect the servo power wire to the 5 V pin on the **ADC** screw terminal or [Breakout](./peripherals/peripherals-portbreakout.md) board. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
+3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
+4. Refer to the [Drive Servos](drive-servos.md) article to move the servo in Bonsai.
+
+# [Harp Synchronization](#tab/harpsynchronization)
+
+[placeholder - connection-harpsynchronization.svg]{width=450}
+
+1. Connect a clock output of a Harp clock generator (e.g. the [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) to the **CLKIN** jack with a stereo jack cable.
+2. The Behavior board adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected boards blink simultaneously.
+3. Refer to the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html) documentation for how devices synchronize.
+
+# [Serial Timestamp](#tab/serialtimestamp)
+
+[placeholder - connection-serialtimestamp.svg]{width=450}
+
+1. Connect a [Breakout](./peripherals/peripherals-portbreakout.md) board (v2.x) to port **P2** with an RJ45 cable.
+2. Wire the breakout **TX** terminal to the receiving device's serial input and a breakout **GND** terminal to its ground. Set the breakout's logic-level jumper to match the receiver (3.3 V or 5 V).
+3. Refer to the [Advanced Configuration](advanced-configuration.md#stream-timestamps) article to enable the timestamp stream in Bonsai.
+
+---
 
 [!INCLUDE [](version-footer.md)]

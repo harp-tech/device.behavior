@@ -11,9 +11,9 @@
 
 ### Specs
 
-- Analog inputs: 2 (12-bit, sampled at 1 kHz; the second analog input is available on hardware 2.0 only)
-- Digital inputs: 4 (1 on the input connector available on hardware 2.0 only, 3 on the peripheral ports accessible with [Breakout](./peripherals/peripherals-portbreakout.md) board, 5V)
-- Digital outputs: 7 (4 on the output connector, 3 on the peripheral ports accessible with [Breakout](./peripherals/peripherals-portbreakout.md) board)
+- Analog inputs: 2 (5 V, 12-bit, sampled at 1 kHz; the second analog input is available on hardware 2.0 only)
+- Digital inputs: 4 (1 on the input connector available on hardware 2.0 only, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board, 5 V)
+- Digital outputs: 7 (4 on the output connector, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board)
 - Digital output pulse duration: 1 – 65535 ms (supported on all digital outputs)
 - Digital output PWM: 1 Hz – 10 kHz, duty cycle 1 – 99% (supported on the output connector only).
 - Peripheral ports: 3 (Compatible with [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board)

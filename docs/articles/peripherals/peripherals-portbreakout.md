@@ -6,8 +6,11 @@ The Harp Breakout is an interface peripheral for the Behavior board. It makes th
 
 ### Key Features
 
-- Allows the control of a 12V valve (e.g. Lee LHD series) (v1.1 only).
-- Allows the use of the Behavior board serial TX instead of the valve return pin, with the logic level selected by the onboard jumper (v2.x only).
+- Supports 12 V solenoid valves (e.g. Lee LHD series) (v1.1 only).
+- Supports [serial timestamp](../advanced-configuration.md#stream-timestamps) output, with the logic level selected by the onboard jumper (v2.x only).
+
+> [!NOTE]
+> Pick the board version for which feature you need, the two features are mutually exclusive as they use the same pins.
 
 ### Ports
 
@@ -16,7 +19,7 @@ The Harp Breakout is an interface peripheral for the Behavior board. It makes th
 - 1x Digital Output (DO)
 - 1x 5V supply (+5V)
 - 1x Ground (GND)
-- 1x 12V supply (+12V) (v1.1 only)
+- 1x 12 V supply (+12V) (v1.1 only)
 - 1x Supply return (compatible for +5V and +12V) (SUP_RTN) (v1.1 only)
 - 1x Serial TX (v2.x only)
 

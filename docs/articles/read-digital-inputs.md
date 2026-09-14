@@ -1,6 +1,6 @@
 ## Read Digital Inputs
 
-The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** screw terminal. Refer to the [connections](./connections.md) article to set up the hardware connection.
+The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** connector. Refer to the [connections](./connections.md) article to set up the hardware connection.
 
 This article covers how to visualize the digital input events in Bonsai.
 

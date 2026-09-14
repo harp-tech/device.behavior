@@ -186,7 +186,11 @@
          style="fill:url(#gradGndFadeFill);fill-opacity:1;stroke:url(#gradGndFadeStroke);stroke-width:4;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0"
          d="m 517.44,103.86 h 50"
          id="pathInputGndFade"
-         inkscape:label="Gnd_Line" /></g><rect
+         inkscape:label="Gnd_Line" /><path
+         style="fill:url(#gradSignalFadeFill);fill-opacity:1;stroke:url(#gradSignalFadeStroke);stroke-width:4;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 517.18,131.16 h 50"
+         id="pathInputDI3Fade"
+         inkscape:label="DI3_Signal_Line" /></g><rect
        style="display:inline;fill:none;stroke:#000000;stroke-width:2.18;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rectInputZoomBox"
        width="84.19"

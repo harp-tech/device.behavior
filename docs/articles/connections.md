@@ -63,8 +63,19 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 ![Photodiode](../images/connection-photodiode.svg){width=600}
 
-1. Wire the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral to the **ADC** connector: the supply wire to the 5 V pin, the ground wire to a **GND** pin, and the output wire to **AD0**.
-2. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity in Bonsai.
+Before connecting the [Photodiode](./peripherals/peripherals-photodiode.md), switch the jumper setting on the casing to either **ANA** for an analog reading or **DIG** for a digital output.
+
+For an analog reading:
+
+1. Wire the [Photodiode](./peripherals/peripherals-photodiode.md) signal wire to either **AD0** on the **ADC** connector (shown above) or **AD1** (hardware > v2.0 only) on the Input connector.
+2. Wire the supply wire to any **+5 V** pin and the ground wire to any **GND** pin.
+3. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity as an analog reading in Bonsai.
+
+Alternatively, for a digital output:
+1. Wire the [Photodiode](./peripherals/peripherals-photodiode.md) signal wire to **DI3** on the **Input** connector (hardware > v2.0 only) if you have access to it.
+2. Otherwise, connect the [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable, then wire the signal to its **DI** terminal. These inputs are represented in the Bonsai interface as `DIPort0`–`DIPort2`.
+3. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read the light intensity as a digital input reading in Bonsai.
+4. Turn the adjustment screw to tune the light threshold for the low and high state of the digital output and monitor the response in Bonsai.
 
 # [Speaker](#tab/speaker)
 

@@ -1,6 +1,6 @@
 ## Control Digital Outputs
 
-The Behavior board has four general-purpose digital outputs **DO0** – **DO3** on the **Output** screw terminal. Refer to the [connections](./connections.md) article to set up a digital output on **DO0**, which we will use for the rest of these examples.
+The Behavior board has four general-purpose digital outputs **DO0** – **DO3** on the **Output** connector. Refer to the [connections](./connections.md) article to set up a digital output on **DO0**, which we will use for the rest of these examples.
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 

@@ -10,7 +10,7 @@ The Harp Breakout is an interface peripheral for the Behavior board. It makes th
 - Supports [serial timestamp](../advanced-configuration.md#stream-timestamps) output, with the logic level selected by the onboard jumper (v2.x only).
 
 > [!NOTE]
-> Pick the board version for which feature you need, the two features are mutually exclusive as they use the same pins.
+> Pick the board version by the feature you need, both features are not available on the same board as they share the same port line.
 
 ### Ports
 

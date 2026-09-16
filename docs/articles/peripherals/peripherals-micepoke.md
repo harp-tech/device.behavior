@@ -32,8 +32,8 @@ The Harp Mice Poke is a nose-poke peripheral for the Behavior board. It detects 
 | Version | Compatible Behavior Board | Notes |
 | ------- | ------------------------- | ----- |
 | 1.4 | > 1.0 | <ul><li> Update valve footprint </li><li> Increased LED resistor</li></ul> |
-| 1.3 | > 1.0 | <ul><li> To document </li></ul> |
-| 1.2 | > 1.0 | <ul><li> To document </li></ul> |
+| 1.3 | > 1.0 | <ul><li> Screw terminals consolidated into a single block </li><li> Added infrared beam and photodiode access on the screw terminals </li></ul> |
+| 1.2 | > 1.0 | <ul><li> Initial version </li></ul> |
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Mice Poke](https://github.com/harp-tech/peripheral.micepoke) repository.
 

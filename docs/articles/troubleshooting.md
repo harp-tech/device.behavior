@@ -24,6 +24,10 @@ A: The input line on the external device might have low impedance. The **DO0**â€
 
 Also check that the ground connection is shared between the devices, as improper grounding can produce offset voltage levels in the low state.
 
+**Q: How do I use the DIO pins on the peripheral ports as digital outputs?**
+
+A: The **DIO** line on ports **P0**â€“**P2** work as a digital input in the current firmware, as the functionality to switch the pins from digital input to digital output have not been implemented yet. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read those pins.
+
 [!INCLUDE [](version-footer.md)]
 
 <!--Reference Style Links -->

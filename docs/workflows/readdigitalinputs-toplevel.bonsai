@@ -60,6 +60,28 @@
         </ui:Size>
         <ui:WindowState xsi:nil="true" />
       </Expression>
+      <Expression xsi:type="Annotation">
+        <Name>Visualize Port DIO Events</Name>
+        <Text><![CDATA[]]></Text>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Behavior Events</Name>
+      </Expression>
+      <Expression xsi:type="beh:Parse">
+        <harp:Register xsi:type="beh:TimestampedPortDIOStateEvent" />
+      </Expression>
+      <Expression xsi:type="ui:VisualizerWindow">
+        <ui:Visible>true</ui:Visible>
+        <ui:Location>
+          <ui:X>400</ui:X>
+          <ui:Y>420</ui:Y>
+        </ui:Location>
+        <ui:Size>
+          <ui:Width>300</ui:Width>
+          <ui:Height>300</ui:Height>
+        </ui:Size>
+        <ui:WindowState xsi:nil="true" />
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="1" To="2" Label="Source1" />
@@ -67,6 +89,8 @@
       <Edge From="3" To="4" Label="Source1" />
       <Edge From="6" To="7" Label="Source1" />
       <Edge From="7" To="8" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

@@ -97,14 +97,30 @@ Alternatively, for a digital output:
 ![Mice Poke](../images/connection-poke.svg){width=600}
 
 1. Connect the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
-2. Refer to the [Control Poke Peripheral](control-poke.md) article to configure the Mice Poke peripheral in Bonsai.
+2. If the peripheral comes with an integrated water valve, connect the valve's inlet to the liquid container with tubing (2.0 mm inner diameter FEP, or 2.1 mm PTFE).
+3. Refer to the [Control Poke Peripheral](control-poke.md) article to configure and use the Mice Poke peripheral in Bonsai.
+
+The peripheral is ready to use! The screw terminal blocks are only needed for external use, they tap the same connections that are carried by the RJ45 connector.
+Use them to control the peripheral from another device, log its signals, wire a different solenoid valve, or connect an extra sensor.
+
+For wiring to the screw terminals:
+
+1. Share ground between the external device and any **GND** terminal.
+2. Use the **+5V** terminal to power the peripheral when it is not connected to the Behavior board, or to power external devices when it is. Never connect an external supply to **+5V** while the Behavior board is also connected.
+3. Wire external signals (5 V logic) to the labeled terminals:
+    - **DIO1** - This line is limited to digital inputs as the functionality to toggle it to a digital output has not yet been added. Use it to add a external sensor like a lever, as it is not connected to any of the peripheral sensors. The Behavior board reports the changes as [port DIO events](read-digital-inputs.md#visualize-port-dio-events).
+    - **IR LED**, **IR PHT** - Connects to the infrared beam LED emitter, as well as the infrared photodetector. Use it to either control or mirror those signals.
+    - **LED** - Connected to the [onboard cue LEDs](control-poke.md#drive-the-poke-led). Use it to control the LED, mirror the signal, or add an extra LED (no series resistor is needed).
+4. To use your own solenoid valve for reward delivery, disconnect the integrated valve's leads from the **VALVE** terminal (if fitted) and wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
 
 # [Encoder](#tab/encoder)
 
-[placeholder - connection-encoder.svg]{width=450}
+![Encoder](../images/connection-encoder.svg){width=600}
 
-1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable.
+1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
 2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai.
+
+The peripheral is ready to use! The solder pads are only needed for external use, they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
 
 # [Camera](#tab/camera)
 

@@ -86,11 +86,12 @@ Alternatively, for a digital output:
 
 # [LED](#tab/led)
 
-[placeholder - connection-led.svg]{width=450}
+![LED](../images/connection-led.svg){width=600}
 
-1. Wire an LED to the **L0** terminal pair: the long leg (anode) to **A** and the short leg (cathode) to **K**. No series resistor is needed; the drive current is configured in software.
-2. Alternatively, connect up to two WS2812-type addressable RGB LEDs to the **RGB** connector as a serial chain.
-3. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
+1. Wire a standard LED to either the  **L0** or **L1** terminal pair with the long leg (anode) to the **A** pin and the short leg (cathode) to **K**. No series resistor is needed as the drive current can be set in Bonsai.
+2. Connect a WS2812-type addressable RGB LED to the **RGB** connector with the signal wire going to **S** and the power and ground going to **5V** and **G**. 
+3. Up to two RGB LEDs can be driven, connect the second one as a serial chain with the same wiring configuration.
+4. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
 
 # [Mice Poke](#tab/poke)
 
@@ -108,7 +109,7 @@ For wiring to the screw terminals:
 1. Share ground between the external device and any **GND** terminal.
 2. Use the **+5V** terminal to power the peripheral when it is not connected to the Behavior board, or to power external devices when it is. Never connect an external supply to **+5V** while the Behavior board is also connected.
 3. Wire external signals (5 V logic) to the labeled terminals:
-    - **DIO1** - This line is limited to digital inputs as the functionality to toggle it to a digital output has not yet been added. Use it to add a external sensor like a lever, as it is not connected to any of the peripheral sensors. The Behavior board reports the changes as [port DIO events](read-digital-inputs.md#visualize-port-dio-events).
+    - **DIO1** - This line is not connected to any of the peripheral sensors and acts as an extra digital input. (the functionality to toggle it to digital output has not been added yet). Use it to add a external sensor like a lever. The Behavior board reports the changes as [port DIO events](read-digital-inputs.md#visualize-port-dio-events).
     - **IR LED**, **IR PHT** - Connects to the infrared beam LED emitter, as well as the infrared photodetector. Use it to either control or mirror those signals.
     - **LED** - Connected to the [onboard cue LEDs](control-poke.md#drive-the-poke-led). Use it to control the LED, mirror the signal, or add an extra LED (no series resistor is needed).
 4. To use your own solenoid valve for reward delivery, disconnect the integrated valve's leads from the **VALVE** terminal (if fitted) and wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
@@ -118,9 +119,18 @@ For wiring to the screw terminals:
 ![Encoder](../images/connection-encoder.svg){width=600}
 
 1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
-2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai.
+2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. 
 
 The peripheral is ready to use! The solder pads are only needed for external use, they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
+
+For wiring to the solder pads:
+
+1. Share ground between the external device and the **-** pad.
+2. Use the **+** pad to power the external encoder when the Behavior board is connected, or to power the peripheral when it is not. Never connect an external supply to **+** while the Behavior board is also connected.
+3. Wire an external encoder's quadrature signals (5 V logic) to the **A** and **B** pads:
+    - Do not turn the onboard encoder while an external one is wired, as both share the same lines. Alternatively, you can also disconnect the onboard rotary encoder.
+4. To log the raw quadrature signals from the onboard encoder instead, connect **A** and **B** to digital inputs.
+
 
 # [Camera](#tab/camera)
 
@@ -132,10 +142,11 @@ The peripheral is ready to use! The solder pads are only needed for external use
 
 # [Servos](#tab/servo)
 
-[placeholder - connection-servo.svg]{width=450}
+![Servos](../images/connection-servo.svg){width=600}
 
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector.
-2. Connect the servo power wire to the 5 V pin on the **ADC** connector or [Breakout](./peripherals/peripherals-portbreakout.md) board. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
+2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
+3. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more power pins on the peripheral ports.
 3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
 4. Refer to the [Drive Servos](drive-servos.md) article to move the servo in Bonsai.
 
@@ -161,9 +172,9 @@ For streaming the serial timestamp (v2.x only):
 
 # [Harp Synchronization](#tab/harpsynchronization)
 
-[placeholder - connection-harpsynchronization.svg]{width=450}
+![Harp Synchronization](../images/connection-harpsynchronization.svg){width=600}
 
-1. Connect a clock output of a Harp clock generator (e.g. the [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) to the **CLKIN** jack with a stereo jack cable.
+1. Connect a clock output of a Harp clock generator (e.g. the [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) to the **CLKIN** jack with a stereo plug cable.
 2. The Behavior board adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected boards blink simultaneously.
 3. Refer to the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html) documentation for how devices synchronize.
 

@@ -90,7 +90,7 @@ Alternatively, for a digital output:
 
 1. Wire a standard LED to either the  **L0** or **L1** terminal pair with the long leg (anode) to the **A** pin and the short leg (cathode) to **K**. No series resistor is needed as the drive current can be set in Bonsai.
 2. Connect a WS2812-type addressable RGB LED to the **RGB** connector with the signal wire going to **S** and the power and ground going to **5V** and **G**. 
-3. Up to two RGB LEDs can be driven, connect the second one as a serial chain with the same wiring configuration.
+3. Up to two RGB LEDs can be driven. Connect the second one as a serial chain with the same wiring configuration.
 4. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
 
 # [Mice Poke](#tab/poke)
@@ -134,17 +134,20 @@ For wiring to the solder pads:
 
 # [Camera](#tab/camera)
 
-[placeholder - connection-camera.svg]{width=450}
+![Camera](../images/connection-camera.svg){width=600}
 
-1. Wire the camera's external trigger input to **DO0** or **DO1** on the **Output** connector, and the camera's trigger ground to any **GND** pin.
-2. Check that the camera's trigger input accepts a 5 V signal. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
-3. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure and start the trigger in Bonsai.
+1. Locate the GPIO (general purpose input/output) connector on your camera. Refer to the camera manual for the connector pinout as it varies widely between camera models and manufacturers.
+2. Check that the camera is compatible with the 5 V trigger signal from the Behavior board. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
+3. Configure the external trigger in the camera vendor's software to use the rising edge of the trigger. Avoid modes that use the trigger pulse width to control exposure as the pulse width is fixed at half the trigger period.
+4. Wire the camera's external trigger input to **DO0** or **DO1** on the **Output** connector. These are the only ports that support the camera trigger functionality. 
+5. Connect the camera's trigger ground to any **GND** pin.
+6. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure and start the trigger in Bonsai.
 
 # [Servos](#tab/servo)
 
 ![Servos](../images/connection-servo.svg){width=600}
 
-1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector.
+1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
 2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
 3. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more power pins on the peripheral ports.
 3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.

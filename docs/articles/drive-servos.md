@@ -20,7 +20,7 @@ To configure the servo, set the period and pulse-width registers for the digital
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `ServoMotor2PeriodPayload` to configure .
+    - `Payload` - Select `ServoMotor2PeriodPayload`.
     - `ServoMotor2Period` - Set the period of the servo pulse train in µs (e.g. 20000 for a 50 Hz servo update).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
@@ -29,7 +29,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `ServoMotor2PulsePayload`.
-    - `ServoMotor2Pulse` - Set the pulse width in µs (e.g. 1500 for the center position of a standard servo, the range is typically 1000 – 2000 µs).
+    - `ServoMotor2Pulse` - Set the pulse width in µs (e.g. 1500 for the center position of a standard servo, the range is typically 1000–2000 µs).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>A</kbd> to set the servo period and <kbd>S</kbd> to move the servo to the starting angle. The two registers are bound to separate keys, so you can reset the angle later without reconfiguring the period. Check your servo's datasheet for its period and pulse-width range if you are unsure about which values to use.

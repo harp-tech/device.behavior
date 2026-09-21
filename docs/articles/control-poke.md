@@ -10,12 +10,11 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 ![Detect Pokes](../workflows/controlpoke-toplevel.bonsai)
 :::
 
-> [!NOTE]
-> To interface with other external devices or accessories, the [Breakout](./peripherals/peripherals-portbreakout.md) extension board makes the peripheral ports' pins available as regular screw-terminal inputs and outputs.
+[!INCLUDE [](breakout-note.md)]
 
 ### Visualize Poke Events
 
-Beam breaks in the Mice Poke peripheral are reported as digital input events.  The three peripheral ports **P0 - P2** are represented as `DIPort0` - `DIPort2` in the [`DigitalInputState`] event register.
+Beam breaks in the Mice Poke peripheral are reported as digital input events. The three peripheral ports **P0**–**P2** are represented as `DIPort0` - `DIPort2` in the [`DigitalInputState`] event register.
 
 :::workflow
 ![Detect Pokes Visualize Events](../workflows/controlpoke-visualizeevents.bonsai)
@@ -100,7 +99,7 @@ In a separate branch:
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `DigitalInputState`.
 - Insert a [`HasFlag`] operator and set the `Value` property to `DIPort0`.
-- Insert a [`Condition`] operator, leaving its inner workflow at the default. Only beam-break events at **P0** pass through; beam restores and events from other ports are filtered out.
+- Insert a [`Condition`] operator, leaving its inner workflow at the default. This operator lets through messages where the value equates to `DIPort0`. In essence, only beam-break events at **P0** pass through; beam restores and events from other ports are filtered out.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `SupplyPort0`.

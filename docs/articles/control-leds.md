@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure LED Current
 
-The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current register ([`Led0Current`], 2 – 100 mA) and a protection limit ([`Led0MaxCurrent`], 5 – 100 mA); writes above the limit are rejected by the device.
+The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current register ([`Led0Current`], 2–100 mA) and a protection limit ([`Led0MaxCurrent`], 5–100 mA); writes above the limit are rejected by the device.
 
 :::workflow
 ![Configure LED Current](../workflows/controlleds-current.bonsai)
@@ -28,7 +28,7 @@ The **L0** and **L1** outputs drive standard single-color LEDs with a configurab
     - `Led0Current` - Set the working current in mA (e.g. 10).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd> to configure the LED 0 drive current, then switch the output on as shown in the next section.
+Run the workflow and press <kbd>A</kbd> to configure the **L0** drive current, then switch the output on as shown in the next section.
 
 ### Turn LEDs On and Off
 
@@ -52,7 +52,7 @@ In a separate branch:
     - `OutputClear` - Select `Led0`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, then press <kbd>S</kbd> to light the LED and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
+Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
 
 ### Set RGB Colors
 
@@ -101,7 +101,7 @@ In a separate branch:
     - `OutputClear` - Select `Rgb0` and `Rgb1`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, then press <kbd>G</kbd> to light both RGB LEDs and <kbd>H</kbd> to turn them off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
+Run the workflow, then press <kbd>G</kbd> to turn on both RGB LEDs and <kbd>H</kbd> to turn them off.
 
 [!INCLUDE [](version-footer.md)]
 

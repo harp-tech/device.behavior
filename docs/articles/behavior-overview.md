@@ -11,15 +11,15 @@
 
 ### Specs
 
-- Analog inputs: 2 (5 V, 12-bit, sampled at 1 kHz; the second analog input is available on hardware 2.0 only)
-- Digital inputs: 4 (1 on the input connector available on hardware 2.0 only, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board, 5 V)
+- Analog inputs: 2 (5 V, 12-bit, sampled at 1 kHz; the second analog input is available on hardware v2.0 or later boards)
+- Digital inputs: 4 (1 on the input connector available on hardware v2.0 or later, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board, 5 V)
 - Digital outputs: 7 (4 on the output connector, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board)
-- Digital output pulse duration: 1 – 65535 ms (supported on all digital outputs)
-- Digital output PWM: 1 Hz – 10 kHz, duty cycle 1 – 99% (supported on the output connector only).
+- Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
+- Digital output PWM: 1 Hz–10 kHz, duty cycle 1–99% (supported on the output connector only).
 - Peripheral ports: 3 (Compatible with [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board)
-- LED outputs: 2 (2 – 100 mA drive current)
+- LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LEDs connector, driven as a serial chain)
-- Camera triggers: 2 (**DO0**/**DO1**, 2 – 600 Hz)
+- Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)
 - Servo outputs: 2 (**DO2**/**DO3**, period and pulse width in µs)
 - Quadrature encoder inputs: 1 (on **P2**, read at 1 kHz)
 - Timestamp resolution: 32 µs
@@ -31,7 +31,7 @@
 | Version | Notes |
 | ------- | ----- |
 | 2.1 | <ul><li> Changed USB connector from Mini-B to USB-C </li></ul> |
-| 2.0 | <ul><li> Added the input connector with second analog input and the third digital input. </li></ul> |
+| 2.0 | <ul><li> Added an input connector with an extra analog input and digital input. </li></ul> |
 | 1.2 | <ul><li> ? </li></ul> |
 | 1.1 | <ul><li> Initial version </li></ul> |
 

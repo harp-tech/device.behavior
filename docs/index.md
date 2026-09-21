@@ -6,9 +6,9 @@ The Harp [Behavior](articles/behavior-overview.md) board is a multi-purpose data
 
 A typical behavioral rig combines sensors, cue lights, reward valves, cameras and motorized actuators. These components usually need individual control interfaces and post-hoc alignment to a common timeline. The Behavior board brings them together on a single device, so that every input and output stream is controlled through one interface and timestamped on the same hardware clock.
 
-The Behavior provides:
+The Behavior board provides:
 
-- General-purpose analog inputs, digital input and outputs for interfacing with external devices.
+- General-purpose digital inputs and outputs, plus analog inputs, for interfacing with external devices.
 - Support for specialized peripherals like [nose pokes](articles/peripherals/peripherals-micepoke.md), camera triggers, servo motors, quadrature encoders and more.
 - Hardware timestamping and synchronization with other [Harp](https://harp-tech.org/articles/about.html) devices.
 - [Bonsai](https://bonsai-rx.org/) integration for flexible experiment acquisition and control.

@@ -70,7 +70,6 @@ Run the workflow and press <kbd>S</kbd>. The `Encoder` value in the analog strea
 [`MulticastSubject`]: xref:Bonsai.Expressions.MulticastSubject
 [`SubscribeSubject`]: xref:Bonsai.Expressions.SubscribeSubject
 [`Parse`]: xref:Harp.Behavior.Parse
-[`MemberSelector`]: xref:Bonsai.Expressions.MemberSelectorBuilder
 [`VisualizerWindow`]: xref:Bonsai.Design.VisualizerWindow
 [`EnableEncoders`]: xref:Harp.Behavior.EnableEncoders
 [`EncoderMode`]: xref:Harp.Behavior.EncoderMode

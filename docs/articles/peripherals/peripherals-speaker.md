@@ -17,7 +17,7 @@ The Harp Speaker is a sound output peripheral for the Behavior board. It connect
 
 - Input signal: 5 V PWM
 - Speaker: PUI Audio AST-03208MR-R
-- Frequency range: 500 Hz – 10 kHz. 
+- Frequency range: 500 Hz–10 kHz. 
 - Connector: Screw terminal
 
 > [!NOTE]

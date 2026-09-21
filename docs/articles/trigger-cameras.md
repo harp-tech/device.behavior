@@ -15,7 +15,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure Trigger Frequency
 
-The trigger frequency of each camera is set with the appropriate register for the port, so  [`Camera1Frequency`] for **DO1**:
+The trigger frequency of each camera is set with the appropriate register for the port, e.g. [`Camera1Frequency`] for **DO1**:
 
 :::workflow
 ![Configure Trigger Frequency](../workflows/triggercameras-frequency.bonsai)

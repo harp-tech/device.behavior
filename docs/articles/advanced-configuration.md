@@ -38,7 +38,7 @@ The [`EventEnable`] register selects which event streams the device broadcasts, 
     - `EventEnable` - Enter `PortDI`, `PortDIO`, `Camera0`, `Camera1` to disable the `AnalogData` event and keep the rest.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd>. The visualizer will stop showing any new [`AnalogData`](acquire-analog-data.md) events
+Run the workflow and press <kbd>A</kbd>. The visualizer will stop showing any new [`AnalogData`](acquire-analog-data.md) events.
 
 ### Stream Timestamps
 
@@ -63,8 +63,7 @@ To enable the stream:
 Run the workflow and press <kbd>S</kbd>. The timestamp stream starts on the **P2** serial line at the next second boundary. Verify the signal on the digital input line on the external device, it should appear as a series of digital input transitions at one second intervals.
 
 > [!NOTE]
-> The serial timestamp stream is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. 
-The Behavior board does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
+> The serial timestamp stream is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. The Behavior board does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
 
 > [!NOTE]
 > Shawn's note - The technical information about the format should enable someone to figure out how to reconstruct the timestamp, but to take someone through the whole process will probably require a tutorial. I am not sure how much to publicize this feature or work on a tutorial for it, as it might change https://github.com/harp-tech/protocol/issues/128.

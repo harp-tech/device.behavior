@@ -1,6 +1,6 @@
 ## Acquire Analog Data
 
-The Behavior board has two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be tested with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
+The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector (hardware v2.0 and later boards). The analog input can be tested with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
 This article covers how to visualize the analog input streams and extract a single channel in Bonsai.
 
@@ -9,9 +9,6 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 :::workflow
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
 :::
-
-> [!NOTE]
-> Hardware version 1.0 only has one ADC.
 
 > [!WARNING]
 > You can find and add these operators to the workflow from the Bonsai [Toolbox](https://bonsai-rx.org/docs/articles/editor.html?tabs=mouse-controls#toolbox). Make sure to use the device-specific versions, e.g. `Device (Harp.Behavior)` instead of `Device (Harp)`. If correctly selected, the names of these operators in the workflow panel will change to reflect either the name of the device or the selected register/payload.
@@ -36,8 +33,8 @@ To visualize only one of the input channels:
 Run the workflow, the first visualizer displays the three payload values:
 
 ```text
-AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput = 13 }
-AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput = 14 }
+AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }
+AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }
 ```
 and the second displays the `AnalogInput0` value on its own.
 

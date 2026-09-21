@@ -20,7 +20,7 @@ The Harp Photodiode is a light-measuring peripheral for the Behavior board. It o
 
 | Version | Compatible Behavior Board | Notes |
 | ------- | ------------------------- | ----- |
-| 2.3 | >1.0 | <ul><li> Initial version </li></ul> |
+| 2.3 | > 1.0 | <ul><li> Initial version </li></ul> |
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp). 
 

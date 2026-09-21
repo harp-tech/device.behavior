@@ -2,7 +2,7 @@
 
 This page covers the software you'll need to interact with the Behavior board, as well as how to update the firmware on the device.
 
-## Software Packages
+### Software Packages
 
 These steps are only required the first time you connect the device to a new computer, and you can install just the packages for the functionality you need.
 
@@ -18,7 +18,7 @@ These steps are only required the first time you connect the device to a new com
 
 # [Python](#tab/python)
 
-The [Harp](https://harp-tech.org/python/) library provides a Python interface for controlling Harp devices and [loading](logging-analysis.md) recorded data. To install the full library, install it in a Python environment with : 
+The [Harp](https://harp-tech.org/python/) library provides a Python interface for controlling Harp devices and [loading](logging-analysis.md) recorded data. To install the full library, install it in a Python environment with: 
 
 ```cmd
 pip install harp
@@ -43,7 +43,7 @@ The [Behavior GUI](behavior-gui.md) is a standalone graphical application for co
 
 ***
 
-## Firmware
+### Firmware Update
 
 New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the Behavior repository. Each firmware release is tagged with a `fw` version prefix (e.g. `fw3.3-harp1.15`), and the `.hex` files can be found in the "Assets" section. Download the file that matches the hardware (`hw`) version of your device.
 

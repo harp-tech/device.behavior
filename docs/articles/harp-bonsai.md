@@ -29,8 +29,8 @@ Before beginning:
 A [visualizer](xref:Bonsai.Design.VisualizerWindow) will automatically open when the workflow starts, displaying the parsed [`AnalogData`] events streaming from the device:
 
 ```text
-AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput = 13 }
-AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput = 14 }
+AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }
+AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }
 ```
 
 The device is ready to use! If, instead, an error appears in Bonsai, check out the [troubleshooting](troubleshooting.md) section.

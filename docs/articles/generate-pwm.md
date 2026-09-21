@@ -1,6 +1,6 @@
 ## Generate PWM
 
-The four general-purpose outputs **DO0** – **DO3** can generate hardware-timed pulse-width modulation (PWM) signals. The PWM signal can be tested with either a [speaker](./peripherals/peripherals-speaker.md) (where the frequency controls the pitch) or an LED (where the duty cycle controls the brightness). Refer to the [connections](./connections.md) article to set up either accessory on **DO0**, which we will use for the rest of these examples.
+The four general-purpose outputs **DO0**–**DO3** can generate hardware-timed pulse-width modulation (PWM) signals. The PWM signal can be tested with either a [speaker](./peripherals/peripherals-speaker.md) (where the frequency controls the pitch) or an LED (where the duty cycle controls the brightness). Refer to the [connections](./connections.md) article to set up either accessory on **DO0**, which we will use for the rest of these examples.
 
 This article covers how to configure the frequency and duty cycle, as well as how to generate and stop the PWM in Bonsai.
 

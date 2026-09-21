@@ -23,7 +23,7 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 **Output (Screw Terminal)** - These general-purpose 5 V digital outputs can be used to communicate with external devices. **DO0**/**DO1** can generate [camera triggers](trigger-cameras.md) and **DO2**/**DO3** can drive [servo motors](drive-servos.md); all four support [PWM](generate-pwm.md).
 
-**Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection. This connector is only available on hardware 2.0 and above boards.
+**Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection. This connector is only available on hardware v2.0 or later boards.
 
 **RGB (3-pin Flick Lock)** - Connector for up to two WS2812-type (Neopixels) addressable RGB LEDs, driven as a serial chain on a single data line. Colors are set with the [RGB registers](control-leds.md#set-rgb-colors).
 
@@ -31,15 +31,11 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 ### Connections
 
-> [!NOTE]
-> Work in progress!
-
 # [Analog Input](#tab/analoginput)
-
 
 ![Analog Input](../images/connection-analoginput.svg){width=600}
 
-1. Wire the analog signal (0 – 5 V) to either **AD0** on the **ADC** connector (shown above) or **AD1** (hardware > v2.0 only) on the **Input** connector. 
+1. Wire the analog signal (0–5 V) to either **AD0** on the **ADC** connector (shown above) or **AD1** (hardware v2.0 or later) on the **Input** connector. 
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the signal in Bonsai.
 
@@ -47,7 +43,7 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 ![Digital Input](../images/connection-digitalinput.svg){width=600}
 
-1. Wire the 5 V digital signal to **DI3** on the **Input** connector (hardware 2.0 only) and its ground to any **GND** pin.
+1. Wire the 5 V digital signal to **DI3** on the **Input** connector (hardware v2.0 or later) and its ground to any **GND** pin.
 2. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital inputs on the peripheral ports.
 3. Refer to the [Read Digital Inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
@@ -55,7 +51,7 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 ![Digital Output](../images/connection-digitaloutput.svg){width=600}
 
-1. Wire the external device's digital input to one of **DO0** – **DO3** on the **Output** connector, and connect the external device's ground to any **GND** pin.
+1. Wire the external device's digital input to one of **DO0**–**DO3** on the **Output** connector, and connect the external device's ground to any **GND** pin.
 2. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital outputs on the peripheral ports.
 3. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to switch the output in Bonsai.
 
@@ -63,19 +59,22 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 ![Photodiode](../images/connection-photodiode.svg){width=600}
 
-Before connecting the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral, switch the jumper setting on the casing to either **ANA** for an analog reading or **DIG** for a digital output. Other third-party photodiode modules that are powered from 5 V and output a 0 to 5 V signal can also be used.
+Before connecting the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral, switch the jumper setting on the casing to either **ANA** for an analog reading or **DIG** for a digital output. Plug the stereo adapter cable into the stereo jack on the peripheral. The other end of the cable has three colored wires for the signal, 5 V supply and ground, as shown above.
 
 For an analog reading:
 
-1. Wire the signal wire to either **AD0** on the **ADC** connector (shown above) or **AD1** on the **Input** connector (hardware > v2.0 only).
+1. Wire the signal wire to either **AD0** on the **ADC** connector (shown above) or **AD1** on the **Input** connector (hardware v2.0 or later).
 2. Wire the supply wire to any **+5 V** pin and the ground wire to any **GND** pin.
 3. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity as an analog reading in Bonsai.
 
 Alternatively, for a digital output:
-1. Wire the signal wire to **DI3** on the **Input** connector (hardware > v2.0 only) if you have access to it.
+1. Wire the signal wire to **DI3** on the **Input** connector (hardware v2.0 or later) if you have access to it.
 2. Otherwise, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital inputs on the peripheral ports.
 3. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read the light intensity as a digital input reading in Bonsai.
 4. Turn the adjustment screw to tune the light threshold for the low and high state of the digital output and monitor the response in Bonsai.
+
+>[!NOTE]
+> Third-party photodiode modules that are powered with 5 V and output a 0 to 5 V signal can be wired the same way.
 
 # [Speaker](#tab/speaker)
 
@@ -83,6 +82,9 @@ Alternatively, for a digital output:
 
 1. Wire the [Speaker](./peripherals/peripherals-speaker.md) peripheral to the **Output** connector: the **+** terminal to one of **DO0**–**DO3** and the **-** terminal to any **GND** pin.
 2. Refer to the [Generate PWM](generate-pwm.md) article to play tones in Bonsai.
+
+>[!NOTE]
+> Third-party passive buzzers or speakers can be driven with PWM in the same way. Active buzzers generate a fixed tone, so switch them on and off like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)). Add a current-limiting series resistor (100 to 330 Ω) to avoid overloading the 5 V supply.
 
 # [LED](#tab/led)
 
@@ -109,7 +111,7 @@ For wiring to the screw terminals:
 1. Share ground between the external device and any **GND** terminal.
 2. Use the **+5V** terminal to power the peripheral when it is not connected to the Behavior board, or to power external devices when it is. Never connect an external supply to **+5V** while the Behavior board is also connected.
 3. Wire external signals (5 V logic) to the labeled terminals:
-    - **DIO1** - This line is not connected to any of the peripheral sensors and acts as an extra digital input. (the functionality to toggle it to digital output has not been added yet). Use it to add a external sensor like a lever. The Behavior board reports the changes as [port DIO events](read-digital-inputs.md#visualize-port-dio-events).
+    - **DIO1** - This line is not connected to any of the peripheral sensors and acts as an extra digital input (the functionality to toggle it to digital output has not been added yet). Use it to add an external sensor like a lever. The Behavior board reports the changes as [port DIO events](read-digital-inputs.md#visualize-port-dio-events).
     - **IR LED**, **IR PHT** - Connects to the infrared beam LED emitter, as well as the infrared photodetector. Use it to either control or mirror those signals.
     - **LED** - Connected to the [onboard cue LEDs](control-poke.md#drive-the-poke-led). Use it to control the LED, mirror the signal, or add an extra LED (no series resistor is needed).
 4. To use your own solenoid valve for reward delivery, disconnect the integrated valve's leads from the **VALVE** terminal (if fitted) and wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
@@ -121,7 +123,7 @@ For wiring to the screw terminals:
 1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
 2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. 
 
-The peripheral is ready to use! The solder pads are only needed for external use, they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
+The peripheral is ready to use! The solder pads are only needed for external use; they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
 
 For wiring to the solder pads:
 
@@ -130,7 +132,6 @@ For wiring to the solder pads:
 3. Wire an external encoder's quadrature signals (5 V logic) to the **A** and **B** pads:
     - Do not turn the onboard encoder while an external one is wired, as both share the same lines. Alternatively, you can also disconnect the onboard rotary encoder.
 4. To log the raw quadrature signals from the onboard encoder instead, connect **A** and **B** to digital inputs.
-
 
 # [Camera](#tab/camera)
 
@@ -150,8 +151,8 @@ For wiring to the solder pads:
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
 2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
 3. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more power pins on the peripheral ports.
-3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
-4. Refer to the [Drive Servos](drive-servos.md) article to move the servo in Bonsai.
+4. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
+5. Refer to the [Drive Servos](drive-servos.md) article to move the servo in Bonsai.
 
 # [Breakout](#tab/breakout)
 

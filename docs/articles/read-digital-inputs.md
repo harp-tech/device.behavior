@@ -1,6 +1,6 @@
 ## Read Digital Inputs
 
-The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** connector. Refer to the [connections](./connections.md) article to set up the hardware connection.
+The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** connector (hardware v2.0 or later boards only). Refer to the [connections](./connections.md) article to set up the hardware connection.
 
 This article covers how to visualize the digital input events and read the peripheral port **DIO** lines as a digital input in Bonsai.
 
@@ -38,7 +38,7 @@ The first value is the payload, listing the digital inputs that are currently ac
 
 ### Visualize Port DIO Events
 
-Each peripheral port also carries a **DIO** line. In the current firmware this line works as an extra digital input. It idles high at 5 V through onboard pull-ups, and the connected device must actively drive it low. Changes on the **DIO** lines are broadcast in the [`PortDIOStateEvent`] register, which can be visualized in the same way as the digital inputs:
+Each peripheral port also carries a **DIO** line. In the current firmware (v3.3) this line works as an extra digital input. It idles high at 5 V through onboard pull-ups, and the connected device must actively drive it low. Changes on the **DIO** lines are broadcast in the [`PortDIOStateEvent`] register, which can be visualized in the same way as the digital inputs:
 
 :::workflow
 ![Read Digital Inputs Visualize Port DIO](../workflows/readdigitalinputs-visualizeportdio.bonsai)

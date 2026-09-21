@@ -19,7 +19,7 @@ The Harp Rotary Encoder is a peripheral for the Behavior board. It plugs directl
 | Version | Compatible Behavior Board | Notes |
 | ------- | ------------------- | ----- |
 | 1.3 | > 1.0 | <ul><li> Fixed encoder direction </li></ul> |
-| 1.2 | > 1.0 | <ul><li> Replaced the optical encoder with a Alps Alpine EC12E24204A9 mechanical encoder </li><li> Added pull-ups and filtering on the quadrature channels </li></ul> |
+| 1.2 | > 1.0 | <ul><li> Replaced the optical encoder with an Alps Alpine EC12E24204A9 mechanical encoder </li><li> Added pull-ups and filtering on the quadrature channels </li></ul> |
 | 1.0 | > 1.0 | <ul><li> Initial version, using a Bourns ENC1J-D28-L00128 optical encoder (128 pulses per revolution) </li></ul> |
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp).

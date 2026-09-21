@@ -16,7 +16,7 @@ A: Only one interface connection to the Behavior board can be opened at one time
 
 **Q: Poke events stopped arriving from P2.**
 
-A: One possible reason is that the quadrature encoder [quadrature encoder](track-rotary-encoder.md) is enabled, as **P2** repurposes its input lines for the quadrature counter. Disable the encoder to restore poke detection.
+A: One possible reason is that the [quadrature encoder](track-rotary-encoder.md) is enabled, as **P2** repurposes its input lines for the quadrature counter. Disable the encoder to restore poke detection.
 
 **Q: An external device does not detect the low state of a digital output. The line reads 5 V when the output is set, but does not reach 0 V when it is cleared.**
 
@@ -26,7 +26,7 @@ Also check that the ground connection is shared between the devices, as improper
 
 **Q: How do I use the DIO pins on the peripheral ports as digital outputs?**
 
-A: The **DIO** line on ports **P0**–**P2** work as a digital input in the current firmware, as the functionality to switch the pins from digital input to digital output have not been implemented yet. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read those pins.
+A: The **DIO** line on ports **P0**–**P2** work as a digital input in the current firmware (v3.3), as the functionality to switch the pins from digital input to digital output have not been implemented yet. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read those pins.
 
 [!INCLUDE [](version-footer.md)]
 

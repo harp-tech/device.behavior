@@ -5,7 +5,7 @@ The Behavior board can mimic or mirror the poke peripheral's infrared port input
 Refer to the [connections](./connections.md) article to set up the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral on port **P0** and connect an indicator (like an LED) to **DO0**, which we will use for the rest of the examples.
 
 > [!WARNING]
-> Due to a firmware bug, only `DO0` and `DO2` can be used as mimic targets.
+> Due to bug in the current firmware (v3.3), only `DO0` and `DO2` can be used as mimic targets.
 
 This article covers how to mimic poke inputs and valve outputs in Bonsai.
 

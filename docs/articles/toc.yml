@@ -2,7 +2,7 @@
 - name: Overview
   href: ../index.md
 - name: Specs
-- name: Behavior
+- name: Behavior Board
   href: behavior-overview.md
 - name: Peripherals
   href: ./peripherals/toc.yml

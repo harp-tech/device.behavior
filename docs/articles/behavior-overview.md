@@ -30,6 +30,7 @@
 
 | Version | Notes |
 | ------- | ----- |
+| 2.1 | <ul><li> Changed USB connector from Mini-B to USB-C </li></ul> |
 | 2.0 | <ul><li> Added the input connector with second analog input and the third digital input. </li></ul> |
 | 1.2 | <ul><li> ? </li></ul> |
 | 1.1 | <ul><li> Initial version </li></ul> |

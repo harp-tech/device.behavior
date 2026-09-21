@@ -52,7 +52,7 @@ New features are added and bugs are fixed with firmware updates which are publis
 
 To update the firmware, use the device setup tool in Bonsai:
 
-[placeholder - installation-firmwareupdate.png]
+![Device Setup](../images/installation-firmwareupdate.png){width=650}
 
 1. Add the [`Device`] operator in Bonsai.
 2. Double-click on the [`Device`] node while the workflow is not running.

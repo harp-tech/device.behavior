@@ -18,7 +18,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UseArtifactsOutput>true</UseArtifactsOutput>
-    <ArtifactsPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../artifacts'))</ArtifactsPath>
+    <ArtifactsPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../artifacts'))</ArtifactsPath>
   </PropertyGroup>
 
   <!-- Universal NuGet Package Properties -->
@@ -33,7 +33,7 @@
     <PackageLicenseSourcePath>$(MSBuildThisFileDirectory)../LICENSE</PackageLicenseSourcePath>
 
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReadmeSourcePath>$(MSBuildThisFileDirectory)../../docs/README.md</PackageReadmeSourcePath>
+    <PackageReadmeSourcePath>$(MSBuildThisFileDirectory)../../../docs/README.md</PackageReadmeSourcePath>
     <PackageReadmeSourcePath Condition="Exists('$(MSBuildThisFileDirectory)README.nuget.md')">$(MSBuildThisFileDirectory)README.nuget.md</PackageReadmeSourcePath>
     <PackageReadmeSourcePath Condition="Exists('$(MSBuildProjectDirectory)\README.md')">$(MSBuildProjectDirectory)\README.md</PackageReadmeSourcePath>
     <PackageReadmeSourcePath Condition="Exists('$(MSBuildProjectDirectory)\README.nuget.md')">$(MSBuildProjectDirectory)\README.nuget.md</PackageReadmeSourcePath>

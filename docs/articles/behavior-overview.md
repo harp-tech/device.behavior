@@ -1,27 +1,33 @@
-## Behavior
+## Behavior Board
 
 ![Harp Behavior](../images/OEPS-BehaviorBoard.jpg){width=450}
 
 ### Key Features
 
 - 3 peripheral ports for plug-and-play peripherals.
-- Hardware-timed pulses on every output line, and PWM (up to 10 kHz with configurable duty cycle) on the four digital outputs on the output connector.
-- Support for camera triggering, servo motor control, and quadrature encoder counting.
+- Hardware-timed pulses for all digital outputs and PWM for the four digital outputs on the **Output** connector.
+- Support for camera triggering, servo motor control, and quadrature encoder counting on selected digital outputs.
 - Configurable LED drive current (up to 100 mA) and RGB LED driver.
 
 ### Specs
 
-- Analog inputs: 2 (5 V, 12-bit, sampled at 1 kHz; the second analog input is available on hardware v2.0 or later boards)
-- Digital inputs: 4 (1 on the input connector available on hardware v2.0 or later, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board, 5 V)
-- Digital outputs: 7 (4 on the output connector, 3 on the peripheral ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board)
+- Analog inputs: 2 (0–5 V, 12-bit, sampled at 1 kHz)
+    - The second analog input on the **Input** connector is available on hardware v2.0 or later
+- Digital inputs: 4 (5 V)
+    - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - The forth digital input on the **Input** connector is available on hardware v2.0 or later
+- Digital outputs: 7 (5 V)
+    - 4 on the **Output** connector
+    - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
-- Digital output PWM: 1 Hz–10 kHz, duty cycle 1–99% (supported on the output connector only).
-- Peripheral ports: 3 (Compatible with [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board)
+- Digital output PWM: 1-10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
+- Peripheral ports: 3 (RJ45)
+    - For the [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board
 - LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LEDs connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)
-- Servo outputs: 2 (**DO2**/**DO3**, period and pulse width in µs)
-- Quadrature encoder inputs: 1 (on **P2**, read at 1 kHz)
+- Servo outputs: 2 (**DO2**/**DO3**)
+- Quadrature encoder inputs: 1 (**P2**, sampled at 1 kHz)
 - Timestamp resolution: 32 µs
 - Synchronization frequency: 1 Hz
 - Synchronization accuracy: 22 ± 16 µs (between clock generator and this device)

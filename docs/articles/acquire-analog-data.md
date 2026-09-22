@@ -1,8 +1,8 @@
 ## Acquire Analog Data
 
-The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector (hardware v2.0 and later boards). The analog input can be tested with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
+The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector (hardware v2.0 and later boards). The analog input can be tested with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
-This article covers how to visualize the analog input streams and extract a single channel in Bonsai.
+This article covers how to visualize the timestamped analog input stream and extract a single channel with its timestamp in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
 
@@ -15,41 +15,42 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Visualize Analog Data
 
-The analog stream is enabled by default and sampled at 1 kHz. To visualize it, filter and decode the [`AnalogData`] events:
+Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital (ADC) converter and broadcast as an [`AnalogData`] stream at 1 Khz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
 
 :::workflow
 ![Analog Data Visualize](../workflows/acquireanalogdata-visualizedata.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`. This will listen to [`HarpMessages`] broadcast from the [`PublishSubject`] named `Behavior Events` in the Harp device pattern.
-- Insert a [`Parse`] operator and configure the `Register` property to `AnalogData`. This filters only messages for that register, and extracts the data into a typed format.
-- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying all the analog data payloads.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`. This filters only messages for that register, and extracts the data together with the device timestamp of each message into a typed format.
+- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying all the analog data payloads with their timestamps.
+
+> [!NOTE]
+> Every register event can be parsed in two forms, selected in the `Register` property of [`Parse`]. The bare payload (e.g. `AnalogData`, used in [First Steps](./harp-bonsai.md#first-steps)) returns only the register values while the timestamped variant (e.g. `TimestampedAnalogData`) returns the same payload wrapped in a `Value` field and adds a `Seconds` field carrying the device timestamp. Use the bare variant if it is enough for live monitoring or the timestamped variant if you need to visualize the timestamp as well. Regardless of which option is chosen, all data is [logged](./logging-analysis.md) with device timestamps.
 
 To visualize only one of the input channels:
 
-- Right-click on the [`Parse`] operator, hold down the <kbd>Alt</kbd> key, and select the "Output (Harp.Behavior.AnalogDataPayload)" > "AnalogInput0" from the context menu. This will create a `AnalogInput0` node on a separate branch.
-- Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel.
+- Insert a [`MemberSelector`] operator on a separate branch.
+- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will bundle the individual channel data as well as the timestamp.
+- Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel and its timestamp.
 
-Run the workflow, the first visualizer displays the three payload values:
+Run the workflow, the first visualizer displays the three payload values followed by the timestamp in seconds:
 
 ```text
-AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }
-AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }
+AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }@10.351072
+AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }@10.352072
 ```
-and the second displays the `AnalogInput0` value on its own.
+and the second displays the `AnalogInput0` value paired with its timestamp.
 
 ```text
-12
-13
+(13, 10.351072)
+(15, 10.352072)
 ```
 
 If you are using a photodiode, shine a light on the photodiode to see the analog input value change. If you are using a different signal source, vary the output voltage instead.
 
 > [!NOTE]
-> Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital (ADC) converter.
-
-> [!NOTE]
-> The `Encoder` value is not an analog voltage reading, it is a [quadrature encoder counter](track-rotary-encoder.md) that is sampled on the same 1 kHz tick so that position and analog data share the same timestamps.
+> The `Encoder` value bundled together in the payload is not an analog voltage reading but a [quadrature encoder counter](track-rotary-encoder.md) that is sampled on the same 1 kHz tick so that position and analog data share the same timestamps.
 
 > [!NOTE]
 > The analog events are enabled by default, but if nothing appears, they may have been disabled by another [configuration](advanced-configuration.md#select-active-events) setting. Refer to the link to find out how to re-enable them.

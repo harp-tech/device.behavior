@@ -1,6 +1,6 @@
 ## Drive Servos
 
-The digital outputs **DO2** and **DO3** can drive standard servo motors, which can be used, for instance, to move a lick spout or a door in and out of reach. Refer to the [connections](./connections.md) article to set up the servo motor on **DO2**, which we will use for the rest of these examples.
+The digital outputs **DO2** and **DO3** can drive standard servo motors, which can be used, for instance, to move a lick spout or a door in and out of reach. Refer to the [connections](./connections.md?tabs=servo#connections) article to set up the servo motor on **DO2**, which we will use for the rest of these examples.
 
 This article covers how to configure the servo, enable and disable the pulse train, and adjust the position in Bonsai.
 
@@ -32,11 +32,11 @@ In a separate branch:
     - `ServoMotor2Pulse` - Set the pulse width in µs (e.g. 1500 for the center position of a standard servo, the range is typically 1000–2000 µs).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>A</kbd> to set the servo period and <kbd>S</kbd> to move the servo to the starting angle. The two registers are bound to separate keys, so you can reset the angle later without reconfiguring the period. Check your servo's datasheet for its period and pulse-width range if you are unsure about which values to use.
+Run the workflow, press <kbd>A</kbd> to set the servo period and <kbd>S</kbd> to set the servo starting angle. The two commands are bound to separate keys, so you can reset the angle later without reconfiguring the period. Check your servo's datasheet for its period and pulse-width range if you are unsure about which values to use.
 
 ### Enable and Disable Servos
 
-The [`EnableServos`] and [`DisableServos`] registers switch the servo pulse train:
+Use the [`EnableServos`] and [`DisableServos`] registers to turn on and off the servo:
 
 :::workflow
 ![Enable and Disable Servos](../workflows/driveservos-enabledisable.bonsai)
@@ -56,7 +56,7 @@ In a separate branch:
     - `DisableServos` - Select `ServoOutput2`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>D</kbd> to enable the servo and <kbd>F</kbd> to stop. The servo moves to the position set by the pulse width and holds it while enabled.
+Run the workflow, press <kbd>D</kbd> to enable the servo and <kbd>F</kbd> to stop. The servo moves to the starting position set in the previous exercise.
 
 ### Adjust the Position
 

@@ -1,6 +1,6 @@
 ## Control LEDs
 
-The Behavior board drives two kinds of light output: two standard current-controlled LEDs on the **L0** and **L1** connectors and up to two WS2812-type addressable RGB LEDs on the **RGB** connector. Refer to the [connections](./connections.md) article to set up the LED on **L0** or the **RGB** connector, which we will use for the rest of these examples.
+The Behavior board drives two kinds of light output: two standard current-controlled LEDs on the **L0** and **L1** connectors and up to two WS2812-type addressable RGB LEDs on the **RGB** connector. Refer to the [connections](./connections.md?tabs=led#connections) article to set up the LED on **L0** or the **RGB** connector, which we will use for the rest of these examples.
 
 This article covers configuring LED drive current, setting RGB colors, and turning on both kinds of LED output in Bonsai.
 

@@ -1,6 +1,6 @@
 ## Read Digital Inputs
 
-The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** connector (hardware v2.0 or later boards only). Refer to the [connections](./connections.md) article to set up the hardware connection.
+The Behavior board has one general-purpose 5 V digital input, **DI3**, located on the **Input** connector (hardware v2.0 or later boards only). Refer to the [connections](./connections.md?tabs=digitalinput#connections) article to set up the hardware connection on **DI3** or 
 
 This article covers how to visualize the digital input events and read the peripheral port **DIO** lines as a digital input in Bonsai.
 
@@ -14,14 +14,14 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Visualize Digital Input Events
 
-The Behavior board broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the peripheral ports **P0**–**P2** (`DIPort0`–`DIPort2`), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral or [Breakout](./peripherals/peripherals-portbreakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
+The Behavior board broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the peripheral ports **P0**–**P2** (`DIPort0`–`DIPort2`), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/peripherals-portbreakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
 
 :::workflow
 ![Read Digital Inputs Visualize](../workflows/controlpoke-visualizeevents.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`. This will listen to [`HarpMessages`] broadcast from the [`PublishSubject`] named `Behavior Events` in the Harp device pattern.
-- Insert a [`Parse`] operator and configure the `Register` property to `Timestamped<DigitalInputState>`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedDigitalInputState`.
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
 
 Run the workflow and drive the **DI3** line high. The visualizer will display:
@@ -45,7 +45,7 @@ Each peripheral port also carries a **DIO** line. In the current firmware (v3.3)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
-- Insert a [`Parse`] operator and configure the `Register` property to `Timestamped<PortDIOStateEvent>`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedPortDIOStateEvent`.
 - Insert a [`VisualizerWindow`] operator.
 
 Run the workflow and drive the **DIO** line on **P0** low. The visualizer will display:

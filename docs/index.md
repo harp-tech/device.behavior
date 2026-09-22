@@ -2,7 +2,7 @@
 
 The Harp [Behavior](articles/behavior-overview.md) board is a multi-purpose data acquisition and control device for behavioral neuroscience experiments.
 
-![Harp Behavior with Peripherals](./images/behavior-peripherals.jpg){width=450}
+![Harp Behavior with Peripherals](./images/behavior-peripherals.svg){width=450}
 
 A typical behavioral rig combines sensors, cue lights, reward valves, cameras and motorized actuators. These components usually need individual control interfaces and post-hoc alignment to a common timeline. The Behavior board brings them together on a single device, so that every input and output stream is controlled through one interface and timestamped on the same hardware clock.
 

@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 from harp import data
 
 # Finds device.yml in the folder, builds the device module, returns a dataset reader
-reader = data.open_dataset("../data/Behavior.harp")
+reader = data.open_dataset("Behavior.harp")
 
 # Lists every register in the reader by name and address
 print(reader.contents)

@@ -23,7 +23,7 @@ Before beginning:
 > The [Harp device pattern](https://harp-tech.org/articles/operators.html#device-pattern) will initialize the device, log data, and provide hooks to send commands as well as receive messages from the Behavior board using the [Harp communication protocol](https://harp-tech.org/protocol/BinaryProtocol-8bit.html). If your workflow does not look like the one above, make sure that the [Harp.Behavior](./installation.md#software-packages) package is installed.
 
 - Click on the [`Behavior (Device)`] operator and set the `PortName` property to the communications port for the device (e.g. COM8).
-- Click on the [`BehaviorDataWriter (DeviceDataWriter)`] operator and set the `Path` property for the name and location of the save file (e.g. `Data\Behavior.harp`).
+- Click on the [`BehaviorDataWriter (DeviceDataWriter)`] operator and set the `Path` property for the name and location of the save folder (e.g. `Behavior.harp`).
 - Press the "Start" button in Bonsai to run the workflow.
 
 A [visualizer](xref:Bonsai.Design.VisualizerWindow) will automatically open when the workflow starts, displaying the parsed [`AnalogData`] events streaming from the device:

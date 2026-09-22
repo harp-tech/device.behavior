@@ -1,6 +1,6 @@
 ## Trigger Cameras
 
-The Behavior board can generate TTL signals for cameras that support external triggering on **DO0** and **DO1**. This is useful for synchronizing multiple cameras and capturing camera frame timestamps on the device clock. Refer to the [connections](./connections.md) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
+The Behavior board can generate TTL signals for cameras that support external triggering on **DO0** and **DO1**. This is useful for synchronizing multiple cameras and capturing camera frame timestamps on the device clock. Refer to the [connections](./connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
 
 This article covers how to configure the trigger frequency, start and stop the cameras, and visualize frame events in Bonsai.
 
@@ -65,7 +65,7 @@ Each trigger pulse broadcasts a frame event tied to the port like [`Camera1Frame
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
-- Insert a [`Parse`] operator and configure the `Register` property to `Timestamped<Camera1Frame>`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedCamera1Frame`.
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
 
 Run the workflow and press <kbd>S</kbd>. The visualizer displays:

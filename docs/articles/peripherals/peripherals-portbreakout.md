@@ -1,13 +1,13 @@
 ## Breakout
 
-The Harp Breakout is an interface peripheral for the Behavior board. It makes the pins of the Behavior board [peripheral ports](../connections.md) available on screw terminals without building a custom cable.
+The Harp Breakout is an interface peripheral for the Behavior board. It makes the pins of the Behavior board peripheral ports available on screw terminals without building a custom cable. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Stream Timestamps](../advanced-configuration.md#stream-timestamps) articles to use it in Bonsai.
 
 !["Breakout board"](../../images/OEPS-Breakout.png){width=450}
 
 ### Key Features
 
 - Supports 12 V solenoid valves (e.g. Lee LHD series) (v1.1 only).
-- Supports [serial timestamp](../advanced-configuration.md#stream-timestamps) output, with the logic level selected by the onboard jumper (v2.x only).
+- Supports serial timestamp output, with the logic level selected by the onboard jumper (v2.x only).
 
 > [!NOTE]
 > Pick the board version by the feature you need, both features are not available on the same board as they share the same port line.

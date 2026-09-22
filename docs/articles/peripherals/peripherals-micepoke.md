@@ -1,6 +1,6 @@
 ## Mice Poke
 
-The Harp Mice Poke is a nose-poke peripheral for the Behavior board. It detects pokes with an infrared beam, drives onboard cue LEDs, and controls a solenoid valve for reward delivery.
+The Harp Mice Poke is a nose-poke peripheral for the Behavior board. It detects pokes with an infrared beam, drives onboard cue LEDs, and controls a solenoid valve for reward delivery. Refer to the [connections](../connections.md?tabs=poke#connections) article to set up the peripheral and the [Control Poke Peripheral](../control-poke.md) article to use it in Bonsai.
 
 !["Mice Poke With Water Valve"](../../images/OEPS-MicePokeWaterValve.jpg){width=450}
 

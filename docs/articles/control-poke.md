@@ -1,6 +1,6 @@
 ## Control Poke Peripheral
 
-The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose poke peripheral for the Behavior board which combines an infrared beam sensor for poke detection, cue LEDs, and a solenoid valve for reward delivery. Refer to the [connections](./connections.md) article to set up the hardware connection on peripheral port **P0**, which we will use for the rest of these examples.
+The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose poke peripheral for the Behavior board which combines an infrared beam sensor for poke detection, cue LEDs, and a solenoid valve for reward delivery. Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the hardware connection on peripheral port **P0**, which we will use for the rest of these examples.
 
 This article covers how to visualize poke events, debounce noisy inputs, drive the cue LED, and deliver rewards with the Mice Poke peripheral in Bonsai.
 
@@ -21,7 +21,7 @@ Beam breaks in the Mice Poke peripheral are reported as digital input events. Th
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`. This will listen to [`HarpMessages`] broadcast from the [`PublishSubject`] named `Behavior Events` in the Harp device pattern.
-- Insert a [`Parse`] operator and configure the `Register` property to `Timestamped<DigitalInputState>`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedDigitalInputState`.
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
 
 Run the workflow and block the infrared beam on the Mice Poke peripheral. The visualizer will display:
@@ -35,7 +35,7 @@ The first value is the payload, listing the digital inputs that are currently ac
 
 ### Configure Input Filter
 
-A single poke can generate a burst of rapid transitions, for example, when the snout hovers at the edge of the infrared beam. The [`PokeInputFilter`] register sets a refractory period, in milliseconds. After each reported transition, further transitions on that port are ignored for the set time, so one poke reads as one entry and one exit.
+A single poke can generate a burst of rapid transitions, for example, when the snout hovers at the edge of the infrared beam. Use the [`PokeInputFilter`] register to set a refractory period in milliseconds. After each reported transition, further transitions on that port are ignored for the set time.
 
 :::workflow
 ![Detect Pokes Input Filter](../workflows/controlpoke-inputfilter.bonsai)
@@ -78,7 +78,7 @@ Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LED on and <kb
 
 ### Deliver Rewards on Poke
 
-Each peripheral port carries a 12 V valve drive line for a solenoid valve that gates reward delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, then closes the loop in Bonsai where every poke at **P0** immediately triggers a reward at the same port.  The reward volume is calibrated by adjusting the pulse duration.
+Each peripheral port carries a 12 V valve drive line for a solenoid valve that gates liquid reward delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the reward volume. It then closes the loop in Bonsai where every poke at **P0** immediately triggers a reward at the same port.
 
 :::workflow
 ![Detect Pokes Deliver Rewards](../workflows/controlpoke-valve.bonsai)
@@ -98,11 +98,11 @@ In a separate branch:
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `DigitalInputState`.
-- Insert a [`HasFlag`] operator and set the `Value` property to `DIPort0`.
-- Insert a [`Condition`] operator, leaving its inner workflow at the default. This operator lets through messages where the value equates to `DIPort0`. In essence, only beam-break events at **P0** pass through; beam restores and events from other ports are filtered out.
+- Insert a [`HasFlag`] operator and set the `Value` property to `DIPort0`. This operator will generate a boolean value (e.g. `True`) if it detects a beam break that matches that pin. 
+- Insert a [`Condition`] operator, leaving its inner workflow at the default. This operator lets through only `True` elements corresponding to beam breaks at **P0**, which are used to trigger the next command.
 - Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `SupplyPort0`.
+    - `Payload` - Select `OutputSetPayload` to select the register that turns on digital output lines.
+    - `OutputSet` - Select `SupplyPort0` to select the valve delivery line for **P0**.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>F</kbd> once to configure the valve pulse, then block the infrared beam on the **P0** poke. The valve will open for 15 ms and close on its own, delivering one reward per poke.

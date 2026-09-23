@@ -12,15 +12,16 @@
 ### Specs
 
 - Analog inputs: 2 (0–5 V, 12-bit, sampled at 1 kHz)
+    - 1 on the **ADC** connector
     - The second analog input on the **Input** connector is available on hardware v2.0 or later
 - Digital inputs: 4 (5 V)
     - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
-    - The forth digital input on the **Input** connector is available on hardware v2.0 or later
+    - The fourth digital input on the **Input** connector is available on hardware v2.0 or later
 - Digital outputs: 7 (5 V)
     - 4 on the **Output** connector
     - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
-- Digital output PWM: 1-10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
+- Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
 - Peripheral ports: 3 (RJ45)
     - For the [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board
 - LED outputs: 2 (2–100 mA drive current)

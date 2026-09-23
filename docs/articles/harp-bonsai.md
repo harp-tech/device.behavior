@@ -1,6 +1,6 @@
 ## Bonsai
 
-Bonsai is a visual reactive programming language for building interactive experiments and processing data streams in real time. It supports a growing ecosystem of hardware and software packages that are commonly used in neuroscience. This article will cover how to set up the Behavior board in Bonsai.
+Bonsai is a visual reactive programming language for building interactive experiments and processing data streams in real time. It supports a growing ecosystem of hardware and software packages that are commonly used in neuroscience. This article covers how to set up the Behavior board in Bonsai.
 
 >[!TIP]
 > More information on Bonsai can be found in the official [documentation](https://bonsai-rx.org/docs/).

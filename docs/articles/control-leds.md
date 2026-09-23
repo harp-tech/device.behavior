@@ -56,7 +56,7 @@ Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to
 
 ### Set RGB Colors
 
-The **RGB** connector drives WS2812-type addressable LEDs (often sold as "NeoPixel" LEDs, rings, or strips). The two LEDs form a serial chain on a single data line: **Rgb0** is the first LED in the chain and **Rgb1** refers to the second when configuring and controlling these LEDs. Plain and analog RGB LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead.
+The **RGB** connector drives WS2812-type individually addressable LEDs. The two LEDs form a serial chain on a single data line: **Rgb0** is the first LED in the chain and **Rgb1** the second when configuring and controlling these LEDs. Single color LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead. Analog RGB LEDs are not supported on either.
 
 The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 

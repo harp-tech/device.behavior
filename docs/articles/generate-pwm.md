@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure PWM
 
-Each output has its own [`PwmFrequencyDO0`] and [`PwmDutyCycleDO0`] registers.
+Each output has its own frequency and duty cycle registers, for instance [`PwmFrequencyDO0`] and [`PwmDutyCycleDO0`] for **DO0**. Configure these registers before starting the PWM signal.
 
 :::workflow
 ![Configure PWM](../workflows/generatepwm-configure.bonsai)
@@ -56,7 +56,7 @@ Run the workflow, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the 
 
 ### Generate PWM Bursts
 
-To generate a PWM train of fixed duration, enable the [pulse function](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the [`PulseDO0`] register.
+To generate a PWM train of fixed duration, enable the [pulse mode](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the [`PulseDO0`] register.
 
 :::workflow
 ![Generate PWM Bursts](../workflows/generatepwm-pulseenable.bonsai)

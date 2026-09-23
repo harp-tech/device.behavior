@@ -1,6 +1,6 @@
 ## Mimic Poke Signals
 
-The Behavior board can mimic or mirror the poke peripheral's infrared port inputs and valve output on other output lines. This is useful for triggering external equipment directly or recording reward delivery on an external acquisition system and avoids round-trip latency from going through the computer. 
+The Behavior board can mimic or mirror the poke peripheral's infrared port inputs and valve output on other output lines. This is useful for triggering external equipment directly or recording reward delivery on an external acquisition system and avoids round-trip latency from going through the computer.
 
 Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral on port **P0** and connect an indicator (like an LED) to **DO0**, which we will use for the rest of the examples.
 
@@ -40,7 +40,7 @@ In a separate branch:
 Run the workflow, press <kbd>A</kbd> to enable the mimic target, and trigger the infrared poke detector on **P0**. The indicator on **DO0** should follow the beam state. Press <kbd>S</kbd> to remove the mimic target configuration.
 
 > [!WARNING]
-> A mimic target line still responds to commands that modify digital outputs, such as [`OutputSet`] and [`OutputClear`]. Other mimic registers can also select the same target. To avoid confusion, we recommend dedicating each mimic target to mirroring a single source and clearing any left over configurations.
+> A mimic target line still responds to commands that modify digital outputs, such as [`OutputSet`] and [`OutputClear`]. Other mimic registers can also select the same target. To avoid conflicts, dedicate each mimic target to a single source and clear any left over configurations.
 
 ### Mimic Poke Valves
 
@@ -64,12 +64,12 @@ In a separate branch:
     - `MimicPort0Valve` - Select `None`.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-To trigger the valve output, send a [`OutputSet`] command in a separate branch:
+To trigger the valve output, send an [`OutputSet`] command in a separate branch:
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `SupplyPort0` to open the Port 0 valve.
+    - `OutputSet` - Select `SupplyPort0` to open the **P0** valve.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>D</kbd>, then press <kbd>G</kbd> to open the **P0** valve. **DO0** follows the valve state, including [timed pulses](control-digital-outputs.md#pulse-outputs). Press <kbd>F</kbd> to remove the mimic target configuration.

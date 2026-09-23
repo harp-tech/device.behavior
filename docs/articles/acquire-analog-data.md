@@ -64,3 +64,4 @@ If you are using a photodiode, shine a light on the photodiode to see the analog
 [`VisualizerWindow`]: xref:Bonsai.Design.VisualizerWindow
 [`HarpMessages`]: xref:Bonsai.Harp.HarpMessage
 [`AnalogData`]: xref:Harp.Behavior.AnalogData
+[`MemberSelector`]: xref:Bonsai.Expressions.MemberSelectorBuilder

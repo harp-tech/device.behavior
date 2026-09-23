@@ -45,10 +45,10 @@ The [Behavior GUI](behavior-gui.md) is a standalone graphical application for co
 
 ### Firmware Update
 
-New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the Behavior repository. Each firmware release is tagged with a `fw` version prefix (e.g. `fw3.3-harp1.15`), and the `.hex` files can be found in the "Assets" section. Download the file that matches the hardware (`hw`) version of your device.
+New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.3-harp1.15-hw2.1-ass0.hex` is firmware v3.3 for a hardware v2.1 Behavior board. Download the latest firmware version that matches the hardware version of the board from the "Assets" section under each release.
 
 >[!TIP]
-> The hardware version is printed on the PCB silkscreen (e.g. `harp behavior v2.0`).
+> The hardware version is printed on the PCB silkscreen (e.g. `harp behavior v2.1`).
 
 To update the firmware, use the device setup tool in Bonsai:
 

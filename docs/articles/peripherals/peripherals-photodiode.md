@@ -1,8 +1,8 @@
 ## Photodiode
 
-The Harp Photodiode is a light-measuring peripheral for the Behavior board. It outputs either an analog signal of the light intensity or a thresholded digital pulse, for instance to detect stimulus onsets on a screen. Refer to the [connections](../connections.md?tabs=photodiode#connections) article to set up the peripheral and the [Acquire Analog Data](../acquire-analog-data.md) or [Read Digital Inputs](../read-digital-inputs.md) articles to read its output in Bonsai.
+The Harp Behavior Photodiode is a light-measuring peripheral for the Behavior board. It outputs either an analog signal of the light intensity or a thresholded digital pulse, for instance to detect stimulus onsets on a screen. Refer to the [connections](../connections.md?tabs=photodiode#connections) article to set up the peripheral and the [Acquire Analog Data](../acquire-analog-data.md) or [Read Digital Inputs](../read-digital-inputs.md) articles to read its output in Bonsai.
 
-!["Photodiode"](../../images/OEPS-Photodiode.jpg){width=450}
+![Photodiode](../../images/OEPS-Photodiode.jpg){width=450}
 
 ### Key Features
 
@@ -14,7 +14,7 @@ The Harp Photodiode is a light-measuring peripheral for the Behavior board. It o
 ### Specs
 
 - Photodiode: Advanced Photonix PDB-C156-ND
-- Connector: 3.5 mm stereo jack for stereo plug cable carrying 5 V, ground and signal wire.
+- Connector: 3.5 mm stereo jack for stereo plug cable carrying 5 V, ground and signal wire
 
 ### Hardware
 

@@ -1,6 +1,6 @@
 ## Ports and Connections
 
-This article will cover the ports on the Behavior board, as well as how to connect the device to peripherals and external devices.
+This article covers the ports on the Behavior board, as well as how to connect the device to peripherals and external devices.
 
 ### Ports
 
@@ -12,7 +12,7 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 **CLKIN (Stereo Jack)** - This [Harp](https://harp-tech.org/articles/about.html) clock input accepts a clock output from any compatible Harp clock generator or synchronizer (e.g. [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) for synchronization with other connected devices.
 
-**STATE** - This status LED cycles on and off with a period of:
+**State** - This status LED cycles on and off with a period of:
 - 2 seconds when it's communicating with Bonsai
 - 4 seconds when in standby
 - 100 milliseconds when a catastrophic error occurs
@@ -25,7 +25,7 @@ This article will cover the ports on the Behavior board, as well as how to conne
 
 **Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection. This connector is only available on hardware v2.0 or later boards.
 
-**RGB (3-pin Flick Lock)** - Connector for up to two WS2812-type (Neopixels) addressable RGB LEDs, driven as a serial chain on a single data line. Colors are set with the [RGB registers](control-leds.md#set-rgb-colors).
+**RGB (3-pin Flick Lock)** - Connector for up to two WS2812-type individually addressable RGB LEDs, driven as a serial chain on a single data line. Colors are set with the [RGB registers](control-leds.md#set-rgb-colors).
 
 **L0, L1 (Screw Terminal)** - These connectors control two regular current-controlled LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
 
@@ -103,7 +103,7 @@ Alternatively, for a digital output:
 2. If the peripheral comes with an integrated water valve, connect the valve's inlet to the liquid container with tubing (2.0 mm inner diameter FEP, or 2.1 mm PTFE).
 3. Refer to the [Control Poke Peripheral](control-poke.md) article to configure and use the Mice Poke peripheral in Bonsai.
 
-The peripheral is ready to use! The screw terminal blocks are only needed for external use, they tap the same connections that are carried by the RJ45 connector.
+No further wiring is necessary. The screw terminal blocks are only needed for external use; they tap the same connections that are carried by the RJ45 connector.
 Use them to control the peripheral from another device, log its signals, wire a different solenoid valve, or connect an extra sensor.
 
 For wiring to the screw terminals:
@@ -116,22 +116,24 @@ For wiring to the screw terminals:
     - **LED** - Connected to the [onboard cue LEDs](control-poke.md#drive-the-poke-led). Use it to control the LED, mirror the signal, or add an extra LED (no series resistor is needed).
 4. To use your own solenoid valve for reward delivery, disconnect the integrated valve's leads from the **VALVE** terminal (if fitted) and wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
 
-# [Encoder](#tab/encoder)
+# [Rotary Encoder](#tab/encoder)
 
 ![Encoder](../images/connection-encoder.svg){width=600}
 
 1. Connect the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
 2. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. 
 
-The peripheral is ready to use! The solder pads are only needed for external use; they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
+No further wiring is necessary. The solder pads are only needed for external use; they share the same lines as the onboard rotary encoder. Use the solder pads to wire an external rotary encoder in place of the onboard one, tap the raw quadrature signals for logging, or to operate the peripheral from another device entirely. 
 
 For wiring to the solder pads:
 
 1. Share ground between the external device and the **-** pad.
 2. Use the **+** pad to power the external encoder when the Behavior board is connected, or to power the peripheral when it is not. Never connect an external supply to **+** while the Behavior board is also connected.
 3. Wire an external encoder's quadrature signals (5 V logic) to the **A** and **B** pads:
-    - Do not turn the onboard encoder while an external one is wired, as both share the same lines. Alternatively, you can also disconnect the onboard rotary encoder.
+    - Do not turn the onboard encoder while an external one is wired, as both share the same lines. Alternatively, disconnect the onboard rotary encoder.
 4. To log the raw quadrature signals from the onboard encoder instead, connect **A** and **B** to digital inputs.
+
+An external rotary encoder can also be connected using the [Breakout](./peripherals/peripherals-portbreakout.md) board, refer to the Breakout tab for more information.
 
 # [Camera](#tab/camera)
 
@@ -144,9 +146,9 @@ For wiring to the solder pads:
 5. Connect the camera's trigger ground to any **GND** pin.
 6. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure and start the trigger in Bonsai.
 
-# [Servos](#tab/servo)
+# [Servo](#tab/servo)
 
-![Servos](../images/connection-servo.svg){width=600}
+![Servo](../images/connection-servo.svg){width=600}
 
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
 2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
@@ -159,14 +161,22 @@ For wiring to the solder pads:
 ![Breakout](../images/connection-breakout.svg){width=600}
 
 For digital input and output connections:
-1. Connect a [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
+1. Connect the [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. Wire the signal wire from external devices to the **DI**, **DIO**, and **DO** screw terminals.
 3. Wire the **+5V** pin and **GND** pins to provide power and ground.
 4. Refer to the [Read Digital Inputs](read-digital-inputs.md) and [Control Digital Outputs](control-digital-outputs.md) articles to use these lines in Bonsai.
 
+For connecting an external rotary encoder:
+1. Connect the Breakout board to port **P2** with an RJ45 cable. The quadrature counter is only available on this port.
+2. Wire the encoder's **A** channel to the **DI** terminal and its **B** channel to the **DIO** terminal. Both channels must be 5 V logic.
+3. Wire the encoder's supply to the **+5V** terminal and its ground to a **GND** terminal. For encoders that require a different supply voltage, power the encoder from an external supply instead and share only its ground with a **GND** terminal.
+4. Leave any index (**Z**) output of the encoder unconnected as the Behavior board does not support it.
+5. Refer to the [Track Rotary Encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. If the count runs in the opposite direction to the rotation, swap the **A** and **B** wires.
+
 For valve control (v1.1 only):
-1. Wire a 12 V solenoid valve between the **+12V** and **SUP_RTN** terminals.
-2. Refer to [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke) to pulse the valve line in Bonsai.
+1. Connect the [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
+2. Wire a 12 V solenoid valve between the **+12V** and **SUP_RTN** terminals.
+3. Refer to [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke) to pulse the valve line in Bonsai.
 
 For streaming the serial timestamp (v2.x only):
 1. Connect the board to **P2**, the timestamp stream can only be transmitted on this port.

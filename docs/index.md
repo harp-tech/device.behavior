@@ -15,7 +15,7 @@ The Behavior board provides:
 
 ## Getting a Device
 
-Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Behavior](https://github.com/harp-tech/device.behavior) repository.
+Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Behavior](https://github.com/harp-tech/device.behavior) repository. Once you have a board, follow the "Getting Started" section to [set up the device](./articles/connections.md) and install the [software](./articles/installation.md).
 
 ## Acknowledgments
 

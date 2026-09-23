@@ -15,7 +15,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Visualize Analog Data
 
-Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital (ADC) converter and broadcast as an [`AnalogData`] stream at 1 Khz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
+Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
 
 :::workflow
 ![Analog Data Visualize](../workflows/acquireanalogdata-visualizedata.bonsai)
@@ -26,7 +26,7 @@ Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitiz
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying all the analog data payloads with their timestamps.
 
 > [!NOTE]
-> Every register event can be parsed in two forms, selected in the `Register` property of [`Parse`]. The bare payload (e.g. `AnalogData`, used in [First Steps](./harp-bonsai.md#first-steps)) returns only the register values while the timestamped variant (e.g. `TimestampedAnalogData`) returns the same payload wrapped in a `Value` field and adds a `Seconds` field carrying the device timestamp. Use the bare variant if it is enough for live monitoring or the timestamped variant if you need to visualize the timestamp as well. Regardless of which option is chosen, all data is [logged](./logging-analysis.md) with device timestamps.
+> Every register event can be parsed in two forms, selected in the `Register` property of [`Parse`]. The bare payload (e.g. `AnalogData`, used in [First Steps](./harp-bonsai.md#first-steps)) returns only the register values while the timestamped variant (e.g. `TimestampedAnalogData`) returns the same payload wrapped in a `Value` field and adds a `Seconds` field carrying the device timestamp. Either variant can be used for live monitoring. Regardless of which option is chosen, all data is [logged](./logging-analysis.md) with device timestamps.
 
 To visualize only one of the input channels:
 

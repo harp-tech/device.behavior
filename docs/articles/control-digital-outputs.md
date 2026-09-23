@@ -14,7 +14,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 > The commands in the examples below can be used to control every output line of the Behavior board. Their location and values in Bonsai are:
 > - General purpose digital outputs **DO0**–**DO3**: `DO0` - `DO3`.
 > - Peripheral ports **P0**–**P2**: the 5 V output lines are represented as `DOPort0`–`DOPort2` and 12 V valve lines as `SupplyPort0`–`SupplyPort2`. See [Control Poke Peripheral](control-poke.md).
-> - LED connectors **L0**, **L1** and **RGB**:  represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
+> - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
 
 [!INCLUDE [](breakout-note.md)]
 
@@ -116,7 +116,7 @@ You can replace [`KeyDown`] with other operators to set outputs with other trigg
 ![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)
 :::
 
-- Insert a [`Timer`] operator and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. 2 seconds).
+- Insert a [`Timer`] operator and set the `DueTime` property to the number of seconds to wait before setting the output (e.g. `00:00:02` for two seconds).
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
     - `OutputSet` - Select `DO0`.

@@ -49,7 +49,7 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ----------------------------------------------------------------------- Set up tools
       - name: Set up AVR-GCC
@@ -61,7 +61,7 @@ jobs:
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
-        uses: harp-tech/configure-build@v1
+        uses: harp-tech/configure-build@v2
 
       # ----------------------------------------------------------------------- Build firmware
       - name: Build firmware
@@ -72,7 +72,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect Firmware binaries
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.build.outcome == 'success' && always()
         with:
           name: Firmware-hw${{matrix.hardware-target}}
@@ -117,11 +117,11 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ----------------------------------------------------------------------- Set up tools
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.x
 
@@ -131,7 +131,7 @@ jobs:
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
-        uses: harp-tech/configure-build@v1
+        uses: harp-tech/configure-build@v2
 
       # ----------------------------------------------------------------------- Regenerate
       - name: Run generators
@@ -156,7 +156,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect NuGet packages
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: matrix.collect-packages && steps.pack.outcome == 'success' && always()
         with:
           name: Packages
@@ -183,13 +183,13 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
       # ----------------------------------------------------------------------- Set up tools
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.x
 
@@ -199,7 +199,7 @@ jobs:
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
-        uses: bonsai-rx/configure-build@v1
+        uses: bonsai-rx/configure-build@v2
 
       # ----------------------------------------------------------------------- Restore
       - name: Restore
@@ -217,7 +217,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect documentation metadata
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.build-metadata.outcome == 'success' && always()
         with:
           name: DocumentationMetadata
@@ -225,7 +225,7 @@ jobs:
           path: artifacts/docs/api/
 
       - name: Collect documentation artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.build-documentation.outcome == 'success' && always()
         with:
           name: DocumentationWebsite
@@ -248,20 +248,20 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
       # ----------------------------------------------------------------------- Download built packages
       - name: Download packages for rendering
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Packages
           path: artifacts/packages/
 
       # ----------------------------------------------------------------------- Set up Bonsai environments
       - name: Set up Bonsai environments
-        uses: bonsai-rx/setup-bonsai@v1
+        uses: bonsai-rx/setup-bonsai@v2
         with:
           environment-paths: '**/.bonsai/'
           inject-packages: artifacts/packages/*.nupkg
@@ -273,7 +273,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Collect images
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.render.outcome == 'success' && always()
         with:
           name: DocumentationWorkflowImages
@@ -301,13 +301,13 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Set up .NET
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.x
 
       # ----------------------------------------------------------------------- Download built packages
       - name: Download built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Packages
           path: artifacts/packages/
@@ -343,13 +343,13 @@ jobs:
     steps:
       # ----------------------------------------------------------------------- Set up .NET
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.x
 
       # ----------------------------------------------------------------------- Download built packages
       - name: Download built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Packages
           path: artifacts/packages/
@@ -394,23 +394,23 @@ jobs:
       # It is intentional that we use two independent download steps here as it ensures that workflow images are permitted
       # to overwrite any conflicts in the docfx output but not the other way around.
       - name: Download documentation website
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: DocumentationWebsite
 
       - name: Download workflow images
         if: ${{needs.workflow-images.result == 'success'}}
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: DocumentationWorkflowImages
 
       # ----------------------------------------------------------------------- Collect artifacts
       - name: Upload final documentation website artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
 
       # ----------------------------------------------------------------------- Publish to GitHub Pages
       - name: Publish to GitHub Pages
         id: publish
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -6,6 +6,7 @@
 #include "app.h"
 #include "app_funcs.h"
 #include "app_ios_and_regs.h"
+#include "mimic.h"
 
 #include "WS2812S.h"
 #include "structs.h"
@@ -71,9 +72,9 @@ void core_callback_catastrophic_error_detected(void)
     clr_POKE1_LED;
     clr_POKE2_LED;    
     
-    clr_POKE0_VALVE;
-    clr_POKE1_VALVE;
-    clr_POKE2_VALVE;
+    close_POKE0_VALVE;
+    close_POKE1_VALVE;
+    close_POKE2_VALVE;
     
     // To do: Clear Pokes DIOs
 }
@@ -423,13 +424,13 @@ void core_callback_t_500us(void)
 
 	if (pulse_countdown.poke0_valve > 0)
 		if (--pulse_countdown.poke0_valve == 0)
-			clr_POKE0_VALVE;
+			close_POKE0_VALVE;
 	if (pulse_countdown.poke1_valve > 0)
 		if (--pulse_countdown.poke1_valve == 0)
-			clr_POKE1_VALVE;
+			close_POKE1_VALVE;
 	if (pulse_countdown.poke2_valve > 0)
 		if (--pulse_countdown.poke2_valve == 0)
-			clr_POKE2_VALVE;
+			close_POKE2_VALVE;
 
 	if (pulse_countdown.led0 > 0)
 		if (--pulse_countdown.led0 == 0)

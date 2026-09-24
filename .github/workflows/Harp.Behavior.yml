@@ -58,6 +58,9 @@ jobs:
         run: dotnet tool restore
 
       # ----------------------------------------------------------------------- Regenerate
+      - name: Generate firmware headers
+        run: dotnet harp.toolkit generate firmware atxmega --ios firmware/Behavior/ios.yml -o firmware/Behavior
+
       - name: Generate C# interface
         run: dotnet harp.toolkit generate interface csharp -o software/dotnet/${{github.workflow}}
 

@@ -3,12 +3,6 @@
 #include "cpu.h"
 
 void init_ios(void);
-
-void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
-#define _SET_IO_ 0
-#define _CLR_IO_ 1
-#define _TGL_IO_ 2
-
 /************************************************************************/
 /* Definition of input pins                                             */
 /************************************************************************/
@@ -96,9 +90,9 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 #define read_POKE0_LED read_io(PORTD, 6)
 
 /* POKE0_VALVE */
-#define set_POKE0_VALVE do { set_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _SET_IO_); } while(0)
-#define clr_POKE0_VALVE do { clear_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _CLR_IO_); } while(0)
-#define tgl_POKE0_VALVE do { toggle_io(PORTD, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT0_VALVE, _TGL_IO_);  } while(0)
+#define set_POKE0_VALVE set_io(PORTD, 7)
+#define clr_POKE0_VALVE clear_io(PORTD, 7)
+#define tgl_POKE0_VALVE toggle_io(PORTD, 7)
 #define read_POKE0_VALVE read_io(PORTD, 7)
 
 /* POKE1_LED */
@@ -108,9 +102,9 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 #define read_POKE1_LED read_io(PORTE, 6)
 
 /* POKE1_VALVE */
-#define set_POKE1_VALVE do { set_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _SET_IO_); } while(0)
-#define clr_POKE1_VALVE do { clear_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _CLR_IO_); } while(0)
-#define tgl_POKE1_VALVE do { toggle_io(PORTE, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT1_VALVE, _TGL_IO_); } while(0)
+#define set_POKE1_VALVE set_io(PORTE, 7)
+#define clr_POKE1_VALVE clear_io(PORTE, 7)
+#define tgl_POKE1_VALVE toggle_io(PORTE, 7)
 #define read_POKE1_VALVE read_io(PORTE, 7)
 
 /* POKE2_LED */
@@ -120,11 +114,10 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 #define read_POKE2_LED read_io(PORTF, 6)
 
 /* POKE2_VALVE */
-#define set_POKE2_VALVE do { set_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _SET_IO_); } while(0)
-#define clr_POKE2_VALVE do { clear_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _CLR_IO_); } while(0)
-#define tgl_POKE2_VALVE do { toggle_io(PORTF, 7); mimic_ir_or_valve(app_regs.REG_MIMIC_PORT2_VALVE, _TGL_IO_); } while(0)
+#define set_POKE2_VALVE set_io(PORTF, 7)
+#define clr_POKE2_VALVE clear_io(PORTF, 7)
+#define tgl_POKE2_VALVE toggle_io(PORTF, 7)
 #define read_POKE2_VALVE read_io(PORTF, 7)
-
 
 /************************************************************************/
 /* Registers' structure                                                 */
@@ -132,7 +125,7 @@ void mimic_ir_or_valve (uint8_t reg, uint8_t what_t_do);
 typedef struct
 {
     uint8_t REG_DIGITAL_INPUT_STATE;
-	uint8_t REG_RESERVED0;
+    uint8_t REG_RESERVED0;
     uint16_t REG_OUTPUT_SET;
     uint16_t REG_OUTPUT_CLEAR;
     uint16_t REG_OUTPUT_TOGGLE;
@@ -151,14 +144,14 @@ typedef struct
     uint16_t REG_PULSE_SUPPLY_PORT0;
     uint16_t REG_PULSE_SUPPLY_PORT1;
     uint16_t REG_PULSE_SUPPLY_PORT2;
-	uint16_t REG_PULSE_LED0;
-	uint16_t REG_PULSE_LED1;
-	uint16_t REG_PULSE_RGB0;
-	uint16_t REG_PULSE_RGB1;
-	uint16_t REG_PULSE_DO0;
-	uint16_t REG_PULSE_DO1;
-	uint16_t REG_PULSE_DO2;
-	uint16_t REG_PULSE_DO3;
+    uint16_t REG_PULSE_LED0;
+    uint16_t REG_PULSE_LED1;
+    uint16_t REG_PULSE_RGB0;
+    uint16_t REG_PULSE_RGB1;
+    uint16_t REG_PULSE_DO0;
+    uint16_t REG_PULSE_DO1;
+    uint16_t REG_PULSE_DO2;
+    uint16_t REG_PULSE_DO3;
     uint16_t REG_PWM_FREQUENCY_DO0;
     uint16_t REG_PWM_FREQUENCY_DO1;
     uint16_t REG_PWM_FREQUENCY_DO2;
@@ -167,60 +160,60 @@ typedef struct
     uint8_t REG_PWM_DUTY_CYCLE_DO1;
     uint8_t REG_PWM_DUTY_CYCLE_DO2;
     uint8_t REG_PWM_DUTY_CYCLE_DO3;
-	uint8_t REG_PWM_START;
-	uint8_t REG_PWM_STOP;
+    uint8_t REG_PWM_START;
+    uint8_t REG_PWM_STOP;
     uint8_t REG_RGB_ALL[6];
-	uint8_t REG_RGB0[3];
-	uint8_t REG_RGB1[3];
-	uint8_t REG_LED0_CURRENT;
-	uint8_t REG_LED1_CURRENT;
-	uint8_t REG_LED0_MAX_CURRENT;
-	uint8_t REG_LED1_MAX_CURRENT;
+    uint8_t REG_RGB0[3];
+    uint8_t REG_RGB1[3];
+    uint8_t REG_LED0_CURRENT;
+    uint8_t REG_LED1_CURRENT;
+    uint8_t REG_LED0_MAX_CURRENT;
+    uint8_t REG_LED1_MAX_CURRENT;
     uint8_t REG_EVENT_ENABLE;
-	uint8_t REG_START_CAMERAS;
-	uint8_t REG_STOP_CAMERAS;
+    uint8_t REG_START_CAMERAS;
+    uint8_t REG_STOP_CAMERAS;
     uint8_t REG_ENABLE_SERVOS;
     uint8_t REG_DISABLE_SERVOS;
     uint8_t REG_ENABLE_ENCODERS;
     uint8_t REG_ENCODER_MODE;
-	uint8_t REG_RESERVED2;
-	uint8_t REG_RESERVED3;
-	uint8_t REG_RESERVED4;
-	uint8_t REG_RESERVED5;
-	uint8_t REG_RESERVED6;
-	uint8_t REG_RESERVED7;
-	uint8_t REG_RESERVED8;
-	uint8_t REG_RESERVED9;
+    uint8_t REG_RESERVED2;
+    uint8_t REG_RESERVED3;
+    uint8_t REG_RESERVED4;
+    uint8_t REG_RESERVED5;
+    uint8_t REG_RESERVED6;
+    uint8_t REG_RESERVED7;
+    uint8_t REG_RESERVED8;
+    uint8_t REG_RESERVED9;
     uint8_t REG_CAMERA0_FRAME;
     uint16_t REG_CAMERA0_FREQUENCY;
     uint8_t REG_CAMERA1_FRAME;
     uint16_t REG_CAMERA1_FREQUENCY;
-	uint8_t REG_RESERVED10;
-	uint8_t REG_RESERVED11;
-	uint8_t REG_RESERVED12;
-	uint8_t REG_RESERVED13;
+    uint8_t REG_RESERVED10;
+    uint8_t REG_RESERVED11;
+    uint8_t REG_RESERVED12;
+    uint8_t REG_RESERVED13;
     uint16_t REG_SERVO_MOTOR2_PERIOD;
     uint16_t REG_SERVO_MOTOR2_PULSE;
     uint16_t REG_SERVO_MOTOR3_PERIOD;
     uint16_t REG_SERVO_MOTOR3_PULSE;
-	uint8_t REG_RESERVED14;
-	uint8_t REG_RESERVED15;
-	uint8_t REG_RESERVED16;
-	uint8_t REG_RESERVED17;
+    uint8_t REG_RESERVED14;
+    uint8_t REG_RESERVED15;
+    uint8_t REG_RESERVED16;
+    uint8_t REG_RESERVED17;
     uint8_t REG_ENCODER_RESET;
-	uint8_t REG_RESERVED18;
-	uint8_t REG_ENABLE_SERIAL_TIMESTAMP;
-	uint8_t REG_MIMIC_PORT0_IR;
-	uint8_t REG_MIMIC_PORT1_IR;
-	uint8_t REG_MIMIC_PORT2_IR;
-	uint8_t REG_RESERVED20;
-	uint8_t REG_RESERVED21;
-	uint8_t REG_RESERVED22;
-	uint8_t REG_MIMIC_PORT0_VALVE;
-	uint8_t REG_MIMIC_PORT1_VALVE;
-	uint8_t REG_MIMIC_PORT2_VALVE;
-	uint8_t REG_RESERVED23;
-	uint8_t REG_RESERVED24;
+    uint8_t REG_RESERVED18;
+    uint8_t REG_ENABLE_SERIAL_TIMESTAMP;
+    uint8_t REG_MIMIC_PORT0_IR;
+    uint8_t REG_MIMIC_PORT1_IR;
+    uint8_t REG_MIMIC_PORT2_IR;
+    uint8_t REG_RESERVED20;
+    uint8_t REG_RESERVED21;
+    uint8_t REG_RESERVED22;
+    uint8_t REG_MIMIC_PORT0_VALVE;
+    uint8_t REG_MIMIC_PORT1_VALVE;
+    uint8_t REG_MIMIC_PORT2_VALVE;
+    uint8_t REG_RESERVED23;
+    uint8_t REG_RESERVED24;
     uint8_t REG_POKE_INPUT_FILTER;
 } AppRegs;
 

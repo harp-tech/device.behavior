@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include "hwbp_core_types.h"
 #include "app_ios_and_regs.h"
+#include "mimic.h"
 
 extern AppRegs app_regs;
 
@@ -69,11 +70,11 @@ void init_ios(void)
 	clr_LED1;
 	clr_RGBS;
 	clr_POKE0_LED;
-	clr_POKE0_VALVE;
+	close_POKE0_VALVE;
 	clr_POKE1_LED;
-	clr_POKE1_VALVE;
+	close_POKE1_VALVE;
 	clr_POKE2_LED;
-	clr_POKE2_VALVE;
+	close_POKE2_VALVE;
 }
 
 /************************************************************************/

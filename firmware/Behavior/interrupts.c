@@ -1,6 +1,7 @@
 #include "cpu.h"
 #include "hwbp_core_types.h"
 #include "app_ios_and_regs.h"
+#include "mimic.h"
 #include "app_funcs.h"
 #include "hwbp_core.h"
 

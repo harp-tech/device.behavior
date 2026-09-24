@@ -1,5 +1,6 @@
 #include "app_funcs.h"
 #include "app_ios_and_regs.h"
+#include "mimic.h"
 #include "hwbp_core.h"
 
 #define F_CPU 32000000
@@ -242,9 +243,9 @@ bool rgb1_on = false;
 #define start_POKE1_LED do {set_POKE1_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DO_PORT1) pulse_countdown.poke1_led = app_regs.REG_PULSE_DO_PORT1 + 1; } while(0)
 #define start_POKE2_LED do {set_POKE2_LED; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_DO_PORT2) pulse_countdown.poke2_led = app_regs.REG_PULSE_DO_PORT2 + 1; } while(0)
 
-#define start_POKE0_VALVE do {set_POKE0_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT0) pulse_countdown.poke0_valve = app_regs.REG_PULSE_SUPPLY_PORT0 + 1; } while(0)
-#define start_POKE1_VALVE do {set_POKE1_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT1) pulse_countdown.poke1_valve = app_regs.REG_PULSE_SUPPLY_PORT1 + 1; } while(0)
-#define start_POKE2_VALVE do {set_POKE2_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT2) pulse_countdown.poke2_valve = app_regs.REG_PULSE_SUPPLY_PORT2 + 1; } while(0)
+#define start_POKE0_VALVE do {open_POKE0_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT0) pulse_countdown.poke0_valve = app_regs.REG_PULSE_SUPPLY_PORT0 + 1; } while(0)
+#define start_POKE1_VALVE do {open_POKE1_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT1) pulse_countdown.poke1_valve = app_regs.REG_PULSE_SUPPLY_PORT1 + 1; } while(0)
+#define start_POKE2_VALVE do {open_POKE2_VALVE; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_SUPPLY_PORT2) pulse_countdown.poke2_valve = app_regs.REG_PULSE_SUPPLY_PORT2 + 1; } while(0)
 
 #define start_LED0 do {set_LED0; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_LED0) pulse_countdown.led0 = app_regs.REG_PULSE_LED0 + 1; } while(0)
 #define start_LED1 do {set_LED1; if (app_regs.REG_OUTPUT_PULSE_ENABLE & B_LED1) pulse_countdown.led1 = app_regs.REG_PULSE_LED1 + 1; } while(0)
@@ -340,9 +341,9 @@ bool app_write_REG_OUTPUT_CLEAR(void *a)
 	if (reg & B_DO_PORT1) clr_POKE1_LED;
 	if (reg & B_DO_PORT2) clr_POKE2_LED;
 	
-	if (reg & B_SUPPLY_PORT0) clr_POKE0_VALVE;
-	if (reg & B_SUPPLY_PORT1) clr_POKE1_VALVE;
-	if (reg & B_SUPPLY_PORT2) clr_POKE2_VALVE;
+	if (reg & B_SUPPLY_PORT0) close_POKE0_VALVE;
+	if (reg & B_SUPPLY_PORT1) close_POKE1_VALVE;
+	if (reg & B_SUPPLY_PORT2) close_POKE2_VALVE;
 	
 	if (reg & B_LED0) clr_LED0;
 	if (reg & B_LED1) clr_LED1;
@@ -378,9 +379,9 @@ bool app_write_REG_OUTPUT_TOGGLE(void *a)
 	if (reg & B_DO_PORT1) { if (read_POKE1_LED) tgl_POKE1_LED; else start_POKE1_LED;}
 	if (reg & B_DO_PORT2) { if (read_POKE2_LED) tgl_POKE2_LED; else start_POKE2_LED;}
 	
-	if (reg & B_SUPPLY_PORT0) { if (read_POKE0_VALVE) tgl_POKE0_VALVE; else start_POKE0_VALVE;}
-	if (reg & B_SUPPLY_PORT1) { if (read_POKE1_VALVE) tgl_POKE1_VALVE; else start_POKE1_VALVE;}
-	if (reg & B_SUPPLY_PORT2) { if (read_POKE2_VALVE) tgl_POKE2_VALVE; else start_POKE2_VALVE;}
+	if (reg & B_SUPPLY_PORT0) { if (read_POKE0_VALVE) toggle_POKE0_VALVE; else start_POKE0_VALVE;}
+	if (reg & B_SUPPLY_PORT1) { if (read_POKE1_VALVE) toggle_POKE1_VALVE; else start_POKE1_VALVE;}
+	if (reg & B_SUPPLY_PORT2) { if (read_POKE2_VALVE) toggle_POKE2_VALVE; else start_POKE2_VALVE;}
 	
 
 	if (reg & B_LED0) { if (!read_LED0) tgl_LED0; else start_LED0;}
@@ -454,9 +455,9 @@ bool app_write_REG_OUTPUT_STATE(void *a)
 	if (reg & B_DO_PORT1) start_POKE1_LED; else clr_POKE1_LED;
 	if (reg & B_DO_PORT2) start_POKE2_LED; else clr_POKE2_LED;
 	
-	if (reg & B_SUPPLY_PORT0) start_POKE0_VALVE; else clr_POKE0_VALVE;
-	if (reg & B_SUPPLY_PORT1) start_POKE1_VALVE; else clr_POKE1_VALVE;
-	if (reg & B_SUPPLY_PORT2) start_POKE2_VALVE; else clr_POKE2_VALVE;
+	if (reg & B_SUPPLY_PORT0) start_POKE0_VALVE; else close_POKE0_VALVE;
+	if (reg & B_SUPPLY_PORT1) start_POKE1_VALVE; else close_POKE1_VALVE;
+	if (reg & B_SUPPLY_PORT2) start_POKE2_VALVE; else close_POKE2_VALVE;
 	
 	if (reg & B_LED0) start_LED0; else clr_LED0;
 	if (reg & B_LED1) start_LED1; else clr_LED1;

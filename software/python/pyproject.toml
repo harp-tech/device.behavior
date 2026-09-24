@@ -1,0 +1,44 @@
+[project]
+name = "harp-behavior"
+dynamic = ["version"]
+description = "Interface for data acquisition and control of Harp Behavior devices."
+authors = [{ name = "harp-tech", email = "contact@harp-tech.org" }]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+]
+dependencies = [
+    "harp-protocol",
+    "harp-device",
+    "numpy>=1.24",
+]
+
+[project.urls]
+Homepage = "https://harp-tech.org/device.behavior"
+Repository = "https://github.com/harp-tech/device.behavior/"
+"Bug Tracker" = "https://github.com/harp-tech/device.behavior/issues"
+Changelog = "https://github.com/harp-tech/device.behavior/releases"
+
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+root = "../.."
+git_describe_command = "git describe --dirty --tags --long --match [0-9]*.[0-9]*.[0-9]*"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["harp*"]
+
+[dependency-groups]
+dev = ["pytest>=8"]

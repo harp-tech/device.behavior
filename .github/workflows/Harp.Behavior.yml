@@ -221,6 +221,8 @@ jobs:
     name: Build Python (${{matrix.python-version}})
     runs-on: ubuntu-latest
     needs: verify-generated
+    env:
+      UV_PYTHON: ${{matrix.python-version}}
     defaults:
       run:
         working-directory: software/python
@@ -240,7 +242,7 @@ jobs:
 
       # ----------------------------------------------------------------------- Build interface package
       - name: Restore interface
-        run: uv sync --group dev --python ${{matrix.python-version}}
+        run: uv sync --group dev
 
       - name: Test interface
         run: uv run pytest

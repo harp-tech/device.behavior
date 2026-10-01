@@ -16,6 +16,8 @@
 - name: Bonsai
   href: harp-bonsai.md
 - name: Bonsai Workflows
+- name: About These Examples
+  href: about-these-examples.md
 - name: Acquire Analog Data
   href: acquire-analog-data.md
 - name: Read Digital Inputs

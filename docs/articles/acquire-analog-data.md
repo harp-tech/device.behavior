@@ -10,9 +10,6 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
 :::
 
-> [!WARNING]
-> You can find and add these operators to the workflow from the Bonsai [Toolbox](https://bonsai-rx.org/docs/articles/editor.html?tabs=mouse-controls#toolbox). Make sure to use the device-specific versions, e.g. `Device (Harp.Behavior)` instead of `Device (Harp)`. If correctly selected, the names of these operators in the workflow panel will change to reflect either the name of the device or the selected register/payload.
-
 ### Visualize Analog Data
 
 Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
@@ -21,17 +18,14 @@ Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitiz
 ![Analog Data Visualize](../workflows/acquireanalogdata-visualizedata.bonsai)
 :::
 
-- Insert a [`SubscribeSubject`] operator named `Behavior Events`. This will listen to [`HarpMessages`] broadcast from the [`PublishSubject`] named `Behavior Events` in the Harp device pattern.
-- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`. This filters only messages for that register, and extracts the data together with the device timestamp of each message into a typed format.
-- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying all the analog data payloads with their timestamps.
-
-> [!NOTE]
-> Every register event can be parsed in two forms, selected in the `Register` property of [`Parse`]. The bare payload (e.g. `AnalogData`, used in [First Steps](./harp-bonsai.md#first-steps)) returns only the register values while the timestamped variant (e.g. `TimestampedAnalogData`) returns the same payload wrapped in a `Value` field and adds a `Seconds` field carrying the device timestamp. Either variant can be used for live monitoring. Regardless of which option is chosen, all data is [logged](./logging-analysis.md) with device timestamps.
+- Insert a [`SubscribeSubject`] operator named `Behavior Events`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`.
+- Insert a [`VisualizerWindow`] operator to automatically open a window displaying all the analog data payloads with their timestamps.
 
 To visualize only one of the input channels:
 
-- Insert a [`MemberSelector`] operator on a separate branch.
-- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will bundle the individual channel data as well as the timestamp.
+- Insert a [`MemberSelector`] operator on a separate branch, this will enable you to select specific fields from the bundled analog data payload.
+- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will select the individual channel data as well as the timestamp.
 - Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel and its timestamp.
 
 Run the workflow, the first visualizer displays the three payload values followed by the timestamp in seconds:

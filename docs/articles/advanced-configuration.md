@@ -65,9 +65,6 @@ Run the workflow and press <kbd>S</kbd>. The timestamp stream starts on the **P2
 > [!NOTE]
 > The serial timestamp stream is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. The Behavior board does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
 
-> [!NOTE]
-> Shawn's note - The technical information about the format should enable someone to figure out how to reconstruct the timestamp, but to take someone through the whole process will probably require a tutorial. I am not sure how much to publicize this feature or work on a tutorial for it, as it might change https://github.com/harp-tech/protocol/issues/128.
-
 [!INCLUDE [](version-footer.md)]
 
 <!--Reference Style Links -->

@@ -2,7 +2,9 @@
 
 The Harp Behavior Breakout is an interface peripheral for the Behavior board. It makes the pins of the Behavior board peripheral ports available on screw terminals without having to build a custom cable. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Stream Timestamps](../advanced-configuration.md#stream-timestamps) articles to use it in Bonsai.
 
-![Breakout board](../../images/OEPS-Breakout.png){width=450}
+![Breakout board v1.1](../../images/OEPS-Breakout.png){width=350} ![Breakout board v2.1](../../images/OEPS-Breakoutv2.1.png){width=350}
+
+*<small>Left: Breakout v1.1. Right: Breakout v2.1.</small>*
 
 ### Key Features
 

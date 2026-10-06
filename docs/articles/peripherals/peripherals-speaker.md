@@ -32,7 +32,4 @@ The Harp Behavior Speaker is a sound output peripheral for the Behavior board. I
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp).
 
-> [!NOTE]
-> The [hardware repository](https://github.com/harp-tech/peripheral.speaker) is private and incomplete, if we want to link to it, it needs to be polished and made public.
-
 [!INCLUDE [](../version-footer.md)]

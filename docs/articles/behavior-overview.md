@@ -39,11 +39,7 @@
 | ------- | ----- |
 | 2.1 | <ul><li> Changed USB connector from Mini-B to USB-C </li></ul> |
 | 2.0 | <ul><li> Added an input connector with an extra analog input and digital input. </li></ul> |
-| 1.2 | <ul><li> ? </li></ul> |
 | 1.1 | <ul><li> Initial version </li></ul> |
-
-> [!WARNING]
-> **TODO**: v1.1 pcb files are not available in the repository, v1.2 pcb is the earliest files. Confirm which is the earliest production version.
 
 ### Firmware
 
@@ -53,8 +49,5 @@
 | 3.2 | <ul><li> Add limits to ServoMotor registers </li><li> Create displacement reading option for quadrature encoder. </li></ul> |
 | 3.1 | <ul><li> Support for hardware 2.0 </li><li> Added serial timestamp registers </li></ul> |
 | 3.0 | <ul><li> Initial version </li></ul> |
-
-> [!WARNING]
-> **TODO**: There are no earlier firmware versions than 3.0. See if there are any notes for the earlier versions.
 
 [!INCLUDE [](version-footer.md)]

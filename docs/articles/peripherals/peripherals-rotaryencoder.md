@@ -24,7 +24,4 @@ The Harp Behavior Rotary Encoder is a rotation tracking peripheral for the Behav
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp).
 
-> [!NOTE]
-> The [hardware repository](https://github.com/harp-tech/peripheral.encoder) is private and incomplete, if we want to link to it, it needs to be polished and made public.
-
 [!INCLUDE [](../version-footer.md)]

@@ -24,7 +24,4 @@ The Harp Behavior Photodiode is a light-measuring peripheral for the Behavior bo
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp). 
 
-> [!NOTE]
-> The [hardware repository](https://github.com/harp-tech/peripheral.lightdetector) is private and incomplete, if we want to link to it, it needs to be polished and made public.
-
 [!INCLUDE [](../version-footer.md)]

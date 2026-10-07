@@ -77,7 +77,7 @@ Run the workflow and press <kbd>F</kbd> to load the colors. If the LEDs are curr
 > To configure one LED at a time, use the [`Rgb0`] or [`Rgb1`] registers instead.
 
 > [!NOTE]
-> There is a bug in the current firmware (v3.3) where the red and green channels are switched.
+> There is a [bug](https://github.com/harp-tech/device.behavior/issues/41) in the current firmware (v3.3) where the red and green channels are switched (e.g. `Red0` controls the LED green channel instead). As a workaround, swap the two channel values to get the intended color.
 
 ### Turn RGB LEDs On and Off
 

@@ -32,7 +32,7 @@ The [Harp device pattern](https://harp-tech.org/articles/operators.html#device-p
 
 To send a command to the device, the examples use:
 
-- A [`KeyDown`] operator that generates the command when a key is pressed.
+- A [`KeyDown`] operator that triggers the branch to execute when a specific key is pressed (defined in the `Filter` property).
 - A [`CreateMessage`] operator that formats the command to send to the device.
 - A [`MulticastSubject`] operator that sends to the command to the `Device Commands` subject.
 
@@ -47,7 +47,7 @@ To receive and read events from the device, the examples use:
 
 - A [`SubscribeSubject`] operator that subscribes to the `Device Events` message stream.
 - A [`Parse`] operator that picks out the messages corresponding to one register and decodes its values.
-- A [`VisualizerWindow`] that displays the decoded values when the workflow starts.
+- A [`VisualizerWindow`] that automatically opens a window and displays the decoded values when the workflow starts.
 
 Each example also shows what the visualizer displays:
 

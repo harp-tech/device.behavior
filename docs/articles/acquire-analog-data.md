@@ -20,7 +20,7 @@ Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitiz
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`.
-- Insert a [`VisualizerWindow`] operator to automatically open a window displaying all the analog data payloads with their timestamps.
+- Insert a [`VisualizerWindow`] operator.
 
 To visualize only one of the input channels:
 

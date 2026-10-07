@@ -160,13 +160,15 @@ An external rotary encoder can also be connected using the [Breakout](./peripher
 
 ![Breakout](../images/connection-breakout.svg){width=600}
 
-For digital input and output connections:
-1. Connect the [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
+Both versions of the [Breakout](./peripherals/peripherals-portbreakout.md) board are shown above. Follow the instructions for the version you have, some of the functionality is only available for a specific version.
+
+For digital input and output connections (both):
+1. Connect the Breakout board to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. Wire the signal wire from external devices to the **DI**, **DIO**, and **DO** screw terminals.
 3. Wire the **+5V** pin and **GND** pins to provide power and ground.
 4. Refer to the [Read Digital Inputs](read-digital-inputs.md) and [Control Digital Outputs](control-digital-outputs.md) articles to use these lines in Bonsai.
 
-For connecting an external rotary encoder:
+For connecting an external rotary encoder (both):
 1. Connect the Breakout board to port **P2** with an RJ45 cable. The quadrature counter is only available on this port.
 2. Wire the encoder's **A** channel to the **DI** terminal and its **B** channel to the **DIO** terminal. Both channels must be 5 V logic.
 3. Wire the encoder's supply to the **+5V** terminal and its ground to a **GND** terminal. For encoders that require a different supply voltage, power the encoder from an external supply instead and share only its ground with a **GND** terminal.

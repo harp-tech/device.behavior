@@ -9,7 +9,8 @@ A typical behavioral rig combines sensors, cue lights, reward valves, cameras an
 The Behavior board provides:
 
 - General-purpose digital inputs and outputs, plus analog inputs, for interfacing with external devices.
-- Support for specialized peripherals like [nose pokes](articles/peripherals/peripherals-micepoke.md), camera triggers, servo motors, quadrature encoders and more.
+- Plug-in support for peripherals like the Harp Behavior [Mice Poke](articles/peripherals/peripherals-micepoke.md), [Rotary Encoder](articles/peripherals/peripherals-rotaryencoder.md), and more.
+- Specialized functionality to directly control external hardware, including triggering [cameras](./articles/trigger-cameras.md), driving [servo motors](./articles/drive-servos.md), and more.
 - Hardware timestamping and synchronization with other [Harp](https://harp-tech.org/articles/about.html) devices.
 - [Bonsai](https://bonsai-rx.org/) integration for flexible experiment acquisition and control.
 

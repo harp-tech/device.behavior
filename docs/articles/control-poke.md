@@ -20,9 +20,9 @@ Beam breaks in the Mice Poke peripheral are reported as digital input events. Th
 ![Detect Pokes Visualize Events](../workflows/controlpoke-visualizeevents.bonsai)
 :::
 
-- Insert a [`SubscribeSubject`] operator named `Behavior Events`. This will listen to [`HarpMessages`] broadcast from the [`PublishSubject`] named `Behavior Events` in the Harp device pattern.
+- Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedDigitalInputState`.
-- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
+- Insert a [`VisualizerWindow`] operator.
 
 Run the workflow and block the infrared beam on the Mice Poke peripheral. The visualizer will display:
 

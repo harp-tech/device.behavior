@@ -30,7 +30,7 @@ Refer to the register table below for a complete listing of the available regist
   </thead>
   <tbody>
     <tr><td>whoAmI</td><td>1216</td></tr>
-    <tr><td>firmwareVersion</td><td>3.4</td></tr>
+    <tr><td>firmwareVersion</td><td>3.3</td></tr>
     <tr><td>hardwareTargets</td><td>2.0</td></tr>
   </tbody>
 </table>
@@ -44,11 +44,11 @@ Refer to the register table below for a complete listing of the available regist
 | [OutputClear](xref:Harp.Behavior.OutputClear) | 35 | U16 |  | Write | Clear the specified digital output lines |  | [DigitalOutputs](xref:Harp.Behavior.DigitalOutputs) |
 | [OutputToggle](xref:Harp.Behavior.OutputToggle) | 36 | U16 |  | Write | Toggle the specified digital output lines |  | [DigitalOutputs](xref:Harp.Behavior.DigitalOutputs) |
 | [OutputState](xref:Harp.Behavior.OutputState) | 37 | U16 |  | Write | Write the state of all digital output lines |  | [DigitalOutputs](xref:Harp.Behavior.DigitalOutputs) |
-| [PortDIOSet](xref:Harp.Behavior.PortDIOSet) | 38 | U8 |  | Write | Set the specified port DIO lines |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
-| [PortDIOClear](xref:Harp.Behavior.PortDIOClear) | 39 | U8 |  | Write | Clear the specified port DIO lines |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
-| [PortDIOToggle](xref:Harp.Behavior.PortDIOToggle) | 40 | U8 |  | Write | Toggle the specified port DIO lines |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
-| [PortDIOState](xref:Harp.Behavior.PortDIOState) | 41 | U8 |  | Write | Write the state of all port DIO lines |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
-| [PortDIODirection](xref:Harp.Behavior.PortDIODirection) | 42 | U8 |  | Write | Specifies which of the port DIO lines are outputs |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
+| [PortDIOSet](xref:Harp.Behavior.PortDIOSet) | 38 | U8 |  | Write | Set the specified port DIO lines.<br><br>*This functionality has not yet been implemented* |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
+| [PortDIOClear](xref:Harp.Behavior.PortDIOClear) | 39 | U8 |  | Write | Clear the specified port DIO lines.<br><br>*This functionality has not yet been implemented* |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
+| [PortDIOToggle](xref:Harp.Behavior.PortDIOToggle) | 40 | U8 |  | Write | Toggle the specified port DIO lines.<br><br>*This functionality has not yet been implemented* |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
+| [PortDIOState](xref:Harp.Behavior.PortDIOState) | 41 | U8 |  | Write | Write the state of all port DIO lines.<br><br>*This functionality has not yet been implemented* |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
+| [PortDIODirection](xref:Harp.Behavior.PortDIODirection) | 42 | U8 |  | Write | Specifies which of the port DIO lines are outputs.<br><br>*This functionality has not yet been implemented* |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
 | [PortDIOStateEvent](xref:Harp.Behavior.PortDIOStateEvent) | 43 | U8 |  | Event | Specifies the state of the port DIO lines on a line change |  | [PortDigitalIOS](xref:Harp.Behavior.PortDigitalIOS) |
 | [AnalogData](xref:Harp.Behavior.AnalogData) | 44 | S16 | 3 | Event | Voltage at the ADC input and encoder value on Port 2 |  | [AnalogDataPayload](xref:Harp.Behavior.AnalogDataPayload) |
 | [OutputPulseEnable](xref:Harp.Behavior.OutputPulseEnable) | 45 | U16 |  | Write | Enables the pulse function for the specified output lines |  | [DigitalOutputs](xref:Harp.Behavior.DigitalOutputs) |

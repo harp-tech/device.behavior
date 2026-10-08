@@ -1,0 +1,70 @@
+## Installation
+
+This page covers the software you'll need to interact with the Behavior board, as well as how to update the firmware on the device.
+
+### Software Packages
+
+These steps are only required the first time you connect the device to a new computer, and you can install just the packages for the functionality you need.
+
+# [Bonsai](#tab/bonsai)
+
+[Bonsai](https://bonsai-rx.org/) is a visual reactive programming language that provides flexible and comprehensive control of the Behavior board.
+
+![Bonsai Package Manager](../images/bonsai-packagemanager.png){width=600}
+
+- Download and install [Bonsai](https://bonsai-rx.org/docs/articles/installation.html).
+- Launch Bonsai and install the `Harp.Behavior` package by searching for it in the [Bonsai package manager](https://bonsai-rx.org/docs/articles/packages.html).
+- (Optional) Install the `Bonsai.Windows.Input` package to follow along with the examples in this user guide.
+
+# [Python](#tab/python)
+
+The [Harp](https://harp-tech.org/python/) library provides a Python interface for controlling Harp devices and [loading](logging-analysis.md) recorded data. To install the full library, install it in a Python environment with: 
+
+```cmd
+pip install harp
+```
+
+To install only the package necessary for loading data:
+
+```cmd
+pip install harp-data
+```
+
+> [!NOTE]
+> Substitute `uv add` for `pip install` if you are using the [uv](https://docs.astral.sh/uv/) package manager.
+
+# [GUI](#tab/gui)
+
+The [Behavior GUI](behavior-gui.md) is a standalone graphical application for configuring and testing the device without using Bonsai.
+
+![Behavior GUI](../images/behavior-gui.png){width=600}
+
+- Download and install the [Behavior GUI](https://github.com/fchampalimaud/device.behavior/releases).
+
+***
+
+### Firmware Update
+
+New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.3-harp1.15-hw2.1-ass0.hex` is firmware v3.3 for a hardware v2.1 Behavior board. Download the latest firmware version that matches the hardware version of the board from the "Assets" section under each release.
+
+>[!TIP]
+> The hardware version is printed on the PCB silkscreen (e.g. `harp behavior v2.1`).
+
+To update the firmware, use the device setup tool in Bonsai:
+
+![Device Setup](../images/installation-firmwareupdate.png){width=650}
+
+1. Add the [`Device`] operator in Bonsai.
+2. Double-click on the [`Device`] node while the workflow is not running.
+3. Select the COM port for the device.
+4. Click "Bootloader".
+5. Click "Open".
+6. Select the downloaded `.hex` file.
+7. Click "Update".
+
+After the update, the device will reboot with the new firmware.
+
+[!INCLUDE [](version-footer.md)]
+
+<!--Reference Style Links -->
+[`Device`]: xref:Harp.Behavior.Device

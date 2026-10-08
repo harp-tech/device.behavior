@@ -1,0 +1,61 @@
+## Acquire Analog Data
+
+The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector (hardware v2.0 and later boards). The analog input can be tested with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
+
+This article covers how to visualize the timestamped analog input stream and extract a single channel with its timestamp in Bonsai.
+
+The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
+
+:::workflow
+![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
+:::
+
+### Visualize Analog Data
+
+Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
+
+:::workflow
+![Analog Data Visualize](../workflows/acquireanalogdata-visualizedata.bonsai)
+:::
+
+- Insert a [`SubscribeSubject`] operator named `Behavior Events`.
+- Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`.
+- Insert a [`VisualizerWindow`] operator.
+
+To visualize only one of the input channels:
+
+- Insert a [`MemberSelector`] operator on a separate branch to select specific fields from the bundled analog data payload.
+- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will select the individual channel data as well as the timestamp.
+- Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel and its timestamp.
+
+Run the workflow, the first visualizer displays the three payload values followed by the timestamp in seconds:
+
+```text
+AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }@10.351072
+AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }@10.352072
+```
+and the second displays the `AnalogInput0` value paired with its timestamp.
+
+```text
+(13, 10.351072)
+(15, 10.352072)
+```
+
+If you are using a photodiode, shine a light on the photodiode to see the analog input value change. If you are using a different signal source, vary the output voltage instead.
+
+> [!NOTE]
+> The `Encoder` value bundled together in the payload is not an analog voltage reading but a [quadrature encoder counter](track-rotary-encoder.md) that is sampled on the same 1 kHz tick so that position and analog data share the same timestamps.
+
+> [!NOTE]
+> The analog events are enabled by default, but if nothing appears, they may have been disabled by another [configuration](advanced-configuration.md#select-active-events) setting. Refer to the link to find out how to re-enable them.
+
+[!INCLUDE [](version-footer.md)]
+
+<!--Reference Style Links -->
+[`SubscribeSubject`]: xref:Bonsai.Expressions.SubscribeSubject
+[`PublishSubject`]: xref:Bonsai.Reactive.PublishSubject
+[`Parse`]: xref:Harp.Behavior.Parse
+[`VisualizerWindow`]: xref:Bonsai.Design.VisualizerWindow
+[`HarpMessages`]: xref:Bonsai.Harp.HarpMessage
+[`AnalogData`]: xref:Harp.Behavior.AnalogData
+[`MemberSelector`]: xref:Bonsai.Expressions.MemberSelectorBuilder

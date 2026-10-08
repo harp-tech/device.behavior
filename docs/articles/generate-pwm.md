@@ -32,7 +32,7 @@ Run the workflow and press <kbd>A</kbd> to configure a 1 kHz, 50% duty cycle wav
 
 ### Start and Stop PWM
 
-The [`PwmStart`] and [`PwmStop`] registers start and stop the waveform on any combination of outputs.
+Use the [`PwmStart`] and [`PwmStop`] registers to start and stop the waveform on any combination of outputs.
 
 :::workflow
 ![Start and Stop PWM](../workflows/generatepwm-startstop.bonsai)
@@ -41,7 +41,7 @@ The [`PwmStart`] and [`PwmStop`] registers start and stop the waveform on any co
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PwmStartPayload`.
-    - `PwmStart` - Select `PwmDO0`.
+    - `PwmStart` - Select the line to start PWM on (e.g. `PwmDO0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -49,14 +49,14 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PwmStopPayload`.
-    - `PwmStop` - Select `PwmDO0`.
+    - `PwmStop` - Select the line to stop PWM on (e.g. `PwmDO0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the waveform on **DO0**.
 
 ### Generate PWM Bursts
 
-To generate a PWM train of fixed duration, enable the [pulse mode](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the [`PulseDO0`] register.
+To generate a PWM train of fixed duration, enable the [pulse mode](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the appropriate output line pulse duration register (e.g. [`PulseDO0`] for **DO0**).
 
 :::workflow
 ![Generate PWM Bursts](../workflows/generatepwm-pulseenable.bonsai)
@@ -65,11 +65,11 @@ To generate a PWM train of fixed duration, enable the [pulse mode](control-digit
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputPulseEnablePayload`.
-    - `OutputPulseEnable` - Select `DO0`.
+    - `OutputPulseEnable` - Select the line to enable the PWM pulse on (e.g. `DO0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PulseDO0Payload`.
-    - `PulseDO0` - Set the burst duration to 100 ms.
+    - `PulseDO0` - Set the burst duration in ms (e.g. `100`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>F</kbd> once to configure the pulse, then press <kbd>S</kbd>. The PWM runs for 100 ms and stops on its own, which translates to either a short beep with a speaker or a brief flash with an LED.

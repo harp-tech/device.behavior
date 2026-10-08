@@ -14,7 +14,7 @@ The Harp Behavior Photodiode is a light-measuring peripheral for the Behavior bo
 ### Specs
 
 - Photodiode: Advanced Photonix PDB-C156-ND
-- Connector: 3.5 mm stereo jack for stereo plug cable carrying 5 V, ground and signal wire
+- Connector: 3.5 mm stereo jack for stereo plug cable carrying 5 V, ground, and signal wire
 
 ### Hardware
 

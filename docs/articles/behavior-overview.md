@@ -25,7 +25,7 @@
 - Peripheral ports: 3 (RJ45)
     - For the [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board
 - LED outputs: 2 (2–100 mA drive current)
-- RGB LED outputs: 2 (WS2812-type addressable LEDs connector, driven as a serial chain)
+- RGB LED outputs: 2 (WS2812-type addressable LED connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)
 - Servo outputs: 2 (**DO2**/**DO3**)
 - Quadrature encoder inputs: 1 (**P2**, sampled at 1 kHz)

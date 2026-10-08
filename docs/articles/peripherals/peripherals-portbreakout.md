@@ -12,7 +12,7 @@ The Harp Behavior Breakout is an interface peripheral for the Behavior board. It
 - Supports serial timestamp output, with the logic level selected by the onboard jumper (v2.x only).
 
 > [!NOTE]
-> Pick the board version by the feature you need, both features are not available on the same board as they share the same port line.
+> Pick the board version by the feature you need. Both features are not available on the same board as they share the same port line.
 
 ### Specs
 
@@ -20,7 +20,7 @@ Ports:
 - 1x Digital Input (DI)
 - 1x Digital Input / Output (DIO)
 - 1x Digital Output (DO)
-- 1x 5V supply (+5V)
+- 1x 5 V supply (+5V)
 - 1x Ground (GND)
 - 1x 12 V supply (+12V) (v1.1 only)
 - 1x Supply return (compatible for +5V and +12V) (SUP_RTN) (v1.1 only)

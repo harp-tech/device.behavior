@@ -11,7 +11,7 @@ The Harp Behavior Speaker is a sound output peripheral for the Behavior board. I
 
 - Onboard speaker driven directly by a digital output.
 - Volume potentiometer to adjust the amplitude.
-- Screw terminal for wiring, no soldering needed.
+- Screw terminal for wiring; no soldering needed.
 
 ### Specs
 

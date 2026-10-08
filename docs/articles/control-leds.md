@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure LED Current
 
-The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current register ([`Led0Current`], 2–100 mA) and a protection limit ([`Led0MaxCurrent`], 5–100 mA); writes above the limit are rejected by the device.
+The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**). Writes above the limit are rejected by the device.
 
 :::workflow
 ![Configure LED Current](../workflows/controlleds-current.bonsai)
@@ -21,11 +21,11 @@ The **L0** and **L1** outputs drive standard single-color LEDs with a configurab
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `Led0MaxCurrentPayload`.
-    - `Led0MaxCurrent` - Set the maximum allowed current according to the rating of the LED in mA (e.g. 20).
+    - `Led0MaxCurrent` - Set the maximum allowed current according to the rating of the LED in mA (e.g. `20`). Valid values are 2–100 mA.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `Led0CurrentPayload`.
-    - `Led0Current` - Set the working current in mA (e.g. 10).
+    - `Led0Current` - Set the working current in mA (e.g. `10`). Valid values are 5–100 mA.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>A</kbd> to configure the **L0** drive current, then switch the output on as shown in the next section.
@@ -41,7 +41,7 @@ Once the drive current is configured, the **L0** and **L1** outputs are switched
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `Led0`.
+    - `OutputSet` - Select the line to turn on (e.g. `Led0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -49,14 +49,14 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputClearPayload`.
-    - `OutputClear` - Select `Led0`.
+    - `OutputClear` - Select the line to turn off (e.g. `Led0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
 
 ### Set RGB Colors
 
-The **RGB** connector drives WS2812-type individually addressable LEDs. The two LEDs form a serial chain on a single data line: **Rgb0** is the first LED in the chain and **Rgb1** the second when configuring and controlling these LEDs. Single color LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead. Analog RGB LEDs are not supported on either.
+The **RGB** connector drives WS2812-type individually addressable LEDs. The two LEDs form a serial chain on a single data line: **Rgb0** is the first LED in the chain and **Rgb1** the second when configuring and controlling these LEDs. Single-color LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead. Analog RGB LEDs are not supported on either.
 
 The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 
@@ -67,11 +67,11 @@ The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each c
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `RgbAllPayload`.
-    - `Red0` - Set to 255 to make **Rgb0** red.
-    - `Blue1` - Set to 255 to make **Rgb1** blue.
+    - `Red0` - Set the value for the red channel on **Rgb0** (e.g. `255`).
+    - `Blue1` - Set the value for the blue channel on **Rgb1** (e.g. `255`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>F</kbd> to load the colors. If the LEDs are currently on, the new colors take effect immediately.
+Run the workflow and press <kbd>F</kbd> to load the colors. If the LEDs are currently on, the new colors take effect immediately. If not, when you turn them on in the next section, , **Rgb0** should display red and **Rgb1** should be blue.
 
 > [!NOTE]
 > To configure one LED at a time, use the [`Rgb0`] or [`Rgb1`] registers instead.
@@ -90,7 +90,7 @@ The RGB LEDs are switched like any other digital output, for instance through th
 - Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `Rgb0` and `Rgb1`.
+    - `OutputSet` - Set the lines to turn on (e.g. `Rgb0, Rgb1`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -98,7 +98,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `H`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputClearPayload`.
-    - `OutputClear` - Select `Rgb0` and `Rgb1`.
+    - `OutputClear` - Set the lines to turn off (e.g.  `Rgb0, Rgb1`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>G</kbd> to turn on both RGB LEDs and <kbd>H</kbd> to turn them off.

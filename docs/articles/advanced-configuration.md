@@ -20,7 +20,7 @@ To see one of the default streams, visualize the [`AnalogData`] event, which rep
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `AnalogData`.
-- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
+- Insert a [`VisualizerWindow`] operator.
 
 Run the workflow. The visualizer immediately displays a rapid stream of [`AnalogData`] values, confirming that the event is enabled by default.
 
@@ -35,7 +35,7 @@ The [`EventEnable`] register selects which event streams the device broadcasts, 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `EventEnablePayload`.
-    - `EventEnable` - Enter `PortDI`, `PortDIO`, `Camera0`, `Camera1` to disable the `AnalogData` event and keep the rest.
+    - `EventEnable` - Enter `PortDI, PortDIO, Camera0, Camera1` to disable the `AnalogData` event and keep the rest.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>A</kbd>. The visualizer will stop showing any new [`AnalogData`](acquire-analog-data.md) events.

@@ -15,7 +15,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure Trigger Frequency
 
-The trigger frequency of each camera is set with the appropriate register for the port, e.g. [`Camera1Frequency`] for **DO1**:
+Set the trigger frequency of each camera with the appropriate register for the port (e.g. [`Camera1Frequency`] for a camera connected to **DO1**).
 
 :::workflow
 ![Configure Trigger Frequency](../workflows/triggercameras-frequency.bonsai)
@@ -24,7 +24,7 @@ The trigger frequency of each camera is set with the appropriate register for th
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `Camera1FrequencyPayload`.
-    - `Camera1Frequency` - Set the trigger frequency in Hz (e.g. 30). Valid values are 2 to 600.
+    - `Camera1Frequency` - Set the trigger frequency in Hz (e.g. `30`). Valid values are 2 to 600.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>A</kbd> to set the trigger frequency. Configure the frequency before starting the camera. Once camera triggering starts, the frequency cannot be modified without stopping the camera.
@@ -40,7 +40,7 @@ Enable and disable the camera triggering with the [`StartCameras`] and [`StopCam
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `StartCamerasPayload`.
-    - `StartCameras` - Select `CameraOutput1` for the camera connected to **DO1**.
+    - `StartCameras` - Select the camera output to start (e.g. `CameraOutput1` for **DO1**).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -48,7 +48,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `StopCamerasPayload`.
-    - `StopCameras` - Select `CameraOutput1` for the camera connected to **DO1**.
+    - `StopCameras` - Select the camera output to stop (e.g. `CameraOutput1` for **DO1**).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and <kbd>D</kbd> to stop it. Check the image stream in either Bonsai with a camera source operator like [`CameraCapture`] or in your camera vendor's acquisition software to confirm that the external trigger is working.
@@ -66,7 +66,7 @@ Each trigger pulse broadcasts a frame event tied to the port like [`Camera1Frame
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedCamera1Frame`.
-- Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the parsed events when the workflow starts.
+- Insert a [`VisualizerWindow`] operator.
 
 Run the workflow and press <kbd>S</kbd>. The visualizer displays:
 

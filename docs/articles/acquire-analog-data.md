@@ -24,7 +24,7 @@ Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitiz
 
 To visualize only one of the input channels:
 
-- Insert a [`MemberSelector`] operator on a separate branch, this will enable you to select specific fields from the bundled analog data payload.
+- Insert a [`MemberSelector`] operator on a separate branch to select specific fields from the bundled analog data payload.
 - Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will select the individual channel data as well as the timestamp.
 - Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel and its timestamp.
 

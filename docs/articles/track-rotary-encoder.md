@@ -43,7 +43,7 @@ The counter is then streamed in the `Encoder` field of the 1 kHz [`AnalogData`](
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `AnalogData`.
-- Right-click on the [`Parse`] operator, select the "Output (Harp.Behavior.AnalogDataPayload)" > "Encoder" option from the context menu. This will create a `Encoder` node.
+- Right-click on the [`Parse`] operator, select the "Output (Harp.Behavior.AnalogDataPayload)" > "Encoder" option from the context menu. This will create an `Encoder` node.
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the encoder count when the workflow starts.
 
 Run the workflow, press <kbd>A</kbd> to enable the encoder if it is disabled, and turn the encoder shaft. The visualizer plots the count going up in one direction and down in the other.

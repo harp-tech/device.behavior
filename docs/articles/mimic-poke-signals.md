@@ -17,7 +17,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Mimic Poke Inputs
 
-Set a mimic target output line for the poke's infrared inputs with the [`MimicPort0IR`] register (ports 1 and 2 have their own counterparts).
+Set a mimic target output line for the poke's infrared inputs with the appropriate port register (e.g. [`MimicPort0IR`] for **P0**).
 
 :::workflow
 ![Mimic Poke Inputs](../workflows/mimicpokesignals-mimicir.bonsai)
@@ -26,7 +26,7 @@ Set a mimic target output line for the poke's infrared inputs with the [`MimicPo
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `MimicPort0IRPayload`.
-    - `MimicPort0IR` - Select `DO0` for the target output line.
+    - `MimicPort0IR` - Select the target output line (e.g. `DO0`)
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -34,17 +34,17 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `MimicPort0IRPayload`.
-    - `MimicPort0IR` - Select `None`.
+    - `MimicPort0IR` - Select `None` to disable the mimic target configuration.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>A</kbd> to enable the mimic target, and trigger the infrared poke detector on **P0**. The indicator on **DO0** should follow the beam state. Press <kbd>S</kbd> to remove the mimic target configuration.
 
 > [!WARNING]
-> A mimic target line still responds to commands that modify digital outputs, such as [`OutputSet`] and [`OutputClear`]. Other mimic registers can also select the same target. To avoid conflicts, dedicate each mimic target to a single source and clear any left over configurations.
+> A mimic target line still responds to commands that modify digital outputs, such as [`OutputSet`] and [`OutputClear`]. Other mimic registers can also select the same target. To avoid conflicts, dedicate each mimic target to a single source and clear any leftover configurations.
 
 ### Mimic Poke Valves
 
-Similarly, to mimic the valve output, set a mimic target in the [`MimicPort0Valve`] register.
+Similarly, to mimic the valve output, set a mimic target in the appropriate port register (e.g. [`MimicPort0Valve`] for **P0**).
 
 :::workflow
 ![Mimic Poke Valves](../workflows/mimicpokesignals-mimicvalve.bonsai)
@@ -53,7 +53,7 @@ Similarly, to mimic the valve output, set a mimic target in the [`MimicPort0Valv
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `MimicPort0ValvePayload`.
-    - `MimicPort0Valve` - Select `DO0`.
+    - `MimicPort0Valve` - Select the target output line (e.g. `DO0`)
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -61,7 +61,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `MimicPort0ValvePayload`.
-    - `MimicPort0Valve` - Select `None`.
+    - `MimicPort0Valve` - Select `None` to disable the mimic target configuration.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 To trigger the valve output, send an [`OutputSet`] command in a separate branch:
@@ -69,7 +69,7 @@ To trigger the valve output, send an [`OutputSet`] command in a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `SupplyPort0` to open the **P0** valve.
+    - `OutputSet` - Select the valve to open (e.g. `SupplyPort0` for **P0**).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>D</kbd>, then press <kbd>G</kbd> to open the **P0** valve. **DO0** follows the valve state, including [timed pulses](control-digital-outputs.md#pulse-outputs). Press <kbd>F</kbd> to remove the mimic target configuration.

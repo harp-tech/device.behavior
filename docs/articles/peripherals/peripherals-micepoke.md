@@ -12,7 +12,7 @@ The Harp Behavior Mice Poke is a nose-poke peripheral for the Behavior board. It
 
 ### Specs
 
-- Connector: RJ45 for direct connection with Behavior board peripheral port, screw terminals for operating the peripheral with other external devices
+- Connector: RJ45 for direct connection with the Behavior board peripheral port, screw terminals for operating the peripheral with other external devices
 
 ### Hardware
 

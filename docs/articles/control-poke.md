@@ -44,7 +44,7 @@ A single poke can generate a burst of rapid transitions, for example, when the s
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PokeInputFilterPayload`.
-    - `PokeInputFilter` - Set the filter time to 5 ms.
+    - `PokeInputFilter` - Set the filter time to the refractory period in ms (e.g. `5`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>A</kbd>. Rapid repeated transitions within 5 ms of a poke event no longer generate events. Set the value to 0 to disable the filter. The default filter time is 1 ms.
@@ -63,7 +63,7 @@ Each peripheral port carries an LED drive line (`DOPort0` - `DOPort2`). The LED 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputSetPayload`.
-    - `OutputSet` - Select `DOPort0`.
+    - `OutputSet` - Select the line to turn on (e.g. `DOPort0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
@@ -71,7 +71,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputClearPayload`.
-    - `OutputClear` - Select `DOPort0`.
+    - `OutputClear` - Select the line to turn off (e.g. `DOPort0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LED on and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
@@ -87,22 +87,22 @@ Each peripheral port carries a 12 V valve drive line for a solenoid valve that g
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputPulseEnablePayload`.
-    - `OutputPulseEnable` - Select `SupplyPort0` to enable pulse mode on the **P0** valve output.
+    - `OutputPulseEnable` - Select the valve output to enable pulse mode on (e.g. `SupplyPort0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `PulseSupplyPort0Payload`.
-    - `PulseSupplyPort0` - Set the valve opening duration in ms (e.g. 15).
+    - `PulseSupplyPort0` - Set the valve opening duration in ms (e.g. `15`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 In a separate branch:
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `DigitalInputState`.
-- Insert a [`HasFlag`] operator and set the `Value` property to `DIPort0`. This operator will generate a boolean value (e.g. `True`) if it detects a beam break that matches that pin. 
+- Insert a [`HasFlag`] operator and set the `Value` property to `DIPort0`. This operator will generate a boolean value (e.g. `True`) if it detects a beam break that matches that pin.
 - Insert a [`Condition`] operator, leaving its inner workflow at the default. This operator lets through only `True` elements corresponding to beam breaks at **P0**, which are used to trigger the next command.
 - Insert a [`CreateMessage`] operator and configure the following properties:
-    - `Payload` - Select `OutputSetPayload` to select the register that turns on digital output lines.
-    - `OutputSet` - Select `SupplyPort0` to select the valve delivery line for **P0**.
+    - `Payload` - Select `OutputSetPayload`.
+    - `OutputSet` - Select the valve delivery line to turn on (e.g. `SupplyPort0` on **P0**).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, press <kbd>F</kbd> once to configure the valve pulse, then block the infrared beam on the **P0** poke. The valve will open for 15 ms and close on its own, delivering one reward per poke.

@@ -20,8 +20,10 @@
   href: about-these-examplesv1.md
 - name: About These Examples v2
   href: about-these-examplesv2.md
-- name: Acquire Analog Data v3
-  href: acquire-analog-datav3.md
+- name: About These Examples v3
+  href: about-these-examplesv3.md
+- name: Acquire Analog Data
+  href: acquire-analog-data.md
 - name: Read Digital Inputs
   href: read-digital-inputs.md
 - name: Control Digital Outputs

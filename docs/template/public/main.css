@@ -1,1 +1,14 @@
 @import "bonsai.css";
+
+/* Mirror of the bonsai template's .wrap-right: float the container's figure left, with the text on right */
+.wrap-left > p > img,
+.wrap-left > p > a > img {
+  max-width: 50%;
+  float: inline-start;
+}
+
+/* Wrap ends before the next section begins */
+
+.wrap-left ~ h3 {
+  clear: both;
+}

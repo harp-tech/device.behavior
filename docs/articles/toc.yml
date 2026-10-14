@@ -16,12 +16,8 @@
 - name: Bonsai
   href: harp-bonsai.md
 - name: Bonsai Workflows
-- name: About These Examples v1
-  href: about-these-examplesv1.md
-- name: About These Examples v2
-  href: about-these-examplesv2.md
-- name: About These Examples v3
-  href: about-these-examplesv3.md
+- name: About These Examples
+  href: about-these-examples.md
 - name: Acquire Analog Data
   href: acquire-analog-data.md
 - name: Read Digital Inputs

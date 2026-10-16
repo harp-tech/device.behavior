@@ -201,14 +201,4 @@
      inkscape:label="Signal_Line"><path
        style="fill:none;stroke:#ff6600;stroke-width:4;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 184.28,198.5 V 245 H 560 V 131 H 519"
-       id="pathSignalWire" /></g><text
-     xml:space="preserve"
-     style="font-size:18.6667px;font-family:Arial, Helvetica, sans-serif;-inkscape-font-specification:Arial;writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1"
-     x="461.88"
-     y="184.12"
-     id="textV2Callout"
-     inkscape:label="v2.0_callout"><tspan
-       sodipodi:role="line"
-       id="tspanV2Callout"
-       x="461.88"
-       y="184.12">≥ v2.0 only</tspan></text></svg>
+       id="pathSignalWire" /></g><text id="textInputZoomTitle" style="display:inline;font-size:18.6667px;font-weight:bold;font-family:Arial, Helvetica, sans-serif;text-anchor:middle;fill:#000000;stroke-width:0.751085" x="503.6" y="37.4" inkscape:label="Input">Input</text></svg>

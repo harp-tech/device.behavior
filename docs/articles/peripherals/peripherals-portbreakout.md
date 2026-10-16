@@ -1,6 +1,6 @@
 ## Breakout
 
-The Harp Behavior Breakout is an interface peripheral for the Behavior board. It makes the pins of the Behavior board peripheral ports available on screw terminals without having to build a custom cable. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Stream Timestamps](../advanced-configuration.md#stream-timestamps) articles to use it in Bonsai.
+The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Stream Timestamps](../advanced-configuration.md#stream-timestamps) articles to use it in Bonsai.
 
 ![Breakout board v1.1](../../images/OEPS-Breakout.png){width=350} ![Breakout board v2.1](../../images/OEPS-Breakoutv2.1.png){width=350}
 
@@ -8,6 +8,7 @@ The Harp Behavior Breakout is an interface peripheral for the Behavior board. It
 
 ### Key Features
 
+- Gain access to additional digital inputs, digital outputs, and power supply lines.
 - Supports 12 V solenoid valves (e.g. Lee LHD series) (v1.1 only).
 - Supports serial timestamp output, with the logic level selected by the onboard jumper (v2.x only).
 
@@ -16,15 +17,16 @@ The Harp Behavior Breakout is an interface peripheral for the Behavior board. It
 
 ### Specs
 
-Ports:
-- 1x Digital Input (DI)
-- 1x Digital Input / Output (DIO)
-- 1x Digital Output (DO)
-- 1x 5 V supply (+5V)
-- 1x Ground (GND)
-- 1x 12 V supply (+12V) (v1.1 only)
-- 1x Supply return (compatible for +5V and +12V) (SUP_RTN) (v1.1 only)
-- 1x Serial TX (v2.x only)
+- Connector: RJ45 for direct connection with the Behavior board poke port
+- Screw Terminals:
+    - 1x Digital Input (DI)
+    - 1x Digital Input / Output (DIO)
+    - 1x Digital Output (DO)
+    - 1x 5 V supply (+5V)
+    - 1x Ground (GND)
+    - 1x 12 V supply (+12V) (v1.1 only)
+    - 1x Supply return (compatible for +5V and +12V) (SUP_RTN) (v1.1 only)
+    - 1x Serial TX (v2.x only)
 
 For connection with a quadrature encoder:
 

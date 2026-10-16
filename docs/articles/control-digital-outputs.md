@@ -13,7 +13,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 > [!NOTE]
 > The commands in the examples below can be used to control every output line of the Behavior board. Their location on the Behavior board and values in Bonsai are:
 > - General-purpose digital outputs **DO0**–**DO3**: `DO0` - `DO3`.
-> - Peripheral ports **P0**–**P2**: the 5 V output lines are represented as `DOPort0`–`DOPort2` and 12 V valve lines as `SupplyPort0`–`SupplyPort2`. See [Control Poke Peripheral](control-poke.md).
+> - Poke ports **P0**–**P2**: the 5 V output lines are represented as `DOPort0`–`DOPort2` and 12 V valve lines as `SupplyPort0`–`SupplyPort2`. See [Control Poke Peripheral](control-poke.md).
 > - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
 
 [!INCLUDE [](breakout-note.md)]
@@ -78,7 +78,7 @@ The [`OutputState`] register writes every output line in a single command: selec
 Run the workflow and press <kbd>G</kbd>. The **DO0** and **DO1** lines go high and every other output goes low. Try setting other outputs first with the commands from the previous sections; the [`OutputState`] write overrides them all.
 
 > [!WARNING]
-> [`OutputState`] acts on every output of the Behavior board, including the peripheral port and LED lines. To change a few lines while leaving the rest untouched, use [`OutputSet`], [`OutputClear`] or [`OutputToggle`] instead.
+> [`OutputState`] acts on every output of the Behavior board, including the poke port and LED lines. To change a few lines while leaving the rest untouched, use [`OutputSet`], [`OutputClear`] or [`OutputToggle`] instead.
 
 ### Pulse Outputs
 

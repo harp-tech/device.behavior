@@ -225,4 +225,4 @@
      inkscape:label="Signal_Line"><path
        style="fill:none;stroke:#ff6600;stroke-width:4;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 493.2,168.5 V 205 H 304.5"
-       id="pathSignalWire" /></g></svg>
+       id="pathSignalWire" /></g><text id="textOutputZoomTitle" style="display:inline;font-size:18.6667px;font-weight:bold;font-family:Arial, Helvetica, sans-serif;text-anchor:middle;fill:#000000;stroke-width:0.751085" x="292.5" y="54.5" inkscape:label="Output">Output</text></svg>

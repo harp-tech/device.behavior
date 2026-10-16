@@ -4,7 +4,7 @@
 
 ### Key Features
 
-- 3 peripheral ports for plug-and-play peripherals.
+- 3 ports for plug-and-play mice pokes.
 - Hardware-timed pulses for all digital outputs and PWM for the four digital outputs on the **Output** connector.
 - Support for camera triggering, servo motor control, and quadrature encoder counting on selected digital outputs.
 - Configurable LED drive current (up to 100 mA) and RGB LED driver.
@@ -13,16 +13,16 @@
 
 - Analog inputs: 2 (0–5 V, 12-bit, sampled at 1 kHz)
     - 1 on the **ADC** connector
-    - The second analog input on the **Input** connector is available on hardware v2.0 or later
+    - 1 on the **Input** connector
 - Digital inputs: 4 (5 V)
-    - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
-    - The fourth digital input on the **Input** connector is available on hardware v2.0 or later
+    - 3 on the poke ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - 1 on the **Input** connector
 - Digital outputs: 7 (5 V)
     - 4 on the **Output** connector
-    - 3 on the peripheral ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - 3 on the poke ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
 - Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
-- Peripheral ports: 3 (RJ45)
+- Poke ports: 3 (RJ45)
     - For the [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board
 - LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LED connector, driven as a serial chain)

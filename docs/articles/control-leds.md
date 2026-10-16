@@ -1,6 +1,6 @@
 ## Control LEDs
 
-The Behavior board drives two kinds of light output: two standard current-controlled LEDs on the **L0** and **L1** connectors and up to two WS2812-type addressable RGB LEDs on the **RGB** connector. Refer to the [connections](./connections.md?tabs=led#connections) article to set up the LED on **L0** or the **RGB** connector, which we will use for the rest of these examples.
+The Behavior board drives two kinds of light output: conventional LEDs on the **L0** and **L1** connectors and addressable RGB LEDs on the **RGB** connector. Refer to the [LED connection](./connections.md?tabs=led#connections) section to set up the LED on **L0** or the [RGB LED connection](./connections.md?tabs=rgbled#connections) section for the **RGB** connector, which we will use for the rest of these examples.
 
 This article covers configuring LED drive current, setting RGB colors, and turning on both kinds of LED output in Bonsai.
 
@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure LED Current
 
-The **L0** and **L1** outputs drive standard single-color LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**). Writes above the limit are rejected by the device.
+The **L0** and **L1** outputs drive conventional LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that is set before using turning on the LED. Writes above the limit are rejected by the device.
 
 :::workflow
 ![Configure LED Current](../workflows/controlleds-current.bonsai)
@@ -56,9 +56,7 @@ Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to
 
 ### Set RGB Colors
 
-The **RGB** connector drives WS2812-type individually addressable LEDs. The two LEDs form a serial chain on a single data line: **Rgb0** is the first LED in the chain and **Rgb1** the second when configuring and controlling these LEDs. Single-color LEDs have no data input and do not work on this connector; drive those from the [L0/L1 outputs](#configure-led-current) instead. Analog RGB LEDs are not supported on either.
-
-The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
+When configuring and controlling the addressable RGB LEDs; **Rgb0** refers to the first LED in the chain and **Rgb1** the second. The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 
 :::workflow
 ![Set RGB Colors](../workflows/controlleds-rgbcolors.bonsai)

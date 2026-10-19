@@ -2,7 +2,7 @@
 
 The Behavior GUI is a standalone visual interface for configuring and testing the device without using Bonsai.
 
-Before beginning, [install the GUI](installation.md#software-packages), follow the hardware setup [guide](connections.md), and connect the USB cable to the computer. Launch "Harp.Behavior.App" from the Windows Start menu.
+Before beginning, [install the GUI](installation.md?tabs=gui#software-packages), follow the hardware setup [guide](connections.md), and connect the USB cable to the computer. Launch "Harp.Behavior.App" from the Windows Start menu.
 
 ![Behavior GUI](../images/behavior-gui.png)
 

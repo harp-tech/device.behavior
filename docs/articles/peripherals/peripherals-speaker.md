@@ -9,7 +9,7 @@ The Harp Behavior Speaker is a peripheral that connects to one of the Behavior b
 
 ### Key Features
 
-- Onboard speaker driven directly by a PWM digital output.
+- Moving coil speaker driven by a PWM digital output without an amplifier.
 - Volume potentiometer to adjust the amplitude.
 - Screw terminal for wiring; no soldering needed.
 

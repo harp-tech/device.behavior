@@ -27,7 +27,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 **RGB (3-pin Flick Lock)** - Connector for up to two  addressable RGB LEDs (WS2812-type, e.g., NeoPixels). The LEDs are driven as a serial chain on a single data line, with colors set with the [RGB registers](control-leds.md#set-rgb-colors).
 
-**L0, L1 (Screw Terminal)** - These connectors control two single-color conventional LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
+**L0, L1 (Screw Terminal)** - These connectors control two conventional single-color LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
 
 ### Connections
 
@@ -43,7 +43,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 ![Digital Input](../images/connection-digitalinput.svg){width=600}
 
-1. Wire the digital signal (5 V) to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital inputs on the poke ports.
+1. Wire the digital signal (5 V) to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to access more digital inputs on the poke ports.
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Read Digital Inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
@@ -51,32 +51,34 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 ![Digital Output](../images/connection-digitaloutput.svg){width=600}
 
-1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to the external device's digital input. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital outputs on the poke ports.
+1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to the external device's digital input. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to access more digital outputs on the poke ports.
 2. Connect the external device's ground to any **GND** pin.
-3. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to switch the output in Bonsai.
+3. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to output digital events in Bonsai.
 
 # [Photodiode](#tab/photodiode)
 
-![Photodiode analog reading](../images/connection-photodiode.svg){width=600}
+![Photodiode analog reading](../images/connection-photodiode-analog.svg){width=600}
 
-Before connecting the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral, switch the jumper setting on the casing to either **ANA** for an analog reading or **DIG** for a digital output. Plug the stereo adapter cable into the stereo jack on the peripheral. The other end of the cable has three colored wires for the signal, 5 V supply and ground.
+Before connecting the [Photodiode](./peripherals/peripherals-photodiode.md) peripheral, insert the stereo plug cable into the stereo jack on the peripheral. The other end of the cable has three color-coded wires for the signal, 5 V supply and ground.
 
 For an analog reading:
 
-1. Wire the signal wire to either **AD0** on the **ADC** connector or **AD1** on the **Input** connector.
-2. Connect the ground wire to any **GND** pin.
-3. Wire the supply wire to the **+5V** pin on the **ADC** connector.
-4. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity as an analog reading in Bonsai.
+1. Use the switch on the side of the casing to select **ANA**.
+2. Wire the signal wire to either **AD0** on the **ADC** connector or **AD1** on the **Input** connector.
+3. Connect the ground wire to any **GND** pin.
+4. Wire the supply wire to the **+5V** pin on the **ADC** connector.
+5. Refer to the [Acquire Analog Data](acquire-analog-data.md) article to read the light intensity as an analog reading in Bonsai.
 
 ![Photodiode digital output](../images/connection-photodiode-digital.svg){width=600}
 
-For a digital output:
+For a digital reading:
 
-1. Wire the signal wire to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more digital inputs on the poke ports.
-2. Connect the ground wire to any **GND** pin.
-3. Wire the supply wire to the **+5V** pin on the **ADC** connector.
-4. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read the light intensity as a digital input reading in Bonsai.
-5. Turn the adjustment screw to tune the light threshold for the low and high state of the digital output and monitor the response in Bonsai.
+1. Use the switch on the side of the casing to select **DIG**.
+2. Wire the signal wire to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to access more digital inputs on the poke ports.
+3. Connect the ground wire to any **GND** pin.
+4. Wire the supply wire to the **+5V** pin on the **ADC** connector.
+5. Refer to the [Read Digital Inputs](./read-digital-inputs.md) article to read the light intensity as a digital input reading in Bonsai.
+6. Turn the adjustment screw on the side of the Photodiode casing to tune the light threshold for the low and high state of the digital output and monitor the response in Bonsai.
 
 >[!NOTE]
 > Third-party photodiode modules that are powered with 5 V and output a 0 to 5 V signal can be wired the same way.
@@ -90,13 +92,13 @@ For a digital output:
 3. Refer to the [Generate PWM](generate-pwm.md) article to play tones in Bonsai.
 
 >[!NOTE]
-> Third-party passive buzzers or speakers can be driven with PWM in the same way. Active buzzers generate a fixed tone, so switch them on and off like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)). Add a current-limiting series resistor (100 to 330 Ω) to avoid overloading the 5 V supply.
+> Third-party passive buzzers or speakers can be driven with PWM in the same way as the Speaker peripheral. Active buzzers generate a fixed tone, so switch them on and off using general purpose digital outputs, instead of PWM (see [Control Digital Outputs](control-digital-outputs.md)). Add a current-limiting series resistor (100 to 330 Ω) to avoid overloading the 5 V supply.
 
 # [LED](#tab/led)
 
 ![LED](../images/connection-led.svg){width=600}
 
-1. Wire the long leg (anode) of a conventional LED to the **A** pin of either the **L0** or **L1** terminal pair. No series resistor is needed as the drive current can be set in Bonsai.
+1. Wire the long leg (anode) of a conventional single-color LED to the **A** pin of either the **L0** or **L1** terminal pair. No series current-limiting resistor is needed as the drive current can be set in Bonsai.
 2. Wire the short leg (cathode) to the **K** pin of the same terminal pair.
 3. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
 
@@ -115,30 +117,35 @@ For a digital output:
 ![Mice Poke](../images/connection-poke.svg){width=600}
 
 1. Connect the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
-2. If the peripheral comes with an integrated water valve, connect the valve's inlet to the liquid container with tubing (2.0 mm inner diameter FEP, or 2.1 mm PTFE).
+2. If you are using a variant of the Mice Poke peripheral with the integrated water valve, connect the valve's inlet to the liquid container with tubing.
 3. Refer to the [Control Poke Peripheral](control-poke.md) article to configure and use the Mice Poke peripheral in Bonsai.
 
 No further wiring is necessary. The screw terminal blocks are only needed for external use; they share the same connections that are carried by the RJ45 connector.
-Use them to connect an extra sensor, wire a different solenoid valve, or log the peripheral signals.
+Use them to connect an extra sensor, wire a solenoid valve, add an additional cue LED, or log the peripheral signals.
 
-To add a sensor like a lever:
+To connect a sensor like a lever:
 
-1. Wire one contact of the lever switch to **GND** and the other to **DIO1**. This line is not connected to any of the peripheral sensors and acts as an active-low digital input (the functionality to toggle it to digital output has not been added yet).
-2. Refer to the [Read Digital Inputs](read-digital-inputs.md#visualize-port-dio-events) article to read the signal in Bonsai.
+1. Wire one contact of the lever switch to **DIO1**. This line is not connected to any of the sensors onboard the Mice Poke Peripheral and can be used as an active-low digital input (the functionality to toggle it to digital output has not been added yet).
+2. Wire the other end of the lever switch to **GND**. 
+3. Refer to the [Read Digital Inputs](read-digital-inputs.md#visualize-port-dio-events) article to read the signal in Bonsai.
 
-To use an alternative solenoid valve for reward delivery:
+To wire a solenoid valve for reward delivery (for Mice Poke variants without integrated water valves):
 
-1. If the peripheral comes with an integrated valve, disconnect the integrated valve's leads from the **VALVE** terminal.
-2. Wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
+1. Wire a 12 V solenoid valve across the terminal pair. For standard coil-only solenoid valves, polarity does not matter.
+
+To add an additional cue LED (for instance, at a different location):
+
+1. Wire the long leg (anode) of an LED to the **LED** terminal. No series current-limiting resistor is needed as the terminal already has one.
+2. Wire the short leg (cathode) to any **GND** terminal.
+3. The additional cue light is controlled by the same signals as the onboard cue LEDs, refer to the [Drive the Poke LED](control-poke.md#drive-the-poke-led) article to control them in Bonsai.
 
 To log the peripheral signals on an external device:
 
 1. Wire the signals (5 V logic) to digital inputs on the external device:
-    - **IR LED** - Reports the status of the beam LED emitter.
-    - **IR PHT** - Reports the status of the infrared photodetector.
+    - **IR LED** - Reports the status of the onboard infrared beam emitter.
+    - **IR PHT** - Reports the status of the onboard infrared photodetector.
     - **LED** - Reports the status of the [onboard cue LEDs](control-poke.md#drive-the-poke-led).
 2. Share ground between the external device and any **GND** terminal.
-
 
 # [Rotary Encoder](#tab/encoder)
 
@@ -151,29 +158,32 @@ No further wiring is necessary to use the device with the Behavior board. The so
 
 To log the raw quadrature signals:
 
+1. Wire the **A** quadrature signal (5 V logic) to a  digital input on the external device.
+2. Wire the **B** quadrature signal (5 V logic) to a  digital input on the external device.
+3. Share ground between the external device and the **-** pad.
 
-1. Wire the **A** and **B** quadrature signals (5 V logic) to digital inputs on the external device.
-2. Share ground between the external device and the **-** pad.
-
-To connect an external rotary encoder, we recommend using the [Breakout](./peripherals/peripherals-portbreakout.md) board instead for an easier connection. Refer to the Breakout tab for more information.
+>[!NOTE]
+> The Harp Behavior Rotary Encoder is meant to demonstrate simple rotational tracking. For applications in which high resolution tracking is needed, such as a running wheel, use a more precise quadrature encoder. We also recommend using the [Breakout](./peripherals/peripherals-portbreakout.md) board instead of the solder pads on this peripheral for an easier connection with external quadrature encoders.
 
 # [Camera](#tab/camera)
 
 ![Camera](../images/connection-camera.svg){width=600}
 
-1. Locate the GPIO (general purpose input/output) connector on your camera. Refer to the camera manual for the connector pinout as it varies widely between camera models and manufacturers.
-2. Check that the camera input is compatible with the 5 V trigger signal from the Behavior board. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
-3. Using the camera vendor's software, configure the camera to use the digital input line corresponding to the input pin you selected. Set the image capture mode to use the rising edges of the incoming pulse to trigger each frame capture.
-4. Wire the camera's external trigger input to **DO0** or **DO1** on the **Output** connector. These are the only ports that support the camera trigger functionality. 
-5. Connect the camera's trigger ground to any **GND** pin.
-6. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure and start the trigger in Bonsai.
+1. Check the camera specifications to ensure it has GPIO (general purpose input/output) and individual frame triggering capabilities.
+2. Refer to the camera manual to understand the connector pinout of the specific model you have. Locate a connector pin that can be configured as a digital input line for that camera. Locate its corresponding ground pin.
+3. Check that the camera input is compatible with the 5 V trigger signal from the Behavior board. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
+4. Using the camera vendor's software, configure the camera to use the digital input line corresponding to the input pin you selected. Set the image capture mode to use the rising edges of the incoming pulse to trigger each frame capture.
+5. Insert the appropriate cable that mates with the connector on the camera and provides wire terminals for the connections.
+6. Connect the camera's digital input pin you selected to **DO0** or **DO1** on the **Output** connector. These are the only ports that support the camera trigger functionality. 
+7. Connect the camera's ground pin corresponding to the digital input pin you selected to any **GND** pin.
+8. Refer to the [Trigger Cameras](trigger-cameras.md) article to configure, start and stop the trigger in Bonsai.
 
 # [Servo](#tab/servo)
 
 ![Servo](../images/connection-servo.svg){width=600}
 
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
-2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to unlock more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the board's 5 V pin; it must power the servo only.
+2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to access more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the Behavior board's 5 V pin; it must power the servo only.
 3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
 4. Refer to the [Drive Servos](drive-servos.md) article to move the servo in Bonsai.
 
@@ -181,11 +191,11 @@ To connect an external rotary encoder, we recommend using the [Breakout](./perip
 
 ![Breakout](../images/connection-breakout.svg){width=600}
 
-Both versions of the [Breakout](./peripherals/peripherals-portbreakout.md) board are shown above. Follow the instructions for the version you have, some of the functionality is only available for a specific version.
+This section describes the connections required for different uses of the [Breakout](./peripherals/peripherals-portbreakout.md) board. Note that some functionality is only available in specific versions of the Breakout board.
 
 To connect digital inputs and outputs (both v1.1 and v2.x):
 1. Connect the Breakout board to port **P0**, **P1**, or **P2** with an RJ45 cable.
-2. Wire the signal wire from external devices to the **DI**, **DIO**, and **DO** screw terminals.
+2. Wire the signal wire from external devices to the **DI**, **DIO**, or **DO** screw terminals.
 3. Wire the external device's ground to a **GND** terminal.
 4. If the external device needs power, wire its supply to the **+5V** terminal.
 5. Refer to the [Read Digital Inputs](read-digital-inputs.md) and [Control Digital Outputs](control-digital-outputs.md) articles to use these lines in Bonsai.
@@ -208,7 +218,7 @@ To stream the serial timestamp (v2.x only):
 1. Connect the board to **P2**, the timestamp stream can only be transmitted on this port.
 2. Wire the **TX** terminal to the receiving device's **RX** input or to a logged digital input.
 3. Wire a **GND** terminal to the receiver's ground.
-4. Set the board's logic-level jumper to match the receiver's operating voltage level (3.3 V or 5 V).
+4. Set the Breakout board's logic-level jumper to match the receiver's operating voltage level (3.3 V or 5 V).
 5. Refer to the [Stream Timestamps](advanced-configuration.md#stream-timestamps) section to enable the stream in Bonsai.
 
 # [Harp Synchronization](#tab/harpsynchronization)

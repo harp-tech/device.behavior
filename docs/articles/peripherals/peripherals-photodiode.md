@@ -6,13 +6,14 @@ The Harp Behavior Photodiode is a peripheral for the Behavior board. It detects 
 
 ### Key Features
 
+- Blue-enhanced silicon photodiode.
 - Switch between analog output (**ANA**) or digital output (**DIG**).
 - Adjustment screw to set the threshold for digital output.
 - Powered from the Behavior board's 5 V supply.
 
 ### Specs
 
-- Photodiode: Advanced Photonix PDB-C156-ND
+- Photodiode: Advanced Photonix PDB-C156
 - Connector: 3.5 mm stereo jack for stereo plug cable carrying 5 V, ground, and signal wire
 
 ### Hardware

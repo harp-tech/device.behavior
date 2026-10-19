@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai or build eac
 
 ### Configure LED Current
 
-The **L0** and **L1** outputs drive conventional LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that is set before using turning on the LED. Writes above the limit are rejected by the device.
+The **L0** and **L1** outputs drive conventional LEDs with a configurable constant current, so no series resistor is needed. Each output has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that is set before turning on the LED. Writes above the protection limit are rejected by the device.
 
 :::workflow
 ![Configure LED Current](../workflows/controlleds-current.bonsai)
@@ -21,18 +21,18 @@ The **L0** and **L1** outputs drive conventional LEDs with a configurable consta
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `Led0MaxCurrentPayload`.
-    - `Led0MaxCurrent` - Set the maximum allowed current according to the rating of the LED in mA (e.g. `20`). Valid values are 2–100 mA.
+    - `Led0MaxCurrent` - Set the maximum allowed current according to the rating of the LED in mA (e.g. `20`). Valid values are 5–100 mA.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `Led0CurrentPayload`.
-    - `Led0Current` - Set the working current in mA (e.g. `10`). Valid values are 5–100 mA.
+    - `Led0Current` - Set the working current in mA (e.g. `10`). Valid values are 2–100 mA.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow and press <kbd>A</kbd> to configure the **L0** drive current, then switch the output on as shown in the next section.
 
 ### Turn LEDs On and Off
 
-Once the drive current is configured, the **L0** and **L1** outputs are switched like any other digital output, for instance through the [`OutputSet`](control-digital-outputs.md) and [`OutputClear`](control-digital-outputs.md) registers:
+Once the drive current is configured, the **L0** and **L1** outputs are switched like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Turn LEDs On and Off](../workflows/controlleds-ledonoff.bonsai)
@@ -52,7 +52,7 @@ In a separate branch:
     - `OutputClear` - Select the line to turn off (e.g. `Led0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
+Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off.
 
 ### Set RGB Colors
 
@@ -79,7 +79,7 @@ Run the workflow and press <kbd>F</kbd> to load the colors. If the LEDs are curr
 
 ### Turn RGB LEDs On and Off
 
-The RGB LEDs are switched like any other digital output, for instance through the [`OutputSet`](control-digital-outputs.md) and [`OutputClear`](control-digital-outputs.md) registers:
+The RGB LEDs are switched like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Turn RGB LEDs On and Off](../workflows/controlleds-rgbonoff.bonsai)
@@ -96,7 +96,7 @@ In a separate branch:
 - Insert a [`KeyDown`] operator and set the `Filter` property to `H`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `OutputClearPayload`.
-    - `OutputClear` - Set the lines to turn off (e.g.  `Rgb0, Rgb1`).
+    - `OutputClear` - Set the lines to turn off (e.g. `Rgb0, Rgb1`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
 Run the workflow, then press <kbd>G</kbd> to turn on both RGB LEDs and <kbd>H</kbd> to turn them off.
@@ -113,3 +113,5 @@ Run the workflow, then press <kbd>G</kbd> to turn on both RGB LEDs and <kbd>H</k
 [`Led0Current`]: xref:Harp.Behavior.Led0Current
 [`Led1Current`]: xref:Harp.Behavior.Led1Current
 [`Led0MaxCurrent`]: xref:Harp.Behavior.Led0MaxCurrent
+[`OutputSet`]: xref:Harp.Behavior.OutputSet
+[`OutputClear`]: xref:Harp.Behavior.OutputClear

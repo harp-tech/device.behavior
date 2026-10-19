@@ -4,13 +4,14 @@ The Harp [Behavior](articles/behavior-overview.md) board is a multi-purpose data
 
 ![Harp Behavior with Peripherals](./images/behavior-peripherals.svg){width=600}
 
-A typical behavioral rig combines sensors, cue lights, reward valves, cameras and motorized actuators. These components usually need individual control interfaces and post-hoc alignment to a common timeline. The Behavior board brings them together on a single device, so that every input and output stream is controlled through one interface and timestamped on the same hardware clock.
+A typical behavioral rig combines sensors, cue lights, reward valves, cameras and motorized actuators. These components usually need individual control interfaces and alignment to a common timeline. The Behavior board brings them together on a single device, so that every input and output stream is controlled through one interface and timestamped on the same hardware clock.
 
 The Behavior board provides:
 
-- General-purpose digital inputs and outputs, plus analog inputs, for interfacing with external devices.
-- Plug-in support for peripherals like the Harp Behavior [Mice Poke](articles/peripherals/peripherals-micepoke.md), [Rotary Encoder](articles/peripherals/peripherals-rotaryencoder.md), and more.
-- Specialized functionality to directly control external hardware, including triggering [cameras](./articles/trigger-cameras.md), driving [servo motors](./articles/drive-servos.md), and more.
+- Support for over 15 sensors and actuators which can be combined in real-time, e.g. to precisely time delivery of visual and auditory cues, motion and water rewards to timing of events such as nose pokes or running wheel position.
+- Plug-and-play mice pokes designed to provide light cues and water delivery capabilities with little additional setup (no soldering required!)
+- Seamlessly synchronize cameras and monitors with your behavioral arena.
+- Easily drive servo motors, RGB LEDs, and other devices directly, thanks to integrated control circuitry.
 - Hardware timestamping and synchronization with other [Harp](https://harp-tech.org/articles/about.html) devices.
 - [Bonsai](https://bonsai-rx.org/) integration for flexible experiment acquisition and control.
 

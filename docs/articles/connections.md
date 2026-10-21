@@ -57,9 +57,9 @@ To send a logic-level output to an external device:
 2. Connect the external device's ground to any **GND** pin.
 3. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to output digital events in Bonsai.
 
-To drive a load such as a conventional LED:
-
 ![Digital Output Load](../images/connection-digitaloutput-load.svg){width=600}
+
+To drive a load such as a conventional LED:
 
 1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to one end of a series current-limiting resistor (100 to 330 Ω is typically used).
 2. Wire the other end of the resistor to the long leg (anode, **A**) of the LED.

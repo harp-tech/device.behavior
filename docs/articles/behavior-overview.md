@@ -2,7 +2,7 @@
 
 ![Harp Behavior](../images/OEPS-BehaviorBoard.jpg){width=450}
 
-## Key Features
+## Key features
 
 - 3 ports for plug-and-play mice pokes.
 - Hardware-timed pulses for all digital outputs and PWM for the four digital outputs on the **Output** connector.

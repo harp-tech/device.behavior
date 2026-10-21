@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
 :::
 
-## Visualize Analog Data
+## Visualize analog data
 
 Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
 

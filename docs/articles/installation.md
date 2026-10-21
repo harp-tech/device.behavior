@@ -2,7 +2,7 @@
 
 This page covers the software you'll need to interact with the Behavior board, as well as how to update the firmware on the device.
 
-## Software Packages
+## Software packages
 
 These steps are only required the first time you connect the device to a new computer, and you can install just the packages for the functionality you need.
 
@@ -43,7 +43,7 @@ The [Behavior GUI](behavior-gui.md) is a standalone graphical application for co
 
 ***
 
-## Firmware Update
+## Firmware update
 
 New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.3-harp1.15-hw2.1-ass0.hex` is firmware v3.3 for a hardware v2.1 Behavior board. Download the latest firmware version that matches the hardware version of the board from the "Assets" section under each release.
 

@@ -30,7 +30,7 @@ Each output line has its own frequency and duty cycle registers, for instance [`
 
 Run the workflow and press <kbd>A</kbd> to configure a 1 kHz, 50% duty cycle waveform on **DO0**. Frequency and duty cycle can also be modified while the PWM signal is running.
 
-## Start and Stop PWM
+## Start and stop PWM
 
 Use the [`PwmStart`] and [`PwmStop`] registers to start and stop the waveform on any combination of outputs.
 
@@ -54,7 +54,7 @@ In a separate branch:
 
 Run the workflow, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the waveform on **DO0**.
 
-## Generate PWM Bursts
+## Generate PWM bursts
 
 To generate a PWM signal for a specified duration, enable the [pulse mode](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the appropriate output line pulse duration register (e.g. [`PulseDO0`] for **DO0**).
 

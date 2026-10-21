@@ -7,7 +7,7 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can
 > [!NOTE]
 > The Harp Behavior Rotary Encoder is meant to demonstrate simple rotational tracking. For applications in which high resolution tracking is needed, such as a running wheel, use a more precise quadrature encoder connected with the Harp Behavior [Breakout](./peripherals-portbreakout.md).
 
-## Key Features
+## Key features
 
 - Mechanical quadrature rotary encoder.
 - Solder pads provide access to the encoder signals for use with external devices.

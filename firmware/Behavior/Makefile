@@ -4,8 +4,9 @@ CORE_VERSION = 1.15
 PREVIEW_VERSION ?= 0
 
 # Read build metadata from app.h if not defined
-APP_H_CONTENTS = $(file < app.h)
-finddef = $(filter +%+,$(patsubst #define:$(1):%,+%+,$(subst #define$() $(1)$() ,#define:$(1):,$(strip $(APP_H_CONTENTS)))))
+HASH := \#
+APP_H_CONTENTS := $(shell cat app.h)
+finddef = $(filter +%+,$(patsubst $(HASH)define:$(1):%,+%+,$(subst $(HASH)define$() $(1)$() ,$(HASH)define:$(1):,$(strip $(APP_H_CONTENTS)))))
 APP_VERSION_NAMES = $(sort $(filter %_VERSION,$(APP_H_CONTENTS)))
 APP_VERSION_VALUES = $(subst +,,$(foreach name,$(APP_VERSION_NAMES),$(call finddef,$(name))))
 FIRMWARE_VERSION ?= $(word 1,$(APP_VERSION_VALUES)).$(word 3,$(APP_VERSION_VALUES))
@@ -25,11 +26,13 @@ FIRMWARE_FORMAT = $(MAJOR_FW_VERSION).$(MINOR_FW_VERSION)
 HARDWARE_FORMAT = $(MAJOR_HW_VERSION).$(MINOR_HW_VERSION)
 
 # Files and directories
+CORE_DIR = core
 BUILD_DIR = bin
 PREVIEW_SUFFIX = $(if $(PREVIEW_VERSION:v%=),-preview$(PREVIEW_VERSION),)
 BUILD_NAME = $(PRJ_NAME)-fw$(FIRMWARE_FORMAT)-harp$(CORE_VERSION)-hw$(HARDWARE_FORMAT)-ass0$(PREVIEW_SUFFIX)
-SRCS = $(wildcard *.c)
+SRCS = $(sort $(wildcard *.c))
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+INCS = -I"$(CORE_DIR)"
 LIBS = -l$(CORE)-$(CORE_VERSION)
 
 # Compiler flags
@@ -60,7 +63,7 @@ LDFLAGS = \
 -Wl,-lm \
 -Wl,$(LIBS) \
 -Wl,--end-group \
--Wl,-L"." \
+-Wl,-L"$(CORE_DIR)" \
 -Wl,--gc-sections \
 -mrelax \
 -mmcu=$(MCU)

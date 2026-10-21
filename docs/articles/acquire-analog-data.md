@@ -1,4 +1,4 @@
-## Acquire Analog Data
+# Acquire Analog Data
 
 The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
 :::
 
-### Visualize Analog Data
+## Visualize Analog Data
 
 Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
 

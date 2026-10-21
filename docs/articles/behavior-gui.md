@@ -1,4 +1,4 @@
-## Behavior GUI
+# Behavior GUI
 
 The Behavior GUI is a standalone visual interface for configuring and testing the device without using Bonsai.
 

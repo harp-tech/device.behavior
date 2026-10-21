@@ -1,4 +1,4 @@
-## Track Rotary Encoder
+# Track Rotary Encoder
 
 The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). As the encoder rotates, it generates counts that increase or decrease depending on the direction of rotation, allowing relative position to be tracked. Refer to the [connections](./connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/peripherals-portbreakout.md) board.
 
@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
 :::
 
-### Enable the Encoder
+## Enable the Encoder
 
 The encoder mode is disabled by default and needs to be enabled with the [`EnableEncoders`] register. The reading can either reflect position or displacement, which is set with [`EncoderMode`].
 
@@ -33,7 +33,7 @@ Run the workflow and press <kbd>A</kbd> to enable the encoder.
 > [!WARNING]
 > While the encoder is enabled, **P2** repurposes its infrared detector line for the quadrature counter. Poke events from **P2** are suspended until the encoder is disabled.
 
-### Visualize Encoder Reading
+## Visualize Encoder Reading
 
 The counter is then streamed in the `Encoder` field of the 1 kHz [`AnalogData`](acquire-analog-data.md) events.
 
@@ -51,7 +51,7 @@ Run the workflow, press <kbd>A</kbd> to enable the encoder if it is disabled, an
 > [!WARNING]
 > In `Position` mode the count is a signed 16-bit value that ranges from -32768 to 32767 and wraps around silently when it passes either end. If the count is likely to hit those limits, reset the count every session or switch to `Displacement` mode and accumulate the per-sample changes in Bonsai with an [`Accumulate`] operator.
 
-### Reset the Encoder
+## Reset the Encoder
 
 The [`EncoderReset`] register sets the counter of the selected encoders back to zero:
 

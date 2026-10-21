@@ -1,11 +1,11 @@
-## Bonsai
+# Bonsai
 
 Bonsai is a visual reactive programming language for building interactive experiments and processing data streams in real time. It supports a growing ecosystem of hardware and software packages that are commonly used in neuroscience. This article covers how to set up the Behavior board in Bonsai.
 
 > [!TIP]
 > More information on Bonsai can be found in the official [documentation](https://bonsai-rx.org/docs/).
 
-### First Steps
+## First Steps
 
 We will use a simple example to connect and test the device in Bonsai. This example visualizes the analog input stream that the Behavior board broadcasts at 1 kHz. You do not need to connect an analog input device, we will revisit this example later in more detail in the "Bonsai Workflows" section.
 

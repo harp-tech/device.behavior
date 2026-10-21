@@ -1,4 +1,4 @@
-## Generate PWM
+# Generate PWM
 
 The four general-purpose outputs **DO0**–**DO3** can generate hardware-timed pulse-width modulation (PWM) signals. The PWM signal can be demonstrated with either a [speaker](./peripherals/peripherals-speaker.md) (where the frequency controls the pitch) or an LED (where the duty cycle controls the brightness). Refer to the [connections](./connections.md?tabs=speaker#connections) article to set up either a speaker or conventional LED on **DO0**, which we will use for the rest of these examples.
 
@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Generate PWM](../workflows/generatepwm-toplevel.bonsai)
 :::
 
-### Configure PWM
+## Configure PWM
 
 Each output line has its own frequency and duty cycle registers, for instance [`PwmFrequencyDO0`] and [`PwmDutyCycleDO0`] for **DO0**. Configure these registers before starting the PWM signal.
 
@@ -30,7 +30,7 @@ Each output line has its own frequency and duty cycle registers, for instance [`
 
 Run the workflow and press <kbd>A</kbd> to configure a 1 kHz, 50% duty cycle waveform on **DO0**. Frequency and duty cycle can also be modified while the PWM signal is running.
 
-### Start and Stop PWM
+## Start and Stop PWM
 
 Use the [`PwmStart`] and [`PwmStop`] registers to start and stop the waveform on any combination of outputs.
 
@@ -54,7 +54,7 @@ In a separate branch:
 
 Run the workflow, then press <kbd>S</kbd> to start and <kbd>D</kbd> to stop the waveform on **DO0**.
 
-### Generate PWM Bursts
+## Generate PWM Bursts
 
 To generate a PWM signal for a specified duration, enable the [pulse mode](control-digital-outputs.md#pulse-outputs) on the output with the [`OutputPulseEnable`] register and configure the duration in the appropriate output line pulse duration register (e.g. [`PulseDO0`] for **DO0**).
 

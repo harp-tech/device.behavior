@@ -1,15 +1,15 @@
-## Behavior Board
+# Behavior Board
 
 ![Harp Behavior](../images/OEPS-BehaviorBoard.jpg){width=450}
 
-### Key Features
+## Key Features
 
 - 3 ports for plug-and-play mice pokes.
 - Hardware-timed pulses for all digital outputs and PWM for the four digital outputs on the **Output** connector.
 - Support for camera triggering, servo motor control, and quadrature encoder counting on selected digital outputs.
 - Configurable LED drive current (up to 100 mA) and RGB LED driver.
 
-### Specs
+## Specs
 
 - Analog inputs: 2 (0–5 V, 12-bit, sampled at 1 kHz)
     - 1 on the **ADC** connector
@@ -33,7 +33,7 @@
 - Synchronization frequency: 1 Hz
 - Synchronization accuracy: 22 ± 16 µs (between clock generator and this device)
 
-### Hardware
+## Hardware
 
 | Version | Notes |
 | ------- | ----- |
@@ -41,7 +41,7 @@
 | 2.0 | <ul><li> Added an input connector with an extra analog input and digital input. </li></ul> |
 | 1.1 | <ul><li> Initial version </li></ul> |
 
-### Firmware
+## Firmware
 
 | Version | Notes |
 | ------- | ----- |

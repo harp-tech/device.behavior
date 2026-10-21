@@ -1,4 +1,4 @@
-## Breakout
+# Breakout
 
 The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Transmit Serial Timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
 
@@ -6,7 +6,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 
 *<small>Left: Breakout v1.1. Right: Breakout v2.1.</small>*
 
-### Key Features
+## Key Features
 
 - Gain access to additional digital inputs, digital outputs, and power supply lines.
 - Supports 12 V solenoid valves (e.g. Lee LHD series) (v1.1 only).
@@ -15,7 +15,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 > [!NOTE]
 > Pick the board version by the feature you need. Both features are not available on the same board as they share the same port line.
 
-### Specs
+## Specs
 
 - Connector: RJ45 for direct connection with the Behavior board poke port
 - Screw Terminals:
@@ -37,7 +37,7 @@ For connection with a quadrature encoder:
 | Supply                 | +5V                |
 | Ground                 | GND                | 
 
-### Hardware
+## Hardware
 
 | Version | Compatible Behavior Board | Notes |
 | ------- | ------------------- | ----- |

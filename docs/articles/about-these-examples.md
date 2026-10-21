@@ -1,4 +1,4 @@
-## About These Examples
+# About These Examples
 
 The following articles cover how to operate the device in Bonsai. Each article walks through either a specific function on the device or a set of input/output ports. If an example requires specific hardware connections, there will be a link to the relevant connection instructions.
 
@@ -15,7 +15,7 @@ Each block is headed by an annotation node (# symbol) with a title describing wh
 > [!NOTE]
 > You can find and add these operators to the workflow from the Bonsai [Toolbox](https://bonsai-rx.org/docs/articles/editor.html?tabs=mouse-controls#toolbox). This article uses the generic operators from the `Bonsai.Harp` package to better illustrate the concept. When following the examples in the later articles, make sure to use the device-specific versions, e.g. `Device (Harp.Behavior)` from the `Harp.Behavior` package instead of the generic `Device (Harp)` operator or another device's version. If correctly selected, the names of these operators in the workflow panel change to reflect the device name.
 
-### Harp Device Pattern
+## Harp Device Pattern
 
 The [Harp device pattern](https://harp-tech.org/articles/operators.html#device-pattern) is the first block you need in every workflow. It initializes the device, logs data, and provides hooks to send commands as well as receive messages from a Harp device according to the Harp [communication protocol](https://harp-tech.org/protocol/BinaryProtocol-8bit.html).
 
@@ -28,7 +28,7 @@ The block is made up of:
 - A [`MessageWriter`] operator that saves the messages or data from the device. The device-specific package will use a dedicated [`DeviceDataWriter`] named after the device.
 - A [`PublishSubject`] operator that broadcasts the message stream as a `Device Events` subject.
 
-### Send Commands to Device
+## Send Commands to Device
 
 Some blocks are used to send commands to the device, which requires a trigger. There are different ways to trigger commands, but in this guide the examples will use keyboard keys as the trigger. 
 
@@ -43,7 +43,7 @@ The block is made up of:
 > [!NOTE]
 > In a real-world application, keyboard presses would be replaced by control logic in Bonsai to convert the Harp example workflows into experimental workflows. For instance, a [`Timer`] can be used instead of [`KeyDown`] to trigger the command at a set time after the workflow starts.
 
-### Read Events from Device
+## Read Events from Device
 
 Other blocks are used to read events from the device, selecting and decoding messages to display.
 
@@ -61,7 +61,7 @@ Sections that read events from devices also include a text sample of the visuali
 13@10.351072
 ```
 
-### Additional Resources
+## Additional Resources
 
 For more, see:
 

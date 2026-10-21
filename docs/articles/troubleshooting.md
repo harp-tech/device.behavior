@@ -1,8 +1,8 @@
-## Errors
+# Errors
 
 This article covers how to resolve common connection errors on the Behavior board.
 
-### COM Port Errors
+## COM Port Errors
 
 **Q: In Bonsai, running the workflow throws an error "The port `ComX` does not exist."**
 
@@ -12,7 +12,7 @@ A: Either the wrong communications port in the `PortName` property in [`Device`]
 
 A: Only one interface connection to the Behavior board can be opened at one time. Check that multiple instances of Bonsai are not running, and that the [Behavior GUI](behavior-gui.md) is closed. Sometimes, the port can also be locked by a program that did not terminate correctly; restarting the computer fixes it.
 
-### Device Errors
+## Device Errors
 
 **Q: Poke events stopped arriving from port P2.**
 

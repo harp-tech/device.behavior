@@ -1,4 +1,4 @@
-## Advanced Configuration
+# Advanced Configuration
 
 These advanced configuration settings affect which data the Behavior board reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and post-hoc alignment on non-Harp devices. Refer to the [connections](./connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/peripherals-portbreakout.md) board on **P2** for the serial timestamp.
 
@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Advanced Configuration](../workflows/advancedconfiguration-toplevel.bonsai)
 :::
 
-### Visualize Analog Data
+## Visualize Analog Data
 
 This workflow uses [`AnalogData`] as an example to demonstrate how to disable a data stream that is enabled by default. First, visualize the [`AnalogData`] stream, which reports the analog inputs at 1 kHz (see [Acquire Analog Data](acquire-analog-data.md) for more details):
 
@@ -24,7 +24,7 @@ This workflow uses [`AnalogData`] as an example to demonstrate how to disable a 
 
 Run the workflow. The visualizer immediately displays a rapid stream of [`AnalogData`] values because this event stream is enabled by default.
 
-### Enable Event Streams
+## Enable Event Streams
 
 The [`EventEnable`] register selects which event streams the device reports. All five are enabled by default: `PortDI`, `PortDIO`, `Camera0`, `Camera1` and `AnalogData`. Write a new selection to choose the streams you want to keep; any event not specified is disabled.
 
@@ -40,7 +40,7 @@ The [`EventEnable`] register selects which event streams the device reports. All
 
 Run the workflow and press <kbd>A</kbd>. The visualizer will stop showing any new [`AnalogData`](acquire-analog-data.md) events.
 
-### Transmit Serial Timestamps
+## Transmit Serial Timestamps
 
 The [`EnableSerialTimestamp`] register enables the serial timestamp transmission, an auxiliary output that can be used by non-Harp devices to log Harp timestamps for time alignment.
 

@@ -1,8 +1,8 @@
-## Ports and Connections
+# Ports and Connections
 
 This article covers the ports on the Behavior board, as well as how to connect the device to peripherals and external devices.
 
-### Ports
+## Ports
 
 ![Harp Behavior Device Pinout](../images/behavior-devicepinout.svg){width=600}
 
@@ -29,7 +29,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 **L0, L1 (Screw Terminal)** - These connectors control two conventional single-color LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
 
-### Connections
+## Connections
 
 # [Analog Input](#tab/analoginput)
 

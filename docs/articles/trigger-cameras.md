@@ -1,4 +1,4 @@
-## Trigger Cameras
+# Trigger Cameras
 
 The Behavior board can generate TTL signals on **DO0** and **DO1** for cameras that support external triggering. This is useful for synchronizing multiple cameras and logging camera frame timestamps on the device clock. Refer to the [connections](./connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
 
@@ -13,7 +13,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > [!TIP]
 > Configure your camera to trigger on the rising edge of the pulse, and avoid modes that use the trigger pulse width to control exposure. Check that the voltage level is compatible with the camera's external trigger voltage level. The trigger signal is a 5 V square wave with a 50% duty cycle and the pulse width is not configurable.
 
-### Configure Trigger Frequency
+## Configure Trigger Frequency
 
 Set the trigger frequency of each camera with the appropriate register for the port (e.g. [`Camera1Frequency`] for a camera connected to **DO1**).
 
@@ -29,7 +29,7 @@ Set the trigger frequency of each camera with the appropriate register for the p
 
 Run the workflow and press <kbd>A</kbd> to set the trigger frequency. Configure the frequency before starting the camera. Once camera triggering starts, the frequency cannot be modified without stopping the camera.
 
-### Start and Stop Cameras
+## Start and Stop Cameras
 
 Enable and disable the camera triggering with the [`StartCameras`] and [`StopCameras`] registers:
 
@@ -56,7 +56,7 @@ Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and 
 > [!NOTE]
 > Camera triggering stops automatically when the Bonsai workflow stops and the device goes into standby mode. This behavior is specific to camera triggering, other digital outputs keep their last state when the workflow stops. Remember to start the camera trigger again when you restart the workflow.
 
-### Visualize Frame Events
+## Visualize Frame Events
 
 Each trigger pulse broadcasts a frame event tied to the port (e.g. [`Camera1Frame`] for **DO1**). Use it to verify that the trigger signal is being generated. Each message includes the timestamp of the pulse's rising edge, as recorded by the device clock:
 

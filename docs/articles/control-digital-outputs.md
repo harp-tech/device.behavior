@@ -1,4 +1,4 @@
-## Control Digital Outputs
+# Control Digital Outputs
 
 The Behavior board has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
 
@@ -19,7 +19,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > [!NOTE]
 > If you need more digital outputs, the [Breakout](./peripherals/peripherals-portbreakout.md) board provides access to the poke port output lines through screw terminals.
 
-### Set and Clear Outputs
+## Set and Clear Outputs
 
 Use the [`OutputSet`] and [`OutputClear`] registers to set the output lines high and low.
 
@@ -46,7 +46,7 @@ Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high to turn t
 > [!NOTE]
 > A single command can modify several outputs at once. To set or clear multiple lines simultaneously, type the names separated by a comma (e.g. `DO0, DO1`) in the `OutputSet` or `OutputClear` field. Output lines not specified remain unchanged.
 
-### Toggle Outputs
+## Toggle Outputs
 
 The [`OutputToggle`] register inverts the current state of the selected output lines.
 
@@ -62,7 +62,7 @@ The [`OutputToggle`] register inverts the current state of the selected output l
 
 Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press. With an LED, it alternates between on and off.
 
-### Write All Outputs
+## Write All Outputs
 
 The [`OutputState`] register writes every output line in a single command: selected lines are set high and all other lines are set low. Use it to set the whole output bank to a known state, for example when initializing an experiment.
 
@@ -81,7 +81,7 @@ Run the workflow and press <kbd>F</kbd>. The **DO0** and **DO1** lines go high a
 > [!WARNING]
 > [`OutputState`] acts on every output of the Behavior board, including the poke port and LED lines. To change a few lines without modifying the rest, specify multiple lines in [`OutputSet`], [`OutputClear`], or [`OutputToggle`].
 
-### Pulse Outputs
+## Pulse Outputs
 
 The Behavior board can generate hardware-timed pulses with a defined duration. Enable pulse mode by selecting output lines in the [`OutputPulseEnable`] register, and set the duration in the output line's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds).
 Once the output line is configured in pulse mode, sending an [`OutputSet`] command sets the line high and then low after the set time has elapsed. This ensures precise pulse timing by eliminating the delay associated with sending a separate command to set the line low.
@@ -110,7 +110,7 @@ Run the workflow, press <kbd>G</kbd> once to configure the pulse, then send a se
 > [!TIP]
 > Pulse mode is preferred to timing pulses in software (e.g. pairing a set command with a delay and a clear command). Software timing is subject to non-real-time OS latency and jitter, which are most noticeable on short pulses.
 
-### Alternative: Set Outputs with Timer
+## Alternative: Set Outputs with Timer
 
 You can replace [`KeyDown`] with other operators to set outputs with other triggers in Bonsai, for instance a [`Timer`] to send triggers after a set time has elapsed.
 

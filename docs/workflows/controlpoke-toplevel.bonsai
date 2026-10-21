@@ -81,7 +81,7 @@
         <Name>Behavior Commands</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Drive the Poke LED</Name>
+        <Name>Control Poke LEDs</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -115,7 +115,7 @@
         <Name>Behavior Commands</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Deliver Rewards</Name>
+        <Name>Deliver Rewards on Poke</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">

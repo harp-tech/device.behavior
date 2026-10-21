@@ -1,6 +1,6 @@
 ## Breakout
 
-The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Stream Timestamps](../advanced-configuration.md#stream-timestamps) articles to use it in Bonsai.
+The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Transmit Serial Timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
 
 ![Breakout board v1.1](../../images/OEPS-Breakout.png){width=350} ![Breakout board v2.1](../../images/OEPS-Breakoutv2.1.png){width=350}
 
@@ -20,7 +20,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 - Connector: RJ45 for direct connection with the Behavior board poke port
 - Screw Terminals:
     - 1x Digital Input (DI)
-    - 1x Digital Input / Output (DIO)
+    - 1x Digital Input / Output (DIO; acts only as an [active-low digital input](../read-digital-inputs.md))
     - 1x Digital Output (DO)
     - 1x 5 V supply (+5V)
     - 1x Ground (GND)

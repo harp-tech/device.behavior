@@ -1,10 +1,10 @@
 ## Trigger Cameras
 
-The Behavior board can generate TTL signals for cameras that support external triggering on **DO0** and **DO1**. This is useful for synchronizing multiple cameras and capturing camera frame timestamps on the device clock. Refer to the [connections](./connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
+The Behavior board can generate TTL signals on **DO0** and **DO1** for cameras that support external triggering. This is useful for synchronizing multiple cameras and logging camera frame timestamps on the device clock. Refer to the [connections](./connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
 
-This article covers how to configure the trigger frequency, start and stop the cameras, and visualize frame events in Bonsai.
+This article covers how to configure the trigger frequency, start and stop the camera, and visualize frame events in Bonsai.
 
-The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
+The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
 ![Trigger Cameras](../workflows/triggercameras-toplevel.bonsai)
@@ -51,14 +51,14 @@ In a separate branch:
     - `StopCameras` - Select the camera output to stop (e.g. `CameraOutput1` for **DO1**).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and <kbd>D</kbd> to stop it. Check the image stream in either Bonsai with a camera source operator like [`CameraCapture`] or in your camera vendor's acquisition software to confirm that the external trigger is working.
+Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and <kbd>D</kbd> to stop it. Check the image stream in either Bonsai with a camera source operator like [`CameraCapture`] or in the camera vendor's acquisition software to confirm that the external trigger is working.
 
 > [!NOTE]
 > Camera triggering stops automatically when the Bonsai workflow stops and the device goes into standby mode. This behavior is specific to camera triggering, other digital outputs keep their last state when the workflow stops. Remember to start the camera trigger again when you restart the workflow.
 
 ### Visualize Frame Events
 
-Each trigger pulse broadcasts a frame event tied to the port like [`Camera1Frame`]. Use it to verify that the trigger signal is being generated. Each message will also carry the recorded timestamp for the pulse on the device clock:
+Each trigger pulse broadcasts a frame event tied to the port (e.g. [`Camera1Frame`] for **DO1**). Use it to verify that the trigger signal is being generated. Each message includes the timestamp of the pulse's rising edge, as recorded by the device clock:
 
 :::workflow
 ![Visualize Frame Events](../workflows/triggercameras-visualizeframes.bonsai)

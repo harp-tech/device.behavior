@@ -1,6 +1,6 @@
 ## Logging and Analysis
 
-This article covers how data from the device is logged to disk, and how to read and plot the logged data with the [`harp-data`](installation.md#software-packages) Python package.
+This article covers how data from the device is logged to disk, and how to read and plot the logged data using the [`harp-data`](installation.md#software-packages) Python package.
 
 ### Log Data
 
@@ -10,13 +10,13 @@ Data from the device is logged by the [`DeviceDataWriter`] operator in the Harp 
 ![Harp Device Pattern](../workflows/harp-devicepattern.bonsai)
 :::
 
-While the workflow is running, registers are logged as the device produces messages (events and command echoes). Two properties of the [`Device`] operator are also important for logging:
+While the workflow is running, data is logged as the device executes commands and reports events. Two properties of the [`Device`] operator are also important for logging:
 
-- `DumpRegisters` - Enabled by default, this property logs a read of every register when the device initializes, capturing the initial state of the device at the start of the experiment.
-- `Heartbeat` - Disabled by default, enable it to regularly log the device's hardware timestamp. The Behavior board's own 1 kHz [`AnalogData`](acquire-analog-data.md) stream can perform the same function while it is enabled.
+- `DumpRegisters` - Enabled by default, the register dump records the value of every register when the device initializes, along with the Harp timestamp for when the value was read. This is useful for capturing the initial state of the device at the start of the experiment.
+- `Heartbeat` - Disabled by default, set this property to `True` to regularly log the device's Harp timestamp. The Behavior board's own 1 kHz [`AnalogData`](acquire-analog-data.md) stream can perform the same function while it is enabled.
 
 > [!WARNING]
-> The register dump can be used as an approximate start time for the workflow or experiment, but keep in mind that other devices in the workflow may initialize at a different time.
+> The Harp timestamps from the register dump can be used as an approximate start time for the workflow or experiment, but keep in mind that other devices in the workflow may initialize at a different time.
 
 ### Analyze Data
 

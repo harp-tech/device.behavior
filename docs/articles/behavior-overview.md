@@ -14,8 +14,8 @@
 - Analog inputs: 2 (0–5 V, 12-bit, sampled at 1 kHz)
     - 1 on the **ADC** connector
     - 1 on the **Input** connector
-- Digital inputs: 4 (5 V)
-    - 3 on the poke ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+- Digital inputs: 7 (5 V)
+    - 3 general-purpose and 3 active-low digital inputs on the poke ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
     - 1 on the **Input** connector
 - Digital outputs: 7 (5 V)
     - 4 on the **Output** connector

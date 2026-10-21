@@ -19,7 +19,7 @@ Check out the following in-depth guides to learn how to access the device functi
 - [Mimic Poke Signals](../articles/mimic-poke-signals.md)
 - [Track Rotary Encoder](../articles/track-rotary-encoder.md)
 - [Trigger Cameras](../articles/trigger-cameras.md)
-- [Drive Servos](../articles/drive-servos.md)
+- [Control Servo Motors](../articles/control-servo-motors.md)
 - [Advanced Configuration](../articles/advanced-configuration.md)
 
 Refer to the register table below for a complete listing of the available registers on the device.

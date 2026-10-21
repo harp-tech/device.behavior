@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateEventEnablePayload
 ---
 
-### Select Active Events
+### Enable Event Streams
 
 :::workflow
-![Select Active Events](../workflows/advancedconfiguration-eventenable.bonsai)
+![Enable Event Streams](../workflows/advancedconfiguration-eventenable.bonsai)
 :::

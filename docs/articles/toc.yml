@@ -36,8 +36,8 @@
   href: track-rotary-encoder.md
 - name: Trigger Cameras
   href: trigger-cameras.md
-- name: Drive Servos
-  href: drive-servos.md
+- name: Control Servo Motors
+  href: control-servo-motors.md
 - name: Advanced Configuration
   href: advanced-configuration.md
 - name: Data Management

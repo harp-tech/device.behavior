@@ -1,16 +1,14 @@
 ## Control Poke Peripheral
 
-The [Mice Poke](./peripherals/peripherals-micepoke.md) is a specialized nose poke peripheral for the Behavior board which combines an infrared beam sensor for poke detection, cue LEDs, and a solenoid valve for reward delivery. Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
+The [Mice Poke](./peripherals/peripherals-micepoke.md) is a nose poke peripheral for the Behavior board which uses an infrared beam sensor for poke detection. It also includes cue LEDs and an optional solenoid valve for controlled liquid delivery, typically used for rewards. Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
 
-This article covers how to visualize poke events, debounce noisy inputs, drive the cue LED, and deliver rewards with the Mice Poke peripheral in Bonsai.
+This article covers how to visualize poke events, debounce noisy inputs, drive the cue LEDs, and dispense liquid rewards with the Mice Poke peripheral in Bonsai.
 
-The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
+The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
 ![Detect Pokes](../workflows/controlpoke-toplevel.bonsai)
 :::
-
-[!INCLUDE [](breakout-note.md)]
 
 ### Visualize Poke Events
 
@@ -24,7 +22,7 @@ Beam breaks in the Mice Poke peripheral are reported as digital input events. Th
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedDigitalInputState`.
 - Insert a [`VisualizerWindow`] operator.
 
-Run the workflow and block the infrared beam on the Mice Poke peripheral. The visualizer will display:
+Run the workflow, block and unblock the infrared beam on the Mice Poke peripheral briefly. The visualizer will display:
 
 ```text
 DIPort0@3.213504
@@ -35,7 +33,7 @@ The first value is the payload, listing the digital inputs that are currently ac
 
 ### Configure Input Filter
 
-A single poke can generate a burst of rapid transitions, for example, when the snout hovers at the edge of the infrared beam. Use the [`PokeInputFilter`] register to set a refractory period in milliseconds. After each reported transition, further transitions on that port are ignored for the set time.
+A single poke can generate a burst of rapid transitions, for example, when the nose hovers at the edge of the infrared beam. Use the [`PokeInputFilter`] register to set a refractory period in milliseconds. After each reported transition, further transitions on that port are ignored for the set time.
 
 :::workflow
 ![Detect Pokes Input Filter](../workflows/controlpoke-inputfilter.bonsai)
@@ -52,12 +50,15 @@ Run the workflow and press <kbd>A</kbd>. Rapid repeated transitions within 5 ms 
 > [!TIP]
 > The filter is blind to the cause of a transition, so values much longer than the animal's fastest re-entry will also ignore genuine consecutive pokes.
 
-### Drive the Poke LED
+> [!NOTE]
+> [`PokeInputFilter`] applies only to the poke port inputs; **DI3** events are not filtered.
 
-Each poke port carries an LED drive line (`DOPort0` - `DOPort2`). The LED is controlled like any other digital output. For instance, you can turn it on and off with the [`OutputSet`] and [`OutputClear`] registers:
+### Control Poke LEDs
+
+Each poke port carries an LED control line (`DOPort0` - `DOPort2`) that controls the two onboard LEDs, and the additional LED output on the screw terminal block. The LED line is controlled like any other digital output. For instance, you can turn it on and off with the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
-![Detect Pokes Drive LED](../workflows/controlpoke-driveled.bonsai)
+![Control Poke LEDs](../workflows/controlpoke-leds.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
@@ -74,11 +75,11 @@ In a separate branch:
     - `OutputClear` - Select the line to turn off (e.g. `DOPort0`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LED on and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LED.
+Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LEDs on and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LEDs, such as with a toggle, pulse mode, or timer. 
 
 ### Deliver Rewards on Poke
 
-Each poke port carries a 12 V valve drive line for a solenoid valve that gates liquid reward delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the reward volume. It then closes the loop in Bonsai where every poke at **P0** immediately triggers a reward at the same port.
+Each poke port carries a 12 V valve drive line for a solenoid valve that gates liquid delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the volume of liquid dispensed. The second branch of the workflow implements closed-loop reward delivery in Bonsai: for every poke at **P0**, a liquid reward is immediately delivered at the same port.
 
 :::workflow
 ![Detect Pokes Deliver Rewards](../workflows/controlpoke-valve.bonsai)

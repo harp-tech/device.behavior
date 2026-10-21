@@ -63,7 +63,7 @@
         <ui:WindowState xsi:nil="true" />
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Select Active Events</Name>
+        <Name>Enable Event Streams</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -82,7 +82,7 @@
         <Name>Behavior Commands</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Stream Timestamps</Name>
+        <Name>Transmit Serial Timestamps</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">

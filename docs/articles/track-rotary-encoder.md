@@ -1,10 +1,10 @@
 ## Track Rotary Encoder
 
-The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). Refer to the [connections](./connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/peripherals-portbreakout.md) board.
+The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). As the encoder rotates, it generates counts that increase or decrease depending on the direction of rotation, allowing relative position to be tracked. Refer to the [connections](./connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/peripherals-portbreakout.md) board.
 
 This article covers enabling the encoder mode, visualizing the reading, and resetting the count.
 
-The complete workflow is shown below. Copy and paste it into Bonsai or build each section by following the step-by-step instructions below.
+The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
 ![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
@@ -21,7 +21,7 @@ The encoder mode is disabled by default and needs to be enabled with the [`Enabl
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `EncoderModePayload`.
-    - `EncoderMode` - Select `Position` to stream the accumulated count, or `Displacement` to stream the change since the previous sample.
+    - `EncoderMode` - Select `Position` to read the accumulated encoder count, or `Displacement` to read the change in count since the previous sample.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 - Insert a [`CreateMessage`] operator and configure the following properties:
     - `Payload` - Select `EnableEncodersPayload`.
@@ -31,7 +31,7 @@ The encoder mode is disabled by default and needs to be enabled with the [`Enabl
 Run the workflow and press <kbd>A</kbd> to enable the encoder.
 
 > [!WARNING]
-> While the encoder is enabled, **P2** repurposes its infrared and DIO lines as the quadrature inputs: poke events from **P2** are suspended until the encoder is disabled.
+> While the encoder is enabled, **P2** repurposes its infrared detector line for the quadrature counter. Poke events from **P2** are suspended until the encoder is disabled.
 
 ### Visualize Encoder Reading
 
@@ -43,7 +43,7 @@ The counter is then streamed in the `Encoder` field of the 1 kHz [`AnalogData`](
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
 - Insert a [`Parse`] operator and configure the `Register` property to `AnalogData`.
-- Right-click on the [`Parse`] operator, select the "Output (Harp.Behavior.AnalogDataPayload)" > "Encoder" option from the context menu. This will create an `Encoder` node.
+- Right-click on the [`Parse`] operator, select the "Output (Harp.Behavior.AnalogDataPayload)" > "Encoder" option from the context menu. This will extract the encoding reading and create an `Encoder` node.
 - Insert a [`VisualizerWindow`] operator. This will automatically open a window displaying the encoder count when the workflow starts.
 
 Run the workflow, press <kbd>A</kbd> to enable the encoder if it is disabled, and turn the encoder shaft. The visualizer plots the count going up in one direction and down in the other.

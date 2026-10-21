@@ -74,7 +74,7 @@ While the servo is enabled, writing a new pulse width moves it immediately:
 
 Run the workflow, then press <kbd>G</kbd> to move the servo to a new angle. Press <kbd>S</kbd> to move it back to the starting angle.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

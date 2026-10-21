@@ -102,7 +102,7 @@ Once the output line is configured in pulse mode, sending an [`OutputSet`] comma
 
 Run the workflow, press <kbd>G</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns to low on its own, which translates to a brief flash on the LED.
 
-[!INCLUDE [](outputpulseenable-warning.md)]
+[!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
 > [!TIP]
 > The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms; see [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
@@ -128,7 +128,7 @@ You can replace [`KeyDown`] with other operators to set outputs with other trigg
 
 Run the workflow. The **DO0** line goes high 2 seconds after the workflow starts. It will go low automatically if pulse mode is enabled. With an LED on **DO0**, it lights 2 seconds after you start the workflow.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

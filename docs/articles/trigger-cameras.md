@@ -77,7 +77,7 @@ FrameAcquired@10.351072
 The first value confirms the frame trigger and the second is the timestamp on the device clock. Match the [logged](./logging-analysis.md) timestamps against the frames saved by your video capture software to align video with the rest of the data.
 
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

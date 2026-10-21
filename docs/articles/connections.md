@@ -245,4 +245,4 @@ To stream the serial timestamp (v2.x only):
 
 ---
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]

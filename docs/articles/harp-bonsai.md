@@ -39,7 +39,7 @@ Next, we suggest going through the "Bonsai Workflows" section if you are not fam
 
 Alternatively, if you have experience with Harp devices, you can check the [register table](xref:Harp.Behavior) in the reference to access the device functionality directly.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`Behavior (Device)`]: xref:Harp.Behavior.Device

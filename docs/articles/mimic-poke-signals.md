@@ -58,7 +58,7 @@ To trigger the valve output, send an [`OutputSet`] command in a separate branch:
 
 Run the workflow, press <kbd>S</kbd>, then press <kbd>D</kbd> to open the **P0** valve. The valve supply lines boot with [pulse mode](control-digital-outputs.md#pulse-outputs) enabled, so the LED indicator on **DO0** should flash briefly.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

@@ -108,9 +108,9 @@ In a separate branch:
 
 Run the workflow, press <kbd>F</kbd> once to configure the valve pulse, then block the infrared beam on the **P0** poke. The valve will open for 15 ms and close on its own, delivering one reward per poke.
 
-[!INCLUDE [](outputpulseenable-warning.md)]
+[!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

@@ -67,7 +67,7 @@ The [`EncoderReset`] register sets the counter of the selected encoders back to 
 
 Run the workflow and press <kbd>S</kbd>. The `Encoder` value in the analog stream returns to zero.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

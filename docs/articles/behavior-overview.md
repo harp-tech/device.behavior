@@ -50,4 +50,4 @@
 | 3.1 | <ul><li> Support for hardware 2.0 </li><li> Added serial timestamp registers </li></ul> |
 | 3.0 | <ul><li> Initial version </li></ul> |
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]

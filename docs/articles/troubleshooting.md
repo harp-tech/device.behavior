@@ -28,7 +28,7 @@ Also check that the ground connection is shared between the devices, as improper
 
 A: The **DIO** line on ports **P0**–**P2** work only as a digital input in the current firmware (v3.3), as the functionality to switch the pins from digital input to digital output has not been implemented yet.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`Device`]: xref:Harp.Behavior.Device

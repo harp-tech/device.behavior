@@ -49,7 +49,7 @@ If you are using a photodiode, shine a light on the photodiode to see the analog
 > [!NOTE]
 > The analog events are enabled by default. However, if no data is being streamed to Bonsai, they may have been disabled by another configuration setting. Refer to the [Enable Event Streams](advanced-configuration.md#enable-event-streams) article to understand how to enable or disable them.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`SubscribeSubject`]: xref:Bonsai.Expressions.SubscribeSubject

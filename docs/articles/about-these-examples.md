@@ -69,7 +69,7 @@ For more, see:
 - The Harp [website](https://harp-tech.org/protocol/BinaryProtocol-8bit.html) for more information on how Harp works.
 - The Bonsai [documentation](https://bonsai-rx.org/docs/) to learn more about Bonsai control logic.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`BehaviorSubject`]: xref:Bonsai.Reactive.BehaviorSubject

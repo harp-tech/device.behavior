@@ -13,4 +13,4 @@ Before beginning, [install the GUI](installation.md?tabs=gui#software-packages),
 > [!WARNING]
 > Only one program can access the device's COM port at a time. Close the GUI before starting a Bonsai workflow that uses the device.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]

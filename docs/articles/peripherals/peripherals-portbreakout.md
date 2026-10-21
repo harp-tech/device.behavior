@@ -46,4 +46,4 @@ For connection with a quadrature encoder:
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Breakout](https://github.com/harp-tech/peripheral.portbreakout) repository.
 
-[!INCLUDE [](../version-footer.md)]
+[!INCLUDE [](../../includes/version-footer.md)]

@@ -64,7 +64,7 @@ To update the firmware, use the device setup tool in Bonsai:
 
 After the update, the device will reboot with the new firmware.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`Device`]: xref:Harp.Behavior.Device

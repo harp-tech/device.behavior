@@ -74,9 +74,9 @@ To generate a PWM signal for a specified duration, enable the [pulse mode](contr
 
 Run the workflow, press <kbd>F</kbd> once to configure the pulse, then press <kbd>S</kbd>. The PWM runs for 100 ms and stops on its own, which translates to either a short beep with a speaker or a brief flash with an LED.
 
-[!INCLUDE [](outputpulseenable-warning.md)]
+[!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

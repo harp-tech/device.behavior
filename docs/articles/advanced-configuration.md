@@ -65,7 +65,7 @@ Run the workflow and press <kbd>S</kbd>. The timestamp transmission on the **P2*
 > [!NOTE]
 > The serial timestamp transmission is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. The Behavior board does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

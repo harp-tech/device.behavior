@@ -104,7 +104,7 @@ In a separate branch:
 
 Run the workflow, then press <kbd>G</kbd> to turn on both RGB LEDs and <kbd>H</kbd> to turn them off.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`KeyDown`]: xref:Bonsai.Windows.Input.KeyDown

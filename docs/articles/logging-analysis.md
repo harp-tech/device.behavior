@@ -50,7 +50,7 @@ df.plot()
 plt.show()
 ```
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`DeviceDataWriter`]: xref:Harp.Behavior.DeviceDataWriter

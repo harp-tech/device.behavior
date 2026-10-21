@@ -56,7 +56,7 @@ DIO0, DIO1, DIO2@20.575872
 
 The payload lists the **DIO** lines that are currently high. Since the lines idle high, driving **DIO0** low removes it from the list, and releasing the line adds it back.
 
-[!INCLUDE [](version-footer.md)]
+[!INCLUDE [](../includes/version-footer.md)]
 
 <!--Reference Style Links -->
 [`SubscribeSubject`]: xref:Bonsai.Expressions.SubscribeSubject

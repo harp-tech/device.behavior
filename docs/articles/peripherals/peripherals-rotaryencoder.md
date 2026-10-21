@@ -32,4 +32,4 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp).
 
-[!INCLUDE [](../version-footer.md)]
+[!INCLUDE [](../../includes/version-footer.md)]

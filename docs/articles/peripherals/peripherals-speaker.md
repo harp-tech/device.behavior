@@ -32,4 +32,4 @@ The Harp Behavior Speaker is a peripheral that connects to one of the Behavior b
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp).
 
-[!INCLUDE [](../version-footer.md)]
+[!INCLUDE [](../../includes/version-footer.md)]

@@ -42,4 +42,4 @@ Assembled units are available from the [Open Ephys store](https://open-ephys.org
 > - PCB and mice poke enclosure
 > - PCB, mice poke enclosure, and water valve
 
-[!INCLUDE [](../version-footer.md)]
+[!INCLUDE [](../../includes/version-footer.md)]

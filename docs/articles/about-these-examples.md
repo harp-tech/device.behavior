@@ -24,7 +24,7 @@ The block is made up of:
 
 - A [`BehaviorSubject`] subject operator that collects all the commands that are sent to it from elsewhere in the workflow and forwards them to the device. It is called `Device Commands` in all workflows.
 - A [`Device`] operator that establishes the serial communication link with the device.
-- A [`MessageWriter`] operator that saves messages or data from the device. In device-specific packages, this is replaced by a dedicated [DeviceDataWriter] operator named after the device.
+- A [`MessageWriter`] operator that saves messages or data from the device. In device-specific packages, this is replaced by a dedicated [`DeviceDataWriter`] operator named after the device.
 - A [`PublishSubject`] operator that broadcasts messages received from the device, allowing other sections of the workflow to subscribe to them. It is called `Device Events` in all workflows.
 
 > [!NOTE]

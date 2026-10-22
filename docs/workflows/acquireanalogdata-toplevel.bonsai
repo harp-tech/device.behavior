@@ -5,6 +5,7 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:beh="clr-namespace:Harp.Behavior;assembly=Harp.Behavior"
                  xmlns:ui="clr-namespace:Bonsai.Design;assembly=Bonsai.Design"
+                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -62,17 +63,17 @@
         <ui:WindowState xsi:nil="true" />
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Value.AnalogInput0,Seconds</Selector>
+        <Selector>Value.AnalogInput0</Selector>
       </Expression>
       <Expression xsi:type="ui:VisualizerWindow">
-        <ui:VisualizerType xsi:type="TypeMapping" TypeArguments="ui:ObjectTextVisualizer" />
+        <ui:VisualizerType xsi:type="TypeMapping" TypeArguments="viz:TimeSeriesVisualizer" />
         <ui:Visible>true</ui:Visible>
         <ui:Location>
           <ui:X>400</ui:X>
           <ui:Y>450</ui:Y>
         </ui:Location>
         <ui:Size>
-          <ui:Width>300</ui:Width>
+          <ui:Width>400</ui:Width>
           <ui:Height>300</ui:Height>
         </ui:Size>
         <ui:WindowState xsi:nil="true" />

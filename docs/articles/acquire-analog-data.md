@@ -2,7 +2,7 @@
 
 The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
-This article covers how to visualize the timestamped analog input stream and extract a single channel with its timestamp in Bonsai.
+This article covers how to visualize the timestamped analog input stream and plot a single channel in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
@@ -22,11 +22,11 @@ Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitiz
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedAnalogData`.
 - Insert a [`VisualizerWindow`] operator.
 
-To visualize only one of the input channels:
+To plot only one of the input channels:
 
 - Insert a [`MemberSelector`] operator on a separate branch to select specific fields from the bundled analog data payload.
-- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` and `Seconds` members to the selection. This will select the individual channel data as well as the timestamp.
-- Insert a [`VisualizerWindow`] operator. This will open a second window displaying only the selected channel and its timestamp.
+- Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` member to the selection. This will select the individual channel data.
+- Insert a [`VisualizerWindow`] operator, right-click on the operator to open the context menu, go to "Select Visualizer" and choose "Bonsai.Design.Visualizers.TimeSeriesVisualizer".
 
 Run the workflow, the first visualizer displays the raw data streaming from the Behavior board. In this case, there are three payload values followed by the timestamp in seconds:
 
@@ -34,12 +34,9 @@ Run the workflow, the first visualizer displays the raw data streaming from the 
 AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }@10.351072
 AnalogDataPayload { AnalogInput0 = 15, Encoder = 0, AnalogInput1 = 14 }@10.352072
 ```
-and the second displays the `AnalogInput0` value paired with its timestamp.
+and the second plots the `AnalogInput0` value over time:
 
-```text
-(13, 10.351072)
-(15, 10.352072)
-```
+![Acquire Analog Data TimeSeriesVisualizer](../images/bonsai-firststeps-visualizer.png){width=300}
 
 If you are using a photodiode, shine a light on the photodiode to see the analog input value change. If you are using a different signal source, vary the output voltage of that device.
 

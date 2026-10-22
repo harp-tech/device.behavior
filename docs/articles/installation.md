@@ -14,7 +14,7 @@ These steps are only required the first time you connect the device to a new com
 
 - Download and install [Bonsai](https://bonsai-rx.org/docs/articles/installation.html).
 - Launch Bonsai and install the `Harp.Behavior` package by searching for it in the [Bonsai package manager](https://bonsai-rx.org/docs/articles/packages.html).
-- (Optional) Install the `Bonsai.Windows.Input` package to follow along with the examples in this user guide.
+- Install the `Bonsai.StarterPack` package to follow along with the examples in this user guide.
 
 # [Python](#tab/python)
 

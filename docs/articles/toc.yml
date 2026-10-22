@@ -1,48 +1,28 @@
 - name: Introduction
-- name: Overview
-  href: ../index.md
+- href: ../index.md
 - name: Specs
-- name: Behavior Board
-  href: behavior-overview.md
+- href: behavior-overview.md
 - name: Peripherals
   href: ./peripherals/toc.yml
 - name: Getting Started
-- name: Ports and Connections
-  href: connections.md
-- name: Installation
-  href: installation.md
-- name: Behavior GUI
-  href: behavior-gui.md
-- name: Bonsai
-  href: harp-bonsai.md
+- href: connections.md
+- href: installation.md
+- href: behavior-gui.md
+- href: harp-bonsai.md
 - name: Bonsai Workflows
-- name: About These Examples
-  href: about-these-examples.md
-- name: Acquire Analog Data
-  href: acquire-analog-data.md
-- name: Read Digital Inputs
-  href: read-digital-inputs.md
-- name: Control Digital Outputs
-  href: control-digital-outputs.md
-- name: Generate PWM
-  href: generate-pwm.md
-- name: Control LEDs
-  href: control-leds.md
-- name: Control Poke Peripheral
-  href: control-poke.md
-- name: Mimic Poke Signals
-  href: mimic-poke-signals.md
-- name: Track Rotary Encoder
-  href: track-rotary-encoder.md
-- name: Trigger Cameras
-  href: trigger-cameras.md
-- name: Control Servo Motors
-  href: control-servo-motors.md
-- name: Advanced Configuration
-  href: advanced-configuration.md
+- href: about-these-examples.md
+- href: acquire-analog-data.md
+- href: read-digital-inputs.md
+- href: control-digital-outputs.md
+- href: generate-pwm.md
+- href: control-leds.md
+- href: control-poke.md
+- href: mimic-poke-signals.md
+- href: track-rotary-encoder.md
+- href: trigger-cameras.md
+- href: control-servo-motors.md
+- href: advanced-configuration.md
 - name: Data Management
-- name: Logging and Analysis
-  href: logging-analysis.md
+- href: logging-analysis.md
 - name: Troubleshooting
-- name: Errors
-  href: troubleshooting.md
+- href: troubleshooting.md

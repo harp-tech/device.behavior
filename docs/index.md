@@ -1,8 +1,4 @@
----
-title: Overview
----
-
-## Overview
+# Overview
 
 The Harp [Behavior](articles/behavior-overview.md) board is a multi-purpose data acquisition and control device for behavioral neuroscience experiments.
 

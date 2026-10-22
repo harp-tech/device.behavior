@@ -1,10 +1,5 @@
-- name: Mice Poke
-  href: peripherals-micepoke.md
-- name: Breakout
-  href: peripherals-portbreakout.md
-- name: Rotary Encoder
-  href: peripherals-rotaryencoder.md
-- name: Speaker
-  href: peripherals-speaker.md
-- name: Photodiode
-  href: peripherals-photodiode.md
+- href: peripherals-micepoke.md
+- href: peripherals-portbreakout.md
+- href: peripherals-rotaryencoder.md
+- href: peripherals-speaker.md
+- href: peripherals-photodiode.md

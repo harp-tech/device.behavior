@@ -126,6 +126,9 @@ For a digital reading:
 4. Up to two RGB LEDs can be driven. Connect the second one as a serial chain with the same wiring configuration.
 5. Refer to the [Control LEDs](control-leds.md#set-rgb-colors) article to set the colors and switch the RGB LEDs in Bonsai.
 
+> [!NOTE]
+> The **RGB** connector is a 2.54 mm Molex KK header with a friction lock. You can assemble a mating connector with a Molex KK crimp housing (22-01-3037) and three crimp terminals (08-50-0160). Dupont style female jumper wires also fit, but without a latch they hold by friction alone.
+
 # [Mice Poke](#tab/poke)
 
 ![Mice Poke](../images/connection-poke.svg){width=600}

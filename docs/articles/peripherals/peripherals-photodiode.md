@@ -4,7 +4,7 @@ The Harp Behavior Photodiode is a peripheral for the Behavior board. It detects 
 
 ![Photodiode](../../images/OEPS-Photodiode.jpg){width=450}
 
-## Key features
+## Key Features
 
 - Blue-enhanced silicon photodiode.
 - Switch between analog output (**ANA**) or digital output (**DIG**).

@@ -13,7 +13,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > [!TIP]
 > Configure your camera to trigger on the rising edge of the pulse, and avoid modes that use the trigger pulse width to control exposure. Check that the voltage level is compatible with the camera's external trigger voltage level. The trigger signal is a 5 V square wave with a 50% duty cycle and the pulse width is not configurable.
 
-## Configure trigger frequency
+## Configure Trigger Frequency
 
 Set the trigger frequency of each camera with the appropriate register for the port (e.g. [`Camera1Frequency`] for a camera connected to **DO1**).
 
@@ -29,7 +29,7 @@ Set the trigger frequency of each camera with the appropriate register for the p
 
 Run the workflow and press <kbd>A</kbd> to set the trigger frequency. Configure the frequency before starting the camera. Once camera triggering starts, the frequency cannot be modified without stopping the camera.
 
-## Start and stop cameras
+## Start and Stop Cameras
 
 Enable and disable the camera triggering with the [`StartCameras`] and [`StopCameras`] registers:
 
@@ -56,7 +56,7 @@ Run the workflow, press <kbd>S</kbd> to start the camera trigger on **DO1** and 
 > [!NOTE]
 > Camera triggering stops automatically when the Bonsai workflow stops and the device goes into standby mode. This behavior is specific to camera triggering, other digital outputs keep their last state when the workflow stops. Remember to start the camera trigger again when you restart the workflow.
 
-## Visualize frame events
+## Visualize Frame Events
 
 Each trigger pulse broadcasts a frame event tied to the port (e.g. [`Camera1Frame`] for **DO1**). Use it to verify that the trigger signal is being generated. Each message includes the timestamp of the pulse's rising edge, as recorded by the device clock:
 

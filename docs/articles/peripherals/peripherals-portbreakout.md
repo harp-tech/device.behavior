@@ -6,7 +6,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 
 *<small>Left: Breakout v1.1. Right: Breakout v2.1.</small>*
 
-## Key features
+## Key Features
 
 - Gain access to additional digital inputs, digital outputs, and power supply lines.
 - Supports 12 V solenoid valves (e.g. Lee LHD series) (v1.1 only).

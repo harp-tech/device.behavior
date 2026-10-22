@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Control LEDs](../workflows/controlleds-toplevel.bonsai)
 :::
 
-## Configure LED current
+## Configure LED Current
 
 The **L0** and **L1** outputs drive conventional LEDs with a configurable constant current, so no series resistor is needed. Each output line has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that are set before turning on the LED. Set the protection limit to the LED's rated current first, then adjust the working current to change the brightness of the LED.
 
@@ -33,7 +33,7 @@ Run the workflow and press <kbd>A</kbd> to configure the **L0** drive current, t
 > [!NOTE]
 > Commands that adjust the working current above the protection limit will be rejected by the device. The Bonsai workflow will terminate with a runtime error that describes an "erroneous write command". Lower the working current or raise the protection limit, then restart the workflow.
 
-## Turn LEDs on and off
+## Turn LEDs On and Off
 
 Once the drive current is configured, the **L0** and **L1** outputs are switched like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
@@ -57,7 +57,7 @@ In a separate branch:
 
 Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off.
 
-## Set RGB colors
+## Set RGB Colors
 
 When configuring and controlling the addressable RGB LEDs; **Rgb0** refers to the first LED in the chain and **Rgb1** the second. The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 
@@ -80,7 +80,7 @@ Run the workflow and press <kbd>F</kbd> to load the color and intensity configur
 > [!NOTE]
 > There is a [bug](https://github.com/harp-tech/device.behavior/issues/41) in the current firmware (v3.3) where the red and green channels are switched (e.g. `Red0` controls the LED green channel instead). As a workaround, swap the two channel values to get the intended color.
 
-## Turn RGB LEDs on and off
+## Turn RGB LEDs On and Off
 
 The RGB LEDs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 

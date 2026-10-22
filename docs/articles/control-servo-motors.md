@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Control Servo Motors](../workflows/controlservomotors-toplevel.bonsai)
 :::
 
-## Configure the servo
+## Configure the Servo
 
 To configure the servo, set the period and pulse-width registers for the digital output port (e.g. [`ServoMotor2Period`] and [`ServoMotor2Pulse`] for **DO2**) in microseconds. The period determines the servo update rate (i.e. how often the servo receives a position command), which can affect how smoothly and reliably it responds. The pulse width determines the servo's target angle.
 
@@ -34,7 +34,7 @@ In a separate branch:
 
 Run the workflow, press <kbd>A</kbd> to set the servo update rate and <kbd>S</kbd> to set the servo starting angle. The two commands are bound to separate keys, so you can reset the angle later without reconfiguring the period. Check your servo's datasheet for its period and pulse width range if you are unsure about which values to use.
 
-## Enable and disable servos
+## Enable and Disable Servos
 
 Use the [`EnableServos`] and [`DisableServos`] registers to turn on and off the servo:
 
@@ -58,7 +58,7 @@ In a separate branch:
 
 Run the workflow, press <kbd>D</kbd> to enable the servo and <kbd>F</kbd> to stop. The servo moves to the starting position which was configured previously.
 
-## Adjust the position
+## Adjust the Position
 
 While the servo is enabled, writing a new pulse width moves it immediately:
 

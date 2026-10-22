@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Detect Pokes](../workflows/controlpoke-toplevel.bonsai)
 :::
 
-## Visualize poke events
+## Visualize Poke Events
 
 Beam breaks in the Mice Poke peripheral are reported as digital input events. The three poke ports **P0**–**P2** are represented as `DIPort0` - `DIPort2` in the [`DigitalInputState`] event register.
 
@@ -31,7 +31,7 @@ None@3.513823
 
 The first value is the payload, listing the digital inputs that are currently active, and the second value is the timestamp on the device clock. Both beam breaks and beam restores generate an event, so `None` marks a poke exit.
 
-## Configure input filter
+## Configure Input Filter
 
 A single poke can generate a burst of rapid transitions, for example, when the nose hovers at the edge of the infrared beam. Use the [`PokeInputFilter`] register to set a refractory period in milliseconds. After each reported transition, further transitions on that port are ignored for the set time.
 
@@ -53,7 +53,7 @@ Run the workflow and press <kbd>A</kbd>. Rapid repeated transitions within 5 ms 
 > [!NOTE]
 > [`PokeInputFilter`] applies only to the poke port inputs; **DI3** events are not filtered.
 
-## Control poke LEDs
+## Control Poke LEDs
 
 Each poke port carries an LED control line (`DOPort0` - `DOPort2`) that controls the two onboard LEDs, and the additional LED output on the screw terminal block. The LED line is controlled like any other digital output. For instance, you can turn it on and off with the [`OutputSet`] and [`OutputClear`] registers:
 
@@ -77,7 +77,7 @@ In a separate branch:
 
 Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LEDs on and <kbd>D</kbd> to turn it off. See [Control Digital Outputs](control-digital-outputs.md) for other methods to control the LEDs, such as with a toggle, pulse mode, or timer. 
 
-## Deliver rewards on poke
+## Deliver Rewards on Poke
 
 Each poke port carries a 12 V valve drive line for a solenoid valve that gates liquid delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the volume of liquid dispensed. The second branch of the workflow implements closed-loop reward delivery in Bonsai: for every poke at **P0**, a liquid reward is immediately delivered at the same port.
 

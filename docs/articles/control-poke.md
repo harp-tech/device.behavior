@@ -2,7 +2,7 @@
 
 The [Mice Poke](./peripherals/peripherals-micepoke.md) is a nose poke peripheral for the Behavior board which uses an infrared beam sensor for poke detection. It also includes cue LEDs and an optional solenoid valve for controlled liquid delivery, typically used for rewards. Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
 
-This article covers how to visualize poke events, debounce noisy inputs, drive the cue LEDs, and dispense liquid rewards with the Mice Poke peripheral in Bonsai.
+This article covers how to visualize poke events, debounce noisy inputs, control the cue LEDs, and dispense liquid rewards with the Mice Poke peripheral in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
@@ -79,7 +79,7 @@ Run the workflow, then press <kbd>S</kbd> to turn the **P0** poke LEDs on and <k
 
 ## Deliver Rewards on Poke
 
-Each poke port carries a 12 V valve drive line for a solenoid valve that gates liquid delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the volume of liquid dispensed. The second branch of the workflow implements closed-loop reward delivery in Bonsai: for every poke at **P0**, a liquid reward is immediately delivered at the same port.
+Each poke port carries a 12 V valve supply line for a solenoid valve that gates liquid delivery. The workflow below enables [pulse mode](control-digital-outputs.md#pulse-outputs) on the valve output and configures the pulse duration, which can be calibrated to adjust the volume of liquid dispensed. The second branch of the workflow implements closed-loop reward delivery in Bonsai: for every poke at **P0**, a liquid reward is immediately delivered at the same port.
 
 :::workflow
 ![Detect Pokes Deliver Rewards](../workflows/controlpoke-valve.bonsai)

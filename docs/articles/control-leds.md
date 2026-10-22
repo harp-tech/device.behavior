@@ -1,8 +1,8 @@
 # Control LEDs
 
-The Behavior board drives two kinds of light output: conventional LEDs on the **L0** and **L1** connectors and addressable RGB LEDs on the **RGB** connector. Refer to the [LED connection](./connections.md?tabs=led#connections) section to set up a conventional LED on **L0** and the [RGB LED connection](./connections.md?tabs=rgbled#connections) section to set up two addressable RGB LEDs on the **RGB** connector. We will use these ports for the rest of these examples.
+The Behavior board controls two kinds of light output: conventional LEDs on the **L0** and **L1** connectors and addressable RGB LEDs on the **RGB** connector. Refer to the [LED connection](./connections.md?tabs=led#connections) section to set up a conventional LED on **L0** and the [RGB LED connection](./connections.md?tabs=rgbled#connections) section to set up two addressable RGB LEDs on the **RGB** connector. We will use these ports for the rest of these examples.
 
-This article covers configuring LED drive current, setting RGB colors, and turning on both kinds of LED in Bonsai.
+This article covers configuring the LED current, setting RGB colors, and turning on both kinds of LED in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
@@ -12,7 +12,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 
 ## Configure LED Current
 
-The **L0** and **L1** outputs drive conventional LEDs with a configurable constant current, so no series resistor is needed. Each output line has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that are set before turning on the LED. Set the protection limit to the LED's rated current first, then adjust the working current to change the brightness of the LED.
+The **L0** and **L1** outputs supply conventional LEDs with a configurable constant current, so no series resistor is needed. Each output line has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that are set before turning on the LED. Set the protection limit to the LED's rated current first, then adjust the working current to change the brightness of the LED.
 
 :::workflow
 ![Configure LED Current](../workflows/controlleds-current.bonsai)
@@ -28,14 +28,14 @@ The **L0** and **L1** outputs drive conventional LEDs with a configurable consta
     - `Led0Current` - Set the working current in mA (e.g. `10`). Valid values are 2–100 mA.
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow and press <kbd>A</kbd> to configure the **L0** drive current, then switch the output on as shown in the next section.
+Run the workflow and press <kbd>A</kbd> to configure the **L0** supply current, then switch the output on as shown in the next section.
 
 > [!NOTE]
 > Commands that adjust the working current above the protection limit will be rejected by the device. The Bonsai workflow will terminate with a runtime error that describes an "erroneous write command". Lower the working current or raise the protection limit, then restart the workflow.
 
 ## Turn LEDs On and Off
 
-Once the drive current is configured, the **L0** and **L1** outputs are switched like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
+Once the current is configured, the **L0** and **L1** outputs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Turn LEDs On and Off](../workflows/controlleds-ledonoff.bonsai)

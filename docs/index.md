@@ -11,7 +11,7 @@ The Behavior board provides:
 - Support for over 15 sensors and actuators which can be combined in real-time, e.g. to precisely time delivery of visual and auditory cues, motion and water rewards to timing of events such as nose pokes or running wheel position.
 - Plug-and-play mice pokes designed to provide light cues and water delivery capabilities with little additional setup (no soldering required!)
 - Seamlessly synchronize cameras and monitors with your behavioral arena.
-- Easily drive servo motors, RGB LEDs, and other devices directly, thanks to integrated control circuitry.
+- Easily control servo motors, RGB LEDs, and other devices directly, thanks to integrated control circuitry.
 - Hardware timestamping and synchronization with other [Harp](https://harp-tech.org/articles/about.html) devices.
 - [Bonsai](https://bonsai-rx.org/) integration for flexible experiment acquisition and control.
 

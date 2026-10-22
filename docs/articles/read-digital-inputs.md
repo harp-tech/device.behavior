@@ -26,7 +26,7 @@ The Behavior board broadcasts changes on its digital input lines as [`DigitalInp
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedDigitalInputState`.
 - Insert a [`VisualizerWindow`] operator.
 
-Run the workflow and drive the **DI3** line high, then low. The visualizer will display:
+Run the workflow and set the **DI3** line high, then low. The visualizer will display:
 
 ```text
 DI3@12.001504
@@ -47,7 +47,7 @@ In the current firmware (v3.3) the **DIO** line acts only as an active-low digit
 - Insert a [`Parse`] operator and configure the `Register` property to `TimestampedPortDIOStateEvent`.
 - Insert a [`VisualizerWindow`] operator.
 
-Run the workflow and drive the **DIO** line on **P0** low, then high. The visualizer will display:
+Run the workflow and set the **DIO** line on **P0** low, then high. The visualizer will display:
 
 ```text
 DIO1, DIO2@20.154016

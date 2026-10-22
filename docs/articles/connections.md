@@ -21,13 +21,13 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 **ADC (Screw Terminal)** - This connector carries the first analog input (**AD0**), a 5 V supply pin and two ground connections.
 
-**Output (Screw Terminal)** - These general-purpose 5 V digital outputs can be used to communicate with external devices. **DO0**/**DO1** can generate [camera triggers](trigger-cameras.md) and **DO2**/**DO3** can drive [servo motors](control-servo-motors.md); all four support [PWM](generate-pwm.md).
+**Output (Screw Terminal)** - These general-purpose 5 V digital outputs can be used to communicate with external devices. **DO0**/**DO1** can generate [camera triggers](trigger-cameras.md) and **DO2**/**DO3** can control [servo motors](control-servo-motors.md); all four support [PWM](generate-pwm.md).
 
 **Input (Screw Terminal)** - This connector carries the second analog input (**AD1**), the digital input **DI3** and one ground connection.
 
-**RGB (3-pin Flick Lock)** - Connector for up to two  addressable RGB LEDs (WS2812-type, e.g., NeoPixels). The LEDs are driven as a serial chain on a single data line, with colors set with the [RGB registers](control-leds.md#set-rgb-colors).
+**RGB (3-pin Flick Lock)** - Connector for up to two  addressable RGB LEDs (WS2812-type, e.g., NeoPixels). The LEDs are controlled as a serial chain on a single data line, with colors set with the [RGB registers](control-leds.md#set-rgb-colors).
 
-**L0, L1 (Screw Terminal)** - These connectors control two conventional single-color LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The drive current is [configurable](control-leds.md) from 2 to 100 mA.
+**L0, L1 (Screw Terminal)** - These connectors control two conventional single-color LED outputs. Each terminal pair is marked **A** (anode, the LED's long leg) and **K** (cathode, the short leg). The output current is [configurable](control-leds.md) from 2 to 100 mA.
 
 ## Connections
 
@@ -51,7 +51,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 ![Digital Output](../images/connection-digitaloutput.svg){width=600}
 
-To send a logic-level output to an external device:
+To connect a logic-level output to an external device:
 
 1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to the external device's digital input. Alternatively, use the [Breakout](./peripherals/peripherals-portbreakout.md) board to access more digital outputs on the poke ports.
 2. Connect the external device's ground to any **GND** pin.
@@ -59,15 +59,15 @@ To send a logic-level output to an external device:
 
 ![Digital Output Load](../images/connection-digitaloutput-load.svg){width=600}
 
-To drive a load such as a conventional LED:
+To connect a load such as a conventional LED:
 
 1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to one end of a series current-limiting resistor (100 to 330 Ω is typically used).
 2. Wire the other end of the resistor to the long leg (anode, **A**) of the LED.
 3. Wire the short leg (cathode, **K**) of the LED to any **GND** pin.
-4. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to drive the output in Bonsai.
+4. Refer to the [Control Digital Outputs](control-digital-outputs.md) article to control the output in Bonsai.
 
 > [!NOTE]
-> Conventional LEDs can also be connected on the **L0**/**L1** connector, where the drive current is configurable and no series current-limiting resistor is needed.
+> Conventional LEDs can also be connected on the **L0**/**L1** connector, where the current is configurable and no series current-limiting resistor is needed.
 
 # [Photodiode](#tab/photodiode)
 
@@ -106,13 +106,13 @@ For a digital reading:
 3. Refer to the [Generate PWM](generate-pwm.md) article to play tones in Bonsai.
 
 > [!NOTE]
-> Third-party passive buzzers or speakers can be driven with PWM in the same way as the Speaker peripheral. Active buzzers generate a fixed tone, so switch them on and off using general purpose digital outputs, instead of PWM (see [Control Digital Outputs](control-digital-outputs.md)). Add a current-limiting series resistor (100 to 330 Ω is typically used) to avoid overloading the 5 V supply.
+> Third-party passive buzzers or speakers can be controlled with PWM in the same way as the Speaker peripheral. Active buzzers generate a fixed tone, so switch them on and off using general purpose digital outputs, instead of PWM (see [Control Digital Outputs](control-digital-outputs.md)). Add a current-limiting series resistor (100 to 330 Ω is typically used) to avoid overloading the 5 V supply.
 
 # [LED](#tab/led)
 
 ![LED](../images/connection-led.svg){width=600}
 
-1. Wire the long leg (anode, **A**) of a conventional single-color LED to the **A** pin of either the **L0** or **L1** terminal pair. No series current-limiting resistor is needed as the drive current can be set in Bonsai.
+1. Wire the long leg (anode, **A**) of a conventional single-color LED to the **A** pin of either the **L0** or **L1** terminal pair. No series current-limiting resistor is needed as the supply current can be set in Bonsai.
 2. Wire the short leg (cathode, **K**) to the **K** pin of the same terminal pair.
 3. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
 
@@ -123,7 +123,7 @@ For a digital reading:
 1. Connect the signal wire of an addressable RGB LED to **S** on the **RGB** connector. Analog RGB LEDs are not supported.
 2. Connect its ground wire to **G**.
 3. Connect its power wire to **5V**.
-4. Up to two RGB LEDs can be driven. Connect the second one as a serial chain with the same wiring configuration.
+4. Up to two RGB LEDs can be controlled. Connect the second one as a serial chain with the same wiring configuration.
 5. Refer to the [Control LEDs](control-leds.md#set-rgb-colors) article to set the colors and switch the RGB LEDs in Bonsai.
 
 > [!NOTE]

@@ -9,7 +9,7 @@
   <Workflow>
     <Nodes>
       <Expression xsi:type="Annotation">
-        <Name>Harp Device Pattern</Name>
+        <Name>Harp device pattern</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
@@ -39,7 +39,7 @@
         <Name>Behavior Events</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Enable Poke Infrared Mimic</Name>
+        <Name>Enable poke infrared mimic</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -58,7 +58,7 @@
         <Name>Behavior Commands</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Enable Poke Valve Mimic</Name>
+        <Name>Enable poke valve mimic</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">

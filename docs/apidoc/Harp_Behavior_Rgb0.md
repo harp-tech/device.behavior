@@ -2,8 +2,8 @@
 uid: Harp.Behavior.Rgb0
 ---
 
-### Set RGB Colors
+### Set RGB colors
 
 :::workflow
-![Set RGB Colors](../workflows/apidoc-rgb0.bonsai)
+![Set RGB colors](../workflows/apidoc-rgb0.bonsai)
 :::

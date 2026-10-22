@@ -10,12 +10,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
 :::
 
-## Enable the Encoder
+## Enable the encoder
 
 The encoder mode is disabled by default and needs to be enabled with the [`EnableEncoders`] register. The reading can either reflect position or displacement, which is set with [`EncoderMode`].
 
 :::workflow
-![Enable the Encoder](../workflows/trackrotaryencoder-enable.bonsai)
+![Enable the encoder](../workflows/trackrotaryencoder-enable.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -33,12 +33,12 @@ Run the workflow and press <kbd>A</kbd> to enable the encoder.
 > [!WARNING]
 > While the encoder is enabled, **P2** repurposes its infrared detector line for the quadrature counter. Poke events from **P2** are suspended until the encoder is disabled.
 
-## Visualize Encoder Reading
+## Visualize encoder reading
 
 The counter is then streamed in the `Encoder` field of the 1 kHz [`AnalogData`](acquire-analog-data.md) events.
 
 :::workflow
-![Visualize Encoder Reading](../workflows/trackrotaryencoder-visualize.bonsai)
+![Visualize encoder reading](../workflows/trackrotaryencoder-visualize.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
@@ -51,12 +51,12 @@ Run the workflow, press <kbd>A</kbd> to enable the encoder if it is disabled, an
 > [!WARNING]
 > In `Position` mode the count is a signed 16-bit value that ranges from -32768 to 32767 and wraps around silently when it passes either end. If the count is likely to hit those limits, reset the count every session or switch to `Displacement` mode and accumulate the per-sample changes in Bonsai with an [`Accumulate`] operator.
 
-## Reset the Encoder
+## Reset the encoder
 
 The [`EncoderReset`] register sets the counter of the selected encoders back to zero:
 
 :::workflow
-![Reset the Encoder](../workflows/trackrotaryencoder-reset.bonsai)
+![Reset the encoder](../workflows/trackrotaryencoder-reset.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.

@@ -2,8 +2,8 @@
 uid: Harp.Behavior.PulseDO3
 ---
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/apidoc-pulsedo3.bonsai)
+![Pulse outputs](../workflows/apidoc-pulsedo3.bonsai)
 :::

@@ -10,7 +10,7 @@
   <Workflow>
     <Nodes>
       <Expression xsi:type="Annotation">
-        <Name>Harp Device Pattern</Name>
+        <Name>Harp device pattern</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
@@ -40,7 +40,7 @@
         <Name>Behavior Events</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Enable the Encoder</Name>
+        <Name>Enable the encoder</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -68,7 +68,7 @@
         <Name>Behavior Commands</Name>
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Visualize Encoder Reading</Name>
+        <Name>Visualize encoder reading</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -93,7 +93,7 @@
         <ui:WindowState xsi:nil="true" />
       </Expression>
       <Expression xsi:type="Annotation">
-        <Name>Reset the Encoder</Name>
+        <Name>Reset the encoder</Name>
         <Text><![CDATA[]]></Text>
       </Expression>
       <Expression xsi:type="Combinator">

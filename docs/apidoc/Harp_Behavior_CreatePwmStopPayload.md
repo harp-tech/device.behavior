@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreatePwmStopPayload
 ---
 
-### Start and Stop PWM
+### Start and stop PWM
 
 :::workflow
-![Start and Stop PWM](../workflows/generatepwm-startstop.bonsai)
+![Start and stop PWM](../workflows/generatepwm-startstop.bonsai)
 :::

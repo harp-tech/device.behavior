@@ -2,8 +2,8 @@
 uid: Harp.Behavior.PulseSupplyPort1
 ---
 
-### Deliver Rewards
+### Deliver rewards
 
 :::workflow
-![Deliver Rewards](../workflows/apidoc-pulsesupplyport1.bonsai)
+![Deliver rewards](../workflows/apidoc-pulsesupplyport1.bonsai)
 :::

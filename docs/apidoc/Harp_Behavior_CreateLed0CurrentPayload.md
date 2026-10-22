@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateLed0CurrentPayload
 ---
 
-### Configure LED Current
+### Configure LED current
 
 :::workflow
-![Configure LED Current](../workflows/controlleds-current.bonsai)
+![Configure LED current](../workflows/controlleds-current.bonsai)
 :::

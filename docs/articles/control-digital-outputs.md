@@ -19,12 +19,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > [!NOTE]
 > If you need more digital outputs, the [Breakout](./peripherals/peripherals-portbreakout.md) board provides access to the poke port output lines through screw terminals.
 
-## Set and Clear Outputs
+## Set and clear outputs
 
 Use the [`OutputSet`] and [`OutputClear`] registers to set the output lines high and low.
 
 :::workflow
-![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
+![Set and clear outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -46,12 +46,12 @@ Run the workflow, then press <kbd>A</kbd> to set the **DO0** line high to turn t
 > [!NOTE]
 > A single command can modify several outputs at once. To set or clear multiple lines simultaneously, type the names separated by a comma (e.g. `DO0, DO1`) in the `OutputSet` or `OutputClear` field. Output lines not specified remain unchanged.
 
-## Toggle Outputs
+## Toggle outputs
 
 The [`OutputToggle`] register inverts the current state of the selected output lines.
 
 :::workflow
-![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
+![Toggle outputs](../workflows/controldigitaloutputs-toggle.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `D`.
@@ -62,12 +62,12 @@ The [`OutputToggle`] register inverts the current state of the selected output l
 
 Run the workflow and press <kbd>D</kbd> repeatedly. The **DO0** line inverts its state on every press. With an LED, it alternates between on and off.
 
-## Write All Outputs
+## Write all outputs
 
 The [`OutputState`] register writes every output line in a single command: selected lines are set high and all other lines are set low. Use it to set the whole output bank to a known state, for example when initializing an experiment.
 
 :::workflow
-![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
+![Write all outputs](../workflows/controldigitaloutputs-state.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
@@ -81,13 +81,13 @@ Run the workflow and press <kbd>F</kbd>. The **DO0** and **DO1** lines go high a
 > [!WARNING]
 > [`OutputState`] acts on every output of the Behavior board, including the poke port and LED lines. To change a few lines without modifying the rest, specify multiple lines in [`OutputSet`], [`OutputClear`], or [`OutputToggle`].
 
-## Pulse Outputs
+## Pulse outputs
 
 The Behavior board can generate hardware-timed pulses with a defined duration. Enable pulse mode by selecting output lines in the [`OutputPulseEnable`] register, and set the duration in the output line's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds).
 Once the output line is configured in pulse mode, sending an [`OutputSet`] command sets the line high and then low after the set time has elapsed. This ensures precise pulse timing by eliminating the delay associated with sending a separate command to set the line low.
 
 :::workflow
-![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
+![Pulse outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `G`.
@@ -100,17 +100,17 @@ Once the output line is configured in pulse mode, sending an [`OutputSet`] comma
     - `PulseDO0` - Set the pulse duration in ms (e.g. `500`).
 - Insert a [`MulticastSubject`] operator named `Behavior Commands`.
 
-Run the workflow, press <kbd>G</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and Clear Outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns to low on its own, which translates to a brief flash on the LED.
+Run the workflow, press <kbd>G</kbd> once to configure the pulse, then send a set command with <kbd>A</kbd> from [Set and clear outputs](#set-and-clear-outputs). The **DO0** line goes high for 500 ms and returns to low on its own, which translates to a brief flash on the LED.
 
 [!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
 > [!TIP]
-> The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms; see [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
+> The poke valve outputs (`SupplyPort0`–`SupplyPort2`) boot with pulse mode already enabled and a default duration of 15 ms; see [Deliver rewards on poke](control-poke.md#deliver-rewards-on-poke). All other outputs boot with pulse mode disabled and stay on until cleared.
 
 > [!TIP]
 > Pulse mode is preferred to timing pulses in software (e.g. pairing a set command with a delay and a clear command). Software timing is subject to non-real-time OS latency and jitter, which are most noticeable on short pulses.
 
-## Alternative: Set Outputs with Timer
+## Alternative: set outputs with Timer
 
 You can replace [`KeyDown`] with other operators to set outputs with other triggers in Bonsai, for instance a [`Timer`] to send triggers after a set time has elapsed.
 

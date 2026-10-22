@@ -154,7 +154,7 @@ To add an additional cue LED (for instance, at a different location):
 
 1. Wire the long leg (anode) of an LED to the **LED** terminal. No series current-limiting resistor is needed as the terminal already has one.
 2. Wire the short leg (cathode) to any **GND** terminal.
-3. The additional cue light is controlled by the same signals as the onboard cue LEDs, refer to the [Control Poke LEDs](control-poke.md#control-poke-leds) article to control them in Bonsai.
+3. The additional cue light is controlled by the same signals as the onboard cue LEDs, refer to the [Control poke LEDs](control-poke.md#control-poke-leds) article to control them in Bonsai.
 
 To log the peripheral signals on an external device:
 
@@ -229,14 +229,14 @@ To connect an external quadrature encoder (both v1.1 and v2.x):
 To control valves for reward delivery (v1.1 only):
 1. Connect the [Breakout](./peripherals/peripherals-portbreakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. Wire a 12 V solenoid valve between the **+12V** and **SUP_RTN** terminals.
-3. Refer to [Deliver Rewards on Poke](control-poke.md#deliver-rewards-on-poke) to pulse the valve line in Bonsai.
+3. Refer to [Deliver rewards on poke](control-poke.md#deliver-rewards-on-poke) to pulse the valve line in Bonsai.
 
 To stream the serial timestamp (v2.x only):
 1. Connect the board to **P2**, the timestamp stream can only be transmitted on this port.
 2. Wire the **TX** terminal to the receiving device's **RX** input or to a logged digital input.
 3. Wire a **GND** terminal to the receiver's ground.
 4. Set the Breakout board's logic-level jumper to match the receiver's operating voltage level (3.3 V or 5 V).
-5. Refer to the [Transmit Serial Timestamps](advanced-configuration.md#transmit-serial-timestamps) section to enable the stream in Bonsai.
+5. Refer to the [Transmit serial timestamps](advanced-configuration.md#transmit-serial-timestamps) section to enable the stream in Bonsai.
 
 # [Harp Synchronization](#tab/harpsynchronization)
 

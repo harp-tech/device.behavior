@@ -10,12 +10,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Advanced Configuration](../workflows/advancedconfiguration-toplevel.bonsai)
 :::
 
-## Visualize Analog Data
+## Visualize analog data
 
 This workflow uses [`AnalogData`] as an example to demonstrate how to disable a data stream that is enabled by default. First, visualize the [`AnalogData`] stream, which reports the analog inputs at 1 kHz (see [Acquire Analog Data](acquire-analog-data.md) for more details):
 
 :::workflow
-![Visualize Analog Data](../workflows/advancedconfiguration-visualizeanalog.bonsai)
+![Visualize analog data](../workflows/advancedconfiguration-visualizeanalog.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
@@ -24,12 +24,12 @@ This workflow uses [`AnalogData`] as an example to demonstrate how to disable a 
 
 Run the workflow. The visualizer immediately displays a rapid stream of [`AnalogData`] values because this event stream is enabled by default.
 
-## Enable Event Streams
+## Enable event streams
 
 The [`EventEnable`] register selects which event streams the device reports. All five are enabled by default: `PortDI`, `PortDIO`, `Camera0`, `Camera1` and `AnalogData`. Write a new selection to choose the streams you want to keep; any event not specified is disabled.
 
 :::workflow
-![Enable Event Streams](../workflows/advancedconfiguration-eventenable.bonsai)
+![Enable event streams](../workflows/advancedconfiguration-eventenable.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -40,7 +40,7 @@ The [`EventEnable`] register selects which event streams the device reports. All
 
 Run the workflow and press <kbd>A</kbd>. The visualizer will stop showing any new [`AnalogData`](acquire-analog-data.md) events.
 
-## Transmit Serial Timestamps
+## Transmit serial timestamps
 
 The [`EnableSerialTimestamp`] register enables the serial timestamp transmission, an auxiliary output that can be used by non-Harp devices to log Harp timestamps for time alignment.
 
@@ -51,7 +51,7 @@ Record this signal on a general purpose digital input port of an external device
 To enable the transmission:
 
 :::workflow
-![Transmit Serial Timestamps](../workflows/advancedconfiguration-serialtimestamp.bonsai)
+![Transmit serial timestamps](../workflows/advancedconfiguration-serialtimestamp.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.

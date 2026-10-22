@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreatePokeInputFilterPayload
 ---
 
-### Configure Input Filter
+### Configure input filter
 
 :::workflow
-![Configure Input Filter](../workflows/controlpoke-inputfilter.bonsai)
+![Configure input filter](../workflows/controlpoke-inputfilter.bonsai)
 :::

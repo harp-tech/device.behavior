@@ -15,7 +15,7 @@ The Behavior board provides:
 - Hardware timestamping and synchronization with other [Harp](https://harp-tech.org/articles/about.html) devices.
 - [Bonsai](https://bonsai-rx.org/) integration for flexible experiment acquisition and control.
 
-## Getting a Device
+## Getting a device
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Behavior](https://github.com/harp-tech/device.behavior) board repository. Once you have a board, follow the "Getting Started" section to [set up the device](./articles/connections.md) and install the [software](./articles/installation.md).
 

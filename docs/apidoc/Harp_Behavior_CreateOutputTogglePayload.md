@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateOutputTogglePayload
 ---
 
-### Toggle Outputs
+### Toggle outputs
 
 :::workflow
-![Toggle Outputs](../workflows/controldigitaloutputs-toggle.bonsai)
+![Toggle outputs](../workflows/controldigitaloutputs-toggle.bonsai)
 :::

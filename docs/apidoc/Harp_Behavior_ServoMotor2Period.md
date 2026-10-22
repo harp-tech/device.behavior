@@ -2,8 +2,8 @@
 uid: Harp.Behavior.ServoMotor2Period
 ---
 
-### Configure the Servo
+### Configure the servo
 
 :::workflow
-![Configure the Servo](../workflows/controlservomotors-configure.bonsai)
+![Configure the servo](../workflows/controlservomotors-configure.bonsai)
 :::

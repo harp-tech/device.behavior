@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateOutputStatePayload
 ---
 
-### Write All Outputs
+### Write all outputs
 
 :::workflow
-![Write All Outputs](../workflows/controldigitaloutputs-state.bonsai)
+![Write all outputs](../workflows/controldigitaloutputs-state.bonsai)
 :::

@@ -10,12 +10,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Control LEDs](../workflows/controlleds-toplevel.bonsai)
 :::
 
-## Configure LED Current
+## Configure LED current
 
 The **L0** and **L1** outputs supply conventional LEDs with a configurable constant current, so no series resistor is needed. Each output line has a working current and protection limit register (e.g. [`Led0Current`] and [`Led0MaxCurrent`] for **L0**) that are set before turning on the LED. Set the protection limit to the LED's rated current first, then adjust the working current to change the brightness of the LED.
 
 :::workflow
-![Configure LED Current](../workflows/controlleds-current.bonsai)
+![Configure LED current](../workflows/controlleds-current.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -33,12 +33,12 @@ Run the workflow and press <kbd>A</kbd> to configure the **L0** supply current, 
 > [!NOTE]
 > Commands that adjust the working current above the protection limit will be rejected by the device. The Bonsai workflow will terminate with a runtime error that describes an "erroneous write command". Lower the working current or raise the protection limit, then restart the workflow.
 
-## Turn LEDs On and Off
+## Turn LEDs on and off
 
 Once the current is configured, the **L0** and **L1** outputs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
-![Turn LEDs On and Off](../workflows/controlleds-ledonoff.bonsai)
+![Turn LEDs on and off](../workflows/controlleds-ledonoff.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.
@@ -57,12 +57,12 @@ In a separate branch:
 
 Run the workflow, then press <kbd>S</kbd> to turn on the LED and <kbd>D</kbd> to turn it off.
 
-## Set RGB Colors
+## Set RGB colors
 
 When configuring and controlling the addressable RGB LEDs; **Rgb0** refers to the first LED in the chain and **Rgb1** the second. The [`RgbAll`] register writes the color of both RGB LEDs in one command. Each channel takes an intensity from 0 to 255.
 
 :::workflow
-![Set RGB Colors](../workflows/controlleds-rgbcolors.bonsai)
+![Set RGB colors](../workflows/controlleds-rgbcolors.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `F`.
@@ -80,12 +80,12 @@ Run the workflow and press <kbd>F</kbd> to load the color and intensity configur
 > [!NOTE]
 > There is a [bug](https://github.com/harp-tech/device.behavior/issues/41) in the current firmware (v3.3) where the red and green channels are switched (e.g. `Red0` controls the LED green channel instead). As a workaround, swap the two channel values to get the intended color.
 
-## Turn RGB LEDs On and Off
+## Turn RGB LEDs on and off
 
 The RGB LEDs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
-![Turn RGB LEDs On and Off](../workflows/controlleds-rgbonoff.bonsai)
+![Turn RGB LEDs on and off](../workflows/controlleds-rgbonoff.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `G`.

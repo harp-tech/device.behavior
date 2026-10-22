@@ -2,8 +2,8 @@
 uid: Harp.Behavior.PulseDOPort2
 ---
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/apidoc-pulsedoport2.bonsai)
+![Pulse outputs](../workflows/apidoc-pulsedoport2.bonsai)
 :::

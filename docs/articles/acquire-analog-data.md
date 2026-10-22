@@ -10,7 +10,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Acquire Analog Data](../workflows/acquireanalogdata-toplevel.bonsai)
 :::
 
-## Visualize Analog Data
+## Visualize analog data
 
 Both analog inputs accept voltages from 0 to 5 V, which are subsequently digitized by an onboard 12-bit analog-to-digital converter (ADC) and broadcast as an [`AnalogData`] event stream at 1 kHz. The workflow below will show you how to filter, decode and visualize the [`AnalogData`] events:
 
@@ -44,7 +44,7 @@ If you are using a photodiode, shine a light on the photodiode to see the analog
 > The `Encoder` value bundled together in the payload is not an analog voltage reading but a [quadrature encoder counter](track-rotary-encoder.md) that is sampled together with the analog data at 1 kHz so that position and analog data share the same timestamps.
 
 > [!NOTE]
-> The analog events are enabled by default. However, if no data is being streamed to Bonsai, they may have been disabled by another configuration setting. Refer to the [Enable Event Streams](advanced-configuration.md#enable-event-streams) article to understand how to enable or disable them.
+> The analog events are enabled by default. However, if no data is being streamed to Bonsai, they may have been disabled by another configuration setting. Refer to the [Enable event streams](advanced-configuration.md#enable-event-streams) article to understand how to enable or disable them.
 
 [!INCLUDE [](../includes/version-footer.md)]
 

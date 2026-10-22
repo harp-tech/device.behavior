@@ -4,14 +4,14 @@ uid: Harp.Behavior.CreateOutputPulseEnablePayload
 
 [!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
+![Pulse outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::
 
-### Generate PWM Bursts
+### Generate PWM bursts
 
 :::workflow
-![Generate PWM Bursts](../workflows/generatepwm-pulseenable.bonsai)
+![Generate PWM bursts](../workflows/generatepwm-pulseenable.bonsai)
 :::

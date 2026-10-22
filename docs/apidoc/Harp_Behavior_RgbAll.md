@@ -2,8 +2,8 @@
 uid: Harp.Behavior.RgbAll
 ---
 
-### Set RGB Colors
+### Set RGB colors
 
 :::workflow
-![Set RGB Colors](../workflows/controlleds-rgbcolors.bonsai)
+![Set RGB colors](../workflows/controlleds-rgbcolors.bonsai)
 :::

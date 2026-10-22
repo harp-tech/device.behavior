@@ -2,8 +2,8 @@
 uid: Harp.Behavior.Camera0Frame
 ---
 
-### Visualize Frame Events
+### Visualize frame events
 
 :::workflow
-![Visualize Frame Events](../workflows/apidoc-camera0frame.bonsai)
+![Visualize frame events](../workflows/apidoc-camera0frame.bonsai)
 :::

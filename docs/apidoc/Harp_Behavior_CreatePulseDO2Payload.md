@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreatePulseDO2Payload
 ---
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/apidoc-pulsedo2.bonsai)
+![Pulse outputs](../workflows/apidoc-pulsedo2.bonsai)
 :::

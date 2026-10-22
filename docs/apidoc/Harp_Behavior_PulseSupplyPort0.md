@@ -2,8 +2,8 @@
 uid: Harp.Behavior.PulseSupplyPort0
 ---
 
-### Deliver Rewards
+### Deliver rewards
 
 :::workflow
-![Deliver Rewards](../workflows/controlpoke-valve.bonsai)
+![Deliver rewards](../workflows/controlpoke-valve.bonsai)
 :::

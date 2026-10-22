@@ -2,14 +2,14 @@
 uid: Harp.Behavior.ServoMotor2Pulse
 ---
 
-### Configure the Servo
+### Configure the servo
 
 :::workflow
-![Configure the Servo](../workflows/controlservomotors-configure.bonsai)
+![Configure the servo](../workflows/controlservomotors-configure.bonsai)
 :::
 
-### Adjust the Position
+### Adjust the position
 
 :::workflow
-![Adjust the Position](../workflows/controlservomotors-position.bonsai)
+![Adjust the position](../workflows/controlservomotors-position.bonsai)
 :::

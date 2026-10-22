@@ -15,12 +15,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 ![Mimic Poke Signals](../workflows/mimicpokesignals-toplevel.bonsai)
 :::
 
-## Enable Poke Infrared Mimic
+## Enable poke infrared mimic
 
 To mimic the infrared signal on the poke ports, first select the mimic infrared port register that corresponds to the port (e.g. [`MimicPort0IR`] for **P0**). Then, specify an output line to mimic the signal on (e.g. `DO0` for **DO0**). No further configuration is necessary as the poke infrared detector is enabled by default.
 
 :::workflow
-![Enable Poke Infrared Mimic](../workflows/mimicpokesignals-mimicir.bonsai)
+![Enable poke infrared mimic](../workflows/mimicpokesignals-mimicir.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `A`.
@@ -34,12 +34,12 @@ Run the workflow, press <kbd>A</kbd> to enable the poke infrared mimic, and trig
 > [!WARNING]
 > A mimic output line still responds to commands that modify digital outputs, such as [`OutputSet`] and [`OutputClear`]. Other mimic registers can also select the same line. To avoid conflicts, dedicate each mimic output line to a single source and clear any leftover configurations.
 
-## Enable Poke Valve Mimic
+## Enable poke valve mimic
 
 To mimic the valve output signal on the poke ports, first select the mimic valve register that corresponds to the port (e.g. [`MimicPort0Valve`] for **P0**). Then, specify an output line to mimic the signal on (e.g. `DO0` for **DO0**). The second branch in the workflow adds a keyboard trigger to turn on the valve output and demonstrate the mimic functionality.
 
 :::workflow
-![Enable Poke Valve Mimic](../workflows/mimicpokesignals-mimicvalve.bonsai)
+![Enable poke valve mimic](../workflows/mimicpokesignals-mimicvalve.bonsai)
 :::
 
 - Insert a [`KeyDown`] operator and set the `Filter` property to `S`.

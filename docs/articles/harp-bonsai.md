@@ -5,7 +5,7 @@ Bonsai is a visual reactive programming language for building interactive experi
 > [!TIP]
 > More information on Bonsai can be found in the official [documentation](https://bonsai-rx.org/docs/).
 
-## First Steps
+## First steps
 
 We will use an introductory example to get started with the device in Bonsai. This example plots one channel of the analog input stream from the Behavior board. You do not need to connect an analog input device. We revisit this example in more detail in the "Examples" section.
 

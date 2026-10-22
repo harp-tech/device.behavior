@@ -2,8 +2,8 @@
 uid: Harp.Behavior.DisableServos
 ---
 
-### Enable and Disable Servos
+### Enable and disable servos
 
 :::workflow
-![Enable and Disable Servos](../workflows/controlservomotors-enabledisable.bonsai)
+![Enable and disable servos](../workflows/controlservomotors-enabledisable.bonsai)
 :::

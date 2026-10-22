@@ -2,8 +2,8 @@
 uid: Harp.Behavior.EncoderReset
 ---
 
-### Reset the Encoder
+### Reset the encoder
 
 :::workflow
-![Reset the Encoder](../workflows/trackrotaryencoder-reset.bonsai)
+![Reset the encoder](../workflows/trackrotaryencoder-reset.bonsai)
 :::

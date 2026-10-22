@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateEncoderModePayload
 ---
 
-### Enable the Encoder
+### Enable the encoder
 
 :::workflow
-![Enable the Encoder](../workflows/trackrotaryencoder-enable.bonsai)
+![Enable the encoder](../workflows/trackrotaryencoder-enable.bonsai)
 :::

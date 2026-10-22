@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateOutputSetPayload
 ---
 
-### Set and Clear Outputs
+### Set and clear outputs
 
 :::workflow
-![Set and Clear Outputs](../workflows/controldigitaloutputs-setclear.bonsai)
+![Set and clear outputs](../workflows/controldigitaloutputs-setclear.bonsai)
 :::

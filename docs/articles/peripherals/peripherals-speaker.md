@@ -7,7 +7,7 @@ The Harp Behavior Speaker is a peripheral that connects to one of the Behavior b
 > [!NOTE]
 > The Harp Behavior Speaker is meant for playback of simple tones. For audio stimulation with complex stimuli and high precision, consider using the Harp [Sound Card](https://github.com/harp-tech/device.soundcard).
 
-## Key Features
+## Key features
 
 - Moving coil speaker driven by a PWM digital output without an amplifier.
 - Volume potentiometer to adjust the amplitude.

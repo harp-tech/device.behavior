@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateCamera0FrequencyPayload
 ---
 
-### Configure Trigger Frequency
+### Configure trigger frequency
 
 :::workflow
-![Configure Trigger Frequency](../workflows/apidoc-camera0frequency.bonsai)
+![Configure trigger frequency](../workflows/apidoc-camera0frequency.bonsai)
 :::

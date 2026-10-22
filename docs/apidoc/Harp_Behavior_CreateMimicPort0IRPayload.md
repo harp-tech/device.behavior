@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateMimicPort0IRPayload
 ---
 
-### Enable Poke Infrared Mimic
+### Enable poke infrared mimic
 
 :::workflow
-![Enable Poke Infrared Mimic](../workflows/mimicpokesignals-mimicir.bonsai)
+![Enable poke infrared mimic](../workflows/mimicpokesignals-mimicir.bonsai)
 :::

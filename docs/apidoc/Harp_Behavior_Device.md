@@ -5,7 +5,7 @@ uid: Harp.Behavior.Device
 Use the [Harp device pattern](https://harp-tech.org/articles/operators.html#device-pattern) to initialize the device, log data, and send commands to and receive messages from the Behavior board.
 
 :::workflow
-![Harp Device Pattern](../workflows/harp-devicepattern.bonsai)
+![Harp device pattern](../workflows/harp-devicepattern.bonsai)
 :::
 
 Check out the following in-depth guides to learn how to access the device functionality with the `Harp.Behavior` package:

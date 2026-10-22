@@ -4,7 +4,7 @@ The Harp Behavior Mice Poke is a peripheral for the Behavior board that has onbo
 
 ![Mice Poke With Water Valve](../../images/OEPS-MicePokeWaterValve.jpg){width=450}
 
-## Key Features
+## Key features
 
 - Plastic nose-poke enclosure for mice.
 - Infrared beam poke detection.

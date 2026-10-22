@@ -4,8 +4,8 @@ uid: Harp.Behavior.OutputPulseEnable
 
 [!INCLUDE [](../includes/outputpulseenable-warning.md)]
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
+![Pulse outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::

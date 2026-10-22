@@ -2,8 +2,8 @@
 uid: Harp.Behavior.PulseDO0
 ---
 
-### Pulse Outputs
+### Pulse outputs
 
 :::workflow
-![Pulse Outputs](../workflows/controldigitaloutputs-pulse.bonsai)
+![Pulse outputs](../workflows/controldigitaloutputs-pulse.bonsai)
 :::

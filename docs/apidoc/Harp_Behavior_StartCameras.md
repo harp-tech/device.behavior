@@ -2,8 +2,8 @@
 uid: Harp.Behavior.StartCameras
 ---
 
-### Start and Stop Cameras
+### Start and stop cameras
 
 :::workflow
-![Start and Stop Cameras](../workflows/triggercameras-startstop.bonsai)
+![Start and stop cameras](../workflows/triggercameras-startstop.bonsai)
 :::

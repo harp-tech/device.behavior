@@ -2,8 +2,8 @@
 uid: Harp.Behavior.AnalogData
 ---
 
-### Visualize Analog Data
+### Visualize analog data
 
 :::workflow
-![Visualize Analog Data](../workflows/acquireanalogdata-visualizedata.bonsai)
+![Visualize analog data](../workflows/acquireanalogdata-visualizedata.bonsai)
 :::

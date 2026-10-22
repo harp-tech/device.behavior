@@ -2,8 +2,8 @@
 uid: Harp.Behavior.CreateServoMotor3PeriodPayload
 ---
 
-### Configure the Servo
+### Configure the servo
 
 :::workflow
-![Configure the Servo](../workflows/apidoc-servomotor3period.bonsai)
+![Configure the servo](../workflows/apidoc-servomotor3period.bonsai)
 :::

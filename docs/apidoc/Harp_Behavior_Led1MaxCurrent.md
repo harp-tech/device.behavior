@@ -2,8 +2,8 @@
 uid: Harp.Behavior.Led1MaxCurrent
 ---
 
-### Configure LED Current
+### Configure LED current
 
 :::workflow
-![Configure LED Current](../workflows/apidoc-led1current.bonsai)
+![Configure LED current](../workflows/apidoc-led1current.bonsai)
 :::

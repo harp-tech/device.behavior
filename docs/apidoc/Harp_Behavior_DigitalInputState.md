@@ -2,8 +2,8 @@
 uid: Harp.Behavior.DigitalInputState
 ---
 
-### Visualize Poke Events
+### Visualize poke events
 
 :::workflow
-![Visualize Poke Events](../workflows/controlpoke-visualizeevents.bonsai)
+![Visualize poke events](../workflows/controlpoke-visualizeevents.bonsai)
 :::

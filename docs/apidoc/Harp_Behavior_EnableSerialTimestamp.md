@@ -2,8 +2,8 @@
 uid: Harp.Behavior.EnableSerialTimestamp
 ---
 
-### Transmit Serial Timestamps
+### Transmit serial timestamps
 
 :::workflow
-![Transmit Serial Timestamps](../workflows/advancedconfiguration-serialtimestamp.bonsai)
+![Transmit serial timestamps](../workflows/advancedconfiguration-serialtimestamp.bonsai)
 :::

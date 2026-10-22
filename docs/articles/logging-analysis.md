@@ -2,12 +2,12 @@
 
 This article covers how data from the device is logged to disk, and how to read and plot the logged data using the [`harp-data`](installation.md#software-packages) Python package.
 
-## Log Data
+## Log data
 
 Data from the device is logged by the [`DeviceDataWriter`] operator in the Harp device pattern, which saves raw data from all device registers in the Harp binary format to the folder set in its `Path` property:
 
 :::workflow
-![Harp Device Pattern](../workflows/harp-devicepattern.bonsai)
+![Harp device pattern](../workflows/harp-devicepattern.bonsai)
 :::
 
 While the workflow is running, data is logged as the device executes commands and reports events. Two properties of the [`Device`] operator are also important for logging:
@@ -18,7 +18,7 @@ While the workflow is running, data is logged as the device executes commands an
 > [!WARNING]
 > The Harp timestamps from the register dump can be used as an approximate start time for the workflow or experiment, but keep in mind that other devices in the workflow may initialize at a different time.
 
-## Analyze Data
+## Analyze data
 
 The [`harp-data`](https://harp-tech.org/python/) package imports data stored in the Harp binary format as [pandas](https://pandas.pydata.org/) DataFrames, which can then be analyzed with any `pandas` compatible plotting or analysis library.
 

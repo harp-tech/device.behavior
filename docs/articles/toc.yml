@@ -9,7 +9,7 @@
 - href: installation.md
 - href: behavior-gui.md
 - href: harp-bonsai.md
-- name: Bonsai Workflows
+- name: Examples
 - href: about-these-examples.md
 - href: acquire-analog-data.md
 - href: read-digital-inputs.md

@@ -1,6 +1,6 @@
 # Behavior Board
 
-![Harp Behavior](../images/OEPS-BehaviorBoard.jpg){width=450}
+![Harp Behavior](../images/behavior-board.jpg){width=450}
 
 ## Key features
 

@@ -30,4 +30,4 @@ The interface with the Harp Behavior can be done through [Bonsai](https://bonsai
 
 ## Licensing ##
 
-Each subdirectory will contain a license or, possibly, a set of licenses if it involves both hardware and software.
+Each part of this repository is released under its own license. The `LICENSE` file at the root of the repository lists the licenses that apply to each folder.

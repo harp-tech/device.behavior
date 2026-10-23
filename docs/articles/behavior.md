@@ -22,6 +22,7 @@
     - 3 on the poke ports, accessible with the [Breakout](./peripherals/breakout.md) board
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
 - Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
+- Digital output drive current: Up to 300 mA per line, total 500 mA across outputs
 - Poke ports: 3 (RJ45)
     - For the [Mice Poke](./peripherals/micepoke.md), [Rotary Encoder](./peripherals/rotaryencoder.md), or [Breakout](./peripherals/breakout.md) board
 - LED outputs: 2 (2–100 mA drive current)

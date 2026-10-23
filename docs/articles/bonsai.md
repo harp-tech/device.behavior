@@ -10,7 +10,7 @@ Bonsai is a visual reactive programming language for building interactive experi
 We will use an introductory example to get started with the device in Bonsai. This example plots one channel of the analog input stream from the Behavior board. You do not need to connect an analog input device. We revisit this example in more detail in the "Examples" section.
 
 Before beginning:
-- Connect the [USB](connections.md) cable to the computer.
+- Connect the [USB](ports-connections.md) cable to the computer.
 - Launch "Bonsai" from the Windows Start menu.
 - Hover over the workflow cell below, and click on the "Copy" icon on the top right.
 - Paste the workflow into Bonsai.
@@ -30,7 +30,7 @@ A [visualizer](xref:Bonsai.Design.VisualizerWindow) will automatically open when
 
 ![First Steps Visualizer](../images/bonsai-firststeps-visualizer.png){width=300}
 
-The device is ready to use! If, instead, an error appears in Bonsai, check out the [troubleshooting](troubleshooting.md) section.
+The device is ready to use! If, instead, an error appears in Bonsai, check out the [troubleshooting](errors.md) section.
 
 Next, we suggest going through the "Examples" section if you are not familiar with using Harp devices in Bonsai.
 

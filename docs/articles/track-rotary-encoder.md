@@ -1,6 +1,6 @@
 # Track Rotary Encoder
 
-The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). As the encoder rotates, it generates counts that increase or decrease depending on the direction of rotation, allowing relative position to be tracked. Refer to the [connections](./connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/peripherals-portbreakout.md) board.
+The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). As the encoder rotates, it generates counts that increase or decrease depending on the direction of rotation, allowing relative position to be tracked. Refer to the [connections](./ports-connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/breakout.md) board.
 
 This article covers enabling the encoder mode, visualizing the reading, and resetting the count.
 

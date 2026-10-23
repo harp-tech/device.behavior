@@ -1,6 +1,6 @@
 # Breakout
 
-The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Transmit serial timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
+The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../ports-connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read Digital Inputs](../read-digital-inputs.md), [Control Digital Outputs](../control-digital-outputs.md), or [Transmit serial timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
 
 ![Breakout board v1.1](../../images/OEPS-Breakout.png){width=350} ![Breakout board v2.1](../../images/OEPS-Breakoutv2.1.png){width=350}
 

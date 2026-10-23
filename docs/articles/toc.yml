@@ -1,14 +1,14 @@
 - name: Introduction
 - href: ../index.md
 - name: Specs
-- href: behavior-overview.md
+- href: behavior.md
 - name: Peripherals
   href: ./peripherals/toc.yml
 - name: Getting Started
-- href: connections.md
+- href: ports-connections.md
 - href: installation.md
 - href: behavior-gui.md
-- href: harp-bonsai.md
+- href: bonsai.md
 - name: Examples
 - href: about-these-examples.md
 - href: acquire-analog-data.md
@@ -25,4 +25,4 @@
 - name: Data Management
 - href: logging-analysis.md
 - name: Troubleshooting
-- href: troubleshooting.md
+- href: errors.md

@@ -1,6 +1,6 @@
 # Control Digital Outputs
 
-The Behavior board has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
+The Behavior board has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 
@@ -17,7 +17,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
 
 > [!NOTE]
-> If you need more digital outputs, the [Breakout](./peripherals/peripherals-portbreakout.md) board provides access to the poke port output lines through screw terminals.
+> If you need more digital outputs, the [Breakout](./peripherals/breakout.md) board provides access to the poke port output lines through screw terminals.
 
 ## Set and clear outputs
 

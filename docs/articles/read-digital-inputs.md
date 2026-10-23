@@ -1,6 +1,6 @@
 # Read Digital Inputs
 
-The Behavior board has one digital input that is accessible without extra hardware: **DI3** on the **Input** connector. Each poke port also carries a general-purpose **DI** line, and a **DIO** line that can be used as an active-low digital input. Refer to the [connections](./connections.md?tabs=digitalinput#connections) article to set up the hardware connection on **DI3** or **DIO0**, which we will use for the rest of these examples.
+The Behavior board has one digital input that is accessible without extra hardware: **DI3** on the **Input** connector. Each poke port also carries a general-purpose **DI** line, and a **DIO** line that can be used as an active-low digital input. Refer to the [connections](./ports-connections.md?tabs=digitalinput#connections) article to set up the hardware connection on **DI3** or **DIO0**, which we will use for the rest of these examples.
 
 This article covers how to visualize the digital input events and read the poke port **DIO** lines as a digital input in Bonsai.
 
@@ -11,12 +11,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 :::
 
 > [!NOTE]
-> If you need more digital inputs, the [Breakout](./peripherals/peripherals-portbreakout.md) board provides access to the poke port input lines through screw terminals.
+> If you need more digital inputs, the [Breakout](./peripherals/breakout.md) board provides access to the poke port input lines through screw terminals.
 
 
 ## Visualize digital input events
 
-The Behavior board broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the poke ports **P0**–**P2** (represented as `DIPort0`–`DIPort2` in Bonsai), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/peripherals-micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/peripherals-portbreakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
+The Behavior board broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the poke ports **P0**–**P2** (represented as `DIPort0`–`DIPort2` in Bonsai), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/breakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
 
 :::workflow
 ![Read Digital Inputs Visualize](../workflows/controlpoke-visualizeevents.bonsai)

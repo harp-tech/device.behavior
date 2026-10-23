@@ -1,6 +1,6 @@
 # Photodiode
 
-The Harp Behavior Photodiode is a peripheral for the Behavior board. It detects light and outputs either an analog signal proportional to light intensity or a digital pulse when a configurable threshold is crossed, for instance to detect stimulus onsets on a screen. Refer to the [connections](../connections.md?tabs=photodiode#connections) article to set up the peripheral and the [Acquire Analog Data](../acquire-analog-data.md) or [Read Digital Inputs](../read-digital-inputs.md) articles to read its output in Bonsai.
+The Harp Behavior Photodiode is a peripheral for the Behavior board. It detects light and outputs either an analog signal proportional to light intensity or a digital pulse when a configurable threshold is crossed, for instance to detect stimulus onsets on a screen. Refer to the [connections](../ports-connections.md?tabs=photodiode#connections) article to set up the peripheral and the [Acquire Analog Data](../acquire-analog-data.md) or [Read Digital Inputs](../read-digital-inputs.md) articles to read its output in Bonsai.
 
 ![Photodiode](../../images/OEPS-Photodiode.jpg){width=450}
 

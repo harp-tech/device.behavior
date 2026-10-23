@@ -1,6 +1,6 @@
 # Trigger Cameras
 
-The Behavior board can generate TTL signals on **DO0** and **DO1** for cameras that support external triggering. This is useful for synchronizing multiple cameras and logging camera frame timestamps on the device clock. Refer to the [connections](./connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
+The Behavior board can generate TTL signals on **DO0** and **DO1** for cameras that support external triggering. This is useful for synchronizing multiple cameras and logging camera frame timestamps on the device clock. Refer to the [connections](./ports-connections.md?tabs=camera#connections) article to set up a compatible camera on **DO1**, which we will use for the rest of these examples.
 
 This article covers how to configure the trigger frequency, start and stop the camera, and visualize frame events in Bonsai.
 

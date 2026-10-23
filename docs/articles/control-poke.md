@@ -1,6 +1,6 @@
 # Control Poke Peripheral
 
-The [Mice Poke](./peripherals/peripherals-micepoke.md) is a nose poke peripheral for the Behavior board which uses an infrared beam sensor for poke detection. It also includes cue LEDs and an optional solenoid valve for controlled liquid delivery, typically used for rewards. Refer to the [connections](./connections.md?tabs=poke#connections) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
+The [Mice Poke](./peripherals/micepoke.md) is a nose poke peripheral for the Behavior board which uses an infrared beam sensor for poke detection. It also includes cue LEDs and an optional solenoid valve for controlled liquid delivery, typically used for rewards. Refer to the [connections](./ports-connections.md?tabs=poke#connections) article to set up the hardware connection on poke port **P0**, which we will use for the rest of these examples.
 
 This article covers how to visualize poke events, debounce noisy inputs, control the cue LEDs, and dispense liquid rewards with the Mice Poke peripheral in Bonsai.
 

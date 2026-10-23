@@ -1,5 +1,5 @@
-- href: peripherals-micepoke.md
-- href: peripherals-portbreakout.md
-- href: peripherals-rotaryencoder.md
-- href: peripherals-speaker.md
-- href: peripherals-photodiode.md
+- href: micepoke.md
+- href: breakout.md
+- href: rotaryencoder.md
+- href: speaker.md
+- href: photodiode.md

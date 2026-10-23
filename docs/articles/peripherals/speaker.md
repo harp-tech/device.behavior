@@ -1,6 +1,6 @@
 # Speaker
 
-The Harp Behavior Speaker is a peripheral that connects to one of the Behavior board's general-purpose digital outputs and turns a PWM signal into an audible tone. Refer to the [connections](../connections.md?tabs=speaker#connections) article to set up the peripheral and the [Generate PWM](../generate-pwm.md) article to use it in Bonsai.
+The Harp Behavior Speaker is a peripheral that connects to one of the Behavior board's general-purpose digital outputs and turns a PWM signal into an audible tone. Refer to the [connections](../ports-connections.md?tabs=speaker#connections) article to set up the peripheral and the [Generate PWM](../generate-pwm.md) article to use it in Bonsai.
 
 ![Speaker](../../images/OEPS-Speaker.jpg){width=450}
 

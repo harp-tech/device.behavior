@@ -1,6 +1,6 @@
 # Acquire Analog Data
 
-The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/peripherals-photodiode.md). Refer to the [connections](./connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
+The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/photodiode.md). Refer to the [connections](./ports-connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
 This article covers how to visualize the timestamped analog input stream and plot a single channel in Bonsai.
 

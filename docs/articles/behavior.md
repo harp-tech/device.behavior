@@ -15,15 +15,15 @@
     - 1 on the **ADC** connector
     - 1 on the **Input** connector
 - Digital inputs: 7 (5 V)
-    - 3 general-purpose and 3 active-low digital inputs on the poke ports accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - 3 general-purpose and 3 active-low digital inputs on the poke ports accessible with the [Breakout](./peripherals/breakout.md) board
     - 1 on the **Input** connector
 - Digital outputs: 7 (5 V)
     - 4 on the **Output** connector
-    - 3 on the poke ports, accessible with the [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - 3 on the poke ports, accessible with the [Breakout](./peripherals/breakout.md) board
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
 - Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
 - Poke ports: 3 (RJ45)
-    - For the [Mice Poke](./peripherals/peripherals-micepoke.md), [Rotary Encoder](./peripherals/peripherals-rotaryencoder.md), or [Breakout](./peripherals/peripherals-portbreakout.md) board
+    - For the [Mice Poke](./peripherals/micepoke.md), [Rotary Encoder](./peripherals/rotaryencoder.md), or [Breakout](./peripherals/breakout.md) board
 - LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LED connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)

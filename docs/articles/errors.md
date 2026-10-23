@@ -6,7 +6,7 @@ This article covers how to resolve common connection errors on the Behavior boar
 
 **Q: In Bonsai, running the workflow throws an error "The port `ComX` does not exist."**
 
-A: Either the wrong communications port in the `PortName` property in [`Device`] was selected, or the [USB](connections.md) cable is not properly connected. Try selecting a different communications port and checking the connection.
+A: Either the wrong communications port in the `PortName` property in [`Device`] was selected, or the [USB](ports-connections.md) cable is not properly connected. Try selecting a different communications port and checking the connection.
 
 **Q: In Bonsai, running the workflow throws an error "Access to the port `ComX` is denied"**
 
@@ -20,7 +20,7 @@ A: One possible reason is that the [quadrature encoder](track-rotary-encoder.md)
 
 **Q: An external device does not detect the low state of a digital output. The line reads 5 V when the output is set, but does not reach 0 V when it is cleared.**
 
-A: The input line on the external device might have low impedance. The **DO0**–**DO3** outputs are designed for high-impedance inputs and return to 0 V through a passive pull-down resistor. Try using the poke port digital outputs with the [Breakout](./peripherals/peripherals-portbreakout.md) board, as those pins have an actively driven low state.
+A: The input line on the external device might have low impedance. The **DO0**–**DO3** outputs are designed for high-impedance inputs and return to 0 V through a passive pull-down resistor. Try using the poke port digital outputs with the [Breakout](./peripherals/breakout.md) board, as those pins have an actively driven low state.
 
 Also check that the ground connection is shared between the devices, as improper grounding can produce offset voltage levels in the low state.
 

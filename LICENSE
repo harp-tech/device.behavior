@@ -1,0 +1,34 @@
+Copyright (C) harp-tech and Contributors
+
+The Harp Behavior device is released under several licenses, according to
+the folder each file is in:
+
+* hardware/PCB: TAPR Open Hardware License, see hardware/PCB/LICENSE
+* hardware/Mechanical: CC BY-SA 4.0, see hardware/Mechanical/LICENSE
+* firmware: MIT, see firmware/LICENSE
+* software: MIT, see software/dotnet/LICENSE and software/python/LICENSE
+* docs: CC BY-SA 4.0 for content, see docs/LICENSE, and MIT for code,
+  including the example workflows, see docs/LICENSE-CODE
+* Third-party components, such as the documentation template in
+  docs/harp-docfx, are licensed under the terms provided by their authors.
+* Everything else, including device.yml, the device interface from which
+  the firmware registers and the software interfaces are generated, and
+  the build configuration, is licensed under the MIT license below.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

@@ -1,2 +1,28 @@
 - name: Introduction
-  href: ../index.md
+- href: ../index.md
+- name: Specs
+- href: behavior.md
+- name: Peripherals
+  href: ./peripherals/toc.yml
+- name: Getting Started
+- href: ports-connections.md
+- href: installation.md
+- href: behavior-gui.md
+- href: bonsai.md
+- name: Examples
+- href: about-these-examples.md
+- href: acquire-analog-data.md
+- href: read-digital-inputs.md
+- href: control-digital-outputs.md
+- href: generate-pwm.md
+- href: control-leds.md
+- href: control-poke.md
+- href: mimic-poke-signals.md
+- href: track-rotary-encoder.md
+- href: trigger-cameras.md
+- href: control-servo-motors.md
+- href: advanced-configuration.md
+- name: Data Management
+- href: logging-analysis.md
+- name: Troubleshooting
+- href: errors.md

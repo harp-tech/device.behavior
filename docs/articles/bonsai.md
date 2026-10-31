@@ -10,6 +10,7 @@ Bonsai is a visual reactive programming language for building interactive experi
 We will use an introductory example to get started with the device in Bonsai. This example plots one channel of the analog input stream from the Behavior board. You do not need to connect an analog input device. We revisit this example in more detail in the "Examples" section.
 
 Before beginning:
+- Install [Bonsai](installation.md?tabs=bonsai#software-packages) and add the `Harp.Behavior` and `Bonsai.StarterPack` packages.
 - Connect the [USB](ports-connections.md) cable to the computer.
 - Launch "Bonsai" from the Windows Start menu.
 - Hover over the workflow cell below, and click on the "Copy" icon on the top right.

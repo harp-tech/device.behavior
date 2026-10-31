@@ -8,7 +8,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 **12V PWR (Barrel Jack)** - This port powers the Behavior board and requires a 12 V power supply.
 
-**USB (USB-C)** - This port connects the device to the control computer running [Bonsai](bonsai.md) or the [GUI](./behavior-gui.md).
+**USB (USB-C)** - This port connects the device to the control computer running [Bonsai](bonsai.md) or the [Behavior GUI](./behavior-gui.md).
 
 **CLKIN (Stereo Jack)** - This [Harp](https://harp-tech.org/articles/about.html) clock input accepts a clock output from any compatible Harp clock generator or synchronizer (e.g. [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) for synchronization with other connected devices.
 

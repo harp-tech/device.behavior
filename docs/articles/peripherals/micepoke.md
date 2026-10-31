@@ -27,7 +27,7 @@ The Harp Behavior Mice Poke is a peripheral for the Behavior board that has onbo
 
 ## Hardware
 
-| Version | Compatible Behavior Board | Notes |
+| Version | Compatible Behavior board | Notes |
 | ------- | ------------------------- | ----- |
 | 1.4 | > 1.0 | <ul><li> Updated valve footprint </li><li> Increased LED resistor</li></ul> |
 | 1.3 | > 1.0 | <ul><li> Screw terminals consolidated into a single block </li><li> Added infrared beam and photodiode access on the screw terminals </li></ul> |

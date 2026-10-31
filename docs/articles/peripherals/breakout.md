@@ -30,7 +30,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 
 For connection with a quadrature encoder:
 
-| Quadrature Encoder Pin | Breakout Board Pin |
+| Quadrature encoder pin | Breakout board pin |
 | ---------------------- | ------------------ |	                               
 | A                      | DI 	              | 
 | B                      | DIO 	              |
@@ -39,7 +39,7 @@ For connection with a quadrature encoder:
 
 ## Hardware
 
-| Version | Compatible Behavior Board | Notes |
+| Version | Compatible Behavior board | Notes |
 | ------- | ------------------- | ----- |
 | 2.x | > 2.0 | <ul><li> Serial TX terminal replaces the +12V and SUP_RTN terminals </li><li> TX logic level jumper-selectable between 3.3 V and 5 V </li></ul> |
 | 1.1 | > 1.2 | <ul><li> Initial version </li></ul> |

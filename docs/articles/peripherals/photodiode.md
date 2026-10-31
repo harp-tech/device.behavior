@@ -18,7 +18,7 @@ The Harp Behavior Photodiode is a peripheral for the Behavior board. It detects 
 
 ## Hardware
 
-| Version | Compatible Behavior Board | Notes |
+| Version | Compatible Behavior board | Notes |
 | ------- | ------------------------- | ----- |
 | 2.3 | > 1.0 | <ul><li> Initial version </li></ul> |
 

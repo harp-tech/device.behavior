@@ -31,7 +31,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 
 ## Connections
 
-# [Analog Input](#tab/analoginput)
+# [Analog input](#tab/analoginput)
 
 ![Analog input](../images/connection-analoginput.svg){width=600}
 
@@ -39,7 +39,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Acquire analog data](acquire-analog-data.md) article to read the signal in Bonsai.
 
-# [Digital Input](#tab/digitalinput)
+# [Digital input](#tab/digitalinput)
 
 ![Digital input](../images/connection-digitalinput.svg){width=600}
 
@@ -47,7 +47,7 @@ This article covers the ports on the Behavior board, as well as how to connect t
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Read digital inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
-# [Digital Output](#tab/digitaloutput)
+# [Digital output](#tab/digitaloutput)
 
 ![Digital output](../images/connection-digitaloutput.svg){width=600}
 
@@ -238,7 +238,7 @@ To stream the serial timestamp (v2.x only):
 4. Set the Breakout board's logic-level jumper to match the receiver's operating voltage level (3.3 V or 5 V).
 5. Refer to the [Transmit serial timestamps](advanced-configuration.md#transmit-serial-timestamps) section to enable the stream in Bonsai.
 
-# [Harp Synchronization](#tab/harpsynchronization)
+# [Harp synchronization](#tab/harpsynchronization)
 
 ![Harp synchronization](../images/connection-harpsynchronization.svg){width=600}
 

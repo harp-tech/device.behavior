@@ -3,7 +3,7 @@ This is a multi-purpose device tailored to behavioral experiments. It allows con
 
 ![HarpBehavior](./images/pcb.png)
 
-### Key Features ###
+### Key features ###
 
 * Enable pulse and configure duration for each output
 * Support for PWM configuration (frequency up to 10KHz and duty cycle)

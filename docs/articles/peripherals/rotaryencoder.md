@@ -24,7 +24,7 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can
 
 ## Hardware
 
-| Version | Compatible Behavior Board | Notes |
+| Version | Compatible Behavior board | Notes |
 | ------- | ------------------- | ----- |
 | 1.3 | > 1.0 | <ul><li> Fixed encoder direction </li></ul> |
 | 1.2 | > 1.0 | <ul><li> Replaced the optical encoder with an Alps Alpine EC12E24204A9 mechanical encoder </li><li> Added pull-ups and filtering on the quadrature channels </li></ul> |

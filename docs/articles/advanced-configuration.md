@@ -1,4 +1,4 @@
-# Advanced Configuration
+# Advanced configuration
 
 These advanced configuration settings affect which data the Behavior board reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and alignment on non-Harp devices. Refer to the [connections](./ports-connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/breakout.md) board on **P2** for the serial timestamp.
 
@@ -7,12 +7,12 @@ This article covers how to visualize the default event streams, select the activ
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Advanced Configuration](../workflows/advancedconfiguration-toplevel.bonsai)
+![Advanced configuration](../workflows/advancedconfiguration-toplevel.bonsai)
 :::
 
 ## Visualize analog data
 
-This workflow uses [`AnalogData`] as an example to demonstrate how to disable a data stream that is enabled by default. First, visualize the [`AnalogData`] stream, which reports the analog inputs at 1 kHz (see [Acquire Analog Data](acquire-analog-data.md) for more details):
+This workflow uses [`AnalogData`] as an example to demonstrate how to disable a data stream that is enabled by default. First, visualize the [`AnalogData`] stream, which reports the analog inputs at 1 kHz (see [Acquire analog data](acquire-analog-data.md) for more details):
 
 :::workflow
 ![Visualize analog data](../workflows/advancedconfiguration-visualizeanalog.bonsai)

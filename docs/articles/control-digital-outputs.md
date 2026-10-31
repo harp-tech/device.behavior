@@ -1,4 +1,4 @@
-# Control Digital Outputs
+# Control digital outputs
 
 The Behavior board has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
 
@@ -7,13 +7,13 @@ This article covers how to set, clear, toggle, and pulse any of these outputs in
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Control Digital Outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
+![Control digital outputs](../workflows/controldigitaloutputs-toplevel.bonsai)
 :::
 
 > [!NOTE]
 > The commands in these examples can be used to control every output line of the Behavior board. Their location on the Behavior board and names in Bonsai are:
 > - General-purpose digital outputs **DO0**–**DO3**: `DO0` - `DO3`.
-> - Poke ports **P0**–**P2**: the 5 V digital output lines are represented as `DOPort0`–`DOPort2` and 12 V digital output lines for valve control as `SupplyPort0`–`SupplyPort2`. See [Control Poke Peripheral](control-poke.md).
+> - Poke ports **P0**–**P2**: the 5 V digital output lines are represented as `DOPort0`–`DOPort2` and 12 V digital output lines for valve control as `SupplyPort0`–`SupplyPort2`. See [Control poke peripheral](control-poke.md).
 > - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
 
 > [!NOTE]
@@ -115,7 +115,7 @@ Run the workflow, press <kbd>G</kbd> once to configure the pulse, then send a se
 You can replace [`KeyDown`] with other operators to set outputs with other triggers in Bonsai, for instance a [`Timer`] to send triggers after a set time has elapsed.
 
 :::workflow
-![Set Outputs Timer](../workflows/controldigitaloutputs-timer.bonsai)
+![Alternative: set outputs with Timer](../workflows/controldigitaloutputs-timer.bonsai)
 :::
 
 - Insert a [`Timer`] operator and configure the following properties:

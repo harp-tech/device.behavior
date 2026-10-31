@@ -1,4 +1,4 @@
-# Logging and Analysis
+# Logging and analysis
 
 This article covers how data from the device is logged to disk, and how to read and plot the logged data using the [`harp-data`](installation.md#software-packages) Python package.
 

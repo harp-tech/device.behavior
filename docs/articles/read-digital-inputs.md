@@ -1,4 +1,4 @@
-# Read Digital Inputs
+# Read digital inputs
 
 The Behavior board has one digital input that is accessible without extra hardware: **DI3** on the **Input** connector. Each poke port also carries a general-purpose **DI** line, and a **DIO** line that can be used as an active-low digital input. Refer to the [connections](./ports-connections.md?tabs=digitalinput#connections) article to set up the hardware connection on **DI3** or **DIO0**, which we will use for the rest of these examples.
 
@@ -7,7 +7,7 @@ This article covers how to visualize the digital input events and read the poke 
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Read Digital Inputs](../workflows/readdigitalinputs-toplevel.bonsai)
+![Read digital inputs](../workflows/readdigitalinputs-toplevel.bonsai)
 :::
 
 > [!NOTE]
@@ -19,7 +19,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 The Behavior board broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the poke ports **P0**–**P2** (represented as `DIPort0`–`DIPort2` in Bonsai), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/breakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
 
 :::workflow
-![Read Digital Inputs Visualize](../workflows/controlpoke-visualizeevents.bonsai)
+![Visualize digital input events](../workflows/controlpoke-visualizeevents.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.
@@ -40,7 +40,7 @@ The first value is the payload, listing the digital inputs that are currently ac
 In the current firmware (v3.3) the **DIO** line acts only as an active-low digital input. It idles high at 5 V through onboard pull-up resistors, and the connected device must actively drive it low. Changes on the **DIO** lines are broadcast in a different register, [`PortDIOStateEvent`], which can be visualized in the same way as the digital inputs:
 
 :::workflow
-![Read Digital Inputs Visualize Port DIO](../workflows/readdigitalinputs-visualizeportdio.bonsai)
+![Visualize port DIO events](../workflows/readdigitalinputs-visualizeportdio.bonsai)
 :::
 
 - Insert a [`SubscribeSubject`] operator named `Behavior Events`.

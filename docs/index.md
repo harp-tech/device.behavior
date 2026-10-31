@@ -2,7 +2,7 @@
 
 The Harp [Behavior](articles/behavior.md) board is a multi-purpose data acquisition and control device for behavioral neuroscience experiments.
 
-![Harp Behavior Landing Image](./images/behavior-landing.svg)
+![Harp Behavior landing image](./images/behavior-landing.svg)
 
 A typical behavioral rig combines sensors, cue lights, reward valves, cameras and motorized actuators. These components usually need individual control interfaces and alignment to a common timeline. The Behavior board brings them together on a single device, so that every input and output stream is controlled through one interface and timestamped on the same hardware clock.
 
@@ -17,7 +17,7 @@ The Behavior board provides:
 
 ## Getting a device
 
-Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Behavior](https://github.com/harp-tech/device.behavior) board repository. Once you have a board, follow the "Getting Started" section to [set up the device](./articles/ports-connections.md) and install the [software](./articles/installation.md).
+Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp), or build your own using the hardware design files in the [Behavior](https://github.com/harp-tech/device.behavior) board repository. Once you have a board, follow the "Getting started" section to [set up the device](./articles/ports-connections.md) and install the [software](./articles/installation.md).
 
 ## Acknowledgments
 

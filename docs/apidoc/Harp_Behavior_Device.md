@@ -10,17 +10,17 @@ Use the [Harp device pattern](https://harp-tech.org/articles/operators.html#devi
 
 Check out the following in-depth guides to learn how to access the device functionality with the `Harp.Behavior` package:
 
-- [Acquire Analog Data](../articles/acquire-analog-data.md)
-- [Read Digital Inputs](../articles/read-digital-inputs.md)
-- [Control Digital Outputs](../articles/control-digital-outputs.md)
+- [Acquire analog data](../articles/acquire-analog-data.md)
+- [Read digital inputs](../articles/read-digital-inputs.md)
+- [Control digital outputs](../articles/control-digital-outputs.md)
 - [Generate PWM](../articles/generate-pwm.md)
 - [Control LEDs](../articles/control-leds.md)
-- [Control Poke Peripheral](../articles/control-poke.md)
-- [Mimic Poke Signals](../articles/mimic-poke-signals.md)
-- [Track Rotary Encoder](../articles/track-rotary-encoder.md)
-- [Trigger Cameras](../articles/trigger-cameras.md)
-- [Control Servo Motors](../articles/control-servo-motors.md)
-- [Advanced Configuration](../articles/advanced-configuration.md)
+- [Control poke peripheral](../articles/control-poke.md)
+- [Mimic poke signals](../articles/mimic-poke-signals.md)
+- [Track rotary encoder](../articles/track-rotary-encoder.md)
+- [Trigger cameras](../articles/trigger-cameras.md)
+- [Control servo motors](../articles/control-servo-motors.md)
+- [Advanced configuration](../articles/advanced-configuration.md)
 
 Refer to the register table below for a complete listing of the available registers on the device.
 

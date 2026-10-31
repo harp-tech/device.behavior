@@ -4,7 +4,7 @@
 - href: behavior.md
 - name: Peripherals
   href: ./peripherals/toc.yml
-- name: Getting Started
+- name: Getting started
 - href: ports-connections.md
 - href: installation.md
 - href: behavior-gui.md
@@ -22,7 +22,7 @@
 - href: trigger-cameras.md
 - href: control-servo-motors.md
 - href: advanced-configuration.md
-- name: Data Management
+- name: Data management
 - href: logging-analysis.md
 - name: Troubleshooting
 - href: errors.md

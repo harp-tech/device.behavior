@@ -1,4 +1,4 @@
-# Control Servo Motors
+# Control servo motors
 
 The digital outputs **DO2** and **DO3** can control positional servo motors that accept a pulse-width signal. For instance, it can be used to move a lick spout in and out of reach, or open and close a door. Refer to the [connections](./ports-connections.md?tabs=servo#connections) article to set up the servo motor on **DO2**, which we will use for the rest of these examples.
 
@@ -7,7 +7,7 @@ This article covers how to configure the servo, enable and disable the pulse-wid
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Control Servo Motors](../workflows/controlservomotors-toplevel.bonsai)
+![Control servo motors](../workflows/controlservomotors-toplevel.bonsai)
 :::
 
 ## Configure the servo

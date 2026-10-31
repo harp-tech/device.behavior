@@ -16,7 +16,7 @@ Before beginning:
 - Paste the workflow into Bonsai.
 
 :::workflow
-![Behavior First Steps](../workflows/behavior-firststeps.bonsai)
+![Behavior first steps](../workflows/behavior-firststeps.bonsai)
 :::
 
 > [!TIP]
@@ -28,7 +28,7 @@ Before beginning:
 
 A [visualizer](xref:Bonsai.Design.VisualizerWindow) will automatically open when the workflow starts, displaying a time-series plot of the `AnalogInput0` channel.
 
-![First Steps Visualizer](../images/bonsai-firststeps-visualizer.png){width=300}
+![First steps visualizer](../images/bonsai-firststeps-visualizer.png){width=300}
 
 The device is ready to use! If, instead, an error appears in Bonsai, check out the [troubleshooting](errors.md) section.
 

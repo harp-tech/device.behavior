@@ -1,4 +1,4 @@
-# Track Rotary Encoder
+# Track rotary encoder
 
 The **P2** poke port of the Behavior board has an encoder mode that allows it to read a quadrature encoder (e.g. to track the rotation of a treadmill). As the encoder rotates, it generates counts that increase or decrease depending on the direction of rotation, allowing relative position to be tracked. Refer to the [connections](./ports-connections.md?tabs=encoder#connections) article to set up either the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral or attach an external quadrature encoder to the [Breakout](./peripherals/breakout.md) board.
 
@@ -7,7 +7,7 @@ This article covers enabling the encoder mode, visualizing the reading, and rese
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Track Rotary Encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
+![Track rotary encoder](../workflows/trackrotaryencoder-toplevel.bonsai)
 :::
 
 ## Enable the encoder

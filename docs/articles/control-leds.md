@@ -35,7 +35,7 @@ Run the workflow and press <kbd>A</kbd> to configure the **L0** supply current, 
 
 ## Turn LEDs on and off
 
-Once the current is configured, the **L0** and **L1** outputs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
+Once the current is configured, the **L0** and **L1** outputs are controlled like any other digital output (see [Control digital outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Turn LEDs on and off](../workflows/controlleds-ledonoff.bonsai)
@@ -82,7 +82,7 @@ Run the workflow and press <kbd>F</kbd> to load the color and intensity configur
 
 ## Turn RGB LEDs on and off
 
-The RGB LEDs are controlled like any other digital output (see [Control Digital Outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
+The RGB LEDs are controlled like any other digital output (see [Control digital outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:
 
 :::workflow
 ![Turn RGB LEDs on and off](../workflows/controlleds-rgbonoff.bonsai)

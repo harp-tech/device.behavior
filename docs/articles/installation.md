@@ -10,7 +10,7 @@ These steps are only required the first time you connect the device to a new com
 
 [Bonsai](https://bonsai-rx.org/) is a visual reactive programming language that provides flexible and comprehensive control of the Behavior board.
 
-![Bonsai Package Manager](../images/bonsai-packagemanager.png){width=600}
+![Bonsai package manager](../images/bonsai-packagemanager.png){width=600}
 
 - Download and install [Bonsai](https://bonsai-rx.org/docs/articles/installation.html).
 - Launch Bonsai and install the `Harp.Behavior` package by searching for it in the [Bonsai package manager](https://bonsai-rx.org/docs/articles/packages.html).
@@ -52,7 +52,7 @@ New features are added and bugs are fixed with firmware updates which are publis
 
 To update the firmware, use the device setup tool in Bonsai:
 
-![Device Setup](../images/installation-firmwareupdate.png){width=650}
+![Device setup](../images/installation-firmwareupdate.png){width=650}
 
 1. Add the [`Device`] operator in Bonsai.
 2. Double-click on the [`Device`] node while the workflow is not running.

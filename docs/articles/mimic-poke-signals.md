@@ -1,4 +1,4 @@
-# Mimic Poke Signals
+# Mimic poke signals
 
 The Behavior board can mimic or mirror the poke peripheral's infrared beam signal and valve output on other output lines. This is useful for triggering external equipment directly or recording reward delivery on an external acquisition system without the round-trip latency introduced by routing signals through the computer.
 
@@ -12,7 +12,7 @@ This article covers how to mimic the poke peripheral's infrared signal and valve
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.
 
 :::workflow
-![Mimic Poke Signals](../workflows/mimicpokesignals-toplevel.bonsai)
+![Mimic poke signals](../workflows/mimicpokesignals-toplevel.bonsai)
 :::
 
 ## Enable poke infrared mimic

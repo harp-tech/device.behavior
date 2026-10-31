@@ -1,4 +1,4 @@
-# Behavior Board
+# Behavior board
 
 ![Harp Behavior](../images/behavior-board.jpg){width=450}
 

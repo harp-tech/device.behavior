@@ -1,0 +1,19 @@
+# Behavior GUI
+
+The Behavior GUI is a standalone visual interface for configuring and testing the device without using Bonsai.
+
+Before beginning:
+- Install the [Behavior GUI](installation.md?tabs=gui#software-packages).
+- Follow the hardware setup [guide](ports-connections.md).
+- Connect the [USB](ports-connections.md) cable to the computer.
+- Launch "Harp.Behavior.App" from the Windows Start menu.
+
+![Behavior GUI](../images/behavior-gui.png)
+
+1. Select the port for the device, and press "Connect". The device details will display on the right side if it is successfully connected.
+2. Select the tab for the register group that you want to control.
+3. Change the values to test outputs, LEDs, cameras, and servos, and observe the output on the connected peripherals.
+
+If an error appears in the Behavior GUI, check out the [troubleshooting](errors.md) section.
+
+[!INCLUDE [](../includes/version-footer.md)]

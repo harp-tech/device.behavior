@@ -4,7 +4,7 @@ root = true
 indent_style = space
 
 #--------------------------------------------------------------------------------------------------
-# XML, JSON, and web files
+# XML, JSON, YAML, and web files
 #--------------------------------------------------------------------------------------------------
 [*.{xml,csproj,vcxproj,vcxproj.filters,shproj,props,targets,config,nuspec,resx,vsixmanifest,wxs,vstemplate,slnx}]
 indent_size = 2
@@ -12,8 +12,21 @@ indent_size = 2
 [*.json]
 indent_size = 2
 
+[*.{yml,yaml}]
+indent_size = 2
+charset = utf-8
+
 [*.{html,css}]
 indent_size = 2
+
+#--------------------------------------------------------------------------------------------------
+# Bonsai
+#--------------------------------------------------------------------------------------------------
+[*.bonsai]
+indent_size = 2
+charset = utf-8-bom
+trim_trailing_whitespace = false
+insert_final_newline = false
 
 #--------------------------------------------------------------------------------------------------
 # C++

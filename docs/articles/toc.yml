@@ -10,7 +10,7 @@
 - href: behavior-gui.md
 - href: bonsai.md
 - name: Examples
-- href: about-these-examples.md
+- href: how-the-examples-work.md
 - href: acquire-analog-data.md
 - href: read-digital-inputs.md
 - href: control-digital-outputs.md

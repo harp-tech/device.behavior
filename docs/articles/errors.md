@@ -1,16 +1,16 @@
 # Errors
 
-This article covers how to resolve common connection errors on the Behavior board.
+This article covers how to resolve common errors on the Behavior board.
 
 ## COM port errors
 
-**Q: In Bonsai, running the workflow throws an error "The port `ComX` does not exist."**
+**Q: In Bonsai, running the workflow throws an error "The port `ComX` does not exist".**
 
 A: Either the wrong communications port in the `PortName` property in [`Device`] was selected, or the [USB](ports-connections.md) cable is not properly connected. Try selecting a different communications port and checking the connection.
 
-**Q: In Bonsai, running the workflow throws an error "Access to the port `ComX` is denied"**
+**Q: Running the Bonsai workflow or connecting to the device in the Behavior GUI throws an error "Access to the port `ComX` is denied".**
 
-A: Only one interface connection to the Behavior board can be opened at one time. Check that multiple instances of Bonsai are not running, and that the [Behavior GUI](behavior-gui.md) is closed. Sometimes, the port can also be locked by a program that did not terminate correctly; restarting the computer fixes it.
+A: Only one interface connection to the Behavior board can be opened at one time. Check that Bonsai and the [Behavior GUI](behavior-gui.md) are not running at the same time, or that multiple instances of either are running. Sometimes, the port can also be locked by a program that did not terminate correctly; restarting the computer fixes it.
 
 ## Device errors
 

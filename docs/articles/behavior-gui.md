@@ -14,7 +14,6 @@ Before beginning:
 2. Select the tab for the register group that you want to control.
 3. Change the values to test outputs, LEDs, cameras, and servos, and observe the output on the connected peripherals.
 
-> [!WARNING]
-> Only one program can access the device's COM port at a time. Close the Behavior GUI before starting a Bonsai workflow that uses the device.
+If an error appears in the Behavior GUI, check out the [troubleshooting](errors.md) section.
 
 [!INCLUDE [](../includes/version-footer.md)]

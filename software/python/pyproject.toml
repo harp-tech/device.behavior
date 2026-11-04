@@ -6,25 +6,37 @@ authors = [{ name = "harp-tech", email = "contact@harp-tech.org" }]
 license = "MIT"
 license-files = ["LICENSE"]
 readme = "README.md"
+keywords = [
+    "harp",
+    "behavior",
+    "data-acquisition",
+    "hardware",
+    "device-control",
+]
 requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
     "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
     "Topic :: System :: Hardware :: Hardware Drivers",
 ]
 dependencies = [
-    "harp-protocol",
-    "harp-device",
+    "harp-protocol>=0.5",
+    "harp-device>=0.5",
     "numpy>=1.24",
 ]
 
 [project.urls]
 Homepage = "https://harp-tech.org/device.behavior"
-Repository = "https://github.com/harp-tech/device.behavior/"
+Repository = "https://github.com/harp-tech/device.behavior"
 "Bug Tracker" = "https://github.com/harp-tech/device.behavior/issues"
 Changelog = "https://github.com/harp-tech/device.behavior/releases"
 
@@ -34,7 +46,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 root = "../.."
-git_describe_command = "git describe --dirty --tags --long --match [0-9]*.[0-9]*.[0-9]*"
+git_describe_command = "git describe --dirty --tags --long --match v[0-9]*.[0-9]*.[0-9]*"
 
 [tool.setuptools.packages.find]
 where = ["src"]

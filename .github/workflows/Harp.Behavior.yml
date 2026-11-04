@@ -284,7 +284,7 @@ jobs:
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
-        uses: bonsai-rx/configure-build@v2
+        uses: harp-tech/configure-build@v2
 
       # ----------------------------------------------------------------------- Restore
       - name: Restore
@@ -508,11 +508,12 @@ jobs:
           SETUPTOOLS_SCM_PRETEND_VERSION: ${{github.event.release.tag_name}}
         run: uv build
 
-      - name: Verify the release tag was applied
+      - name: Verify setuptools-scm applied the build version
+        shell: bash
         run: |
-          if ls dist/*.dev* >/dev/null 2>&1; then
-            echo "::error::Built a development version, so setuptools-scm did not apply the release tag."
-            ls -1 dist/
+          ls -1 dist/
+          if ls dist/*-0.0.0.tar.gz >/dev/null 2>&1; then
+            echo "::error::Built version 0.0.0, so setuptools-scm did not apply the build version. Check that pyproject.toml still declares a tool.setuptools_scm table."
             exit 1
           fi
 

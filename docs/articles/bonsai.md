@@ -1,13 +1,13 @@
 # Bonsai
 
-Bonsai is a visual reactive programming language for building interactive experiments and processing data streams in real time. It supports a growing ecosystem of hardware and software packages that are commonly used in neuroscience. This article covers how to set up the Behavior board in Bonsai.
+Bonsai is a visual reactive programming language for building interactive experiments and processing data streams in real time. It supports a growing ecosystem of hardware and software packages that are commonly used in neuroscience. This article covers how to set up the Behavior device in Bonsai.
 
 > [!TIP]
 > More information on Bonsai can be found in the official [documentation](https://bonsai-rx.org/docs/).
 
 ## First steps
 
-We will use an introductory example to get started with the device in Bonsai. This example plots one channel of the analog input stream from the Behavior board. You do not need to connect an analog input device. We revisit this example in more detail in the "Examples" section.
+We will use an introductory example to get started with the device in Bonsai. This example plots one channel of the analog input stream from the Behavior device. You do not need to connect an analog input device. We revisit this example in more detail in the "Examples" section.
 
 Before beginning:
 - Install [Bonsai](installation.md?tabs=bonsai#software-packages) and add the `Harp.Behavior` and `Bonsai.StarterPack` packages.

@@ -1,6 +1,6 @@
 # Acquire analog data
 
-The Behavior board has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/photodiode.md). Refer to the [connections](./ports-connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
+The Behavior device has up to two analog inputs: **AD0** is located on the **ADC** connector and **AD1** is located on the **Input** connector. The analog input can be demonstrated with an analog output from a [photodiode](./peripherals/photodiode.md). Refer to the [connections](./ports-connections.md?tabs=photodiode#connections) article to set up the hardware connection on **AD0**, which we will use for the rest of these examples. 
 
 This article covers how to visualize the timestamped analog input stream and plot a single channel in Bonsai.
 
@@ -28,7 +28,7 @@ To plot only one of the input channels:
 - Double-click the [`MemberSelector`] operator to open the editor, and add the `Value.AnalogInput0` member to the selection. This will select the individual channel data.
 - Insert a [`VisualizerWindow`] operator, right-click on the operator to open the context menu, go to "Select Visualizer" and choose "Bonsai.Design.Visualizers.TimeSeriesVisualizer".
 
-Run the workflow, the first visualizer displays the raw data streaming from the Behavior board. In this case, there are three payload values followed by the timestamp in seconds:
+Run the workflow, the first visualizer displays the raw data streaming from the Behavior device. In this case, there are three payload values followed by the timestamp in seconds:
 
 ```text
 AnalogDataPayload { AnalogInput0 = 13, Encoder = 0, AnalogInput1 = 13 }@10.351072

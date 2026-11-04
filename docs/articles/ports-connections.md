@@ -1,12 +1,12 @@
 # Ports and connections
 
-This article covers the ports on the Behavior board, as well as how to connect the device to peripherals and external devices.
+This article covers the ports on the Behavior device, as well as how to connect the device to peripherals and external devices.
 
 ## Ports
 
 ![Harp Behavior device pinout](../images/behavior-devicepinout.svg){width=600}
 
-**12V PWR (Barrel Jack)** - This port powers the Behavior board and requires a 12 V power supply.
+**12V PWR (Barrel Jack)** - This port powers the Behavior device and requires a 12 V power supply.
 
 **USB (USB-C)** - This port connects the device to the control computer running [Bonsai](bonsai.md) or the [Behavior GUI](./behavior-gui.md).
 
@@ -171,7 +171,7 @@ To log the peripheral signals on an external device:
 1. Connect the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
 2. Refer to the [Track rotary encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. 
 
-No further wiring is necessary to use the device with the Behavior board. The solder pads are only needed to access the raw quadrature signals for logging.
+No further wiring is necessary to use the encoder with the Behavior device. The solder pads are only needed to access the raw quadrature signals for logging.
 
 To log the raw quadrature signals:
 
@@ -188,7 +188,7 @@ To log the raw quadrature signals:
 
 1. Check the camera specifications to ensure it has GPIO (general purpose input/output) and individual frame triggering capabilities.
 2. Refer to the camera manual to understand the connector pinout of the specific model you have. Locate a connector pin that can be configured as a digital input line for that camera. Locate its corresponding ground pin.
-3. Check that the camera input is compatible with the 5 V trigger signal from the Behavior board. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
+3. Check that the camera input is compatible with the 5 V trigger signal from the Behavior device. For cameras with lower-voltage trigger inputs (e.g. 1.8 V or 3.3 V logic), add a level shifter between the output and the camera.
 4. Using the camera vendor's software, configure the camera to use the digital input line corresponding to the input pin you selected. Set the image capture mode to use the rising edges of the incoming pulse to trigger each frame capture.
 5. Insert the appropriate cable that mates with the connector on the camera and provides wire terminals for the connections.
 6. Connect the camera's digital input pin you selected to **DO0** or **DO1** on the **Output** connector. These are the only ports that support the camera trigger functionality. 
@@ -200,7 +200,7 @@ To log the raw quadrature signals:
 ![Servo](../images/connection-servo.svg){width=600}
 
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
-2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the Behavior board's 5 V pin; it must power the servo only.
+2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the Behavior device's 5 V pin; it must power the servo only.
 3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
 4. Refer to the [Control servo motors](control-servo-motors.md) article to move the servo in Bonsai.
 
@@ -223,7 +223,7 @@ To connect an external quadrature encoder (both v1.1 and v2.x):
 3. Wire the encoder's **B** channel to the **DIO** terminal.
 4. Wire the encoder's ground to a **GND** terminal.
 5. Wire the encoder's supply to the **+5V** terminal. For encoders that require a different supply voltage, power the encoder from an external supply instead and share only its ground with the **GND** terminal.
-6. Leave any index (**Z**) output of the encoder unconnected as the Behavior board does not support it.
+6. Leave any index (**Z**) output of the encoder unconnected as the Behavior device does not support it.
 7. Refer to the [Track rotary encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. If the count runs in the opposite direction to the rotation, swap the **A** and **B** wires.
 
 To control valves for reward delivery (v1.1 only):
@@ -243,7 +243,7 @@ To stream the serial timestamp (v2.x only):
 ![Harp synchronization](../images/connection-harpsynchronization.svg){width=600}
 
 1. Connect a **CLKOUT** of a Harp clock generator (e.g. the [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) to the **CLKIN** jack with a stereo plug cable.
-2. The Behavior board adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected boards blink simultaneously.
+2. The Behavior device adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected boards blink simultaneously.
 3. Refer to the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html) documentation for how devices synchronize.
 
 ---

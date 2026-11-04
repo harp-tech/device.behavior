@@ -1,6 +1,6 @@
 # Advanced configuration
 
-These advanced configuration settings affect which data the Behavior board reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and alignment on non-Harp devices. Refer to the [connections](./ports-connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/breakout.md) board on **P2** for the serial timestamp.
+These advanced configuration settings affect which data the Behavior device reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and alignment on non-Harp devices. Refer to the [connections](./ports-connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/breakout.md) board on **P2** for the serial timestamp.
 
 This article covers how to visualize the default event streams, select the active events, and transmit serial timestamps in Bonsai.
 
@@ -63,7 +63,7 @@ To enable the transmission:
 Run the workflow and press <kbd>S</kbd>. The timestamp transmission on the **P2** serial line begins at the starting boundary of the next second of the Harp clock.  Verify the signal on the digital input line on the external device, it should appear as a series of digital input transitions at one second intervals.
 
 > [!NOTE]
-> The serial timestamp transmission is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. The Behavior board does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
+> The serial timestamp transmission is not the same as the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html), which keeps connected Harp devices synchronized. The Behavior device does not generate the Harp synchronization clock and can only receive it. For a Harp synchronization clock generator, consider the [Harp Timestamp Generator Gen3](https://github.com/harp-tech/device.timestampgeneratorgen3/).
 
 [!INCLUDE [](../includes/version-footer.md)]
 

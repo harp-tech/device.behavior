@@ -9,7 +9,7 @@ uid: Harp.Behavior.Device
   <dl><div><dt>Log files</dt><dd><code>Behavior_&lt;address&gt;.bin</code></dd></div></dl>
 </div>
 
-Use the [Harp device pattern](https://harp-tech.org/articles/operators.html#device-pattern) to initialize the device, log data, and send commands to and receive messages from the Behavior board.
+Use the [Harp device pattern](https://harp-tech.org/articles/operators.html#device-pattern) to initialize the device, log data, and send commands to and receive messages from the Behavior device.
 
 :::workflow
 ![Harp device pattern](../workflows/harp-devicepattern.bonsai)
@@ -30,5 +30,7 @@ Check out the following in-depth guides to learn how to access the device functi
 - [Advanced configuration](../articles/advanced-configuration.md)
 
 ## Registers
+
+The core registers implemented by every Harp device, such as `WhoAmI` and `OperationControl`, are described in the [Device Registers and Operation specification](https://harp-tech.org/protocol/Device.html).
 
 [!INCLUDE [](../../artifacts/docs/registers/registers.md)]

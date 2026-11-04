@@ -1,5 +1,6 @@
 ---
 uid: Harp.Behavior.Device
+title: Registers
 ---
 
 # Behavior device

@@ -87,6 +87,7 @@ registers:
     address: 46
     type: U16
     access: Write
+    defaultValue: 500
     minValue: 1
     description: Specifies the duration of the output pulse in milliseconds.
   PulseDOPort1:
@@ -98,12 +99,15 @@ registers:
   PulseSupplyPort0:
     <<: *pulseDO
     address: 49
+    defaultValue: 15
   PulseSupplyPort1:
     <<: *pulseDO
     address: 50
+    defaultValue: 15
   PulseSupplyPort2:
     <<: *pulseDO
     address: 51
+    defaultValue: 15
   PulseLed0:
     <<: *pulseDO
     address: 52
@@ -119,37 +123,46 @@ registers:
   PulseDO0:
     <<: *pulseDO
     address: 56
+    defaultValue: 250
   PulseDO1:
     <<: *pulseDO
     address: 57
+    defaultValue: 250
   PulseDO2:
     <<: *pulseDO
     address: 58
+    defaultValue: 250
   PulseDO3:
     <<: *pulseDO
     address: 59
+    defaultValue: 250
   PwmFrequencyDO0: &pwmFreq
     address: 60
     type: U16
     access: Write
+    defaultValue: 1000
     minValue: 1
     description: Specifies the frequency of the PWM at DO0.
   PwmFrequencyDO1:
     <<: *pwmFreq
     address: 61
+    defaultValue: 2000
     description: Specifies the frequency of the PWM at DO1.
   PwmFrequencyDO2:
     <<: *pwmFreq
     address: 62
+    defaultValue: 3000
     description: Specifies the frequency of the PWM at DO2.
   PwmFrequencyDO3:
     <<: *pwmFreq
     address: 63
+    defaultValue: 4000
     description: Specifies the frequency of the PWM at DO3.
   PwmDutyCycleDO0: &pwmDutyCycle
     address: 64
     type: U8
     access: Write
+    defaultValue: 50
     minValue: 1
     maxValue: 99
     description: Specifies the duty cycle of the PWM at DO0.
@@ -225,6 +238,7 @@ registers:
     address: 73
     type: U8
     access: Write
+    defaultValue: 10
     minValue: 2
     maxValue: 100
     description: Specifies the configuration of current to drive LED 0.
@@ -236,6 +250,7 @@ registers:
     address: 75
     type: U8
     access: Write
+    defaultValue: 30
     minValue: 5
     maxValue: 100
     description: Specifies the configuration of current to drive LED 0.
@@ -316,6 +331,7 @@ registers:
     address: 93
     type: U16
     access: Write
+    defaultValue: 30
     minValue: 1
     maxValue: 600
     description: Specifies the trigger frequency for camera 0.
@@ -343,6 +359,7 @@ registers:
     address: 100
     type: U16
     access: Write
+    defaultValue: 20000
     minValue: 2
     maxValue: 65534
     description: Specifies the period of the servo motor in DO2, in microseconds.
@@ -350,6 +367,7 @@ registers:
     address: 101
     type: U16
     access: Write
+    defaultValue: 1500
     minValue: 6
     maxValue: 65530
     description: Specifies the pulse of the servo motor in DO2, in microseconds.

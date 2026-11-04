@@ -31,6 +31,7 @@ env:
   DOTNET_GENERATE_ASPNET_CERTIFICATE: false
   ContinuousIntegrationBuild: true
   AVR_TOOLCHAIN_URL: https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/SoftwareTools/avr8-gnu-toolchain-3.6.2.1778-win32.any.x86.zip
+  AVR_TOOLCHAIN_SHA256: eeef51253ef8e24260dfef50f8e735eb5a950c3bd559899dd60ba1a24eb38ab9
 jobs:
   # =====================================================================================================================================================================
   # Verify generated code
@@ -85,21 +86,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        hardware-target: ['1.1', '1.2', '2.0']
+        hardware-target: ['1.1', '1.2', '2.0', '2.1']
     name: Build Firmware (hw${{matrix.hardware-target}})
     runs-on: windows-latest
     needs: verify-generated
+    defaults:
+      run:
+        shell: bash
     steps:
       # ----------------------------------------------------------------------- Checkout
       - name: Checkout
         uses: actions/checkout@v7
 
       # ----------------------------------------------------------------------- Set up tools
-      - name: Set up AVR-GCC
+      - name: Restore tool cache
+        id: tool-cache
+        uses: actions/cache@v5
+        with:
+          path: avr8-gnu-toolchain.zip
+          key: avr8-gnu-toolchain-${{env.AVR_TOOLCHAIN_SHA256}}
+
+      - name: Download AVR-GCC
+        if: steps.tool-cache.outputs.cache-hit != 'true'
+        run: curl --fail --silent --show-error --location --output avr8-gnu-toolchain.zip "$AVR_TOOLCHAIN_URL"
+
+      - name: Install AVR-GCC
         run: |
-          Invoke-WebRequest -Uri $env:AVR_TOOLCHAIN_URL -OutFile $HOME\avr8-gnu-toolchain-win32_x86_64.zip
-          Expand-Archive $HOME\avr8-gnu-toolchain-win32_x86_64.zip -DestinationPath $HOME -Force
-          echo "$(Resolve-Path $HOME\avr8-gnu-toolchain-win32_x86\bin)" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          echo "$AVR_TOOLCHAIN_SHA256 avr8-gnu-toolchain.zip" | sha256sum --check --strict
+          unzip -q -o avr8-gnu-toolchain.zip -d "$(cygpath -u "$RUNNER_TEMP")"
+          cygpath -w "$(cygpath -u "$RUNNER_TEMP")/avr8-gnu-toolchain-win32_x86/bin" >> "$GITHUB_PATH"
 
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
@@ -110,7 +125,6 @@ jobs:
       - name: Build firmware
         working-directory: firmware/Behavior
         id: build
-        shell: bash
         run: make all FIRMWARE_VERSION=${{env.CiBuildVersion}} HARDWARE_VERSION=${{matrix.hardware-target}} PREVIEW_VERSION=${{env.CiFirmwarePreviewVersion}}
 
       # ----------------------------------------------------------------------- Collect artifacts
@@ -118,16 +132,9 @@ jobs:
         uses: actions/upload-artifact@v7
         if: steps.build.outcome == 'success' && always()
         with:
-          name: Firmware-hw${{matrix.hardware-target}}
+          name: Firmware-${{env.CiBuildVersion}}-hw${{matrix.hardware-target}}
           if-no-files-found: error
           path: firmware/Behavior/bin/*.hex
-
-      # ----------------------------------------------------------------------- Upload release assets
-      - name: Upload release assets
-        if: github.event_name == 'release'
-        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} firmware/Behavior/bin/*.hex --clobber
-        env:
-          GH_TOKEN: ${{github.token}}
 
   # =====================================================================================================================================================================
   # Build .NET
@@ -198,13 +205,6 @@ jobs:
           if-no-files-found: error
           path: artifacts/package/${{matrix.configuration}}/**
 
-      # ----------------------------------------------------------------------- Upload release assets
-      - name: Upload release assets
-        if: matrix.collect-packages && steps.pack.outcome == 'success' && github.event_name == 'release'
-        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} artifacts/package/${{matrix.configuration}}/** --clobber
-        env:
-          GH_TOKEN: ${{github.token}}
-
   # =====================================================================================================================================================================
   # Build Python
   #  ___      _ _    _   ___      _   _             
@@ -221,8 +221,6 @@ jobs:
     name: Build Python (${{matrix.python-version}})
     runs-on: ubuntu-latest
     needs: verify-generated
-    env:
-      UV_PYTHON: ${{matrix.python-version}}
     defaults:
       run:
         working-directory: software/python
@@ -238,11 +236,12 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v8.3.2
         with:
+          python-version: ${{matrix.python-version}}
           enable-cache: true
 
       # ----------------------------------------------------------------------- Build interface package
       - name: Restore interface
-        run: uv sync --group dev
+        run: uv sync --locked
 
       - name: Test interface
         run: uv run pytest
@@ -277,6 +276,11 @@ jobs:
       - name: Set up .NET tools
         run: dotnet tool restore
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v8.3.2
+        with:
+          enable-cache: true
+
       # ----------------------------------------------------------------------- Configure build
       - name: Configure build
         id: configure-build
@@ -285,6 +289,13 @@ jobs:
       # ----------------------------------------------------------------------- Restore
       - name: Restore
         run: dotnet restore software/dotnet
+
+      # ----------------------------------------------------------------------- Generate reference
+      - name: Generate register reference
+        run: dotnet harp.toolkit generate documentation docfx device.yml -o artifacts/docs/registers
+
+      - name: Generate Python API reference
+        run: uv run --locked docs/harp-docfx/scripts/generate-python-api.py --search-path software/python/src --flat-toc
 
       # ----------------------------------------------------------------------- Build metadata
       - name: Build metadata
@@ -372,10 +383,8 @@ jobs:
   publish-github:
     name: Publish packages to GitHub
     runs-on: ubuntu-latest
-    needs: build-dotnet
+    needs: [build-firmware, build-dotnet, build-python]
     permissions:
-      # Needed to attach files to releases
-      contents: write
       # Needed to upload to GitHub Packages
       packages: write
     if: github.event_name == 'push' || github.event_name == 'release'
@@ -392,13 +401,6 @@ jobs:
         with:
           name: Packages
           path: artifacts/packages/
-
-      # ----------------------------------------------------------------------- Upload release assets
-      - name: Upload release assets
-        if: github.event_name == 'release'
-        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} artifacts/packages/* --clobber
-        env:
-          GH_TOKEN: ${{github.token}}
 
       # ----------------------------------------------------------------------- Push to GitHub Packages
       - name: Push to GitHub Packages
@@ -419,8 +421,13 @@ jobs:
     name: Publish packages to NuGet.org
     runs-on: ubuntu-latest
     environment: public-release
-    needs: [build-firmware, build-dotnet]
+    needs: [build-firmware, build-dotnet, build-python]
     if: github.event_name == 'release'
+    permissions:
+      # Needed to attach files to releases
+      contents: write
+      # Needed to request the OIDC token for NuGet.org trusted publishing
+      id-token: write
     steps:
       # ----------------------------------------------------------------------- Set up .NET
       - name: Setup .NET
@@ -435,9 +442,28 @@ jobs:
           name: Packages
           path: artifacts/packages/
 
+      - name: Download firmware binaries
+        uses: actions/download-artifact@v8
+        with:
+          pattern: Firmware-*
+          merge-multiple: true
+          path: artifacts/firmware/
+
+      # ----------------------------------------------------------------------- Upload release assets
+      - name: Upload release assets
+        run: gh release upload --repo ${{github.repository}} ${{github.event.release.tag_name}} artifacts/packages/* artifacts/firmware/*.hex --clobber
+        env:
+          GH_TOKEN: ${{github.token}}
+
       # ----------------------------------------------------------------------- Push to NuGet.org
+      - name: Log in to NuGet.org with OIDC
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{secrets.NUGET_USER}}
+
       - name: Push to NuGet.org
-        run: dotnet nuget push "artifacts/packages/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source ${{vars.NUGET_API_URL}}
+        run: dotnet nuget push "artifacts/packages/*.nupkg" --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} --source ${{vars.NUGET_API_URL}}
         env:
           # This is a workaround for https://github.com/NuGet/Home/issues/9775
           DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER: 0
@@ -454,7 +480,7 @@ jobs:
   publish-pypi:
     name: Publish to PyPI
     runs-on: ubuntu-latest
-    needs: build-python
+    needs: [build-firmware, build-dotnet, build-python]
     if: github.event_name == 'release'
     environment: pypi
     permissions:
@@ -511,7 +537,7 @@ jobs:
     name: Publish documentation
     runs-on: ubuntu-latest
     # Publishing is not strictly necessary here, but if we're going to do a public release we want to wait to publish the docs until it goes out
-    needs: [build-documentation, workflow-images, publish-packages-nuget-org]
+    needs: [build-documentation, workflow-images, publish-packages-nuget-org, publish-pypi]
     permissions:
       # Both required by actions/deploy-pages
       pages: write

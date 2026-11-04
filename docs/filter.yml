@@ -2,3 +2,9 @@ apiRules:
 - exclude:
     hasAttribute:
       uid: System.ObsoleteAttribute
+- include:
+    uidRegex: ^Harp\.Behavior\.(AsyncDevice|CreateMessage|DeviceDataWriter|FilterRegister|Format|GetDeviceMetadata|GroupByRegister|Parse)$
+    type: Type
+- exclude:
+    uidRegex: ^Harp\.Behavior\.[^.]+$
+    type: Type

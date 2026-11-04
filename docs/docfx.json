@@ -6,7 +6,10 @@
         {
           "src": "../software/dotnet/",
           "files": "**/*.csproj",
-          "exclude": "**/*.App.csproj"
+          "exclude": [
+            "**/*.App.csproj",
+            "**/*.Design.csproj"
+          ]
         }
       ],
       "output": "../artifacts/docs/api/",
@@ -21,14 +24,25 @@
         "files": [
           "*.md",
           "toc.yml",
-          "{articles,tutorials,examples}/**/*.md",
-          "{articles,tutorials,examples}/**/toc.yml"
+          "{articles,reference,tutorials,examples}/**/*.md",
+          "{articles,reference,tutorials,examples}/**/toc.yml"
         ],
         "exclude": "README.md"
       },
       {
         "src": "../artifacts/docs/api/",
         "dest": "api",
+        "files": "**/*.yml",
+        "exclude": "toc.yml"
+      },
+      {
+        "src": "../artifacts/docs/registers/",
+        "dest": "registers",
+        "files": "**/*.yml"
+      },
+      {
+        "src": "../artifacts/docs/python/",
+        "dest": "python",
         "files": "**/*.yml"
       }
     ],

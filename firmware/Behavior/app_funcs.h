@@ -7,13 +7,13 @@
 /* Define if not defined                                                */
 /************************************************************************/
 #ifndef bool
-	#define bool uint8_t
+    #define bool uint8_t
 #endif
 #ifndef true
-	#define true 1
+    #define true 1
 #endif
 #ifndef false
-	#define false 0
+    #define false 0
 #endif
 
 

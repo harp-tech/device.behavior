@@ -42,3 +42,9 @@ include = ["harp*"]
 
 [dependency-groups]
 dev = ["pytest>=8"]
+
+[tool.docfx-tools]
+inventories = [
+    "https://harp-tech.org/python/objects.inv",
+    "https://numpy.org/doc/stable/objects.inv",
+]

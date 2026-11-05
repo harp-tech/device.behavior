@@ -5205,10 +5205,10 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Provides methods for manipulating Led0MaxCurrent register messages. Specifies the configuration
-    /// of current to drive LED 0.
+    /// Provides methods for manipulating Led0MaxCurrent register messages. Specifies the maximum
+    /// current allowed to drive LED 0, in mA.
     /// </summary>
-    [Description("Specifies the configuration of current to drive LED 0.")]
+    [Description("Specifies the maximum current allowed to drive LED 0, in mA.")]
     public partial class Led0MaxCurrent
     {
         /// <summary>
@@ -5279,10 +5279,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of Led0MaxCurrent register messages.
-    /// Specifies the configuration of current to drive LED 0.
+    /// Specifies the maximum current allowed to drive LED 0, in mA.
     /// </summary>
     /// <seealso cref="Led0MaxCurrent"/>
-    [Description("Specifies the configuration of current to drive LED 0.")]
+    [Description("Specifies the maximum current allowed to drive LED 0, in mA.")]
     public partial class TimestampedLed0MaxCurrent : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(Led0MaxCurrent);
@@ -5304,10 +5304,10 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Provides methods for manipulating Led1MaxCurrent register messages. Specifies the configuration
-    /// of current to drive LED 1.
+    /// Provides methods for manipulating Led1MaxCurrent register messages. Specifies the maximum
+    /// current allowed to drive LED 1, in mA.
     /// </summary>
-    [Description("Specifies the configuration of current to drive LED 1.")]
+    [Description("Specifies the maximum current allowed to drive LED 1, in mA.")]
     public partial class Led1MaxCurrent
     {
         /// <summary>
@@ -5378,10 +5378,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of Led1MaxCurrent register messages.
-    /// Specifies the configuration of current to drive LED 1.
+    /// Specifies the maximum current allowed to drive LED 1, in mA.
     /// </summary>
     /// <seealso cref="Led1MaxCurrent"/>
-    [Description("Specifies the configuration of current to drive LED 1.")]
+    [Description("Specifies the maximum current allowed to drive LED 1, in mA.")]
     public partial class TimestampedLed1MaxCurrent : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(Led1MaxCurrent);
@@ -9241,7 +9241,7 @@ namespace Harp.Behavior
         /// specified output lines.
         /// </summary>
         [Description("Enables the pulse function for the specified output lines.")]
-        public DigitalOutputs OutputPulseEnable { get; set; }
+        public DigitalOutputs OutputPulseEnable { get; set; } = DigitalOutputs.SupplyPort0 | DigitalOutputs.SupplyPort1 | DigitalOutputs.SupplyPort2;
 
         /// <summary>
         /// Creates a message payload for the OutputPulseEnable register.
@@ -11121,22 +11121,22 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents an operator that creates Led0MaxCurrent register messages. Specifies the
-    /// configuration of current to drive LED 0.
+    /// Represents an operator that creates Led0MaxCurrent register messages. Specifies the maximum
+    /// current allowed to drive LED 0, in mA.
     /// </summary>
     [DisplayName("Led0MaxCurrentPayload")]
-    [Description("Specifies the configuration of current to drive LED 0.")]
+    [Description("Specifies the maximum current allowed to drive LED 0, in mA.")]
     public partial class CreateLed0MaxCurrentPayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(Led0MaxCurrent);
 
         /// <summary>
-        /// Gets or sets the value for the Led0MaxCurrent register. Specifies the configuration of current
-        /// to drive LED 0.
+        /// Gets or sets the value for the Led0MaxCurrent register. Specifies the maximum current allowed to
+        /// drive LED 0, in mA.
         /// </summary>
         [Range(min: 5, max: 100)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
-        [Description("Specifies the configuration of current to drive LED 0.")]
+        [Description("Specifies the maximum current allowed to drive LED 0, in mA.")]
         public byte Led0MaxCurrent { get; set; } = 30;
 
         /// <summary>
@@ -11161,10 +11161,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped Led0MaxCurrent register messages. Specifies the
-    /// configuration of current to drive LED 0.
+    /// maximum current allowed to drive LED 0, in mA.
     /// </summary>
     [DisplayName("TimestampedLed0MaxCurrentPayload")]
-    [Description("Specifies the configuration of current to drive LED 0.")]
+    [Description("Specifies the maximum current allowed to drive LED 0, in mA.")]
     public partial class CreateTimestampedLed0MaxCurrentPayload : CreateLed0MaxCurrentPayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(Led0MaxCurrent);
@@ -11182,22 +11182,22 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents an operator that creates Led1MaxCurrent register messages. Specifies the
-    /// configuration of current to drive LED 1.
+    /// Represents an operator that creates Led1MaxCurrent register messages. Specifies the maximum
+    /// current allowed to drive LED 1, in mA.
     /// </summary>
     [DisplayName("Led1MaxCurrentPayload")]
-    [Description("Specifies the configuration of current to drive LED 1.")]
+    [Description("Specifies the maximum current allowed to drive LED 1, in mA.")]
     public partial class CreateLed1MaxCurrentPayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(Led1MaxCurrent);
 
         /// <summary>
-        /// Gets or sets the value for the Led1MaxCurrent register. Specifies the configuration of current
-        /// to drive LED 1.
+        /// Gets or sets the value for the Led1MaxCurrent register. Specifies the maximum current allowed to
+        /// drive LED 1, in mA.
         /// </summary>
         [Range(min: 5, max: 100)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
-        [Description("Specifies the configuration of current to drive LED 1.")]
+        [Description("Specifies the maximum current allowed to drive LED 1, in mA.")]
         public byte Led1MaxCurrent { get; set; } = 30;
 
         /// <summary>
@@ -11222,10 +11222,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped Led1MaxCurrent register messages. Specifies the
-    /// configuration of current to drive LED 1.
+    /// maximum current allowed to drive LED 1, in mA.
     /// </summary>
     [DisplayName("TimestampedLed1MaxCurrentPayload")]
-    [Description("Specifies the configuration of current to drive LED 1.")]
+    [Description("Specifies the maximum current allowed to drive LED 1, in mA.")]
     public partial class CreateTimestampedLed1MaxCurrentPayload : CreateLed1MaxCurrentPayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(Led1MaxCurrent);
@@ -11256,7 +11256,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the EventEnable register. Specifies the active events in the device.
         /// </summary>
         [Description("Specifies the active events in the device.")]
-        public Events EventEnable { get; set; }
+        public Events EventEnable { get; set; } = Events.PortDI | Events.PortDIO | Events.AnalogData | Events.Camera0 | Events.Camera1;
 
         /// <summary>
         /// Creates a message payload for the EventEnable register.
@@ -12627,7 +12627,7 @@ namespace Harp.Behavior
         /// value for poke inputs, in ms.
         /// </summary>
         [Description("Specifies the low pass filter time value for poke inputs, in ms.")]
-        public byte PokeInputFilter { get; set; }
+        public byte PokeInputFilter { get; set; } = 1;
 
         /// <summary>
         /// Creates a message payload for the PokeInputFilter register.

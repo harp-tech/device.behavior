@@ -264,8 +264,8 @@ typedef struct
 #define ADD_REG_RGB1                       72 // U8     Specifies the state of the RGB1 LED channels.
 #define ADD_REG_LED0_CURRENT               73 // U8     Specifies the configuration of current to drive LED 0.
 #define ADD_REG_LED1_CURRENT               74 // U8     Specifies the configuration of current to drive LED 1.
-#define ADD_REG_LED0_MAX_CURRENT           75 // U8     Specifies the configuration of current to drive LED 0.
-#define ADD_REG_LED1_MAX_CURRENT           76 // U8     Specifies the configuration of current to drive LED 1.
+#define ADD_REG_LED0_MAX_CURRENT           75 // U8     Specifies the maximum current allowed to drive LED 0, in mA.
+#define ADD_REG_LED1_MAX_CURRENT           76 // U8     Specifies the maximum current allowed to drive LED 1, in mA.
 #define ADD_REG_EVENT_ENABLE               77 // U8     Specifies the active events in the device.
 #define ADD_REG_START_CAMERAS              78 // U8     Specifies the camera outputs to enable in the device.
 #define ADD_REG_STOP_CAMERAS               79 // U8     Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.

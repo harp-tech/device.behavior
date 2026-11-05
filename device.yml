@@ -82,6 +82,7 @@ registers:
   OutputPulseEnable:
     <<: *output
     address: 45
+    defaultValue: 56
     description: Enables the pulse function for the specified output lines
   PulseDOPort0: &pulseDO
     address: 46
@@ -253,16 +254,17 @@ registers:
     defaultValue: 30
     minValue: 5
     maxValue: 100
-    description: Specifies the configuration of current to drive LED 0.
+    description: Specifies the maximum current allowed to drive LED 0, in mA.
   Led1MaxCurrent:
     <<: *ledMaxCurrent
     address: 76
-    description: Specifies the configuration of current to drive LED 1.
+    description: Specifies the maximum current allowed to drive LED 1, in mA.
   EventEnable:
     address: 77
     type: U8
     access: Write
     maskType: Events
+    defaultValue: 31
     description: Specifies the active events in the device.
   StartCameras: &cameraControl
     address: 78
@@ -451,6 +453,7 @@ registers:
     address: 122
     type: U8
     access: Write
+    defaultValue: 1
     description: Specifies the low pass filter time value for poke inputs, in ms.
 bitMasks:
   DigitalInputs:

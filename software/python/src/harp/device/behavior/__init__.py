@@ -100,6 +100,7 @@ __all__ = [
     "MimicPort0ValvePayload",
     "MimicPort1ValvePayload",
     "MimicPort2ValvePayload",
+    "PokeInputFilterPayload",
     "DigitalInputState",
     "OutputSet",
     "OutputClear",
@@ -402,7 +403,10 @@ class AnalogDataPayload(StructPayload[np.int16], length=3):
 class OutputPulseEnablePayload(AnonymousPayload[np.uint16]):
     """Represents the payload of the OutputPulseEnable register."""
 
-    __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
+    __value__: DigitalOutputs = BitMask(
+        enum=DigitalOutputs,
+        default=DigitalOutputs.SUPPLY_PORT0 | DigitalOutputs.SUPPLY_PORT1 | DigitalOutputs.SUPPLY_PORT2,
+    )
 
 
 class PulseDOPort0Payload(AnonymousPayload[np.uint16]):
@@ -611,7 +615,10 @@ class Led1MaxCurrentPayload(AnonymousPayload[np.uint8]):
 class EventEnablePayload(AnonymousPayload[np.uint8]):
     """Represents the payload of the EventEnable register."""
 
-    __value__: Events = BitMask(enum=Events)
+    __value__: Events = BitMask(
+        enum=Events,
+        default=Events.PORT_DI | Events.PORT_DIO | Events.ANALOG_DATA | Events.CAMERA0 | Events.CAMERA1,
+    )
 
 
 class StartCamerasPayload(AnonymousPayload[np.uint8]):
@@ -744,6 +751,12 @@ class MimicPort2ValvePayload(AnonymousPayload[np.uint8]):
     """Represents the payload of the MimicPort2Valve register."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
+
+
+class PokeInputFilterPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PokeInputFilter register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(1))
 
 
 class DigitalInputState(RegisterBase[DigitalInputs]):
@@ -1089,7 +1102,7 @@ class Led1Current(RegisterBase[np.uint8]):
 
 
 class Led0MaxCurrent(RegisterBase[np.uint8]):
-    """Specifies the configuration of current to drive LED 0."""
+    """Specifies the maximum current allowed to drive LED 0, in mA."""
 
     address: ClassVar[int] = 75
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -1097,7 +1110,7 @@ class Led0MaxCurrent(RegisterBase[np.uint8]):
 
 
 class Led1MaxCurrent(RegisterBase[np.uint8]):
-    """Specifies the configuration of current to drive LED 1."""
+    """Specifies the maximum current allowed to drive LED 1, in mA."""
 
     address: ClassVar[int] = 76
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -1420,10 +1433,12 @@ class _Reserved24(RegisterU8):
     address: ClassVar[int] = 121
 
 
-class PokeInputFilter(RegisterU8):
+class PokeInputFilter(RegisterBase[np.uint8]):
     """Specifies the low pass filter time value for poke inputs, in ms."""
 
     address: ClassVar[int] = 122
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PokeInputFilterPayload
 
 
 REGISTER_MAP: dict[int, type[RegisterBase[Any]]] = {

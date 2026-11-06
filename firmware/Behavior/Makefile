@@ -47,6 +47,7 @@ CFLAGS = \
 -fshort-enums \
 -mrelax \
 -O3 \
+-g2 \
 -Wall \
 -mmcu=$(MCU) \
 -DMAJOR_FW_VERSION=$(MAJOR_FW_VERSION) \
@@ -76,7 +77,7 @@ OBJCOPY_FLAGS = \
 -R .fuse \
 -R .lock \
 -R .signature \
--R .user_signatures \
+-R .user_signatures
 
 all: $(BUILD_DIR)/$(BUILD_NAME).hex
 
@@ -89,11 +90,15 @@ clean:
 $(BUILD_DIR):
 	mkdir "$(BUILD_DIR)"
 
-$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c $(INCS) -MD -MP -MF "$(@:.o=.d)" -MT"$(@:.o=.d)" -MT"$@" -o $@ $<
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $(INCS) -MD -MP -MF "$(@:.o=.d)" -MT"$@" -o $@ $<
 
-$(BUILD_DIR)/%.elf: $(OBJS)
-	$(CC) -o $@ $(OBJS) -Wl,-Map="$(@:.elf=.map)" $(LDFLAGS) $(LIBS)
+$(BUILD_DIR)/$(BUILD_NAME).elf: $(OBJS)
+	$(CC) -o $@ $(OBJS) -Wl,-Map="$(@:.elf=.map)" $(LDFLAGS)
 
-$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf
+$(BUILD_DIR)/$(BUILD_NAME).hex: $(BUILD_DIR)/$(BUILD_NAME).elf
 	$(OBJCOPY) $(OBJCOPY_FLAGS) $< $@
+
+-include $(wildcard $(BUILD_DIR)/*.d)
+
+.PHONY: all clean

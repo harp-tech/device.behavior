@@ -10153,7 +10153,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the PwmFrequencyDO0 register. Specifies the frequency of the PWM at
         /// DO0.
         /// </summary>
-        [Range(min: 1, max: long.MaxValue)]
+        [Range(min: 1, max: 10000)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the frequency of the PWM at DO0.")]
         public ushort PwmFrequencyDO0 { get; set; } = 1000;
@@ -10214,7 +10214,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the PwmFrequencyDO1 register. Specifies the frequency of the PWM at
         /// DO1.
         /// </summary>
-        [Range(min: 1, max: long.MaxValue)]
+        [Range(min: 1, max: 10000)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the frequency of the PWM at DO1.")]
         public ushort PwmFrequencyDO1 { get; set; } = 2000;
@@ -10275,7 +10275,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the PwmFrequencyDO2 register. Specifies the frequency of the PWM at
         /// DO2.
         /// </summary>
-        [Range(min: 1, max: long.MaxValue)]
+        [Range(min: 1, max: 10000)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the frequency of the PWM at DO2.")]
         public ushort PwmFrequencyDO2 { get; set; } = 3000;
@@ -10336,7 +10336,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the PwmFrequencyDO3 register. Specifies the frequency of the PWM at
         /// DO3.
         /// </summary>
-        [Range(min: 1, max: long.MaxValue)]
+        [Range(min: 1, max: 10000)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the frequency of the PWM at DO3.")]
         public ushort PwmFrequencyDO3 { get; set; } = 4000;
@@ -11729,7 +11729,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the Camera0Frequency register. Specifies the trigger frequency for
         /// camera 0.
         /// </summary>
-        [Range(min: 1, max: 600)]
+        [Range(min: 2, max: 600)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the trigger frequency for camera 0.")]
         public ushort Camera0Frequency { get; set; } = 30;
@@ -11849,7 +11849,7 @@ namespace Harp.Behavior
         /// Gets or sets the value for the Camera1Frequency register. Specifies the trigger frequency for
         /// camera 1.
         /// </summary>
-        [Range(min: 1, max: 600)]
+        [Range(min: 2, max: 600)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("Specifies the trigger frequency for camera 1.")]
         public ushort Camera1Frequency { get; set; } = 30;

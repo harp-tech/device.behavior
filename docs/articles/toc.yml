@@ -7,7 +7,7 @@
 - name: Getting started
 - href: ports-connections.md
 - href: installation.md
-- href: behavior-gui.md
+- href: behavior-app.md
 - href: bonsai.md
 - name: Examples
 - href: how-the-examples-work.md

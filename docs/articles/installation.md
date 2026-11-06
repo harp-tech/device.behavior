@@ -6,20 +6,20 @@ This page covers the software you'll need to interact with the Behavior device, 
 
 These steps are only required the first time you connect the device to a new computer, and you can install just the packages for the functionality you need.
 
-# [GUI](#tab/gui)
+# [App](#tab/app)
 
-The [Behavior GUI](behavior-gui.md) is a standalone graphical app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
+The [Behavior app](behavior-app.md) is a desktop app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
 
-![Behavior GUI](../images/behavior-gui.png){width=600}
+![Behavior app](../images/behavior-app.png){width=600}
 
 - Download and install the [.NET SDK](https://dotnet.microsoft.com/download), version 8 or later.
-- Install the Behavior GUI from a terminal with:
+- Install the Behavior app from a terminal with:
 
 ```cmd
 dotnet tool install -g Harp.Behavior.App
 ```
 
-To update the Behavior GUI to the latest release, run `dotnet tool update -g Harp.Behavior.App`.
+To update the Behavior app to the latest release, run `dotnet tool update -g Harp.Behavior.App`.
 
 # [Bonsai](#tab/bonsai)
 

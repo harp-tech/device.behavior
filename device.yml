@@ -143,6 +143,7 @@ registers:
     access: Write
     defaultValue: 1000
     minValue: 1
+    maxValue: 10000
     description: Specifies the frequency of the PWM at DO0.
   PwmFrequencyDO1:
     <<: *pwmFreq
@@ -334,7 +335,7 @@ registers:
     type: U16
     access: Write
     defaultValue: 30
-    minValue: 1
+    minValue: 2
     maxValue: 600
     description: Specifies the trigger frequency for camera 0.
   Camera1Frame:

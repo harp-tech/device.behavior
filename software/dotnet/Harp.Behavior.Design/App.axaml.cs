@@ -20,10 +20,15 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var viewModel = new BehaviorViewModel();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new BehaviorViewModel()
+                DataContext = viewModel
             };
+
+            var portName = GetPortName(desktop.Args);
+            if (portName is not null)
+                desktop.MainWindow.Opened += (_, _) => viewModel.ConnectToPort(portName);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
@@ -44,5 +49,14 @@ public partial class App : Application
             var about = new About() { DataContext = new AboutViewModel() };
             about.ShowDialog(ownerWindow);
         }
+    }
+
+    private static string? GetPortName(string[]? args)
+    {
+        if (args is null)
+            return null;
+
+        var index = Array.IndexOf(args, "--port");
+        return index >= 0 && index < args.Length - 1 ? args[index + 1] : null;
     }
 }

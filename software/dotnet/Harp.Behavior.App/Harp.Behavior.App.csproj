@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Visual tool for configuring Harp Behavior devices.</Description>
+    <Description>App for configuring and testing Harp Behavior devices.</Description>
     <PackageTags>$(PackageTags) App</PackageTags>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <RollForward>Major</RollForward>

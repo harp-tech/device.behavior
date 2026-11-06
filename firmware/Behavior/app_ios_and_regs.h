@@ -227,11 +227,11 @@ typedef struct
 #define ADD_REG_OUTPUT_CLEAR               35 // U16    Clear the specified digital output lines
 #define ADD_REG_OUTPUT_TOGGLE              36 // U16    Toggle the specified digital output lines
 #define ADD_REG_OUTPUT_STATE               37 // U16    Write the state of all digital output lines
-#define ADD_REG_PORT_DIO_SET               38 // U8     Set the specified port DIO lines
-#define ADD_REG_PORT_DIO_CLEAR             39 // U8     Clear the specified port DIO lines
-#define ADD_REG_PORT_DIO_TOGGLE            40 // U8     Toggle the specified port DIO lines
-#define ADD_REG_PORT_DIO_STATE             41 // U8     Write the state of all port DIO lines
-#define ADD_REG_PORT_DIO_DIRECTION         42 // U8     Specifies which of the port DIO lines are outputs
+#define ADD_REG_PORT_DIO_SET               38 // U8     Set the specified port DIO lines. This functionality has not yet been implemented.
+#define ADD_REG_PORT_DIO_CLEAR             39 // U8     Clear the specified port DIO lines. This functionality has not yet been implemented.
+#define ADD_REG_PORT_DIO_TOGGLE            40 // U8     Toggle the specified port DIO lines. This functionality has not yet been implemented.
+#define ADD_REG_PORT_DIO_STATE             41 // U8     Write the state of all port DIO lines. This functionality has not yet been implemented.
+#define ADD_REG_PORT_DIO_DIRECTION         42 // U8     Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.
 #define ADD_REG_PORT_DIO_STATE_EVENT       43 // U8     Specifies the state of the port DIO lines on a line change
 #define ADD_REG_ANALOG_DATA                44 // I16    Voltage at the ADC input and encoder value on Port 2
 #define ADD_REG_OUTPUT_PULSE_ENABLE        45 // U16    Enables the pulse function for the specified output lines

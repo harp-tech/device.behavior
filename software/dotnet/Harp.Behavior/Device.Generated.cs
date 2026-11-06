@@ -1448,9 +1448,9 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods for manipulating PortDIOSet register messages. Set the specified port DIO
-    /// lines.
+    /// lines. This functionality has not yet been implemented.
     /// </summary>
-    [Description("Set the specified port DIO lines.")]
+    [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class PortDIOSet
     {
         /// <summary>
@@ -1522,10 +1522,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of PortDIOSet register messages. Set the
-    /// specified port DIO lines.
+    /// specified port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     /// <seealso cref="PortDIOSet"/>
-    [Description("Set the specified port DIO lines.")]
+    [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class TimestampedPortDIOSet : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOSet);
@@ -1548,9 +1548,9 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods for manipulating PortDIOClear register messages. Clear the specified port DIO
-    /// lines.
+    /// lines. This functionality has not yet been implemented.
     /// </summary>
-    [Description("Clear the specified port DIO lines.")]
+    [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class PortDIOClear
     {
         /// <summary>
@@ -1622,10 +1622,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of PortDIOClear register messages. Clear
-    /// the specified port DIO lines.
+    /// the specified port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     /// <seealso cref="PortDIOClear"/>
-    [Description("Clear the specified port DIO lines.")]
+    [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class TimestampedPortDIOClear : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOClear);
@@ -1648,9 +1648,9 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods for manipulating PortDIOToggle register messages. Toggle the specified port DIO
-    /// lines.
+    /// lines. This functionality has not yet been implemented.
     /// </summary>
-    [Description("Toggle the specified port DIO lines.")]
+    [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class PortDIOToggle
     {
         /// <summary>
@@ -1722,10 +1722,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of PortDIOToggle register messages. Toggle
-    /// the specified port DIO lines.
+    /// the specified port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     /// <seealso cref="PortDIOToggle"/>
-    [Description("Toggle the specified port DIO lines.")]
+    [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class TimestampedPortDIOToggle : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOToggle);
@@ -1748,9 +1748,9 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods for manipulating PortDIOState register messages. Write the state of all port
-    /// DIO lines.
+    /// DIO lines. This functionality has not yet been implemented.
     /// </summary>
-    [Description("Write the state of all port DIO lines.")]
+    [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
     public partial class PortDIOState
     {
         /// <summary>
@@ -1822,10 +1822,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of PortDIOState register messages. Write
-    /// the state of all port DIO lines.
+    /// the state of all port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     /// <seealso cref="PortDIOState"/>
-    [Description("Write the state of all port DIO lines.")]
+    [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
     public partial class TimestampedPortDIOState : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOState);
@@ -1848,9 +1848,9 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods for manipulating PortDIODirection register messages. Specifies which of the
-    /// port DIO lines are outputs.
+    /// port DIO lines are outputs. This functionality has not yet been implemented.
     /// </summary>
-    [Description("Specifies which of the port DIO lines are outputs.")]
+    [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
     public partial class PortDIODirection
     {
         /// <summary>
@@ -1922,10 +1922,11 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Provides methods that return the timestamped payload of PortDIODirection register messages.
-    /// Specifies which of the port DIO lines are outputs.
+    /// Specifies which of the port DIO lines are outputs. This functionality has not yet been
+    /// implemented.
     /// </summary>
     /// <seealso cref="PortDIODirection"/>
-    [Description("Specifies which of the port DIO lines are outputs.")]
+    [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
     public partial class TimestampedPortDIODirection : ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIODirection);
@@ -8802,18 +8803,19 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates PortDIOSet register messages. Set the specified port DIO
-    /// lines.
+    /// lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("PortDIOSetPayload")]
-    [Description("Set the specified port DIO lines.")]
+    [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreatePortDIOSetPayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(PortDIOSet);
 
         /// <summary>
-        /// Gets or sets the value for the PortDIOSet register. Set the specified port DIO lines.
+        /// Gets or sets the value for the PortDIOSet register. Set the specified port DIO lines. This
+        /// functionality has not yet been implemented.
         /// </summary>
-        [Description("Set the specified port DIO lines.")]
+        [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
         public PortDigitalIOS PortDIOSet { get; set; }
 
         /// <summary>
@@ -8838,10 +8840,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped PortDIOSet register messages. Set the specified
-    /// port DIO lines.
+    /// port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("TimestampedPortDIOSetPayload")]
-    [Description("Set the specified port DIO lines.")]
+    [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreateTimestampedPortDIOSetPayload : CreatePortDIOSetPayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOSet);
@@ -8860,18 +8862,19 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates PortDIOClear register messages. Clear the specified port DIO
-    /// lines.
+    /// lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("PortDIOClearPayload")]
-    [Description("Clear the specified port DIO lines.")]
+    [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreatePortDIOClearPayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(PortDIOClear);
 
         /// <summary>
-        /// Gets or sets the value for the PortDIOClear register. Clear the specified port DIO lines.
+        /// Gets or sets the value for the PortDIOClear register. Clear the specified port DIO lines. This
+        /// functionality has not yet been implemented.
         /// </summary>
-        [Description("Clear the specified port DIO lines.")]
+        [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
         public PortDigitalIOS PortDIOClear { get; set; }
 
         /// <summary>
@@ -8896,10 +8899,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped PortDIOClear register messages. Clear the
-    /// specified port DIO lines.
+    /// specified port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("TimestampedPortDIOClearPayload")]
-    [Description("Clear the specified port DIO lines.")]
+    [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreateTimestampedPortDIOClearPayload : CreatePortDIOClearPayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOClear);
@@ -8918,18 +8921,19 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates PortDIOToggle register messages. Toggle the specified port
-    /// DIO lines.
+    /// DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("PortDIOTogglePayload")]
-    [Description("Toggle the specified port DIO lines.")]
+    [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreatePortDIOTogglePayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(PortDIOToggle);
 
         /// <summary>
-        /// Gets or sets the value for the PortDIOToggle register. Toggle the specified port DIO lines.
+        /// Gets or sets the value for the PortDIOToggle register. Toggle the specified port DIO lines. This
+        /// functionality has not yet been implemented.
         /// </summary>
-        [Description("Toggle the specified port DIO lines.")]
+        [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
         public PortDigitalIOS PortDIOToggle { get; set; }
 
         /// <summary>
@@ -8954,10 +8958,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped PortDIOToggle register messages. Toggle the
-    /// specified port DIO lines.
+    /// specified port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("TimestampedPortDIOTogglePayload")]
-    [Description("Toggle the specified port DIO lines.")]
+    [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreateTimestampedPortDIOTogglePayload : CreatePortDIOTogglePayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOToggle);
@@ -8976,18 +8980,19 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates PortDIOState register messages. Write the state of all port
-    /// DIO lines.
+    /// DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("PortDIOStatePayload")]
-    [Description("Write the state of all port DIO lines.")]
+    [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreatePortDIOStatePayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(PortDIOState);
 
         /// <summary>
         /// Gets or sets the value for the PortDIOState register. Write the state of all port DIO lines.
+        /// This functionality has not yet been implemented.
         /// </summary>
-        [Description("Write the state of all port DIO lines.")]
+        [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
         public PortDigitalIOS PortDIOState { get; set; }
 
         /// <summary>
@@ -9012,10 +9017,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped PortDIOState register messages. Write the state
-    /// of all port DIO lines.
+    /// of all port DIO lines. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("TimestampedPortDIOStatePayload")]
-    [Description("Write the state of all port DIO lines.")]
+    [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
     public partial class CreateTimestampedPortDIOStatePayload : CreatePortDIOStatePayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIOState);
@@ -9034,19 +9039,19 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates PortDIODirection register messages. Specifies which of the
-    /// port DIO lines are outputs.
+    /// port DIO lines are outputs. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("PortDIODirectionPayload")]
-    [Description("Specifies which of the port DIO lines are outputs.")]
+    [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
     public partial class CreatePortDIODirectionPayload : IRegisterPayload
     {
         Type IRegisterPayload.RegisterType => typeof(PortDIODirection);
 
         /// <summary>
         /// Gets or sets the value for the PortDIODirection register. Specifies which of the port DIO lines
-        /// are outputs.
+        /// are outputs. This functionality has not yet been implemented.
         /// </summary>
-        [Description("Specifies which of the port DIO lines are outputs.")]
+        [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
         public PortDigitalIOS PortDIODirection { get; set; }
 
         /// <summary>
@@ -9071,10 +9076,10 @@ namespace Harp.Behavior
 
     /// <summary>
     /// Represents an operator that creates timestamped PortDIODirection register messages. Specifies
-    /// which of the port DIO lines are outputs.
+    /// which of the port DIO lines are outputs. This functionality has not yet been implemented.
     /// </summary>
     [DisplayName("TimestampedPortDIODirectionPayload")]
-    [Description("Specifies which of the port DIO lines are outputs.")]
+    [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
     public partial class CreateTimestampedPortDIODirectionPayload : CreatePortDIODirectionPayload, ITimestampedRegister
     {
         Type ITimestampedRegister.RegisterType => typeof(PortDIODirection);

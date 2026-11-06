@@ -850,7 +850,7 @@ class OutputState(RegisterBase[DigitalOutputs]):
 
 
 class PortDIOSet(RegisterBase[PortDigitalIOS]):
-    """Set the specified port DIO lines"""
+    """Set the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 38
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -858,7 +858,7 @@ class PortDIOSet(RegisterBase[PortDigitalIOS]):
 
 
 class PortDIOClear(RegisterBase[PortDigitalIOS]):
-    """Clear the specified port DIO lines"""
+    """Clear the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 39
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -866,7 +866,7 @@ class PortDIOClear(RegisterBase[PortDigitalIOS]):
 
 
 class PortDIOToggle(RegisterBase[PortDigitalIOS]):
-    """Toggle the specified port DIO lines"""
+    """Toggle the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 40
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -874,7 +874,7 @@ class PortDIOToggle(RegisterBase[PortDigitalIOS]):
 
 
 class PortDIOState(RegisterBase[PortDigitalIOS]):
-    """Write the state of all port DIO lines"""
+    """Write the state of all port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 41
     payload_type: ClassVar[PayloadType] = PayloadType.U8
@@ -882,7 +882,7 @@ class PortDIOState(RegisterBase[PortDigitalIOS]):
 
 
 class PortDIODirection(RegisterBase[PortDigitalIOS]):
-    """Specifies which of the port DIO lines are outputs"""
+    """Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 42
     payload_type: ClassVar[PayloadType] = PayloadType.U8

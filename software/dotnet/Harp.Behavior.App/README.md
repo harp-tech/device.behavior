@@ -1,6 +1,6 @@
 ## About
 
-`Harp.Behavior.App` provides a graphical interface for configuring and testing [Harp Behavior](https://harp-tech.org/device.behavior) devices.
+`Harp.Behavior.App` is a desktop app for configuring and testing [Harp Behavior](https://harp-tech.org/device.behavior) devices.
 
 As with other Harp devices, the Behavior device can also be used from [Bonsai](https://bonsai-rx.org/).
 
@@ -16,6 +16,12 @@ Once installed, the app is launched from a terminal:
 
 ```text
 harp.behavior
+```
+
+To connect to a device as soon as the app opens, pass its serial port:
+
+```text
+harp.behavior --port COM3
 ```
 
 ### Linux

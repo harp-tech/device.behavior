@@ -100,10 +100,10 @@
         <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="*,*" Margin="0,0,50,0" MinHeight="60">
           <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="10" Orientation="Horizontal"
                       Spacing="20">
-            <TextBlock Text="Select a device" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding PortLabelText}" VerticalAlignment="Center" />
             <ComboBox Name="Ports" ItemsSource="{Binding Ports}" SelectedItem="{Binding SelectedPort}"
-                      MinWidth="70" />
-            <Button Command="{Binding LoadDeviceInformation}">
+                      IsEnabled="{Binding CanSelectPort}" MinWidth="70" />
+            <Button Command="{Binding LoadDeviceInformation}" IsEnabled="{Binding CanSelectPort}">
               <heroIcons:HeroIcon Foreground="{Binding IconColor}" Type="ArrowPath" Width="16" Height="16" />
             </Button>
             <Button Content="{Binding ConnectButtonText}"

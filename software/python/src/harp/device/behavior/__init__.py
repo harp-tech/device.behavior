@@ -196,36 +196,75 @@ class DigitalOutputs(enum.IntFlag):
     """Specifies the state of port digital output lines."""
 
     DO_PORT0 = 0x1
+    """Port 0 digital output"""
+
     DO_PORT1 = 0x2
+    """Port 1 digital output"""
+
     DO_PORT2 = 0x4
+    """Port 2 digital output"""
+
     SUPPLY_PORT0 = 0x8
+    """Port 0 12 V output for valve control"""
+
     SUPPLY_PORT1 = 0x10
+    """Port 1 12 V output for valve control"""
+
     SUPPLY_PORT2 = 0x20
+    """Port 2 12 V output for valve control"""
+
     LED0 = 0x40
+    """LED output L0"""
+
     LED1 = 0x80
+    """LED output L1"""
+
     RGB0 = 0x100
+    """RGB LED 0 on the RGB connector"""
+
     RGB1 = 0x200
+    """RGB LED 1 on the RGB connector"""
+
     DO0 = 0x400
+    """Digital output DO0"""
+
     DO1 = 0x800
+    """Digital output DO1"""
+
     DO2 = 0x1000
+    """Digital output DO2"""
+
     DO3 = 0x2000
+    """Digital output DO3"""
 
 
 class PortDigitalIOS(enum.IntFlag):
     """Specifies the state of the port DIO lines."""
 
     DIO0 = 0x1
+    """Port 0 DIO line"""
+
     DIO1 = 0x2
+    """Port 1 DIO line"""
+
     DIO2 = 0x4
+    """Port 2 DIO line"""
 
 
 class PwmOutputs(enum.IntFlag):
     """Specifies the state of PWM output lines."""
 
     PWM_DO0 = 0x1
+    """PWM on digital output DO0"""
+
     PWM_DO1 = 0x2
+    """PWM on digital output DO1"""
+
     PWM_DO2 = 0x4
+    """PWM on digital output DO2"""
+
     PWM_DO3 = 0x8
+    """PWM on digital output DO3"""
 
 
 class Events(enum.IntFlag):
@@ -292,6 +331,8 @@ class MimicOutput(enum.IntEnum):
     """Specifies the target IO on which to mimic the specified register."""
 
     NONE = 0
+    """Is not reflected on any output"""
+
     DIO0 = 1
     """Is reflected on DIO0"""
 
@@ -318,7 +359,10 @@ class EncoderModeMask(enum.IntEnum):
     """Specifies the type of reading made from the quadrature encoder."""
 
     POSITION = 0
+    """The accumulated encoder count"""
+
     DISPLACEMENT = 1
+    """The change in encoder count since the previous sample"""
 
 
 class DigitalInputStatePayload(AnonymousPayload[np.uint8]):

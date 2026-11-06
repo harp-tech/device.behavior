@@ -474,33 +474,75 @@ bitMasks:
   DigitalOutputs:
     description: Specifies the state of port digital output lines.
     bits:
-      DOPort0: 0x1
-      DOPort1: 0x2
-      DOPort2: 0x4
-      SupplyPort0: 0x8
-      SupplyPort1: 0x10
-      SupplyPort2: 0x20
-      Led0: 0x40
-      Led1: 0x80
-      Rgb0: 0x100
-      Rgb1: 0x200
-      DO0: 0x400
-      DO1: 0x800
-      DO2: 0x1000
-      DO3: 0x2000
+      DOPort0:
+        value: 0x1
+        description: Port 0 digital output
+      DOPort1:
+        value: 0x2
+        description: Port 1 digital output
+      DOPort2:
+        value: 0x4
+        description: Port 2 digital output
+      SupplyPort0:
+        value: 0x8
+        description: Port 0 12 V output for valve control
+      SupplyPort1:
+        value: 0x10
+        description: Port 1 12 V output for valve control
+      SupplyPort2:
+        value: 0x20
+        description: Port 2 12 V output for valve control
+      Led0:
+        value: 0x40
+        description: LED output L0
+      Led1:
+        value: 0x80
+        description: LED output L1
+      Rgb0:
+        value: 0x100
+        description: RGB LED 0 on the RGB connector
+      Rgb1:
+        value: 0x200
+        description: RGB LED 1 on the RGB connector
+      DO0:
+        value: 0x400
+        description: Digital output DO0
+      DO1:
+        value: 0x800
+        description: Digital output DO1
+      DO2:
+        value: 0x1000
+        description: Digital output DO2
+      DO3:
+        value: 0x2000
+        description: Digital output DO3
   PortDigitalIOS:
     description: Specifies the state of the port DIO lines.
     bits:
-      DIO0: 0x1
-      DIO1: 0x2
-      DIO2: 0x4
+      DIO0:
+        value: 0x1
+        description: Port 0 DIO line
+      DIO1:
+        value: 0x2
+        description: Port 1 DIO line
+      DIO2:
+        value: 0x4
+        description: Port 2 DIO line
   PwmOutputs:
     description: Specifies the state of PWM output lines.
     bits:
-      PwmDO0: 0x1
-      PwmDO1: 0x2
-      PwmDO2: 0x4
-      PwmDO3: 0x8
+      PwmDO0:
+        value: 0x1
+        description: PWM on digital output DO0
+      PwmDO1:
+        value: 0x2
+        description: PWM on digital output DO1
+      PwmDO2:
+        value: 0x4
+        description: PWM on digital output DO2
+      PwmDO3:
+        value: 0x8
+        description: PWM on digital output DO3
   Events:
     description: Specifies the active events in the device.
     bits:
@@ -559,7 +601,9 @@ groupMasks:
   MimicOutput:
     description: Specifies the target IO on which to mimic the specified register.
     values:
-      None: 0
+      None:
+        value: 0
+        description: Is not reflected on any output
       DIO0:
         value: 1
         description: Is reflected on DIO0
@@ -584,5 +628,9 @@ groupMasks:
   EncoderModeMask:
     description: Specifies the type of reading made from the quadrature encoder.
     values:
-      Position: 0
-      Displacement: 1
+      Position:
+        value: 0
+        description: The accumulated encoder count
+      Displacement:
+        value: 1
+        description: The change in encoder count since the previous sample

@@ -12914,20 +12914,93 @@ namespace Harp.Behavior
     [Flags]
     public enum DigitalOutputs : ushort
     {
+        /// <summary>
+        /// Specifies that no flags are set.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Port 0 digital output.
+        /// </summary>
+        [Description("Port 0 digital output.")]
         DOPort0 = 0x1,
+
+        /// <summary>
+        /// Port 1 digital output.
+        /// </summary>
+        [Description("Port 1 digital output.")]
         DOPort1 = 0x2,
+
+        /// <summary>
+        /// Port 2 digital output.
+        /// </summary>
+        [Description("Port 2 digital output.")]
         DOPort2 = 0x4,
+
+        /// <summary>
+        /// Port 0 12 V output for valve control.
+        /// </summary>
+        [Description("Port 0 12 V output for valve control.")]
         SupplyPort0 = 0x8,
+
+        /// <summary>
+        /// Port 1 12 V output for valve control.
+        /// </summary>
+        [Description("Port 1 12 V output for valve control.")]
         SupplyPort1 = 0x10,
+
+        /// <summary>
+        /// Port 2 12 V output for valve control.
+        /// </summary>
+        [Description("Port 2 12 V output for valve control.")]
         SupplyPort2 = 0x20,
+
+        /// <summary>
+        /// LED output L0.
+        /// </summary>
+        [Description("LED output L0.")]
         Led0 = 0x40,
+
+        /// <summary>
+        /// LED output L1.
+        /// </summary>
+        [Description("LED output L1.")]
         Led1 = 0x80,
+
+        /// <summary>
+        /// RGB LED 0 on the RGB connector.
+        /// </summary>
+        [Description("RGB LED 0 on the RGB connector.")]
         Rgb0 = 0x100,
+
+        /// <summary>
+        /// RGB LED 1 on the RGB connector.
+        /// </summary>
+        [Description("RGB LED 1 on the RGB connector.")]
         Rgb1 = 0x200,
+
+        /// <summary>
+        /// Digital output DO0.
+        /// </summary>
+        [Description("Digital output DO0.")]
         DO0 = 0x400,
+
+        /// <summary>
+        /// Digital output DO1.
+        /// </summary>
+        [Description("Digital output DO1.")]
         DO1 = 0x800,
+
+        /// <summary>
+        /// Digital output DO2.
+        /// </summary>
+        [Description("Digital output DO2.")]
         DO2 = 0x1000,
+
+        /// <summary>
+        /// Digital output DO3.
+        /// </summary>
+        [Description("Digital output DO3.")]
         DO3 = 0x2000
     }
 
@@ -12937,9 +13010,27 @@ namespace Harp.Behavior
     [Flags]
     public enum PortDigitalIOS : byte
     {
+        /// <summary>
+        /// Specifies that no flags are set.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// Port 0 DIO line.
+        /// </summary>
+        [Description("Port 0 DIO line.")]
         DIO0 = 0x1,
+
+        /// <summary>
+        /// Port 1 DIO line.
+        /// </summary>
+        [Description("Port 1 DIO line.")]
         DIO1 = 0x2,
+
+        /// <summary>
+        /// Port 2 DIO line.
+        /// </summary>
+        [Description("Port 2 DIO line.")]
         DIO2 = 0x4
     }
 
@@ -12949,10 +13040,33 @@ namespace Harp.Behavior
     [Flags]
     public enum PwmOutputs : byte
     {
+        /// <summary>
+        /// Specifies that no flags are set.
+        /// </summary>
         None = 0x0,
+
+        /// <summary>
+        /// PWM on digital output DO0.
+        /// </summary>
+        [Description("PWM on digital output DO0.")]
         PwmDO0 = 0x1,
+
+        /// <summary>
+        /// PWM on digital output DO1.
+        /// </summary>
+        [Description("PWM on digital output DO1.")]
         PwmDO1 = 0x2,
+
+        /// <summary>
+        /// PWM on digital output DO2.
+        /// </summary>
+        [Description("PWM on digital output DO2.")]
         PwmDO2 = 0x4,
+
+        /// <summary>
+        /// PWM on digital output DO3.
+        /// </summary>
+        [Description("PWM on digital output DO3.")]
         PwmDO3 = 0x8
     }
 
@@ -13105,6 +13219,10 @@ namespace Harp.Behavior
     /// </summary>
     public enum MimicOutput : byte
     {
+        /// <summary>
+        /// Is not reflected on any output.
+        /// </summary>
+        [Description("Is not reflected on any output.")]
         None = 0,
 
         /// <summary>
@@ -13155,7 +13273,16 @@ namespace Harp.Behavior
     /// </summary>
     public enum EncoderModeMask : byte
     {
+        /// <summary>
+        /// The accumulated encoder count.
+        /// </summary>
+        [Description("The accumulated encoder count.")]
         Position = 0,
+
+        /// <summary>
+        /// The change in encoder count since the previous sample.
+        /// </summary>
+        [Description("The change in encoder count since the previous sample.")]
         Displacement = 1
     }
 

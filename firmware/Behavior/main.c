@@ -5,13 +5,13 @@
 
 int main(void)
 {
-	/* Initialize device */
-	hwbp_app_initialize();
+    /* Initialize device */
+    hwbp_app_initialize();
 
-	/* Enable interrupts */
-	hwbp_app_enable_interrupts;
-	
-	/* Infinite loop */
-	while(1);
-		//__asm volatile("sleep");
+    /* Enable interrupts */
+    hwbp_app_enable_interrupts;
+
+    /* Infinite loop */
+    while(1);
+        //__asm volatile("sleep");
 }

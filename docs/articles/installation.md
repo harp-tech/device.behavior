@@ -24,6 +24,12 @@ The [Harp](https://harp-tech.org/python/) library provides a Python interface fo
 pip install harp
 ```
 
+To install the interface for the Behavior device:
+
+```cmd
+pip install harp-behavior
+```
+
 To install only the package necessary for loading data:
 
 ```cmd
@@ -35,11 +41,18 @@ pip install harp-data
 
 # [GUI](#tab/gui)
 
-The [Behavior GUI](behavior-gui.md) is a standalone graphical application for configuring and testing the device without using Bonsai.
+The [Behavior GUI](behavior-gui.md) is a standalone graphical app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
 
 ![Behavior GUI](../images/behavior-gui.png){width=600}
 
-- Download and install the [Behavior GUI](https://github.com/fchampalimaud/device.behavior/releases).
+- Download and install the [.NET SDK](https://dotnet.microsoft.com/download), version 8 or later.
+- Install the Behavior GUI from a terminal with:
+
+```cmd
+dotnet tool install -g Harp.Behavior.App
+```
+
+To update the Behavior GUI to the latest release, run `dotnet tool update -g Harp.Behavior.App`.
 
 ***
 

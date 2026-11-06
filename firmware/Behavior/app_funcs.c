@@ -1116,20 +1116,20 @@ bool app_write_REG_RGB_ALL(void *a)
 {
     uint8_t *reg = ((uint8_t*)a);
 
-    app_regs.REG_RGB_ALL[0] = reg[1];
-    app_regs.REG_RGB_ALL[1] = reg[0];
+    app_regs.REG_RGB_ALL[0] = reg[0];
+    app_regs.REG_RGB_ALL[1] = reg[1];
     app_regs.REG_RGB_ALL[2] = reg[2];
-    app_regs.REG_RGB_ALL[3] = reg[4];
-    app_regs.REG_RGB_ALL[4] = reg[3];
+    app_regs.REG_RGB_ALL[3] = reg[3];
+    app_regs.REG_RGB_ALL[4] = reg[4];
     app_regs.REG_RGB_ALL[5] = reg[5];
 
-    app_regs.REG_RGB_ALL[0] = reg[1];
-    app_regs.REG_RGB_ALL[1] = reg[0];
-    app_regs.REG_RGB_ALL[2] = reg[2];
+    app_regs.REG_RGB0[0] = reg[0];
+    app_regs.REG_RGB0[1] = reg[1];
+    app_regs.REG_RGB0[2] = reg[2];
 
-    app_regs.REG_RGB_ALL[0] = reg[4];
-    app_regs.REG_RGB_ALL[1] = reg[3];
-    app_regs.REG_RGB_ALL[2] = reg[5];
+    app_regs.REG_RGB1[0] = reg[3];
+    app_regs.REG_RGB1[1] = reg[4];
+    app_regs.REG_RGB1[2] = reg[5];
 
     handle_Rgbs(rgb0_on, rgb1_on);
 
@@ -1146,13 +1146,13 @@ bool app_write_REG_RGB0(void *a)
 {
     uint8_t *reg = ((uint8_t*)a);
 
-    app_regs.REG_RGB_ALL[0] = reg[1];
-    app_regs.REG_RGB_ALL[1] = reg[0];
+    app_regs.REG_RGB_ALL[0] = reg[0];
+    app_regs.REG_RGB_ALL[1] = reg[1];
     app_regs.REG_RGB_ALL[2] = reg[2];
 
-    app_regs.REG_RGB_ALL[0] = reg[1];
-    app_regs.REG_RGB_ALL[1] = reg[0];
-    app_regs.REG_RGB_ALL[2] = reg[2];
+    app_regs.REG_RGB0[0] = reg[0];
+    app_regs.REG_RGB0[1] = reg[1];
+    app_regs.REG_RGB0[2] = reg[2];
 
     handle_Rgbs(rgb0_on, rgb1_on);
 
@@ -1169,13 +1169,13 @@ bool app_write_REG_RGB1(void *a)
 {
     uint8_t *reg = ((uint8_t*)a);
 
-    app_regs.REG_RGB_ALL[3] = reg[1];
-    app_regs.REG_RGB_ALL[4] = reg[0];
+    app_regs.REG_RGB_ALL[3] = reg[0];
+    app_regs.REG_RGB_ALL[4] = reg[1];
     app_regs.REG_RGB_ALL[5] = reg[2];
 
-    app_regs.REG_RGB_ALL[0] = reg[1];
-    app_regs.REG_RGB_ALL[1] = reg[0];
-    app_regs.REG_RGB_ALL[2] = reg[2];
+    app_regs.REG_RGB1[0] = reg[0];
+    app_regs.REG_RGB1[1] = reg[1];
+    app_regs.REG_RGB1[2] = reg[2];
 
     handle_Rgbs(rgb0_on, rgb1_on);
 
@@ -1850,12 +1850,12 @@ ISR(USARTF1_DRE_vect, ISR_NAKED)
 /************************************************************************/
 void update_DIO_to_mimic (unsigned char reg)
 {
-    if (reg & GM_MIMIC_OUTPUT_DIO0)
-        io_pin2out(&PORTD, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO0 to output
-    if (reg & GM_MIMIC_OUTPUT_DIO0)
-        io_pin2out(&PORTE, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO1 to output
-    if (reg & GM_MIMIC_OUTPUT_DIO0)
-        io_pin2out(&PORTF, 4, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO2 to output
+    if (reg == GM_MIMIC_OUTPUT_DIO0)
+        io_pin2out(&PORTD, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO0 to output
+    if (reg == GM_MIMIC_OUTPUT_DIO1)
+        io_pin2out(&PORTE, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO1 to output
+    if (reg == GM_MIMIC_OUTPUT_DIO2)
+        io_pin2out(&PORTF, 5, OUT_IO_DIGITAL, IN_EN_IO_EN);   // DIO2 to output
 }
 
 void app_read_REG_MIMIC_PORT0_IR(void) {}

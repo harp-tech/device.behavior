@@ -4,9 +4,6 @@ The Behavior device can mimic or mirror the poke peripheral's infrared beam sign
 
 Refer to the [Mice Poke connection](./ports-connections.md?tabs=poke#connections) section to set up the [Mice Poke](./peripherals/micepoke.md) peripheral on port **P0** and the [Digital Output connection](./ports-connections.md?tabs=digitaloutput#connections) section to connect an LED to **DO0** as an indicator. We will use these ports for the rest of the exercises.
 
-> [!WARNING]
-> Due to a [bug](https://github.com/harp-tech/device.behavior/issues/44) in the current firmware (v3.3), only `DO0` and `DO2` can be used as mimic output lines.
-
 This article covers how to mimic the poke peripheral's infrared signal and valve outputs in Bonsai.
 
 The complete workflow is shown below. Copy and paste it into Bonsai to get started immediately, or build each section by following the step-by-step instructions in the following sections.

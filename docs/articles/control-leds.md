@@ -77,9 +77,6 @@ Run the workflow and press <kbd>F</kbd> to load the color and intensity configur
 > [!NOTE]
 > To configure one LED at a time, select [`Rgb0`] for the first LED or [`Rgb1`] for the second LED under the `Payload` property in the [`CreateMessage`] operator.
 
-> [!NOTE]
-> There is a [bug](https://github.com/harp-tech/device.behavior/issues/41) in the current firmware (v3.3) where the red and green channels are switched (e.g. `Red0` controls the LED green channel instead). As a workaround, swap the two channel values to get the intended color.
-
 ## Turn RGB LEDs on and off
 
 The RGB LEDs are controlled like any other digital output (see [Control digital outputs](control-digital-outputs.md)), for instance through the [`OutputSet`] and [`OutputClear`] registers:

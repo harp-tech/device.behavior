@@ -1,4 +1,8 @@
-# Behavior board
+---
+title: Device
+---
+
+# Behavior device
 
 ![Harp Behavior](../images/behavior-board.jpg){width=450}
 

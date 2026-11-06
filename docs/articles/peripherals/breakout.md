@@ -1,6 +1,6 @@
 # Breakout
 
-The Harp Behavior Breakout is a peripheral that provides access to the Behavior board's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../ports-connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read digital inputs](../read-digital-inputs.md), [Control digital outputs](../control-digital-outputs.md), or [Transmit serial timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
+The Harp Behavior Breakout is a peripheral that provides access to the Behavior device's poke port lines via screw terminals, without the need for custom cables. Refer to the [connections](../ports-connections.md?tabs=breakout#connections) article to set up the peripheral and the [Read digital inputs](../read-digital-inputs.md), [Control digital outputs](../control-digital-outputs.md), or [Transmit serial timestamps](../advanced-configuration.md#transmit-serial-timestamps) articles to use it in Bonsai.
 
 ![Breakout board v1.1](../../images/peripheral-breakout-v1.1.jpg){width=350} ![Breakout board v2.1](../../images/peripheral-breakout-v2.1.jpg){width=350}
 
@@ -17,7 +17,7 @@ The Harp Behavior Breakout is a peripheral that provides access to the Behavior 
 
 ## Specs
 
-- Connector: RJ45 for direct connection with the Behavior board poke port
+- Connector: RJ45 for direct connection with the Behavior device poke port
 - Screw Terminals:
     - 1x Digital Input (DI)
     - 1x Digital Input / Output (DIO; acts only as an [active-low digital input](../read-digital-inputs.md))
@@ -39,7 +39,7 @@ For connection with a quadrature encoder:
 
 ## Hardware
 
-| Version | Compatible Behavior board | Notes |
+| Version | Compatible Behavior device | Notes |
 | ------- | ------------------- | ----- |
 | 2.x | > 2.0 | <ul><li> Serial TX terminal replaces the +12V and SUP_RTN terminals </li><li> TX logic level jumper-selectable between 3.3 V and 5 V </li></ul> |
 | 1.1 | > 1.2 | <ul><li> Initial version </li></ul> |

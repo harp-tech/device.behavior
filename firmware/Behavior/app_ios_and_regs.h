@@ -264,8 +264,8 @@ typedef struct
 #define ADD_REG_RGB1                       72 // U8     Specifies the state of the RGB1 LED channels.
 #define ADD_REG_LED0_CURRENT               73 // U8     Specifies the configuration of current to drive LED 0.
 #define ADD_REG_LED1_CURRENT               74 // U8     Specifies the configuration of current to drive LED 1.
-#define ADD_REG_LED0_MAX_CURRENT           75 // U8     Specifies the configuration of current to drive LED 0.
-#define ADD_REG_LED1_MAX_CURRENT           76 // U8     Specifies the configuration of current to drive LED 1.
+#define ADD_REG_LED0_MAX_CURRENT           75 // U8     Specifies the maximum current allowed to drive LED 0, in mA.
+#define ADD_REG_LED1_MAX_CURRENT           76 // U8     Specifies the maximum current allowed to drive LED 1, in mA.
 #define ADD_REG_EVENT_ENABLE               77 // U8     Specifies the active events in the device.
 #define ADD_REG_START_CAMERAS              78 // U8     Specifies the camera outputs to enable in the device.
 #define ADD_REG_STOP_CAMERAS               79 // U8     Specifies the camera outputs to disable in the device. An event will be issued when the trigger signal is actually stopped being generated.
@@ -327,54 +327,54 @@ typedef struct
 /************************************************************************/
 /* Registers' bits                                                      */
 /************************************************************************/
-#define B_DI_PORT0                      (1<<0)       // Port 0 digital input
-#define B_DI_PORT1                      (1<<1)       // Port 1 digital input
-#define B_DI_PORT2                      (1<<2)       // Port 2 digital input
-#define B_DI3                           (1<<3)       // Digital input DI3
-#define B_DO_PORT0                      (1<<0)       // 
-#define B_DO_PORT1                      (1<<1)       // 
-#define B_DO_PORT2                      (1<<2)       // 
-#define B_SUPPLY_PORT0                  (1<<3)       // 
-#define B_SUPPLY_PORT1                  (1<<4)       // 
-#define B_SUPPLY_PORT2                  (1<<5)       // 
-#define B_LED0                          (1<<6)       // 
-#define B_LED1                          (1<<7)       // 
-#define B_RGB0                          (1<<8)       // 
-#define B_RGB1                          (1<<9)       // 
-#define B_DO0                           (1<<10)      // 
-#define B_DO1                           (1<<11)      // 
-#define B_DO2                           (1<<12)      // 
-#define B_DO3                           (1<<13)      // 
-#define B_DIO0                          (1<<0)       // 
-#define B_DIO1                          (1<<1)       // 
-#define B_DIO2                          (1<<2)       // 
-#define B_PWM_DO0                       (1<<0)       // 
-#define B_PWM_DO1                       (1<<1)       // 
-#define B_PWM_DO2                       (1<<2)       // 
-#define B_PWM_DO3                       (1<<3)       // 
-#define B_PORT_DI                       (1<<0)       // Event from register DigitalInputState
-#define B_PORT_DIO                      (1<<1)       // Event from register PortDIOStateEvent
-#define B_ANALOG_DATA                   (1<<2)       // Event from register AnalogData
-#define B_CAMERA0                       (1<<3)       // Event from register Camera0Frame
-#define B_CAMERA1                       (1<<4)       // Event from register Camera1Frame
-#define B_CAMERA_OUTPUT0                (1<<0)       // Camera on digital output 0
-#define B_CAMERA_OUTPUT1                (1<<1)       // Camera on digital output 1
-#define B_SERVO_OUTPUT2                 (1<<2)       // Servo on digital output 2
-#define B_SERVO_OUTPUT3                 (1<<3)       // Servo on digital output 3
-#define B_ENCODER_PORT2                 (1<<2)       // Encoder on port 2
-#define B_FRAME_ACQUIRED                (1<<0)       // Camera frame was triggered
-#define B_TIMESTAMP_PORT2               (1<<2)       // Enable the serial timestamp TX on Port 2
-#define MSK_MIMIC_OUTPUT                0x07         // 
-#define GM_MIMIC_OUTPUT_NONE            0x00         // 
-#define GM_MIMIC_OUTPUT_DIO0            0x01         // Is reflected on DIO0
-#define GM_MIMIC_OUTPUT_DIO1            0x02         // Is reflected on DIO1
-#define GM_MIMIC_OUTPUT_DIO2            0x03         // Is reflected on DIO2
-#define GM_MIMIC_OUTPUT_DO0             0x04         // Is reflected on DO0
-#define GM_MIMIC_OUTPUT_DO1             0x05         // Is reflected on DO1
-#define GM_MIMIC_OUTPUT_DO2             0x06         // Is reflected on DO2
-#define GM_MIMIC_OUTPUT_DO3             0x07         // Is reflected on DO3
-#define MSK_ENCODER_MODE                0x01         // 
-#define GM_ENCODER_MODE_POSITION        0x00         // 
-#define GM_ENCODER_MODE_DISPLACEMENT    0x01         // 
+#define B_DI_PORT0                           (1<<0)       // Port 0 digital input
+#define B_DI_PORT1                           (1<<1)       // Port 1 digital input
+#define B_DI_PORT2                           (1<<2)       // Port 2 digital input
+#define B_DI3                                (1<<3)       // Digital input DI3
+#define B_DO_PORT0                           (1<<0)       // Port 0 digital output
+#define B_DO_PORT1                           (1<<1)       // Port 1 digital output
+#define B_DO_PORT2                           (1<<2)       // Port 2 digital output
+#define B_SUPPLY_PORT0                       (1<<3)       // Port 0 12 V output for valve control
+#define B_SUPPLY_PORT1                       (1<<4)       // Port 1 12 V output for valve control
+#define B_SUPPLY_PORT2                       (1<<5)       // Port 2 12 V output for valve control
+#define B_LED0                               (1<<6)       // LED output L0
+#define B_LED1                               (1<<7)       // LED output L1
+#define B_RGB0                               (1<<8)       // RGB LED 0 on the RGB connector
+#define B_RGB1                               (1<<9)       // RGB LED 1 on the RGB connector
+#define B_DO0                                (1<<10)      // Digital output DO0
+#define B_DO1                                (1<<11)      // Digital output DO1
+#define B_DO2                                (1<<12)      // Digital output DO2
+#define B_DO3                                (1<<13)      // Digital output DO3
+#define B_DIO0                               (1<<0)       // Port 0 DIO line
+#define B_DIO1                               (1<<1)       // Port 1 DIO line
+#define B_DIO2                               (1<<2)       // Port 2 DIO line
+#define B_PWM_DO0                            (1<<0)       // PWM on digital output DO0
+#define B_PWM_DO1                            (1<<1)       // PWM on digital output DO1
+#define B_PWM_DO2                            (1<<2)       // PWM on digital output DO2
+#define B_PWM_DO3                            (1<<3)       // PWM on digital output DO3
+#define B_PORT_DI                            (1<<0)       // Event from register DigitalInputState
+#define B_PORT_DIO                           (1<<1)       // Event from register PortDIOStateEvent
+#define B_ANALOG_DATA                        (1<<2)       // Event from register AnalogData
+#define B_CAMERA0                            (1<<3)       // Event from register Camera0Frame
+#define B_CAMERA1                            (1<<4)       // Event from register Camera1Frame
+#define B_CAMERA_OUTPUT0                     (1<<0)       // Camera on digital output 0
+#define B_CAMERA_OUTPUT1                     (1<<1)       // Camera on digital output 1
+#define B_SERVO_OUTPUT2                      (1<<2)       // Servo on digital output 2
+#define B_SERVO_OUTPUT3                      (1<<3)       // Servo on digital output 3
+#define B_ENCODER_PORT2                      (1<<2)       // Encoder on port 2
+#define B_FRAME_ACQUIRED                     (1<<0)       // Camera frame was triggered
+#define B_TIMESTAMP_PORT2                    (1<<2)       // Enable the serial timestamp TX on Port 2
+#define MSK_MIMIC_OUTPUT                     0x07         //
+#define GM_MIMIC_OUTPUT_NONE                 0x00         // Is not reflected on any output
+#define GM_MIMIC_OUTPUT_DIO0                 0x01         // Is reflected on DIO0
+#define GM_MIMIC_OUTPUT_DIO1                 0x02         // Is reflected on DIO1
+#define GM_MIMIC_OUTPUT_DIO2                 0x03         // Is reflected on DIO2
+#define GM_MIMIC_OUTPUT_DO0                  0x04         // Is reflected on DO0
+#define GM_MIMIC_OUTPUT_DO1                  0x05         // Is reflected on DO1
+#define GM_MIMIC_OUTPUT_DO2                  0x06         // Is reflected on DO2
+#define GM_MIMIC_OUTPUT_DO3                  0x07         // Is reflected on DO3
+#define MSK_ENCODER_MODE_MASK                0x01         //
+#define GM_ENCODER_MODE_MASK_POSITION        0x00         // The accumulated encoder count
+#define GM_ENCODER_MODE_MASK_DISPLACEMENT    0x01         // The change in encoder count since the previous sample
 
 #endif /* _APP_REGS_H_ */

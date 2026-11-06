@@ -6,7 +6,7 @@ Before beginning:
 - Install the [Behavior GUI](installation.md?tabs=gui#software-packages).
 - Follow the hardware setup [guide](ports-connections.md).
 - Connect the [USB](ports-connections.md) cable to the computer.
-- Launch "Harp.Behavior.App" from the Windows Start menu.
+- Launch the Behavior GUI by running `harp.behavior` in a terminal.
 
 ![Behavior GUI](../images/behavior-gui.png)
 

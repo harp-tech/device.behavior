@@ -1,6 +1,6 @@
 # Control digital outputs
 
-The Behavior board has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
+The Behavior device has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 
@@ -11,7 +11,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 :::
 
 > [!NOTE]
-> The commands in these examples can be used to control every output line of the Behavior board. Their location on the Behavior board and names in Bonsai are:
+> The commands in these examples can be used to control every output line of the Behavior device. Their location on the Behavior device and names in Bonsai are:
 > - General-purpose digital outputs **DO0**–**DO3**: `DO0` - `DO3`.
 > - Poke ports **P0**–**P2**: the 5 V digital output lines are represented as `DOPort0`–`DOPort2` and 12 V digital output lines for valve control as `SupplyPort0`–`SupplyPort2`. See [Control poke peripheral](control-poke.md).
 > - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
@@ -79,11 +79,11 @@ The [`OutputState`] register writes every output line in a single command: selec
 Run the workflow and press <kbd>F</kbd>. The **DO0** and **DO1** lines go high and every other output goes low. Try setting other outputs first with the commands from the previous sections; the [`OutputState`] write overrides them all. The LED on **DO0** turns on and stays lit.
 
 > [!WARNING]
-> [`OutputState`] acts on every output of the Behavior board, including the poke port and LED lines. To change a few lines without modifying the rest, specify multiple lines in [`OutputSet`], [`OutputClear`], or [`OutputToggle`].
+> [`OutputState`] acts on every output of the Behavior device, including the poke port and LED lines. To change a few lines without modifying the rest, specify multiple lines in [`OutputSet`], [`OutputClear`], or [`OutputToggle`].
 
 ## Pulse outputs
 
-The Behavior board can generate hardware-timed pulses with a defined duration. Enable pulse mode by selecting output lines in the [`OutputPulseEnable`] register, and set the duration in the output line's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds).
+The Behavior device can generate hardware-timed pulses with a defined duration. Enable pulse mode by selecting output lines in the [`OutputPulseEnable`] register, and set the duration in the output line's pulse-duration register (e.g. [`PulseDO0`] for **DO0**, in milliseconds).
 Once the output line is configured in pulse mode, sending an [`OutputSet`] command sets the line high and then low after the set time has elapsed. This ensures precise pulse timing by eliminating the delay associated with sending a separate command to set the line low.
 
 :::workflow

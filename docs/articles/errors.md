@@ -1,6 +1,6 @@
 # Errors
 
-This article covers how to resolve common errors on the Behavior board.
+This article covers how to resolve common errors on the Behavior device.
 
 ## COM port errors
 
@@ -10,7 +10,7 @@ A: Either the wrong communications port in the `PortName` property in [`Device`]
 
 **Q: Running the Bonsai workflow or connecting to the device in the Behavior GUI throws an error "Access to the port `ComX` is denied".**
 
-A: Only one interface connection to the Behavior board can be opened at one time. Check that Bonsai and the [Behavior GUI](behavior-gui.md) are not running at the same time, or that multiple instances of either are running. Sometimes, the port can also be locked by a program that did not terminate correctly; restarting the computer fixes it.
+A: Only one interface connection to the Behavior device can be opened at one time. Check that Bonsai and the [Behavior GUI](behavior-gui.md) are not running at the same time, or that multiple instances of either are running. Sometimes, the port can also be locked by a program that did not terminate correctly; restarting the computer fixes it.
 
 ## Device errors
 

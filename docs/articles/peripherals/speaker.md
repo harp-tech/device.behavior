@@ -1,6 +1,6 @@
 # Speaker
 
-The Harp Behavior Speaker is a peripheral that connects to one of the Behavior board's general-purpose digital outputs and turns a PWM signal into an audible tone. Refer to the [connections](../ports-connections.md?tabs=speaker#connections) article to set up the peripheral and the [Generate PWM](../generate-pwm.md) article to use it in Bonsai.
+The Harp Behavior Speaker is a peripheral that connects to one of the Behavior device's general-purpose digital outputs and turns a PWM signal into an audible tone. Refer to the [connections](../ports-connections.md?tabs=speaker#connections) article to set up the peripheral and the [Generate PWM](../generate-pwm.md) article to use it in Bonsai.
 
 ![Speaker](../../images/peripheral-speaker.jpg){width=450}
 
@@ -21,11 +21,11 @@ The Harp Behavior Speaker is a peripheral that connects to one of the Behavior b
 - Connector: Screw terminal
 
 > [!NOTE]
-> While the speaker can go higher in range, the [PWM signal generation](../generate-pwm.md) on the Behavior board has a 10 kHz upper limit.
+> While the speaker can go higher in range, the [PWM signal generation](../generate-pwm.md) on the Behavior device has a 10 kHz upper limit.
 
 ## Hardware
 
-| Version | Compatible Behavior board | Notes |
+| Version | Compatible Behavior device | Notes |
 | ------- | ------------------- | ----- |
 | 1.2 | > 1.0 | <ul><li> Fixed the volume direction </li></ul> |
 | 1.1 | > 1.0 | <ul><li> Initial version </li></ul> |

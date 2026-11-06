@@ -1,3 +1,6 @@
+%YAML 1.1
+---
+# yaml-language-server: $schema=https://harp-tech.org/draft-02/schema/ios.json
 DO3:
   port: PORTC
   pinNumber: 0

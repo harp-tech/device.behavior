@@ -1,4 +1,5 @@
 import WorkflowContainer from "./workflow.js"
+import Navbar from "./navbar.js"
 
 export default {
     defaultTheme: 'light',
@@ -9,5 +10,6 @@ export default {
     }],
     start: () => {
         WorkflowContainer.init();
+        Navbar.init();
     }
 }

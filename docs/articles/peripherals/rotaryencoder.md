@@ -1,6 +1,6 @@
 # Rotary Encoder
 
-The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can be used to demonstrate how rotation can be tracked when the onboard shaft is rotated. It plugs directly into poke port **P2**, the only port with a quadrature counter. Refer to the [connections](../ports-connections.md?tabs=encoder#connections) article to set up the peripheral and the [Track rotary encoder](../track-rotary-encoder.md) article to use it in Bonsai.
+The Harp Behavior Rotary Encoder is a peripheral for the Behavior device that can be used to demonstrate how rotation can be tracked when the onboard shaft is rotated. It plugs directly into poke port **P2**, the only port with a quadrature counter. Refer to the [connections](../ports-connections.md?tabs=encoder#connections) article to set up the peripheral and the [Track rotary encoder](../track-rotary-encoder.md) article to use it in Bonsai.
 
 ![Rotary Encoder](../../images/peripheral-rotaryencoder.jpg){width=450}
 
@@ -15,7 +15,7 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can
 ## Specs
 
 - Encoder: Alps Alpine EC12E24204A9 (mechanical, 24 pulses per revolution, with detents)
-- Connector: RJ45 for direct connection to a Behavior board poke port
+- Connector: RJ45 for direct connection to a Behavior device poke port
 - Solder pads: for wiring an external quadrature encoder or operating the peripheral from another device
     - 1x 5 V supply (+)
     - 1x Quadrature channel A (A)
@@ -24,7 +24,7 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior board that can
 
 ## Hardware
 
-| Version | Compatible Behavior board | Notes |
+| Version | Compatible Behavior device | Notes |
 | ------- | ------------------- | ----- |
 | 1.3 | > 1.0 | <ul><li> Fixed encoder direction </li></ul> |
 | 1.2 | > 1.0 | <ul><li> Replaced the optical encoder with an Alps Alpine EC12E24204A9 mechanical encoder </li><li> Added pull-ups and filtering on the quadrature channels </li></ul> |

@@ -2,8 +2,9 @@
   <PropertyGroup>
     <Description>Design Library containing UI components for configuring Harp Behavior devices.</Description>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <PackageTags>$(PackageTags) Design Bonsai Rx</PackageTags>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <TargetFrameworks>net8.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

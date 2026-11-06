@@ -13,7 +13,6 @@ from harp.protocol import (
     IdentityConverter,
     PayloadType,
     RegisterBase,
-    RegisterU16,
     RegisterU8,
     StructPayload,
 )
@@ -48,10 +47,36 @@ __all__ = [
     "PortDIOStateEventPayload",
     "AnalogDataPayload",
     "OutputPulseEnablePayload",
+    "PulseDOPort0Payload",
+    "PulseDOPort1Payload",
+    "PulseDOPort2Payload",
+    "PulseSupplyPort0Payload",
+    "PulseSupplyPort1Payload",
+    "PulseSupplyPort2Payload",
+    "PulseLed0Payload",
+    "PulseLed1Payload",
+    "PulseRgb0Payload",
+    "PulseRgb1Payload",
+    "PulseDO0Payload",
+    "PulseDO1Payload",
+    "PulseDO2Payload",
+    "PulseDO3Payload",
+    "PwmFrequencyDO0Payload",
+    "PwmFrequencyDO1Payload",
+    "PwmFrequencyDO2Payload",
+    "PwmFrequencyDO3Payload",
+    "PwmDutyCycleDO0Payload",
+    "PwmDutyCycleDO1Payload",
+    "PwmDutyCycleDO2Payload",
+    "PwmDutyCycleDO3Payload",
     "PwmStartPayload",
     "PwmStopPayload",
     "RgbAllPayload",
     "RgbPayload",
+    "Led0CurrentPayload",
+    "Led1CurrentPayload",
+    "Led0MaxCurrentPayload",
+    "Led1MaxCurrentPayload",
     "EventEnablePayload",
     "StartCamerasPayload",
     "StopCamerasPayload",
@@ -60,7 +85,13 @@ __all__ = [
     "EnableEncodersPayload",
     "EncoderModePayload",
     "Camera0FramePayload",
+    "Camera0FrequencyPayload",
     "Camera1FramePayload",
+    "Camera1FrequencyPayload",
+    "ServoMotor2PeriodPayload",
+    "ServoMotor2PulsePayload",
+    "ServoMotor3PeriodPayload",
+    "ServoMotor3PulsePayload",
     "EncoderResetPayload",
     "EnableSerialTimestampPayload",
     "MimicPort0IRPayload",
@@ -69,8 +100,8 @@ __all__ = [
     "MimicPort0ValvePayload",
     "MimicPort1ValvePayload",
     "MimicPort2ValvePayload",
+    "PokeInputFilterPayload",
     "DigitalInputState",
-    "_Reserved0",
     "OutputSet",
     "OutputClear",
     "OutputToggle",
@@ -121,44 +152,22 @@ __all__ = [
     "DisableServos",
     "EnableEncoders",
     "EncoderMode",
-    "_Reserved2",
-    "_Reserved3",
-    "_Reserved4",
-    "_Reserved5",
-    "_Reserved6",
-    "_Reserved7",
-    "_Reserved8",
-    "_Reserved9",
     "Camera0Frame",
     "Camera0Frequency",
     "Camera1Frame",
     "Camera1Frequency",
-    "_Reserved10",
-    "_Reserved11",
-    "_Reserved12",
-    "_Reserved13",
     "ServoMotor2Period",
     "ServoMotor2Pulse",
     "ServoMotor3Period",
     "ServoMotor3Pulse",
-    "_Reserved14",
-    "_Reserved15",
-    "_Reserved16",
-    "_Reserved17",
     "EncoderReset",
-    "_Reserved18",
     "EnableSerialTimestamp",
     "MimicPort0IR",
     "MimicPort1IR",
     "MimicPort2IR",
-    "_Reserved20",
-    "_Reserved21",
-    "_Reserved22",
     "MimicPort0Valve",
     "MimicPort1Valve",
     "MimicPort2Valve",
-    "_Reserved23",
-    "_Reserved24",
     "PokeInputFilter",
     "REGISTER_MAP",
 ]
@@ -187,36 +196,75 @@ class DigitalOutputs(enum.IntFlag):
     """Specifies the state of port digital output lines."""
 
     DO_PORT0 = 0x1
+    """Port 0 digital output"""
+
     DO_PORT1 = 0x2
+    """Port 1 digital output"""
+
     DO_PORT2 = 0x4
+    """Port 2 digital output"""
+
     SUPPLY_PORT0 = 0x8
+    """Port 0 12 V output for valve control"""
+
     SUPPLY_PORT1 = 0x10
+    """Port 1 12 V output for valve control"""
+
     SUPPLY_PORT2 = 0x20
+    """Port 2 12 V output for valve control"""
+
     LED0 = 0x40
+    """LED output L0"""
+
     LED1 = 0x80
+    """LED output L1"""
+
     RGB0 = 0x100
+    """RGB LED 0 on the RGB connector"""
+
     RGB1 = 0x200
+    """RGB LED 1 on the RGB connector"""
+
     DO0 = 0x400
+    """Digital output DO0"""
+
     DO1 = 0x800
+    """Digital output DO1"""
+
     DO2 = 0x1000
+    """Digital output DO2"""
+
     DO3 = 0x2000
+    """Digital output DO3"""
 
 
 class PortDigitalIOS(enum.IntFlag):
     """Specifies the state of the port DIO lines."""
 
     DIO0 = 0x1
+    """Port 0 DIO line"""
+
     DIO1 = 0x2
+    """Port 1 DIO line"""
+
     DIO2 = 0x4
+    """Port 2 DIO line"""
 
 
 class PwmOutputs(enum.IntFlag):
     """Specifies the state of PWM output lines."""
 
     PWM_DO0 = 0x1
+    """PWM on digital output DO0"""
+
     PWM_DO1 = 0x2
+    """PWM on digital output DO1"""
+
     PWM_DO2 = 0x4
+    """PWM on digital output DO2"""
+
     PWM_DO3 = 0x8
+    """PWM on digital output DO3"""
 
 
 class Events(enum.IntFlag):
@@ -283,6 +331,8 @@ class MimicOutput(enum.IntEnum):
     """Specifies the target IO on which to mimic the specified register."""
 
     NONE = 0
+    """Is not reflected on any output"""
+
     DIO0 = 1
     """Is reflected on DIO0"""
 
@@ -309,7 +359,10 @@ class EncoderModeMask(enum.IntEnum):
     """Specifies the type of reading made from the quadrature encoder."""
 
     POSITION = 0
+    """The accumulated encoder count"""
+
     DISPLACEMENT = 1
+    """The change in encoder count since the previous sample"""
 
 
 class DigitalInputStatePayload(AnonymousPayload[np.uint8]):
@@ -394,7 +447,142 @@ class AnalogDataPayload(StructPayload[np.int16], length=3):
 class OutputPulseEnablePayload(AnonymousPayload[np.uint16]):
     """Represents the payload of the OutputPulseEnable register."""
 
-    __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
+    __value__: DigitalOutputs = BitMask(
+        enum=DigitalOutputs,
+        default=DigitalOutputs.SUPPLY_PORT0 | DigitalOutputs.SUPPLY_PORT1 | DigitalOutputs.SUPPLY_PORT2,
+    )
+
+
+class PulseDOPort0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDOPort0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseDOPort1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDOPort1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseDOPort2Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDOPort2 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseSupplyPort0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseSupplyPort0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
+
+
+class PulseSupplyPort1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseSupplyPort1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
+
+
+class PulseSupplyPort2Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseSupplyPort2 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
+
+
+class PulseLed0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseLed0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseLed1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseLed1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseRgb0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseRgb0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseRgb1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseRgb1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
+
+
+class PulseDO0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDO0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
+
+
+class PulseDO1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDO1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
+
+
+class PulseDO2Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDO2 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
+
+
+class PulseDO3Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PulseDO3 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
+
+
+class PwmFrequencyDO0Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PwmFrequencyDO0 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1000))
+
+
+class PwmFrequencyDO1Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PwmFrequencyDO1 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(2000))
+
+
+class PwmFrequencyDO2Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PwmFrequencyDO2 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(3000))
+
+
+class PwmFrequencyDO3Payload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the PwmFrequencyDO3 register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(4000))
+
+
+class PwmDutyCycleDO0Payload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PwmDutyCycleDO0 register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
+
+
+class PwmDutyCycleDO1Payload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PwmDutyCycleDO1 register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
+
+
+class PwmDutyCycleDO2Payload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PwmDutyCycleDO2 register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
+
+
+class PwmDutyCycleDO3Payload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PwmDutyCycleDO3 register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
 
 
 class PwmStartPayload(AnonymousPayload[np.uint8]):
@@ -444,10 +632,37 @@ class RgbPayload(StructPayload[np.uint8], length=3):
     """The intensity of the blue channel in the RGB LED."""
 
 
+class Led0CurrentPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the Led0Current register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(10))
+
+
+class Led1CurrentPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the Led1Current register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(10))
+
+
+class Led0MaxCurrentPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the Led0MaxCurrent register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(30))
+
+
+class Led1MaxCurrentPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the Led1MaxCurrent register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(30))
+
+
 class EventEnablePayload(AnonymousPayload[np.uint8]):
     """Represents the payload of the EventEnable register."""
 
-    __value__: Events = BitMask(enum=Events)
+    __value__: Events = BitMask(
+        enum=Events,
+        default=Events.PORT_DI | Events.PORT_DIO | Events.ANALOG_DATA | Events.CAMERA0 | Events.CAMERA1,
+    )
 
 
 class StartCamerasPayload(AnonymousPayload[np.uint8]):
@@ -492,10 +707,46 @@ class Camera0FramePayload(AnonymousPayload[np.uint8]):
     __value__: FrameAcquired = BitMask(enum=FrameAcquired)
 
 
+class Camera0FrequencyPayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the Camera0Frequency register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(30))
+
+
 class Camera1FramePayload(AnonymousPayload[np.uint8]):
     """Represents the payload of the Camera1Frame register."""
 
     __value__: FrameAcquired = BitMask(enum=FrameAcquired)
+
+
+class Camera1FrequencyPayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the Camera1Frequency register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(30))
+
+
+class ServoMotor2PeriodPayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the ServoMotor2Period register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(20000))
+
+
+class ServoMotor2PulsePayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the ServoMotor2Pulse register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1500))
+
+
+class ServoMotor3PeriodPayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the ServoMotor3Period register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(20000))
+
+
+class ServoMotor3PulsePayload(AnonymousPayload[np.uint16]):
+    """Represents the payload of the ServoMotor3Pulse register."""
+
+    __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1500))
 
 
 class EncoderResetPayload(AnonymousPayload[np.uint8]):
@@ -544,6 +795,12 @@ class MimicPort2ValvePayload(AnonymousPayload[np.uint8]):
     """Represents the payload of the MimicPort2Valve register."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
+
+
+class PokeInputFilterPayload(AnonymousPayload[np.uint8]):
+    """Represents the payload of the PokeInputFilter register."""
+
+    __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(1))
 
 
 class DigitalInputState(RegisterBase[DigitalInputs]):
@@ -656,136 +913,180 @@ class OutputPulseEnable(RegisterBase[DigitalOutputs]):
     payload_class = OutputPulseEnablePayload
 
 
-class PulseDOPort0(RegisterU16):
+class PulseDOPort0(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 46
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDOPort0Payload
 
 
-class PulseDOPort1(RegisterU16):
+class PulseDOPort1(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 47
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDOPort1Payload
 
 
-class PulseDOPort2(RegisterU16):
+class PulseDOPort2(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 48
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDOPort2Payload
 
 
-class PulseSupplyPort0(RegisterU16):
+class PulseSupplyPort0(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 49
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseSupplyPort0Payload
 
 
-class PulseSupplyPort1(RegisterU16):
+class PulseSupplyPort1(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 50
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseSupplyPort1Payload
 
 
-class PulseSupplyPort2(RegisterU16):
+class PulseSupplyPort2(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 51
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseSupplyPort2Payload
 
 
-class PulseLed0(RegisterU16):
+class PulseLed0(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 52
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseLed0Payload
 
 
-class PulseLed1(RegisterU16):
+class PulseLed1(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 53
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseLed1Payload
 
 
-class PulseRgb0(RegisterU16):
+class PulseRgb0(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 54
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseRgb0Payload
 
 
-class PulseRgb1(RegisterU16):
+class PulseRgb1(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 55
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseRgb1Payload
 
 
-class PulseDO0(RegisterU16):
+class PulseDO0(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 56
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDO0Payload
 
 
-class PulseDO1(RegisterU16):
+class PulseDO1(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 57
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDO1Payload
 
 
-class PulseDO2(RegisterU16):
+class PulseDO2(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 58
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDO2Payload
 
 
-class PulseDO3(RegisterU16):
+class PulseDO3(RegisterBase[np.uint16]):
     """Specifies the duration of the output pulse in milliseconds."""
 
     address: ClassVar[int] = 59
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PulseDO3Payload
 
 
-class PwmFrequencyDO0(RegisterU16):
+class PwmFrequencyDO0(RegisterBase[np.uint16]):
     """Specifies the frequency of the PWM at DO0."""
 
     address: ClassVar[int] = 60
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PwmFrequencyDO0Payload
 
 
-class PwmFrequencyDO1(RegisterU16):
+class PwmFrequencyDO1(RegisterBase[np.uint16]):
     """Specifies the frequency of the PWM at DO1."""
 
     address: ClassVar[int] = 61
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PwmFrequencyDO1Payload
 
 
-class PwmFrequencyDO2(RegisterU16):
+class PwmFrequencyDO2(RegisterBase[np.uint16]):
     """Specifies the frequency of the PWM at DO2."""
 
     address: ClassVar[int] = 62
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PwmFrequencyDO2Payload
 
 
-class PwmFrequencyDO3(RegisterU16):
+class PwmFrequencyDO3(RegisterBase[np.uint16]):
     """Specifies the frequency of the PWM at DO3."""
 
     address: ClassVar[int] = 63
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = PwmFrequencyDO3Payload
 
 
-class PwmDutyCycleDO0(RegisterU8):
+class PwmDutyCycleDO0(RegisterBase[np.uint8]):
     """Specifies the duty cycle of the PWM at DO0."""
 
     address: ClassVar[int] = 64
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PwmDutyCycleDO0Payload
 
 
-class PwmDutyCycleDO1(RegisterU8):
+class PwmDutyCycleDO1(RegisterBase[np.uint8]):
     """Specifies the duty cycle of the PWM at DO1."""
 
     address: ClassVar[int] = 65
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PwmDutyCycleDO1Payload
 
 
-class PwmDutyCycleDO2(RegisterU8):
+class PwmDutyCycleDO2(RegisterBase[np.uint8]):
     """Specifies the duty cycle of the PWM at DO2."""
 
     address: ClassVar[int] = 66
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PwmDutyCycleDO2Payload
 
 
-class PwmDutyCycleDO3(RegisterU8):
+class PwmDutyCycleDO3(RegisterBase[np.uint8]):
     """Specifies the duty cycle of the PWM at DO3."""
 
     address: ClassVar[int] = 67
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PwmDutyCycleDO3Payload
 
 
 class PwmStart(RegisterBase[PwmOutputs]):
@@ -828,28 +1129,36 @@ class Rgb1(RegisterBase[RgbPayload]):
     payload_class = RgbPayload
 
 
-class Led0Current(RegisterU8):
+class Led0Current(RegisterBase[np.uint8]):
     """Specifies the configuration of current to drive LED 0."""
 
     address: ClassVar[int] = 73
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = Led0CurrentPayload
 
 
-class Led1Current(RegisterU8):
+class Led1Current(RegisterBase[np.uint8]):
     """Specifies the configuration of current to drive LED 1."""
 
     address: ClassVar[int] = 74
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = Led1CurrentPayload
 
 
-class Led0MaxCurrent(RegisterU8):
-    """Specifies the configuration of current to drive LED 0."""
+class Led0MaxCurrent(RegisterBase[np.uint8]):
+    """Specifies the maximum current allowed to drive LED 0, in mA."""
 
     address: ClassVar[int] = 75
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = Led0MaxCurrentPayload
 
 
-class Led1MaxCurrent(RegisterU8):
-    """Specifies the configuration of current to drive LED 1."""
+class Led1MaxCurrent(RegisterBase[np.uint8]):
+    """Specifies the maximum current allowed to drive LED 1, in mA."""
 
     address: ClassVar[int] = 76
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = Led1MaxCurrentPayload
 
 
 class EventEnable(RegisterBase[Events]):
@@ -964,10 +1273,12 @@ class Camera0Frame(RegisterBase[FrameAcquired]):
     payload_class = Camera0FramePayload
 
 
-class Camera0Frequency(RegisterU16):
+class Camera0Frequency(RegisterBase[np.uint16]):
     """Specifies the trigger frequency for camera 0."""
 
     address: ClassVar[int] = 93
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = Camera0FrequencyPayload
 
 
 class Camera1Frame(RegisterBase[FrameAcquired]):
@@ -978,10 +1289,12 @@ class Camera1Frame(RegisterBase[FrameAcquired]):
     payload_class = Camera1FramePayload
 
 
-class Camera1Frequency(RegisterU16):
+class Camera1Frequency(RegisterBase[np.uint16]):
     """Specifies the trigger frequency for camera 1."""
 
     address: ClassVar[int] = 95
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = Camera1FrequencyPayload
 
 
 class _Reserved10(RegisterU8):
@@ -1008,28 +1321,36 @@ class _Reserved13(RegisterU8):
     address: ClassVar[int] = 99
 
 
-class ServoMotor2Period(RegisterU16):
+class ServoMotor2Period(RegisterBase[np.uint16]):
     """Specifies the period of the servo motor in DO2, in microseconds."""
 
     address: ClassVar[int] = 100
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = ServoMotor2PeriodPayload
 
 
-class ServoMotor2Pulse(RegisterU16):
+class ServoMotor2Pulse(RegisterBase[np.uint16]):
     """Specifies the pulse of the servo motor in DO2, in microseconds."""
 
     address: ClassVar[int] = 101
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = ServoMotor2PulsePayload
 
 
-class ServoMotor3Period(RegisterU16):
+class ServoMotor3Period(RegisterBase[np.uint16]):
     """Specifies the period of the servo motor in DO3, in microseconds."""
 
     address: ClassVar[int] = 102
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = ServoMotor3PeriodPayload
 
 
-class ServoMotor3Pulse(RegisterU16):
+class ServoMotor3Pulse(RegisterBase[np.uint16]):
     """Specifies the pulse of the servo motor in DO3, in microseconds."""
 
     address: ClassVar[int] = 103
+    payload_type: ClassVar[PayloadType] = PayloadType.U16
+    payload_class = ServoMotor3PulsePayload
 
 
 class _Reserved14(RegisterU8):
@@ -1156,10 +1477,12 @@ class _Reserved24(RegisterU8):
     address: ClassVar[int] = 121
 
 
-class PokeInputFilter(RegisterU8):
+class PokeInputFilter(RegisterBase[np.uint8]):
     """Specifies the low pass filter time value for poke inputs, in ms."""
 
     address: ClassVar[int] = 122
+    payload_type: ClassVar[PayloadType] = PayloadType.U8
+    payload_class = PokeInputFilterPayload
 
 
 REGISTER_MAP: dict[int, type[RegisterBase[Any]]] = {

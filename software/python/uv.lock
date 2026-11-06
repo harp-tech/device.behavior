@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -41,8 +41,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "harp-device" },
-    { name = "harp-protocol" },
+    { name = "harp-device", specifier = ">=0.5" },
+    { name = "harp-protocol", specifier = ">=0.5" },
     { name = "numpy", specifier = ">=1.24" },
 ]
 

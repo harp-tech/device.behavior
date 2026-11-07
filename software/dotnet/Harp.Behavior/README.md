@@ -1,6 +1,6 @@
 ## About
 
-`Harp.Behavior` provides an asynchronous API and reactive operators for data acquisition and control of [Harp Behavior](https://harp-tech.org/api/Harp.Behavior.html) devices.
+`Harp.Behavior` provides an asynchronous API and reactive operators for data acquisition and control of [Harp Behavior](https://harp-tech.org/device.behavior) devices.
 
 ## How to Use
 
@@ -19,8 +19,8 @@ Console.WriteLine($"{deviceName} WhoAmI: {whoAmI} Timestamp (s): {timestamp}");
 
 ## Additional Documentation
 
-For additional documentation and examples, refer to the [official Harp documentation](https://harp-tech.org/api/Harp.Behavior.html).
+For additional documentation and examples, refer to the [official Harp Behavior documentation](https://harp-tech.org/device.behavior).
 
 ## Feedback & Contributing
 
-`Harp.Behavior` is released as open-source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/harp-tech/device.behavior).
+`Harp.Behavior` is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/harp-tech/device.behavior).

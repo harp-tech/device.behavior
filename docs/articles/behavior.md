@@ -50,6 +50,7 @@ title: Device
 
 | Version | Notes |
 | ------- | ----- |
+| 3.4 | <ul><li> Fixed the red and green channels of the RGB LED registers </li><li> Fixed the DIO lines as mimic outputs </li></ul> |
 | 3.3 | <ul><li> Fixed the read function of the digital inputs register </li></ul> |
 | 3.2 | <ul><li> Add limits to ServoMotor registers </li><li> Create displacement reading option for quadrature encoder. </li></ul> |
 | 3.1 | <ul><li> Support for hardware 2.0 </li><li> Added serial timestamp registers </li></ul> |

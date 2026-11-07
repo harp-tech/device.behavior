@@ -1,33 +1,25 @@
-## Harp Behavior
-This is a multi-purpose device tailored to behavioral experiments. It allows control of pokes, RGB LEDs, LEDs, cameras, servo motors and a quadrature counter.
+# Harp Behavior
 
-![HarpBehavior](./images/pcb.png)
+The Harp Behavior device is a multi-purpose data acquisition and control system for behavioral neuroscience experiments. It controls mice pokes, LEDs, RGB LEDs, cameras and servo motors, reads digital, analog and quadrature encoder inputs, and timestamps every input and output on the same hardware clock.
 
-### Key features ###
+![Harp Behavior](./images/behavior-landing.svg)
 
-* Enable pulse and configure duration for each output
-* Support for PWM configuration (frequency up to 10KHz and duty cycle)
-* LED current (up to 100mA) and maximum nominal current configuration
-* Up to 2 cameras controlling (DO0 and DO1)
-* Up to 2 servo motors (DO2 and DO3)
-* Up to 1 quadrature counter (Port2) (Note: Port0 and Port1 can also act as quadrature counters but this is a request feature)
+## Documentation
 
+The [device documentation](https://harp-tech.org/device.behavior) covers the specifications, setting up the device, installing the software, examples for each feature, and the register reference.
 
-### Connectivity ###
+## Software
 
-* 1x clock sync input (CLKIN) [stereo jack]
-* 1x USB (for computer) [USB type B]
-* 1x 12V supply [barrel connector jack]
-* 3x poke connectors (LED+12V valve) (Poke0, Poke1, Poke2) [RJ45]
-* 2x LEDs outputs (5V) (LED0, LED1) [screw terminal]
-* 2x RGB LEDs outputs (5V) (RGB0, RGB1) [flick lock 3x male pins]
-* 4x general purpose digital outputs with PWM (5V) (DO0-DO3) [screw terminal]
-* 1x ADC (5V) [screw terminal]
+The device can be used from [Bonsai](https://bonsai-rx.org/) through the `Harp.Behavior` package, from Python through the `harp-behavior` package, or without programming through the Behavior app. The [installation](https://harp-tech.org/device.behavior/articles/installation.html) page describes how to install each of them.
 
-## Interface ##
+## Repository layout
 
-The interface with the Harp Behavior can be done through [Bonsai](https://bonsai-rx.org/) or a dedicated GUI (Graphical User Interface).
+- `device.yml` describes the registers of the device. The firmware headers and the .NET and Python interfaces are generated from it.
+- `firmware` holds the firmware of the device.
+- `hardware` holds the PCB and mechanical design files.
+- `software` holds the .NET packages, including the Bonsai package and the app, and the Python package.
+- `docs` holds the documentation site.
 
-## Licensing ##
+## Licensing
 
 Each part of this repository is released under its own license. The `LICENSE` file at the root of the repository lists the licenses that apply to each folder.

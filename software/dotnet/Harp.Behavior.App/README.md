@@ -6,7 +6,7 @@ As with other Harp devices, the Behavior device can also be used from [Bonsai](h
 
 ## How to Use
 
-The app is distributed as a .NET tool. Installing it requires the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0):
+The app is distributed as a .NET tool. Installing it requires the [.NET SDK](https://dotnet.microsoft.com/download), version 8 or later:
 
 ```text
 dotnet tool install -g Harp.Behavior.App
@@ -34,8 +34,8 @@ sudo usermod -a -G dialout <USERNAME>
 
 ## Additional Documentation
 
-For additional documentation and examples, refer to the [official Harp documentation](https://harp-tech.org/device.behavior).
+For additional documentation and examples, refer to the [official Harp Behavior documentation](https://harp-tech.org/device.behavior).
 
 ## Feedback & Contributing
 
-`Harp.Behavior.App` is released as open-source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/harp-tech/device.behavior).
+`Harp.Behavior.App` is released as open source under the [MIT license](https://licenses.nuget.org/MIT). Bug reports and contributions are welcome at [the GitHub repository](https://github.com/harp-tech/device.behavior).

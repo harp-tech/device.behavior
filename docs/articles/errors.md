@@ -26,7 +26,7 @@ Also check that the ground connection is shared between the devices, as improper
 
 **Q: How do I use the DIO pins on the poke ports as digital outputs?**
 
-A: The **DIO** line on ports **P0**–**P2** work only as a digital input in the current firmware (v3.3), as the functionality to switch the pins from digital input to digital output has not been implemented yet.
+A: The **DIO** line on ports **P0**–**P2** works only as a digital input, as the functionality to switch the pins from digital input to digital output has not been implemented yet. A **DIO** line can still follow the infrared beam or valve of a poke when it is selected as a mimic output, as described in [Mimic poke signals](mimic-poke-signals.md).
 
 [!INCLUDE [](../includes/version-footer.md)]
 

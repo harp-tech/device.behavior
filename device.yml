@@ -41,23 +41,23 @@ registers:
     type: U8
     access: Write
     maskType: PortDigitalIOS
-    description: Set the specified port DIO lines
+    description: Set the specified port DIO lines. This functionality has not yet been implemented.
   PortDIOClear:
     <<: *portDIO
     address: 39
-    description: Clear the specified port DIO lines
+    description: Clear the specified port DIO lines. This functionality has not yet been implemented.
   PortDIOToggle:
     <<: *portDIO
     address: 40
-    description: Toggle the specified port DIO lines
+    description: Toggle the specified port DIO lines. This functionality has not yet been implemented.
   PortDIOState:
     <<: *portDIO
     address: 41
-    description: Write the state of all port DIO lines
+    description: Write the state of all port DIO lines. This functionality has not yet been implemented.
   PortDIODirection:
     <<: *portDIO
     address: 42
-    description: Specifies which of the port DIO lines are outputs
+    description: Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.
   PortDIOStateEvent:
     <<: *portDIO
     address: 43

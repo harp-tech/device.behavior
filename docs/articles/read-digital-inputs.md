@@ -37,7 +37,7 @@ The first value is the payload, listing the digital inputs that are currently ac
 
 ## Visualize port DIO events
 
-In the current firmware (v3.3) the **DIO** line acts only as an active-low digital input. It idles high at 5 V through onboard pull-up resistors, and the connected device must actively drive it low. Changes on the **DIO** lines are broadcast in a different register, [`PortDIOStateEvent`], which can be visualized in the same way as the digital inputs:
+By default, the **DIO** line acts as an active-low digital input. It idles high at 5 V through onboard pull-up resistors, and the connected device must actively drive it low. Changes on the **DIO** lines are broadcast in a different register, [`PortDIOStateEvent`], which can be visualized in the same way as the digital inputs:
 
 :::workflow
 ![Visualize port DIO events](../workflows/readdigitalinputs-visualizeportdio.bonsai)

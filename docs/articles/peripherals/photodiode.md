@@ -19,7 +19,7 @@ The Harp Behavior Photodiode is a peripheral for the Behavior device. It detects
 ## Hardware
 
 | Version | Compatible Behavior device | Notes |
-| ------- | ------------------------- | ----- |
+| ------- | -------------------------- | ----- |
 | 2.3 | > 1.0 | <ul><li> Initial version </li></ul> |
 
 Assembled units are available from the [Open Ephys store](https://open-ephys.org/harp). 

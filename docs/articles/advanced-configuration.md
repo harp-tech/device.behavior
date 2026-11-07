@@ -1,6 +1,6 @@
 # Advanced configuration
 
-These advanced configuration settings affect which data the Behavior device reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and alignment on non-Harp devices. Refer to the [connections](./ports-connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/breakout.md) board on **P2** for the serial timestamp.
+These advanced configuration settings affect which data the Behavior device reports. By default, all events are enabled, but you can selectively disable certain events. The device can also transmit serial timestamps on the poke port **P2** for logging and alignment on non-Harp devices. Refer to the [connections](./ports-connections.md?tabs=breakout#connections) article to set up the [Breakout](./peripherals/breakout.md) on **P2** for the serial timestamp.
 
 This article covers how to visualize the default event streams, select the active events, and transmit serial timestamps in Bonsai.
 

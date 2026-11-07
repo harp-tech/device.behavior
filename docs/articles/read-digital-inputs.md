@@ -11,12 +11,12 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 :::
 
 > [!NOTE]
-> If you need more digital inputs, the [Breakout](./peripherals/breakout.md) board provides access to the poke port input lines through screw terminals.
+> If you need more digital inputs, the [Breakout](./peripherals/breakout.md) provides access to the poke port input lines through screw terminals.
 
 
 ## Visualize digital input events
 
-The Behavior device broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the poke ports **P0**–**P2** (represented as `DIPort0`–`DIPort2` in Bonsai), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/breakout.md) board. The workflow below subscribes, parses, and displays them in a visualizer window.
+The Behavior device broadcasts changes on its digital input lines as [`DigitalInputState`] event messages. In addition to **DI3**, this register also reports events from the **DI** lines on the poke ports **P0**–**P2** (represented as `DIPort0`–`DIPort2` in Bonsai), such as [poke events](control-poke.md) from the [Mice Poke](./peripherals/micepoke.md) peripheral or other digital inputs connected to the [Breakout](./peripherals/breakout.md). The workflow below subscribes, parses, and displays them in a visualizer window.
 
 :::workflow
 ![Visualize digital input events](../workflows/controlpoke-visualizeevents.bonsai)

@@ -26,7 +26,7 @@ The Harp Behavior Speaker is a peripheral that connects to one of the Behavior d
 ## Hardware
 
 | Version | Compatible Behavior device | Notes |
-| ------- | ------------------- | ----- |
+| ------- | -------------------------- | ----- |
 | 1.2 | > 1.0 | <ul><li> Fixed the volume direction </li></ul> |
 | 1.1 | > 1.0 | <ul><li> Initial version </li></ul> |
 

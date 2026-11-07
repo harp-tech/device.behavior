@@ -17,7 +17,7 @@ The complete workflow is shown below. Copy and paste it into Bonsai to get start
 > - LED connectors **L0**, **L1** and **RGB**: represented as `Led0`, `Led1`, `Rgb0` and `Rgb1` in Bonsai. See [Control LEDs](control-leds.md).
 
 > [!NOTE]
-> If you need more digital outputs, the [Breakout](./peripherals/breakout.md) board provides access to the poke port output lines through screw terminals.
+> If you need more digital outputs, the [Breakout](./peripherals/breakout.md) provides access to the poke port output lines through screw terminals.
 
 ## Set and clear outputs
 

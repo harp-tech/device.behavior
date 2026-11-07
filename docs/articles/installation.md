@@ -58,7 +58,7 @@ pip install harp-data
 
 ## Firmware update
 
-New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.3-harp1.15-hw2.1-ass0.hex` is firmware v3.3 for a hardware v2.1 Behavior device. Download the latest firmware version that matches the hardware version of the device from the "Assets" section under each release.
+New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.4-harp1.15-hw2.1-ass0.hex` is firmware v3.4 for a hardware v2.1 Behavior device. Download the latest firmware version that matches the hardware version of the device from the "Assets" section under each release.
 
 > [!TIP]
 > The hardware version is printed on the PCB silkscreen (e.g. `harp behavior v2.1`).

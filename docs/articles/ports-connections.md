@@ -17,7 +17,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 - 4 seconds when in standby
 - 100 milliseconds when a catastrophic error occurs
 
-**P0, P1, P2 (RJ45)** - These poke ports interface directly with the [Mice Poke](./peripherals/micepoke.md) peripheral for poke detection and reward delivery. Alternatively, use the [Breakout](./peripherals/breakout.md) board to interface with other accessories. Port **P2** also has a quadrature counter for [rotation tracking](track-rotary-encoder.md). Use it with the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral, or with a quadrature encoder connected through the Breakout board.
+**P0, P1, P2 (RJ45)** - These poke ports interface directly with the [Mice Poke](./peripherals/micepoke.md) peripheral for poke detection and reward delivery. Alternatively, use the [Breakout](./peripherals/breakout.md) to interface with other accessories. Port **P2** also has a quadrature counter for [rotation tracking](track-rotary-encoder.md). Use it with the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral, or with a quadrature encoder connected through the Breakout.
 
 **ADC (Screw Terminal)** - This connector carries the first analog input (**AD0**), a 5 V supply pin and two ground connections.
 
@@ -43,7 +43,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 
 ![Digital input](../images/connection-digitalinput.svg){width=600}
 
-1. Wire the digital signal (5 V) to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more digital inputs on the poke ports.
+1. Wire the digital signal (5 V) to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) to access more digital inputs on the poke ports.
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Read digital inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
@@ -53,7 +53,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 
 To connect a logic-level output to an external device:
 
-1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to the external device's digital input. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more digital outputs on the poke ports.
+1. Wire a digital output from **DO0**–**DO3** on the **Output** connector to the external device's digital input. Alternatively, use the [Breakout](./peripherals/breakout.md) to access more digital outputs on the poke ports.
 2. Connect the external device's ground to any **GND** pin.
 3. Refer to the [Control digital outputs](control-digital-outputs.md) article to output digital events in Bonsai.
 
@@ -88,7 +88,7 @@ For an analog reading:
 For a digital reading:
 
 1. Use the switch on the side of the casing to select **DIG**.
-2. Wire the signal wire to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more digital inputs on the poke ports.
+2. Wire the signal wire to **DI3** on the **Input** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) to access more digital inputs on the poke ports.
 3. Connect the ground wire to any **GND** pin.
 4. Wire the supply wire to the **+5V** pin on the **ADC** connector.
 5. Refer to the [Read digital inputs](./read-digital-inputs.md) article to read the light intensity as a digital input reading in Bonsai.
@@ -142,7 +142,7 @@ Use them to connect an extra sensor, wire a solenoid valve, add an additional cu
 
 To connect a sensor like a lever:
 
-1. Wire one contact of the lever switch to **DIO1**. This line is not connected to any of the sensors onboard the Mice Poke Peripheral and can be used as an active-low digital input (the functionality to toggle it to digital output has not been added yet).
+1. Wire one contact of the lever switch to **DIO1**. This line is not connected to any of the sensors onboard the Mice Poke peripheral and can be used as an active-low digital input (the functionality to toggle it to digital output has not been added yet).
 2. Wire the other end of the lever switch to **GND**. 
 3. Refer to the [Read digital inputs](read-digital-inputs.md#visualize-port-dio-events) article to read the signal in Bonsai.
 
@@ -180,7 +180,7 @@ To log the raw quadrature signals:
 3. Share ground between the external device and the **-** pad.
 
 > [!NOTE]
-> The Harp Behavior Rotary Encoder is meant to demonstrate simple rotational tracking. For applications in which high resolution tracking is needed, such as a running wheel, use a more precise quadrature encoder. We also recommend using the [Breakout](./peripherals/breakout.md) board instead of the solder pads on this peripheral for an easier connection with external quadrature encoders.
+> The Harp Behavior Rotary Encoder is meant to demonstrate simple rotational tracking. For applications in which high resolution tracking is needed, such as a running wheel, use a more precise quadrature encoder. We also recommend using the [Breakout](./peripherals/breakout.md) instead of the solder pads on this peripheral for an easier connection with external quadrature encoders.
 
 # [Camera](#tab/camera)
 
@@ -200,7 +200,7 @@ To log the raw quadrature signals:
 ![Servo](../images/connection-servo.svg){width=600}
 
 1. Connect the servo signal wire to **DO2** or **DO3** on the **Output** connector. These are the only ports that support the servo functionality.
-2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) board to access more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the Behavior device's 5 V pin; it must power the servo only.
+2. Connect the servo power wire to the **+5V** pin on the **ADC** connector. Alternatively, use the [Breakout](./peripherals/breakout.md) to access more power pins on the poke ports. For servos that draw more than 200 mA, or that require a supply voltage other than 5 V, power the servo from an external supply matching its rating instead. Never connect the external supply to the Behavior device's 5 V pin; it must power the servo only.
 3. Connect the servo ground wire to a **GND** pin. For servos requiring an external power supply, connect the external supply's ground to a **GND** pin.
 4. Refer to the [Control servo motors](control-servo-motors.md) article to move the servo in Bonsai.
 
@@ -208,17 +208,17 @@ To log the raw quadrature signals:
 
 ![Breakout](../images/connection-breakout.svg){width=600}
 
-This section describes the connections required for different uses of the [Breakout](./peripherals/breakout.md) board. Note that some functionality is only available in specific versions of the Breakout board.
+This section describes the connections required for different uses of the [Breakout](./peripherals/breakout.md). Note that some functionality is only available in specific versions of the Breakout.
 
 To connect digital inputs and outputs (both v1.1 and v2.x):
-1. Connect the Breakout board to port **P0**, **P1**, or **P2** with an RJ45 cable.
+1. Connect the Breakout to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. Wire the signal wire from external devices to the **DI**, **DIO**, or **DO** screw terminals.
 3. Wire the external device's ground to a **GND** terminal.
 4. If the external device needs power, wire its supply to the **+5V** terminal.
 5. Refer to the [Read digital inputs](read-digital-inputs.md) and [Control digital outputs](control-digital-outputs.md) articles to use these lines in Bonsai.
 
 To connect an external quadrature encoder (both v1.1 and v2.x):
-1. Connect the Breakout board to port **P2** with an RJ45 cable. The quadrature counter is only available on this port.
+1. Connect the Breakout to port **P2** with an RJ45 cable. The quadrature counter is only available on this port.
 2. Wire the encoder's **A** channel to the **DI** terminal. Both channels must be 5 V logic.
 3. Wire the encoder's **B** channel to the **DIO** terminal.
 4. Wire the encoder's ground to a **GND** terminal.
@@ -227,15 +227,15 @@ To connect an external quadrature encoder (both v1.1 and v2.x):
 7. Refer to the [Track rotary encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. If the count runs in the opposite direction to the rotation, swap the **A** and **B** wires.
 
 To control valves for reward delivery (v1.1 only):
-1. Connect the [Breakout](./peripherals/breakout.md) board to port **P0**, **P1**, or **P2** with an RJ45 cable.
+1. Connect the [Breakout](./peripherals/breakout.md) to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. Wire a 12 V solenoid valve between the **+12V** and **SUP_RTN** terminals.
 3. Refer to [Deliver rewards on poke](control-poke.md#deliver-rewards-on-poke) to pulse the valve line in Bonsai.
 
 To stream the serial timestamp (v2.x only):
-1. Connect the board to **P2**, the timestamp stream can only be transmitted on this port.
+1. Connect the Breakout to **P2**, the timestamp stream can only be transmitted on this port.
 2. Wire the **TX** terminal to the receiving device's **RX** input or to a logged digital input.
 3. Wire a **GND** terminal to the receiver's ground.
-4. Set the Breakout board's logic-level jumper to match the receiver's operating voltage level (3.3 V or 5 V).
+4. Set the logic-level jumper of the Breakout to match the receiver's operating voltage level (3.3 V or 5 V).
 5. Refer to the [Transmit serial timestamps](advanced-configuration.md#transmit-serial-timestamps) section to enable the stream in Bonsai.
 
 # [Harp synchronization](#tab/harpsynchronization)
@@ -243,7 +243,7 @@ To stream the serial timestamp (v2.x only):
 ![Harp synchronization](../images/connection-harpsynchronization.svg){width=600}
 
 1. Connect a **CLKOUT** of a Harp clock generator (e.g. the [Harp Timestamp Generator](https://github.com/harp-tech/device.timestampgeneratorgen3)) to the **CLKIN** jack with a stereo plug cable.
-2. The Behavior device adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected boards blink simultaneously.
+2. The Behavior device adopts the generator's clock automatically. To verify the connection, check that the **STATE** LEDs of the connected devices blink simultaneously.
 3. Refer to the [Harp synchronization clock](https://harp-tech.org/protocol/SynchronizationClock.html) documentation for how devices synchronize.
 
 ---

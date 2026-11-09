@@ -8,7 +8,7 @@ These steps are only required the first time you connect the device to a new com
 
 # [App](#tab/app)
 
-The [Behavior app](behavior-app.md) is a desktop app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
+The [Behavior app](app.md) is a desktop app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
 
 ![Behavior app](../images/behavior-app.png){width=600}
 

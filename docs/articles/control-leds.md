@@ -1,6 +1,6 @@
 # Control LEDs
 
-The Behavior device controls two kinds of light output: conventional LEDs on the **L0** and **L1** connectors and addressable RGB LEDs on the **RGB** connector. Refer to the [LED connection](./ports-connections.md?tabs=led#connections) section to set up a conventional LED on **L0** and the [RGB LED connection](./ports-connections.md?tabs=rgbled#connections) section to set up two addressable RGB LEDs on the **RGB** connector. We will use these ports for the rest of these examples.
+The Behavior device controls two kinds of light output: conventional LEDs on the **L0** and **L1** connectors and addressable RGB LEDs on the **RGB** connector. Refer to the [LED connection](./ports-connections.md?tabs=led#connections) section to set up a conventional LED on **L0** and the [RGB LED connection](./ports-connections.md?tabs=rgb-led#connections) section to set up two addressable RGB LEDs on the **RGB** connector. We will use these ports for the rest of these examples.
 
 This article covers configuring the LED current, setting RGB colors, and turning on both kinds of LED in Bonsai.
 

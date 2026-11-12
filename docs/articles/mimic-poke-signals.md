@@ -2,7 +2,7 @@
 
 The Behavior device can mimic or mirror the poke peripheral's infrared beam signal and valve output on other output lines. This is useful for triggering external equipment directly or recording reward delivery on an external acquisition system without the round-trip latency introduced by routing signals through the computer.
 
-Refer to the [Mice Poke connection](./ports-connections.md?tabs=poke#connections) section to set up the [Mice Poke](./peripherals/micepoke.md) peripheral on port **P0** and the [Digital Output connection](./ports-connections.md?tabs=digitaloutput#connections) section to connect an LED to **DO0** as an indicator. We will use these ports for the rest of the exercises.
+Refer to the [Mice Poke connection](./ports-connections.md?tabs=mice-poke#connections) section to set up the [Mice Poke](./peripherals/mice-poke.md) peripheral on port **P0** and the [Digital Output connection](./ports-connections.md?tabs=digital-output#connections) section to connect an LED to **DO0** as an indicator. We will use these ports for the rest of the exercises.
 
 This article covers how to mimic the poke peripheral's infrared signal and valve outputs in Bonsai.
 

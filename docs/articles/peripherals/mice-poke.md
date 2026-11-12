@@ -1,6 +1,6 @@
 # Mice Poke
 
-The Harp Behavior Mice Poke is a peripheral for the Behavior device that has onboard cue LEDs, detects pokes with an infrared beam, and controls a solenoid valve for reward delivery. Refer to the [connections](../ports-connections.md?tabs=poke#connections) article to set up the peripheral and the [Control poke peripheral](../control-poke.md) article to use it in Bonsai.
+The Harp Behavior Mice Poke is a peripheral for the Behavior device that has onboard cue LEDs, detects pokes with an infrared beam, and controls a solenoid valve for reward delivery. Refer to the [connections](../ports-connections.md?tabs=mice-poke#connections) article to set up the peripheral and the [Control poke peripheral](../control-poke.md) article to use it in Bonsai.
 
 ![Mice Poke with water valve](../../images/peripheral-micepoke.jpg){width=450}
 
@@ -28,7 +28,7 @@ The Harp Behavior Mice Poke is a peripheral for the Behavior device that has onb
 ## Hardware
 
 | Version | Compatible Behavior device | Notes |
-| ------- | ------------------------- | ----- |
+| ------- | -------------------------- | ----- |
 | 1.4 | > 1.0 | <ul><li> Updated valve footprint </li><li> Increased LED resistor</li></ul> |
 | 1.3 | > 1.0 | <ul><li> Screw terminals consolidated into a single block </li><li> Added infrared beam and photodiode access on the screw terminals </li></ul> |
 | 1.2 | > 1.0 | <ul><li> Initial version </li></ul> |

@@ -1,6 +1,6 @@
 # Rotary Encoder
 
-The Harp Behavior Rotary Encoder is a peripheral for the Behavior device that can be used to demonstrate how rotation can be tracked when the onboard shaft is rotated. It plugs directly into poke port **P2**, the only port with a quadrature counter. Refer to the [connections](../ports-connections.md?tabs=encoder#connections) article to set up the peripheral and the [Track rotary encoder](../track-rotary-encoder.md) article to use it in Bonsai.
+The Harp Behavior Rotary Encoder is a peripheral for the Behavior device that can be used to demonstrate how rotation can be tracked when the onboard shaft is rotated. It plugs directly into poke port **P2**, the only port with a quadrature counter. Refer to the [connections](../ports-connections.md?tabs=rotary-encoder#connections) article to set up the peripheral and the [Track rotary encoder](../track-rotary-encoder.md) article to use it in Bonsai.
 
 ![Rotary Encoder](../../images/peripheral-rotaryencoder.jpg){width=450}
 
@@ -25,7 +25,7 @@ The Harp Behavior Rotary Encoder is a peripheral for the Behavior device that ca
 ## Hardware
 
 | Version | Compatible Behavior device | Notes |
-| ------- | ------------------- | ----- |
+| ------- | -------------------------- | ----- |
 | 1.3 | > 1.0 | <ul><li> Fixed encoder direction </li></ul> |
 | 1.2 | > 1.0 | <ul><li> Replaced the optical encoder with an Alps Alpine EC12E24204A9 mechanical encoder </li><li> Added pull-ups and filtering on the quadrature channels </li></ul> |
 | 1.0 | > 1.0 | <ul><li> Initial version, using a Bourns ENC1J-D28-L00128 optical encoder (128 pulses per revolution) </li></ul> |

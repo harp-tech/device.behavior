@@ -1,3 +1,7 @@
+---
+title: App
+---
+
 # Behavior app
 
 The Behavior app is a desktop app for configuring and testing the device without using Bonsai.

@@ -4,7 +4,7 @@ title: Device
 
 # Behavior device
 
-![Harp Behavior](../images/behavior-board.jpg){width=450}
+![Harp Behavior](../images/behavior-device.jpg){width=450}
 
 ## Key features
 
@@ -19,16 +19,16 @@ title: Device
     - 1 on the **ADC** connector
     - 1 on the **Input** connector
 - Digital inputs: 7 (5 V)
-    - 3 general-purpose and 3 active-low digital inputs on the poke ports accessible with the [Breakout](./peripherals/breakout.md) board
+    - 3 general-purpose and 3 active-low digital inputs on the poke ports accessible with the [Breakout](./peripherals/breakout.md)
     - 1 on the **Input** connector
 - Digital outputs: 7 (5 V)
     - 4 on the **Output** connector
-    - 3 on the poke ports, accessible with the [Breakout](./peripherals/breakout.md) board
+    - 3 on the poke ports, accessible with the [Breakout](./peripherals/breakout.md)
 - Digital output pulse duration: 1–65535 ms (supported on all digital outputs)
 - Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
 - Digital output drive current: Up to 300 mA per line, total 500 mA across outputs
 - Poke ports: 3 (RJ45)
-    - For the [Mice Poke](./peripherals/micepoke.md), [Rotary Encoder](./peripherals/rotaryencoder.md), or [Breakout](./peripherals/breakout.md) board
+    - For the [Mice Poke](./peripherals/mice-poke.md), [Rotary Encoder](./peripherals/rotary-encoder.md), or [Breakout](./peripherals/breakout.md)
 - LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LED connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)
@@ -50,6 +50,7 @@ title: Device
 
 | Version | Notes |
 | ------- | ----- |
+| 3.4 | <ul><li> Fixed the red and green channels of the RGB LED registers </li><li> Fixed the DIO lines as mimic outputs </li></ul> |
 | 3.3 | <ul><li> Fixed the read function of the digital inputs register </li></ul> |
 | 3.2 | <ul><li> Add limits to ServoMotor registers </li><li> Create displacement reading option for quadrature encoder. </li></ul> |
 | 3.1 | <ul><li> Support for hardware 2.0 </li><li> Added serial timestamp registers </li></ul> |

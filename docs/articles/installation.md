@@ -8,7 +8,7 @@ These steps are only required the first time you connect the device to a new com
 
 # [App](#tab/app)
 
-The [Behavior app](behavior-app.md) is a desktop app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
+The [Behavior app](app.md) is a desktop app for configuring and testing the device without using Bonsai. It is distributed as a [.NET tool](https://learn.microsoft.com/dotnet/core/tools/global-tools).
 
 ![Behavior app](../images/behavior-app.png){width=600}
 
@@ -58,12 +58,33 @@ pip install harp-data
 
 ## Firmware update
 
-New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.3-harp1.15-hw2.1-ass0.hex` is firmware v3.3 for a hardware v2.1 Behavior device. Download the latest firmware version that matches the hardware version of the device from the "Assets" section under each release.
+New features are added and bugs are fixed with firmware updates which are published on the [release page](https://github.com/harp-tech/device.behavior/releases) in the device GitHub repository. Each release contains a `.hex` file tagged with the firmware (`fw`) and hardware (`hw`) version. For instance, `Behavior-fw3.4-harp1.15-hw2.1-ass0.hex` is firmware v3.4 for a hardware v2.1 Behavior device. Download the latest firmware version that matches the hardware version of the device from the "Assets" section under each release.
 
 > [!TIP]
 > The hardware version is printed on the PCB silkscreen (e.g. `harp behavior v2.1`).
 
-To update the firmware, use the device setup tool in Bonsai:
+The firmware can be updated from a terminal with the Harp Toolkit, or from the device setup dialog in Bonsai.
+
+# [Toolkit](#tab/toolkit)
+
+The [Harp Toolkit](https://harp-tech.org/toolkit/) is a command-line tool for working with Harp devices. Like the Behavior app, it is distributed as a .NET tool.
+
+- Download and install the [.NET SDK](https://dotnet.microsoft.com/download), version 8 or later.
+- Install the toolkit from a terminal with:
+
+```cmd
+dotnet tool install -g Harp.Toolkit
+```
+
+- Update the firmware with the serial port of the device and the downloaded `.hex` file:
+
+```cmd
+harp.toolkit update --port COM3 Behavior-fw3.4-harp1.15-hw2.1-ass0.hex
+```
+
+The toolkit checks that the file matches the device before writing it, and waits for the device to restart with the new firmware. Run `harp.toolkit list` to find the serial port of the device. The toolkit [firmware update](https://harp-tech.org/toolkit/articles/update.html) documentation describes every option.
+
+# [Bonsai](#tab/device-setup)
 
 ![Device setup](../images/installation-firmwareupdate.png){width=650}
 
@@ -76,6 +97,8 @@ To update the firmware, use the device setup tool in Bonsai:
 7. Click "Update".
 
 After the update, the device will reboot with the new firmware.
+
+***
 
 [!INCLUDE [](../includes/version-footer.md)]
 

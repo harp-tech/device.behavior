@@ -1,6 +1,6 @@
 # Overview
 
-The Harp [Behavior](articles/behavior.md) device is a multi-purpose data acquisition and control system for behavioral neuroscience experiments.
+The Harp [Behavior](articles/device.md) device is a multi-purpose data acquisition and control system for behavioral neuroscience experiments.
 
 ![Harp Behavior landing image](./images/behavior-landing.svg)
 

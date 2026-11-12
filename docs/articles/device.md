@@ -28,7 +28,7 @@ title: Device
 - Digital output PWM: 1–10000 Hz, duty cycle 1–99% (supported on the **Output** connector only)
 - Digital output drive current: Up to 300 mA per line, total 500 mA across outputs
 - Poke ports: 3 (RJ45)
-    - For the [Mice Poke](./peripherals/micepoke.md), [Rotary Encoder](./peripherals/rotaryencoder.md), or [Breakout](./peripherals/breakout.md)
+    - For the [Mice Poke](./peripherals/mice-poke.md), [Rotary Encoder](./peripherals/rotary-encoder.md), or [Breakout](./peripherals/breakout.md)
 - LED outputs: 2 (2–100 mA drive current)
 - RGB LED outputs: 2 (WS2812-type addressable LED connector, driven as a serial chain)
 - Camera triggers: 2 (**DO0**/**DO1**, 2–600 Hz)

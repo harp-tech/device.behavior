@@ -1,6 +1,6 @@
 # Control digital outputs
 
-The Behavior device has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digitaloutput#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
+The Behavior device has four general-purpose digital outputs **DO0**–**DO3** on the **Output** connector.  Refer to the [connections](./ports-connections.md?tabs=digital-output#connections) article to connect an LED to **DO0** as an indicator, which we will use for the rest of these examples.
 
 This article covers how to set, clear, toggle, and pulse any of these outputs in Bonsai.
 

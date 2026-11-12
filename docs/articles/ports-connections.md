@@ -17,7 +17,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 - 4 seconds when in standby
 - 100 milliseconds when a catastrophic error occurs
 
-**P0, P1, P2 (RJ45)** - These poke ports interface directly with the [Mice Poke](./peripherals/micepoke.md) peripheral for poke detection and reward delivery. Alternatively, use the [Breakout](./peripherals/breakout.md) to interface with other accessories. Port **P2** also has a quadrature counter for [rotation tracking](track-rotary-encoder.md). Use it with the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral, or with a quadrature encoder connected through the Breakout.
+**P0, P1, P2 (RJ45)** - These poke ports interface directly with the [Mice Poke](./peripherals/mice-poke.md) peripheral for poke detection and reward delivery. Alternatively, use the [Breakout](./peripherals/breakout.md) to interface with other accessories. Port **P2** also has a quadrature counter for [rotation tracking](track-rotary-encoder.md). Use it with the [Rotary Encoder](./peripherals/rotary-encoder.md) peripheral, or with a quadrature encoder connected through the Breakout.
 
 **ADC (Screw Terminal)** - This connector carries the first analog input (**AD0**), a 5 V supply pin and two ground connections.
 
@@ -31,7 +31,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 
 ## Connections
 
-# [Analog input](#tab/analoginput)
+# [Analog input](#tab/analog-input)
 
 ![Analog input](../images/connection-analoginput.svg){width=600}
 
@@ -39,7 +39,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Acquire analog data](acquire-analog-data.md) article to read the signal in Bonsai.
 
-# [Digital input](#tab/digitalinput)
+# [Digital input](#tab/digital-input)
 
 ![Digital input](../images/connection-digitalinput.svg){width=600}
 
@@ -47,7 +47,7 @@ This article covers the ports on the Behavior device, as well as how to connect 
 2. Connect the ground wire to any **GND** pin.
 3. Refer to the [Read digital inputs](read-digital-inputs.md) article to visualize the input events in Bonsai.
 
-# [Digital output](#tab/digitaloutput)
+# [Digital output](#tab/digital-output)
 
 ![Digital output](../images/connection-digitaloutput.svg){width=600}
 
@@ -116,7 +116,7 @@ For a digital reading:
 2. Wire the short leg (cathode, **K**) to the **K** pin of the same terminal pair.
 3. Refer to the [Control LEDs](control-leds.md) article to configure and switch the LEDs in Bonsai.
 
-# [RGB LED](#tab/rgbled)
+# [RGB LED](#tab/rgb-led)
 
 ![RGB LED](../images/connection-rgbled.svg){width=600}
 
@@ -129,11 +129,11 @@ For a digital reading:
 > [!NOTE]
 > The **RGB** connector is a 2.54 mm Molex KK header with a friction lock. You can assemble a mating connector with a Molex KK crimp housing (22-01-3037) and three crimp terminals (08-50-0160). Dupont style female jumper wires also fit, but without a latch they hold by friction alone.
 
-# [Mice Poke](#tab/poke)
+# [Mice Poke](#tab/mice-poke)
 
 ![Mice Poke](../images/connection-poke.svg){width=600}
 
-1. Connect the [Mice Poke](./peripherals/micepoke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
+1. Connect the [Mice Poke](./peripherals/mice-poke.md) peripheral to port **P0**, **P1**, or **P2** with an RJ45 cable.
 2. If you are using a variant of the Mice Poke peripheral with the integrated water valve, connect the valve's inlet to the liquid container with tubing.
 3. Refer to the [Control poke peripheral](control-poke.md) article to configure and use the Mice Poke peripheral in Bonsai.
 
@@ -164,11 +164,11 @@ To log the peripheral signals on an external device:
     - **LED** - Reports the status of the [onboard cue LEDs](control-poke.md#control-poke-leds).
 2. Share ground between the external device and any **GND** terminal.
 
-# [Rotary Encoder](#tab/encoder)
+# [Rotary Encoder](#tab/rotary-encoder)
 
 ![Rotary Encoder](../images/connection-encoder.svg){width=600}
 
-1. Connect the [Rotary Encoder](./peripherals/rotaryencoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
+1. Connect the [Rotary Encoder](./peripherals/rotary-encoder.md) peripheral to port **P2** with an RJ45 cable. This is the only port with the quadrature counter functionality.
 2. Refer to the [Track rotary encoder](track-rotary-encoder.md) article to read the encoder in Bonsai. 
 
 No further wiring is necessary to use the encoder with the Behavior device. The solder pads are only needed to access the raw quadrature signals for logging.
@@ -238,7 +238,7 @@ To stream the serial timestamp (v2.x only):
 4. Set the logic-level jumper of the Breakout to match the receiver's operating voltage level (3.3 V or 5 V).
 5. Refer to the [Transmit serial timestamps](advanced-configuration.md#transmit-serial-timestamps) section to enable the stream in Bonsai.
 
-# [Harp synchronization](#tab/harpsynchronization)
+# [Harp synchronization](#tab/harp-synchronization)
 
 ![Harp synchronization](../images/connection-harpsynchronization.svg){width=600}
 

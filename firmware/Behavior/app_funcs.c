@@ -1533,7 +1533,7 @@ bool app_write_REG_ENCODER_MODE(void *a)
 {
     uint8_t reg = *((uint8_t*)a);
 
-    if (reg & ~MSK_ENCODER_MODE_MASK) return false;
+    if (reg & ~MSK_ENCODER_MODE) return false;
 
     app_regs.REG_ENCODER_MODE = reg;
     return true;

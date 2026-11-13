@@ -1473,9 +1473,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1483,10 +1483,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1498,7 +1498,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOSet"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -1514,7 +1514,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOSet"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -1540,7 +1540,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIOSet.GetTimestampedPayload(message);
         }
@@ -1573,9 +1573,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1583,10 +1583,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1598,7 +1598,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOClear"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -1614,7 +1614,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOClear"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -1640,7 +1640,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIOClear.GetTimestampedPayload(message);
         }
@@ -1673,9 +1673,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1683,10 +1683,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1698,7 +1698,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOToggle"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -1714,7 +1714,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOToggle"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -1740,7 +1740,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIOToggle.GetTimestampedPayload(message);
         }
@@ -1773,9 +1773,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1783,10 +1783,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1798,7 +1798,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOState"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -1814,7 +1814,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOState"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -1840,7 +1840,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIOState.GetTimestampedPayload(message);
         }
@@ -1873,9 +1873,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1883,10 +1883,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1898,7 +1898,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIODirection"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -1914,7 +1914,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIODirection"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -1941,7 +1941,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIODirection.GetTimestampedPayload(message);
         }
@@ -1974,9 +1974,9 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PortDigitalIOS GetPayload(HarpMessage message)
+        public static PortDIOLines GetPayload(HarpMessage message)
         {
-            return (PortDigitalIOS)message.GetPayloadByte();
+            return (PortDIOLines)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -1984,10 +1984,10 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetTimestampedPayload(HarpMessage message)
         {
             var (payload, timestamp) = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PortDigitalIOS)payload, timestamp);
+            return Timestamped.Create((PortDIOLines)payload, timestamp);
         }
 
         /// <summary>
@@ -1999,7 +1999,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOStateEvent"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -2015,7 +2015,7 @@ namespace Harp.Behavior
         /// A <see cref="HarpMessage"/> object for the <see cref="PortDIOStateEvent"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDigitalIOS value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PortDIOLines value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -2041,7 +2041,7 @@ namespace Harp.Behavior
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PortDigitalIOS> GetPayload(HarpMessage message)
+        public static Timestamped<PortDIOLines> GetPayload(HarpMessage message)
         {
             return PortDIOStateEvent.GetTimestampedPayload(message);
         }
@@ -8816,13 +8816,13 @@ namespace Harp.Behavior
         /// functionality has not yet been implemented.
         /// </summary>
         [Description("Set the specified port DIO lines. This functionality has not yet been implemented.")]
-        public PortDigitalIOS PortDIOSet { get; set; }
+        public PortDIOLines PortDIOSet { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIOSet register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIOSet;
         }
@@ -8875,13 +8875,13 @@ namespace Harp.Behavior
         /// functionality has not yet been implemented.
         /// </summary>
         [Description("Clear the specified port DIO lines. This functionality has not yet been implemented.")]
-        public PortDigitalIOS PortDIOClear { get; set; }
+        public PortDIOLines PortDIOClear { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIOClear register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIOClear;
         }
@@ -8934,13 +8934,13 @@ namespace Harp.Behavior
         /// functionality has not yet been implemented.
         /// </summary>
         [Description("Toggle the specified port DIO lines. This functionality has not yet been implemented.")]
-        public PortDigitalIOS PortDIOToggle { get; set; }
+        public PortDIOLines PortDIOToggle { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIOToggle register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIOToggle;
         }
@@ -8993,13 +8993,13 @@ namespace Harp.Behavior
         /// This functionality has not yet been implemented.
         /// </summary>
         [Description("Write the state of all port DIO lines. This functionality has not yet been implemented.")]
-        public PortDigitalIOS PortDIOState { get; set; }
+        public PortDIOLines PortDIOState { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIOState register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIOState;
         }
@@ -9052,13 +9052,13 @@ namespace Harp.Behavior
         /// are outputs. This functionality has not yet been implemented.
         /// </summary>
         [Description("Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented.")]
-        public PortDigitalIOS PortDIODirection { get; set; }
+        public PortDIOLines PortDIODirection { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIODirection register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIODirection;
         }
@@ -9111,13 +9111,13 @@ namespace Harp.Behavior
         /// lines on a line change.
         /// </summary>
         [Description("Specifies the state of the port DIO lines on a line change.")]
-        public PortDigitalIOS PortDIOStateEvent { get; set; }
+        public PortDIOLines PortDIOStateEvent { get; set; }
 
         /// <summary>
         /// Creates a message payload for the PortDIOStateEvent register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public PortDigitalIOS GetPayload()
+        public PortDIOLines GetPayload()
         {
             return PortDIOStateEvent;
         }
@@ -12677,7 +12677,7 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents the payload of the AnalogData register.
+    /// Represents the AnalogData payload.
     /// </summary>
     public struct AnalogDataPayload
     {
@@ -12716,12 +12716,10 @@ namespace Harp.Behavior
         public short AnalogInput1;
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the payload of
-        /// the AnalogData register.
+        /// Returns a <see cref="string"/> that represents the AnalogData payload.
         /// </summary>
         /// <returns>
-        /// A <see cref="string"/> that represents the payload of the
-        /// AnalogData register.
+        /// A <see cref="string"/> that represents the AnalogData payload.
         /// </returns>
         public override string ToString()
         {
@@ -12734,7 +12732,7 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents the payload of the RgbAll register.
+    /// Represents the RgbAll payload.
     /// </summary>
     public struct RgbAllPayload
     {
@@ -12800,12 +12798,10 @@ namespace Harp.Behavior
         public byte Blue1;
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the payload of
-        /// the RgbAll register.
+        /// Returns a <see cref="string"/> that represents the RgbAll payload.
         /// </summary>
         /// <returns>
-        /// A <see cref="string"/> that represents the payload of the
-        /// RgbAll register.
+        /// A <see cref="string"/> that represents the RgbAll payload.
         /// </returns>
         public override string ToString()
         {
@@ -12821,7 +12817,7 @@ namespace Harp.Behavior
     }
 
     /// <summary>
-    /// Represents the payload of the Rgb register.
+    /// Represents the Rgb payload.
     /// </summary>
     public struct RgbPayload
     {
@@ -12860,12 +12856,10 @@ namespace Harp.Behavior
         public byte Blue;
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the payload of
-        /// the Rgb register.
+        /// Returns a <see cref="string"/> that represents the Rgb payload.
         /// </summary>
         /// <returns>
-        /// A <see cref="string"/> that represents the payload of the
-        /// Rgb register.
+        /// A <see cref="string"/> that represents the Rgb payload.
         /// </returns>
         public override string ToString()
         {
@@ -13013,7 +13007,7 @@ namespace Harp.Behavior
     /// Specifies the state of the port DIO lines.
     /// </summary>
     [Flags]
-    public enum PortDigitalIOS : byte
+    public enum PortDIOLines : byte
     {
         /// <summary>
         /// Specifies that no flags are set.

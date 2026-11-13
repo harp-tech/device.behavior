@@ -210,12 +210,12 @@ public class BehaviorViewModel : ViewModelBase
     [Reactive] public DigitalOutputs OutputClear { get; set; }
     [Reactive] public DigitalOutputs OutputToggle { get; set; }
     [Reactive] public DigitalOutputs OutputState { get; set; }
-    [Reactive] public PortDigitalIOS PortDIOSet { get; set; }
-    [Reactive] public PortDigitalIOS PortDIOClear { get; set; }
-    [Reactive] public PortDigitalIOS PortDIOToggle { get; set; }
-    [Reactive] public PortDigitalIOS PortDIOState { get; set; }
-    [Reactive] public PortDigitalIOS PortDIODirection { get; set; }
-    [Reactive] public PortDigitalIOS PortDIOStateEvent { get; set; }
+    [Reactive] public PortDIOLines PortDIOSet { get; set; }
+    [Reactive] public PortDIOLines PortDIOClear { get; set; }
+    [Reactive] public PortDIOLines PortDIOToggle { get; set; }
+    [Reactive] public PortDIOLines PortDIOState { get; set; }
+    [Reactive] public PortDIOLines PortDIODirection { get; set; }
+    [Reactive] public PortDIOLines PortDIOStateEvent { get; set; }
     [Reactive] public AnalogDataPayload AnalogData { get; set; }
     [Reactive] public DigitalOutputs OutputPulseEnable { get; set; }
     [Reactive] public ushort PulseDOPort0 { get; set; }
@@ -1802,23 +1802,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIOSet Flags
+    #region PortDIOLines_PortDIOSet Flags
 
     public bool IsDIO0Enabled_PortDIOSet
     {
         get
         {
-            return PortDIOSet.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIOSet.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIOSet |= PortDigitalIOS.DIO0;
+                PortDIOSet |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIOSet &= ~PortDigitalIOS.DIO0;
+                PortDIOSet &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -1831,17 +1831,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOSet.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIOSet.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIOSet |= PortDigitalIOS.DIO1;
+                PortDIOSet |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIOSet &= ~PortDigitalIOS.DIO1;
+                PortDIOSet &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -1854,17 +1854,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOSet.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIOSet.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIOSet |= PortDigitalIOS.DIO2;
+                PortDIOSet |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIOSet &= ~PortDigitalIOS.DIO2;
+                PortDIOSet &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -1875,23 +1875,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIOClear Flags
+    #region PortDIOLines_PortDIOClear Flags
 
     public bool IsDIO0Enabled_PortDIOClear
     {
         get
         {
-            return PortDIOClear.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIOClear.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIOClear |= PortDigitalIOS.DIO0;
+                PortDIOClear |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIOClear &= ~PortDigitalIOS.DIO0;
+                PortDIOClear &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -1904,17 +1904,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOClear.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIOClear.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIOClear |= PortDigitalIOS.DIO1;
+                PortDIOClear |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIOClear &= ~PortDigitalIOS.DIO1;
+                PortDIOClear &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -1927,17 +1927,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOClear.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIOClear.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIOClear |= PortDigitalIOS.DIO2;
+                PortDIOClear |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIOClear &= ~PortDigitalIOS.DIO2;
+                PortDIOClear &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -1948,23 +1948,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIOToggle Flags
+    #region PortDIOLines_PortDIOToggle Flags
 
     public bool IsDIO0Enabled_PortDIOToggle
     {
         get
         {
-            return PortDIOToggle.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIOToggle.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIOToggle |= PortDigitalIOS.DIO0;
+                PortDIOToggle |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIOToggle &= ~PortDigitalIOS.DIO0;
+                PortDIOToggle &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -1977,17 +1977,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOToggle.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIOToggle.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIOToggle |= PortDigitalIOS.DIO1;
+                PortDIOToggle |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIOToggle &= ~PortDigitalIOS.DIO1;
+                PortDIOToggle &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -2000,17 +2000,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOToggle.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIOToggle.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIOToggle |= PortDigitalIOS.DIO2;
+                PortDIOToggle |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIOToggle &= ~PortDigitalIOS.DIO2;
+                PortDIOToggle &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -2021,23 +2021,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIOState Flags
+    #region PortDIOLines_PortDIOState Flags
 
     public bool IsDIO0Enabled_PortDIOState
     {
         get
         {
-            return PortDIOState.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIOState.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIOState |= PortDigitalIOS.DIO0;
+                PortDIOState |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIOState &= ~PortDigitalIOS.DIO0;
+                PortDIOState &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -2050,17 +2050,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOState.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIOState.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIOState |= PortDigitalIOS.DIO1;
+                PortDIOState |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIOState &= ~PortDigitalIOS.DIO1;
+                PortDIOState &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -2073,17 +2073,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOState.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIOState.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIOState |= PortDigitalIOS.DIO2;
+                PortDIOState |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIOState &= ~PortDigitalIOS.DIO2;
+                PortDIOState &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -2094,23 +2094,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIODirection Flags
+    #region PortDIOLines_PortDIODirection Flags
 
     public bool IsDIO0Enabled_PortDIODirection
     {
         get
         {
-            return PortDIODirection.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIODirection.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIODirection |= PortDigitalIOS.DIO0;
+                PortDIODirection |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIODirection &= ~PortDigitalIOS.DIO0;
+                PortDIODirection &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -2123,17 +2123,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIODirection.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIODirection.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIODirection |= PortDigitalIOS.DIO1;
+                PortDIODirection |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIODirection &= ~PortDigitalIOS.DIO1;
+                PortDIODirection &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -2146,17 +2146,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIODirection.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIODirection.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIODirection |= PortDigitalIOS.DIO2;
+                PortDIODirection |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIODirection &= ~PortDigitalIOS.DIO2;
+                PortDIODirection &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -2167,23 +2167,23 @@ public class BehaviorViewModel : ViewModelBase
 
     #endregion
 
-    #region PortDigitalIOS_PortDIOStateEvent Flags
+    #region PortDIOLines_PortDIOStateEvent Flags
 
     public bool IsDIO0Enabled_PortDIOStateEvent
     {
         get
         {
-            return PortDIOStateEvent.HasFlag(PortDigitalIOS.DIO0);
+            return PortDIOStateEvent.HasFlag(PortDIOLines.DIO0);
         }
         set
         {
             if (value)
             {
-                PortDIOStateEvent |= PortDigitalIOS.DIO0;
+                PortDIOStateEvent |= PortDIOLines.DIO0;
             }
             else
             {
-                PortDIOStateEvent &= ~PortDigitalIOS.DIO0;
+                PortDIOStateEvent &= ~PortDIOLines.DIO0;
             }
 
             // Notify the UI about the change
@@ -2196,17 +2196,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOStateEvent.HasFlag(PortDigitalIOS.DIO1);
+            return PortDIOStateEvent.HasFlag(PortDIOLines.DIO1);
         }
         set
         {
             if (value)
             {
-                PortDIOStateEvent |= PortDigitalIOS.DIO1;
+                PortDIOStateEvent |= PortDIOLines.DIO1;
             }
             else
             {
-                PortDIOStateEvent &= ~PortDigitalIOS.DIO1;
+                PortDIOStateEvent &= ~PortDIOLines.DIO1;
             }
 
             // Notify the UI about the change
@@ -2219,17 +2219,17 @@ public class BehaviorViewModel : ViewModelBase
     {
         get
         {
-            return PortDIOStateEvent.HasFlag(PortDigitalIOS.DIO2);
+            return PortDIOStateEvent.HasFlag(PortDIOLines.DIO2);
         }
         set
         {
             if (value)
             {
-                PortDIOStateEvent |= PortDigitalIOS.DIO2;
+                PortDIOStateEvent |= PortDIOLines.DIO2;
             }
             else
             {
-                PortDIOStateEvent &= ~PortDigitalIOS.DIO2;
+                PortDIOStateEvent &= ~PortDIOLines.DIO2;
             }
 
             // Notify the UI about the change
@@ -3289,49 +3289,49 @@ public class BehaviorViewModel : ViewModelBase
         this.WhenAnyValue(x => x.PortDIOSet)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIOSet = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIOSet = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIOSet = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIOSet = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIOSet = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIOSet = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.PortDIOClear)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIOClear = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIOClear = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIOClear = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIOClear = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIOClear = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIOClear = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.PortDIOToggle)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIOToggle = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIOToggle = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIOToggle = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIOToggle = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIOToggle = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIOToggle = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.PortDIOState)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIOState = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIOState = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIOState = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIOState = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIOState = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIOState = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.PortDIODirection)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIODirection = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIODirection = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIODirection = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIODirection = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIODirection = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIODirection = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.PortDIOStateEvent)
             .Subscribe(x =>
             {
-                IsDIO0Enabled_PortDIOStateEvent = x.HasFlag(PortDigitalIOS.DIO0);
-                IsDIO1Enabled_PortDIOStateEvent = x.HasFlag(PortDigitalIOS.DIO1);
-                IsDIO2Enabled_PortDIOStateEvent = x.HasFlag(PortDigitalIOS.DIO2);
+                IsDIO0Enabled_PortDIOStateEvent = x.HasFlag(PortDIOLines.DIO0);
+                IsDIO1Enabled_PortDIOStateEvent = x.HasFlag(PortDIOLines.DIO1);
+                IsDIO2Enabled_PortDIOStateEvent = x.HasFlag(PortDIOLines.DIO2);
             });
 
         this.WhenAnyValue(x => x.OutputPulseEnable)
@@ -4677,7 +4677,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOSetAsync(value),
-                PortDigitalIOS.DIO0,
+                PortDIOLines.DIO0,
                 "PortDIOSet");
         });
     }
@@ -4694,7 +4694,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOClearAsync(value),
-                PortDigitalIOS.DIO0,
+                PortDIOLines.DIO0,
                 "PortDIOClear");
         });
     }
@@ -4711,7 +4711,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOSetAsync(value),
-                PortDigitalIOS.DIO1,
+                PortDIOLines.DIO1,
                 "PortDIOSet");
         });
     }
@@ -4728,7 +4728,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOClearAsync(value),
-                PortDigitalIOS.DIO1,
+                PortDIOLines.DIO1,
                 "PortDIOClear");
         });
     }
@@ -4745,7 +4745,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOSetAsync(value),
-                PortDigitalIOS.DIO2,
+                PortDIOLines.DIO2,
                 "PortDIOSet");
         });
     }
@@ -4762,7 +4762,7 @@ public class BehaviorViewModel : ViewModelBase
 
             await WriteAndLogAsync(
                 value => _device.WritePortDIOClearAsync(value),
-                PortDigitalIOS.DIO2,
+                PortDIOLines.DIO2,
                 "PortDIOClear");
         });
     }

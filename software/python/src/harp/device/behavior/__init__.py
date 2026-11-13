@@ -24,7 +24,7 @@ __all__ = [
     "WHO_AM_I",
     "DigitalInputs",
     "DigitalOutputs",
-    "PortDigitalIOS",
+    "PortDIOLines",
     "PwmOutputs",
     "Events",
     "CameraOutputs",
@@ -238,7 +238,7 @@ class DigitalOutputs(enum.IntFlag):
     """Digital output DO3"""
 
 
-class PortDigitalIOS(enum.IntFlag):
+class PortDIOLines(enum.IntFlag):
     """Specifies the state of the port DIO lines."""
 
     DIO0 = 0x1
@@ -366,73 +366,73 @@ class EncoderModeMask(enum.IntEnum):
 
 
 class DigitalInputStatePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the DigitalInputState register."""
+    """Represents the DigitalInputState payload."""
 
     __value__: DigitalInputs = BitMask(enum=DigitalInputs)
 
 
 class OutputSetPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the OutputSet register."""
+    """Represents the OutputSet payload."""
 
     __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
 
 
 class OutputClearPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the OutputClear register."""
+    """Represents the OutputClear payload."""
 
     __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
 
 
 class OutputTogglePayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the OutputToggle register."""
+    """Represents the OutputToggle payload."""
 
     __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
 
 
 class OutputStatePayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the OutputState register."""
+    """Represents the OutputState payload."""
 
     __value__: DigitalOutputs = BitMask(enum=DigitalOutputs)
 
 
 class PortDIOSetPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIOSet register."""
+    """Represents the PortDIOSet payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class PortDIOClearPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIOClear register."""
+    """Represents the PortDIOClear payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class PortDIOTogglePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIOToggle register."""
+    """Represents the PortDIOToggle payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class PortDIOStatePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIOState register."""
+    """Represents the PortDIOState payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class PortDIODirectionPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIODirection register."""
+    """Represents the PortDIODirection payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class PortDIOStateEventPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PortDIOStateEvent register."""
+    """Represents the PortDIOStateEvent payload."""
 
-    __value__: PortDigitalIOS = BitMask(enum=PortDigitalIOS)
+    __value__: PortDIOLines = BitMask(enum=PortDIOLines)
 
 
 class AnalogDataPayload(StructPayload[np.int16], length=3):
-    """Represents the payload of the AnalogData register."""
+    """Represents the AnalogData payload."""
 
     analog_input0: np.int16 = Field(IdentityConverter(np.int16))
     """The voltage at the output of the ADC channel 0."""
@@ -445,7 +445,7 @@ class AnalogDataPayload(StructPayload[np.int16], length=3):
 
 
 class OutputPulseEnablePayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the OutputPulseEnable register."""
+    """Represents the OutputPulseEnable payload."""
 
     __value__: DigitalOutputs = BitMask(
         enum=DigitalOutputs,
@@ -454,151 +454,151 @@ class OutputPulseEnablePayload(AnonymousPayload[np.uint16]):
 
 
 class PulseDOPort0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDOPort0 register."""
+    """Represents the PulseDOPort0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseDOPort1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDOPort1 register."""
+    """Represents the PulseDOPort1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseDOPort2Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDOPort2 register."""
+    """Represents the PulseDOPort2 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseSupplyPort0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseSupplyPort0 register."""
+    """Represents the PulseSupplyPort0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
 
 
 class PulseSupplyPort1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseSupplyPort1 register."""
+    """Represents the PulseSupplyPort1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
 
 
 class PulseSupplyPort2Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseSupplyPort2 register."""
+    """Represents the PulseSupplyPort2 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(15))
 
 
 class PulseLed0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseLed0 register."""
+    """Represents the PulseLed0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseLed1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseLed1 register."""
+    """Represents the PulseLed1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseRgb0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseRgb0 register."""
+    """Represents the PulseRgb0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseRgb1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseRgb1 register."""
+    """Represents the PulseRgb1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(500))
 
 
 class PulseDO0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDO0 register."""
+    """Represents the PulseDO0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
 
 
 class PulseDO1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDO1 register."""
+    """Represents the PulseDO1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
 
 
 class PulseDO2Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDO2 register."""
+    """Represents the PulseDO2 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
 
 
 class PulseDO3Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PulseDO3 register."""
+    """Represents the PulseDO3 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(250))
 
 
 class PwmFrequencyDO0Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PwmFrequencyDO0 register."""
+    """Represents the PwmFrequencyDO0 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1000))
 
 
 class PwmFrequencyDO1Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PwmFrequencyDO1 register."""
+    """Represents the PwmFrequencyDO1 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(2000))
 
 
 class PwmFrequencyDO2Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PwmFrequencyDO2 register."""
+    """Represents the PwmFrequencyDO2 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(3000))
 
 
 class PwmFrequencyDO3Payload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the PwmFrequencyDO3 register."""
+    """Represents the PwmFrequencyDO3 payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(4000))
 
 
 class PwmDutyCycleDO0Payload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmDutyCycleDO0 register."""
+    """Represents the PwmDutyCycleDO0 payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
 
 
 class PwmDutyCycleDO1Payload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmDutyCycleDO1 register."""
+    """Represents the PwmDutyCycleDO1 payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
 
 
 class PwmDutyCycleDO2Payload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmDutyCycleDO2 register."""
+    """Represents the PwmDutyCycleDO2 payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
 
 
 class PwmDutyCycleDO3Payload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmDutyCycleDO3 register."""
+    """Represents the PwmDutyCycleDO3 payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(50))
 
 
 class PwmStartPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmStart register."""
+    """Represents the PwmStart payload."""
 
     __value__: PwmOutputs = BitMask(enum=PwmOutputs)
 
 
 class PwmStopPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PwmStop register."""
+    """Represents the PwmStop payload."""
 
     __value__: PwmOutputs = BitMask(enum=PwmOutputs)
 
 
 class RgbAllPayload(StructPayload[np.uint8], length=6):
-    """Represents the payload of the RgbAll register."""
+    """Represents the RgbAll payload."""
 
     green0: np.uint8 = Field(IdentityConverter(np.uint8))
     """The intensity of the green channel in the RGB0 LED."""
@@ -620,7 +620,7 @@ class RgbAllPayload(StructPayload[np.uint8], length=6):
 
 
 class RgbPayload(StructPayload[np.uint8], length=3):
-    """Represents the payload of the Rgb register."""
+    """Represents the Rgb payload."""
 
     green: np.uint8 = Field(IdentityConverter(np.uint8))
     """The intensity of the green channel in the RGB LED."""
@@ -633,31 +633,31 @@ class RgbPayload(StructPayload[np.uint8], length=3):
 
 
 class Led0CurrentPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Led0Current register."""
+    """Represents the Led0Current payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(10))
 
 
 class Led1CurrentPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Led1Current register."""
+    """Represents the Led1Current payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(10))
 
 
 class Led0MaxCurrentPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Led0MaxCurrent register."""
+    """Represents the Led0MaxCurrent payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(30))
 
 
 class Led1MaxCurrentPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Led1MaxCurrent register."""
+    """Represents the Led1MaxCurrent payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(30))
 
 
 class EventEnablePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EventEnable register."""
+    """Represents the EventEnable payload."""
 
     __value__: Events = BitMask(
         enum=Events,
@@ -666,139 +666,139 @@ class EventEnablePayload(AnonymousPayload[np.uint8]):
 
 
 class StartCamerasPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the StartCameras register."""
+    """Represents the StartCameras payload."""
 
     __value__: CameraOutputs = BitMask(enum=CameraOutputs)
 
 
 class StopCamerasPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the StopCameras register."""
+    """Represents the StopCameras payload."""
 
     __value__: CameraOutputs = BitMask(enum=CameraOutputs)
 
 
 class EnableServosPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EnableServos register."""
+    """Represents the EnableServos payload."""
 
     __value__: ServoOutputs = BitMask(enum=ServoOutputs)
 
 
 class DisableServosPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the DisableServos register."""
+    """Represents the DisableServos payload."""
 
     __value__: ServoOutputs = BitMask(enum=ServoOutputs)
 
 
 class EnableEncodersPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EnableEncoders register."""
+    """Represents the EnableEncoders payload."""
 
     __value__: EncoderInputs = BitMask(enum=EncoderInputs)
 
 
 class EncoderModePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EncoderMode register."""
+    """Represents the EncoderMode payload."""
 
     __value__: EncoderModeMask = GroupMask(enum=EncoderModeMask, mask=0xFF)
 
 
 class Camera0FramePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Camera0Frame register."""
+    """Represents the Camera0Frame payload."""
 
     __value__: FrameAcquired = BitMask(enum=FrameAcquired)
 
 
 class Camera0FrequencyPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the Camera0Frequency register."""
+    """Represents the Camera0Frequency payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(30))
 
 
 class Camera1FramePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the Camera1Frame register."""
+    """Represents the Camera1Frame payload."""
 
     __value__: FrameAcquired = BitMask(enum=FrameAcquired)
 
 
 class Camera1FrequencyPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the Camera1Frequency register."""
+    """Represents the Camera1Frequency payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(30))
 
 
 class ServoMotor2PeriodPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the ServoMotor2Period register."""
+    """Represents the ServoMotor2Period payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(20000))
 
 
 class ServoMotor2PulsePayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the ServoMotor2Pulse register."""
+    """Represents the ServoMotor2Pulse payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1500))
 
 
 class ServoMotor3PeriodPayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the ServoMotor3Period register."""
+    """Represents the ServoMotor3Period payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(20000))
 
 
 class ServoMotor3PulsePayload(AnonymousPayload[np.uint16]):
-    """Represents the payload of the ServoMotor3Pulse register."""
+    """Represents the ServoMotor3Pulse payload."""
 
     __value__: np.uint16 = Field(IdentityConverter(np.uint16), default=np.uint16(1500))
 
 
 class EncoderResetPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EncoderReset register."""
+    """Represents the EncoderReset payload."""
 
     __value__: EncoderInputs = BitMask(enum=EncoderInputs)
 
 
 class EnableSerialTimestampPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the EnableSerialTimestamp register."""
+    """Represents the EnableSerialTimestamp payload."""
 
     __value__: SerialTimestampPorts = BitMask(enum=SerialTimestampPorts)
 
 
 class MimicPort0IRPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort0IR register."""
+    """Represents the MimicPort0IR payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class MimicPort1IRPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort1IR register."""
+    """Represents the MimicPort1IR payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class MimicPort2IRPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort2IR register."""
+    """Represents the MimicPort2IR payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class MimicPort0ValvePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort0Valve register."""
+    """Represents the MimicPort0Valve payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class MimicPort1ValvePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort1Valve register."""
+    """Represents the MimicPort1Valve payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class MimicPort2ValvePayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the MimicPort2Valve register."""
+    """Represents the MimicPort2Valve payload."""
 
     __value__: MimicOutput = GroupMask(enum=MimicOutput, mask=0xFF)
 
 
 class PokeInputFilterPayload(AnonymousPayload[np.uint8]):
-    """Represents the payload of the PokeInputFilter register."""
+    """Represents the PokeInputFilter payload."""
 
     __value__: np.uint8 = Field(IdentityConverter(np.uint8), default=np.uint8(1))
 
@@ -849,7 +849,7 @@ class OutputState(RegisterBase[DigitalOutputs]):
     payload_class = OutputStatePayload
 
 
-class PortDIOSet(RegisterBase[PortDigitalIOS]):
+class PortDIOSet(RegisterBase[PortDIOLines]):
     """Set the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 38
@@ -857,7 +857,7 @@ class PortDIOSet(RegisterBase[PortDigitalIOS]):
     payload_class = PortDIOSetPayload
 
 
-class PortDIOClear(RegisterBase[PortDigitalIOS]):
+class PortDIOClear(RegisterBase[PortDIOLines]):
     """Clear the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 39
@@ -865,7 +865,7 @@ class PortDIOClear(RegisterBase[PortDigitalIOS]):
     payload_class = PortDIOClearPayload
 
 
-class PortDIOToggle(RegisterBase[PortDigitalIOS]):
+class PortDIOToggle(RegisterBase[PortDIOLines]):
     """Toggle the specified port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 40
@@ -873,7 +873,7 @@ class PortDIOToggle(RegisterBase[PortDigitalIOS]):
     payload_class = PortDIOTogglePayload
 
 
-class PortDIOState(RegisterBase[PortDigitalIOS]):
+class PortDIOState(RegisterBase[PortDIOLines]):
     """Write the state of all port DIO lines. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 41
@@ -881,7 +881,7 @@ class PortDIOState(RegisterBase[PortDigitalIOS]):
     payload_class = PortDIOStatePayload
 
 
-class PortDIODirection(RegisterBase[PortDigitalIOS]):
+class PortDIODirection(RegisterBase[PortDIOLines]):
     """Specifies which of the port DIO lines are outputs. This functionality has not yet been implemented."""
 
     address: ClassVar[int] = 42
@@ -889,7 +889,7 @@ class PortDIODirection(RegisterBase[PortDigitalIOS]):
     payload_class = PortDIODirectionPayload
 
 
-class PortDIOStateEvent(RegisterBase[PortDigitalIOS]):
+class PortDIOStateEvent(RegisterBase[PortDIOLines]):
     """Specifies the state of the port DIO lines on a line change"""
 
     address: ClassVar[int] = 43

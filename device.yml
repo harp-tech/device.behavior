@@ -40,7 +40,7 @@ registers:
     address: 38
     type: U8
     access: Write
-    maskType: PortDigitalIOS
+    maskType: PortDIOLines
     description: Set the specified port DIO lines. This functionality has not yet been implemented.
   PortDIOClear:
     <<: *portDIO
@@ -517,7 +517,7 @@ bitMasks:
       DO3:
         value: 0x2000
         description: Digital output DO3
-  PortDigitalIOS:
+  PortDIOLines:
     description: Specifies the state of the port DIO lines.
     bits:
       DIO0:

@@ -429,7 +429,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIOSetAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIOSetAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOSet.Address), cancellationToken);
             return PortDIOSet.GetPayload(reply);
@@ -453,7 +453,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIOSetAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIOSetAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOSet.Address), cancellationToken);
             return PortDIOSet.GetTimestampedPayload(reply);
@@ -475,7 +475,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task WritePortDIOSetAsync(PortDigitalIOS value, CancellationToken cancellationToken = default)
+        public async Task WritePortDIOSetAsync(PortDIOLines value, CancellationToken cancellationToken = default)
         {
             var request = PortDIOSet.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -499,7 +499,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIOClearAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIOClearAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOClear.Address), cancellationToken);
             return PortDIOClear.GetPayload(reply);
@@ -523,7 +523,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIOClearAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIOClearAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOClear.Address), cancellationToken);
             return PortDIOClear.GetTimestampedPayload(reply);
@@ -545,7 +545,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task WritePortDIOClearAsync(PortDigitalIOS value, CancellationToken cancellationToken = default)
+        public async Task WritePortDIOClearAsync(PortDIOLines value, CancellationToken cancellationToken = default)
         {
             var request = PortDIOClear.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -569,7 +569,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIOToggleAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIOToggleAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOToggle.Address), cancellationToken);
             return PortDIOToggle.GetPayload(reply);
@@ -593,7 +593,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIOToggleAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIOToggleAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOToggle.Address), cancellationToken);
             return PortDIOToggle.GetTimestampedPayload(reply);
@@ -615,7 +615,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task WritePortDIOToggleAsync(PortDigitalIOS value, CancellationToken cancellationToken = default)
+        public async Task WritePortDIOToggleAsync(PortDIOLines value, CancellationToken cancellationToken = default)
         {
             var request = PortDIOToggle.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -639,7 +639,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIOStateAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIOStateAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOState.Address), cancellationToken);
             return PortDIOState.GetPayload(reply);
@@ -663,7 +663,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIOStateAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIOStateAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOState.Address), cancellationToken);
             return PortDIOState.GetTimestampedPayload(reply);
@@ -685,7 +685,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task WritePortDIOStateAsync(PortDigitalIOS value, CancellationToken cancellationToken = default)
+        public async Task WritePortDIOStateAsync(PortDIOLines value, CancellationToken cancellationToken = default)
         {
             var request = PortDIOState.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -709,7 +709,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIODirectionAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIODirectionAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIODirection.Address), cancellationToken);
             return PortDIODirection.GetPayload(reply);
@@ -733,7 +733,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIODirectionAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIODirectionAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIODirection.Address), cancellationToken);
             return PortDIODirection.GetTimestampedPayload(reply);
@@ -755,7 +755,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task WritePortDIODirectionAsync(PortDigitalIOS value, CancellationToken cancellationToken = default)
+        public async Task WritePortDIODirectionAsync(PortDIOLines value, CancellationToken cancellationToken = default)
         {
             var request = PortDIODirection.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -779,7 +779,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<PortDigitalIOS> ReadPortDIOStateEventAsync(CancellationToken cancellationToken = default)
+        public async Task<PortDIOLines> ReadPortDIOStateEventAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOStateEvent.Address), cancellationToken);
             return PortDIOStateEvent.GetPayload(reply);
@@ -803,7 +803,7 @@ namespace Harp.Behavior
         /// <exception cref="System.OperationCanceledException">
         /// The cancellation token was canceled. This exception is stored into the returned task.
         /// </exception>
-        public async Task<Timestamped<PortDigitalIOS>> ReadTimestampedPortDIOStateEventAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<PortDIOLines>> ReadTimestampedPortDIOStateEventAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(PortDIOStateEvent.Address), cancellationToken);
             return PortDIOStateEvent.GetTimestampedPayload(reply);
